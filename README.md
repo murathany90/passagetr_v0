@@ -272,3 +272,10 @@ Bu izin eksikse uygulama açılır ancak Supabase istekleri `Failed host lookup`
 Debug ve emulator ortamlarında sorun görünmeyip yalnızca release APK’da ortaya çıkabilir.
 APK üretirken `--dart-define=SUPABASE_URL` ve `--dart-define=SUPABASE_ANON_KEY` parametrelerinin boş olmadığından emin olunmalıdır.
 Anonymous giriş kullanılıyorsa Supabase Dashboard → Auth → Providers → Anonymous ayarının açık olması gerekir.
+
+## Faz 3 Ozet Akisi
+
+- Bottom nav: `Ana Sayfa / Kelime / Okuma / Profil`
+- Home `Hizli Basla` oncelik sirasi: `resume reading -> weak words -> random words`
+- ReadingDetail: `selection -> dictionary prefill`, reading progress save, `Bu paragraftan kelimeler` paneli
+- Paragraftan kelimeler panelindeki `Kelime Calis` aksiyonu flashcard oturumunu sadece `customWordIds` ile baslatir
