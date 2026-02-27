@@ -1,6 +1,9 @@
 import '../entities/passage_sentence.dart';
 import '../entities/reading_passage.dart';
+import '../entities/reading_resume_item.dart';
 import '../entities/sentence_translation.dart';
+import '../entities/user_reading_progress.dart';
+import '../entities/word_item.dart';
 import '../value_objects/paged_result.dart';
 
 abstract class ReadingRepository {
@@ -25,5 +28,24 @@ abstract class ReadingRepository {
     required String provider,
     String targetLang = 'tr',
     required String translatedText,
+  });
+
+  Future<UserReadingProgress?> getUserReadingProgress({
+    required String passageId,
+  });
+
+  Future<void> upsertUserReadingProgress({
+    required String passageId,
+    required int lastIdx,
+    required bool completed,
+  });
+
+  Future<int> getTodayReadSentenceCount();
+
+  Future<ReadingResumeItem?> getLatestIncompleteReading();
+
+  Future<List<WordItem>> getPassageWords({
+    required String passageId,
+    int limit = 20,
   });
 }

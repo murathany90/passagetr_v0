@@ -9,65 +9,85 @@ import '../tests/test_hub_page.dart';
 import '../words/word_list_page.dart';
 
 class PackListPage extends ConsumerWidget {
-  const PackListPage({super.key});
+  const PackListPage({
+    super.key,
+    this.embedded = false,
+    this.onPackTap,
+    this.emptyHint,
+  });
+
+  final bool embedded;
+  final void Function(BuildContext context, Pack pack)? onPackTap;
+  final String? emptyHint;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<Pack>> packsAsync = ref.watch(packListProvider);
 
+    final Widget body = packsAsync.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (Object error, StackTrace stack) {
+        return _ErrorState(
+          message: 'Pack listesi yuklenemedi.',
+          detail: error.toString(),
+          onRetry: () => ref.invalidate(packListProvider),
+        );
+      },
+      data: (List<Pack> packs) {
+        if (packs.isEmpty) {
+          return _EmptyPackState(
+            onRetry: () => ref.invalidate(packListProvider),
+            hint: emptyHint,
+          );
+        }
+
+        return RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(packListProvider);
+            await ref.read(packListProvider.future);
+          },
+          child: ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(16),
+            itemBuilder: (BuildContext context, int index) {
+              final Pack pack = packs[index];
+              return Card(
+                child: ListTile(
+                  title: Text(pack.name),
+                  subtitle: Text(
+                    '${pack.wordCount} kelime - ${pack.fromLang.toUpperCase()} -> ${pack.toLang.toUpperCase()}',
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    if (onPackTap != null) {
+                      onPackTap!(context, pack);
+                      return;
+                    }
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => PackDetailPage(pack: pack),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+            separatorBuilder: (_, __) => const SizedBox(height: 8),
+            itemCount: packs.length,
+          ),
+        );
+      },
+    );
+
+    if (embedded) {
+      return body;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pack List'),
       ),
-      body: packsAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (Object error, StackTrace stack) {
-          return _ErrorState(
-            message: 'Pack listesi yuklenemedi.',
-            detail: error.toString(),
-            onRetry: () => ref.invalidate(packListProvider),
-          );
-        },
-        data: (List<Pack> packs) {
-          if (packs.isEmpty) {
-            return _EmptyPackState(
-              onRetry: () => ref.invalidate(packListProvider),
-            );
-          }
-
-          return RefreshIndicator(
-            onRefresh: () async {
-              ref.invalidate(packListProvider);
-              await ref.read(packListProvider.future);
-            },
-            child: ListView.separated(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16),
-              itemBuilder: (BuildContext context, int index) {
-                final Pack pack = packs[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(pack.name),
-                    subtitle: Text(
-                      '${pack.wordCount} kelime - ${pack.fromLang.toUpperCase()} -> ${pack.toLang.toUpperCase()}',
-                    ),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => PackDetailPage(pack: pack),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-              separatorBuilder: (_, __) => const SizedBox(height: 8),
-              itemCount: packs.length,
-            ),
-          );
-        },
-      ),
+      body: body,
     );
   }
 }
@@ -95,7 +115,7 @@ class PackDetailPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (_) => WordStudyHubPage(pack: pack),
+                    builder: (_) => FlashcardSessionPage(pack: pack),
                   ),
                 );
               },
@@ -113,6 +133,30 @@ class PackDetailPage extends StatelessWidget {
               },
               icon: const Icon(Icons.menu_book),
               label: const Text('Paragraf Calis'),
+            ),
+            const SizedBox(height: 8),
+            FilledButton.tonalIcon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => TestHubPage(pack: pack),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.quiz),
+              label: const Text('Test'),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => WordListPage(pack: pack),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.list),
+              label: const Text('Kelime Listesi'),
             ),
           ],
         ),
@@ -178,9 +222,13 @@ class WordStudyHubPage extends StatelessWidget {
 }
 
 class _EmptyPackState extends StatelessWidget {
-  const _EmptyPackState({required this.onRetry});
+  const _EmptyPackState({
+    required this.onRetry,
+    this.hint,
+  });
 
   final VoidCallback onRetry;
+  final String? hint;
 
   @override
   Widget build(BuildContext context) {
@@ -195,8 +243,9 @@ class _EmptyPackState extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
-            const Text(
-              'CSV import rehberini docs/supabase_csv_import.md dosyasindan takip edin.',
+            Text(
+              hint ??
+                  'CSV import rehberini docs/supabase_csv_import.md dosyasindan takip edin.',
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),

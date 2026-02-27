@@ -13,6 +13,13 @@ abstract class WordRepository {
 
   Future<WordItem?> getWordById(String wordId);
 
+  Future<WordItem?> getWordByEnWord({
+    required String packId,
+    required String enWord,
+  });
+
+  Future<List<WordItem>> getWordsByIds(List<String> wordIds);
+
   // Faz 2 notu: bu metot icte source-agnostic query builder kullanacak
   // sekilde implement edilir. Gerektiginde getWordsBySource eklenebilir.
   Future<List<WordItem>> getSessionBatch(

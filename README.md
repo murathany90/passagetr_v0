@@ -279,3 +279,14 @@ Anonymous giriş kullanılıyorsa Supabase Dashboard → Auth → Providers → 
 - Home `Hizli Basla` oncelik sirasi: `resume reading -> weak words -> random words`
 - ReadingDetail: `selection -> dictionary prefill`, reading progress save, `Bu paragraftan kelimeler` paneli
 - Paragraftan kelimeler panelindeki `Kelime Calis` aksiyonu flashcard oturumunu sadece `customWordIds` ile baslatir
+
+## Libre Fallback Endpoint Notu
+
+Libre provider kullanilirken uygulama ana endpoint basarisiz olursa asagidaki public endpointleri sirayla dener:
+- https://translate.argosopentech.com/translate
+- https://translate.astian.org/translate
+- https://libretranslate.pussthecat.org/translate
+
+Ornek:
+- --dart-define=TRANSLATE_ENDPOINT="https://translate.argosopentech.com/translate"
+- --dart-define=TRANSLATE_ENDPOINT="https://libretranslate.pussthecat.org/translate"

@@ -15,4 +15,11 @@ abstract class ProgressRepository {
   Future<Map<String, UserWordProgress>> getProgressMap({
     required List<String> wordIds,
   });
+
+  Future<int> getTodayWordCount();
+
+  Future<List<String>> getWeakWordIds({
+    required String packId,
+    int limit = 10,
+  });
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../state/providers.dart';
-import '../packs/pack_list_page.dart';
+import '../shell/main_shell_page.dart';
 
 class BootstrapPage extends ConsumerWidget {
   const BootstrapPage({super.key});
@@ -12,7 +12,7 @@ class BootstrapPage extends ConsumerWidget {
     final AsyncValue<void> bootstrap = ref.watch(authBootstrapProvider);
 
     return bootstrap.when(
-      data: (_) => const PackListPage(),
+      data: (_) => const MainShellPage(),
       loading: () => const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       ),

@@ -18,11 +18,13 @@
    - Yoksa zayif kelimelerle flashcard acilir.
    - O da yoksa random flashcard acilir.
 
-## 3) Reading Detail Selection + Dictionary
+## 3) Reading Detail Selection + Quick Word Popup
 1. Sentence EN metni secilebilir.
-2. Bir kelime secildiginde dictionary sheet acilir.
-3. Secilen kelime input alani prefill olur.
-4. Cambridge / Dictionary.com / Copy butonlari calisir.
+2. Bir kelime secildiginde dis tarayici acilmadan uygulama ici popup acilir.
+3. Secilen kelime pack'te varsa popup'ta kelime detaylari (pos/tr/example/chipler) gorunur.
+4. Secilen kelime pack'te yoksa popup loading sonrasi otomatik EN->TR ceviri gorunur.
+5. `Kaynakta Ac` sadece butona basinca dis tarayiciyi acar (otomatik acmaz).
+6. `Flashcard'da Calis` tek kelimelik custom oturum acabilir.
 
 ## 4) Reading Progress Write
 1. ReadingDetail acilisinda `user_reading_progress` kaydi olusur/guncellenir.
@@ -54,3 +56,7 @@
    - app crash olmaz
    - anlamli hata mesaji gorunur.
 2. Sozluk linki acilamazsa snackbar gorunur.
+3. Quick Word popup'ta ceviri hatasi olursa:
+   - popup kapanmaz
+   - `Retry` ile tekrar denenebilir
+   - `Kaynakta Ac` aktif kalir.

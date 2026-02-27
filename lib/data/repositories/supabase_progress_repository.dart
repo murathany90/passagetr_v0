@@ -48,7 +48,8 @@ class SupabaseProgressRepository implements ProgressRepository {
             FlashcardAnswer.unknown => -8,
           };
 
-          final int mastery = _clamp((current?['mastery'] as int? ?? 0) + delta);
+          final int mastery =
+              _clamp((current?['mastery'] as int? ?? 0) + delta);
           final int seen = (current?['seen_count'] as int? ?? 0) + 1;
           final int correct = current?['correct_count'] as int? ?? 0;
           final int wrong = current?['wrong_count'] as int? ?? 0;
@@ -98,10 +99,11 @@ class SupabaseProgressRepository implements ProgressRepository {
               await _getCurrentProgress(userId: userId, wordId: wordId);
 
           final int delta = isCorrect ? 10 : -10;
-          final int mastery = _clamp((current?['mastery'] as int? ?? 0) + delta);
+          final int mastery =
+              _clamp((current?['mastery'] as int? ?? 0) + delta);
           final int seen = (current?['seen_count'] as int? ?? 0) + 1;
-          final int correct = (current?['correct_count'] as int? ?? 0) +
-              (isCorrect ? 1 : 0);
+          final int correct =
+              (current?['correct_count'] as int? ?? 0) + (isCorrect ? 1 : 0);
           final int wrong =
               (current?['wrong_count'] as int? ?? 0) + (isCorrect ? 0 : 1);
 
@@ -156,6 +158,72 @@ class SupabaseProgressRepository implements ProgressRepository {
       );
     }
     return mapped;
+  }
+
+  @override
+  Future<int> getTodayWordCount() async {
+    final String userId = _resolveUserId();
+    final DateTime now = DateTime.now();
+    final DateTime startOfDay = DateTime(now.year, now.month, now.day);
+
+    final List<dynamic> rows = await _client
+        .from('user_word_progress')
+        .select('word_id')
+        .eq('user_id', userId)
+        .gte('last_seen_at', startOfDay.toUtc().toIso8601String());
+
+    return rows.length;
+  }
+
+  @override
+  Future<List<String>> getWeakWordIds({
+    required String packId,
+    int limit = 10,
+  }) async {
+    final String userId = _resolveUserId();
+
+    final List<dynamic> weakRows = await _client
+        .from('user_word_progress')
+        .select('word_id, mastery, wrong_count, words!inner(pack_id)')
+        .eq('user_id', userId)
+        .eq('words.pack_id', packId)
+        .order('mastery', ascending: true)
+        .order('wrong_count', ascending: false)
+        .limit(limit);
+
+    final List<String> ids = <String>[];
+    final Set<String> seen = <String>{};
+    for (final dynamic row in weakRows) {
+      final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
+      final String? wordId = data['word_id'] as String?;
+      if (wordId != null && seen.add(wordId)) {
+        ids.add(wordId);
+      }
+    }
+
+    if (ids.length >= limit) {
+      return ids;
+    }
+
+    final List<dynamic> fallbackRows = await _client
+        .from('words')
+        .select('id')
+        .eq('pack_id', packId)
+        .order('created_at', ascending: true)
+        .limit(limit * 3);
+
+    for (final dynamic row in fallbackRows) {
+      final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
+      final String? id = data['id'] as String?;
+      if (id != null && seen.add(id)) {
+        ids.add(id);
+      }
+      if (ids.length >= limit) {
+        break;
+      }
+    }
+
+    return ids;
   }
 
   Future<Map<String, dynamic>?> _getCurrentProgress({

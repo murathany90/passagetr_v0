@@ -24,6 +24,14 @@ abstract class TranslationService {
   String get providerKey;
   bool get isConfigured;
 
+  Future<String> translateEnToTr(String text) {
+    return translate(
+      text: text,
+      sourceLang: 'en',
+      targetLang: 'tr',
+    );
+  }
+
   Future<String> translate({
     required String text,
     required String sourceLang,
@@ -31,7 +39,7 @@ abstract class TranslationService {
   });
 }
 
-class LibreTranslateService implements TranslationService {
+class LibreTranslateService extends TranslationService {
   LibreTranslateService({
     required this.endpoint,
     required this.apiKey,
@@ -42,6 +50,11 @@ class LibreTranslateService implements TranslationService {
   final String apiKey;
   final http.Client _client;
   static const Duration _timeout = Duration(seconds: 10);
+  static const List<String> _fallbackEndpoints = <String>[
+    'https://translate.argosopentech.com/translate',
+    'https://translate.astian.org/translate',
+    'https://libretranslate.pussthecat.org/translate',
+  ];
 
   @override
   String get providerKey => TranslationProvider.libre.value;
@@ -61,7 +74,6 @@ class LibreTranslateService implements TranslationService {
       );
     }
 
-    final Uri uri = _resolveUri(endpoint);
     final Map<String, dynamic> payload = <String, dynamic>{
       'q': text,
       'source': sourceLang,
@@ -71,51 +83,132 @@ class LibreTranslateService implements TranslationService {
     if (apiKey.trim().isNotEmpty) {
       payload['api_key'] = apiKey;
     }
+    final String body = jsonEncode(payload);
+    TranslationException? lastError;
 
-    try {
-      final http.Response response = await _client
-          .post(
-            uri,
-            headers: <String, String>{'Content-Type': 'application/json'},
-            body: jsonEncode(payload),
-          )
-          .timeout(_timeout);
+    for (final Uri uri in _buildCandidateUris()) {
+      try {
+        final http.Response response = await _postWithRedirect(
+          uri: uri,
+          body: body,
+        );
 
-      if (response.statusCode < 200 || response.statusCode >= 300) {
-        throw _statusError(response.statusCode);
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          throw _statusError(response: response, endpointUri: uri);
+        }
+
+        final dynamic decoded = jsonDecode(response.body);
+        if (decoded is! Map<String, dynamic>) {
+          throw const TranslationException(
+            'Ceviri yaniti beklenen formatta degil.',
+          );
+        }
+
+        final String? translated = _extractTranslatedText(decoded);
+        if (translated == null || translated.trim().isEmpty) {
+          throw const TranslationException('Ceviri metni bos geldi.');
+        }
+        return translated.trim();
+      } on TimeoutException {
+        lastError = TranslationException(
+          'Ceviri istegi zaman asimina ugradi. endpoint: $uri',
+        );
+      } on SocketException {
+        lastError = TranslationException(
+          'Ag hatasi nedeniyle ceviri alinamadi. endpoint: $uri',
+        );
+      } on http.ClientException {
+        lastError = TranslationException(
+          'Ceviri servisine baglanilamadi. endpoint: $uri',
+        );
+      } on FormatException {
+        lastError = TranslationException(
+          'Ceviri yaniti gecersiz formatta. endpoint: $uri',
+        );
+      } on TranslationException catch (error) {
+        lastError = error;
       }
-
-      final dynamic decoded = jsonDecode(response.body);
-      if (decoded is! Map<String, dynamic>) {
-        throw const TranslationException(
-            'Ceviri yaniti beklenen formatta degil.');
-      }
-
-      final String? translated = _extractTranslatedText(decoded);
-      if (translated == null || translated.trim().isEmpty) {
-        throw const TranslationException('Ceviri metni bos geldi.');
-      }
-      return translated.trim();
-    } on TimeoutException {
-      throw const TranslationException('Ceviri istegi zaman asimina ugradi.');
-    } on SocketException {
-      throw const TranslationException('Ag hatasi nedeniyle ceviri alinamadi.');
-    } on http.ClientException {
-      throw const TranslationException('Ceviri servisine baglanilamadi.');
-    } on FormatException {
-      throw const TranslationException('Ceviri yaniti gecersiz formatta.');
     }
+
+    throw lastError ?? const TranslationException('Ceviri su an alinamadi.');
   }
 
   Uri _resolveUri(String endpointRaw) {
-    final Uri base = Uri.parse(endpointRaw.trim());
-    if (base.path.endsWith('/translate')) {
+    final Uri base = Uri.parse(_normalizeEndpoint(endpointRaw));
+    if (base.path.trim().isEmpty) {
+      return base.replace(path: '/translate/');
+    }
+    if (base.path.endsWith('/translate/')) {
       return base;
     }
+    if (base.path.endsWith('/translate')) {
+      return base.replace(path: '${base.path}/');
+    }
     final String nextPath = base.path.endsWith('/')
-        ? '${base.path}translate'
-        : '${base.path}/translate';
+        ? '${base.path}translate/'
+        : '${base.path}/translate/';
     return base.replace(path: nextPath);
+  }
+
+  String _normalizeEndpoint(String raw) {
+    final String trimmed = raw.trim();
+    if (trimmed.endsWith('/translate')) {
+      return '$trimmed/';
+    }
+    return trimmed;
+  }
+
+  List<Uri> _buildCandidateUris() {
+    final Set<String> seen = <String>{};
+    final List<Uri> uris = <Uri>[];
+    for (final String raw in <String>[endpoint, ..._fallbackEndpoints]) {
+      final String normalized = _normalizeEndpoint(raw);
+      if (normalized.isEmpty || !seen.add(normalized)) {
+        continue;
+      }
+      uris.add(_resolveUri(normalized));
+    }
+    return uris;
+  }
+
+  Future<http.Response> _postWithRedirect({
+    required Uri uri,
+    required String body,
+  }) async {
+    const Map<String, String> headers = <String, String>{
+      'Content-Type': 'application/json',
+    };
+
+    final http.Response first = await _client
+        .post(
+          uri,
+          headers: headers,
+          body: body,
+        )
+        .timeout(_timeout);
+
+    if (first.statusCode != 301 && first.statusCode != 302) {
+      return first;
+    }
+
+    final String? location = first.headers['location'];
+    if (location == null || location.trim().isEmpty) {
+      return first;
+    }
+
+    final Uri rawRedirect = Uri.parse(location.trim()).hasScheme
+        ? Uri.parse(location.trim())
+        : uri.resolve(location.trim());
+
+    final Uri redirectUri = _resolveUri(rawRedirect.toString());
+
+    return _client
+        .post(
+          redirectUri,
+          headers: headers,
+          body: body,
+        )
+        .timeout(_timeout);
   }
 
   String? _extractTranslatedText(Map<String, dynamic> data) {
@@ -144,27 +237,42 @@ class LibreTranslateService implements TranslationService {
     return null;
   }
 
-  TranslationException _statusError(int code) {
+  TranslationException _statusError({
+    required http.Response response,
+    required Uri endpointUri,
+  }) {
+    final int code = response.statusCode;
+    final String location = response.headers['location'] ?? '-';
+    final String headers = response.headers.entries
+        .map((MapEntry<String, String> e) => '${e.key}:${e.value}')
+        .join(', ');
+
     if (code == 429) {
-      return const TranslationException(
-        'Ceviri servisi su an yogun. Daha sonra tekrar dene.',
+      return TranslationException(
+        'Ceviri siniri asildi, biraz sonra tekrar dene. '
+        '(status:$code endpoint:$endpointUri location:$location headers:$headers)',
       );
     }
     if (code == 401 || code == 403) {
-      return const TranslationException(
-        'Ceviri yetkilendirmesi gecersiz. API ayarlarini kontrol et.',
+      return TranslationException(
+        'Ceviri yetkilendirmesi gecersiz. API ayarlarini kontrol et. '
+        '(status:$code endpoint:$endpointUri location:$location headers:$headers)',
       );
     }
     if (code >= 500) {
-      return const TranslationException(
-        'Ceviri servisi gecici olarak kullanilamiyor.',
+      return TranslationException(
+        'Ceviri servisi gecici olarak kullanilamiyor. '
+        '(status:$code endpoint:$endpointUri location:$location headers:$headers)',
       );
     }
-    return TranslationException('Ceviri servisi hata kodu: $code');
+    return TranslationException(
+      'Ceviri servisi hata kodu: $code '
+      '(endpoint:$endpointUri location:$location headers:$headers)',
+    );
   }
 }
 
-class GoogleCloudTranslateService implements TranslationService {
+class GoogleCloudTranslateService extends TranslationService {
   GoogleCloudTranslateService({
     required this.endpoint,
     required this.apiKey,
@@ -270,7 +378,7 @@ class GoogleCloudTranslateService implements TranslationService {
   TranslationException _statusError(int code) {
     if (code == 429) {
       return const TranslationException(
-        'Ceviri servisi su an yogun. Daha sonra tekrar dene.',
+        'Ceviri siniri asildi, biraz sonra tekrar dene.',
       );
     }
     if (code == 401 || code == 403) {

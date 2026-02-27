@@ -1,14 +1,18 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../core/utils/word_selection_utils.dart';
 
 class DictionarySheet extends StatefulWidget {
   const DictionarySheet({
     required this.initialSentence,
+    this.initialWord,
     super.key,
   });
 
   final String initialSentence;
+  final String? initialWord;
 
   @override
   State<DictionarySheet> createState() => _DictionarySheetState();
@@ -20,7 +24,7 @@ class _DictionarySheetState extends State<DictionarySheet> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controller = TextEditingController(text: widget.initialWord ?? '');
   }
 
   @override
@@ -38,7 +42,8 @@ class _DictionarySheetState extends State<DictionarySheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Text('Sozluk Ac', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('Sozluk Ac',
+                style: TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
             Text(
               widget.initialSentence,
@@ -56,16 +61,13 @@ class _DictionarySheetState extends State<DictionarySheet> {
             ),
             const SizedBox(height: 12),
             FilledButton(
-              onPressed: () => _openDictionary(
-                'https://dictionary.cambridge.org/dictionary/english/',
-              ),
+              onPressed: () =>
+                  _openDictionary(buildCambridgeDictionaryUrl(_word)),
               child: const Text('Cambridge'),
             ),
             const SizedBox(height: 8),
             FilledButton.tonal(
-              onPressed: () => _openDictionary(
-                'https://www.dictionary.com/browse/',
-              ),
+              onPressed: () => _openDictionary(buildDictionaryDotComUrl(_word)),
               child: const Text('Dictionary.com'),
             ),
             const SizedBox(height: 8),
@@ -81,13 +83,12 @@ class _DictionarySheetState extends State<DictionarySheet> {
 
   String get _word => _controller.text.trim();
 
-  Future<void> _openDictionary(String baseUrl) async {
+  Future<void> _openDictionary(Uri uri) async {
     if (_word.isEmpty) {
       _showMessage('Lutfen bir kelime girin.');
       return;
     }
 
-    final Uri uri = Uri.parse('$baseUrl${Uri.encodeComponent(_word)}');
     final bool launched = await launchUrl(
       uri,
       mode: LaunchMode.externalApplication,

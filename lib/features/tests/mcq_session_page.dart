@@ -58,10 +58,12 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
       }
 
       pool.shuffle(_random);
-      final int questionCount = min(AppConstants.testTargetQuestionCount, pool.length);
+      final int questionCount =
+          min(AppConstants.testTargetQuestionCount, pool.length);
       final List<WordItem> selected = pool.take(questionCount).toList();
       final List<_McqQuestion> built = selected
-          .map((WordItem word) => _McqQuestion(word: word, options: _buildOptions(word, pool)))
+          .map((WordItem word) =>
+              _McqQuestion(word: word, options: _buildOptions(word, pool)))
           .toList();
 
       if (!mounted) {
@@ -100,7 +102,9 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
       optionSet.add(item.trMeaning);
     }
 
-    final List<WordItem> fallback = pool.where((WordItem w) => w.id != target.id).toList()
+    final List<WordItem> fallback = pool
+        .where((WordItem w) => w.id != target.id)
+        .toList()
       ..shuffle(_random);
     for (final WordItem item in fallback) {
       if (optionSet.length >= 4) {
@@ -246,7 +250,8 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(q.word.enWord, style: Theme.of(context).textTheme.headlineSmall),
+            Text(q.word.enWord,
+                style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 8),
             Chip(label: Text(q.word.pos)),
             const SizedBox(height: 16),

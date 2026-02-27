@@ -12,9 +12,16 @@ import '../../state/providers.dart';
 import '../tests/test_hub_page.dart';
 
 class FlashcardSessionPage extends ConsumerStatefulWidget {
-  const FlashcardSessionPage({required this.pack, super.key});
+  const FlashcardSessionPage({
+    required this.pack,
+    this.customWordIds,
+    this.sessionLabel,
+    super.key,
+  });
 
   final Pack pack;
+  final List<String>? customWordIds;
+  final String? sessionLabel;
 
   @override
   ConsumerState<FlashcardSessionPage> createState() =>
@@ -37,6 +44,11 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
   int _unsureCount = 0;
   int _unknownCount = 0;
 
+  bool get _isCustomSession =>
+      (widget.customWordIds ?? const <String>[]).isNotEmpty;
+
+  String get _title => widget.sessionLabel ?? 'Flashcard';
+
   @override
   void initState() {
     super.initState();
@@ -57,7 +69,11 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       _unknownCount = 0;
     });
 
-    await _loadMore();
+    if (_isCustomSession) {
+      await _loadCustomWords();
+    } else {
+      await _loadMore();
+    }
 
     if (mounted) {
       setState(() {
@@ -66,7 +82,40 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     }
   }
 
+  Future<void> _loadCustomWords() async {
+    final List<String> ids = widget.customWordIds ?? const <String>[];
+    if (ids.isEmpty) {
+      setState(() {
+        _hasMore = false;
+      });
+      return;
+    }
+
+    try {
+      final WordRepository repository = ref.read(wordRepositoryProvider);
+      final List<WordItem> words = await repository.getWordsByIds(ids);
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _words.addAll(words);
+        _offset = words.length;
+        _hasMore = false;
+      });
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _errorMessage = error.toString();
+      });
+    }
+  }
+
   Future<void> _loadMore() async {
+    if (_isCustomSession) {
+      return;
+    }
     if (_loadingMore || !_hasMore) {
       return;
     }
@@ -137,7 +186,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
         _showBack = false;
       });
 
-      if (_words.length - _index < 8 && _hasMore) {
+      if (!_isCustomSession && _words.length - _index < 8 && _hasMore) {
         _loadMore();
       }
     } catch (error) {
@@ -166,7 +215,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
 
     if (_errorMessage != null && _words.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Flashcard')),
+        appBar: AppBar(title: Text(_title)),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -177,7 +226,8 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
                 const SizedBox(height: 8),
                 Text(_errorMessage!, textAlign: TextAlign.center),
                 const SizedBox(height: 12),
-                FilledButton(onPressed: _loadInitial, child: const Text('Retry')),
+                FilledButton(
+                    onPressed: _loadInitial, child: const Text('Retry')),
               ],
             ),
           ),
@@ -187,16 +237,17 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
 
     if (_words.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Flashcard')),
+        appBar: AppBar(title: Text(_title)),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const Text('Bu pack icin gosterilecek kelime bulunamadi.'),
+                const Text('Bu oturum icin gosterilecek kelime bulunamadi.'),
                 const SizedBox(height: 12),
-                FilledButton(onPressed: _loadInitial, child: const Text('Retry')),
+                FilledButton(
+                    onPressed: _loadInitial, child: const Text('Retry')),
               ],
             ),
           ),
@@ -220,7 +271,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flashcard ${_index + 1}/${_words.length}'),
+        title: Text('$_title ${_index + 1}/${_words.length}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -260,7 +311,8 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
             ),
             const SizedBox(height: 8),
             FilledButton.tonal(
-              onPressed: _saving ? null : () => _submit(FlashcardAnswer.unknown),
+              onPressed:
+                  _saving ? null : () => _submit(FlashcardAnswer.unknown),
               child: const Text('Bilmiyordum'),
             ),
           ],

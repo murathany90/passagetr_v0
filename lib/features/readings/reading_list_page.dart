@@ -244,7 +244,10 @@ class _ReadingListPageState extends ConsumerState<ReadingListPage> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (_) => ReadingDetailPage(passage: passage),
+                    builder: (_) => ReadingDetailPage(
+                      passage: passage,
+                      pack: widget.pack,
+                    ),
                   ),
                 );
               },

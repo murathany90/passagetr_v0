@@ -62,6 +62,65 @@ class SupabaseWordRepository implements WordRepository {
   }
 
   @override
+  Future<WordItem?> getWordByEnWord({
+    required String packId,
+    required String enWord,
+  }) async {
+    final String normalized = enWord.trim().toLowerCase();
+    if (normalized.isEmpty) {
+      return null;
+    }
+
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select()
+        .eq('pack_id', packId)
+        .ilike('en_word', normalized)
+        .limit(10);
+
+    if (rows.isEmpty) {
+      return null;
+    }
+
+    WordItem? fallback;
+    for (final dynamic row in rows) {
+      final WordItem item = _fromRow(row as Map);
+      final String current = item.enWord.trim().toLowerCase();
+      if (current == normalized) {
+        return item;
+      }
+      fallback ??= item;
+    }
+
+    return fallback;
+  }
+
+  @override
+  Future<List<WordItem>> getWordsByIds(List<String> wordIds) async {
+    if (wordIds.isEmpty) {
+      return const <WordItem>[];
+    }
+
+    final List<dynamic> rows =
+        await _client.from('words').select().inFilter('id', wordIds);
+
+    final Map<String, WordItem> byId = <String, WordItem>{};
+    for (final dynamic row in rows) {
+      final WordItem word = _fromRow(row as Map);
+      byId[word.id] = word;
+    }
+
+    final List<WordItem> ordered = <WordItem>[];
+    for (final String id in wordIds) {
+      final WordItem? found = byId[id];
+      if (found != null) {
+        ordered.add(found);
+      }
+    }
+    return ordered;
+  }
+
+  @override
   Future<List<WordItem>> getSessionBatch(
     String packId, {
     int limit = 100,
