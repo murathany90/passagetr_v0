@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 enum TranslationProvider {
   libre('libre'),
-  google('google');
+  google('google'),
+  deepl('deepl');
 
   const TranslationProvider(this.value);
   final String value;
@@ -392,6 +394,150 @@ class GoogleCloudTranslateService extends TranslationService {
       );
     }
     return TranslationException('Ceviri servisi hata kodu: $code');
+  }
+}
+
+class DeeplFunctionResponse {
+  const DeeplFunctionResponse({
+    required this.status,
+    required this.data,
+  });
+
+  final int status;
+  final dynamic data;
+}
+
+class DeeplEdgeFunctionTranslationService extends TranslationService {
+  DeeplEdgeFunctionTranslationService({
+    SupabaseClient? client,
+    Future<DeeplFunctionResponse> Function(Map<String, dynamic> body)?
+        invokeOverride,
+  })  : _client = client,
+        _invokeOverride = invokeOverride;
+
+  final SupabaseClient? _client;
+  final Future<DeeplFunctionResponse> Function(Map<String, dynamic> body)?
+      _invokeOverride;
+
+  @override
+  String get providerKey => TranslationProvider.deepl.value;
+
+  @override
+  bool get isConfigured => _invokeOverride != null || _client != null;
+
+  @override
+  Future<String> translate({
+    required String text,
+    required String sourceLang,
+    required String targetLang,
+  }) async {
+    final String normalizedText = text.trim();
+    if (normalizedText.isEmpty) {
+      throw const TranslationException('Ceviri metni bos olamaz.');
+    }
+    if (!isConfigured) {
+      throw const TranslationException(
+          'Deepl ceviri servisi yapilandirilmadi.');
+    }
+
+    try {
+      final DeeplFunctionResponse response = await _invoke(
+        <String, dynamic>{
+          'text': normalizedText,
+          'source': sourceLang.trim().toUpperCase(),
+          'target': targetLang.trim().toUpperCase(),
+        },
+      );
+
+      if (response.status < 200 || response.status >= 300) {
+        throw _statusError(response.status, response.data);
+      }
+
+      final dynamic body = response.data;
+      if (body is! Map<String, dynamic>) {
+        throw const TranslationException(
+          'Deepl function yaniti beklenen formatta degil.',
+        );
+      }
+
+      final dynamic translatedNode =
+          body['translatedText'] ?? body['translated_text'];
+      final String translated = (translatedNode as String?)?.trim() ?? '';
+      if (translated.isEmpty) {
+        throw const TranslationException('Deepl ceviri metni bos geldi.');
+      }
+      return translated;
+    } on TranslationException {
+      rethrow;
+    } catch (error) {
+      final String text = error.toString();
+      if (text.contains('429')) {
+        throw const TranslationException(
+          'Ceviri siniri asildi, biraz sonra tekrar dene.',
+        );
+      }
+      throw TranslationException('Ceviri alinamadi: $text');
+    }
+  }
+
+  Future<DeeplFunctionResponse> _invoke(Map<String, dynamic> body) async {
+    final Future<DeeplFunctionResponse> Function(Map<String, dynamic> body)?
+        invokeOverride = _invokeOverride;
+    if (invokeOverride != null) {
+      return invokeOverride(body);
+    }
+
+    final SupabaseClient? client = _client;
+    if (client == null) {
+      throw const TranslationException('Deepl function client bulunamadi.');
+    }
+
+    final dynamic response = await client.functions.invoke(
+      'deepl_translate',
+      body: body,
+    );
+
+    final int status = _extractStatus(response) ?? 200;
+    final dynamic data = _extractData(response);
+    return DeeplFunctionResponse(status: status, data: data);
+  }
+
+  int? _extractStatus(dynamic response) {
+    try {
+      final dynamic status = response.status;
+      if (status is int) {
+        return status;
+      }
+      if (status is String) {
+        return int.tryParse(status);
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  dynamic _extractData(dynamic response) {
+    try {
+      return response.data;
+    } catch (_) {}
+    return response;
+  }
+
+  TranslationException _statusError(int status, dynamic body) {
+    final String detail;
+    if (body is Map<String, dynamic>) {
+      detail = (body['message'] ?? body['error'] ?? body.toString()).toString();
+    } else {
+      detail = body?.toString() ?? '';
+    }
+
+    if (status == 429) {
+      return const TranslationException(
+        'Ceviri siniri asildi, biraz sonra tekrar dene.',
+      );
+    }
+    return TranslationException(
+      'Deepl function hatasi: status=$status detail=$detail',
+    );
   }
 }
 

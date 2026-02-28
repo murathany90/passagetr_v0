@@ -65,6 +65,7 @@ final Provider<ReadingRepository> readingRepositoryProvider =
 
 final Provider<TranslationService> translationServiceProvider =
     Provider<TranslationService>((Ref ref) {
+  final SupabaseClient client = ref.watch(supabaseClientProvider);
   final TranslationProvider provider =
       TranslationProvider.fromRaw(AppConfig.translateProvider);
 
@@ -79,6 +80,8 @@ final Provider<TranslationService> translationServiceProvider =
         endpoint: AppConfig.translateEndpoint,
         apiKey: AppConfig.translateApiKey,
       );
+    case TranslationProvider.deepl:
+      return DeeplEdgeFunctionTranslationService(client: client);
   }
 });
 

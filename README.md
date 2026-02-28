@@ -290,3 +290,40 @@ Libre provider kullanilirken uygulama ana endpoint basarisiz olursa asagidaki pu
 Ornek:
 - --dart-define=TRANSLATE_ENDPOINT="https://translate.argosopentech.com/translate"
 - --dart-define=TRANSLATE_ENDPOINT="https://libretranslate.pussthecat.org/translate"
+
+## DeepL (Supabase Edge Function Proxy)
+
+Bu projede DeepL API key istemciye konmaz. Mobil uygulama DeepL'e dogrudan gitmez; `deepl_translate` Edge Function uzerinden cagirir.
+
+### 1) Edge Function Deploy
+
+```bash
+supabase functions deploy deepl_translate
+```
+
+### 2) Secret Set
+
+```bash
+supabase secrets set DEEPL_AUTH_KEY="<YOUR_DEEPL_AUTH_KEY>"
+```
+
+Opsiyonel endpoint override (default free):
+
+```bash
+supabase secrets set DEEPL_API_URL="https://api-free.deepl.com/v2/translate"
+```
+
+### 3) Flutter Run (DeepL)
+
+DeepL icin istemci tarafinda endpoint/key verilmez, sadece provider secilir:
+
+```bash
+flutter run \
+  --dart-define=SUPABASE_URL="https://<project>.supabase.co" \
+  --dart-define=SUPABASE_ANON_KEY="<anon-key>" \
+  --dart-define=TRANSLATE_PROVIDER="deepl"
+```
+
+Notlar:
+- WordQuickViewSheet fallback ceviri bu provider ile otomatik calisir.
+- Ceviri hatasinda popup kapanmaz; Retry ve `Kaynakta Ac` kullanilabilir.

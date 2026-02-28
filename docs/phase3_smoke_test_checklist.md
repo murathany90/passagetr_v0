@@ -60,3 +60,9 @@
    - popup kapanmaz
    - `Retry` ile tekrar denenebilir
    - `Kaynakta Ac` aktif kalir.
+
+## 7) Deepl Provider Smoke
+1. Uygulamayi `--dart-define=TRANSLATE_PROVIDER=deepl` ile baslat.
+2. ReadingDetail'de pack disi bir kelime sec.
+3. Beklenen: Quick Word popup loading sonrasi ceviri gelir.
+4. Beklenen: dis tarayici otomatik acilmaz; sadece `Kaynakta Ac` ile acilir.
