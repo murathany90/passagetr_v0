@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/widgets/app_error_state.dart';
+import '../../core/widgets/app_gradient_cta_button.dart';
+import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_section_header.dart';
+import '../../core/widgets/app_stat_tile.dart';
+import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/home_dashboard_data.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/reading_resume_item.dart';
@@ -21,7 +27,8 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
     if (!quickStart.isAvailable) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Hizli basla icin uygun icerik bulunamadi.')),
+          content: Text('Hizli basla icin uygun icerik bulunamadi.'),
+        ),
       );
       return;
     }
@@ -56,7 +63,8 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
         if (pack == null || ids.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-                content: Text('Hizli basla icin kelime bulunamadi.')),
+              content: Text('Hizli basla icin kelime bulunamadi.'),
+            ),
           );
           return;
         }
@@ -90,32 +98,19 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
     );
 
     return dashboard.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const AppLoadingBlock(message: 'Ana sayfa yukleniyor...'),
       error: (Object error, StackTrace stack) {
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Ana sayfa verisi yuklenemedi.'),
-                const SizedBox(height: 8),
-                Text(error.toString(), textAlign: TextAlign.center),
-                const SizedBox(height: 12),
-                FilledButton(
-                  onPressed: () => ref.invalidate(homeDashboardProvider),
-                  child: const Text('Retry'),
-                ),
-              ],
-            ),
-          ),
+        return AppErrorState(
+          title: 'Ana sayfa verisi yuklenemedi.',
+          detail: error.toString(),
+          onRetry: () => ref.invalidate(homeDashboardProvider),
         );
       },
       data: (HomeDashboardData data) {
-        final String quickStartText = switch (data.quickStart.type) {
-          QuickStartType.resumeReading => 'Hizli Basla: Okumaya Devam Et',
-          QuickStartType.weakWords => 'Hizli Basla: Zorlandigin Kelimeler',
-          QuickStartType.randomWords => 'Hizli Basla: Rastgele Flashcard',
+        final String quickStartTitle = switch (data.quickStart.type) {
+          QuickStartType.resumeReading => 'Okumaya Devam Et',
+          QuickStartType.weakWords => 'Zorlandigin Kelimeler',
+          QuickStartType.randomWords => 'Rastgele Flashcard',
           QuickStartType.unavailable => 'Hizli Basla su an kullanilamiyor',
         };
 
@@ -125,71 +120,60 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),
             children: <Widget>[
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Bugunun Durumu',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 12),
-                      _MetricRow(
-                        label: 'Bugun gorulen kelime',
-                        value: '${data.todayWordCount}',
-                      ),
-                      _MetricRow(
-                        label: 'Bugun okunan cumle',
-                        value: '${data.todayReadSentenceCount}',
-                      ),
-                      _MetricRow(
-                        label: 'Bugun cozulen soru',
-                        value: data.todaySolvedQuestionText,
-                      ),
-                    ],
-                  ),
+              AppSurfaceCard(
+                padding: const EdgeInsets.all(18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Bugunun Durumu',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w800,
+                              ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'Gunluk hedefini hizli basla ile devam ettir.',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                    ),
+                    const SizedBox(height: 14),
+                    AppGradientCtaButton(
+                      label: 'Hizli Basla: $quickStartTitle',
+                      icon: Icons.play_arrow_rounded,
+                      enabled: data.quickStart.isAvailable,
+                      onTap: () => _onQuickStart(data),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 14),
-              FilledButton.icon(
-                onPressed: data.quickStart.isAvailable
-                    ? () => _onQuickStart(data)
-                    : null,
-                icon: const Icon(Icons.play_arrow),
-                label: Text(quickStartText),
+              const SizedBox(height: 16),
+              const AppSectionHeader(title: 'Gunluk Metrikler'),
+              const SizedBox(height: 8),
+              AppStatTile(
+                label: 'Bugun gorulen kelime',
+                value: '${data.todayWordCount}',
+                icon: Icons.school_outlined,
+              ),
+              const SizedBox(height: 8),
+              AppStatTile(
+                label: 'Bugun okunan cumle',
+                value: '${data.todayReadSentenceCount}',
+                icon: Icons.menu_book_outlined,
+              ),
+              const SizedBox(height: 8),
+              AppStatTile(
+                label: 'Bugun cozulen soru',
+                value: data.todaySolvedQuestionText,
+                icon: Icons.quiz_outlined,
               ),
             ],
           ),
         );
       },
-    );
-  }
-}
-
-class _MetricRow extends StatelessWidget {
-  const _MetricRow({
-    required this.label,
-    required this.value,
-  });
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        children: <Widget>[
-          Expanded(child: Text(label)),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        ],
-      ),
     );
   }
 }

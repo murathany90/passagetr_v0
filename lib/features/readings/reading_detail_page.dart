@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/services/translation_service.dart';
+import '../../core/widgets/app_empty_state.dart';
+import '../../core/widgets/app_error_state.dart';
+import '../../core/widgets/app_gradient_cta_button.dart';
+import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_section_header.dart';
+import '../../core/widgets/app_surface_card.dart';
 import '../../core/utils/word_selection_utils.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/passage_sentence.dart';
@@ -12,6 +18,7 @@ import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/reading_repository.dart';
 import '../../state/providers.dart';
 import '../flashcard/flashcard_session_page.dart';
+import 'widgets/interactive_sentence_text.dart';
 import 'widgets/word_quick_view_sheet.dart';
 
 class ReadingDetailPage extends ConsumerStatefulWidget {
@@ -419,34 +426,6 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     _quickWordSheetOpen = false;
   }
 
-  void _onSentenceSelectionChanged(
-    PassageSentence sentence,
-    TextSelection selection,
-    SelectionChangedCause? cause,
-  ) {
-    if (selection.isCollapsed) {
-      return;
-    }
-    if (_quickWordSheetOpen) {
-      return;
-    }
-    final int start = selection.start;
-    final int end = selection.end;
-    if (start < 0 ||
-        end < 0 ||
-        start >= end ||
-        end > sentence.sentenceEn.length) {
-      return;
-    }
-
-    final String raw = sentence.sentenceEn.substring(start, end);
-    final String normalized = normalizeSelectedWord(raw);
-    if (normalized.isEmpty) {
-      return;
-    }
-    _openQuickWordPopup(normalized);
-  }
-
   String? _resolveTranslation(PassageSentence sentence) {
     final String inline = sentence.sentenceTr?.trim() ?? '';
     if (inline.isNotEmpty) {
@@ -468,6 +447,13 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         .reduce((int a, int b) => a > b ? a : b);
   }
 
+  Set<String> get _knownWordsSet {
+    return _passageWords
+        .map((WordItem e) => normalizeWordToken(e.enWord))
+        .where((String e) => e.isNotEmpty)
+        .toSet();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -478,91 +464,88 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
 
   Widget _buildBody() {
     if (_loading) {
-      return const Center(child: CircularProgressIndicator());
+      return const AppLoadingBlock(message: 'Okuma yukleniyor...');
     }
 
     if (_error != null) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Text('Paragraf yuklenemedi.'),
-              const SizedBox(height: 8),
-              Text(_error!, textAlign: TextAlign.center),
-              const SizedBox(height: 12),
-              FilledButton(onPressed: _load, child: const Text('Retry')),
-            ],
-          ),
-        ),
+      return AppErrorState(
+        title: 'Paragraf yuklenemedi.',
+        detail: _error!,
+        onRetry: _load,
       );
     }
 
     if (_sentences.isEmpty) {
-      return const Center(child: Text('Bu paragrafta cumle yok.'));
+      return const AppEmptyState(
+        title: 'Bu paragrafta cumle yok.',
+        message: 'Baska bir paragraf secip tekrar deneyin.',
+        icon: Icons.menu_book_outlined,
+      );
     }
 
     final int total = _maxIdx;
     final int shownProgress =
         _completed ? total : (_lastIdx > total ? total : _lastIdx);
     final double progress = total == 0 ? 0 : shownProgress / total;
+    final Set<String> knownWordsSet = _knownWordsSet;
 
     return RefreshIndicator(
       onRefresh: _load,
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 18),
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 20),
         itemCount: _sentences.length + 2,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
-            return Card(
+            return AppSurfaceCard(
               margin: const EdgeInsets.only(bottom: 10),
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          'Ilerleme: $shownProgress/$total',
-                          style: Theme.of(context).textTheme.titleMedium,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Ilerleme: $shownProgress/$total',
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                ),
+                      ),
+                      const SizedBox(width: 8),
+                      if (_completed)
+                        const Chip(
+                          label: Text('Tamamlandi'),
+                          visualDensity: VisualDensity.compact,
                         ),
-                        const SizedBox(width: 8),
-                        if (_completed)
-                          const Chip(
-                            label: Text('Tamamlandi'),
-                            visualDensity: VisualDensity.compact,
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    LinearProgressIndicator(value: progress),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: OutlinedButton(
-                            onPressed: _savingProgress || shownProgress >= total
-                                ? null
-                                : _advanceProgress,
-                            child: const Text('Ilerledim'),
-                          ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  LinearProgressIndicator(value: progress),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: _savingProgress || shownProgress >= total
+                              ? null
+                              : _advanceProgress,
+                          icon: const Icon(Icons.arrow_forward_rounded),
+                          label: const Text('Ilerledim'),
                         ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: FilledButton(
-                            onPressed: _savingProgress || _completed
-                                ? null
-                                : _completeReading,
-                            child: const Text('Okumayi Bitirdim'),
-                          ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: FilledButton.icon(
+                          onPressed: _savingProgress || _completed
+                              ? null
+                              : _completeReading,
+                          icon: const Icon(Icons.task_alt_rounded),
+                          label: const Text('Okumayi Bitirdim'),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           }
@@ -578,105 +561,106 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
           final String? translation = _resolveTranslation(sentence);
           final String? translateError = _translationErrors[sentence.id];
 
-          return Card(
+          return AppSurfaceCard(
             margin: const EdgeInsets.only(bottom: 8),
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('${sentence.idx}.'),
-                  const SizedBox(height: 4),
-                  SelectableText(
-                    sentence.sentenceEn,
-                    onSelectionChanged: (TextSelection selection,
-                        SelectionChangedCause? cause) {
-                      _onSentenceSelectionChanged(sentence, selection, cause);
-                    },
-                    style: Theme.of(context).textTheme.bodyLarge,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Chip(
+                      label: Text('${sentence.idx}'),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: InteractiveSentenceText(
+                        sentenceText: sentence.sentenceEn,
+                        knownWordsSet: knownWordsSet,
+                        onWordTap: _openQuickWordPopup,
+                        baseStyle: Theme.of(context).textTheme.bodyLarge,
+                        knownStyle:
+                            Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                OutlinedButton.icon(
+                  onPressed: () => _toggleTranslation(sentence),
+                  icon: Icon(
+                    expanded ? Icons.visibility_off : Icons.translate,
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () => _toggleTranslation(sentence),
-                          icon: Icon(
-                            expanded ? Icons.visibility_off : Icons.translate,
+                  label: Text(
+                    expanded ? 'Ceviriyi Gizle' : 'Ceviriyi Goster',
+                  ),
+                ),
+                if (expanded) ...<Widget>[
+                  const SizedBox(height: 6),
+                  if (loadingTranslate)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 6),
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
                           ),
-                          label: Text(
-                            expanded ? 'Ceviriyi Gizle' : 'Ceviriyi Goster',
+                          SizedBox(width: 8),
+                          Text('Ceviri yukleniyor...'),
+                        ],
+                      ),
+                    ),
+                  if (!loadingTranslate && translation != null)
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'TR:',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                           ),
+                          const SizedBox(height: 4),
+                          Text(translation),
+                        ],
+                      ),
+                    ),
+                  if (!loadingTranslate && translation == null) ...<Widget>[
+                    const Text('Ceviri bulunamadi.'),
+                    if (translateError != null) ...<Widget>[
+                      const SizedBox(height: 4),
+                      Text(
+                        translateError,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                     ],
-                  ),
-                  if (expanded) ...<Widget>[
                     const SizedBox(height: 6),
-                    if (loadingTranslate)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            ),
-                            SizedBox(width: 8),
-                            Text('Ceviri yukleniyor...'),
-                          ],
-                        ),
-                      ),
-                    if (!loadingTranslate && translation != null)
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'TR:',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(translation),
-                          ],
-                        ),
-                      ),
-                    if (!loadingTranslate && translation == null) ...<Widget>[
-                      const Text('Ceviri bulunamadi.'),
-                      if (translateError != null) ...<Widget>[
-                        const SizedBox(height: 4),
-                        Text(
-                          translateError,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        ),
-                      ],
-                      const SizedBox(height: 6),
-                      TextButton(
-                        onPressed: () => _translateAndCache(sentence),
-                        child: const Text('Retry Ceviri'),
-                      ),
-                    ],
+                    TextButton(
+                      onPressed: () => _translateAndCache(sentence),
+                      child: const Text('Retry Ceviri'),
+                    ),
                   ],
                 ],
-              ),
+              ],
             ),
           );
         },
@@ -685,75 +669,69 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   }
 
   Widget _buildPassageWordsPanel() {
-    return Card(
+    return AppSurfaceCard(
       margin: const EdgeInsets.only(top: 6),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Bu paragraftan kelimeler',
-              style: Theme.of(context).textTheme.titleMedium,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const AppSectionHeader(title: 'Bu paragraftan kelimeler'),
+          const SizedBox(height: 8),
+          if (_loadingPassageWords)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: Center(child: CircularProgressIndicator()),
+            )
+          else if (_passageWordsError != null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(_passageWordsError!),
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: _loadPassageWords,
+                  child: const Text('Retry'),
+                ),
+              ],
+            )
+          else if (_passageWords.isEmpty)
+            const Text('Bu paragraftan eslesen kelime bulunamadi.')
+          else ...<Widget>[
+            ..._passageWords.map(
+              (WordItem word) {
+                final int mastery =
+                    _passageWordsProgress[word.id]?.mastery ?? 0;
+                return ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(word.enWord),
+                  subtitle: Text(word.pos),
+                  trailing: Chip(
+                    label: Text('Mastery $mastery'),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 8),
-            if (_loadingPassageWords)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Center(child: CircularProgressIndicator()),
-              )
-            else if (_passageWordsError != null)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(_passageWordsError!),
-                  const SizedBox(height: 8),
-                  OutlinedButton(
-                    onPressed: _loadPassageWords,
-                    child: const Text('Retry'),
+            AppGradientCtaButton(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => FlashcardSessionPage(
+                      pack: widget.pack,
+                      customWordIds: _passageWords
+                          .map((WordItem e) => e.id)
+                          .toList(growable: false),
+                      sessionLabel: 'Paragraftan Kelime Calis',
+                    ),
                   ),
-                ],
-              )
-            else if (_passageWords.isEmpty)
-              const Text('Bu paragraftan eslesen kelime bulunamadi.')
-            else ...<Widget>[
-              ..._passageWords.map(
-                (WordItem word) {
-                  final int mastery =
-                      _passageWordsProgress[word.id]?.mastery ?? 0;
-                  return ListTile(
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(word.enWord),
-                    subtitle: Text(word.pos),
-                    trailing: Chip(
-                      label: Text('Mastery $mastery'),
-                      visualDensity: VisualDensity.compact,
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 8),
-              FilledButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => FlashcardSessionPage(
-                        pack: widget.pack,
-                        customWordIds: _passageWords
-                            .map((WordItem e) => e.id)
-                            .toList(growable: false),
-                        sessionLabel: 'Paragraftan Kelime Calis',
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.school),
-                label: const Text('Kelime Calis'),
-              ),
-            ],
+                );
+              },
+              icon: Icons.school,
+              label: 'Kelime Calis',
+            ),
           ],
-        ),
+        ],
       ),
     );
   }

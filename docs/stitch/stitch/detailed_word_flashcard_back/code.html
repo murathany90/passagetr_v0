@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detailed Word Flashcard Back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0C6D4F", // Dark Emerald Green
+                        "primary-light": "#E0F2F1", // Light Green for secondary buttons
+                        "primary-dark": "#004D40", // Darker shade for dark mode
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#121212",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E1E1E",
+                        "text-light": "#1F2937",
+                        "text-dark": "#E5E7EB",
+                        "text-muted-light": "#6B7280",
+                        "text-muted-dark": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'xl': "16px",
+                        '2xl': "24px",
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'card': '0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.04)',
+                    }
+                },
+            },
+        };
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col items-center justify-center p-4 antialiased transition-colors duration-200">
+<div class="w-full max-w-md bg-background-light dark:bg-background-dark h-[844px] flex flex-col relative overflow-hidden shadow-2xl rounded-[3rem] border border-gray-200 dark:border-gray-800">
+<div class="px-6 pt-4 pb-2 flex justify-between items-center text-xs font-medium text-text-light dark:text-text-dark">
+<span>00:59</span>
+<div class="flex items-center gap-1">
+<span class="material-icons-round text-sm">signal_cellular_alt</span>
+<span class="material-icons-round text-sm">wifi</span>
+<span class="material-icons-round text-sm">battery_full</span>
+</div>
+</div>
+<header class="flex items-center justify-between px-4 py-3 pb-2 z-10">
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-icons-round text-2xl text-text-light dark:text-text-dark">arrow_back</span>
+</button>
+<h1 class="text-lg font-semibold text-text-light dark:text-text-dark">Hizli Basla 1/10</h1>
+<div class="w-10"></div> 
+</header>
+<div class="px-6 mb-4">
+<div class="h-1.5 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[10%] rounded-full"></div>
+</div>
+</div>
+<main class="flex-1 px-4 pb-6 overflow-y-auto no-scrollbar flex flex-col">
+<div class="flex-1 bg-surface-light dark:bg-surface-dark rounded-2xl shadow-card border border-gray-100 dark:border-gray-700 p-6 flex flex-col relative transition-colors duration-200">
+<button class="absolute top-4 right-4 p-2 rounded-full text-primary bg-primary-light/30 hover:bg-primary-light/50 dark:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<span class="material-icons-round">volume_up</span>
+</button>
+<div class="mb-6">
+<h2 class="text-3xl font-bold text-primary mb-1">yetenek</h2>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark italic">noun</p>
+</div>
+<div class="space-y-4 mb-6">
+<div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+<div class="flex gap-2 mb-2">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">EN</span>
+<p class="text-sm font-medium leading-relaxed">She has the <span class="text-primary font-bold">ability</span> to sing.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300">TR</span>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">Şarkı söyleme <span class="font-semibold text-text-light dark:text-text-dark">yeteneği</span> var.</p>
+</div>
+</div>
+</div>
+<div class="mb-4">
+<h3 class="text-xs font-bold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark mb-3">Synonyms</h3>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-white dark:bg-gray-800 text-text-light dark:text-text-dark border border-gray-200 dark:border-gray-600 shadow-sm">
+                            capability
+                        </span>
+<span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-white dark:bg-gray-800 text-text-light dark:text-text-dark border border-gray-200 dark:border-gray-600 shadow-sm">
+                            talent
+                        </span>
+</div>
+</div>
+<div class="mt-2 mb-4">
+<h3 class="text-xs font-bold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark mb-3">Antonyms</h3>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-white dark:bg-gray-800 text-text-light dark:text-text-dark border border-gray-200 dark:border-gray-600 shadow-sm opacity-80">
+                            inability
+                        </span>
+</div>
+</div>
+<div class="flex-1"></div>
+<p class="text-center text-xs text-text-muted-light dark:text-text-muted-dark mt-4 flex items-center justify-center gap-1 opacity-60">
+<span class="material-icons-round text-sm">touch_app</span>
+                    Kartın ön yüzü için dokun
+                </p>
+</div>
+</main>
+<footer class="px-6 pb-8 pt-2 space-y-3 bg-background-light dark:bg-background-dark z-20">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3.5 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-icons-round text-lg">check_circle</span>
+                Biliyordum
+            </button>
+<button class="w-full bg-transparent border-2 border-gray-300 dark:border-gray-600 text-text-light dark:text-text-dark font-semibold py-3 px-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-icons-round text-lg">help_outline</span>
+                Kararsızım
+            </button>
+<button class="w-full bg-primary-light dark:bg-primary/20 text-primary dark:text-primary-light font-semibold py-3.5 px-4 rounded-xl hover:bg-green-100 dark:hover:bg-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-icons-round text-lg">cancel</span>
+                Bilmiyordum
+            </button>
+</footer>
+<div class="h-1 w-1/3 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-2"></div>
+</div>
+
+</body></html>

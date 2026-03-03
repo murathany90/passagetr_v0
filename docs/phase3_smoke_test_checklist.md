@@ -18,13 +18,17 @@
    - Yoksa zayif kelimelerle flashcard acilir.
    - O da yoksa random flashcard acilir.
 
-## 3) Reading Detail Selection + Quick Word Popup
-1. Sentence EN metni secilebilir.
-2. Bir kelime secildiginde dis tarayici acilmadan uygulama ici popup acilir.
-3. Secilen kelime pack'te varsa popup'ta kelime detaylari (pos/tr/example/chipler) gorunur.
-4. Secilen kelime pack'te yoksa popup loading sonrasi otomatik EN->TR ceviri gorunur.
-5. `Kaynakta Ac` sadece butona basinca dis tarayiciyi acar (otomatik acmaz).
-6. `Flashcard'da Calis` tek kelimelik custom oturum acabilir.
+## 3) Reading Detail Interactive Sentence + Quick Word Popup
+1. Sentence EN metni token bazli render edilir.
+2. Sistemde bulunan kelimeler bold/belirgin gorunur.
+3. Sistemde olmayan kelimeler normal stilde gorunur.
+4. Kelimeye tek dokunusta dis tarayici acilmadan uygulama ici popup acilir.
+5. Secilen kelime pack'te varsa popup'ta kelime detaylari (pos/tr/example/chipler) gorunur.
+6. Secilen kelime pack'te yoksa popup loading sonrasi otomatik EN->TR ceviri gorunur.
+7. Noktalama isaretlerine dokununca popup acilmaz.
+8. `Kaynakta Ac` sadece butona basinca dis tarayiciyi acar (otomatik acmaz).
+9. `Flashcard'da Calis` tek kelimelik custom oturum acabilir.
+10. Ayni passage tekrar acildiginda scroll/tap akisi akici kalir.
 
 ## 4) Reading Progress Write
 1. ReadingDetail acilisinda `user_reading_progress` kaydi olusur/guncellenir.

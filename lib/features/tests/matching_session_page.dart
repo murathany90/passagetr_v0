@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/widgets/app_error_state.dart';
+import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/progress_repository.dart';
@@ -185,27 +188,17 @@ class _MatchingSessionPageState extends ConsumerState<MatchingSessionPage> {
   Widget build(BuildContext context) {
     if (_loading) {
       return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: AppLoadingBlock(message: 'Matching yukleniyor...'),
       );
     }
 
     if (_error != null) {
       return Scaffold(
         appBar: AppBar(title: const Text('Matching')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Matching verisi yuklenemedi'),
-                const SizedBox(height: 8),
-                Text(_error!, textAlign: TextAlign.center),
-                const SizedBox(height: 12),
-                FilledButton(onPressed: _load, child: const Text('Retry')),
-              ],
-            ),
-          ),
+        body: AppErrorState(
+          title: 'Matching verisi yuklenemedi',
+          detail: _error!,
+          onRetry: _load,
         ),
       );
     }
@@ -214,13 +207,27 @@ class _MatchingSessionPageState extends ConsumerState<MatchingSessionPage> {
     if (completed) {
       return Scaffold(
         appBar: AppBar(title: const Text('Matching Sonuc')),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Dogru: $_correctCount'),
-              Text('Yanlis deneme: $_wrongCount'),
-              const SizedBox(height: 12),
+              AppSurfaceCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Oturum Tamamlandi',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                    ),
+                    const SizedBox(height: 12),
+                    _MetricRow(label: 'Dogru', value: _correctCount),
+                    _MetricRow(label: 'Yanlis deneme', value: _wrongCount),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               FilledButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Text('Kapat'),
@@ -231,59 +238,199 @@ class _MatchingSessionPageState extends ConsumerState<MatchingSessionPage> {
       );
     }
 
+    final double progress = _left.isEmpty ? 0 : _matched.length / _left.length;
+
     return Scaffold(
-      appBar:
-          AppBar(title: Text('Matching ${_matched.length}/${_left.length}')),
+      appBar: AppBar(
+        title: Text('Matching ${_matched.length}/${_left.length}'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: Row(
+        child: Column(
           children: <Widget>[
-            Expanded(
-              child: ListView.separated(
-                itemCount: _left.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 6),
-                itemBuilder: (BuildContext context, int index) {
-                  final WordItem word = _left[index];
-                  final bool isMatched = _matched.containsKey(word.id);
-                  final bool isSelected = _selectedLeftIndex == index;
-                  return ListTile(
-                    tileColor: isMatched
-                        ? Colors.green.withValues(alpha: 0.18)
-                        : isSelected
-                            ? Colors.blue.withValues(alpha: 0.18)
-                            : null,
-                    title: Text(word.enWord),
-                    subtitle: Text(word.pos),
-                    onTap: isMatched
-                        ? null
-                        : () {
-                            setState(() {
-                              _selectedLeftIndex = index;
-                            });
-                          },
-                  );
-                },
+            AppSurfaceCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Tiklamali Eslestirme',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 6),
+                  LinearProgressIndicator(value: progress),
+                ],
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(height: 10),
             Expanded(
-              child: ListView.separated(
-                itemCount: _right.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 6),
-                itemBuilder: (BuildContext context, int index) {
-                  final String meaning = _right[index];
-                  final bool isUsed = _usedRightIndices.contains(index);
-                  return ListTile(
-                    tileColor:
-                        isUsed ? Colors.green.withValues(alpha: 0.12) : null,
-                    title: Text(meaning),
-                    onTap: isUsed ? null : () => _onMeaningTap(index),
-                  );
-                },
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        const _ColumnHeader(
+                          title: 'EN',
+                          subtitle: 'Kelime sec',
+                        ),
+                        const SizedBox(height: 6),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: _left.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(height: 6),
+                            itemBuilder: (BuildContext context, int index) {
+                              final WordItem word = _left[index];
+                              final bool isMatched =
+                                  _matched.containsKey(word.id);
+                              final bool isSelected =
+                                  _selectedLeftIndex == index;
+                              final Color? tint = isMatched
+                                  ? Colors.green.withValues(alpha: 0.16)
+                                  : isSelected
+                                      ? Theme.of(context)
+                                          .colorScheme
+                                          .primaryContainer
+                                          .withValues(alpha: 0.7)
+                                      : null;
+
+                              return ListTile(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(
+                                    color: isSelected
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .outlineVariant,
+                                  ),
+                                ),
+                                tileColor: tint,
+                                title: Text(word.enWord),
+                                subtitle: Text(word.pos),
+                                onTap: isMatched
+                                    ? null
+                                    : () {
+                                        setState(() {
+                                          _selectedLeftIndex = index;
+                                        });
+                                      },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        const _ColumnHeader(
+                          title: 'TR',
+                          subtitle: 'Anlam sec',
+                        ),
+                        const SizedBox(height: 6),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: _right.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(height: 6),
+                            itemBuilder: (BuildContext context, int index) {
+                              final String meaning = _right[index];
+                              final bool isUsed =
+                                  _usedRightIndices.contains(index);
+                              return ListTile(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant,
+                                  ),
+                                ),
+                                tileColor: isUsed
+                                    ? Colors.green.withValues(alpha: 0.12)
+                                    : null,
+                                title: Text(meaning),
+                                onTap:
+                                    isUsed ? null : () => _onMeaningTap(index),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ColumnHeader extends StatelessWidget {
+  const _ColumnHeader({
+    required this.title,
+    required this.subtitle,
+  });
+
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppSurfaceCard(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            subtitle,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MetricRow extends StatelessWidget {
+  const _MetricRow({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final int value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(
+        children: <Widget>[
+          Expanded(child: Text(label)),
+          Text(
+            '$value',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+        ],
       ),
     );
   }

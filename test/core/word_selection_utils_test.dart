@@ -7,6 +7,14 @@ void main() {
     expect(normalizeSelectedWord(' "Technology," '), equals('technology'));
   });
 
+  test('normalizeWordToken trims edge punctuation and keeps hyphen/apostrophe',
+      () {
+    expect(normalizeWordToken(' "Technology," '), equals('technology'));
+    expect(normalizeWordToken("students'"), equals('students'));
+    expect(normalizeWordToken('state-of-the-art'), equals('state-of-the-art'));
+    expect(normalizeWordToken('2026'), equals(''));
+  });
+
   test('dictionary url builders generate expected urls', () {
     expect(
       buildCambridgeDictionaryUrl('Technology').toString(),

@@ -35,39 +35,41 @@ class _MainShellPageState extends State<MainShellPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(title: Text(_titleForIndex(_index))),
       body: _buildBodyForIndex(_index),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        onTap: (int value) {
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _index,
+        onDestinationSelected: (int value) {
           setState(() {
             _index = value;
           });
         },
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        destinations: const <NavigationDestination>[
+          NavigationDestination(
             icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
+            selectedIcon: Icon(Icons.home),
             label: 'Ana Sayfa',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.school_outlined),
-            activeIcon: Icon(Icons.school),
+            selectedIcon: Icon(Icons.school),
             label: 'Kelime',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
-            activeIcon: Icon(Icons.menu_book),
+            selectedIcon: Icon(Icons.menu_book),
             label: 'Okuma',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
+            selectedIcon: Icon(Icons.person),
             label: 'Profil',
           ),
         ],
+        surfaceTintColor: colorScheme.surfaceTint,
       ),
     );
   }

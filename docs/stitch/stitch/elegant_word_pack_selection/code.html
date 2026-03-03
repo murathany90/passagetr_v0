@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Word Pack Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0C6D4F",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0F172A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B",
+                        "text-main-light": "#1E293B",
+                        "text-main-dark": "#F1F5F9",
+                        "text-sub-light": "#64748B",
+                        "text-sub-dark": "#94A3B8",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem", // Material 3 uses larger rounded corners
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'elevation-1': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'elevation-2': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                    }
+                },
+            },
+        };
+    </script>
+<style>.hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main-light dark:text-text-main-dark min-h-screen flex flex-col antialiased transition-colors duration-200">
+<div class="h-12 w-full flex items-center justify-between px-6 pt-2 pb-2 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="text-xs font-semibold dark:text-gray-300">9:41</div>
+<div class="flex space-x-2">
+<span class="material-icons text-sm dark:text-gray-300">signal_cellular_alt</span>
+<span class="material-icons text-sm dark:text-gray-300">wifi</span>
+<span class="material-icons text-sm dark:text-gray-300">battery_full</span>
+</div>
+</div>
+<header class="px-6 py-4 flex flex-col justify-end bg-background-light dark:bg-background-dark">
+<div class="flex items-center justify-between mb-4">
+<h1 class="text-3xl font-bold text-primary dark:text-emerald-400 tracking-tight">Kelime Paketleri</h1>
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-icons text-text-sub-light dark:text-text-sub-dark">search</span>
+</button>
+</div>
+<div class="flex space-x-3 overflow-x-auto hide-scrollbar pb-2">
+<button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium shadow-soft whitespace-nowrap">Tümü</button>
+<button class="px-4 py-2 bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-text-sub-light dark:text-text-sub-dark rounded-full text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap transition-colors">YDS</button>
+<button class="px-4 py-2 bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-text-sub-light dark:text-text-sub-dark rounded-full text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap transition-colors">TOEFL</button>
+<button class="px-4 py-2 bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-text-sub-light dark:text-text-sub-dark rounded-full text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap transition-colors">IELTS</button>
+</div>
+</header>
+<main class="flex-1 px-4 pb-24 space-y-4 overflow-y-auto">
+<div class="mb-6">
+<h2 class="text-sm font-semibold text-text-sub-light dark:text-text-sub-dark uppercase tracking-wider mb-3 ml-2">Son Çalışılan</h2>
+<div class="relative overflow-hidden bg-primary rounded-3xl p-6 shadow-lg text-white">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-emerald-300 opacity-10 rounded-full blur-2xl"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded text-xs font-semibold">B2</span>
+<span class="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded text-xs font-semibold">EN -&gt; TR</span>
+</div>
+<h3 class="text-2xl font-bold mb-1">YDS Set 001</h3>
+<p class="text-emerald-100 text-sm mb-6">Akademik kelime hazinesi</p>
+</div>
+<div class="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
+<span class="material-icons text-white">school</span>
+</div>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between text-xs font-medium mb-2 text-emerald-100">
+<span>İlerleme</span>
+<span>45%</span>
+</div>
+<div class="w-full bg-black/20 rounded-full h-2">
+<div class="bg-white h-2 rounded-full" style="width: 45%"></div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-xs font-medium text-emerald-50">105 / 234 kelime öğrenildi</span>
+<button class="flex items-center space-x-1 bg-white text-primary px-4 py-2 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50 transition-colors">
+<span>Devam Et</span>
+<span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h2 class="text-sm font-semibold text-text-sub-light dark:text-text-sub-dark uppercase tracking-wider mb-3 ml-2">Paketler</h2>
+<div class="group bg-surface-light dark:bg-surface-dark rounded-2xl p-4 shadow-elevation-1 hover:shadow-elevation-2 transition-shadow border border-gray-100 dark:border-gray-800 mb-3 cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gray-200 dark:bg-gray-700 group-hover:bg-primary transition-colors"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-start space-x-4 pl-2">
+<div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-icons">menu_book</span>
+</div>
+<div>
+<div class="flex items-center space-x-2 mb-1">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark text-lg">YDS Set 002</h3>
+<span class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-text-sub-light dark:text-text-sub-dark rounded text-[10px] font-bold uppercase">C1</span>
+</div>
+<p class="text-sm text-text-sub-light dark:text-text-sub-dark mb-2">234 kelime • EN -&gt; TR</p>
+<div class="flex items-center space-x-2">
+<div class="w-24 bg-gray-100 dark:bg-gray-700 rounded-full h-1.5">
+<div class="bg-orange-500 h-1.5 rounded-full" style="width: 12%"></div>
+</div>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark font-medium">12%</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end justify-between self-stretch py-1">
+<span class="material-icons text-gray-300 dark:text-gray-600">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="group bg-surface-light dark:bg-surface-dark rounded-2xl p-4 shadow-elevation-1 hover:shadow-elevation-2 transition-shadow border border-gray-100 dark:border-gray-800 mb-3 cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gray-200 dark:bg-gray-700 group-hover:bg-primary transition-colors"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-start space-x-4 pl-2">
+<div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons">psychology</span>
+</div>
+<div>
+<div class="flex items-center space-x-2 mb-1">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark text-lg">YDS Set 003</h3>
+<span class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-text-sub-light dark:text-text-sub-dark rounded text-[10px] font-bold uppercase">B1</span>
+</div>
+<p class="text-sm text-text-sub-light dark:text-text-sub-dark mb-2">234 kelime • EN -&gt; TR</p>
+<div class="flex items-center space-x-2">
+<div class="w-24 bg-gray-100 dark:bg-gray-700 rounded-full h-1.5">
+<div class="bg-blue-500 h-1.5 rounded-full w-0"></div>
+</div>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark font-medium">0%</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end justify-between self-stretch py-1">
+<span class="material-icons text-gray-300 dark:text-gray-600">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="group bg-surface-light dark:bg-surface-dark rounded-2xl p-4 shadow-elevation-1 hover:shadow-elevation-2 transition-shadow border border-gray-100 dark:border-gray-800 mb-3 cursor-pointer relative overflow-hidden opacity-90">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gray-200 dark:bg-gray-700 group-hover:bg-primary transition-colors"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-start space-x-4 pl-2">
+<div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-icons">translate</span>
+</div>
+<div>
+<div class="flex items-center space-x-2 mb-1">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark text-lg">YDS Phrasal Verbs</h3>
+<span class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-text-sub-light dark:text-text-sub-dark rounded text-[10px] font-bold uppercase">Adv</span>
+</div>
+<p class="text-sm text-text-sub-light dark:text-text-sub-dark mb-2">150 kelime • EN -&gt; TR</p>
+<div class="flex items-center space-x-2">
+<div class="w-24 bg-gray-100 dark:bg-gray-700 rounded-full h-1.5">
+<div class="bg-purple-500 h-1.5 rounded-full w-0"></div>
+</div>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark font-medium">0%</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end justify-between self-stretch py-1">
+<span class="material-icons text-gray-300 dark:text-gray-600">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 pb-safe pt-2 px-6 shadow-lg z-40">
+<div class="flex justify-between items-center pb-2">
+<a class="flex flex-col items-center group" href="#">
+<span class="material-icons text-gray-400 dark:text-gray-500 group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-medium mt-1 text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">Ana Sayfa</span>
+</a>
+<a class="flex flex-col items-center group" href="#">
+<div class="bg-primary/10 dark:bg-primary/20 p-1.5 rounded-xl px-4">
+<span class="material-icons text-primary dark:text-emerald-400">school</span>
+</div>
+<span class="text-[10px] font-bold mt-1 text-primary dark:text-emerald-400">Kelime</span>
+</a>
+<a class="flex flex-col items-center group" href="#">
+<span class="material-icons text-gray-400 dark:text-gray-500 group-hover:text-primary transition-colors">menu_book</span>
+<span class="text-[10px] font-medium mt-1 text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">Okuma</span>
+</a>
+<a class="flex flex-col items-center group" href="#">
+<span class="material-icons text-gray-400 dark:text-gray-500 group-hover:text-primary transition-colors">person</span>
+<span class="text-[10px] font-medium mt-1 text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">Profil</span>
+</a>
+</div>
+</nav>
+<div class="h-6 w-full bg-surface-light dark:bg-surface-dark fixed bottom-0 z-50"></div>
+
+</body></html>

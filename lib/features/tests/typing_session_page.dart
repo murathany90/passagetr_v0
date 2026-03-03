@@ -5,6 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/utils/text_normalizer.dart';
+import '../../core/widgets/app_error_state.dart';
+import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/progress_repository.dart';
@@ -168,26 +171,16 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
   Widget build(BuildContext context) {
     if (_loading) {
       return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: AppLoadingBlock(message: 'Typing yukleniyor...'),
       );
     }
     if (_error != null) {
       return Scaffold(
         appBar: AppBar(title: const Text('Typing')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Typing verisi yuklenemedi'),
-                const SizedBox(height: 8),
-                Text(_error!, textAlign: TextAlign.center),
-                const SizedBox(height: 12),
-                FilledButton(onPressed: _load, child: const Text('Retry')),
-              ],
-            ),
-          ),
+        body: AppErrorState(
+          title: 'Typing verisi yuklenemedi',
+          detail: _error!,
+          onRetry: _load,
         ),
       );
     }
@@ -195,13 +188,27 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
     if (_index >= _questions.length) {
       return Scaffold(
         appBar: AppBar(title: const Text('Typing Sonuc')),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Dogru: $_correct'),
-              Text('Yanlis: $_wrong'),
-              const SizedBox(height: 12),
+              AppSurfaceCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Oturum Tamamlandi',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                    ),
+                    const SizedBox(height: 12),
+                    _MetricRow(label: 'Dogru', value: _correct),
+                    _MetricRow(label: 'Yanlis', value: _wrong),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               FilledButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Text('Kapat'),
@@ -213,6 +220,8 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
     }
 
     final WordItem q = _questions[_index];
+    final double progress =
+        _questions.isEmpty ? 0 : (_index + 1) / _questions.length;
 
     return Scaffold(
       appBar: AppBar(
@@ -223,25 +232,75 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text('TR anlam:', style: Theme.of(context).textTheme.labelLarge),
-            const SizedBox(height: 6),
-            Text(q.trMeaning, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 16),
+            AppSurfaceCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'TR anlam',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    q.trMeaning,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 12),
+                  LinearProgressIndicator(value: progress),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
             TextField(
               controller: _answerController,
+              textInputAction: TextInputAction.done,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
                 hintText: 'English kelimeyi yaz',
+                prefixIcon: Icon(Icons.keyboard_alt_outlined),
               ),
               onSubmitted: (_) => _submit(),
             ),
-            const SizedBox(height: 12),
-            FilledButton(
+            const SizedBox(height: 10),
+            FilledButton.icon(
               onPressed: _saving ? null : _submit,
-              child: const Text('Gonder'),
+              icon: const Icon(Icons.send_rounded),
+              label: const Text('Gonder'),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _MetricRow extends StatelessWidget {
+  const _MetricRow({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final int value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(
+        children: <Widget>[
+          Expanded(child: Text(label)),
+          Text(
+            '$value',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+        ],
       ),
     );
   }

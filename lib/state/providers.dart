@@ -341,7 +341,7 @@ final readingProgressProvider =
 final passageWordsProvider = FutureProvider.family<List<WordItem>, String>(
   (Ref ref, String passageId) async {
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
-    return repository.getPassageWords(passageId: passageId, limit: 20);
+    return repository.getPassageWords(passageId: passageId, limit: 400);
   },
 );
 

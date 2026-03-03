@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium Test Hub Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#10B981", // Emerald 500
+                        "primary-dark": "#047857", // Emerald 700
+                        "background-light": "#F0FDF4", // Emerald 50
+                        "background-dark": "#064E3B", // Emerald 900
+                        "card-light": "rgba(255, 255, 255, 0.7)",
+                        "card-dark": "rgba(16, 185, 129, 0.1)",
+                        surface: "#ffffff",
+                        "surface-dark": "#1f2937",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        'xl': '1.5rem',
+                        '2xl': '2rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(16, 185, 129, 0.3)',
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-gray-900 font-display min-h-screen flex flex-col transition-colors duration-300 antialiased">
+<div class="h-12 w-full flex justify-between items-center px-6 pt-2 text-gray-800 dark:text-white text-xs font-medium z-10">
+<span>09:41</span>
+<div class="flex space-x-2">
+<span class="material-icons-round text-sm">signal_cellular_alt</span>
+<span class="material-icons-round text-sm">wifi</span>
+<span class="material-icons-round text-sm">battery_full</span>
+</div>
+</div>
+<header class="px-6 py-4 flex items-center mb-4 z-10">
+<button class="p-2 -ml-2 rounded-full hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors text-gray-800 dark:text-white">
+<span class="material-icons-round text-2xl">arrow_back</span>
+</button>
+<h1 class="text-2xl font-bold ml-2 text-gray-900 dark:text-white tracking-tight">Test Hub</h1>
+</header>
+<main class="flex-1 px-6 pb-8 flex flex-col space-y-6 overflow-y-auto">
+<div class="fixed top-20 right-0 w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob pointer-events-none dark:mix-blend-normal dark:bg-emerald-900 dark:opacity-30"></div>
+<div class="fixed bottom-20 left-0 w-64 h-64 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 pointer-events-none dark:mix-blend-normal dark:bg-teal-900 dark:opacity-30"></div>
+<div class="z-10 mb-2">
+<h2 class="text-sm uppercase tracking-wider font-semibold text-emerald-600 dark:text-emerald-400">Select Mode</h2>
+<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Choose a test type to practice your vocabulary.</p>
+</div>
+<button class="group relative w-full text-left transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 dark:group-hover:opacity-20"></div>
+<div class="glass-card relative bg-white/60 dark:bg-gray-800/60 p-6 rounded-2xl shadow-soft dark:shadow-none border border-white/50 dark:border-white/10 flex items-center justify-between">
+<div class="flex items-center space-x-5">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-50 dark:from-emerald-900 dark:to-teal-800 flex items-center justify-center shadow-sm text-emerald-600 dark:text-emerald-300">
+<span class="material-icons-round text-3xl">quiz</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">Multiple Choice</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 font-medium">English <span class="text-emerald-500">→</span> Turkish</p>
+</div>
+</div>
+<span class="material-icons-round text-gray-300 dark:text-gray-600 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">chevron_right</span>
+</div>
+</button>
+<button class="group relative w-full text-left transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute inset-0 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 dark:group-hover:opacity-20"></div>
+<div class="glass-card relative bg-white/60 dark:bg-gray-800/60 p-6 rounded-2xl shadow-soft dark:shadow-none border border-white/50 dark:border-white/10 flex items-center justify-between">
+<div class="flex items-center space-x-5">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-50 dark:from-teal-900 dark:to-cyan-800 flex items-center justify-center shadow-sm text-teal-600 dark:text-teal-300">
+<span class="material-icons-round text-3xl">style</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">Matching</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Connect pairs</p>
+</div>
+</div>
+<span class="material-icons-round text-gray-300 dark:text-gray-600 group-hover:text-teal-500 dark:group-hover:text-teal-400 transition-colors">chevron_right</span>
+</div>
+</button>
+<button class="group relative w-full text-left transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 dark:group-hover:opacity-20"></div>
+<div class="glass-card relative bg-white/60 dark:bg-gray-800/60 p-6 rounded-2xl shadow-soft dark:shadow-none border border-white/50 dark:border-white/10 flex items-center justify-between">
+<div class="flex items-center space-x-5">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-50 dark:from-cyan-900 dark:to-blue-800 flex items-center justify-center shadow-sm text-cyan-600 dark:text-cyan-300">
+<span class="material-icons-round text-3xl">keyboard</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-cyan-700 dark:group-hover:text-cyan-300 transition-colors">Typing</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Turkish <span class="text-cyan-500">→</span> English</p>
+</div>
+</div>
+<span class="material-icons-round text-gray-300 dark:text-gray-600 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors">chevron_right</span>
+</div>
+</button>
+<div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800 z-10">
+<div class="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-10 -translate-y-10"></div>
+<div class="relative z-10 flex justify-between items-end">
+<div>
+<p class="text-emerald-100 text-sm font-medium mb-1">Weekly Progress</p>
+<h4 class="text-3xl font-bold">85%</h4>
+<p class="text-xs text-emerald-100 mt-1">Great job! Keep it up.</p>
+</div>
+<div class="h-10 w-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+<span class="material-icons-round text-white">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 py-3 px-6 pb-6 flex justify-between items-center z-20">
+<button class="flex flex-col items-center space-y-1 text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+<span class="material-icons-round text-2xl">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center space-y-1 text-emerald-600 dark:text-emerald-400 transition-colors">
+<span class="material-icons-round text-2xl">school</span>
+<span class="text-[10px] font-medium">Test Hub</span>
+</button>
+<button class="flex flex-col items-center space-y-1 text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+<span class="material-icons-round text-2xl">analytics</span>
+<span class="text-[10px] font-medium">Stats</span>
+</button>
+<button class="flex flex-col items-center space-y-1 text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+<span class="material-icons-round text-2xl">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+
+</body></html>

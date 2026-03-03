@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/theme/app_theme.dart';
 import '../features/bootstrap/bootstrap_page.dart';
 
 class LearningApp extends StatelessWidget {
@@ -9,10 +10,9 @@ class LearningApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'English Learning',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0C6D4F)),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
       home: const BootstrapPage(),
     );
   }

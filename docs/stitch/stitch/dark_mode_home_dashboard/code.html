@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dark Mode Home Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0c6e51",
+                        "primary-dark": "#064e3b",
+                        "primary-light": "#34d399",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211c",
+                        "surface-dark": "#1c2623",
+                        "surface-darker": "#111816",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex h-full min-h-screen w-full flex-col max-w-md mx-auto shadow-2xl overflow-hidden bg-background-light dark:bg-background-dark">
+<!-- Header Section -->
+<div class="flex items-center p-6 pb-2 justify-between pt-8 sticky top-0 z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 ring-2 ring-primary/50" data-alt="User profile picture showing a smiling woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJgNskE5ntonGaz5qwHxD6zoYtEJu7vJBisIxPHUmIIBDLHzu--UTTd-yF5L6ueKWiKKFz95PGRcoPEe70eUD7xXSxUmUsXSlcFdeI6lqzB0oRBtnhz3PunmcLq2CwcfeeHQgn_Ync1U-ZPu3U4dmTmkDCch2hSOIpAGWSG_oZ4c0loXMygzpYx6RtUN5RkSygcrBWue08uU42IFl3XlEuLqW9vrCQVS1Uc5lfU4gav3VeL0qFqK0DWhcFh3gmqwnsfSJ8jtdvx4U");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-primary rounded-full border-2 border-background-dark"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Welcome back</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">Sarah Doe</h2>
+</div>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-surface-dark/50 hover:bg-surface-dark transition-colors text-slate-900 dark:text-white relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-background-dark"></span>
+</button>
+</div>
+<!-- Greeting Area -->
+<div class="px-6 pt-4 pb-2">
+<h1 class="text-slate-900 dark:text-white text-[28px] font-bold leading-tight">Ready to learn <br/><span class="text-primary dark:text-primary-light">English today?</span></h1>
+</div>
+<!-- Today's Status Card (Glassmorphism) -->
+<div class="p-6">
+<div class="group relative overflow-hidden rounded-xl bg-surface-dark/40 dark:bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg">
+<!-- Background decorative glow -->
+<div class="absolute -top-10 -right-10 size-40 bg-primary/20 blur-3xl rounded-full"></div>
+<div class="absolute bottom-0 left-0 size-32 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="relative flex flex-col p-5 gap-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-primary-light text-sm font-medium mb-1">Daily Progress</p>
+<h3 class="text-white text-xl font-bold tracking-tight">Bugünün Durumu</h3>
+</div>
+<div class="radial-progress text-primary text-xs font-bold" style="--value:80; --size:3rem;">80%</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-gray-700/50 rounded-full h-2.5">
+<div class="bg-gradient-to-r from-primary to-primary-light h-2.5 rounded-full w-[80%] shadow-[0_0_10px_rgba(52,211,153,0.5)]"></div>
+</div>
+<div class="flex justify-between items-end mt-2">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-dark bg-gray-600 flex items-center justify-center text-[10px] text-white font-bold bg-cover bg-center" data-alt="Friend avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC7_2Mh1tZOsC8Kt2R_3PoxK796M1Rzv4VgoLd5ulWJR7t8YpIrzNltbuuQ1llP7o3q6Hg5KAFZLCDS_UJJpiZHQubUcNBDM3ktQM6GEyDpikRZMgsMsr_tdepb7iSbJjZEdrMq-5byoBAQh76l-nJmBIivYVIBNc471YGD7QbRgnMYO8hYYV6LYNnHn-vNQ6A2a8R9URLczhsR85Bt2y_CKJ3k5fTuE9gf7Nx2rAT2SUMKuSQmPAZDmuTYFWVddXIuNNz55gHK17c')"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-dark bg-gray-600 flex items-center justify-center text-[10px] text-white font-bold bg-cover bg-center" data-alt="Friend avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCT2g3e42FtL6HnUKjIX3Ny06sw8qk_bAoOPDNvWJRk1K-UWeE6XTQl7GQeV7QaNokFigxhQJpXEKmOJHsraY59coXIXUE6grNCZHy56Q_CPxgBlemNGvv3S4PuyNl6IZKHnxoa7ky1xFjogVgdk_BJexoMdNRNtckzrEdK2LWmkvqTAHsnweF1KpUjkwhYmJtEdz5A3xkLFXqrfXKAZ2i2_tSPc1R2PM_f25YANjPvCZx_WVzA7GHXJlma3nx7_2u-i2BRr3sf3YI')"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-dark bg-surface-dark flex items-center justify-center text-[10px] text-primary-light font-bold">+3</div>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white text-sm font-bold py-2 px-5 rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-95">
+                            Continue
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Start Section -->
+<div class="px-6 pb-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white text-lg font-bold">Quick Actions</h3>
+</div>
+<button class="w-full relative overflow-hidden group rounded-xl p-1">
+<div class="absolute inset-0 bg-gradient-to-r from-primary-dark via-primary to-primary-light opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="relative bg-surface-darker/90 dark:bg-surface-darker/80 backdrop-blur-sm rounded-[10px] p-4 flex items-center justify-between group-hover:bg-transparent transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white">bolt</span>
+</div>
+<div class="text-left">
+<p class="text-white font-bold text-lg group-hover:text-white transition-colors">Hızlı Başla</p>
+<p class="text-slate-400 text-sm group-hover:text-white/80 transition-colors">Start a 5-min session</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all">arrow_forward_ios</span>
+</div>
+</button>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4 px-6 pb-24">
+<!-- Words Card -->
+<div class="col-span-1 bg-surface-dark dark:bg-[#1c2623] rounded-xl p-5 border border-white/5 relative group hover:border-primary/30 transition-colors">
+<div class="absolute top-4 right-4 text-primary opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+<span class="material-symbols-outlined">school</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-2">Words</p>
+<div class="flex items-baseline gap-2">
+<h4 class="text-white text-2xl font-bold">15</h4>
+<span class="text-primary text-xs font-bold bg-primary/10 px-1.5 py-0.5 rounded">+20%</span>
+</div>
+<div class="mt-3 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+<!-- Sentences Card -->
+<div class="col-span-1 bg-surface-dark dark:bg-[#1c2623] rounded-xl p-5 border border-white/5 relative group hover:border-primary/30 transition-colors">
+<div class="absolute top-4 right-4 text-primary opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-2">Sentences</p>
+<div class="flex items-baseline gap-2">
+<h4 class="text-white text-2xl font-bold">5</h4>
+<span class="text-primary text-xs font-bold bg-primary/10 px-1.5 py-0.5 rounded">+5%</span>
+</div>
+<div class="mt-3 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2 rounded-full"></div>
+</div>
+</div>
+<!-- Questions Card (Full Width) -->
+<div class="col-span-2 bg-surface-dark dark:bg-[#1c2623] rounded-xl p-5 border border-white/5 relative group hover:border-primary/30 transition-colors flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-sm font-medium mb-1">Questions Answered</p>
+<div class="flex items-baseline gap-2">
+<h4 class="text-white text-2xl font-bold">42</h4>
+<span class="text-primary text-xs font-bold bg-primary/10 px-1.5 py-0.5 rounded">+12 today</span>
+</div>
+</div>
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-[0_0_15px_rgba(12,110,81,0.2)]">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 max-w-md mx-auto">
+<!-- Gradient fade above nav -->
+<div class="absolute bottom-full left-0 right-0 h-12 bg-gradient-to-t from-background-dark to-transparent pointer-events-none"></div>
+<div class="flex gap-2 border-t border-white/10 bg-surface-darker/95 backdrop-blur-lg px-6 pb-6 pt-3 justify-between items-end">
+<a class="flex flex-col items-center justify-end gap-1 group w-14" href="#">
+<div class="text-primary flex h-7 items-center justify-center transition-transform group-hover:-translate-y-1">
+<span class="material-symbols-outlined text-[26px] font-variation-settings-fill">home</span>
+</div>
+<p class="text-primary text-[10px] font-medium leading-normal tracking-wide">Home</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 group w-14" href="#">
+<div class="text-slate-500 hover:text-white flex h-7 items-center justify-center transition-colors group-hover:-translate-y-1">
+<span class="material-symbols-outlined text-[26px]">menu_book</span>
+</div>
+<p class="text-slate-500 group-hover:text-white text-[10px] font-medium leading-normal tracking-wide transition-colors">Lessons</p>
+</a>
+<!-- Floating Action Button effect for Practice -->
+<a class="flex flex-col items-center justify-end gap-1 relative -top-5" href="#">
+<div class="size-14 rounded-full bg-gradient-to-b from-primary to-primary-dark shadow-[0_4px_12px_rgba(12,110,81,0.4)] flex items-center justify-center text-white ring-4 ring-background-dark hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[28px]">extension</span>
+</div>
+<p class="text-slate-400 text-[10px] font-medium leading-normal mt-1">Practice</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 group w-14" href="#">
+<div class="text-slate-500 hover:text-white flex h-7 items-center justify-center transition-colors group-hover:-translate-y-1">
+<span class="material-symbols-outlined text-[26px]">bar_chart</span>
+</div>
+<p class="text-slate-500 group-hover:text-white text-[10px] font-medium leading-normal tracking-wide transition-colors">Stats</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 group w-14" href="#">
+<div class="text-slate-500 hover:text-white flex h-7 items-center justify-center transition-colors group-hover:-translate-y-1">
+<span class="material-symbols-outlined text-[26px]">person</span>
+</div>
+<p class="text-slate-500 group-hover:text-white text-[10px] font-medium leading-normal tracking-wide transition-colors">Profile</p>
+</a>
+</div>
+</div>
+</div>
+<style>
+        /* Custom CSS for Material Symbols fill variation if needed, though mostly standard icons work */
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        .font-variation-settings-fill {
+             font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</body></html>

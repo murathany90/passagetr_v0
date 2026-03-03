@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/widgets/app_error_state.dart';
+import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/progress_repository.dart';
@@ -195,52 +198,32 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
   Widget build(BuildContext context) {
     if (_loading) {
       return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: AppLoadingBlock(message: 'MCQ yukleniyor...'),
       );
     }
 
     if (_error != null) {
       return Scaffold(
         appBar: AppBar(title: const Text('MCQ')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('MCQ yuklenemedi'),
-                const SizedBox(height: 8),
-                Text(_error!, textAlign: TextAlign.center),
-                const SizedBox(height: 12),
-                FilledButton(onPressed: _load, child: const Text('Retry')),
-              ],
-            ),
-          ),
+        body: AppErrorState(
+          title: 'MCQ yuklenemedi',
+          detail: _error!,
+          onRetry: _load,
         ),
       );
     }
 
     if (_index >= _questions.length) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('MCQ Sonuc')),
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text('Dogru: $_correct'),
-              Text('Yanlis: $_wrong'),
-              const SizedBox(height: 12),
-              FilledButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Kapat'),
-              ),
-            ],
-          ),
-        ),
+      return _ResultView(
+        correct: _correct,
+        wrong: _wrong,
       );
     }
 
     final _McqQuestion q = _questions[_index];
+    final double progress =
+        _questions.isEmpty ? 0 : (_index + 1) / _questions.length;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('MCQ ${_index + 1}/${_questions.length}'),
@@ -250,21 +233,156 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(q.word.enWord,
-                style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 8),
-            Chip(label: Text(q.word.pos)),
-            const SizedBox(height: 16),
-            for (final String option in q.options)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: OutlinedButton(
-                  onPressed: _locked ? null : () => _answer(option),
-                  child: Text(option),
-                ),
+            AppSurfaceCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Soru ${_index + 1}',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  LinearProgressIndicator(value: progress),
+                  const SizedBox(height: 10),
+                  Text(
+                    q.word.enWord,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 6),
+                  Chip(label: Text(q.word.pos)),
+                ],
               ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.separated(
+                itemCount: q.options.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemBuilder: (BuildContext context, int optionIndex) {
+                  final String option = q.options[optionIndex];
+                  final String prefix =
+                      String.fromCharCode('A'.codeUnitAt(0) + optionIndex);
+                  return OutlinedButton(
+                    onPressed: _locked ? null : () => _answer(option),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(58),
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 14,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          child: Text(
+                            prefix,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(child: Text(option)),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ResultView extends StatelessWidget {
+  const _ResultView({
+    required this.correct,
+    required this.wrong,
+  });
+
+  final int correct;
+  final int wrong;
+
+  @override
+  Widget build(BuildContext context) {
+    final int total = correct + wrong;
+    final int score = total == 0 ? 0 : ((correct / total) * 100).round();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('MCQ Sonuc')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            AppSurfaceCard(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Skor',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '%$score',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 10),
+                  _MetricRow(label: 'Dogru', value: '$correct'),
+                  _MetricRow(label: 'Yanlis', value: '$wrong'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Kapat'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MetricRow extends StatelessWidget {
+  const _MetricRow({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: <Widget>[
+          Expanded(child: Text(label)),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+        ],
       ),
     );
   }
