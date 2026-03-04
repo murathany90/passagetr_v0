@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../core/widgets/app_section_header.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
@@ -25,7 +26,11 @@ class TestHubPage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
-                  builder: (_) => McqSessionPage(pack: pack),
+                  builder: (_) => McqSessionPage(
+                    pack: pack,
+                    questionCount: AppConstants.testTargetQuestionCount,
+                    sessionLabel: 'MCQ',
+                  ),
                 ),
               );
             },

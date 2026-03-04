@@ -11,7 +11,7 @@ class SupabasePackRepository implements PackRepository {
   @override
   Future<List<Pack>> getPacksWithWordCount() async {
     final List<dynamic> rows =
-        await _client.from('packs').select().order('created_at');
+        await _client.from('packs').select().order('name', ascending: true);
 
     final List<Pack> packs = <Pack>[];
     for (final dynamic row in rows) {

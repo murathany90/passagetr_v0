@@ -1,4 +1,4 @@
-# PDF 11 ÇIKTISI: DETERMINERS AND QUANTIFIERS
+# PDF 11 ÇIKTISI: DETERMINERS, QUANTIFIERS & PRONOUNS
 
 ## 📊 METADATA
 - Toplam Sayfa: 25
@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # A LOT OF / LOTS OF / PLENTY OF | Sayfa 1/25
 
 ## 📌 ÇOK MİKTAR İFADELERİ
@@ -73,7 +72,6 @@ C) several
 ---
 
 ## 📄 SAYFA 2
-
 # SADECE ÇOĞUL İSİM ALAN YAPILAR | Sayfa 2/25
 
 ## 📌 BİRÇOK ANLAMINDAKİ YAPILAR
@@ -101,7 +99,7 @@ C) several
 → **Açıklama:** "Quite a few" yapısı "birkaç" değil, aslında "oldukça çok, epey" anlamındadır. "Pages" çoğul ismiyle kullanılmış ve "were" çoğul fiili gelmiştir. "Few" tek başına "az" anlamındayken, "quite a few" çokluk ifade eder.
 
 **Örnek 4 (A great many):**
-**EN:** A great ancient philosophers contributed to the development of modern scientific thinking, but their works were often misunderstood for centuries.
+**EN:** A great many ancient philosophers contributed to the development of modern scientific thinking, but their works were often misunderstood for centuries.
 **TR:** Birçok antik filozof modern bilimsel düşüncenin gelişimine katkıda bulundu, ancak eserleri yüzyıllar boyunca sık sık yanlış anlaşıldı.
 → **Açıklama:** "A great many" yapısı "philosophers" çoğul ismiyle kullanılmıştır. "Many" tek başına da kullanılabilir, ancak "a great many" daha vurgulu ve resmi bir ifadedir. Fiil "contributed" çoğul özneye göre çekimlenmiştir.
 
@@ -146,7 +144,6 @@ C) much
 ---
 
 ## 📄 SAYFA 3
-
 # SADECE SAYILAMAYAN İSİM ALAN YAPILAR | Sayfa 3/25
 
 ## 📌 ÇOK MİKTAR İFADELERİ
@@ -218,7 +215,6 @@ C) several
 ---
 
 ## 📄 SAYFA 4
-
 # MANY / SEVERAL / A FEW / FEW | Sayfa 4/25
 
 ## 📌 ÇOĞUL İSİMLERLE KULLANILAN MİKTAR İFADELERİ
@@ -291,7 +287,6 @@ C) several
 ---
 
 ## 📄 SAYFA 5
-
 # "OF" İLE KULLANIM | Sayfa 5/25
 
 ## 📌 MİKTAR İFADELERİ + "OF" YAPISI
@@ -363,7 +358,6 @@ C) Many students of passed the exam.
 ---
 
 ## 📄 SAYFA 6
-
 # MUCH / A LITTLE / LITTLE | Sayfa 6/25
 
 ## 📌 SAYILAMAYAN İSİMLERLE KULLANILAN MİKTAR İFADELERİ
@@ -435,7 +429,6 @@ C) She has a lot of patience. (DOĞRU)
 ---
 
 ## 📄 SAYFA 7
-
 # MOST / SOME | Sayfa 7/25
 
 ## 📌 HEM ÇOĞUL HEM SAYILAMAYAN İSİMLERLE KULLANILAN YAPILAR
@@ -506,7 +499,6 @@ C) much
 ---
 
 ## 📄 SAYFA 8
-
 # ANY | Sayfa 8/25
 
 ## 📌 SORU, OLUMSUZ VE OLUMLU CÜMLELERDE "ANY"
@@ -578,7 +570,6 @@ C) any
 ---
 
 ## 📄 SAYFA 9
-
 # NO | Sayfa 9/25
 
 ## 📌 "NO" - OLUMSUZLUK İFADESİ
@@ -650,7 +641,6 @@ C) I no have money.
 ---
 
 ## 📄 SAYFA 10
-
 # BOTH / EITHER / NEITHER | Sayfa 10/25
 
 ## 📌 İKİ ŞEY İÇİN KULLANILAN YAPILAR
@@ -673,9 +663,9 @@ C) I no have money.
 → **Açıklama:** "Both" bu cümlede zamir olarak kullanılmıştır ve "both students" anlamına gelir. Daha önce bahsedilen iki öğrenciye gönderme yapmaktadır. Zamir olarak kullanıldığında da çoğul kabul edilir.
 
 **Örnek 3 (Either + tekil isim):**
-**EN:** Either reaction from the audience, whether positive or negative, is regarded as a completely rude attitude in this conservative cultural context.
-**TR:** Seyirciden gelen her iki tepki de, olumlu ya da olumsuz olsun, bu muhafazakar kültürel bağlamda tamamen kaba bir tutum olarak değerlendirilir.
-→ **Açıklama:** "Either" tekil "reaction" ismiyle kullanılmıştır. "Either" anlam olarak "her iki" gibi görünse de, dilbilgisel olarak tekil kabul edilir ve fiil tekil olur ("is regarded"). "Either A or B" yapısında da fiil son özneye göre belirlenir.
+**EN:** Either reaction from the audience, whether positive or negative, can influence the speaker's confidence.
+**TR:** Seyirciden gelecek iki tepkiden biri (olumlu ya da olumsuz), konuşmacının özgüvenini etkileyebilir.
+→ **Açıklama:** "Either" tekil "reaction" ile kullanıldığında "ikisinden biri" anlamı verir ve fiil tekil kabul edilir. "Either A or B" yapısında fiil uyumu genellikle yakın özneye göre belirlenir.
 
 **Örnek 4 (Neither + tekil isim):**
 **EN:** Neither job offer from the two companies appeals to me personally because of the relatively low salaries and limited career advancement opportunities.
@@ -729,7 +719,6 @@ C) both
 ---
 
 ## 📄 SAYFA 11
-
 # BOTH / EITHER / NEITHER - "OF" KULLANIMI | Sayfa 11/25
 
 ## 📌 İKİLİ YAPILARIN "OF" İLE KULLANIMI
@@ -801,7 +790,6 @@ C) is
 ---
 
 ## 📄 SAYFA 12
-
 # EACH or EVERY? | Sayfa 12/25
 
 ## 📌 "HER BİR" vs "HER"
@@ -874,7 +862,6 @@ C) all
 ---
 
 ## 📄 SAYFA 13
-
 # ALL or WHOLE? | Sayfa 13/25
 
 ## 📌 "BÜTÜN, TAMAMI" İFADELERİ
@@ -947,7 +934,6 @@ C) He spent all his life searching.
 ---
 
 ## 📄 SAYFA 14
-
 # NO or NONE? | Sayfa 14/25
 
 ## 📌 "HİÇ" İFADELERİ
@@ -1019,7 +1005,6 @@ C) None of the students passed the exam.
 ---
 
 ## 📄 SAYFA 15
-
 # HALF | Sayfa 15/25
 
 ## 📌 "YARIM, YARI" İFADELERİ
@@ -1098,7 +1083,6 @@ C) Half the students are here.
 ---
 
 ## 📄 SAYFA 16
-
 # MANY A / AN | Sayfa 16/25
 
 ## 📌 "BİRÇOK" İFADESİNİN FARKLI KULLANIMI
@@ -1170,13 +1154,12 @@ C) are
 ---
 
 ## 📄 SAYFA 17
-
 # OTHER / OTHERS | Sayfa 17/25
 
 ## 📌 "DİĞER, BAŞKA" İFADELERİ
-"Other" ve "others" yapıları "başka, diğer" anlamına gelir. "Other" sıfat olarak kullanılır ve kendinden sonra çoğul isim alır. "Others" ise zamir olarak kullanılır ve tek başına, isim almadan gelir.
+"Other" ve "others" yapıları "başka, diğer" anlamına gelir. "Other" sıfat olarak çoğul veya sayılamayan isimlerle sık kullanılır; tekil sayılabilir isimlerde çoğunlukla "another/the other" tercih edilir. "Others" ise zamir olarak tek başına, isim almadan gelir.
 
-> 💡 **İpucu:** "Other" + çoğul isim = diğer/başka şeyler. "Others" = other + isim (ismin yerine geçer). "Some other" = başka bazı, "any other" = herhangi başka.
+> 💡 **İpucu:** "Other" + çoğul/sayılamayan isim, "another" + tekil sayılabilir isim, "the other" + belirli kalan öğe; "others/the others" ise isim yerine geçen zamirlerdir.
 
 ---
 
@@ -1185,7 +1168,7 @@ C) are
 **Örnek 1 (Other + çoğul isim - sıfat olarak):**
 **EN:** These teaching methods are not effective for advanced students; we should definitely find other ways of teaching essay writing to challenge them.
 **TR:** Bu öğretim yöntemleri ileri düzey öğrenciler için etkili değil; onları zorlamak için makale yazmayı öğretmenin başka yollarını kesinlikle bulmalıyız.
-→ **Açıklama:** "Other" sıfat olarak kullanılmış ve çoğul "ways" ismiyle gelmiştir. "Other ways" = başka yollar. "Other" her zaman çoğul isimle kullanılır (tekil isimle kullanılacaksa "another" kullanılır).
+→ **Açıklama:** "Other" burada sıfat olarak çoğul "ways" ile kullanılmıştır. Tekil sayılabilir isimde çoğunlukla "another/the other" tercih edilir; sayılamayan isimlerde ise "other" doğrudan kullanılabilir (other information).
 
 **Örnek 2 (Others - zamir olarak - belirsiz sayı):**
 **EN:** Some experienced writers use allegory frequently in their works to convey deeper meanings, but others completely refuse to use it, preferring direct language.
@@ -1198,7 +1181,7 @@ C) are
 → **Açıklama:** "Any other" yapısı "herhangi başka" anlamındadır. Olumsuz cümlelerde "any other" kullanılır. "Option" tekil olmasına rağmen, "any other" genellikle tekil isimle kullanılır.
 
 **Örnek 4 (Some other - başka bazı):**
-**EN:** Some other qualified applicants will be interviewed today afternoon, and some others will come tomorrow morning for the same position.
+**EN:** Some other qualified applicants will be interviewed this afternoon, and some others will come tomorrow morning for the same position.
 **TR:** Diğer bazı nitelikli adaylar bugün öğleden sonra mülakata alınacak ve diğer bazıları da aynı pozisyon için yarın sabah gelecek.
 → **Açıklama:** "Some other" + çoğul isim (applicants) veya "some others" (zamir) kullanılabilir. "Some other" sıfat, "some others" ise zamir görevindedir. İkisi de "başka bazıları" anlamına gelir.
 
@@ -1243,7 +1226,6 @@ C) any other
 ---
 
 ## 📄 SAYFA 18
-
 # THE OTHER / THE OTHERS | Sayfa 18/25
 
 ## 📌 BELİRLİ "DİĞER" İFADELERİ
@@ -1316,7 +1298,6 @@ C) the other
 ---
 
 ## 📄 SAYFA 19
-
 # ANOTHER | Sayfa 19/25
 
 ## 📌 "BİR DİĞER, BİR BAŞKA" İFADESİ
@@ -1390,7 +1371,6 @@ C) I need an other chance.
 ---
 
 ## 📄 SAYFA 20
-
 # EACH OTHER / ONE ANOTHER | Sayfa 20/25
 
 ## 📌 "BİRBİRİ" İFADELERİ
@@ -1461,7 +1441,6 @@ C) one another
 ---
 
 ## 📄 SAYFA 21
-
 # SUBJECT / OBJECT PRONOUNS & POSSESSIVES | Sayfa 21/25
 
 ## 📌 ZAMİRLER VE İYELİK YAPILARI
@@ -1549,7 +1528,6 @@ C) This book is mine.
 ---
 
 ## 📄 SAYFA 22
-
 # REFLEXIVE PRONOUNS | Sayfa 22/25
 
 ## 📌 DÖNÜŞLÜLÜK ZAMİRLERİ
@@ -1636,7 +1614,6 @@ C) himself
 ---
 
 ## 📄 SAYFA 23
-
 # REFLEXIVE PRONOUNS - ÖZEL KULLANIMLAR | Sayfa 23/25
 
 ## 📌 DÖNÜŞLÜLÜK ZAMİRLERİNİN ÖZEL KULLANIMLARI
@@ -1716,7 +1693,6 @@ C) hers
 ---
 
 ## 📄 SAYFA 24
-
 # INDEFINITE PRONOUNS | Sayfa 24/25
 
 ## 📌 BELGİSİZ ZAMİRLER
@@ -1802,7 +1778,6 @@ C) Everyone am here.
 ---
 
 ## 📄 SAYFA 25
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 25/25
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1906,8 +1881,6 @@ D) hers / yours
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 12_PRONOUNS
-### 📍 **İlerleme:** 11/12 PDF tamamlandı
 
 [Kelime sayısı: 245]
 
@@ -1920,3 +1893,14 @@ D) hers / yours
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 25'i geçmiyor
 - [x] HTML div'leri doğru işaretlenmiş
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Review Tests
+### 📍 **İlerleme:** 11/12 PDF tamamlandı

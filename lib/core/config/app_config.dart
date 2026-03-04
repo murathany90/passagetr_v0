@@ -16,6 +16,11 @@ class AppConfig {
     defaultValue: false,
   );
 
+  static const bool useLocalStaticContent = bool.fromEnvironment(
+    'USE_LOCAL_STATIC_CONTENT',
+    defaultValue: true,
+  );
+
   static const String _translateProviderRaw = String.fromEnvironment(
     'TRANSLATE_PROVIDER',
     defaultValue: 'libre',

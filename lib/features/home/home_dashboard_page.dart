@@ -93,87 +93,107 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<void> authBootstrap = ref.watch(authBootstrapProvider);
     final AsyncValue<HomeDashboardData> dashboard = ref.watch(
       homeDashboardProvider,
     );
 
-    return dashboard.when(
-      loading: () => const AppLoadingBlock(message: 'Ana sayfa yukleniyor...'),
-      error: (Object error, StackTrace stack) {
-        return AppErrorState(
-          title: 'Ana sayfa verisi yuklenemedi.',
-          detail: error.toString(),
-          onRetry: () => ref.invalidate(homeDashboardProvider),
-        );
-      },
-      data: (HomeDashboardData data) {
-        final String quickStartTitle = switch (data.quickStart.type) {
-          QuickStartType.resumeReading => 'Okumaya Devam Et',
-          QuickStartType.weakWords => 'Zorlandigin Kelimeler',
-          QuickStartType.randomWords => 'Rastgele Flashcard',
-          QuickStartType.unavailable => 'Hizli Basla su an kullanilamiyor',
-        };
+    return authBootstrap.when(
+      loading: () =>
+          const AppLoadingBlock(message: 'Anonim oturum hazirlaniyor...'),
+      error: (Object error, StackTrace stack) => AppErrorState(
+        title: 'Ana sayfa verisi yuklenemedi.',
+        detail: _friendlyHomeError(error),
+        onRetry: () => ref.invalidate(authBootstrapProvider),
+      ),
+      data: (_) => dashboard.when(
+        loading: () =>
+            const AppLoadingBlock(message: 'Ana sayfa yukleniyor...'),
+        error: (Object error, StackTrace stack) {
+          return AppErrorState(
+            title: 'Ana sayfa verisi yuklenemedi.',
+            detail: _friendlyHomeError(error),
+            onRetry: () => ref.invalidate(homeDashboardProvider),
+          );
+        },
+        data: (HomeDashboardData data) {
+          final String quickStartTitle = switch (data.quickStart.type) {
+            QuickStartType.resumeReading => 'Okumaya Devam Et',
+            QuickStartType.weakWords => 'Zorlandigin Kelimeler',
+            QuickStartType.randomWords => 'Rastgele Flashcard',
+            QuickStartType.unavailable => 'Hizli Basla su an kullanilamiyor',
+          };
 
-        return RefreshIndicator(
-          onRefresh: () async => ref.invalidate(homeDashboardProvider),
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16),
-            children: <Widget>[
-              AppSurfaceCard(
-                padding: const EdgeInsets.all(18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Bugunun Durumu',
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'Gunluk hedefini hizli basla ile devam ettir.',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                    ),
-                    const SizedBox(height: 14),
-                    AppGradientCtaButton(
-                      label: 'Hizli Basla: $quickStartTitle',
-                      icon: Icons.play_arrow_rounded,
-                      enabled: data.quickStart.isAvailable,
-                      onTap: () => _onQuickStart(data),
-                    ),
-                  ],
+          return RefreshIndicator(
+            onRefresh: () async => ref.invalidate(homeDashboardProvider),
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(16),
+              children: <Widget>[
+                AppSurfaceCard(
+                  padding: const EdgeInsets.all(18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Bugunun Durumu',
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Gunluk hedefini hizli basla ile devam ettir.',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                      ),
+                      const SizedBox(height: 14),
+                      AppGradientCtaButton(
+                        label: 'Hizli Basla: $quickStartTitle',
+                        icon: Icons.play_arrow_rounded,
+                        enabled: data.quickStart.isAvailable,
+                        onTap: () => _onQuickStart(data),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              const AppSectionHeader(title: 'Gunluk Metrikler'),
-              const SizedBox(height: 8),
-              AppStatTile(
-                label: 'Bugun gorulen kelime',
-                value: '${data.todayWordCount}',
-                icon: Icons.school_outlined,
-              ),
-              const SizedBox(height: 8),
-              AppStatTile(
-                label: 'Bugun okunan cumle',
-                value: '${data.todayReadSentenceCount}',
-                icon: Icons.menu_book_outlined,
-              ),
-              const SizedBox(height: 8),
-              AppStatTile(
-                label: 'Bugun cozulen soru',
-                value: data.todaySolvedQuestionText,
-                icon: Icons.quiz_outlined,
-              ),
-            ],
-          ),
-        );
-      },
+                const SizedBox(height: 16),
+                const AppSectionHeader(title: 'Gunluk Metrikler'),
+                const SizedBox(height: 8),
+                AppStatTile(
+                  label: 'Bugun gorulen kelime',
+                  value: '${data.todayWordCount}',
+                  icon: Icons.school_outlined,
+                ),
+                const SizedBox(height: 8),
+                AppStatTile(
+                  label: 'Bugun okunan cumle',
+                  value: '${data.todayReadSentenceCount}',
+                  icon: Icons.menu_book_outlined,
+                ),
+                const SizedBox(height: 8),
+                AppStatTile(
+                  label: 'Bugun cozulen soru',
+                  value: data.todaySolvedQuestionText,
+                  icon: Icons.quiz_outlined,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
+}
+
+String _friendlyHomeError(Object error) {
+  final String text = error.toString().toLowerCase();
+  if (text.contains('auth session yok') || text.contains('anonymous')) {
+    return 'Anonim oturum gecici olarak olusmadi. Ag baglantisini kontrol edip yeniden deneyin.';
+  }
+  return error.toString();
 }

@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # Fiil Türleri ve Passive İlişkisi | Sayfa 1/15
 
 ## 📌 Passive Yapının Temeli
@@ -69,7 +68,6 @@ D) They will announce the results tomorrow.
 ---
 
 ## 📄 SAYFA 2
-
 # İki Nesneli Fiillerde Passive (give, send, tell) | Sayfa 2/15
 
 ## 📌 Ditransitive Fiillerde Passive
@@ -136,7 +134,6 @@ D) A detailed email sent to the employees by the manager.
 ---
 
 ## 📄 SAYFA 3
-
 # Zamanlara Göre Passive Yapımı | Sayfa 3/15
 
 ## 📌 "Be V3" Formülü
@@ -212,7 +209,6 @@ D) The winners are announced next week.
 ---
 
 ## 📄 SAYFA 4
-
 # Mastar ve Ulaçların Passive Halleri (Infinitive & Gerund) | Sayfa 4/15
 
 ## 📌 Non-finite Fiillerde Passive
@@ -279,7 +275,6 @@ D) She denies to be accused.
 ---
 
 ## 📄 SAYFA 5
-
 # Deyimsel Fiillerde Passive & Stative Passive | Sayfa 5/15
 
 ## 📌 Phrasal Verbs ve Prepositional Verbs
@@ -353,7 +348,6 @@ D) He is interested in modern art.
 ---
 
 ## 📄 SAYFA 6
-
 # Passive Stratejileri | Sayfa 6/15
 
 ## 📌 Sınav Stratejileri
@@ -430,7 +424,6 @@ D) discussing
 ---
 
 ## 📄 SAYFA 7
-
 # That-Clause ile Passive (It is said that...) | Sayfa 7/15
 
 ## 📌 "That-Clause" Nesne Olduğunda
@@ -504,7 +497,6 @@ D) She is known that she is an excellent surgeon.
 ---
 
 ## 📄 SAYFA 8
-
 # That-Clause'tan Infinitive'e Dönüşüm | Sayfa 8/15
 
 ## 📌 Özne + Passive + Infinitive
@@ -581,7 +573,6 @@ D) She was known to kill her husband.
 ---
 
 ## 📄 SAYFA 9
-
 # That-Clause Passive'te Detaylar & Strateji | Sayfa 9/15
 
 ## 📌 That-Clause Passive Olduğunda
@@ -656,7 +647,6 @@ E) to have discovered
 ---
 
 ## 📄 SAYFA 10
-
 # Pasifte Özel Durumlar: caught Ving & Ergative Verbs | Sayfa 10/15
 
 ## 📌 caught Ving Yapısı
@@ -731,7 +721,6 @@ D) to have left
 ---
 
 ## 📄 SAYFA 11
-
 # Örnek Soru Çözümü & Strateji | Sayfa 11/15
 
 ## 📌 Tense + Passive Birlikte
@@ -808,7 +797,6 @@ D) were audited
 ---
 
 ## 📄 SAYFA 12
-
 # Causatives'e Giriş: Eylemi Yaptırtmak (have/get + object + V3) | Sayfa 12/15
 
 ## 📌 Ettirgen Yapı (Causative)
@@ -882,7 +870,6 @@ D) had
 ---
 
 ## 📄 SAYFA 13
-
 # Eylemi Kime Yaptırdığımızı Söylemek | Sayfa 13/15
 
 ## 📌 Agent (İşi Yapan) Belirtildiğinde
@@ -959,7 +946,6 @@ D) asked
 ---
 
 ## 📄 SAYFA 14
-
 # Causatives'ta Özel Durumlar: Make/Let Passive & Özel Fiil Listeleri | Sayfa 14/15
 
 ## 📌 Make ve Let'in Passive Halleri
@@ -1041,7 +1027,6 @@ D) cleaned
 ---
 
 ## 📄 SAYFA 15
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 15/15
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1141,8 +1126,6 @@ D) was had
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 05_NOUN_CLAUSES.pdf
-### 📍 **İlerleme:** 4/12 PDF tamamlandı
 
 [Kelime sayısı: 210]
 
@@ -1155,3 +1138,14 @@ D) was had
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 15 (25'i geçmiyor)
 - [x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, hatırlatma, kart)
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Gerunds & Infinitives
+### 📍 **İlerleme:** 4/12 PDF tamamlandı

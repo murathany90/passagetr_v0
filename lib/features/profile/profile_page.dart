@@ -17,23 +17,36 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<void> authBootstrap = ref.watch(authBootstrapProvider);
     final AsyncValue<HomeDashboardData> dashboard = ref.watch(
       homeDashboardProvider,
     );
     final AsyncValue<List<Pack>> packs = ref.watch(packListProvider);
-    final String userId =
-        Supabase.instance.client.auth.currentUser?.id ?? 'session_not_found';
-    final String shortUid =
-        userId.length > 12 ? '${userId.substring(0, 12)}...' : userId;
+    final String? userId = Supabase.instance.client.auth.currentUser?.id;
+    final String shortUid = userId == null
+        ? 'oturum_hazirlaniyor'
+        : (userId.length > 12 ? '${userId.substring(0, 12)}...' : userId);
 
     return RefreshIndicator(
       onRefresh: () async {
+        ref.invalidate(authBootstrapProvider);
+        try {
+          await ref.read(authBootstrapProvider.future);
+        } catch (_) {
+          // Hata state'i ekranda AppErrorState ile gosterilecek.
+        }
         ref.invalidate(homeDashboardProvider);
         ref.invalidate(packListProvider);
-        await Future.wait<void>(<Future<void>>[
-          ref.read(homeDashboardProvider.future),
-          ref.read(packListProvider.future),
-        ]);
+        try {
+          await ref.read(homeDashboardProvider.future);
+        } catch (_) {
+          // Hata state'i ekranda gosterilecek.
+        }
+        try {
+          await ref.read(packListProvider.future);
+        } catch (_) {
+          // Hata state'i ekranda gosterilecek.
+        }
       },
       child: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -85,37 +98,46 @@ class ProfilePage extends ConsumerWidget {
           const SizedBox(height: 12),
           const AppSectionHeader(title: 'Bugunun Ozeti'),
           const SizedBox(height: 8),
-          dashboard.when(
-            loading: () => const AppLoadingBlock(
-                message: 'Profil metrikleri yukleniyor...'),
+          authBootstrap.when(
+            loading: () =>
+                const AppLoadingBlock(message: 'Anonim oturum hazirlaniyor...'),
             error: (Object error, StackTrace stack) => AppErrorState(
-              title: 'Profil metrikleri alinamadi.',
-              detail: error.toString(),
-              onRetry: () => ref.invalidate(homeDashboardProvider),
+              title: 'Oturum kurulamadigi icin profil metrikleri alinamadi.',
+              detail: _friendlyAuthDetail(error),
+              onRetry: () => ref.invalidate(authBootstrapProvider),
             ),
-            data: (HomeDashboardData data) {
-              return Column(
-                children: <Widget>[
-                  AppStatTile(
-                    label: 'Bugun gorulen kelime',
-                    value: '${data.todayWordCount}',
-                    icon: Icons.school_outlined,
-                  ),
-                  const SizedBox(height: 8),
-                  AppStatTile(
-                    label: 'Bugun okunan cumle',
-                    value: '${data.todayReadSentenceCount}',
-                    icon: Icons.menu_book_outlined,
-                  ),
-                  const SizedBox(height: 8),
-                  AppStatTile(
-                    label: 'Bugun cozulen soru',
-                    value: data.todaySolvedQuestionText,
-                    icon: Icons.quiz_outlined,
-                  ),
-                ],
-              );
-            },
+            data: (_) => dashboard.when(
+              loading: () => const AppLoadingBlock(
+                  message: 'Profil metrikleri yukleniyor...'),
+              error: (Object error, StackTrace stack) => AppErrorState(
+                title: 'Profil metrikleri alinamadi.',
+                detail: _friendlyDashboardDetail(error),
+                onRetry: () => ref.invalidate(homeDashboardProvider),
+              ),
+              data: (HomeDashboardData data) {
+                return Column(
+                  children: <Widget>[
+                    AppStatTile(
+                      label: 'Bugun gorulen kelime',
+                      value: '${data.todayWordCount}',
+                      icon: Icons.school_outlined,
+                    ),
+                    const SizedBox(height: 8),
+                    AppStatTile(
+                      label: 'Bugun okunan cumle',
+                      value: '${data.todayReadSentenceCount}',
+                      icon: Icons.menu_book_outlined,
+                    ),
+                    const SizedBox(height: 8),
+                    AppStatTile(
+                      label: 'Bugun cozulen soru',
+                      value: data.todaySolvedQuestionText,
+                      icon: Icons.quiz_outlined,
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
           const SizedBox(height: 12),
           const AppSectionHeader(title: 'Sistem Durumu'),
@@ -176,6 +198,22 @@ class ProfilePage extends ConsumerWidget {
       ),
     );
   }
+}
+
+String _friendlyAuthDetail(Object error) {
+  final String text = error.toString().toLowerCase();
+  if (text.contains('anonymous') || text.contains('auth')) {
+    return 'Anonim oturum su an olusturulamadi. Ag baglantisini kontrol edip tekrar deneyin.';
+  }
+  return error.toString();
+}
+
+String _friendlyDashboardDetail(Object error) {
+  final String text = error.toString().toLowerCase();
+  if (text.contains('auth session yok') || text.contains('unauthenticated')) {
+    return 'Oturum gecici olarak kesildi. Yeniden dene ile metrikleri tekrar yukleyin.';
+  }
+  return error.toString();
 }
 
 class _InfoRow extends StatelessWidget {

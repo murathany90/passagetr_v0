@@ -5,12 +5,17 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/utils/raw_splitter.dart';
 import '../../../core/utils/word_selection_utils.dart';
+import '../../../domain/entities/dictionary_lookup_result.dart';
 import '../../../core/widgets/app_gradient_cta_button.dart';
 import '../../../core/widgets/app_surface_card.dart';
 import '../../../domain/entities/pack.dart';
 import '../../../domain/entities/word_item.dart';
+import '../../../domain/repositories/dictionary_repository.dart';
+import '../../../domain/repositories/word_repository.dart';
 import '../../../state/providers.dart';
 import '../../flashcard/flashcard_session_page.dart';
+import '../../words/widgets/dictionary_fallback_sheet.dart';
+import '../../words/word_detail_page.dart';
 
 class WordQuickViewSheet extends ConsumerWidget {
   const WordQuickViewSheet({
@@ -23,6 +28,60 @@ class WordQuickViewSheet extends ConsumerWidget {
   final BuildContext hostContext;
   final Pack pack;
   final String selectedWord;
+
+  Future<void> _openRelatedWord(
+    BuildContext context,
+    WidgetRef ref,
+    String rawWord,
+    WordItem currentWord,
+  ) async {
+    final String normalized = normalizeWordToken(rawWord);
+    if (normalized.isEmpty) {
+      return;
+    }
+
+    final WordRepository wordRepository = ref.read(wordRepositoryProvider);
+    final WordItem? target =
+        await wordRepository.getWordByEnWordGlobal(normalized);
+
+    if (!context.mounted) {
+      return;
+    }
+
+    if (target != null) {
+      if (target.id == currentWord.id) {
+        return;
+      }
+      Navigator.of(context).pop();
+      if (!hostContext.mounted) {
+        return;
+      }
+      Navigator.of(hostContext).push(
+        MaterialPageRoute<void>(
+          builder: (_) => WordDetailPage(word: target),
+        ),
+      );
+      return;
+    }
+
+    final DictionaryRepository dictionaryRepository =
+        ref.read(dictionaryRepositoryProvider);
+    final DictionaryLookupResult lookup =
+        await dictionaryRepository.lookup(query: normalized);
+    if (!context.mounted) {
+      return;
+    }
+
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (_) => DictionaryFallbackSheet(
+        query: normalized,
+        lookup: lookup,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,23 +119,30 @@ class WordQuickViewSheet extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      normalized,
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
+              Text(
+                normalized,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w800,
                     ),
-                  ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: <Widget>[
                   Chip(
                     label: const Text('Quick Word'),
                     visualDensity: VisualDensity.compact,
                     backgroundColor:
                         Theme.of(context).colorScheme.primaryContainer,
                   ),
+                  if ((state.sourceLabel ?? '').trim().isNotEmpty)
+                    Chip(
+                      label: Text(state.sourceLabel!.trim()),
+                      visualDensity: VisualDensity.compact,
+                    ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -89,10 +155,20 @@ class WordQuickViewSheet extends ConsumerWidget {
                               hostContext: hostContext,
                               pack: pack,
                               word: state.wordItem!,
+                              sourceLabel: state.sourceLabel,
+                              onRelatedWordTap: (String token) {
+                                return _openRelatedWord(
+                                  context,
+                                  ref,
+                                  token,
+                                  state.wordItem!,
+                                );
+                              },
                             )
                           : (state.translatedText ?? '').trim().isNotEmpty
                               ? _TranslatedWordContent(
                                   translatedText: state.translatedText!,
+                                  sourceLabel: state.sourceLabel,
                                 )
                               : _ErrorContent(
                                   error:
@@ -180,16 +256,21 @@ class _FoundWordContent extends StatelessWidget {
     required this.hostContext,
     required this.pack,
     required this.word,
+    required this.sourceLabel,
+    required this.onRelatedWordTap,
   });
 
   final BuildContext hostContext;
   final Pack pack;
   final WordItem word;
+  final String? sourceLabel;
+  final Future<void> Function(String rawWord) onRelatedWordTap;
 
   @override
   Widget build(BuildContext context) {
     final List<String> synonyms = parseRawList(word.synonymsRaw);
     final List<String> antonyms = parseRawList(word.antonymsRaw);
+    final List<String> tags = parseRawList(word.tagsRaw);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,25 +279,58 @@ class _FoundWordContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
                 children: <Widget>[
-                  Chip(label: Text(word.pos)),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      word.trMeaning,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
+                  if (word.pos.trim().isNotEmpty) Chip(label: Text(word.pos)),
+                  if ((word.level ?? '').trim().isNotEmpty)
+                    Chip(
+                      label: Text('Level ${(word.level ?? '').trim()}'),
+                      visualDensity: VisualDensity.compact,
                     ),
-                  ),
+                  if ((sourceLabel ?? '').trim().isNotEmpty)
+                    Chip(
+                      label: Text(sourceLabel!.trim()),
+                      visualDensity: VisualDensity.compact,
+                    ),
                 ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                word.trMeaning,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
               ),
               const SizedBox(height: 8),
               Text('EN: ${word.exampleEn}'),
               if ((word.exampleTr ?? '').trim().isNotEmpty) ...<Widget>[
                 const SizedBox(height: 3),
                 Text('TR: ${word.exampleTr}'),
+              ],
+              if (tags.isNotEmpty) ...<Widget>[
+                const SizedBox(height: 8),
+                const Text('Tags'),
+                const SizedBox(height: 4),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: tags
+                      .map((String e) => Chip(label: Text(e)))
+                      .toList(growable: false),
+                ),
+              ],
+              if ((word.notes ?? '').trim().isNotEmpty) ...<Widget>[
+                const SizedBox(height: 8),
+                Text(
+                  'Not',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                const SizedBox(height: 3),
+                Text(word.notes!.trim()),
               ],
             ],
           ),
@@ -229,7 +343,12 @@ class _FoundWordContent extends StatelessWidget {
             spacing: 6,
             runSpacing: 6,
             children: synonyms
-                .map((String e) => Chip(label: Text(e)))
+                .map(
+                  (String e) => ActionChip(
+                    label: Text(e),
+                    onPressed: () => onRelatedWordTap(e),
+                  ),
+                )
                 .toList(growable: false),
           ),
         ],
@@ -241,7 +360,12 @@ class _FoundWordContent extends StatelessWidget {
             spacing: 6,
             runSpacing: 6,
             children: antonyms
-                .map((String e) => Chip(label: Text(e)))
+                .map(
+                  (String e) => ActionChip(
+                    label: Text(e),
+                    onPressed: () => onRelatedWordTap(e),
+                  ),
+                )
                 .toList(growable: false),
           ),
         ],
@@ -270,9 +394,11 @@ class _FoundWordContent extends StatelessWidget {
 class _TranslatedWordContent extends StatelessWidget {
   const _TranslatedWordContent({
     required this.translatedText,
+    required this.sourceLabel,
   });
 
   final String translatedText;
+  final String? sourceLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -287,6 +413,13 @@ class _TranslatedWordContent extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
           ),
+          if ((sourceLabel ?? '').trim().isNotEmpty) ...<Widget>[
+            const SizedBox(height: 6),
+            Chip(
+              label: Text(sourceLabel!.trim()),
+              visualDensity: VisualDensity.compact,
+            ),
+          ],
           const SizedBox(height: 6),
           Text(
             translatedText,

@@ -87,7 +87,7 @@ class ReadingHomePage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      '${pack.wordCount} kelime tabani',
+                      '${pack.wordCount} kelime',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color:
                                 Theme.of(context).colorScheme.onSurfaceVariant,

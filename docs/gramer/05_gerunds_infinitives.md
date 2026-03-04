@@ -1,13 +1,14 @@
-# PDF 5 ÇIKTISI: GERUNDS & INFINITIVES
+# PDF 05 ÇIKTISI: GERUNDS & INFINITIVES
 
 ## 📊 METADATA
 - Toplam Sayfa: 20
-- Ana Konu: Gerund (Ving) ve Infinitive (to Vo) Kullanımları
+- Toplam Kelime: ~4200
+- Sayfa Başı Ortalama: ~210 kelime
+- Ana Konu Başlığı: Gerunds & Infinitives
 
 ---
 
 ## 📄 SAYFA 1
-
 # Gerund (Ving) Nedir? | Sayfa 1/20
 
 ## 📌 FİİLLERİ İSİMLEŞTİRMEK
@@ -69,7 +70,6 @@ D) Exercised
 ---
 
 ## 📄 SAYFA 2
-
 # Gerund: Fiil + Nesne (Ving) | Sayfa 2/20
 
 ## 📌 Ving'İN FİİL NESNESİ OLARAK 3 GÖREVİ
@@ -143,7 +143,6 @@ D) checked
 ---
 
 ## 📄 SAYFA 3
-
 # Strateji: Ving vs to Vo Zaman Mantığı | Sayfa 3/20
 
 ## 📌 FİİLLERİ ZAMAN ÇİZGİSİNDE DÜŞÜN
@@ -223,7 +222,6 @@ D) study
 ---
 
 ## 📄 SAYFA 4
-
 # Preposition + Ving (Edatlardan Sonra Ving) | Sayfa 4/20
 
 ## 📌 KURAL: EDATTAN SONRA FİİL GELİRSE Ving OLUR
@@ -305,7 +303,6 @@ D) for be
 ---
 
 ## 📄 SAYFA 5
-
 # Deyimsel Yapılar + Ving (Idiomatic Expressions) | Sayfa 5/20
 
 ## 📌 ÖZEL KALIPLAR MUTLAKA Ving ALIR
@@ -388,7 +385,6 @@ D) see
 ---
 
 ## 📄 SAYFA 6
-
 # Özel Yapılar + Ving | Sayfa 6/20
 
 ## 📌 DİĞER Ving GEREKTİREN DURUMLAR
@@ -475,7 +471,6 @@ D) prepared
 ---
 
 ## 📄 SAYFA 7
-
 # Algı Fiilleri: See/Hear + Ving vs Vo | Sayfa 7/20
 
 ## 📌 EYLEMİN TAMAMI MI, PARÇASI MI?
@@ -565,7 +560,6 @@ D) playing
 ---
 
 ## 📄 SAYFA 8
-
 # Passive Gerund: Being V3 | Sayfa 8/20
 
 ## 📌 Ving'İN EDİLGEN HALİ: BEING V3
@@ -640,7 +634,6 @@ D) being asked to speak
 ---
 
 ## 📄 SAYFA 9
-
 # Perfect Gerund: Having V3 | Sayfa 9/20
 
 ## 📌 GEÇMİŞTE ÖNCELİK VURGUSU: HAVING V3
@@ -715,7 +708,6 @@ D) to accept
 ---
 
 ## 📄 SAYFA 10
-
 # Infinitive (to Vo) - Giriş | Sayfa 10/20
 
 ## 📌 INFINITIVE (TO VO) NEDİR?
@@ -794,7 +786,6 @@ D) For learn
 ---
 
 ## 📄 SAYFA 11
-
 # Sıfatlardan Sonra Infinitive (Adj + to Vo) | Sayfa 11/20
 
 ## 📌 KURAL: SIFATTAN SONRA FİİL GELİRSE TO VO
@@ -878,7 +869,6 @@ D) for you to help
 ---
 
 ## 📄 SAYFA 12
-
 # İsimlerden Sonra Infinitive (Noun + to Vo) | Sayfa 12/20
 
 ## 📌 KURAL: SOYUT İSİMLERDEN SONRA TO VO
@@ -962,7 +952,6 @@ D) to decide
 ---
 
 ## 📄 SAYFA 13
-
 # Özel Infinitive Yapıları | Sayfa 13/20
 
 ## 📌 TOO / ENOUGH / QUESTION WORD + TO VO
@@ -1058,7 +1047,6 @@ D) very heavy
 ---
 
 ## 📄 SAYFA 14
-
 # Amaç Bildiren Infinitive | Sayfa 14/20
 
 ## 📌 PURPOSIVE INFINITIVE: AMAÇ BİLDİREN TO VO
@@ -1143,7 +1131,6 @@ D) so that improve
 ---
 
 ## 📄 SAYFA 15
-
 # Pasif Infinitive: to be V3 | Sayfa 15/20
 
 ## 📌 INFINITIVE'İN EDİLGEN HALİ: TO BE V3
@@ -1225,7 +1212,6 @@ D) signed
 ---
 
 ## 📄 SAYFA 16
-
 # Perfect Infinitive: to have V3 | Sayfa 16/20
 
 ## 📌 GEÇMİŞTE ÖNCELİK VURGUSU: TO HAVE V3
@@ -1305,7 +1291,6 @@ D) to have destroyed
 ---
 
 ## 📄 SAYFA 17
-
 # Verb + Object + To Vo Yapısı | Sayfa 17/20
 
 ## 📌 KURAL: BAZI FİİLLER NESNE + TO VO İSTER
@@ -1391,7 +1376,6 @@ D) to leaving
 ---
 
 ## 📄 SAYFA 18
-
 # Pasif Yapı + Infinitive | Sayfa 18/20
 
 ## 📌 PASİF CÜMLELERDE INFINITIVE KULLANIMI
@@ -1479,7 +1463,6 @@ D) writing
 ---
 
 ## 📄 SAYFA 19
-
 # İki Anlamlı Fiiller: Ving vs to Vo | Sayfa 19/20
 
 ## 📌 AYNI FİİL, FARKLI ANLAMLAR
@@ -1571,7 +1554,6 @@ D) to seeing
 ---
 
 ## 📄 SAYFA 20
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 20/20
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1671,7 +1653,16 @@ D) to seeing
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 06_PASSIVE_VOICE
-### 📍 **İlerleme:** 5/12 PDF tamamlandı
 
 **[Kelime sayısı: 248]**
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Adjectives & Adverbs
+### 📍 **İlerleme:** 5/12 PDF tamamlandı

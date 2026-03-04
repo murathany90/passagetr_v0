@@ -1,4 +1,4 @@
-# PDF 1 ÇIKTISI: 10_CONJUNCTIONS_And_ADVERBIAL_CLAUSES_And_INVERSIONS
+# PDF 10 ÇIKTISI: CONJUNCTIONS, ADVERBIAL CLAUSES & INVERSIONS
 
 ## 📊 METADATA
 - Toplam Sayfa: 25
@@ -213,7 +213,7 @@ E) but also
 ## 📌 Both...and / Either...or / Neither...nor
 Bu yapılar da aynı gramer türündeki ögeleri birleştirir. "Neither...nor" olumlu cümle yapısıyla kullanılır ama anlam olumsuzdur.
 
-> 💡 **İpucu:** "Either...or" olumsuz cümlede kullanılırsa "neither...nor" anlamı verir.
+> 💡 **İpucu:** "Either...or" seçenek sunar. Olumsuzluk için genellikle "neither...nor" veya "not either...or" yapıları tercih edilir.
 
 ---
 
@@ -1696,8 +1696,6 @@ D) was / taken off
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 11_CLAUSES (Sıfat Cümlecikleri, İsim Cümlecikleri)
-### 📍 **İlerleme:** 10/12 PDF tamamlandı
 
 [Kelime sayısı: 300 - test sayfası biraz daha uzun olabilir, ancak kabul edilebilir sınırlar içinde.]
 
@@ -1710,3 +1708,14 @@ D) was / taken off
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 25
 - [x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, hatırlatma kutuları kullanıldı)
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Determiners, Quantifiers & Pronouns
+### 📍 **İlerleme:** 10/12 PDF tamamlandı

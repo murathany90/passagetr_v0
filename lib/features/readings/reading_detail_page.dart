@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/services/translation_service.dart';
+import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
 import '../../core/widgets/app_loading_block.dart';
 import '../../core/widgets/app_section_header.dart';
 import '../../core/widgets/app_surface_card.dart';
-import '../../core/utils/word_selection_utils.dart';
 import '../../domain/entities/pack.dart';
+import '../../domain/entities/passage_focus_word.dart';
 import '../../domain/entities/passage_sentence.dart';
 import '../../domain/entities/reading_passage.dart';
 import '../../domain/entities/sentence_translation.dart';
-import '../../domain/entities/user_word_progress.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/reading_repository.dart';
+import '../../domain/repositories/word_repository.dart';
 import '../../state/providers.dart';
 import '../flashcard/flashcard_session_page.dart';
+import '../tests/mcq_session_page.dart';
 import 'widgets/interactive_sentence_text.dart';
 import 'widgets/word_quick_view_sheet.dart';
 
@@ -38,25 +40,27 @@ class ReadingDetailPage extends ConsumerStatefulWidget {
 }
 
 class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
+  static final RegExp _tokenPattern =
+      RegExp(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*|\s+|[^A-Za-z0-9\s]+");
+
   final Set<String> _expandedSentenceIds = <String>{};
   final Set<String> _loadingTranslationIds = <String>{};
   final Map<String, String> _runtimeTranslations = <String, String>{};
   final Map<String, String> _translationErrors = <String, String>{};
+  final Map<String, Set<String>> _highlightedWordsBySentence =
+      <String, Set<String>>{};
+  bool _focusWordsExpanded = false;
 
   bool _loading = true;
+  bool _savingProgress = false;
+  bool _quickWordSheetOpen = false;
   String? _error;
   List<PassageSentence> _sentences = <PassageSentence>[];
+  List<PassageFocusWord> _focusWords = <PassageFocusWord>[];
+  String _datasetVersion = '';
 
   int _lastIdx = 0;
   bool _completed = false;
-  bool _savingProgress = false;
-  bool _quickWordSheetOpen = false;
-
-  bool _loadingPassageWords = true;
-  String? _passageWordsError;
-  List<WordItem> _passageWords = <WordItem>[];
-  Map<String, UserWordProgress> _passageWordsProgress =
-      <String, UserWordProgress>{};
 
   @override
   void initState() {
@@ -69,14 +73,16 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       _loading = true;
       _error = null;
       _sentences = <PassageSentence>[];
+      _focusWords = <PassageFocusWord>[];
+      _datasetVersion = '';
+      _lastIdx = 0;
+      _completed = false;
       _expandedSentenceIds.clear();
       _loadingTranslationIds.clear();
       _runtimeTranslations.clear();
       _translationErrors.clear();
-      _passageWords = <WordItem>[];
-      _passageWordsProgress = <String, UserWordProgress>{};
-      _loadingPassageWords = true;
-      _passageWordsError = null;
+      _highlightedWordsBySentence.clear();
+      _focusWordsExpanded = false;
     });
 
     try {
@@ -92,17 +98,22 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
               .map((PassageSentence e) => e.idx)
               .reduce((int a, int b) => a > b ? a : b);
 
-      final progress = await readingRepository.getUserReadingProgress(
-        passageId: widget.passage.id,
-      );
-
       int nextLastIdx = widget.initialLastIdx;
       bool nextCompleted = false;
-      if (progress != null) {
-        nextLastIdx =
-            progress.lastIdx > nextLastIdx ? progress.lastIdx : nextLastIdx;
-        nextCompleted = progress.completed;
+
+      try {
+        final progress = await readingRepository.getUserReadingProgress(
+          passageId: widget.passage.id,
+        );
+        if (progress != null) {
+          nextLastIdx =
+              progress.lastIdx > nextLastIdx ? progress.lastIdx : nextLastIdx;
+          nextCompleted = progress.completed;
+        }
+      } catch (_) {
+        // Auth/network hatasi static akisi bloklamaz.
       }
+
       if (nextLastIdx > maxIdx) {
         nextLastIdx = maxIdx;
       }
@@ -116,14 +127,19 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         _completed = nextCompleted;
       });
 
-      await readingRepository.upsertUserReadingProgress(
-        passageId: widget.passage.id,
-        lastIdx: _lastIdx,
-        completed: _completed,
-      );
+      try {
+        await readingRepository.upsertUserReadingProgress(
+          passageId: widget.passage.id,
+          lastIdx: _lastIdx,
+          completed: _completed,
+        );
+      } catch (_) {
+        // Best-effort.
+      }
 
       await _prefetchCachedTranslations();
-      await _loadPassageWords();
+      await _buildDeterministicHighlights();
+
       ref.invalidate(readingProgressProvider(widget.passage.id));
       ref.invalidate(homeDashboardProvider);
     } catch (error) {
@@ -142,45 +158,134 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     }
   }
 
-  Future<void> _loadPassageWords() async {
-    setState(() {
-      _loadingPassageWords = true;
-      _passageWordsError = null;
-    });
-    try {
-      final List<WordItem> words = await ref.read(
-        passageWordsProvider(widget.passage.id).future,
-      );
+  Future<void> _buildDeterministicHighlights() async {
+    if (_sentences.isEmpty) {
+      return;
+    }
 
-      Map<String, UserWordProgress> progress =
-          const <String, UserWordProgress>{};
-      if (words.isNotEmpty) {
-        progress = await ref.read(progressRepositoryProvider).getProgressMap(
-              wordIds: words.map((WordItem e) => e.id).toList(growable: false),
-            );
+    final String datasetVersion = await ref.read(
+      appContentDatasetVersionProvider.future,
+    );
+    final WordRepository wordRepository = ref.read(wordRepositoryProvider);
+    final List<WordItem> globalWords = await wordRepository.getGlobalWordIndex(
+      limit: 7000,
+    );
+
+    final Map<String, List<WordItem>> tokenIndex = <String, List<WordItem>>{};
+    for (final WordItem word in globalWords) {
+      final String token = normalizeWordToken(word.enWord);
+      if (token.isEmpty) {
+        continue;
+      }
+      tokenIndex.putIfAbsent(token, () => <WordItem>[]).add(word);
+    }
+
+    final Map<String, Set<String>> highlighted = <String, Set<String>>{};
+    final Map<String, PassageFocusWord> focusMap = <String, PassageFocusWord>{};
+
+    for (final PassageSentence sentence in _sentences) {
+      final List<String> tokens =
+          _extractNormalizedWordTokens(sentence.sentenceEn);
+      if (tokens.isEmpty) {
+        continue;
       }
 
-      if (!mounted) {
-        return;
+      final Set<String> uniqueTokens = tokens.toSet();
+      final List<_SentenceCandidate> candidates = <_SentenceCandidate>[];
+      final String seed = '${widget.passage.id}|${sentence.id}|$datasetVersion';
+
+      for (final String token in uniqueTokens) {
+        final List<WordItem>? choices = tokenIndex[token];
+        if (choices == null || choices.isEmpty) {
+          continue;
+        }
+
+        WordItem bestWord = choices.first;
+        int bestScore = _stableHash('$seed|$token|${bestWord.id}');
+
+        for (final WordItem choice in choices.skip(1)) {
+          final int score = _stableHash('$seed|$token|${choice.id}');
+          if (score < bestScore) {
+            bestWord = choice;
+            bestScore = score;
+          }
+        }
+
+        candidates.add(
+          _SentenceCandidate(
+            token: token,
+            word: bestWord,
+            score: bestScore,
+          ),
+        );
       }
-      setState(() {
-        _passageWords = words;
-        _passageWordsProgress = progress;
+
+      candidates.sort((_SentenceCandidate a, _SentenceCandidate b) {
+        final int scoreCompare = a.score.compareTo(b.score);
+        if (scoreCompare != 0) {
+          return scoreCompare;
+        }
+        return a.token.compareTo(b.token);
       });
-    } catch (error) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {
-        _passageWordsError = error.toString();
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _loadingPassageWords = false;
-        });
+
+      final List<_SentenceCandidate> selected = candidates.take(4).toList();
+      highlighted[sentence.id] =
+          selected.map((candidate) => candidate.token).toSet();
+
+      for (final _SentenceCandidate item in selected) {
+        final int occurrenceCount =
+            tokens.where((String e) => e == item.token).length;
+        final PassageFocusWord? current = focusMap[item.word.id];
+        focusMap[item.word.id] = PassageFocusWord(
+          wordId: item.word.id,
+          enWord: item.word.enWord,
+          trMeaning: item.word.trMeaning,
+          pos: item.word.pos,
+          count: (current?.count ?? 0) + occurrenceCount,
+        );
       }
     }
+
+    final List<PassageFocusWord> focusWords = focusMap.values.toList()
+      ..sort((PassageFocusWord a, PassageFocusWord b) {
+        final int countCompare = b.count.compareTo(a.count);
+        if (countCompare != 0) {
+          return countCompare;
+        }
+        return a.enWord.compareTo(b.enWord);
+      });
+
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _datasetVersion = datasetVersion;
+      _highlightedWordsBySentence
+        ..clear()
+        ..addAll(highlighted);
+      _focusWords = focusWords;
+    });
+  }
+
+  List<String> _extractNormalizedWordTokens(String sentence) {
+    final List<String> tokens = <String>[];
+    for (final Match match in _tokenPattern.allMatches(sentence)) {
+      final String raw = match.group(0) ?? '';
+      final String normalized = normalizeWordToken(raw);
+      if (normalized.isNotEmpty) {
+        tokens.add(normalized);
+      }
+    }
+    return tokens;
+  }
+
+  int _stableHash(String input) {
+    int hash = 0x811C9DC5;
+    for (int i = 0; i < input.length; i++) {
+      hash ^= input.codeUnitAt(i);
+      hash = (hash * 0x01000193) & 0x7fffffff;
+    }
+    return hash;
   }
 
   Future<void> _prefetchCachedTranslations() async {
@@ -447,17 +552,20 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         .reduce((int a, int b) => a > b ? a : b);
   }
 
-  Set<String> get _knownWordsSet {
-    return _passageWords
-        .map((WordItem e) => normalizeWordToken(e.enWord))
-        .where((String e) => e.isNotEmpty)
-        .toSet();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.passage.title)),
+      appBar: AppBar(
+        toolbarHeight: 72,
+        title: Tooltip(
+          message: widget.passage.title,
+          child: Text(
+            widget.passage.title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
       body: _buildBody(),
     );
   }
@@ -487,7 +595,6 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     final int shownProgress =
         _completed ? total : (_lastIdx > total ? total : _lastIdx);
     final double progress = total == 0 ? 0 : shownProgress / total;
-    final Set<String> knownWordsSet = _knownWordsSet;
 
     return RefreshIndicator(
       onRefresh: _load,
@@ -560,6 +667,8 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
               _loadingTranslationIds.contains(sentence.id);
           final String? translation = _resolveTranslation(sentence);
           final String? translateError = _translationErrors[sentence.id];
+          final Set<String> highlightedWords =
+              _highlightedWordsBySentence[sentence.id] ?? const <String>{};
 
           return AppSurfaceCard(
             margin: const EdgeInsets.only(bottom: 8),
@@ -567,6 +676,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Chip(
                       label: Text('${sentence.idx}'),
@@ -576,12 +686,13 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                     Expanded(
                       child: InteractiveSentenceText(
                         sentenceText: sentence.sentenceEn,
-                        knownWordsSet: knownWordsSet,
+                        highlightedWordsSet: highlightedWords,
                         onWordTap: _openQuickWordPopup,
                         baseStyle: Theme.of(context).textTheme.bodyLarge,
-                        knownStyle:
+                        highlightStyle:
                             Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w800,
+                                  decoration: TextDecoration.underline,
                                 ),
                       ),
                     ),
@@ -669,49 +780,80 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   }
 
   Widget _buildPassageWordsPanel() {
+    final List<String> focusWordIds = _focusWords
+        .map((PassageFocusWord e) => e.wordId)
+        .toList(growable: false);
+
     return AppSurfaceCard(
       margin: const EdgeInsets.only(top: 6),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const AppSectionHeader(title: 'Bu paragraftan kelimeler'),
-          const SizedBox(height: 8),
-          if (_loadingPassageWords)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Center(child: CircularProgressIndicator()),
-            )
-          else if (_passageWordsError != null)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(_passageWordsError!),
-                const SizedBox(height: 8),
-                OutlinedButton(
-                  onPressed: _loadPassageWords,
-                  child: const Text('Retry'),
-                ),
-              ],
-            )
-          else if (_passageWords.isEmpty)
-            const Text('Bu paragraftan eslesen kelime bulunamadi.')
-          else ...<Widget>[
-            ..._passageWords.map(
-              (WordItem word) {
-                final int mastery =
-                    _passageWordsProgress[word.id]?.mastery ?? 0;
-                return ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(word.enWord),
-                  subtitle: Text(word.pos),
-                  trailing: Chip(
-                    label: Text('Mastery $mastery'),
+          Theme(
+            data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              initiallyExpanded: false,
+              tilePadding: EdgeInsets.zero,
+              childrenPadding: const EdgeInsets.only(top: 6),
+              onExpansionChanged: (bool expanded) {
+                setState(() {
+                  _focusWordsExpanded = expanded;
+                });
+              },
+              title: Row(
+                children: <Widget>[
+                  const AppSectionHeader(title: 'Odak Kelimeler'),
+                  const SizedBox(width: 8),
+                  Chip(
+                    label: Text('${_focusWords.length}'),
                     visualDensity: VisualDensity.compact,
                   ),
-                );
-              },
+                ],
+              ),
+              subtitle: _datasetVersion.trim().isEmpty
+                  ? null
+                  : Text(
+                      'Dataset: $_datasetVersion',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                    ),
+              children: <Widget>[
+                if (_focusWords.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child:
+                          Text('Bu paragrafta secili odak kelime bulunamadi.'),
+                    ),
+                  )
+                else ...<Widget>[
+                  ..._focusWords.map(
+                    (PassageFocusWord word) {
+                      final String pos = word.pos.trim();
+                      final String trMeaning = word.trMeaning.trim();
+                      final String subtitle = trMeaning.isEmpty
+                          ? (pos.isEmpty ? '-' : pos)
+                          : (pos.isEmpty ? trMeaning : '$trMeaning • $pos');
+                      return ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(word.enWord),
+                        subtitle: Text(subtitle),
+                        trailing: Chip(
+                          label: Text('x${word.count}'),
+                          visualDensity: VisualDensity.compact,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ],
             ),
+          ),
+          if (_focusWordsExpanded && focusWordIds.isNotEmpty) ...<Widget>[
             const SizedBox(height: 8),
             AppGradientCtaButton(
               onTap: () {
@@ -719,10 +861,8 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                   MaterialPageRoute<void>(
                     builder: (_) => FlashcardSessionPage(
                       pack: widget.pack,
-                      customWordIds: _passageWords
-                          .map((WordItem e) => e.id)
-                          .toList(growable: false),
-                      sessionLabel: 'Paragraftan Kelime Calis',
+                      customWordIds: focusWordIds,
+                      sessionLabel: 'Passage Focus Words',
                     ),
                   ),
                 );
@@ -730,9 +870,38 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
               icon: Icons.school,
               label: 'Kelime Calis',
             ),
+            const SizedBox(height: 8),
+            FilledButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => McqSessionPage(
+                      pack: widget.pack,
+                      customWordIds: focusWordIds,
+                      sessionLabel: 'Passage Mini MCQ',
+                      questionCount: 5,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.quiz),
+              label: const Text('Mini MCQ'),
+            ),
           ],
         ],
       ),
     );
   }
+}
+
+class _SentenceCandidate {
+  const _SentenceCandidate({
+    required this.token,
+    required this.word,
+    required this.score,
+  });
+
+  final String token;
+  final WordItem word;
+  final int score;
 }

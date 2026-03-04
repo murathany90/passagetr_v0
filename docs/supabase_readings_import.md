@@ -16,7 +16,7 @@ Bu dokuman Faz 2 reading tablolari icin CSV import adimlarini tarif eder.
 Konum: `docs/readings_passages.csv`
 
 Header:
-`pack_name;title;level;tags_raw;source_url`
+`pack_name;title;level;tags_raw;Category`
 
 Import hedefi: `reading_passages`
 Mapping:
@@ -24,7 +24,7 @@ Mapping:
 - `title` -> `title`
 - `level` -> `level`
 - `tags_raw` -> `tags_raw`
-- `source_url` -> `source_url`
+- `Category` -> `category`
 
 Not:
 - `reading_passages.pack_name` gecici import kolonudur.

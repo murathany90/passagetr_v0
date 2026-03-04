@@ -5,16 +5,15 @@ class AppConstants {
   static const int testPoolSize = 200;
 
   static const List<String> posValues = <String>[
-    'noun',
-    'verb',
-    'adj',
-    'adv',
-    'prep',
-    'conj',
-    'pron',
-    'det',
-    'phrasal',
-    'idiom',
-    'other',
+    'prep.',
+    'phr. v.',
+    'v.',
+    'n.',
+    'adj.',
+    'adv.',
+    'NP',
+    'conj.',
+    'det.',
+    'modal',
   ];
 }

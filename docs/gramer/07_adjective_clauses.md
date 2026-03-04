@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # Giriş: Sıfat Cümlecikleri (Adjective Clauses) | Sayfa 1/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -88,7 +87,6 @@ D) This is the house ___ Jack built.
 ---
 
 ## 📄 SAYFA 2
-
 # Özne Odaklı Sıfat Cümlecikleri (Subject‑Focused) | Sayfa 2/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -169,7 +167,6 @@ D) whose
 ---
 
 ## 📄 SAYFA 3
-
 # Nesne Odaklı Sıfat Cümlecikleri – Fiil Nesnesi | Sayfa 3/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -249,7 +246,6 @@ D) whose
 ---
 
 ## 📄 SAYFA 4
-
 # Nesne Odaklı – Edatlı (Preposition) Kullanımlar | Sayfa 4/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -331,7 +327,6 @@ D) that on
 ---
 
 ## 📄 SAYFA 5
-
 # İyelik (Possessive): Whose + Noun ve Of Which | Sayfa 5/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -413,7 +408,6 @@ D) that
 ---
 
 ## 📄 SAYFA 6
-
 # Yer Bildiren Sıfat Cümlecikleri (Where) | Sayfa 6/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -499,7 +493,6 @@ D) when
 ---
 
 ## 📄 SAYFA 7
-
 # Zaman Bildiren Sıfat Cümlecikleri (When) | Sayfa 7/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -594,7 +587,6 @@ D) whose
 ---
 
 ## 📄 SAYFA 8
-
 # Sebep Bildiren Sıfat Cümlecikleri (Why) | Sayfa 8/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -689,7 +681,6 @@ D) when
 ---
 
 ## 📄 SAYFA 9
-
 # Tüm Cümleyi Niteleyen Sıfat Cümlecikleri (Co‑ordinating) | Sayfa 9/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -772,7 +763,6 @@ D) when
 ---
 
 ## 📄 SAYFA 10
-
 # Miktar İfadeleriyle Sıfat Cümlecikleri | Sayfa 10/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -867,7 +857,6 @@ D) which
 ---
 
 ## 📄 SAYFA 11
-
 # Sıfat Cümleciklerinde Kısaltma – Aktif (Ving) | Sayfa 11/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -951,7 +940,6 @@ D) being read
 ---
 
 ## 📄 SAYFA 12
-
 # Sıfat Cümleciklerinde Kısaltma – Pasif (V3 / Being V3) | Sayfa 12/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1044,7 +1032,6 @@ D) being held
 ---
 
 ## 📄 SAYFA 13
-
 # Kısaltma: Sıfat ve Edat Öbekleri (Be + Adjective / Preposition) | Sayfa 13/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1136,7 +1123,6 @@ D) which opposite
 ---
 
 ## 📄 SAYFA 14
-
 # Kısaltma: To + Infinitive (The first, the only, superlatives) | Sayfa 14/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1239,7 +1225,6 @@ D) having
 ---
 
 ## 📄 SAYFA 15
-
 # Kısaltma: Appositive Phrase (Açıklayıcı İsim/ Sıfat Öbeği) | Sayfa 15/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1330,7 +1315,6 @@ D) To design
 ---
 
 ## 📄 SAYFA 16
-
 # Edat + Relative Pronoun Yapıları (Preposition Combinations) | Sayfa 16/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1434,7 +1418,6 @@ D) to which
 ---
 
 ## 📄 SAYFA 17
-
 # Özel Yapılar: Whereby, The Way In Which, vb. | Sayfa 17/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1533,7 +1516,6 @@ D) in that
 ---
 
 ## 📄 SAYFA 18
-
 # Genel Tekrar ve Strateji Tabloları | Sayfa 18/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1632,7 +1614,6 @@ D) whose
 ---
 
 ## 📄 SAYFA 19
-
 # Karışık Örneklerle Pekiştirme | Sayfa 19/20
 
 ## 📌 KONUNUN ÖZÜ
@@ -1732,7 +1713,6 @@ D) Örnek 4
 ---
 
 ## 📄 SAYFA 20
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 20/20
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1834,8 +1814,6 @@ D) having landed
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** Noun Clauses (İsim Cümlecikleri)
-### 📍 **İlerleme:** 07/12 PDF tamamlandı
 
 ---
 
@@ -1850,3 +1828,14 @@ D) having landed
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 20 (25'i geçmiyor)
 - [x] HTML div'leri doğru işaretlenmiş
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Noun Clauses
+### 📍 **İlerleme:** 7/12 PDF tamamlandı

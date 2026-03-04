@@ -1,4 +1,4 @@
-# PDF 6 ÇIKTISI: ADJECTIVES & ADVERBS
+# PDF 06 ÇIKTISI: ADJECTIVES & ADVERBS
 
 ## 📊 METADATA
 - Toplam Sayfa: 20
@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # Sıfatlar (Adjectives) – Tanım ve Türetme | Sayfa 1/20
 
 ## 📌 Sıfat Nedir?
@@ -84,7 +83,7 @@ Bazı sıfatlar doğuştan sıfattır (pretty, big). Bazıları ise isimlere vey
 ## ⚡ KENDİNİ TEST ET (TEK SORU)
 
 **Soru:** Aşağıdaki cümlede boşluğa hangi sıfat gelmelidir?  
-"The research provided some __________ (history) evidence for the theory."
+"The archive contains many __________ documents from the Ottoman period."
 
 A) historic  
 B) historical  
@@ -94,8 +93,8 @@ D) historian
 <details>
 <summary>✅ Cevabı Göster</summary>
 
-**Doğru Cevap:** A) historic  
-**Açıklama:** "Historic" önemli/tarihi anlamında kullanılır. "Historical" ise tarihle ilgili anlamındadır. Burada "önemli kanıt" anlamı olduğu için "historic" doğru.
+**Doğru Cevap:** B) historical  
+**Açıklama:** "Historical" tarihle ilgili anlamındadır ve "documents from the Ottoman period" ifadesiyle doğal biçimde eşleşir. "Historic" ise daha çok tarihsel açıdan dönüm noktası olan olaylar için kullanılır (ör. *a historic decision*).
 </details>
 
 [Kelime sayısı: 210]
@@ -103,7 +102,6 @@ D) historian
 ---
 
 ## 📄 SAYFA 2
-
 # Sıfatların Kullanımı: Attributive & Predicative | Sayfa 2/20
 
 ## 📌 İki Temel Kullanım
@@ -188,7 +186,6 @@ D) slowing
 ---
 
 ## 📄 SAYFA 3
-
 # -ing ve -ed Sıfatları (Etkileyen / Etkilenen) | Sayfa 3/20
 
 ## 📌 Aktif ve Pasif Anlam
@@ -269,7 +266,6 @@ D) boredom
 ---
 
 ## 📄 SAYFA 4
-
 # Zarflar (Adverbs) – Oluşum ve Önemli İstisnalar | Sayfa 4/20
 
 ## 📌 Zarf Nedir?
@@ -357,7 +353,6 @@ D) hardness
 ---
 
 ## 📄 SAYFA 5
-
 # Derecelendirme Zarfları – I (badly, awfully, terribly, too) | Sayfa 5/20
 
 ## 📌 Anlam Güçlendirici Zarflar
@@ -440,7 +435,6 @@ D) much
 ---
 
 ## 📄 SAYFA 6
-
 # Derecelendirme Zarfları – II (barely, hardly, scarcely, almost, nearly) | Sayfa 6/20
 
 ## 📌 Olumsuz Anlamlı Zarflar
@@ -518,7 +512,6 @@ D) scarcely
 ---
 
 ## 📄 SAYFA 7
-
 # Cümle Zarfları ve Vurgu Zarfları | Sayfa 7/20
 
 ## 📌 Sentence Adverbs (Cümle Zarfları)
@@ -598,7 +591,6 @@ D) Also
 ---
 
 ## 📄 SAYFA 8
-
 # Comparatives – Karşılaştırma Yapıları | Sayfa 8/20
 
 ## 📌 İki Şeyi Karşılaştırma
@@ -689,7 +681,6 @@ D) worst
 ---
 
 ## 📄 SAYFA 9
-
 # Comparative Vurgulayıcılar ve Yapılar | Sayfa 9/20
 
 ## 📌 Derecesini Artırma/Azaltma
@@ -774,7 +765,6 @@ D) most
 ---
 
 ## 📄 SAYFA 10
-
 # As...as Yapısı (Eşitlik Karşılaştırması) | Sayfa 10/20
 
 ## 📌 "...kadar" Anlamı
@@ -859,7 +849,6 @@ D) more / than
 ---
 
 ## 📄 SAYFA 11
-
 # Sonuç Bildiren Yapılar: So...that, Such...that | Sayfa 11/20
 
 ## 📌 "O kadar...ki..." Anlamı
@@ -944,7 +933,6 @@ D) very
 ---
 
 ## 📄 SAYFA 12
-
 # Too ve Enough Yapıları | Sayfa 12/20
 
 ## 📌 "Too...to" (çok fazla... -emeyecek kadar)
@@ -1031,7 +1019,6 @@ D) such
 ---
 
 ## 📄 SAYFA 13
-
 # Superlatives – En Üstünlük Derecesi | Sayfa 13/20
 
 ## 📌 Üç veya Daha Fazla Arasında
@@ -1119,7 +1106,6 @@ D) more intelligent
 ---
 
 ## 📄 SAYFA 14
-
 # Superlative Vurgulayıcılar ve Kullanımlar | Sayfa 14/20
 
 ## 📌 Superlative ile Kullanılan Yapılar
@@ -1202,7 +1188,6 @@ D) too
 ---
 
 ## 📄 SAYFA 15
-
 # Like, As, Such As Kullanımları | Sayfa 15/20
 
 ## 📌 Benzetme, Örnekleme ve Gerçeklik
@@ -1285,7 +1270,6 @@ D) so
 ---
 
 ## 📄 SAYFA 16
-
 # Strateji: Karşılaştırma Kalıpları Tablosu | Sayfa 16/20
 
 ## 📌 Özet Tablo – Sık Kullanılan Karşılaştırma Yapıları
@@ -1376,7 +1360,6 @@ D) such
 ---
 
 ## 📄 SAYFA 17
-
 # Strateji: So / Such Farkı ve Kullanım İpuçları | Sayfa 17/20
 
 ## 📌 So vs Such – Temel Fark
@@ -1459,7 +1442,6 @@ D) very
 ---
 
 ## 📄 SAYFA 18
-
 # Örnek Soru Çözümleri (YDS Tarzı) | Sayfa 18/20
 
 ## 📌 Strateji: Soru Kökünü Analiz Et
@@ -1568,7 +1550,6 @@ D) enough
 ---
 
 ## 📄 SAYFA 19
-
 # Genel Tekrar Tabloları | Sayfa 19/20
 
 ## 📌 Tüm Karşılaştırma ve Derecelendirme Yapıları
@@ -1650,7 +1631,6 @@ D) furthest
 ---
 
 ## 📄 SAYFA 20
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 20/20
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1750,8 +1730,6 @@ D) so
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** TENSES (Zamanlar)
-### 📍 **İlerleme:** 6/12 PDF tamamlandı
 
 [Kelime sayısı: 230]
 
@@ -1764,3 +1742,14 @@ D) so
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 20 (25'i geçmiyor)
 - [x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, kart grupları)
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Adjective Clauses
+### 📍 **İlerleme:** 6/12 PDF tamamlandı

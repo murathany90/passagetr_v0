@@ -1,6 +1,8 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../domain/entities/tag_count.dart';
 import '../../domain/entities/word_item.dart';
+import '../../domain/entities/word_level_summary.dart';
 import '../../domain/repositories/word_repository.dart';
 import '../../domain/value_objects/paged_result.dart';
 
@@ -8,6 +10,14 @@ class SupabaseWordRepository implements WordRepository {
   SupabaseWordRepository(this._client);
 
   final SupabaseClient _client;
+  static const List<String> _orderedLevels = <String>[
+    'A1',
+    'A2',
+    'B1',
+    'B2',
+    'C1',
+    'C2',
+  ];
 
   @override
   Future<PagedResult<WordItem>> getWordsByPack(
@@ -27,7 +37,7 @@ class SupabaseWordRepository implements WordRepository {
 
     final String cleanPos = (pos ?? '').trim();
     if (cleanPos.isNotEmpty) {
-      builder = builder.eq('pos', cleanPos);
+      builder = builder.ilike('pos', '%$cleanPos%');
     }
 
     final String cleanTag = (tag ?? '').trim();
@@ -134,6 +144,176 @@ class SupabaseWordRepository implements WordRepository {
     return page.items;
   }
 
+  @override
+  Future<List<WordItem>> getGlobalWordIndex({int limit = 7000}) async {
+    final int boundedLimit = limit <= 0 ? 7000 : limit;
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select()
+        .order('en_word', ascending: true)
+        .limit(boundedLimit);
+
+    return rows
+        .map((dynamic e) => _fromRow(e as Map))
+        .toList(growable: false);
+  }
+
+  @override
+  Future<List<WordLevelSummary>> getLevelsWithWordCount() async {
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select('level')
+        .not('level', 'is', null)
+        .limit(10000);
+
+    final Map<String, int> counts = <String, int>{};
+    for (final dynamic row in rows) {
+      final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
+      final String level = (data['level'] as String? ?? '').trim().toUpperCase();
+      if (level.isEmpty) {
+        continue;
+      }
+      counts[level] = (counts[level] ?? 0) + 1;
+    }
+
+    return _orderedLevels
+        .map(
+          (String level) => WordLevelSummary(
+            level: level,
+            wordCount: counts[level] ?? 0,
+          ),
+        )
+        .toList(growable: false);
+  }
+
+  @override
+  Future<List<TagCount>> getTagsByLevel(
+    String level, {
+    String? search,
+  }) async {
+    final String cleanLevel = level.trim().toUpperCase();
+    final String cleanSearch = _normalize(search ?? '');
+    if (cleanLevel.isEmpty) {
+      return const <TagCount>[];
+    }
+
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select('tags_raw')
+        .ilike('level', cleanLevel)
+        .not('tags_raw', 'is', null)
+        .limit(10000);
+
+    final Map<String, int> counts = <String, int>{};
+    for (final dynamic row in rows) {
+      final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
+      final String raw = (data['tags_raw'] as String? ?? '').trim();
+      if (raw.isEmpty) {
+        continue;
+      }
+      final List<String> parts = raw
+          .split(RegExp(r'[;,]'))
+          .map((String e) => e.trim())
+          .where((String e) => e.isNotEmpty)
+          .toList(growable: false);
+      for (final String part in parts) {
+        final String key = _normalize(part);
+        if (key.isEmpty) {
+          continue;
+        }
+        counts[key] = (counts[key] ?? 0) + 1;
+      }
+    }
+
+    final List<TagCount> tags = counts.entries
+        .where(
+          (MapEntry<String, int> e) =>
+              cleanSearch.isEmpty || e.key.contains(cleanSearch),
+        )
+        .map((MapEntry<String, int> e) => TagCount(tag: e.key, count: e.value))
+        .toList(growable: false)
+      ..sort((TagCount a, TagCount b) {
+        final int countCompare = b.count.compareTo(a.count);
+        if (countCompare != 0) {
+          return countCompare;
+        }
+        return a.tag.compareTo(b.tag);
+      });
+
+    return tags;
+  }
+
+  @override
+  Future<PagedResult<WordItem>> getWordsByLevel({
+    required String level,
+    String? tag,
+    String? query,
+    String? pos,
+    int limit = 50,
+    int offset = 0,
+  }) async {
+    dynamic builder =
+        _client.from('words').select().ilike('level', level.trim().toUpperCase());
+
+    final String cleanQuery = (query ?? '').trim();
+    if (cleanQuery.isNotEmpty) {
+      builder = builder.ilike('en_word', '%$cleanQuery%');
+    }
+
+    final String cleanPos = (pos ?? '').trim();
+    if (cleanPos.isNotEmpty) {
+      builder = builder.ilike('pos', '%$cleanPos%');
+    }
+
+    final String cleanTag = (tag ?? '').trim();
+    if (cleanTag.isNotEmpty) {
+      builder = builder.ilike('tags_raw', '%$cleanTag%');
+    }
+
+    final List<dynamic> rows = await builder
+        .order('en_word', ascending: true)
+        .range(offset, offset + limit);
+
+    final bool hasMore = rows.length > limit;
+    final List<dynamic> sliced = hasMore ? rows.take(limit).toList() : rows;
+    final List<WordItem> items =
+        sliced.map((dynamic e) => _fromRow(e as Map)).toList(growable: false);
+
+    return PagedResult<WordItem>(
+      items: items,
+      hasMore: hasMore,
+      nextOffset: offset + items.length,
+    );
+  }
+
+  @override
+  Future<WordItem?> getWordByEnWordGlobal(String enWord) async {
+    final String normalized = _normalize(enWord);
+    if (normalized.isEmpty) {
+      return null;
+    }
+
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select()
+        .ilike('en_word', normalized)
+        .limit(20);
+
+    if (rows.isEmpty) {
+      return null;
+    }
+
+    WordItem? fallback;
+    for (final dynamic row in rows) {
+      final WordItem item = _fromRow(row as Map);
+      if (_normalize(item.enWord) == normalized) {
+        return item;
+      }
+      fallback ??= item;
+    }
+    return fallback;
+  }
+
   WordItem _fromRow(Map row) {
     final Map<String, dynamic> data = Map<String, dynamic>.from(row);
     return WordItem(
@@ -150,5 +330,9 @@ class SupabaseWordRepository implements WordRepository {
       tagsRaw: data['tags_raw'] as String?,
       notes: data['notes'] as String?,
     );
+  }
+
+  String _normalize(String value) {
+    return value.toLowerCase().trim().replaceAll(RegExp(r'\s+'), ' ');
   }
 }

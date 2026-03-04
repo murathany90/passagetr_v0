@@ -6,18 +6,18 @@ import '../../../core/utils/word_selection_utils.dart';
 class InteractiveSentenceText extends StatefulWidget {
   const InteractiveSentenceText({
     required this.sentenceText,
-    required this.knownWordsSet,
+    required this.highlightedWordsSet,
     required this.onWordTap,
     this.baseStyle,
-    this.knownStyle,
+    this.highlightStyle,
     super.key,
   });
 
   final String sentenceText;
-  final Set<String> knownWordsSet;
+  final Set<String> highlightedWordsSet;
   final ValueChanged<String> onWordTap;
   final TextStyle? baseStyle;
-  final TextStyle? knownStyle;
+  final TextStyle? highlightStyle;
 
   @override
   State<InteractiveSentenceText> createState() =>
@@ -50,9 +50,10 @@ class _InteractiveSentenceTextState extends State<InteractiveSentenceText> {
     final TextStyle fallbackBase = widget.baseStyle ??
         Theme.of(context).textTheme.bodyLarge ??
         const TextStyle();
-    final TextStyle fallbackKnown = widget.knownStyle ??
+    final TextStyle fallbackHighlight = widget.highlightStyle ??
         fallbackBase.copyWith(
           fontWeight: FontWeight.w700,
+          decoration: TextDecoration.underline,
         );
 
     final List<TextSpan> spans = <TextSpan>[];
@@ -66,7 +67,7 @@ class _InteractiveSentenceTextState extends State<InteractiveSentenceText> {
         continue;
       }
 
-      final bool isKnown = widget.knownWordsSet.contains(normalized);
+      final bool isHighlighted = widget.highlightedWordsSet.contains(normalized);
       final TapGestureRecognizer recognizer = TapGestureRecognizer()
         ..onTap = () => widget.onWordTap(normalized);
       _recognizers.add(recognizer);
@@ -74,7 +75,7 @@ class _InteractiveSentenceTextState extends State<InteractiveSentenceText> {
       spans.add(
         TextSpan(
           text: raw,
-          style: isKnown ? fallbackKnown : fallbackBase,
+          style: isHighlighted ? fallbackHighlight : fallbackBase,
           recognizer: recognizer,
         ),
       );

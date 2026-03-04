@@ -1,4 +1,4 @@
-# PDF 3 ÇIKTISI: Modality
+# PDF 03 ÇIKTISI: MODALITY
 
 ## 📊 METADATA
 - PDF Adı: 03_MODALITY.pdf
@@ -10,8 +10,8 @@
 
 ---
 
-## 📄 SAYFA 1 | ABILITY (Yetenek) - 1/15
-
+## 📄 SAYFA 1
+# ABILITY (Yetenek) | Sayfa 1/15
 ### 📌 KONUNUN ÖZÜ
 Yetenek bildiren yapılar: **can** (genel yetenek), **could** (geçmiş yetenek), **be able to** (her zaman diliminde kullanılabilir). "Could" geçmişte tek seferlik başarılı eylemlerde kullanılmaz, onun yerine "was/were able to" tercih edilir.
 
@@ -56,7 +56,7 @@ Yetenek bildiren yapılar: **can** (genel yetenek), **could** (geçmiş yetenek)
 
 ### ⚡ KENDİNİ TEST ET (TEK SORU)
 
-**Soru:** Dünkı çok zor sınavda tüm soruları cevaplamayı başardım. Hangi ifade doğrudur?
+**Soru:** Dünkü çok zor sınavda tüm soruları cevaplamayı başardım. Hangi ifade doğrudur?
 
 A) I could answer all the questions in the exam yesterday.
 B) I was able to answer all the questions in the exam yesterday.
@@ -70,7 +70,8 @@ B) I was able to answer all the questions in the exam yesterday.
 
 ---
 
-## 📄 SAYFA 2 | POSSIBILITY (Olasılık) - Genel ve Kuramsal
+## 📄 SAYFA 2
+# POSSIBILITY (Olasılık) - Genel ve Kuramsal | Sayfa 2/15
 
 ### 📌 KONUNUN ÖZÜ
 Olasılık ifade eden yapılar: **may, might, could** (genel olasılık, olumlu cümlelerde); **can** (kuramsal olasılık, her zaman mümkün); **be likely to, be unlikely to, be bound to** (olasılık dereceleri).
@@ -131,7 +132,8 @@ B) Anyone can make mistakes.
 
 ---
 
-## 📄 SAYFA 3 | POSSIBILITY - Özel Yapılar ve Stratejiler
+## 📄 SAYFA 3
+# POSSIBILITY - Özel Yapılar ve Stratejiler | Sayfa 3/15
 
 ### 📌 KONUNUN ÖZÜ
 **May/might/could well** yapıları normal "may/might/could" ile aynı anlamdadır, sadece vurgu yapar. **May/might as well** ise "bari... yapalım" anlamında kullanılır ve olasılıkla ilgisi yoktur. Ayrıca **I have no idea, perhaps, probably** gibi ifadeler olasılık sorularında ipucudur.
@@ -192,7 +194,8 @@ B) might as well
 
 ---
 
-## 📄 SAYFA 4 | REQUESTS (Ricalar) ve PERMISSIONS (İzinler)
+## 📄 SAYFA 4
+# REQUESTS (Ricalar) ve PERMISSIONS (İzinler) | Sayfa 4/15
 
 ### 📌 KONUNUN ÖZÜ
 Rica ederken **can, could, will, would** soru cümlelerinde kullanılır. **Would you mind + Ving?** veya **Would you mind if + subject + V2?** yapıları daha kibardır. İzin isterken **may, might, can, could** kullanılır.
@@ -253,7 +256,8 @@ C) Would you mind if I have the menu?
 
 ---
 
-## 📄 SAYFA 5 | OBLIGATION & NECESSITY (Zorunluluk ve Gereklilik) - 1
+## 📄 SAYFA 5
+# OBLIGATION & NECESSITY (Zorunluluk ve Gereklilik) - 1 | Sayfa 5/15
 
 ### 📌 KONUNUN ÖZÜ
 Zorunluluk bildiren yapılar: **must** (içten gelen zorunluluk), **have to / have got to** (dıştan gelen zorunluluk, kurallar), **need to** (gereklilik). Olumsuzda zorunluluk yokluğu: **needn't, don't have to, don't need to** ("-e gerek yok"). "Mustn't" yasaklama içindir, bu grupta yer almaz.
@@ -313,7 +317,8 @@ B) I must study tonight.
 
 ---
 
-## 📄 SAYFA 6 | OBLIGATION IN THE PAST ve ADVICE
+## 📄 SAYFA 6
+# OBLIGATION IN THE PAST ve ADVICE | Sayfa 6/15
 
 ### 📌 KONUNUN ÖZÜ
 Geçmişte zorunluluk: **had to** (bir şey yapmak zorundaydım). Geçmişte zorunluluğun olmaması: **didn't have to, didn't need to** (gerek kalmadı). Tavsiye: **should, ought to, had better** (nazik tavsiye); **must** (güçlü tavsiye). Olumsuz tavsiye: **shouldn't, ought not to, had better not**.
@@ -374,7 +379,8 @@ B) I hadn't to attend the meeting yesterday.
 
 ---
 
-## 📄 SAYFA 7 | DEDUCTION (Sonuç Çıkarımı)
+## 📄 SAYFA 7
+# DEDUCTION (Sonuç Çıkarımı) | Sayfa 7/15
 
 ### 📌 KONUNUN ÖZÜ
 Mevcut bir durumdan mantıksal sonuç çıkarırken: olumlu çıkarım **must** (-meli/-malı), olumsuz çıkarım **can't / mustn't** (-mez/-maz, olamaz). Geçmişe yönelik çıkarım: **must have V3** (yapmış olmalı), **can't/couldn't have V3** (yapmış olamaz).
@@ -434,7 +440,8 @@ B) nobody can be at home.
 
 ---
 
-## 📄 SAYFA 8 | HABITUAL ACTIVITIES (Alışkanlıklar)
+## 📄 SAYFA 8
+# HABITUAL ACTIVITIES (Alışkanlıklar) | Sayfa 8/15
 
 ### 📌 KONUNUN ÖZÜ
 Şu anki alışkanlıklar: **be used to / be accustomed to + Ving/Noun** (alışkın olmak). Alışma süreci: **get used to / get accustomed to + Ving/Noun** (alışmak). Geçmişteki alışkanlıklar (artık yapılmayan): **used to / would + V0** (yapardım). "Would" sadece eylemler için kullanılır, durumlar için kullanılmaz.
@@ -494,7 +501,8 @@ B) I used to be shy when I was a child.
 
 ---
 
-## 📄 SAYFA 9 | PREFERENCES (Tercihler)
+## 📄 SAYFA 9
+# PREFERENCES (Tercihler) | Sayfa 9/15
 
 ### 📌 KONUNUN ÖZÜ
 Tercih bildiren yapılar: **would rather / sooner + V0** (tercih ederim), **would prefer + to V0** (tercih ederim), **prefer + Ving / Noun + to + Ving/Noun** (tercih ederim). Farklı zamanlar ve özneler için özel kullanımlar vardır: başkası için tercihte "would rather + subject + past tense", geçmiş pişmanlıkta "would rather have V3" gibi.
@@ -554,7 +562,8 @@ B) I would rather you didn't come tomorrow.
 
 ---
 
-## 📄 SAYFA 10 | PROHIBITION (Yasaklama) ve EXPECTATIONS (Beklentiler)
+## 📄 SAYFA 10
+# PROHIBITION (Yasaklama) ve EXPECTATIONS (Beklentiler) | Sayfa 10/15
 
 ### 📌 KONUNUN ÖZÜ
 Yasaklama: **mustn't** (yasak), **be not allowed to, be forbidden to** (yasak). Ayrıca **be not supposed to, shouldn't** gibi yapılar da "-mamalısın" anlamında kullanılabilir. Beklentiler: **be to V0** (program/görev), **be supposed to V0** (beklenti, gereklilik). Geçmişte gerçekleşmeyen beklentiler: **was/were to have V3** (yapacaktı ama yapmadı).
@@ -614,7 +623,8 @@ B) The meeting was to have started at 9, but it was postponed.
 
 ---
 
-## 📄 SAYFA 11 | ASKING FOR OPINION ve MODALITY PROGRESSIVE
+## 📄 SAYFA 11
+# ASKING FOR OPINION ve MODALITY PROGRESSIVE | Sayfa 11/15
 
 ### 📌 KONUNUN ÖZÜ
 Fikir danışırken **shall** (I/we ile) ve **should** kullanılır. "Shall" teklif anlamı da taşır. **Modal + be Ving** yapısı konuşma anında devam eden bir eylem hakkında tahmin yürütmek için kullanılır: **may/might/could be Ving** (yapıyor olabilir), **must be Ving** (yapıyor olmalı), **can't be Ving** (yapıyor olamaz).
@@ -675,7 +685,8 @@ B) can be
 
 ---
 
-## 📄 SAYFA 12 | MODALITY PERFECT - Past Modals 1 (should have, may have, could have)
+## 📄 SAYFA 12
+# MODALITY PERFECT - Past Modals 1 (should have, may have, could have) | Sayfa 12/15
 
 ### 📌 KONUNUN ÖZÜ
 **Should have V3 / ought to have V3**: Geçmiş tavsiye, pişmanlık, eleştiri (-meliydin ama yapmadın). **May/might/could have V3**: Geçmiş olasılık (-miş olabilir). **Could have V3** ayrıca geçmişte kaçırılmış fırsatlar için de kullanılır (-ebilirdin ama yapmadın).
@@ -736,7 +747,8 @@ B) may have been
 
 ---
 
-## 📄 SAYFA 13 | MODALITY PERFECT - Past Modals 2 (must have, can't have, didn't need to)
+## 📄 SAYFA 13
+# MODALITY PERFECT - Past Modals 2 (must have, can't have, didn't need to) | Sayfa 13/15
 
 ### 📌 KONUNUN ÖZÜ
 **Must have V3**: Geçmişte güçlü çıkarım (yapmış olmalı). **Can't have V3 / couldn't have V3**: Geçmişte olumsuz güçlü çıkarım (yapmış olamaz). **Didn't need to / didn't have to**: Geçmişte bir şeyi yapmaya gerek yoktu (yapılıp yapılmadığı önemli değil, genellikle yapılmadığını ima eder). **Needn't have V3** ise gereksiz yere yapıldığını vurgular.
@@ -796,7 +808,8 @@ B) We needn't have hurried.
 
 ---
 
-## 📄 SAYFA 14 | ÖZET TABLOLAR - MUST ve PAST MODALS
+## 📄 SAYFA 14
+# ÖZET TABLOLAR - MUST ve PAST MODALS | Sayfa 14/15
 
 ### 📌 KONUNUN ÖZÜ
 Bu sayfada "must" yapısının tüm kullanımları ve geçmiş modal yapılarının Türkçe karşılıkları özetlenmiştir.
@@ -872,7 +885,8 @@ B) must have been
 
 ---
 
-## 📄 SAYFA 15 | BÖLÜM TARAMA TESTİ
+## 📄 SAYFA 15
+# BÖLÜM TARAMA TESTİ | Sayfa 15/15
 
 ### 🎯 Bu Bölümde Öğrendiklerimiz
 - Yetenek (ability) için can, could, be able to kullanımı
@@ -969,8 +983,6 @@ D) I was smoking, but I don't now.
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 04_TENSES.pdf
-### 📍 **İlerleme:** 3/12 PDF tamamlandı
 
 ---
 
@@ -981,3 +993,14 @@ D) I was smoking, but I don't now.
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 15 (25'i geçmiyor)
 - [x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, hatırlatma kutuları kullanıldı)
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Passive Voice & Causatives
+### 📍 **İlerleme:** 3/12 PDF tamamlandı

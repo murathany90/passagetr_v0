@@ -1,3 +1,14 @@
+# PDF 12 ÇIKTISI: REVIEW TESTS
+
+## 📊 METADATA
+- Toplam Sayfa: 40
+- Toplam Kelime: ~9.650
+- Sayfa Başı Ortalama: ~241 kelime
+
+---
+
+## 📄 SAYFA 1
+
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 1/40
 
 ## 📌 İNGİLİZCEDE TEMEL KAVRAMLAR - CÜMLENİN YAPISI
@@ -56,7 +67,6 @@ D) My professor
 
 **Doğru Cevap:** A) The book
 **Açıklama:** Öznenin önünde edat olmaz. "on the table" ve "in the library" edat öbekleri olduğu için özne olamaz. Gerçek özne sadece "the book"tur.
-</div>
 </details>
 
 ---
@@ -64,6 +74,8 @@ D) My professor
 [Kelime sayısı: 235]
 
 ---
+
+## 📄 SAYFA 2
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 2/40
 
@@ -122,7 +134,6 @@ D) The artist painted a beautiful portrait.
 
 **Doğru Cevap:** B) The baby cried all night long.
 **Açıklama:** "Cried" (ağladı) fiili geçişsizdir, nesne almaz. Bu nedenle pasif yapılamaz. Diğer fiillerin hepsi nesne almaktadır.
-</div>
 </details>
 
 ---
@@ -130,6 +141,8 @@ D) The artist painted a beautiful portrait.
 [Kelime sayısı: 245]
 
 ---
+
+## 📄 SAYFA 3
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 3/40
 
@@ -188,7 +201,6 @@ D) which
 
 **Doğru Cevap:** C) why
 **Açıklama:** Fiil "know" (bilmek) bir soru anlamı gerektirir. Cümle "neden istifa ettiğini" sormaktadır. "Why" (neden) soru kelimesi bu anlamı karşılar.
-</div>
 </details>
 
 ---
@@ -196,6 +208,8 @@ D) which
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 4
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 4/40
 
@@ -257,7 +271,6 @@ D) Sadece insanlar için kullanılır
 
 **Doğru Cevap:** C) Cümleden atılabilir
 **Açıklama:** Non-defining clause ek bilgi verir, cümleden atıldığında ana anlam bozulmaz. Virgül kullanılır ve "that" kullanılamaz.
-</div>
 </details>
 
 ---
@@ -265,6 +278,8 @@ D) Sadece insanlar için kullanılır
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 5
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 5/40
 
@@ -325,7 +340,6 @@ D) because
 
 **Doğru Cevap:** B) as soon as
 **Açıklama:** Cümle "işten eve gelir gelmez" anlamını gerektirir. "As soon as" (....er ...mez) zaman bağlacı bu anlamı verir.
-</div>
 </details>
 
 ---
@@ -333,6 +347,8 @@ D) because
 [Kelime sayısı: 238]
 
 ---
+
+## 📄 SAYFA 6
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 6/40
 
@@ -392,7 +408,6 @@ D) The train arrives at 8 o'clock.
 
 **Doğru Cevap:** B) She go to school every day.
 **Açıklama:** "She" öznesi üçüncü tekil şahıstır ve fiil "-s" takısı almalıdır. Doğru kullanım "She goes to school every day" olmalıdır.
-</div>
 </details>
 
 ---
@@ -400,6 +415,8 @@ D) The train arrives at 8 o'clock.
 [Kelime sayısı: 243]
 
 ---
+
+## 📄 SAYFA 7
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 7/40
 
@@ -459,7 +476,6 @@ D) He is understanding the lesson.
 
 **Doğru Cevap:** C) They are playing football right now.
 **Açıklama:** "Know, want, understand" gibi durum fiilleri (stative verbs) genellikle continuous formda kullanılmaz. Sadece eylem fiilleri (action verbs) continuous olabilir.
-</div>
 </details>
 
 ---
@@ -467,6 +483,8 @@ D) He is understanding the lesson.
 [Kelime sayısı: 241]
 
 ---
+
+## 📄 SAYFA 8
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 8/40
 
@@ -526,7 +544,6 @@ D) They went to school.
 
 **Doğru Cevap:** C) I wish I lived in Paris.
 **Açıklama:** "Lived" past simple olmasına rağmen şu an Paris'te yaşamadığını, yaşamayı dilediğini ifade eder. Bu "wish" ten sonra gelen özel bir unreal present kullanımıdır.
-</div>
 </details>
 
 ---
@@ -534,6 +551,8 @@ D) They went to school.
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 9
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 9/40
 
@@ -593,7 +612,6 @@ D) had done
 
 **Doğru Cevap:** B) were doing
 **Açıklama:** "When I arrived" (past simple - kısa eylem) geldiğinde, çocukların ödev yapma eylemi devam ediyordu (uzun eylem). Bu nedenle "were doing" past continuous kullanılmalıdır.
-</div>
 </details>
 
 ---
@@ -601,6 +619,8 @@ D) had done
 [Kelime sayısı: 239]
 
 ---
+
+## 📄 SAYFA 10
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 10/40
 
@@ -667,7 +687,6 @@ D) He has never tried Japanese food.
 
 **Doğru Cevap:** B) She has visited her grandmother yesterday.
 **Açıklama:** Present perfect, "yesterday" gibi belirli bir geçmiş zaman ifadesiyle kullanılamaz. Doğrusu "She visited her grandmother yesterday" (past simple) olmalıdır.
-</div>
 </details>
 
 ---
@@ -675,6 +694,8 @@ D) He has never tried Japanese food.
 [Kelime sayısı: 244]
 
 ---
+
+## 📄 SAYFA 11
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 11/40
 
@@ -741,7 +762,6 @@ D) had forgotten
 
 **Doğru Cevap:** D) had forgotten
 **Açıklama:** "Realized" (fark etti) past simple'dır. Anahtarları unutma eylemi, fark etme eyleminden daha önce gerçekleşmiştir. Bu nedenle past perfect (had forgotten) kullanılmalıdır.
-</div>
 </details>
 
 ---
@@ -749,6 +769,8 @@ D) had forgotten
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 12
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 12/40
 
@@ -813,7 +835,6 @@ D) rains
 
 **Doğru Cevap:** B) is going to rain
 **Açıklama:** Koyu bulutlar (mevcut kanıt) yağmurun yaklaştığını gösteriyor. Mevcut kanıtlara dayalı çıkarım için "be going to" kullanılır.
-</div>
 </details>
 
 ---
@@ -821,6 +842,8 @@ D) rains
 [Kelime sayısı: 245]
 
 ---
+
+## 📄 SAYFA 13
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 13/40
 
@@ -891,7 +914,6 @@ D) may
 
 **Doğru Cevap:** C) was able to
 **Açıklama:** Geçmişte tek seferlik başarılan bir eylemden bahsediliyor. Bu durumda "could" değil, "was able to" (başardım) kullanılır.
-</div>
 </details>
 
 ---
@@ -899,6 +921,8 @@ D) may
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 14
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 14/40
 
@@ -964,7 +988,6 @@ D) should be
 
 **Doğru Cevap:** C) can't be
 **Açıklama:** Işıkların kapalı olması, evde olmadıklarına dair güçlü bir kanıttır. Olumsuz çıkarım için "can't be" (olamazlar) kullanılır.
-</div>
 </details>
 
 ---
@@ -972,6 +995,8 @@ D) should be
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 15
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 15/40
 
@@ -1035,7 +1060,6 @@ D) can't
 
 **Doğru Cevap:** B) don't have to
 **Açıklama:** Konuşmacı yemeğin kendi ikramı olduğunu söylüyor, bu nedenle karşı tarafın ödeme zorunluluğu yok. "Don't have to" (zorunda değilsin) bu anlamı verir.
-</div>
 </details>
 
 ---
@@ -1043,6 +1067,8 @@ D) can't
 [Kelime sayısı: 243]
 
 ---
+
+## 📄 SAYFA 16
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 16/40
 
@@ -1113,7 +1139,6 @@ D) Hamlet will be written by Shakespeare.
 
 **Doğru Cevap:** B) Hamlet was written by Shakespeare.
 **Açıklama:** Aktif cümle past simple (V2 - wrote) olduğu için, pasif cümle de past simple passive (was/were + V3) olmalıdır. "Was written" doğru formdur.
-</div>
 </details>
 
 ---
@@ -1121,6 +1146,8 @@ D) Hamlet will be written by Shakespeare.
 [Kelime sayısı: 241]
 
 ---
+
+## 📄 SAYFA 17
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 17/40
 
@@ -1188,7 +1215,6 @@ D) have / repairing
 
 **Doğru Cevap:** B) have / repaired
 **Açıklama:** Bir işi başkasına yaptırmak anlamında "have + nesne + V3" kullanılır. "Have my computer repaired" (bilgisayarımı tamir ettirmek) doğru formdur.
-</div>
 </details>
 
 ---
@@ -1196,6 +1222,8 @@ D) have / repairing
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 18
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 18/40
 
@@ -1262,7 +1290,6 @@ D) have seen
 
 **Doğru Cevap:** B) seeing
 **Açıklama:** "Look forward to" kalıbında "to" bir edattır (preposition). Edatlardan sonra fiil gelecekse mutlaka Ving formunda olmalıdır. "Looking forward to seeing" doğru kullanımdır.
-</div>
 </details>
 
 ---
@@ -1270,6 +1297,8 @@ D) have seen
 [Kelime sayısı: 244]
 
 ---
+
+## 📄 SAYFA 19
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 19/40
 
@@ -1335,7 +1364,6 @@ D) to buying
 
 **Doğru Cevap:** C) to buy
 **Açıklama:** "Need" (ihtiyacım var) fiilinden sonra gelen eylem (satın almak) henüz gerçekleşmemiştir, geleceğe yöneliktir. Bu nedenle "to buy" (infinitive) kullanılmalıdır.
-</div>
 </details>
 
 ---
@@ -1343,6 +1371,8 @@ D) to buying
 [Kelime sayısı: 243]
 
 ---
+
+## 📄 SAYFA 20
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 20/40
 
@@ -1413,7 +1443,6 @@ D) having told
 
 **Doğru Cevap:** B) to tell
 **Açıklama:** Kötü bir haberi üzülerek bildirirken "regret + to V0" kullanılır. Geçmişe pişmanlık için "regret + Ving" kullanılır. Burada şimdiki zamanda kötü haber veriliyor.
-</div>
 </details>
 
 ---
@@ -1421,6 +1450,8 @@ D) having told
 [Kelime sayısı: 245]
 
 ---
+
+## 📄 SAYFA 21
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 21/40
 
@@ -1495,7 +1526,6 @@ D) disappointing / disappointed
 
 **Doğru Cevap:** C) disappointed / disappointing
 **Açıklama:** İlk boşluk kişinin durumunu anlatır (etkilenen) → disappointed. İkinci boşluk filmin özelliğini anlatır (etkileyen) → disappointing.
-</div>
 </details>
 
 ---
@@ -1503,6 +1533,8 @@ D) disappointing / disappointed
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 22
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 22/40
 
@@ -1577,7 +1609,6 @@ D) I know her good.
 
 **Doğru Cevap:** C) They arrived late to the meeting.
 **Açıklama:** "Late" düzensiz bir zarftır ve "arrived" fiilini doğru şekilde nitelemiştir. A'da "beautifully", B'de "carefully", D'de "well" olmalıdır.
-</div>
 </details>
 
 ---
@@ -1585,6 +1616,8 @@ D) I know her good.
 [Kelime sayısı: 244]
 
 ---
+
+## 📄 SAYFA 23
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 23/40
 
@@ -1651,7 +1684,6 @@ D) dificult
 
 **Doğru Cevap:** B) more difficult
 **Açıklama:** "Difficult" üç heceli bir sıfattır. Uzun sıfatlarda comparative "more + sıfat" ile yapılır. "Than" olduğu için comparative kullanılmalıdır.
-</div>
 </details>
 
 ---
@@ -1659,6 +1691,8 @@ D) dificult
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 24
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 24/40
 
@@ -1725,7 +1759,6 @@ D) more interesting
 
 **Doğru Cevap:** B) the most interesting
 **Açıklama:** "Ever" (şimdiye kadar) ifadesi superlative gerektirir. "Interesting" uzun bir sıfat olduğu için "the most interesting" (en ilginç) doğru formdur.
-</div>
 </details>
 
 ---
@@ -1733,6 +1766,8 @@ D) more interesting
 [Kelime sayısı: 241]
 
 ---
+
+## 📄 SAYFA 25
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 25/40
 
@@ -1798,7 +1833,6 @@ D) the most / of
 
 **Doğru Cevap:** B) as / as
 **Açıklama:** Cümle bir eşitlik karşılaştırması yapmaktadır (ana dil konuşucusu kadar akıcı). Bu nedenle "as...as" yapısı kullanılmalıdır.
-</div>
 </details>
 
 ---
@@ -1806,6 +1840,8 @@ D) the most / of
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 26
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 26/40
 
@@ -1869,7 +1905,6 @@ D) such a
 
 **Doğru Cevap:** B) such
 **Açıklama:** "Weather" (hava) sayılamayan bir isimdir ve "a/an" almaz. "Such + (adj) + noun" kullanılır. "Such beautiful weather" doğru formdur.
-</div>
 </details>
 
 ---
@@ -1877,6 +1912,8 @@ D) such a
 [Kelime sayısı: 241]
 
 ---
+
+## 📄 SAYFA 27
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 27/40
 
@@ -1950,7 +1987,6 @@ D) such / that
 
 **Doğru Cevap:** A) too / to
 **Açıklama:** Kahvenin içilemeyecek kadar sıcak olduğu (olumsuz sonuç) belirtiliyor. "Too + adj + to V0" kalıbı bu anlamı verir.
-</div>
 </details>
 
 ---
@@ -1958,6 +1994,8 @@ D) such / that
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 28
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 28/40
 
@@ -2027,7 +2065,6 @@ D) has rained / stay
 
 **Doğru Cevap:** B) rains / will stay
 **Açıklama:** Gelecekle ilgili olası bir durum (yağmur yağması) ifade ediliyor. Type 1 kuralı: if clause'da present simple (rains), main clause'da will + V0 (will stay).
-</div>
 </details>
 
 ---
@@ -2035,6 +2072,8 @@ D) has rained / stay
 [Kelime sayısı: 243]
 
 ---
+
+## 📄 SAYFA 29
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 29/40
 
@@ -2099,7 +2138,6 @@ D) had been / wouldn't have bought
 
 **Doğru Cevap:** A) were / wouldn't buy
 **Açıklama:** "Senin yerinde olsam" kalıbı Type 2'dir. "Were" (past simple) şu anki gerçek dışı durumu ifade eder, "wouldn't buy" ise hayali sonucu.
-</div>
 </details>
 
 ---
@@ -2107,6 +2145,8 @@ D) had been / wouldn't have bought
 [Kelime sayısı: 244]
 
 ---
+
+## 📄 SAYFA 30
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 30/40
 
@@ -2180,7 +2220,6 @@ D) would study
 
 **Doğru Cevap:** C) had studied
 **Açıklama:** Geçmişe yönelik bir pişmanlık ifade ediliyor (üniversitedeyken). Bu nedenle "wish + past perfect" (had studied) kullanılmalıdır.
-</div>
 </details>
 
 ---
@@ -2188,6 +2227,8 @@ D) would study
 [Kelime sayısı: 239]
 
 ---
+
+## 📄 SAYFA 31
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 31/40
 
@@ -2265,7 +2306,6 @@ D) or
 
 **Doğru Cevap:** C) yet
 **Açıklama:** Çalışmamak (beklenen: başarısız olmak) ile sınavı geçmek arasında beklenmedik bir zıtlık var. "Yet" (yine de) bu anlamı verir.
-</div>
 </details>
 
 ---
@@ -2273,6 +2313,8 @@ D) or
 [Kelime sayısı: 245]
 
 ---
+
+## 📄 SAYFA 32
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 32/40
 
@@ -2347,7 +2389,6 @@ D) However
 
 **Doğru Cevap:** B) Despite
 **Açıklama:** Boşluktan sonra "being" (Ving) geliyor. "Despite" ten sonra Ving gelebilir. "Although" dan sonra cümle gelirdi: "Although he is very rich..."
-</div>
 </details>
 
 ---
@@ -2355,6 +2396,8 @@ D) However
 [Kelime sayısı: 241]
 
 ---
+
+## 📄 SAYFA 33
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 33/40
 
@@ -2428,7 +2471,6 @@ D) as
 
 **Doğru Cevap:** B) because of
 **Açıklama:** Boşluktan sonra "the heavy fog" bir isimdir. Bu nedenle edat olan "because of" kullanılmalıdır. "Because" dan sonra cümle gelirdi: "because there was heavy fog."
-</div>
 </details>
 
 ---
@@ -2436,6 +2478,8 @@ D) as
 [Kelime sayısı: 240]
 
 ---
+
+## 📄 SAYFA 34
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 34/40
 
@@ -2512,7 +2556,6 @@ D) for fear
 
 **Doğru Cevap:** B) in order not to
 **Açıklama:** Olumsuz bir amaç ifade ediliyor (trafiğe yakalanmamak). "In order not to + V0" (memek için) doğru yapıdır. "So as not to" da doğru olabilirdi.
-</div>
 </details>
 
 ---
@@ -2520,6 +2563,8 @@ D) for fear
 [Kelime sayısı: 243]
 
 ---
+
+## 📄 SAYFA 35
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 35/40
 
@@ -2592,7 +2637,6 @@ D) have got
 
 **Doğru Cevap:** B) get
 **Açıklama:** "As soon as" zaman bağlacından sonra gelecek anlam olmasına rağmen "will" kullanılmaz. Present simple "get" doğru formdur.
-</div>
 </details>
 
 ---
@@ -2600,6 +2644,8 @@ D) have got
 [Kelime sayısı: 244]
 
 ---
+
+## 📄 SAYFA 36
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 36/40
 
@@ -2677,7 +2723,6 @@ D) had arrested
 
 **Doğru Cevap:** A) arrested
 **Açıklama:** Adam polis tarafından TUTUKLANDI (pasif). Adjective clause kısaltması: "The man who was arrested" → "The man arrested". Pasif anlamlı kısaltma V3 ile yapılır.
-</div>
 </details>
 
 ---
@@ -2685,6 +2730,8 @@ D) had arrested
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 37
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 37/40
 
@@ -2760,7 +2807,6 @@ D) Only
 
 **Doğru Cevap:** A) No sooner
 **Açıklama:** "No sooner...than" (er mez) kalıbı iki eylemin hemen ardı ardına olduğunu ifade eder. "No sooner had I locked..." doğru devrik yapıdır.
-</div>
 </details>
 
 ---
@@ -2768,6 +2814,8 @@ D) Only
 [Kelime sayısı: 243]
 
 ---
+
+## 📄 SAYFA 38
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 38/40
 
@@ -2839,7 +2887,6 @@ D) For example
 
 **Doğru Cevap:** B) However
 **Açıklama:** Zarar etmek (olumsuz) ile bonus ödemek (olumlu) arasında bir zıtlık var. "However" (ancak, buna rağmen) bu zıtlığı ifade eder.
-</div>
 </details>
 
 ---
@@ -2847,6 +2894,8 @@ D) For example
 [Kelime sayısı: 242]
 
 ---
+
+## 📄 SAYFA 39
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 39/40
 
@@ -2926,7 +2975,6 @@ D) how for getting
 
 **Doğru Cevap:** C) how to get
 **Açıklama:** "How I can get" noun clause'ının kısaltılmış hali "how to get"tir. Soru kelimesi (how) + to V0 (to get) doğru formdur.
-</div>
 </details>
 
 ---
@@ -2934,6 +2982,8 @@ D) how for getting
 [Kelime sayısı: 241]
 
 ---
+
+## 📄 SAYFA 40
 
 # 📚 İNGİLİZCE GRAMER TEKRAR VE TESTLER | Sayfa 40/40
 
@@ -3051,8 +3101,6 @@ Gramer öğrenmek bir maratondur, sprint değil. Düzenli tekrar yapın, bol bol
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** Kelime Bilgisi ve Okuma Teknikleri
-### 📍 **İlerleme:** 12/12 PDF tamamlandı ✅
 
 ---
 
@@ -3060,10 +3108,6 @@ Gramer öğrenmek bir maratondur, sprint değil. Düzenli tekrar yapın, bol bol
 
 ---
 
-## 📊 METADATA
-- Toplam Sayfa: 40
-- Toplam Kelime: ~9.650
-- Sayfa Başı Ortalama: ~241 kelime
 
 ---
 
@@ -3074,3 +3118,11 @@ Gramer öğrenmek bir maratondur, sprint değil. Düzenli tekrar yapın, bol bol
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 40
 - [x] HTML div'leri doğru işaretlenmiş
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Yok — seri tamamlandı
+### 📍 **İlerleme:** 12/12 PDF tamamlandı ✅

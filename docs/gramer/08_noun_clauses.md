@@ -1,14 +1,15 @@
-# PDF 08 ÇIKTISI: NOUN CLAUSES (İSİM CÜMLECİKLERİ)
+# PDF 08 ÇIKTISI: NOUN CLAUSES
 
 ## 📊 METADATA
 - Toplam Sayfa: 18
-- Ana Konu: Noun Clauses & Auxiliaries
-- Hedef: Mobil cihazlarda rahat okuma (150-250 kelime/sayfa)
+- Toplam Kelime: ~3800
+- Sayfa Başı Ortalama: ~211 kelime
+- Ana Konu Başlığı: Noun Clauses
+- Not: Embedded questions yapısında yardımcı fiil dizilimi alt mekanizma olarak ele alınır
 
 ---
 
-# 📄 SAYFA 1
-
+## 📄 SAYFA 1
 # Noun Clause Nedir? | Sayfa 1/18
 
 ## 📌 TANIM
@@ -62,8 +63,7 @@ D) she
 
 ---
 
-# 📄 SAYFA 2
-
+## 📄 SAYFA 2
 # KARARLI DURUM BAĞLAÇLARI (THAT / THE FACT THAT) | Sayfa 2/18
 
 ## 📌 ÖZET
@@ -124,8 +124,7 @@ D) We believe ____ it’s true.
 
 ---
 
-# 📄 SAYFA 3
-
+## 📄 SAYFA 3
 # THAT-CLAUSE’UN DİĞER KULLANIM ALANLARI | Sayfa 3/18
 
 ## 📌 SIFATLAR, SOYUT İSİMLER, YÜKLEM
@@ -187,8 +186,7 @@ D) whether
 
 ---
 
-# 📄 SAYFA 4
-
+## 📄 SAYFA 4
 # KARARSIZ DURUM BAĞLAÇLARI – WH- & HOW | Sayfa 4/18
 
 ## 📌 TANIM
@@ -257,8 +255,7 @@ D) how we solved this problem
 
 ---
 
-# 📄 SAYFA 5
-
+## 📄 SAYFA 5
 # KARARSIZ DURUM BAĞLAÇLARI – WHETHER / IF | Sayfa 5/18
 
 ## 📌 KULLANIM
@@ -329,8 +326,7 @@ D) what
 
 ---
 
-# 📄 SAYFA 6
-
+## 📄 SAYFA 6
 # NOUN CLAUSE ÖZNE VE NESNE OLARAK | Sayfa 6/18
 
 ## 📌 ÖZNE KONUMU
@@ -398,8 +394,7 @@ D) What
 
 ---
 
-# 📄 SAYFA 7
-
+## 📄 SAYFA 7
 # EDAT SONRASI VE ÖZNE TAMAMLAYICISI | Sayfa 7/18
 
 ## 📌 EDAT + NOUN CLAUSE
@@ -470,8 +465,7 @@ D) about if
 
 ---
 
-# 📄 SAYFA 8
-
+## 📄 SAYFA 8
 # -EVER KELİMELERİ (WHOEVER, WHATEVER, VS.) | Sayfa 8/18
 
 ## 📌 TANIM
@@ -547,8 +541,7 @@ D) Whichever
 
 ---
 
-# 📄 SAYFA 9
-
+## 📄 SAYFA 9
 # NOUN CLAUSE KISALTMALARI (REDUCTIONS) | Sayfa 9/18
 
 ## 📌 KURAL
@@ -620,8 +613,7 @@ D) I’m not sure which way should I go.
 
 ---
 
-# 📄 SAYFA 10
-
+## 📄 SAYFA 10
 # SUBJUNCTIVE IN THAT CLAUSE (DİLEK KİPİ) | Sayfa 10/18
 
 ## 📌 KURAL
@@ -693,8 +685,7 @@ D) has been submitted
 
 ---
 
-# 📄 SAYFA 11
-
+## 📄 SAYFA 11
 # TENSE UYUMU – ANA CÜMLE PRESENT İSE | Sayfa 11/18
 
 ## 📌 KURAL
@@ -762,8 +753,7 @@ D) had stolen
 
 ---
 
-# 📄 SAYFA 12
-
+## 📄 SAYFA 12
 # TENSE UYUMU – ANA CÜMLE PAST İSE | Sayfa 12/18
 
 ## 📌 KURAL
@@ -833,8 +823,7 @@ D) had come
 
 ---
 
-# 📄 SAYFA 13
-
+## 📄 SAYFA 13
 # YARDIMCI FİİLLERLE KISA YANITLAR (TOO / EITHER / SO / NEITHER) | Sayfa 13/18
 
 ## 📌 KULLANIM
@@ -907,8 +896,7 @@ D) I haven’t, neither.
 
 ---
 
-# 📄 SAYFA 14
-
+## 📄 SAYFA 14
 # QUESTION TAGS (DEĞİL Mİ?) | Sayfa 14/18
 
 ## 📌 KURAL
@@ -984,8 +972,7 @@ D) didn’t he
 
 ---
 
-# 📄 SAYFA 15
-
+## 📄 SAYFA 15
 # QUESTION TAGS – ÖZEL DURUMLAR | Sayfa 15/18
 
 ## 📌 KURAL: NOUN CLAUSE İÇEREN CÜMLELER
@@ -1058,8 +1045,7 @@ D) do I
 
 ---
 
-# 📄 SAYFA 16
-
+## 📄 SAYFA 16
 # STRATEJİ ÖZETLERİ (KARARLI / KARARSIZ AYRIMI) | Sayfa 16/18
 
 ## 📌 KARARLI (THAT) VS KARARSIZ (WH- / WHETHER)
@@ -1127,8 +1113,7 @@ D) which
 
 ---
 
-# 📄 SAYFA 17
-
+## 📄 SAYFA 17
 # ÖRNEK SINAV SORULARI VE ÇÖZÜM STRATEJİLERİ | Sayfa 17/18
 
 ## 📌 YDS / YÖKDİL TARZI SORULAR
@@ -1211,8 +1196,7 @@ D) whether
 
 ---
 
-# 📄 SAYFA 18
-
+## 📄 SAYFA 18
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 18/18
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1307,8 +1291,6 @@ D) don’t you
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 09_ADJECTIVE_CLAUSES
-### 📍 **İlerleme:** 8/12 PDF tamamlandı
 
 [Kelime sayısı: 210]
 
@@ -1321,3 +1303,14 @@ D) don’t you
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 18 (≤25)
 - [x] HTML div'leri doğru işaretlenmiş
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Conditionals, Wish & If Only
+### 📍 **İlerleme:** 8/12 PDF tamamlandı

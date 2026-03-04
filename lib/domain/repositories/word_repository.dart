@@ -1,4 +1,6 @@
 import '../entities/word_item.dart';
+import '../entities/word_level_summary.dart';
+import '../entities/tag_count.dart';
 import '../value_objects/paged_result.dart';
 
 abstract class WordRepository {
@@ -27,4 +29,24 @@ abstract class WordRepository {
     int limit = 100,
     int offset = 0,
   });
+
+  Future<List<WordItem>> getGlobalWordIndex({int limit = 7000});
+
+  Future<List<WordLevelSummary>> getLevelsWithWordCount();
+
+  Future<List<TagCount>> getTagsByLevel(
+    String level, {
+    String? search,
+  });
+
+  Future<PagedResult<WordItem>> getWordsByLevel({
+    required String level,
+    String? tag,
+    String? query,
+    String? pos,
+    int limit = 50,
+    int offset = 0,
+  });
+
+  Future<WordItem?> getWordByEnWordGlobal(String enWord);
 }

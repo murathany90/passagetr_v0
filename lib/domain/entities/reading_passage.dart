@@ -6,7 +6,7 @@ class ReadingPassage {
     required this.title,
     required this.level,
     required this.tagsRaw,
-    required this.sourceUrl,
+    required this.category,
   });
 
   final String id;
@@ -15,5 +15,5 @@ class ReadingPassage {
   final String title;
   final String? level;
   final String? tagsRaw;
-  final String? sourceUrl;
+  final String? category;
 }

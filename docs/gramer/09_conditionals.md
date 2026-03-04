@@ -1,4 +1,4 @@
-# PDF 9 ÇIKTISI: CONDITIONALS / IF CLAUSES
+# PDF 09 ÇIKTISI: CONDITIONALS, WISH & IF ONLY
 
 ## 📊 METADATA
 - Toplam Sayfa: 25
@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # GİRİŞ: IF YAPISININ İKİ KULLANIMI | Sayfa 1/25
 
 ## 📌 IF’İN İKİ FARKLI GÖREVİ VARDIR
@@ -72,7 +71,6 @@ D) If I were you, I would accept.
 ---
 
 ## 📄 SAYFA 2
-
 # TYPE 0: BİLİMSEL GERÇEKLER VE GENEL GEÇER DURUMLAR | Sayfa 2/25
 
 ## 📌 HER ZAMAN AYNI SONUÇ
@@ -85,14 +83,14 @@ Type 0, neden‑sonuç ilişkisi, evrensel gerçekler ve bilimsel gereklilikler 
 ## 📏 ÖRNEK CÜMLELER
 
 **Örnek 1:**
-**EN:** If the Earth doesn’t rotate around itself, days and nights don’t occur.
-**TR:** Dünya kendi etrafında dönmezse gece ve gündüz oluşmaz.
+**EN:** If the Earth rotates around its axis, we experience day and night.
+**TR:** Dünya kendi ekseni etrafında döndüğünde gece ve gündüz oluşur.
 → **Açıklama:** Evrensel bir gerçek anlatılıyor. Her iki tarafta da Present Simple kullanılmış. “If” yerine “whenever” koysak da anlam bozulmaz.
 
 **Örnek 2:**
-**EN:** Ice melts if you heat it to 0°C.
-**TR:** Buz, 0°C’ye kadar ısıtırsanız erir.
-→ **Açıklama:** Bilimsel bir gerçek: Her ısıtma eyleminde buz erir. Present Simple + Present Simple kuralına uygun.
+**EN:** If water reaches 100°C, it boils.
+**TR:** Su 100°C’ye ulaştığında kaynar.
+→ **Açıklama:** Bilimsel ve tekrar eden bir sonuç anlatılır. Type 0 yapısında iki tarafta da Present Simple kullanılır.
 
 **Örnek 3:**
 **EN:** If I make a promise, I always keep it.
@@ -137,13 +135,12 @@ D) If he came, we were happy.
 ---
 
 ## 📄 SAYFA 3
-
 # TYPE 1: GERÇEKLEŞMESİ MUHTEMEL DURUMLAR (PRESENT / FUTURE) | Sayfa 3/25
 
 ## 📌 OLASI BİR ŞART VE SONUCU
 Type 1, şu anda veya gelecekte gerçekleşmesi mümkün olan şartları ve sonuçlarını ifade eder. Yan cümlecikte genellikle **Present Simple**, ana cümlecikte ise **will / can / may / must / emir kipi** gibi yapılar bulunur.
 
-> 💡 **İpucu:** Yan cümlecikte asla “will” kullanılmaz. Gelecek anlamı Present Simple ile verilir.
+> 💡 **İpucu:** Type 1'de yan cümlecikte genellikle “will” kullanılmaz; sınavlarda en güvenli kalıp Present Simple kullanmaktır.
 
 ---
 
@@ -203,7 +200,6 @@ D) have missed / haven’t
 ---
 
 ## 📄 SAYFA 4
-
 # TYPE 2: ŞU ANDAKİ GERÇEK DIŞI DURUMLAR (UNREAL PRESENT) | Sayfa 4/25
 
 ## 📌 HAYALİ VEYA GERÇEĞE AYKIRI ŞARTLAR
@@ -269,7 +265,6 @@ D) won’t be / visit
 ---
 
 ## 📄 SAYFA 5
-
 # TYPE 3: GEÇMİŞTEKİ GERÇEK DIŞI DURUMLAR (UNREAL PAST) | Sayfa 5/25
 
 ## 📌 GEÇMİŞTE OLANIN AKSİNİ İFADE ETME
@@ -334,7 +329,6 @@ D) weren’t / would have gone
 ---
 
 ## 📄 SAYFA 6
-
 # MIXED TYPES: GEÇMİŞ ŞARTIN ŞU ANDAKİ SONUCU | Sayfa 6/25
 
 ## 📌 ZAMAN KARIŞMASI: İKİ FARKLI ZAMAN BİR ARADA
@@ -398,7 +392,6 @@ D) would listen / didn’t make
 ---
 
 ## 📄 SAYFA 7
-
 # INVERSİON: IF’SİZ ŞART CÜMLELERİ | Sayfa 7/25
 
 ## 📌 DEVRİK YAPI İLE ŞART İFADE ETME
@@ -463,7 +456,6 @@ D) Have we
 ---
 
 ## 📄 SAYFA 8
-
 # PROVIDED / PROVIDING / AS LONG AS | Sayfa 8/25
 
 ## 📌 “ŞARTIYLA / KOŞULUYLA” ANLAMI
@@ -529,7 +521,6 @@ D) provided
 ---
 
 ## 📄 SAYFA 9
-
 # ONLY IF / EVEN IF | Sayfa 9/25
 
 ## 📌 ANCAK … -SA / -SE BİLE
@@ -595,11 +586,10 @@ D) do you drive
 ---
 
 ## 📄 SAYFA 10
-
 # UNLESS | Sayfa 10/25
 
 ## 📌 “-MEDİKÇE / -MEZSE” ANLAMI
-“Unless” = “if … not” anlamına gelir. Olumsuz bir şartı ifade eder. Genellikle Type 1 ile kullanılır, ancak Type 2 ve Type 3’te pek tercih edilmez. Ana cümlede genellikle olumsuzluk vardır.
+“Unless” = “if … not” anlamına gelir. Olumsuz bir şartı ifade eder. Type 1 ile çok yaygındır; Type 2 ve Type 3 bağlamlarında daha sınırlı görülür. Ana cümle olumlu da olumsuz da olabilir.
 
 > 💡 **İpucu:** “Unless” zaten olumsuz anlam taşıdığı için bağlı olduğu cümlecikte ayrıca “not” kullanılmaz (istisnalar olsa da sınavlarda sorulmaz).
 
@@ -625,7 +615,7 @@ D) do you drive
 **Örnek 4 (Type 2’de kullanılmaz – uyarı):**
 **EN:** If he didn’t know the address, he would get lost. (NOT: Unless he knew…)
 **TR:** Adresi bilmese kaybolurdu.
-→ **Açıklama:** Type 2’de “unless” kullanımı yaygın değildir, “if … not” tercih edilir. Bu örnek “unless” ile anlaşılmaz.
+→ **Açıklama:** Type 2 bağlamında “unless” teorik olarak mümkün olsa da sınavlarda çoğu durumda “if ... not” daha güvenli ve nettir.
 
 ---
 
@@ -660,7 +650,6 @@ D) provided
 ---
 
 ## 📄 SAYFA 11
-
 # SUPPOSE / WHAT IF / ON CONDITION THAT | Sayfa 11/25
 
 ## 📌 VARSAYALIM Kİ / YA … -SA / ŞARTIYLA
@@ -725,7 +714,6 @@ D) Only if
 ---
 
 ## 📄 SAYFA 12
-
 # IN CASE / IN CASE OF | Sayfa 12/25
 
 ## 📌 “-E İHTİMALİNE KARŞI / … DURUMUNDA”
@@ -790,7 +778,6 @@ D) Unless
 ---
 
 ## 📄 SAYFA 13
-
 # IF IT WEREN’T FOR / IF IT HADN’T BEEN FOR / BUT FOR | Sayfa 13/25
 
 ## 📌 “OLMASA / OLMASAYDI” KALIPLARI
@@ -855,7 +842,6 @@ D) wasn’t / would have been
 ---
 
 ## 📄 SAYFA 14
-
 # IMPLIED CONDITIONS: BUT / OTHERWISE / WITHOUT | Sayfa 14/25
 
 ## 📌 GİZLİ ŞART İFADELERİ
@@ -920,13 +906,12 @@ D) or else
 ---
 
 ## 📄 SAYFA 15
-
 # WISH CLAUSES: PRESENT WISHES | Sayfa 15/25
 
 ## 📌 ŞU ANKİ DİLEKLER (KEŞKE … -SA / -SE)
 “Wish” ten sonra gelen cümle, gerçeğin aksini ifade eder. Şu anla ilgili dilekler için **Past Simple** kullanılır. “Be” fiili tüm özneler için genelde **were** olur.
 
-> 💡 **İpucu:** “I wish I were…” en sık yapılan hatırlatıcıdır. Asla “I wish I am” denmez.
+> 💡 **İpucu:** “I wish I were…” en güvenli kalıptır; standart sınav İngilizcesinde “I wish I am” beklenmez.
 
 ---
 
@@ -985,7 +970,6 @@ D) will have
 ---
 
 ## 📄 SAYFA 16
-
 # WISH CLAUSES: FUTURE WISHES (WOULD) | Sayfa 16/25
 
 ## 📌 GELECEKTEKİ DİLEKLER VE ELEŞTİRİLER
@@ -1049,7 +1033,6 @@ D) will stop
 ---
 
 ## 📄 SAYFA 17
-
 # WISH CLAUSES: PAST WISHES & IF ONLY | Sayfa 17/25
 
 ## 📌 GEÇMİŞ PİŞMANLIKLAR
@@ -1115,7 +1098,6 @@ D) would have / were spared
 ---
 
 ## 📄 SAYFA 18
-
 # ÖZET TABLOSU: TYPE 0, 1, 2, 3 | Sayfa 18/25
 
 ## 📌 DÖRT TEMEL TYPE’IN KARŞILAŞTIRMASI
@@ -1164,7 +1146,6 @@ D) Type 3
 ---
 
 ## 📄 SAYFA 19
-
 # DİĞER ŞART YAPILARI ÖZET | Sayfa 19/25
 
 ## 📌 IF DIŞINDAKİ BAĞLAÇLAR
@@ -1215,7 +1196,6 @@ D) Unless
 ---
 
 ## 📄 SAYFA 20
-
 # IMPLIED CONDITIONS ÖZET | Sayfa 20/25
 
 ## 📌 GİZLİ ŞART İFADELERİ
@@ -1264,13 +1244,12 @@ D) doesn’t get
 ---
 
 ## 📄 SAYFA 21
-
 # WISH CLAUSES ÖZET | Sayfa 21/25
 
 ## 📌 WISH İLE ÜÇ ZAMAN
 “Wish” ten sonra gelen yapı, dileğin zamanına göre değişir: şimdiki zaman için Past, gelecek için would, geçmiş için Past Perfect.
 
-> 💡 **İpucu:** “Wish” ile ilgili en önemli kural: Asla wish’ten sonra present tense gelmez.
+> 💡 **İpucu:** Sınav pratiğinde “wish” sonrasında present tense yerine çoğunlukla past-form yapılar beklenir.
 
 ---
 
@@ -1311,7 +1290,6 @@ D) may have had
 ---
 
 ## 📄 SAYFA 22
-
 # SINAV STRATEJİLERİ (ÖRNEK SORULARLA) | Sayfa 22/25
 
 ## 📌 KARŞILAŞTIRMALI SORU ÇÖZÜMÜ
@@ -1386,7 +1364,6 @@ D) am not
 ---
 
 ## 📄 SAYFA 23
-
 # KARIŞTIRILAN NOKTALAR VE PRATİK İPUÇLARI | Sayfa 23/25
 
 ## 📌 SIK YAPILAN HATALAR
@@ -1438,7 +1415,6 @@ D) Unless it rains, we’ll go out.
 ---
 
 ## 📄 SAYFA 24
-
 # EK ÖRNEKLERLE PEKİŞTİRME | Sayfa 24/25
 
 ## 📌 FARKLI BAĞLAMLARDA CONDITIONALS
@@ -1504,7 +1480,6 @@ D) Başvurmadı ama aldı.
 ---
 
 ## 📄 SAYFA 25
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 25/25
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1604,8 +1579,6 @@ D) would
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** 10_WISH_CLAUSES_ADVANCED.pdf
-### 📍 **İlerleme:** 9/12 PDF tamamlandı
 
 [Kelime sayısı: 278] (test sayfası için biraz yüksek ama kabul edilebilir)
 
@@ -1618,3 +1591,14 @@ D) would
 - [x] Son sayfada 5 soruluk test var
 - [x] Toplam sayfa 25
 - [x] HTML div'leri doğru işaretlenmiş (strateji kutusu eklendi)
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Conjunctions, Adverbial Clauses & Inversions
+### 📍 **İlerleme:** 9/12 PDF tamamlandı

@@ -1,4 +1,4 @@
-# 📋 **PDF 2 ÇIKTISI: TENSE SYSTEM IN ENGLISH (DÜZELTİLMİŞ & GELİŞTİRİLMİŞ VERSİYON)**
+# PDF 02 ÇIKTISI: TENSE SYSTEM IN ENGLISH
 
 ## 📊 METADATA
 - Toplam Sayfa: 25
@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # Time ve Tense Kavramları | Sayfa 1/25
 
 ## 📌 ZAMAN (TIME) VE KİP (TENSE) FARKI
@@ -40,10 +39,10 @@
 **TR:** hak etmek - hak etti - hak etmiş
 → Düzenli fiillerde Past ve Past Participle aynıdır. Yine future çekimi yoktur.
 
-### Örnek 5: Neden Future Tense Yok?
+### Örnek 5: Neden Ayrı Bir Inflected Future Tense Yok?
 **EN:** Tomorrow, I will travel to London. (NOT: I will travelled)
 **TR:** Yarın Londra'ya seyahat edeceğim.
-→ Fiil (travel) çekimlenmiyor, sadece "will" yardımcı fiili ekleniyor. Bu yüzden future ayrı bir tense değil.
+→ Fiil (travel) çekimlenmiyor, sadece "will" yardımcı fiili ekleniyor. Bu nedenle İngilizce’de future meaning/future forms vardır; ancak ayrı bir inflected future tense yoktur.
 
 ---
 
@@ -63,14 +62,14 @@
 
 A) Present Tense
 B) Past Tense
-C) Future Tense
+C) Inflected Future Tense
 D) Present Perfect
 
 <details>
 <summary>✅ Cevabı Göster</summary>
 
 **Doğru Cevap:** C
-**Açıklama:** Future Tense yoktur. Future, "will" yardımcı fiiliyle yapılır ama fiilin ayrı bir future çekimi yoktur. Present Perfect ise bir aspect'tir ama present tense grubunda yer alır.
+**Açıklama:** İngilizce’de future meaning veren yapılar (will, be going to vb.) vardır; ancak fiilin ayrı bir future çekimi olmadığı için inflected future tense kabul edilmez. Present Perfect ise aspect bilgisidir.
 </details>
 
 [Kelime sayısı: 224]
@@ -78,7 +77,6 @@ D) Present Perfect
 ---
 
 ## 📄 SAYFA 2
-
 # Tense Aspect'leri | Sayfa 2/25
 
 ## 📌 ASPECT NEDİR?
@@ -175,7 +173,6 @@ D) Simple ve Perfect Aspect
 ---
 
 ## 📄 SAYFA 3
-
 # Simple Aspect (V1 - V2) | Sayfa 3/25
 
 ## 📌 SIMPLE ASPECT NEDİR?
@@ -258,7 +255,6 @@ D) have walked
 ---
 
 ## 📄 SAYFA 4
-
 # Progressive Aspect (be Ving) | Sayfa 4/25
 
 ## 📌 PROGRESSIVE ASPECT NEDİR?
@@ -339,7 +335,6 @@ D) They are building a new shopping mall in our neighborhood.
 ---
 
 ## 📄 SAYFA 5
-
 # Perfect Aspect (have V3) | Sayfa 5/25
 
 ## 📌 PERFECT ASPECT NEDİR?
@@ -418,7 +413,6 @@ D) was already starting
 ---
 
 ## 📄 SAYFA 6
-
 # Present Simple (V1) Kullanım Alanları | Sayfa 6/25
 
 ## 📌 PRESENT SIMPLE NERELERDE KULLANILIR?
@@ -513,7 +507,6 @@ Sınavlarda genellikle "revolved" tercih edilir çünkü ana cümle past tense.
 ---
 
 ## 📄 SAYFA 7
-
 # Present Simple - Özel Kullanımlar | Sayfa 7/25
 
 ## 📌 PRESENT SIMPLE'IN DİĞER KULLANIMLARI
@@ -593,7 +586,6 @@ D) have received
 ---
 
 ## 📄 SAYFA 8
-
 # Present Progressive (am/is/are Ving) | Sayfa 8/25
 
 ## 📌 PRESENT PROGRESSIVE NERELERDE KULLANILIR?
@@ -689,7 +681,6 @@ D) will study
 ---
 
 ## 📄 SAYFA 9
-
 # Present Progressive - Zaman İfadeleri | Sayfa 9/25
 
 ## 📌 DİKKAT: "NOW" İÇEREN ZAMAN İFADELERİ
@@ -777,7 +768,6 @@ D) will take
 ---
 
 ## 📄 SAYFA 10
-
 # Present Progressive - Aşama Aşama Gelişen Olaylar | Sayfa 10/25
 
 ## 📌 AŞAMA AŞAMA GELİŞEN OLAYLAR
@@ -870,7 +860,6 @@ D) improved
 ---
 
 ## 📄 SAYFA 11
-
 # Past Simple (V2) | Sayfa 11/25
 
 ## 📌 PAST SIMPLE NERELERDE KULLANILIR?
@@ -958,7 +947,6 @@ D) had been discovered
 ---
 
 ## 📄 SAYFA 12
-
 # Past Simple - Present Anlam Veren Özel Yapılar | Sayfa 12/25
 
 ## 📌 V2 GÖRÜNCE PAST MI DÜŞÜNMELİYİZ?
@@ -1055,7 +1043,6 @@ D) have
 ---
 
 ## 📄 SAYFA 13
-
 # Past Progressive (was/were Ving) | Sayfa 13/25
 
 ## 📌 PAST PROGRESSIVE NERELERDE KULLANILIR?
@@ -1139,7 +1126,6 @@ D) was walking / was seeing
 ---
 
 ## 📄 SAYFA 14
-
 # Past Progressive - Özel Durumlar ve Bağlaçlar | Sayfa 14/25
 
 ## 📌 AYNI ANDA İKİ EYLEM
@@ -1222,7 +1208,6 @@ D) were sitting / was ringing
 ---
 
 ## 📄 SAYFA 15
-
 # Present Perfect (have/has V3) | Sayfa 15/25
 
 ## 📌 PRESENT PERFECT NEDİR?
@@ -1307,7 +1292,6 @@ D) was never trying
 ---
 
 ## 📄 SAYFA 16
-
 # Present Perfect - "Since" Kullanımı | Sayfa 16/25
 
 ## 📌 "SINCE" İLE PRESENT PERFECT
@@ -1394,7 +1378,6 @@ D) have increased / have hired
 ---
 
 ## 📄 SAYFA 17
-
 # Present Perfect - Zaman İfadeleri | Sayfa 17/25
 
 ## 📌 PRESENT PERFECT İLE KULLANILAN İFADELER
@@ -1484,7 +1467,6 @@ D) was seeing
 ---
 
 ## 📄 SAYFA 18
-
 # Present Perfect - Özel Durumlar | Sayfa 18/25
 
 ## 📌 SUPERLATIVES VE ORDINALS
@@ -1566,7 +1548,6 @@ D) had lost
 ---
 
 ## 📄 SAYFA 19
-
 # Present Perfect Progressive (have/has been Ving) | Sayfa 19/25
 
 ## 📌 PRESENT PERFECT PROGRESSIVE NEDİR?
@@ -1652,7 +1633,6 @@ D) Were / running
 ---
 
 ## 📄 SAYFA 20
-
 # Past Perfect (had V3) | Sayfa 20/25
 
 ## 📌 PAST PERFECT NEDİR?
@@ -1737,7 +1717,6 @@ D) was already starting
 ---
 
 ## 📄 SAYFA 21
-
 # Past Perfect - Unreal (Gerçek Dışı) Kullanımlar | Sayfa 21/25
 
 ## 📌 UNREAL PAST PERFECT
@@ -1830,7 +1809,6 @@ D) was listening
 ---
 
 ## 📄 SAYFA 22
-
 # Past Perfect Progressive (had been Ving) | Sayfa 22/25
 
 ## 📌 PAST PERFECT PROGRESSIVE
@@ -1911,8 +1889,7 @@ D) was wandering
 ---
 
 ## 📄 SAYFA 23
-
-# Future Tenses (will / be going to) | Sayfa 23/25
+# Future Forms (will / be going to) | Sayfa 23/25
 
 ## 📌 GELECEK ZAMAN YAPILARI
 Future için tek bir tense yok, birden çok yapı var: will, be going to, Present Progressive, Present Simple. Her birinin farklı kullanım alanları ve anlam incelikleri vardır.
@@ -2012,8 +1989,7 @@ Konuşma anında hissedilen fiziksel belirtiler varsa "be going to" daha doğrud
 ---
 
 ## 📄 SAYFA 24
-
-# Future Perfect & Progressive | Sayfa 24/25
+# Future Forms: Perfect & Progressive | Sayfa 24/25
 
 ## 📌 FUTURE PERFECT (will have V3)
 Gelecekte **belirli bir zamandan önce bitmiş olacak** eylemler. "By ...", "by the time ..." ile sık kullanılır.
@@ -2096,7 +2072,6 @@ D) have already left
 ---
 
 ## 📄 SAYFA 25
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 25/25
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -2203,8 +2178,6 @@ D) had eaten
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** MODALS (Yardımcı Fiiller)
-### 📍 **İlerleme:** 2/12 PDF tamamlandı
 
 [Kelime sayısı: 279]
 
@@ -2220,3 +2193,14 @@ D) had eaten
 - [x] Tüm düzeltme önerileri uygulanmış
 - [x] İngilizce örnekler uzun ve açıklayıcı
 - [x] Zaman ifadeleri ve ipuçları tablolarla verilmiş
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Modality (Modal Verbs / Kipler)
+### 📍 **İlerleme:** 2/12 PDF tamamlandı

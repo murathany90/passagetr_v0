@@ -9,6 +9,7 @@ import '../value_objects/paged_result.dart';
 abstract class ReadingRepository {
   Future<PagedResult<ReadingPassage>> getPassagesByPack({
     required String packId,
+    Set<String>? levels,
     int limit = 20,
     int offset = 0,
   });
@@ -39,6 +40,10 @@ abstract class ReadingRepository {
     required int lastIdx,
     required bool completed,
   });
+
+  Future<Map<String, UserReadingProgress>> getProgressMapForPassages(
+    List<String> passageIds,
+  );
 
   Future<int> getTodayReadSentenceCount();
 

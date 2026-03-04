@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../core/utils/raw_splitter.dart';
 import '../../domain/entities/pack.dart';
+import '../../domain/entities/dictionary_lookup_result.dart';
 import '../../domain/entities/word_item.dart';
+import '../../domain/repositories/dictionary_repository.dart';
 import '../../domain/repositories/progress_repository.dart';
 import '../../domain/repositories/word_repository.dart';
 import '../../domain/value_objects/flashcard_answer.dart';
 import '../../state/providers.dart';
 import '../tests/test_hub_page.dart';
+import '../words/widgets/dictionary_fallback_sheet.dart';
+import '../words/word_detail_page.dart';
 
 class FlashcardSessionPage extends ConsumerStatefulWidget {
   const FlashcardSessionPage({
@@ -207,6 +212,47 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     }
   }
 
+  Future<void> _openRelatedWord(String rawWord) async {
+    final String normalized = normalizeWordToken(rawWord);
+    if (normalized.isEmpty) {
+      return;
+    }
+
+    final WordRepository wordRepository = ref.read(wordRepositoryProvider);
+    final WordItem? target =
+        await wordRepository.getWordByEnWordGlobal(normalized);
+    if (!mounted) {
+      return;
+    }
+
+    if (target != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => WordDetailPage(word: target),
+        ),
+      );
+      return;
+    }
+
+    final DictionaryRepository dictionaryRepository =
+        ref.read(dictionaryRepositoryProvider);
+    final DictionaryLookupResult lookup =
+        await dictionaryRepository.lookup(query: normalized);
+    if (!mounted) {
+      return;
+    }
+
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (_) => DictionaryFallbackSheet(
+        query: normalized,
+        lookup: lookup,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_loading) {
@@ -294,6 +340,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
                           word: word,
                           synonyms: synonyms,
                           antonyms: antonyms,
+                          onRelatedWordTap: _openRelatedWord,
                         )
                       : _FrontFace(word: word),
                 ),
@@ -349,11 +396,13 @@ class _BackFace extends StatelessWidget {
     required this.word,
     required this.synonyms,
     required this.antonyms,
+    required this.onRelatedWordTap,
   });
 
   final WordItem word;
   final List<String> synonyms;
   final List<String> antonyms;
+  final ValueChanged<String> onRelatedWordTap;
 
   @override
   Widget build(BuildContext context) {
@@ -374,7 +423,12 @@ class _BackFace extends StatelessWidget {
             spacing: 6,
             runSpacing: 6,
             children: synonyms
-                .map((String e) => Chip(label: Text(e)))
+                .map(
+                  (String e) => ActionChip(
+                    label: Text(e),
+                    onPressed: () => onRelatedWordTap(e),
+                  ),
+                )
                 .toList(growable: false),
           ),
         ],
@@ -386,7 +440,12 @@ class _BackFace extends StatelessWidget {
             spacing: 6,
             runSpacing: 6,
             children: antonyms
-                .map((String e) => Chip(label: Text(e)))
+                .map(
+                  (String e) => ActionChip(
+                    label: Text(e),
+                    onPressed: () => onRelatedWordTap(e),
+                  ),
+                )
                 .toList(growable: false),
           ),
         ],

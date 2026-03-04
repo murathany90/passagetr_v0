@@ -20,13 +20,20 @@ class SupabaseReadingRepository implements ReadingRepository {
   @override
   Future<PagedResult<ReadingPassage>> getPassagesByPack({
     required String packId,
+    Set<String>? levels,
     int limit = 20,
     int offset = 0,
   }) async {
-    final List<dynamic> rows = await _client
-        .from('reading_passages')
-        .select()
-        .eq('pack_id', packId)
+    dynamic builder = _client.from('reading_passages').select().eq('pack_id', packId);
+    final Set<String> normalizedLevels = (levels ?? <String>{})
+        .map((String e) => e.trim().toUpperCase())
+        .where((String e) => e.isNotEmpty)
+        .toSet();
+    if (normalizedLevels.isNotEmpty) {
+      builder = builder.inFilter('level', normalizedLevels.toList());
+    }
+
+    final List<dynamic> rows = await builder
         .order('title', ascending: true)
         .range(offset, offset + limit);
 
@@ -135,6 +142,29 @@ class SupabaseReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<Map<String, UserReadingProgress>> getProgressMapForPassages(
+    List<String> passageIds,
+  ) async {
+    if (passageIds.isEmpty) {
+      return const <String, UserReadingProgress>{};
+    }
+
+    final String userId = _resolveUserId();
+    final List<dynamic> rows = await _client
+        .from('user_reading_progress')
+        .select()
+        .eq('user_id', userId)
+        .inFilter('passage_id', passageIds);
+
+    final Map<String, UserReadingProgress> mapped = <String, UserReadingProgress>{};
+    for (final dynamic row in rows) {
+      final UserReadingProgress progress = _readingProgressFromRow(row as Map);
+      mapped[progress.passageId] = progress;
+    }
+    return mapped;
+  }
+
+  @override
   Future<int> getTodayReadSentenceCount() async {
     final String userId = _resolveUserId();
     final DateTime now = DateTime.now();
@@ -216,7 +246,7 @@ class SupabaseReadingRepository implements ReadingRepository {
       title: (data['title'] as String?) ?? '',
       level: data['level'] as String?,
       tagsRaw: data['tags_raw'] as String?,
-      sourceUrl: data['source_url'] as String?,
+      category: data['category'] as String?,
     );
   }
 

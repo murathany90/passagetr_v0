@@ -11,6 +11,13 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.5.1
   supabase_flutter: ^2.8.4
+  drift: ^2.20.3
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.4
+  path: ^1.9.0
+  shared_preferences: ^2.3.2
+  flutter_html: ^3.0.0-beta.2
+  flutter_html_table: ^3.0.0
   http: ^1.2.2
   url_launcher: ^6.3.1
   google_fonts: ^6.2.1
@@ -19,6 +26,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  drift_dev: ^2.20.3
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/db/dictionary_local.sqlite
+    - assets/db/app_content.db
+    - assets/db/app_content.meta.json

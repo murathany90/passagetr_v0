@@ -14,9 +14,18 @@ import '../../domain/repositories/word_repository.dart';
 import '../../state/providers.dart';
 
 class McqSessionPage extends ConsumerStatefulWidget {
-  const McqSessionPage({required this.pack, super.key});
+  const McqSessionPage({
+    required this.pack,
+    this.customWordIds,
+    this.sessionLabel,
+    this.questionCount = 5,
+    super.key,
+  });
 
   final Pack pack;
+  final List<String>? customWordIds;
+  final String? sessionLabel;
+  final int questionCount;
 
   @override
   ConsumerState<McqSessionPage> createState() => _McqSessionPageState();
@@ -51,18 +60,25 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
 
     try {
       final WordRepository wordRepository = ref.read(wordRepositoryProvider);
-      final List<WordItem> pool = await wordRepository.getSessionBatch(
-        widget.pack.id,
-        limit: AppConstants.testPoolSize,
-      );
+      final List<String> requestedWordIds = (widget.customWordIds ?? <String>[])
+          .map((String e) => e.trim())
+          .where((String e) => e.isNotEmpty)
+          .toList(growable: false);
+
+      final List<WordItem> pool = requestedWordIds.isEmpty
+          ? await wordRepository.getSessionBatch(
+              widget.pack.id,
+              limit: AppConstants.testPoolSize,
+            )
+          : await wordRepository.getWordsByIds(requestedWordIds);
 
       if (pool.isEmpty) {
         throw Exception('Pack icinde soru uretilecek kelime yok.');
       }
 
       pool.shuffle(_random);
-      final int questionCount =
-          min(AppConstants.testTargetQuestionCount, pool.length);
+      final int targetCount = widget.questionCount <= 0 ? 5 : widget.questionCount;
+      final int questionCount = min(targetCount, pool.length);
       final List<WordItem> selected = pool.take(questionCount).toList();
       final List<_McqQuestion> built = selected
           .map((WordItem word) =>
@@ -196,15 +212,19 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final String rawLabel = (widget.sessionLabel ?? 'MCQ').trim();
+    final String label = rawLabel.isEmpty ? 'MCQ' : rawLabel;
+
     if (_loading) {
-      return const Scaffold(
-        body: AppLoadingBlock(message: 'MCQ yukleniyor...'),
+      return Scaffold(
+        appBar: AppBar(title: Text(label)),
+        body: const AppLoadingBlock(message: 'MCQ yukleniyor...'),
       );
     }
 
     if (_error != null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('MCQ')),
+        appBar: AppBar(title: Text(label)),
         body: AppErrorState(
           title: 'MCQ yuklenemedi',
           detail: _error!,
@@ -215,6 +235,7 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
 
     if (_index >= _questions.length) {
       return _ResultView(
+        title: '$label Sonuc',
         correct: _correct,
         wrong: _wrong,
       );
@@ -226,7 +247,7 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('MCQ ${_index + 1}/${_questions.length}'),
+        title: Text('$label ${_index + 1}/${_questions.length}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -305,10 +326,12 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
 
 class _ResultView extends StatelessWidget {
   const _ResultView({
+    required this.title,
     required this.correct,
     required this.wrong,
   });
 
+  final String title;
   final int correct;
   final int wrong;
 
@@ -318,7 +341,7 @@ class _ResultView extends StatelessWidget {
     final int score = total == 0 ? 0 : ((correct / total) * 100).round();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('MCQ Sonuc')),
+      appBar: AppBar(title: Text(title)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

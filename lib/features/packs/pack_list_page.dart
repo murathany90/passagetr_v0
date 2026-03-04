@@ -10,7 +10,6 @@ import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../state/providers.dart';
 import '../flashcard/flashcard_session_page.dart';
-import '../readings/reading_list_page.dart';
 import '../tests/test_hub_page.dart';
 import '../words/word_list_page.dart';
 
@@ -198,18 +197,6 @@ class PackDetailPage extends StatelessWidget {
             },
             icon: Icons.school,
             label: 'Kelime Calis',
-          ),
-          const SizedBox(height: 8),
-          FilledButton.tonalIcon(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => ReadingListPage(pack: pack),
-                ),
-              );
-            },
-            icon: const Icon(Icons.menu_book),
-            label: const Text('Paragraf Calis'),
           ),
           const SizedBox(height: 8),
           FilledButton.tonalIcon(

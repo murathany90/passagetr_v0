@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../grammar/grammar_home_page.dart';
 import '../home/home_dashboard_page.dart';
-import '../packs/pack_list_page.dart';
 import '../profile/profile_page.dart';
 import '../readings/reading_home_page.dart';
+import '../words/word_home_page.dart';
 
 class MainShellPage extends StatefulWidget {
   const MainShellPage({super.key});
@@ -20,6 +21,7 @@ class _MainShellPageState extends State<MainShellPage> {
       0 => 'Ana Sayfa',
       1 => 'Kelime',
       2 => 'Okuma',
+      3 => 'Gramer',
       _ => 'Profil',
     };
   }
@@ -27,8 +29,9 @@ class _MainShellPageState extends State<MainShellPage> {
   Widget _buildBodyForIndex(int index) {
     return switch (index) {
       0 => const HomeDashboardPage(),
-      1 => const PackListPage(embedded: true),
+      1 => const WordHomePage(),
       2 => const ReadingHomePage(),
+      3 => const GrammarHomePage(),
       _ => const ProfilePage(),
     };
   }
@@ -59,9 +62,14 @@ class _MainShellPageState extends State<MainShellPage> {
             label: 'Kelime',
           ),
           NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book),
+            icon: Icon(Icons.chrome_reader_mode_outlined),
+            selectedIcon: Icon(Icons.chrome_reader_mode),
             label: 'Okuma',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.auto_stories_outlined),
+            selectedIcon: Icon(Icons.auto_stories),
+            label: 'Gramer',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),

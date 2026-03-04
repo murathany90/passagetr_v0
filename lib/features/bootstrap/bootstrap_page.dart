@@ -9,7 +9,7 @@ class BootstrapPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<void> bootstrap = ref.watch(authBootstrapProvider);
+    final AsyncValue<void> bootstrap = ref.watch(appBootstrapProvider);
 
     return bootstrap.when(
       data: (_) => const MainShellPage(),
@@ -25,12 +25,7 @@ class BootstrapPage extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const Text(
-                    'Anonim giris basarisiz oldu.',
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Supabase Auth > Providers > Anonymous ayarini kontrol edin.',
+                    'Uygulama baslatilamadi.',
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
@@ -40,7 +35,7 @@ class BootstrapPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 12),
                   FilledButton(
-                    onPressed: () => ref.invalidate(authBootstrapProvider),
+                    onPressed: () => ref.invalidate(appBootstrapProvider),
                     child: const Text('Retry'),
                   ),
                 ],

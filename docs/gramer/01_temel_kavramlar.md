@@ -1,4 +1,4 @@
-# PDF 1 ÇIKTISI: İNGİLİZCEDE TEMEL KAVRAMLAR
+# PDF 01 ÇIKTISI: İNGİLİZCEDE TEMEL KAVRAMLAR
 
 ## 📊 METADATA
 - Toplam Sayfa: 16
@@ -8,7 +8,6 @@
 ---
 
 ## 📄 SAYFA 1
-
 # Cümlenin Temel Unsurları | Sayfa 1/16
 
 ## 📌 TEMEL YAPI TAŞLARI
@@ -75,7 +74,6 @@ Toplam 3 Noun Phrase vardır.
 ---
 
 ## 📄 SAYFA 2
-
 # Fiil Türleri (Verb Types) | Sayfa 2/16
 
 ## 📌 FİİLLER NESNE SAYISINA GÖRE 3'E AYRILIR
@@ -151,7 +149,6 @@ D) Hiçbiri
 ---
 
 ## 📄 SAYFA 3
-
 # Noun Phrase (İsim Öbeği) | Sayfa 3/16
 
 ## 📌 İSİM ÖBEĞİ NEDİR?
@@ -219,7 +216,6 @@ D) book
 ---
 
 ## 📄 SAYFA 4
-
 # Prepositions (Edatlar) ve Strateji | Sayfa 4/16
 
 ## 📌 EDATLARIN GÖREVİ
@@ -287,7 +283,6 @@ D) mine
 ---
 
 ## 📄 SAYFA 5
-
 # Sentence vs Clause (Cümle ve Cümlecik) | Sayfa 5/16
 
 ## 📌 TEMEL FARK
@@ -359,7 +354,6 @@ D) Hiçbiri
 ---
 
 ## 📄 SAYFA 6
-
 # Özne (Subject) Pozisyonunda Kullanılan Yapılar - 1 | Sayfa 6/16
 
 ## 📌 ÖZNE NELERDEN OLUŞUR?
@@ -430,7 +424,6 @@ D) It
 ---
 
 ## 📄 SAYFA 7
-
 # Özne (Subject) Pozisyonunda Kullanılan Yapılar - 2 | Sayfa 7/16
 
 ## 📌 DİĞER ÖZNE YAPILARI
@@ -504,7 +497,6 @@ D) Sıfat
 ---
 
 ## 📄 SAYFA 8
-
 # Özne (Subject) Pozisyonunda Kullanılan Yapılar - 3 | Sayfa 8/16
 
 ## 📌 KARMAŞIK ÖZNE YAPILARI
@@ -584,7 +576,6 @@ D) What
 ---
 
 ## 📄 SAYFA 9
-
 # Fiilin Halleri (Verb Forms) | Sayfa 9/16
 
 ## 📌 FİİLİN 6 HALİ
@@ -668,7 +659,6 @@ D) V3
 ---
 
 ## 📄 SAYFA 10
-
 # Ving ve V3'ün Diğer Kullanımları | Sayfa 10/16
 
 ## 📌 Ving ve V3 SADECE ZAMAN YAPMAZ
@@ -749,7 +739,6 @@ D) breaks
 ---
 
 ## 📄 SAYFA 11
-
 # Fiil Türleri (Transitivity) | Sayfa 11/16
 
 ## 📌 NESNE DURUMUNA GÖRE FİİLLER
@@ -822,7 +811,6 @@ D) send
 ---
 
 ## 📄 SAYFA 12
-
 # Nesne (Object) Pozisyonunda Kullanılan Yapılar - 1 | Sayfa 12/16
 
 ## 📌 NESNE NEREDE BULUNUR?
@@ -901,7 +889,6 @@ D) studied
 ---
 
 ## 📄 SAYFA 13
-
 # Nesne (Object) Pozisyonunda Kullanılan Yapılar - 2 | Sayfa 13/16
 
 ## 📌 NOUN CLAUSE VE ADJECTIVE CLAUSE NESNE OLARAK
@@ -976,7 +963,6 @@ D) where
 ---
 
 ## 📄 SAYFA 14
-
 # Boş Nesne "It" | Sayfa 14/16
 
 ## 📌 "IT" NESNE OLARAK
@@ -1048,7 +1034,6 @@ D) them
 ---
 
 ## 📄 SAYFA 15
-
 # Preposition + Object (Edat + Nesne) | Sayfa 15/16
 
 ## 📌 EDATLARIN NESNESİ
@@ -1134,7 +1119,6 @@ D) see
 ---
 
 ## 📄 SAYFA 16
-
 # 📊 BÖLÜM TARAMA TESTİ | Sayfa 16/16
 
 ## 🎯 Bu Bölümde Öğrendiklerimiz
@@ -1241,8 +1225,6 @@ D) breaks
 
 ---
 
-### ⏭️ **Sonraki Bölüm:** Tense System in English (Zamanlar)
-### 📍 **İlerleme:** 1/12 PDF tamamlandı
 
 ---
 
@@ -1257,3 +1239,14 @@ D) breaks
 - ✅ Son sayfada 5 soruluk test var
 - ✅ Toplam sayfa 16 (25'i geçmiyor)
 - ✅ HTML div'leri doğru işaretlenmiş
+
+---
+
+
+---
+
+
+---
+
+### ⏭️ **Sonraki Bölüm:** Tense System in English
+### 📍 **İlerleme:** 1/12 PDF tamamlandı
