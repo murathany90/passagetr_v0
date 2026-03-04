@@ -1,14 +1,14 @@
-# İngilizce Öğrenme Uygulaması (Faz 1-4, Güncel)
+﻿# Ä°ngilizce Ã–ÄŸrenme UygulamasÄ± (Faz 1-4, GÃ¼ncel)
 
-Bu repo, Flutter + Supabase tabanlı İngilizce öğrenme uygulamasının güncel sürümünü içerir.
-Mevcut kapsam artık yalnızca Faz 1 değil; Faz 2 (reading/çeviri), Faz 3 (dashboard/akış iyileştirmeleri) ve Faz 4 (gramer modülü + content pipeline) dahildir.
+Bu repo, Flutter + Supabase tabanlÄ± Ä°ngilizce Ã¶ÄŸrenme uygulamasÄ±nÄ±n gÃ¼ncel sÃ¼rÃ¼mÃ¼nÃ¼ iÃ§erir.
+Mevcut kapsam artÄ±k yalnÄ±zca Faz 1 deÄŸil; Faz 2 (reading/Ã§eviri), Faz 3 (dashboard/akÄ±ÅŸ iyileÅŸtirmeleri) ve Faz 4 (gramer modÃ¼lÃ¼ + content pipeline) dahildir.
 
-## Kapsam Özeti
+## Kapsam Ã–zeti
 
 - Faz 1: Kelime paketleri, flashcard, test hub, progress takibi
-- Faz 2: Reading modülü, çeviri servisleri ve çeviri cache
-- Faz 3: Home/dashboard ve gezinme akışı iyileştirmeleri
-- Faz 4: Gramer modülü, markdown->json dönüştürme ve Supabase yükleme pipeline'ı
+- Faz 2: Reading modÃ¼lÃ¼, Ã§eviri servisleri ve Ã§eviri cache
+- Faz 3: Home/dashboard ve gezinme akÄ±ÅŸÄ± iyileÅŸtirmeleri
+- Faz 4: Gramer modÃ¼lÃ¼, markdown->json dÃ¶nÃ¼ÅŸtÃ¼rme ve Supabase yÃ¼kleme pipeline'Ä±
 
 ## Mimari ve Teknolojiler
 
@@ -18,56 +18,56 @@ Mevcut kapsam artık yalnızca Faz 1 değil; Faz 2 (reading/çeviri), Faz 3 (das
 - Render: `flutter_html`, `flutter_html_table`
 - Local lightweight state: `shared_preferences`
 
-### Bağımlılık Özeti (`pubspec.yaml`)
+### BaÄŸÄ±mlÄ±lÄ±k Ã–zeti (`pubspec.yaml`)
 
-| Tür | Paket | Amaç |
+| TÃ¼r | Paket | AmaÃ§ |
 |---|---|---|
-| dependency | `flutter_riverpod` | Provider/state katmanı |
-| dependency | `supabase_flutter` | Auth + DB erişimi |
-| dependency | `shared_preferences` | Basit lokal kalıcılık |
-| dependency | `flutter_html` | HTML içerik render |
-| dependency | `flutter_html_table` | HTML table desteği |
-| dependency | `http` | Servis çağrıları |
+| dependency | `flutter_riverpod` | Provider/state katmanÄ± |
+| dependency | `supabase_flutter` | Auth + DB eriÅŸimi |
+| dependency | `shared_preferences` | Basit lokal kalÄ±cÄ±lÄ±k |
+| dependency | `flutter_html` | HTML iÃ§erik render |
+| dependency | `flutter_html_table` | HTML table desteÄŸi |
+| dependency | `http` | Servis Ã§aÄŸrÄ±larÄ± |
 | dependency | `google_fonts` | Tipografi |
 | dev_dependency | `flutter_test` | Test |
-| dev_dependency | `flutter_lints` | Lint kuralları |
+| dev_dependency | `flutter_lints` | Lint kurallarÄ± |
 
-### Proje Klasör Yapısı (`lib/`)
+### Proje KlasÃ¶r YapÄ±sÄ± (`lib/`)
 
 ```text
 lib/
-|-- main.dart                  # Uygulama giriş noktası, Supabase init
-|-- app/                       # MaterialApp, routing ve app-level yapı
-|-- core/                      # Ortak altyapı
-|   |-- auth/                  # Oturum/anon auth yardımcıları
+|-- main.dart                  # Uygulama giriÅŸ noktasÄ±, Supabase init
+|-- app/                       # MaterialApp, routing ve app-level yapÄ±
+|-- core/                      # Ortak altyapÄ±
+|   |-- auth/                  # Oturum/anon auth yardÄ±mcÄ±larÄ±
 |   |-- config/                # dart-define / env config okuma
 |   |-- constants/             # Uygulama sabitleri
-|   |-- services/              # Harici servis katmanı (çeviri vb.)
-|   |-- theme/                 # Renk, tipografi, tema tanımları
-|   |-- utils/                 # Saf yardımcı fonksiyonlar
-|   `-- widgets/               # Yeniden kullanılabilir UI bileşenleri
+|   |-- services/              # Harici servis katmanÄ± (Ã§eviri vb.)
+|   |-- theme/                 # Renk, tipografi, tema tanÄ±mlarÄ±
+|   |-- utils/                 # Saf yardÄ±mcÄ± fonksiyonlar
+|   `-- widgets/               # Yeniden kullanÄ±labilir UI bileÅŸenleri
 |-- data/
-|   `-- repositories/          # Supabase repository implementasyonları
+|   `-- repositories/          # Supabase repository implementasyonlarÄ±
 |-- domain/
-|   |-- entities/              # İş modeli nesneleri
-|   |-- repositories/          # Repository arayüzleri
+|   |-- entities/              # Ä°ÅŸ modeli nesneleri
+|   |-- repositories/          # Repository arayÃ¼zleri
 |   `-- value_objects/         # Value object tipleri
-|-- features/                  # Feature-first ekran/modül yapısı
-|   |-- bootstrap/             # Açılış/başlatma akışı
+|-- features/                  # Feature-first ekran/modÃ¼l yapÄ±sÄ±
+|   |-- bootstrap/             # AÃ§Ä±lÄ±ÅŸ/baÅŸlatma akÄ±ÅŸÄ±
 |   |-- home/                  # Dashboard
 |   |-- shell/                 # Bottom navigation container
 |   |-- packs/                 # Paket listesi
 |   |-- words/                 # Kelime liste/detay
-|   |-- flashcard/             # Flashcard oturumları
+|   |-- flashcard/             # Flashcard oturumlarÄ±
 |   |-- tests/                 # MCQ, matching, typing testleri
-|   |-- readings/              # Okuma modülü
-|   |-- grammar/               # Gramer modülü (modül/sayfa/reader)
-|   `-- profile/               # Profil ve debug/ayar ekranları
+|   |-- readings/              # Okuma modÃ¼lÃ¼
+|   |-- grammar/               # Gramer modÃ¼lÃ¼ (modÃ¼l/sayfa/reader)
+|   `-- profile/               # Profil ve debug/ayar ekranlarÄ±
 `-- state/
-    `-- providers.dart         # Riverpod provider tanımları
+    `-- providers.dart         # Riverpod provider tanÄ±mlarÄ±
 ```
 
-## Kurulum ve İlk Çalıştırma
+## Kurulum ve Ä°lk Ã‡alÄ±ÅŸtÄ±rma
 
 ## 1) Repo kurulum
 
@@ -77,7 +77,7 @@ cd ingilizce_app1
 flutter pub get
 ```
 
-## 2) Konfigürasyon dosyaları
+## 2) KonfigÃ¼rasyon dosyalarÄ±
 
 ### Flutter app config (`env/app.dev.json`)
 
@@ -85,7 +85,7 @@ flutter pub get
 cp env/app.dev.json.example env/app.dev.json
 ```
 
-`env/app.dev.json` örnek içerik:
+`env/app.dev.json` Ã¶rnek iÃ§erik:
 
 ```json
 {
@@ -101,7 +101,7 @@ cp env/app.dev.json.example env/app.dev.json
 cp .env.example .env
 ```
 
-`.env` örnek içerik:
+`.env` Ã¶rnek iÃ§erik:
 
 ```env
 SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
@@ -109,10 +109,10 @@ SUPABASE_SERVICE_ROLE_KEY=sb_secret_xxx
 ```
 
 Not:
-- Mobil uygulama tarafında yalnızca `SUPABASE_ANON_KEY` (`sb_publishable_...`) kullanılmalıdır.
-- `SUPABASE_SERVICE_ROLE_KEY` yalnızca script/server tarafında kullanılmalıdır.
+- Mobil uygulama tarafÄ±nda yalnÄ±zca `SUPABASE_ANON_KEY` (`sb_publishable_...`) kullanÄ±lmalÄ±dÄ±r.
+- `SUPABASE_SERVICE_ROLE_KEY` yalnÄ±zca script/server tarafÄ±nda kullanÄ±lmalÄ±dÄ±r.
 
-## 3) Uygulamayı çalıştırma
+## 3) UygulamayÄ± Ã§alÄ±ÅŸtÄ±rma
 
 Windows (PowerShell script):
 
@@ -126,15 +126,15 @@ macOS/Linux veya script kullanmak istemeyenler:
 flutter run --dart-define-from-file=env/app.dev.json
 ```
 
-## Android Build Gereksinimleri (Repo Gerçeği)
+## Android Build Gereksinimleri (Repo GerÃ§eÄŸi)
 
 - Java: 17
 - Kotlin plugin: `2.2.20` (`android/settings.gradle.kts`)
 - Gradle wrapper: `8.14` (`android/gradle/wrapper/gradle-wrapper.properties`)
-- Android compile/min/target SDK: Flutter tarafından sağlanır (`flutter.compileSdkVersion`, `flutter.minSdkVersion`, `flutter.targetSdkVersion`)
-- NDK: Flutter tarafından sağlanır (`flutter.ndkVersion`)
+- Android compile/min/target SDK: Flutter tarafÄ±ndan saÄŸlanÄ±r (`flutter.compileSdkVersion`, `flutter.minSdkVersion`, `flutter.targetSdkVersion`)
+- NDK: Flutter tarafÄ±ndan saÄŸlanÄ±r (`flutter.ndkVersion`)
 
-## Supabase Kurulum Akışı (Kısa)
+## Supabase Kurulum AkÄ±ÅŸÄ± (KÄ±sa)
 
 ## 1) Migration uygula
 
@@ -145,12 +145,12 @@ supabase db push
 ```
 
 Alternatif:
-- Supabase SQL Editor aç
-- `supabase/migrations/*.sql` içeriğini sırayla çalıştır
+- Supabase SQL Editor aÃ§
+- `supabase/migrations/*.sql` iÃ§eriÄŸini sÄ±rayla Ã§alÄ±ÅŸtÄ±r
 
-## 2) RLS mantığı örnek (doğrulanmış desen)
+## 2) RLS mantÄ±ÄŸÄ± Ã¶rnek (doÄŸrulanmÄ±ÅŸ desen)
 
-`user_word_progress` için temel politika mantığı:
+`user_word_progress` iÃ§in temel politika mantÄ±ÄŸÄ±:
 
 ```sql
 create policy progress_select_own on public.user_word_progress
@@ -158,24 +158,24 @@ for select to authenticated
 using (auth.uid() = user_id);
 ```
 
-Benzer şekilde insert/update için `with check (auth.uid() = user_id)` uygulanır.
+Benzer ÅŸekilde insert/update iÃ§in `with check (auth.uid() = user_id)` uygulanÄ±r.
 
-## 3) Örnek veri yükleme (özet)
+## 3) Ã–rnek veri yÃ¼kleme (Ã¶zet)
 
-- Kelime setleri/okuma içerikleri için: `docs/supabase_csv_import.md`, `docs/supabase_readings_import.md`
-- Gramer verisi için:
+- Kelime setleri/okuma iÃ§erikleri iÃ§in: `docs/supabase_csv_import.md`, `docs/supabase_readings_import.md`
+- Gramer verisi iÃ§in:
   1. Markdown -> JSON
   2. JSON -> Supabase uploader
 
-## Faz 4 - Gramer Modülü ve Pipeline
+## Faz 4 - Gramer ModÃ¼lÃ¼ ve Pipeline
 
-- Markdown kaynak klasörü: `docs/gramer`
+- Markdown kaynak klasÃ¶rÃ¼: `docs/gramer`
 - Converter: `markdown_to_json_converter.py`
 - Uploader: `supabase_uploader.py`
 - Migration: `supabase/migrations/202603030005_grammar.sql`
-- Flutter ekranları: `lib/features/grammar/`
+- Flutter ekranlarÄ±: `lib/features/grammar/`
 
-### Gramer komutları
+### Gramer komutlarÄ±
 
 ```powershell
 python markdown_to_json_converter.py --input-dir docs/gramer --output-dir json_output
@@ -189,17 +189,17 @@ Alternatif uploader:
 python supabase_uploader.py --json-file json_output/tum_gramer_modulleri.json --mode replace
 ```
 
-## UI Akışı (Tutarlı Özet)
+## UI AkÄ±ÅŸÄ± (TutarlÄ± Ã–zet)
 
-1. Açılış/Splash: Supabase bağlantısı kontrol edilir, anonim oturum başlatılır.
-2. Paket listesi: Kullanıcı çalışacağı paketi seçer.
-3. Kelime listesi: Arama/filtreleme yapılır, buradan **öğrenme oturumu başlatılır**.
-4. Flashcard oturumu: Bilme düzeyi işaretlenir, progress güncellenir.
-5. Test hub: MCQ / eşleştirme / yazma testleri.
-6. Reading: Metin, çeviri ve kelime etkileşimleri.
-7. Gramer: Modül listesi -> modül sayfaları -> reader akışı.
+1. AÃ§Ä±lÄ±ÅŸ/Splash: Supabase baÄŸlantÄ±sÄ± kontrol edilir, anonim oturum baÅŸlatÄ±lÄ±r.
+2. Paket listesi: KullanÄ±cÄ± Ã§alÄ±ÅŸacaÄŸÄ± paketi seÃ§er.
+3. Kelime listesi: Arama/filtreleme yapÄ±lÄ±r, buradan **Ã¶ÄŸrenme oturumu baÅŸlatÄ±lÄ±r**.
+4. Flashcard oturumu: Bilme dÃ¼zeyi iÅŸaretlenir, progress gÃ¼ncellenir.
+5. Test hub: MCQ / eÅŸleÅŸtirme / yazma testleri.
+6. Reading: Metin, Ã§eviri ve kelime etkileÅŸimleri.
+7. Gramer: ModÃ¼l listesi -> modÃ¼l sayfalarÄ± -> reader akÄ±ÅŸÄ±.
 
-### Temsili UI Çizimi (Wireframe)
+### Temsili UI Ã‡izimi (Wireframe)
 
 ```text
 +-----------------------------------+
@@ -276,12 +276,12 @@ python supabase_uploader.py --json-file json_output/tum_gramer_modulleri.json --
 +-----------------------------------+
 ```
 
-## Faz 3 Özet Akışı
+## Faz 3 Ã–zet AkÄ±ÅŸÄ±
 
 - Bottom nav: `Ana Sayfa / Kelime / Okuma / Gramer / Profil`
-- Home hızlı başlangıç: `resume reading -> weak words -> random words`
-- Reading detail: seçim ve hızlı sözlük etkileşimi
-- Gramer reader: modül bazlı sayfa ilerleme akışı
+- Home hÄ±zlÄ± baÅŸlangÄ±Ã§: `resume reading -> weak words -> random words`
+- Reading detail: seÃ§im ve hÄ±zlÄ± sÃ¶zlÃ¼k etkileÅŸimi
+- Gramer reader: modÃ¼l bazlÄ± sayfa ilerleme akÄ±ÅŸÄ±
 
 ## Test ve Kalite Kontrolleri
 
@@ -292,53 +292,36 @@ python -m py_compile markdown_to_json_converter.py supabase_uploader.py
 ```
 
 Not:
-- Typing testi şu an esasen exact-match davranışına yakındır.
-- Typo tolerance yardımcı katmanları bazı akışlarda vardır, ancak typing doğrulamasına otomatik geniş tolerans olarak garanti edilmez.
+- Typing testi ÅŸu an esasen exact-match davranÄ±ÅŸÄ±na yakÄ±ndÄ±r.
+- Typo tolerance yardÄ±mcÄ± katmanlarÄ± bazÄ± akÄ±ÅŸlarda vardÄ±r, ancak typing doÄŸrulamasÄ±na otomatik geniÅŸ tolerans olarak garanti edilmez.
 
-## Operasyonel Risk Notları
+## Operasyonel Risk NotlarÄ±
 
-- Anonymous auth hızlı onboarding sağlar; ancak cihaz değişimi/uygulama silme sonrası kullanıcı kimliği taşınamazsa ilerleme geri getirilemeyebilir.
-- Public translation fallback endpoint'leri geliştirmede pratik olsa da production için gizlilik, limit ve uptime riskleri barındırır.
+- Anonymous auth hÄ±zlÄ± onboarding saÄŸlar; ancak cihaz deÄŸiÅŸimi/uygulama silme sonrasÄ± kullanÄ±cÄ± kimliÄŸi taÅŸÄ±namazsa ilerleme geri getirilemeyebilir.
+- Public translation fallback endpoint'leri geliÅŸtirmede pratik olsa da production iÃ§in gizlilik, limit ve uptime riskleri barÄ±ndÄ±rÄ±r.
 
 ## Troubleshooting
 
-| Sorun | Belirti | Kontrol / Çözüm |
+| Sorun | Belirti | Kontrol / Ã‡Ã¶zÃ¼m |
 |---|---|---|
-| Supabase URL/Key eksik | Uygulama Supabase’e bağlanmaz | `SUPABASE_URL` + `SUPABASE_ANON_KEY` değerlerini kontrol et |
-| Anonymous provider kapalı | Açılışta anonim oturum oluşmaz | Supabase Dashboard -> Auth -> Providers -> Anonymous aç |
-| Android INTERNET izni eksik | `Failed host lookup` / `SocketException` | `AndroidManifest.xml` içinde INTERNET iznini doğrula |
-| Translation endpoint yok | Çeviri özelliği çalışmaz | Endpoint tanımla veya fallback davranışını kabul et |
+| Supabase URL/Key eksik | Uygulama Supabaseâ€™e baÄŸlanmaz | `SUPABASE_URL` + `SUPABASE_ANON_KEY` deÄŸerlerini kontrol et |
+| Anonymous provider kapalÄ± | AÃ§Ä±lÄ±ÅŸta anonim oturum oluÅŸmaz | Supabase Dashboard -> Auth -> Providers -> Anonymous aÃ§ |
+| Android INTERNET izni eksik | `Failed host lookup` / `SocketException` | `AndroidManifest.xml` iÃ§inde INTERNET iznini doÄŸrula |
+| Translation endpoint yok | Ã‡eviri Ã¶zelliÄŸi Ã§alÄ±ÅŸmaz | Endpoint tanÄ±mla veya fallback davranÄ±ÅŸÄ±nÄ± kabul et |
 
 ## Android Release Notu (Split APK)
 
-Küçük boyutlu APK (ABI bazlı):
+KÃ¼Ã§Ã¼k boyutlu APK (ABI bazlÄ±):
 
 ```powershell
 flutter build apk --release --split-per-abi --dart-define-from-file=env/app.dev.json
 ```
 
-## Screenshots (Yer Tutucu)
+## Not: T?rk?e Karakterler
 
-Bu dosyaları siz ekleyeceksiniz:
+Bu README dosyas? **UTF-8** kodlamas? ile tutulur. T?rk?e karakterlerin (?, ?, ?, ?, ?, ?, ?) bozulmamas? i?in dosyay? UTF-8 olarak a??p kaydedin.
 
-1. `docs/screenshots/01_home_dashboard.png`  
-   Ana Dashboard + Bottom Nav (Gramer sekmesi görünür)
-2. `docs/screenshots/02_word_list.png`  
-   Kelime Listesi (arama + filtre + öğrenmeye başla)
-3. `docs/screenshots/03_test_hub.png`  
-   Test Hub (sekmeler görünür)
-4. `docs/screenshots/04_reading_detail.png`  
-   Reading Detail (çeviriyi göster akışı)
-5. `docs/screenshots/05_grammar_modules.png`  
-   Gramer Modül Listesi
-6. `docs/screenshots/06_grammar_reader.png`  
-   Gramer Reader (progress + içerik + mini test)
-
-İsterseniz bu bölümde doğrudan Markdown image link formatına çevirebiliriz:
-
-```md
-![Home Dashboard](docs/screenshots/01_home_dashboard.png)
-```
+PowerShell ile dosya yazarken UTF-8 kullan?n: `Set-Content -Encoding UTF8` veya `Out-File -Encoding utf8`.
 
 ## Faz 3.1 Stabilizasyon Notu
 
@@ -348,3 +331,83 @@ Bu dosyaları siz ekleyeceksiniz:
 - ReadingDetail odak kelimeler paneli varsayilan kapali gelir; acildiginda EN + TR anlam listelenir.
 - Reading quick word popup layoutu tasma yapmayacak sekilde yeniden hizalandi.
 - Home/Profile auth akisinda anonim session zorunlu hale getirildi; auth hatalari kullanici dostu Retry mesaji ile gosterilir.
+
+## Faz 3.1 Ek Guncelleme (Kelime/SÃ¶zlÃ¼k Birlesimi + UI Stabilizasyon)
+
+Bu bolum, mevcut Faz 3.1 notlarina ek olarak son patchlerde gelen davranis guncellemelerini listeler.
+
+### 1) Navigasyon ve Bilgi Mimarisi
+
+- Bottom nav artik 5 sekmelidir: `Ana Sayfa / Kelime / Okuma / Gramer / Profil`.
+- Ayrik `Sozluk` sekmesi shell'den cikarilmistir.
+- Sozluk ozelligi kaldirilmadi; `Kelime` sekmesi icinde birlesik arama deneyimine tasindi.
+
+### 2) Kelime Sekmesi (Yeni Birlesik Arama Akisi)
+
+- Kelime sekmesinde ustte tek bir arama kutusu bulunur.
+- Bos aramada gereksiz sorgu atilmaz, yonlendirme metni gosterilir.
+- Arama sonucu kelime kartinda eslesirse:
+  - `Kelime Karti` aksiyonu ile `WordDetail` acilir.
+  - `Sozluk` aksiyonu ile dictionary/fallback sonucu acilir.
+- Arama sonucu kelime kartinda yoksa:
+  - `Sozluk` aksiyonu ile fallback lookup sonucu acilir.
+- Kelime sekmesinin altinda pack listesi gomulu kalir (`PackListPage(embedded: true)`).
+
+### 3) Auth Stabilizasyonu
+
+- `appBootstrapProvider` auth hatalarini artik swallow etmez.
+- Home/Profile veri providerlari auth session kurulmadan metrik sorgularina gecmez.
+- Gecici oturum kopmalarinda bir kez otomatik toparlama (retry) uygulanir.
+- Kullaniciya gosterilen hata dili teknik yerine aksiyon odaklidir (`Retry`).
+
+### 4) Reading Quick Word Popup Iyilestirmesi
+
+- Popup ust bolumunde baslik ve etiketler `Column + Wrap` duzenine alinmistir.
+- Uzun kelime ve uzun etiketlerde satir kirilmasi/overflow riski azaltilmistir.
+- Bulunan kelime kartinda `trMeaning` chip satirindan ayrilip ayri blokta gosterilir.
+- Synonym/antonym chipleri iliskili kelime veya sozluk fallback akisini tetikleyebilir.
+- `Kaynakta Ac` otomatik calismaz, sadece butonla dis tarayici acilir.
+
+### 5) Reading Odak Kelimeler Paneli
+
+- Panel varsayilan olarak kapalidir (collapse/expand).
+- Panel acildiginda her satirda `EN + TR + POS` bilgisi gosterilir.
+- `Kelime Calis` ve `Mini MCQ` aksiyonlari panel acikken gorunur.
+- Odak kelimeler mevcut deterministic highlight yaklasimiyla uyumlu uretilir.
+
+### 6) Sayac Tutarliligi
+
+- Pack kartlarinda gorunen kelime sayisi tek bir kaynak semasiyla sunulur (`Pack.wordCount`).
+- Reading pack kart metni `X kelime` formatina alinmistir.
+- Word ve Reading yuzeyinde ayni pack icin ayni sayi gosterilmesi hedeflenmistir.
+
+### 7) Build Notu (Kucuk APK)
+
+Kucuk boyutlu arm64 release APK icin:
+
+```powershell
+flutter build apk --release --target-platform android-arm64 --split-per-abi --dart-define-from-file=env/app.dev.json
+```
+
+Beklenen cikti:
+- `build/app/outputs/flutter-apk/app-arm64-v8a-release.apk`
+
+## Screenshots
+
+### 1) Home Dashboard
+![Home Dashboard](docs/screenshots/01_home_dashboard.png)
+
+### 2) Word List
+![Word List](docs/screenshots/02_word_list.png)
+
+### 3) Test Hub
+![Test Hub](docs/screenshots/03_test_hub.png)
+
+### 4) Reading Detail
+![Reading Detail](docs/screenshots/04_reading_detail.png)
+
+### 5) Grammar Modules
+![Grammar Modules](docs/screenshots/05_grammar_modules.png)
+
+### 6) Grammar Reader
+![Grammar Reader](docs/screenshots/06_grammar_reader.png)
