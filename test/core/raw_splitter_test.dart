@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:ingilizce_app1/core/utils/raw_splitter.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:passagetr/core/utils/raw_splitter.dart';
 
 void main() {
   group('parseRawList', () {
@@ -14,3 +14,4 @@ void main() {
     });
   });
 }
+

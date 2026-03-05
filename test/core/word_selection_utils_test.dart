@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ingilizce_app1/core/utils/word_selection_utils.dart';
+import 'package:passagetr/core/utils/word_selection_utils.dart';
 
 void main() {
   test('normalizeSelectedWord trims punctuation and lowercases', () {
@@ -26,3 +26,4 @@ void main() {
     );
   });
 }
+

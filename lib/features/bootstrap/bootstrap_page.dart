@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/constants/brand_constants.dart';
 import '../../state/providers.dart';
 import '../shell/main_shell_page.dart';
 
@@ -117,7 +118,7 @@ class _BrandedSplashState extends State<_BrandedSplash>
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'English Learning',
+                  BrandConstants.appName,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w800,
                         color: colors.onSurface,
@@ -125,7 +126,7 @@ class _BrandedSplashState extends State<_BrandedSplash>
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Kelime, okuma ve gramer — tek uygulamada.',
+                  BrandConstants.slogan,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: colors.onSurfaceVariant,

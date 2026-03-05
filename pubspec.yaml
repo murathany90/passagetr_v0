@@ -1,5 +1,5 @@
-name: ingilizce_app1
-description: Faz 1 MVP - Supabase tabanli Ingilizce kelime ogrenme uygulamasi
+name: passagetr
+description: PASSAGETR - Reading is Power.
 publish_to: "none"
 version: 0.1.0+1
 
@@ -31,10 +31,29 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   build_runner: ^2.4.13
   drift_dev: ^2.20.3
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: assets/branding/app_icon_source.png
+    background_color: "#F5C33B"
+    theme_color: "#F5C33B"
+  windows:
+    generate: true
+    image_path: assets/branding/app_icon_source.png
+    icon_size: 256
+  macos:
+    generate: true
+    image_path: assets/branding/app_icon_source.png
+  image_path: assets/branding/app_icon_source.png
 
 flutter:
   uses-material-design: true
   assets:
+    - assets/branding/app_icon_source.png
     - assets/db/dictionary_local.sqlite
     - assets/db/app_content.db
     - assets/db/app_content.meta.json

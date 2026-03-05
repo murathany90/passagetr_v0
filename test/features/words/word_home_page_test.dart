@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ingilizce_app1/domain/entities/dictionary_lookup_result.dart';
-import 'package:ingilizce_app1/domain/entities/pack.dart';
-import 'package:ingilizce_app1/domain/entities/word_item.dart';
-import 'package:ingilizce_app1/features/words/word_home_page.dart';
-import 'package:ingilizce_app1/state/content_providers.dart';
-import 'package:ingilizce_app1/state/pack_providers.dart';
-import 'package:ingilizce_app1/state/word_providers.dart';
+import 'package:passagetr/domain/entities/dictionary_lookup_result.dart';
+import 'package:passagetr/domain/entities/pack.dart';
+import 'package:passagetr/domain/entities/word_item.dart';
+import 'package:passagetr/features/words/word_home_page.dart';
+import 'package:passagetr/state/content_providers.dart';
+import 'package:passagetr/state/pack_providers.dart';
+import 'package:passagetr/state/word_providers.dart';
 
 import '../../helpers/fake_repositories.dart';
 
@@ -141,3 +141,4 @@ void main() {
     expect(find.text('Sözlük'), findsOneWidget);
   });
 }
+

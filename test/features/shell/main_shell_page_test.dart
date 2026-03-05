@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ingilizce_app1/domain/entities/home_dashboard_data.dart';
-import 'package:ingilizce_app1/features/shell/main_shell_page.dart';
-import 'package:ingilizce_app1/state/auth_providers.dart';
-import 'package:ingilizce_app1/state/dashboard_providers.dart';
-import 'package:ingilizce_app1/state/nav_badge_providers.dart';
+import 'package:passagetr/domain/entities/home_dashboard_data.dart';
+import 'package:passagetr/features/shell/main_shell_page.dart';
+import 'package:passagetr/state/auth_providers.dart';
+import 'package:passagetr/state/dashboard_providers.dart';
+import 'package:passagetr/state/nav_badge_providers.dart';
 
 void main() {
   Future<void> configureViewport(WidgetTester tester) async {
@@ -56,3 +56,4 @@ void main() {
     expect(find.text('Sozluk'), findsNothing);
   });
 }
+

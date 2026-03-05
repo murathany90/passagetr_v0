@@ -1,0 +1,24 @@
+# flutter_native_splash.yaml
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/splash.png
+
+  android_12:
+    image: assets/splash-android12.png
+    color: "#FFFFFF"
+
+# Run:
+# dart run flutter_native_splash:create
+
+# In your main.dart:
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // ... initialization logic
+
+  FlutterNativeSplash.remove();
+  runApp(const MyApp());
+}

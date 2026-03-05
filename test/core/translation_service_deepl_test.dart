@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ingilizce_app1/core/services/translation_service.dart';
+import 'package:passagetr/core/services/translation_service.dart';
 
 void main() {
   test('DeeplEdgeFunctionTranslationService parses translatedText', () async {
@@ -45,3 +45,4 @@ void main() {
     );
   });
 }
+

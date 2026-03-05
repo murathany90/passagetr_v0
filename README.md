@@ -1,7 +1,19 @@
-# İngilizce Öğrenme Uygulaması (Faz 1-4, Güncel)
+# PASSAGETR (Faz 1-4, Güncel)
 
 Bu repo, Flutter + Supabase tabanlı İngilizce öğrenme uygulamasının güncel sürümünü içerir.
 Mevcut kapsam artık yalnızca Faz 1 değil; Faz 2 (reading/çeviri), Faz 3 (dashboard/akış iyileştirmeleri) ve Faz 4 (gramer modülü + content pipeline) dahildir.
+
+PASSAGETR: YDS ve İngilizce öğrenenler için özel olarak tasarlanmış,
+zengin okuma parçası koleksiyonuna sahip akıllı öğrenme uygulaması.
+
+📚 500+ Özgün Okuma Parçası
+🎯 YDS, YÖKDİL, YDT'ye Özel İçerik
+🤖 Akıllı Kelime Çıkarıcı
+📊 Detaylı İlerleme Takibi
+🎧 Sesli Okuma Desteği
+📱 Çevrimdışı Kullanım
+
+Özel Slogan: Reading is Power.
 
 ## Kapsam Özeti
 
@@ -84,7 +96,7 @@ lib/
 
 ```bash
 git clone <REPO_URL>
-cd ingilizce_app1
+cd PASSAGETR
 flutter pub get
 ```
 
@@ -214,7 +226,7 @@ python supabase_uploader.py --json-file json_output/tum_gramer_modulleri.json --
 
 ```text
 +-----------------------------------+
-| ingilizce_app1                    |
+| PASSAGETR                         |
 +-----------------------------------+
 | [Ana Sayfa] [Kelime] [Okuma] [Gramer] [Profil]  <- Bottom Nav
 +-----------------------------------+
@@ -416,6 +428,25 @@ flutter build apk --release --target-platform android-arm64 --split-per-abi --da
 
 Beklenen cikti:
 - `build/app/outputs/flutter-apk/app-arm64-v8a-release.apk`
+
+## PASSAGETR Marka Geçişi
+
+- Uygulama adı tüm platformlarda `PASSAGETR` olarak güncellendi.
+- Uygulama sloganı: `Reading is Power.`
+- Flutter package adı: `passagetr`
+- Android/iOS/macOS bundle ID ve applicationId bu turda bilinçli olarak **değiştirilmedi**:
+  - `com.example.ingilizce_app1`
+  - `com.example.ingilizceApp1`
+
+### İkon Kaynağı ve Üretim
+
+- Kaynak ikon: `docs/icon_taslak/flutter/splash.png`
+- Proje içi kaynak: `assets/branding/app_icon_source.png`
+- İkon üretim komutu:
+
+```bash
+dart run flutter_launcher_icons
+```
 
 ## Screenshots
 

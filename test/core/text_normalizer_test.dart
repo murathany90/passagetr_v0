@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:ingilizce_app1/core/utils/text_normalizer.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:passagetr/core/utils/text_normalizer.dart';
 
 void main() {
   test('normalizeTypingAnswer should lowercase and collapse spaces', () {
@@ -7,3 +7,4 @@ void main() {
     expect(result, 'abc def');
   });
 }
+

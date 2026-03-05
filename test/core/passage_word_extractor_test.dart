@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ingilizce_app1/core/utils/passage_word_extractor.dart';
+import 'package:passagetr/core/utils/passage_word_extractor.dart';
 
 void main() {
   test('extractPassageWordCandidates removes stopwords and punctuation', () {
@@ -18,3 +18,4 @@ void main() {
     expect(words.contains('office'), isTrue);
   });
 }
+

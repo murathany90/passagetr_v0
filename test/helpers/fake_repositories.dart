@@ -1,19 +1,19 @@
-import 'package:ingilizce_app1/core/services/translation_service.dart';
-import 'package:ingilizce_app1/domain/entities/dictionary_bootstrap_state.dart';
-import 'package:ingilizce_app1/domain/entities/dictionary_entry.dart';
-import 'package:ingilizce_app1/domain/entities/dictionary_lookup_result.dart';
-import 'package:ingilizce_app1/domain/entities/passage_sentence.dart';
-import 'package:ingilizce_app1/domain/entities/reading_passage.dart';
-import 'package:ingilizce_app1/domain/entities/reading_resume_item.dart';
-import 'package:ingilizce_app1/domain/entities/sentence_translation.dart';
-import 'package:ingilizce_app1/domain/entities/tag_count.dart';
-import 'package:ingilizce_app1/domain/entities/user_reading_progress.dart';
-import 'package:ingilizce_app1/domain/entities/word_item.dart';
-import 'package:ingilizce_app1/domain/entities/word_level_summary.dart';
-import 'package:ingilizce_app1/domain/repositories/dictionary_repository.dart';
-import 'package:ingilizce_app1/domain/repositories/reading_repository.dart';
-import 'package:ingilizce_app1/domain/repositories/word_repository.dart';
-import 'package:ingilizce_app1/domain/value_objects/paged_result.dart';
+﻿import 'package:passagetr/core/services/translation_service.dart';
+import 'package:passagetr/domain/entities/dictionary_bootstrap_state.dart';
+import 'package:passagetr/domain/entities/dictionary_entry.dart';
+import 'package:passagetr/domain/entities/dictionary_lookup_result.dart';
+import 'package:passagetr/domain/entities/passage_sentence.dart';
+import 'package:passagetr/domain/entities/reading_passage.dart';
+import 'package:passagetr/domain/entities/reading_resume_item.dart';
+import 'package:passagetr/domain/entities/sentence_translation.dart';
+import 'package:passagetr/domain/entities/tag_count.dart';
+import 'package:passagetr/domain/entities/user_reading_progress.dart';
+import 'package:passagetr/domain/entities/word_item.dart';
+import 'package:passagetr/domain/entities/word_level_summary.dart';
+import 'package:passagetr/domain/repositories/dictionary_repository.dart';
+import 'package:passagetr/domain/repositories/reading_repository.dart';
+import 'package:passagetr/domain/repositories/word_repository.dart';
+import 'package:passagetr/domain/value_objects/paged_result.dart';
 
 class FakeTranslationService extends TranslationService {
   FakeTranslationService({
@@ -342,3 +342,4 @@ class FakeReadingRepository implements ReadingRepository {
     return passageWords.take(limit).toList(growable: false);
   }
 }
+

@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ingilizce_app1/core/utils/levenshtein.dart';
+import 'package:passagetr/core/utils/levenshtein.dart';
 
 void main() {
   group('levenshteinDistance', () {
@@ -17,7 +17,7 @@ void main() {
       expect(levenshteinDistance('', ''), 0);
     });
 
-    test('classic kitten → sitting = 3', () {
+    test('classic kitten â†’ sitting = 3', () {
       expect(levenshteinDistance('kitten', 'sitting'), 3);
     });
 
@@ -44,12 +44,12 @@ void main() {
     });
 
     test('one edit on long word (>5 chars) returns nearMatch', () {
-      // "abilty" → missing 'i' at position 4: distance = 1
+      // "abilty" â†’ missing 'i' at position 4: distance = 1
       expect(checkTypingAnswer('ability', 'abilty'), TypingResult.nearMatch);
     });
 
     test('two edits on long word returns nearMatch', () {
-      // "abiltiy" → transposition-like: distance = 2
+      // "abiltiy" â†’ transposition-like: distance = 2
       expect(checkTypingAnswer('ability', 'abiltiy'), TypingResult.nearMatch);
     });
 
@@ -78,3 +78,4 @@ void main() {
     });
   });
 }
+

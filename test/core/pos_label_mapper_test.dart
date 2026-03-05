@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:ingilizce_app1/core/utils/pos_label_mapper.dart';
+﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:passagetr/core/utils/pos_label_mapper.dart';
 
 void main() {
   test('labelFor maps canonical POS to Turkish labels', () {
@@ -15,3 +15,4 @@ void main() {
     expect(sorted, <String>['prep.', 'v.', 'adv.', 'custom']);
   });
 }
+
