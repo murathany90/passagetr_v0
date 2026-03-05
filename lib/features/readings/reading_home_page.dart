@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/i18n/tr_ui_texts.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
-import '../../core/widgets/app_loading_block.dart';
 import '../../core/widgets/app_section_header.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../state/providers.dart';
@@ -19,11 +20,21 @@ class ReadingHomePage extends ConsumerWidget {
     final AsyncValue<List<Pack>> packsAsync = ref.watch(packListProvider);
 
     return packsAsync.when(
-      loading: () =>
-          const AppLoadingBlock(message: 'Okuma paketleri yukleniyor...'),
+      loading: () => const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            AppShimmerCard(lineCount: 4),
+            SizedBox(height: 10),
+            AppShimmerCard(),
+            SizedBox(height: 10),
+            AppShimmerCard(lineCount: 2),
+          ],
+        ),
+      ),
       error: (Object error, StackTrace stack) {
         return AppErrorState(
-          title: 'Okuma paketleri yuklenemedi.',
+          title: TrUiTexts.readingPackLoadError,
           detail: error.toString(),
           onRetry: () => ref.invalidate(packListProvider),
         );
@@ -31,9 +42,8 @@ class ReadingHomePage extends ConsumerWidget {
       data: (List<Pack> packs) {
         if (packs.isEmpty) {
           return const AppEmptyState(
-            title: 'Okuma paketi bulunamadi',
-            message:
-                'Okuma paketleri icin docs/supabase_readings_import.md adimlarini takip edin.',
+            title: TrUiTexts.readingPackEmptyTitle,
+            message: TrUiTexts.readingPackEmptyMessage,
             icon: Icons.menu_book_outlined,
           );
         }
@@ -68,7 +78,8 @@ class ReadingHomePage extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const AppSectionHeader(title: 'Okuma Paketi'),
+                    const AppSectionHeader(
+                        title: TrUiTexts.readingPackCardTitle),
                     Row(
                       children: <Widget>[
                         Expanded(
@@ -87,7 +98,9 @@ class ReadingHomePage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      '${pack.wordCount} kelime',
+                      pack.wordCount > 0
+                          ? TrUiTexts.packWordCount(pack.wordCount)
+                          : TrUiTexts.packOnlyReading,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color:
                                 Theme.of(context).colorScheme.onSurfaceVariant,
@@ -145,14 +158,14 @@ class _ReadingHeroCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Paragraf Calis',
+            TrUiTexts.readingHeroTitle,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w800,
                 ),
           ),
           const SizedBox(height: 6),
           Text(
-            '$packCount okuma paketi hazir. Cumle bazli calis ve ceviriyle pekistir.',
+            TrUiTexts.readingHeroSummary(packCount),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -161,7 +174,7 @@ class _ReadingHeroCard extends StatelessWidget {
           AppGradientCtaButton(
             onTap: onTap,
             icon: Icons.play_arrow_rounded,
-            label: 'Okumaya Basla',
+            label: TrUiTexts.readingHeroStart,
           ),
         ],
       ),

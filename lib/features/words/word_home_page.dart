@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/i18n/tr_ui_texts.dart';
 import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/dictionary_lookup_result.dart';
@@ -87,10 +88,10 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
         return;
       }
       setState(() {
-        _error = 'Arama su an tamamlanamadi. Tekrar deneyin.';
+        _error = TrUiTexts.searchError;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Arama hatasi: $error')),
+        SnackBar(content: Text('${TrUiTexts.searchErrorPrefix} $error')),
       );
     } finally {
       if (mounted) {
@@ -146,7 +147,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Kelime / Sozluk Arama',
+                  TrUiTexts.wordSearchTitle,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
@@ -159,16 +160,17 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
                         controller: _queryController,
                         textInputAction: TextInputAction.search,
                         onSubmitted: _submitSearch,
+                        onChanged: (_) => setState(() {}),
                         decoration: const InputDecoration(
-                          hintText: 'Kelime ara (or. abandon)',
+                          hintText: TrUiTexts.wordSearchHint,
                           prefixIcon: Icon(Icons.search),
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
                     FilledButton(
-                      onPressed: _isSearching ? null : _submitSearch,
-                      child: const Text('Ara'),
+                      onPressed: _isSearching ? null : () => _submitSearch(),
+                      child: const Text(TrUiTexts.searchButton),
                     ),
                   ],
                 ),
@@ -186,7 +188,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
                         );
                       },
                       icon: const Icon(Icons.layers_outlined),
-                      label: const Text('Level Hub'),
+                      label: const Text(TrUiTexts.levelHubCta),
                     ),
                     if (_queryController.text.trim().isNotEmpty)
                       TextButton(
@@ -194,7 +196,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
                           _queryController.clear();
                           _submitSearch('');
                         },
-                        child: const Text('Temizle'),
+                        child: const Text(TrUiTexts.clear),
                       ),
                   ],
                 ),
@@ -225,7 +227,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
               child: CircularProgressIndicator(strokeWidth: 2),
             ),
             SizedBox(width: 10),
-            Expanded(child: Text('Arama yapiliyor...')),
+            Expanded(child: Text(TrUiTexts.searching)),
           ],
         ),
       );
@@ -234,7 +236,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
     if (_submittedQuery.trim().isEmpty) {
       return const AppSurfaceCard(
         child: Text(
-          'Arama sonucunda kelime karti varsa "Kelime Karti", her durumda "Sozluk" sonucuna gidebilirsiniz.',
+          TrUiTexts.searchInfo,
         ),
       );
     }
@@ -251,7 +253,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
             const SizedBox(height: 8),
             FilledButton(
               onPressed: _submitSearch,
-              child: const Text('Retry'),
+              child: const Text(TrUiTexts.retry),
             ),
           ],
         ),
@@ -275,12 +277,11 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
           const SizedBox(height: 6),
           if (hasWordCard) ...<Widget>[
             Text(
-              'Kelime kartinda bulundu: ${_matchedWord!.enWord} -> ${_matchedWord!.trMeaning}',
+              '${TrUiTexts.wordCardFoundPrefix} ${_matchedWord!.enWord} -> ${_matchedWord!.trMeaning}',
             ),
             const SizedBox(height: 8),
           ] else ...<Widget>[
-            const Text(
-                'Kelime kartinda bulunamadi. Sozluk sonucunu acabilirsiniz.'),
+            const Text(TrUiTexts.wordCardMissing),
             const SizedBox(height: 8),
           ],
           if (sourceLabel.isNotEmpty)
@@ -305,12 +306,12 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
                     );
                   },
                   icon: const Icon(Icons.style_outlined),
-                  label: const Text('Kelime Karti'),
+                  label: const Text(TrUiTexts.wordCardButton),
                 ),
               FilledButton.icon(
                 onPressed: _openDictionaryResult,
                 icon: const Icon(Icons.menu_book_outlined),
-                label: const Text('Sozluk'),
+                label: const Text(TrUiTexts.dictionaryButton),
               ),
             ],
           ),
@@ -324,19 +325,19 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
       return '';
     }
     if (lookup.hasLocalEntries) {
-      return 'Local sozluk';
+      return TrUiTexts.sourceLocalDictionary;
     }
     if (lookup.fromServerCache) {
-      return 'Sunucu cache';
+      return TrUiTexts.sourceServerCache;
     }
     if (lookup.fromDeepL) {
-      return 'DeepL fallback';
+      return TrUiTexts.sourceDeepLFallback;
     }
     if (lookup.hasFallback) {
-      return 'Fallback';
+      return TrUiTexts.sourceFallback;
     }
     if (lookup.hasError) {
-      return 'Hata';
+      return TrUiTexts.sourceError;
     }
     return '';
   }

@@ -11,6 +11,17 @@ class LocalWordRepository implements WordRepository {
   final AppContentLocalDataSource _local;
 
   @override
+  Future<List<String>> getDistinctPosValues({
+    String? packId,
+    String? level,
+  }) {
+    return _local.getDistinctPosValues(
+      packId: packId,
+      level: level,
+    );
+  }
+
+  @override
   Future<PagedResult<WordItem>> getWordsByPack(
     String packId, {
     String? query,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/i18n/tr_ui_texts.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
-import '../../core/widgets/app_loading_block.dart';
 import '../../core/widgets/app_section_header.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../state/providers.dart';
@@ -30,10 +31,21 @@ class PackListPage extends ConsumerWidget {
     final AsyncValue<List<Pack>> packsAsync = ref.watch(packListProvider);
 
     final Widget body = packsAsync.when(
-      loading: () => const AppLoadingBlock(message: 'Packler yukleniyor...'),
+      loading: () => const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            AppShimmerCard(),
+            SizedBox(height: 10),
+            AppShimmerCard(lineCount: 2),
+            SizedBox(height: 10),
+            AppShimmerCard(),
+          ],
+        ),
+      ),
       error: (Object error, StackTrace stack) {
         return AppErrorState(
-          title: 'Pack listesi yuklenemedi.',
+          title: TrUiTexts.packListLoadError,
           detail: error.toString(),
           onRetry: () => ref.invalidate(packListProvider),
         );
@@ -41,10 +53,10 @@ class PackListPage extends ConsumerWidget {
       data: (List<Pack> packs) {
         if (packs.isEmpty) {
           return AppEmptyState(
-            title: 'Henuz paket yok',
+            title: TrUiTexts.packListEmptyTitle,
             message: hintText(),
             icon: Icons.menu_book_outlined,
-            actionLabel: 'Yenile',
+            actionLabel: TrUiTexts.refresh,
             onAction: () => ref.invalidate(packListProvider),
           );
         }
@@ -89,7 +101,11 @@ class PackListPage extends ConsumerWidget {
                           ),
                         ),
                         Chip(
-                          label: Text('${pack.wordCount} kelime'),
+                          label: Text(
+                            pack.wordCount > 0
+                                ? TrUiTexts.packWordCount(pack.wordCount)
+                                : TrUiTexts.packOnlyReading,
+                          ),
                           visualDensity: VisualDensity.compact,
                         ),
                       ],
@@ -111,7 +127,7 @@ class PackListPage extends ConsumerWidget {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'Pack hub ac',
+                          TrUiTexts.packOpenHubCta,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -139,15 +155,14 @@ class PackListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pack List'),
+        title: const Text(TrUiTexts.packsAppBarTitle),
       ),
       body: body,
     );
   }
 
   String hintText() {
-    return emptyHint ??
-        'CSV import rehberini docs/supabase_csv_import.md dosyasindan takip edin.';
+    return emptyHint ?? TrUiTexts.csvImportHint;
   }
 }
 
@@ -185,7 +200,7 @@ class PackDetailPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          const AppSectionHeader(title: 'Calisma Modlari'),
+          const AppSectionHeader(title: TrUiTexts.packModesHeader),
           const SizedBox(height: 8),
           AppGradientCtaButton(
             onTap: () {
@@ -196,7 +211,7 @@ class PackDetailPage extends StatelessWidget {
               );
             },
             icon: Icons.school,
-            label: 'Kelime Calis',
+            label: TrUiTexts.wordStudyCta,
           ),
           const SizedBox(height: 8),
           FilledButton.tonalIcon(
@@ -236,7 +251,7 @@ class WordStudyHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Kelime Calis')),
+      appBar: AppBar(title: const Text(TrUiTexts.wordStudyCta)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[

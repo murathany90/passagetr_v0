@@ -4,6 +4,11 @@ import '../entities/tag_count.dart';
 import '../value_objects/paged_result.dart';
 
 abstract class WordRepository {
+  Future<List<String>> getDistinctPosValues({
+    String? packId,
+    String? level,
+  });
+
   Future<PagedResult<WordItem>> getWordsByPack(
     String packId, {
     String? query,

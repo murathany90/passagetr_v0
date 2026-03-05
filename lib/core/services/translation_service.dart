@@ -45,18 +45,15 @@ class LibreTranslateService extends TranslationService {
   LibreTranslateService({
     required this.endpoint,
     required this.apiKey,
+    this.fallbackEndpoints = const <String>[],
     http.Client? client,
   }) : _client = client ?? http.Client();
 
   final String endpoint;
   final String apiKey;
+  final List<String> fallbackEndpoints;
   final http.Client _client;
   static const Duration _timeout = Duration(seconds: 10);
-  static const List<String> _fallbackEndpoints = <String>[
-    'https://translate.argosopentech.com/translate',
-    'https://translate.astian.org/translate',
-    'https://libretranslate.pussthecat.org/translate',
-  ];
 
   @override
   String get providerKey => TranslationProvider.libre.value;
@@ -163,7 +160,7 @@ class LibreTranslateService extends TranslationService {
   List<Uri> _buildCandidateUris() {
     final Set<String> seen = <String>{};
     final List<Uri> uris = <Uri>[];
-    for (final String raw in <String>[endpoint, ..._fallbackEndpoints]) {
+    for (final String raw in <String>[endpoint, ...fallbackEndpoints]) {
       final String normalized = _normalizeEndpoint(raw);
       if (normalized.isEmpty || !seen.add(normalized)) {
         continue;

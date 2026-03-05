@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -8,15 +10,26 @@ class AuthSessionService {
 
   final SupabaseClient _client;
 
+  /// Whether the last auth attempt was skipped due to network unavailability.
+  bool _offlineSkipped = false;
+  bool get isOfflineSkipped => _offlineSkipped;
+
   Future<void> ensureAnonymousSession() async {
     final Session? session = _client.auth.currentSession;
     if (session != null) {
+      _offlineSkipped = false;
       return;
     }
 
     try {
       await _client.auth.signInAnonymously();
+      _offlineSkipped = false;
     } catch (error) {
+      // Network errors → offline mode, skip auth silently
+      if (_isNetworkError(error)) {
+        _offlineSkipped = true;
+        return;
+      }
       if (_canUseDevFallback) {
         return;
       }
@@ -26,7 +39,7 @@ class AuthSessionService {
     }
 
     if (_client.auth.currentSession == null) {
-      if (_canUseDevFallback) {
+      if (_canUseDevFallback || _offlineSkipped) {
         return;
       }
       throw const AuthSessionException('Anonymous giris olusturulamadi.');
@@ -37,6 +50,20 @@ class AuthSessionService {
       kDebugMode &&
       AppConfig.allowDemoFallback &&
       AppConfig.demoUserUuid.isNotEmpty;
+
+  /// Checks if the error is a network connectivity issue.
+  static bool _isNetworkError(Object error) {
+    if (error is SocketException) {
+      return true;
+    }
+    final String message = error.toString().toLowerCase();
+    return message.contains('socketexception') ||
+        message.contains('failed host lookup') ||
+        message.contains('no address associated') ||
+        message.contains('connection refused') ||
+        message.contains('network is unreachable') ||
+        message.contains('clientexception');
+  }
 }
 
 class AuthSessionException implements Exception {

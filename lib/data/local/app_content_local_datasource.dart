@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 
 import '../../core/utils/passage_word_extractor.dart';
+import '../../core/utils/pos_label_mapper.dart';
 import '../../domain/entities/tag_count.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/passage_sentence.dart';
@@ -101,14 +102,14 @@ limit 1
   }) async {
     final String normalizedPackId = packId.trim();
     final String normalizedQuery = _normalize((query ?? '').trim());
-    final String normalizedPos = (pos ?? '').trim();
-    final String normalizedPosLike = '%$normalizedPos%';
-    final String normalizedTag = _normalize((tag ?? '').trim());
+    final String normalizedPos = _normalizeTokenForContains(pos ?? '');
+    final String normalizedPosLike = '%;$normalizedPos;%';
+    final String normalizedTag = _normalizeTokenForContains(tag ?? '');
     final int boundedLimit = limit <= 0 ? 50 : limit;
     final int boundedOffset = offset < 0 ? 0 : offset;
 
     final String queryLike = '%$normalizedQuery%';
-    final String tagLike = '%$normalizedTag%';
+    final String tagLike = '%;$normalizedTag;%';
 
     final List<QueryRow> rows = await _db.customSelect(
       '''
@@ -116,8 +117,8 @@ select *
 from words
 where pack_id = ?1
   and (?2 = '' or en_word_normalized like ?3 or search_key like ?3)
-  and (?4 = '' or pos like ?5)
-  and (?6 = '' or lower(coalesce(tags_raw, '')) like ?7)
+  and (?4 = '' or (';' || replace(replace(lower(coalesce(pos, '')), ',', ';'), ' ', '') || ';') like ?5)
+  and (?6 = '' or (';' || replace(replace(lower(coalesce(tags_raw, '')), ',', ';'), ' ', '') || ';') like ?7)
 order by lower(en_word) asc, en_word asc
 limit ?8 offset ?9
       ''',
@@ -132,11 +133,14 @@ limit ?8 offset ?9
         Variable<int>(boundedLimit + 1),
         Variable<int>(boundedOffset),
       ],
-      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{_db.appContentWords},
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentWords
+      },
     ).get();
 
     final bool hasMore = rows.length > boundedLimit;
-    final List<QueryRow> sliced = hasMore ? rows.take(boundedLimit).toList() : rows;
+    final List<QueryRow> sliced =
+        hasMore ? rows.take(boundedLimit).toList() : rows;
     final List<WordItem> items =
         sliced.map(_wordFromQueryRow).toList(growable: false);
 
@@ -145,6 +149,47 @@ limit ?8 offset ?9
       hasMore: hasMore,
       nextOffset: boundedOffset + items.length,
     );
+  }
+
+  Future<List<String>> getDistinctPosValues({
+    String? packId,
+    String? level,
+  }) async {
+    final String cleanPackId = (packId ?? '').trim();
+    final String cleanLevel = (level ?? '').trim().toUpperCase();
+
+    final List<Variable<Object>> variables = <Variable<Object>>[
+      Variable<String>(cleanPackId),
+      Variable<String>(cleanLevel),
+    ];
+
+    final List<QueryRow> rows = await _db
+        .customSelect(
+          '''
+select pos
+from words
+where (?1 = '' or pack_id = ?1)
+  and (?2 = '' or upper(coalesce(level, '')) = ?2)
+  and trim(coalesce(pos, '')) <> ''
+      ''',
+          variables: variables,
+          readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+            _db.appContentWords
+          },
+        )
+        .get();
+
+    final Set<String> tokens = <String>{};
+    for (final QueryRow row in rows) {
+      final String raw = row.read<String>('pos');
+      for (final String token in raw.split(';')) {
+        final String trimmed = token.trim();
+        if (trimmed.isNotEmpty) {
+          tokens.add(trimmed);
+        }
+      }
+    }
+    return PosLabelMapper.sortByCanonicalOrder(tokens);
   }
 
   Future<WordItem?> getWordById(String wordId) async {
@@ -244,7 +289,9 @@ order by lower(en_word) asc, en_word asc
 limit ?1
       ''',
       variables: <Variable<Object>>[Variable<int>(boundedLimit)],
-      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{_db.appContentWords},
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentWords
+      },
     ).get();
 
     return rows.map(_wordFromQueryRow).toList(growable: false);
@@ -258,7 +305,9 @@ from words
 where level is not null and trim(level) <> ''
 group by upper(coalesce(level, ''))
       ''',
-      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{_db.appContentWords},
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentWords
+      },
     ).get();
 
     final Map<String, int> counts = <String, int>{};
@@ -298,7 +347,9 @@ where upper(coalesce(level, '')) = ?1
   and trim(tags_raw) <> ''
       ''',
       variables: <Variable<Object>>[Variable<String>(normalizedLevel)],
-      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{_db.appContentWords},
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentWords
+      },
     ).get();
 
     final Map<String, int> counts = <String, int>{};
@@ -346,14 +397,14 @@ where upper(coalesce(level, '')) = ?1
   }) async {
     final String normalizedLevel = level.trim().toUpperCase();
     final String normalizedQuery = _normalize((query ?? '').trim());
-    final String normalizedPos = (pos ?? '').trim();
-    final String normalizedPosLike = '%$normalizedPos%';
-    final String normalizedTag = _normalize((tag ?? '').trim());
+    final String normalizedPos = _normalizeTokenForContains(pos ?? '');
+    final String normalizedPosLike = '%;$normalizedPos;%';
+    final String normalizedTag = _normalizeTokenForContains(tag ?? '');
     final int boundedLimit = limit <= 0 ? 50 : limit;
     final int boundedOffset = offset < 0 ? 0 : offset;
 
     final String queryLike = '%$normalizedQuery%';
-    final String tagLike = '%$normalizedTag%';
+    final String tagLike = '%;$normalizedTag;%';
 
     final List<QueryRow> rows = await _db.customSelect(
       '''
@@ -361,8 +412,8 @@ select *
 from words
 where upper(coalesce(level, '')) = ?1
   and (?2 = '' or en_word_normalized like ?3 or search_key like ?3)
-  and (?4 = '' or pos like ?5)
-  and (?6 = '' or lower(coalesce(tags_raw, '')) like ?7)
+  and (?4 = '' or (';' || replace(replace(lower(coalesce(pos, '')), ',', ';'), ' ', '') || ';') like ?5)
+  and (?6 = '' or (';' || replace(replace(lower(coalesce(tags_raw, '')), ',', ';'), ' ', '') || ';') like ?7)
 order by lower(en_word) asc, en_word asc
 limit ?8 offset ?9
       ''',
@@ -377,7 +428,9 @@ limit ?8 offset ?9
         Variable<int>(boundedLimit + 1),
         Variable<int>(boundedOffset),
       ],
-      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{_db.appContentWords},
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentWords
+      },
     ).get();
 
     final bool hasMore = rows.length > boundedLimit;
@@ -435,7 +488,8 @@ limit ?8 offset ?9
         variables.add(Variable<String>(level));
         placeholders.add('?$index');
       }
-      where.write(' and upper(coalesce(level, \'\')) in (${placeholders.join(',')})');
+      where.write(
+          ' and upper(coalesce(level, \'\')) in (${placeholders.join(',')})');
     }
 
     final int limitIdx = variables.length + 1;
@@ -443,22 +497,25 @@ limit ?8 offset ?9
     final int offsetIdx = variables.length + 1;
     variables.add(Variable<int>(boundedOffset));
 
-    final List<QueryRow> rows = await _db.customSelect(
-      '''
+    final List<QueryRow> rows = await _db
+        .customSelect(
+          '''
 select *
 from reading_passages
 $where
 order by lower(title) asc, title asc
 limit ?$limitIdx offset ?$offsetIdx
       ''',
-      variables: variables,
-      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
-        _db.appContentReadingPassages,
-      },
-    ).get();
+          variables: variables,
+          readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+            _db.appContentReadingPassages,
+          },
+        )
+        .get();
 
     final bool hasMore = rows.length > boundedLimit;
-    final List<QueryRow> sliced = hasMore ? rows.take(boundedLimit).toList() : rows;
+    final List<QueryRow> sliced =
+        hasMore ? rows.take(boundedLimit).toList() : rows;
     final List<ReadingPassage> items =
         sliced.map(_passageFromQueryRow).toList(growable: false);
 
@@ -477,13 +534,13 @@ limit ?$limitIdx offset ?$offsetIdx
       return const <PassageSentence>[];
     }
 
-    final List<AppContentReadingSentence> rows = await (_db
-          .select(_db.appContentReadingSentences)
-          ..where((tbl) => tbl.passageId.equals(normalized))
-          ..orderBy([
-            (tbl) => OrderingTerm.asc(tbl.idx),
-          ]))
-        .get();
+    final List<AppContentReadingSentence> rows =
+        await (_db.select(_db.appContentReadingSentences)
+              ..where((tbl) => tbl.passageId.equals(normalized))
+              ..orderBy([
+                (tbl) => OrderingTerm.asc(tbl.idx),
+              ]))
+            .get();
 
     return rows.map(_sentenceFromData).toList(growable: false);
   }
@@ -492,7 +549,8 @@ limit ?$limitIdx offset ?$offsetIdx
     required String passageId,
     int limit = 20,
   }) async {
-    final List<PassageSentence> sentences = await getSentences(passageId: passageId);
+    final List<PassageSentence> sentences =
+        await getSentences(passageId: passageId);
     if (sentences.isEmpty) {
       return const <WordItem>[];
     }
@@ -517,6 +575,71 @@ limit ?$limitIdx offset ?$offsetIdx
       }
     }
     return matched;
+  }
+
+  /// Returns all English sentences for all passages that belong to [packId].
+  Future<List<String>> getAllSentencesByPack(String packId) async {
+    final String normalized = packId.trim();
+    if (normalized.isEmpty) {
+      return const <String>[];
+    }
+
+    final List<QueryRow> rows = await _db.customSelect(
+      '''
+select s.sentence_en
+from reading_sentences s
+inner join reading_passages p on p.id = s.passage_id
+where p.pack_id = ?1
+order by s.passage_id, s.idx
+      ''',
+      variables: <Variable<Object>>[Variable<String>(normalized)],
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentReadingSentences,
+        _db.appContentReadingPassages,
+      },
+    ).get();
+
+    return rows
+        .map((QueryRow row) => row.read<String>('sentence_en'))
+        .toList(growable: false);
+  }
+
+  /// Counts how many unique words from the global word pool appear in the
+  /// reading passages of the given pack. This enables cross-pack word
+  /// discovery: words linked to any pack via FK will still be counted
+  /// for other packs if they appear in that pack's reading content.
+  Future<int> getPassageWordCountByPack(String packId) async {
+    final List<String> sentences = await getAllSentencesByPack(packId);
+    if (sentences.isEmpty) {
+      return 0;
+    }
+
+    // Extract all unique word candidates (no limit) from all pack sentences.
+    final Set<String> candidateSet = <String>{};
+    for (final String sentence in sentences) {
+      final List<String> words = sentence
+          .toLowerCase()
+          .split(RegExp(r'[^a-z]+'))
+          .map((String e) => e.trim())
+          .where((String e) => e.length > 1)
+          .toList(growable: false);
+      for (final String word in words) {
+        candidateSet.add(word);
+      }
+    }
+    if (candidateSet.isEmpty) {
+      return 0;
+    }
+
+    // Match candidates against the global word index.
+    final List<WordItem> global = await getGlobalWordIndex(limit: 7000);
+    int count = 0;
+    for (final WordItem word in global) {
+      if (candidateSet.contains(_normalize(word.enWord))) {
+        count++;
+      }
+    }
+    return count;
   }
 
   Pack _packFromQueryRow(QueryRow row) {
@@ -588,5 +711,9 @@ limit ?$limitIdx offset ?$offsetIdx
 
   String _normalize(String value) {
     return value.toLowerCase().trim().replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  String _normalizeTokenForContains(String value) {
+    return _normalize(value).replaceAll(' ', '');
   }
 }

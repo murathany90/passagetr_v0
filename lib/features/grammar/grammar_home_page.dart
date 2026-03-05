@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
-import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../domain/entities/grammar_module.dart';
 import '../../state/providers.dart';
 import 'grammar_module_pages_page.dart';
@@ -19,9 +19,11 @@ class GrammarHomePage extends ConsumerStatefulWidget {
 class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
   static const String _lastModuleKey = 'grammar_last_module_id';
   static const String _lastPageKey = 'grammar_last_page_id';
+  static const String _readPagesPrefix = 'grammar_read_pages_';
 
   int? _lastModuleId;
   int? _lastPageId;
+  Map<int, int> _readPageCounts = const <int, int>{};
 
   @override
   void initState() {
@@ -37,6 +39,22 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
     setState(() {
       _lastModuleId = prefs.getInt(_lastModuleKey);
       _lastPageId = prefs.getInt(_lastPageKey);
+    });
+  }
+
+  Future<void> _loadProgressCounts(List<GrammarModule> modules) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<int, int> counts = <int, int>{};
+    for (final GrammarModule module in modules) {
+      final String key = '$_readPagesPrefix${module.id}';
+      final List<String> readPages = prefs.getStringList(key) ?? <String>[];
+      counts[module.id] = readPages.length;
+    }
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _readPageCounts = counts;
     });
   }
 
@@ -65,7 +83,21 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
     final AsyncValue<List<GrammarModule>> modulesAsync = ref.watch(grammarModulesProvider);
 
     return modulesAsync.when(
-      loading: () => const AppLoadingBlock(message: 'Gramer modulleri yukleniyor...'),
+      loading: () => Padding(
+        padding: const EdgeInsets.all(16),
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 6,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.05,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+          ),
+          itemBuilder: (_, __) => const AppShimmerCard(lineCount: 3),
+        ),
+      ),
       error: (Object error, StackTrace stackTrace) {
         return AppErrorState(
           title: 'Gramer modulleri yuklenemedi.',
@@ -80,6 +112,11 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
             message: 'Supabase grammar tablolarini ve yukleme scriptini kontrol edin.',
             icon: Icons.menu_book_outlined,
           );
+        }
+
+        // Load progress counts after modules arrive
+        if (_readPageCounts.isEmpty && modules.isNotEmpty) {
+          _loadProgressCounts(modules);
         }
 
         GrammarModule? resumeModule;
@@ -118,14 +155,16 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
                 itemCount: modules.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.05,
+                  childAspectRatio: 0.92,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   final GrammarModule module = modules[index];
+                  final int readCount = _readPageCounts[module.id] ?? 0;
                   return _ModuleCard(
                     module: module,
+                    readPageCount: readCount,
                     onTap: () => _openModule(module),
                   );
                 },
@@ -157,21 +196,32 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
     );
 
     await _loadResume();
+    // Reload progress counts after returning from reader
+    final AsyncValue<List<GrammarModule>> modulesAsync = ref.read(grammarModulesProvider);
+    if (modulesAsync.hasValue) {
+      await _loadProgressCounts(modulesAsync.value!);
+    }
   }
 }
 
 class _ModuleCard extends StatelessWidget {
   const _ModuleCard({
     required this.module,
+    required this.readPageCount,
     required this.onTap,
   });
 
   final GrammarModule module;
+  final int readPageCount;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final Color color = _parseColor(module.renk);
+    final int total = module.toplamSayfa;
+    final int read = readPageCount > total ? total : readPageCount;
+    final double progress = total == 0 ? 0 : read / total;
+    final bool isComplete = read >= total && total > 0;
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -182,15 +232,26 @@ class _ModuleCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CircleAvatar(
-                radius: 18,
-                backgroundColor: color.withValues(alpha: 0.15),
-                child: Text(module.icon, style: const TextStyle(fontSize: 18)),
+              Row(
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundColor: color.withValues(alpha: 0.15),
+                    child: Text(module.icon, style: const TextStyle(fontSize: 18)),
+                  ),
+                  const Spacer(),
+                  if (isComplete)
+                    Icon(
+                      Icons.check_circle_rounded,
+                      size: 20,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                ],
               ),
               const Spacer(),
               Text(
                 module.baslik,
-                maxLines: 3,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w700,
@@ -198,8 +259,18 @@ class _ModuleCard extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                '${module.toplamSayfa} sayfa',
+                '$read/$total sayfa',
                 style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 4),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: LinearProgressIndicator(
+                  value: progress,
+                  minHeight: 4,
+                  backgroundColor: color.withValues(alpha: 0.12),
+                  valueColor: AlwaysStoppedAnimation<Color>(color),
+                ),
               ),
             ],
           ),

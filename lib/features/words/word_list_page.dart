@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/i18n/tr_ui_texts.dart';
+import '../../core/utils/pos_label_mapper.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/word_repository.dart';
@@ -132,6 +134,13 @@ class _WordListPageState extends ConsumerState<WordListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<List<String>> posValuesAsync = ref.watch(
+      distinctPosValuesProvider(
+        DistinctPosRequest(packId: widget.pack.id),
+      ),
+    );
+    final List<String> posValues = _resolvePosValues(posValuesAsync);
+
     return Scaffold(
       appBar: AppBar(title: Text('${widget.pack.name} - Kelimeler')),
       body: Column(
@@ -142,7 +151,7 @@ class _WordListPageState extends ConsumerState<WordListPage> {
               controller: _searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: 'Kelime ara (en_word)',
+                hintText: TrUiTexts.searchWordHint,
                 suffixIcon: IconButton(
                   onPressed: () {
                     _searchController.clear();
@@ -164,15 +173,18 @@ class _WordListPageState extends ConsumerState<WordListPage> {
                     items: <DropdownMenuItem<String>>[
                       const DropdownMenuItem<String>(
                         value: '',
-                        child: Text('Tum POS'),
+                        child: Text(TrUiTexts.allPos),
                       ),
-                      ...AppConstants.posValues.map(
+                      ...posValues.map(
                         (String value) => DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(PosLabelMapper.labelFor(value)),
                         ),
                       ),
                     ],
+                    decoration: const InputDecoration(
+                      labelText: TrUiTexts.posFilterLabel,
+                    ),
                     onChanged: (String? value) {
                       setState(() {
                         _selectedPos = value ?? '';
@@ -186,7 +198,8 @@ class _WordListPageState extends ConsumerState<WordListPage> {
                   child: TextField(
                     controller: _tagController,
                     decoration: InputDecoration(
-                      hintText: 'Tag filtre',
+                      hintText: TrUiTexts.filterTagHint,
+                      labelText: TrUiTexts.tagFilterLabel,
                       suffixIcon: IconButton(
                         onPressed: () {
                           _tagController.clear();
@@ -207,7 +220,7 @@ class _WordListPageState extends ConsumerState<WordListPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _onFilterChanged,
         icon: const Icon(Icons.filter_alt),
-        label: const Text('Uygula'),
+        label: const Text(TrUiTexts.applyFilters),
       ),
     );
   }
@@ -224,13 +237,13 @@ class _WordListPageState extends ConsumerState<WordListPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Text('Kelimeler yuklenemedi.'),
+              const Text(TrUiTexts.wordListLoadError),
               const SizedBox(height: 8),
               Text(_errorMessage!, textAlign: TextAlign.center),
               const SizedBox(height: 12),
               FilledButton(
                 onPressed: _loadInitial,
-                child: const Text('Retry'),
+                child: const Text(TrUiTexts.retry),
               ),
             ],
           ),
@@ -239,7 +252,7 @@ class _WordListPageState extends ConsumerState<WordListPage> {
     }
 
     if (_items.isEmpty) {
-      return const Center(child: Text('Sonuc bulunamadi'));
+      return const Center(child: Text(TrUiTexts.noResults));
     }
 
     return RefreshIndicator(
@@ -260,7 +273,8 @@ class _WordListPageState extends ConsumerState<WordListPage> {
                 padding: const EdgeInsets.all(12),
                 child: OutlinedButton(
                   onPressed: _loadNextPage,
-                  child: const Text('Sayfa yukleme hatasi - Retry'),
+                  child: const Text(
+                      '${TrUiTexts.wordsLoadMoreError} - ${TrUiTexts.retry}'),
                 ),
               );
             }
@@ -269,7 +283,7 @@ class _WordListPageState extends ConsumerState<WordListPage> {
                 padding: const EdgeInsets.all(12),
                 child: OutlinedButton(
                   onPressed: _loadNextPage,
-                  child: const Text('Daha fazla yukle'),
+                  child: const Text(TrUiTexts.wordsLoadMore),
                 ),
               );
             }
@@ -280,7 +294,7 @@ class _WordListPageState extends ConsumerState<WordListPage> {
           return ListTile(
             title: Text(word.enWord),
             subtitle: Text(word.trMeaning),
-            trailing: Chip(label: Text(word.pos)),
+            trailing: Chip(label: Text(PosLabelMapper.labelFor(word.pos))),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
@@ -292,5 +306,13 @@ class _WordListPageState extends ConsumerState<WordListPage> {
         },
       ),
     );
+  }
+
+  List<String> _resolvePosValues(AsyncValue<List<String>> async) {
+    final List<String>? values = async.valueOrNull;
+    if (values != null && values.isNotEmpty) {
+      return values;
+    }
+    return AppConstants.posValues;
   }
 }

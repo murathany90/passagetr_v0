@@ -32,6 +32,14 @@ class AppConfig {
   static const String _translateApiKeyRaw =
       String.fromEnvironment('TRANSLATE_API_KEY');
 
+  /// When true, LibreTranslate will try public community endpoints as
+  /// fallback when the primary endpoint fails. Disabled by default for
+  /// production safety (rate-limit, uptime, privacy risks).
+  static const bool allowLibreFallbacks = bool.fromEnvironment(
+    'ALLOW_LIBRE_FALLBACKS',
+    defaultValue: false,
+  );
+
   // Sanitized values (trim + normalize)
   static final String supabaseUrl = _normalizeUrl(_supabaseUrlRaw);
   static final String supabaseAnonKey = _supabaseAnonKeyRaw.trim();
@@ -42,6 +50,18 @@ class AppConfig {
 
   static bool get hasSupabaseConfig =>
       supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;
+
+  /// Returns fallback endpoints only when [allowLibreFallbacks] is enabled.
+  static List<String> get libreFallbackEndpoints {
+    if (!allowLibreFallbacks) {
+      return const <String>[];
+    }
+    return const <String>[
+      'https://translate.argosopentech.com/translate',
+      'https://translate.astian.org/translate',
+      'https://libretranslate.pussthecat.org/translate',
+    ];
+  }
 
   static String _normalizeUrl(String input) {
     var u = input.trim();
@@ -59,3 +79,4 @@ class AppConfig {
     return u;
   }
 }
+

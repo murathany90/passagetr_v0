@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/i18n/tr_ui_texts.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_loading_block.dart';
@@ -19,17 +20,17 @@ class WordLevelHubPage extends ConsumerWidget {
         ref.watch(wordLevelsProvider);
 
     return levelsAsync.when(
-      loading: () => const AppLoadingBlock(message: 'Seviyeler yukleniyor...'),
+      loading: () => const AppLoadingBlock(message: TrUiTexts.levelsLoading),
       error: (Object error, StackTrace stack) => AppErrorState(
-        title: 'Level listesi yuklenemedi.',
+        title: TrUiTexts.levelListLoadError,
         detail: error.toString(),
         onRetry: () => ref.invalidate(wordLevelsProvider),
       ),
       data: (List<WordLevelSummary> levels) {
         if (levels.isEmpty) {
           return const AppEmptyState(
-            title: 'Level bulunamadi',
-            message: 'Kelime seviyeleri icin veri bulunamadi.',
+            title: TrUiTexts.levelEmptyTitle,
+            message: TrUiTexts.levelEmptyMessage,
             icon: Icons.school_outlined,
           );
         }
@@ -61,17 +62,21 @@ class WordLevelHubPage extends ConsumerWidget {
                       width: 44,
                       height: 44,
                       decoration: BoxDecoration(
-                        color: ReadingLevelStyle.background(context, level.level),
+                        color:
+                            ReadingLevelStyle.background(context, level.level),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
                         child: Text(
                           level.level,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: ReadingLevelStyle.foreground(level.level),
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                color:
+                                    ReadingLevelStyle.foreground(level.level),
+                                fontWeight: FontWeight.w800,
+                              ),
                         ),
                       ),
                     ),
@@ -90,12 +95,14 @@ class WordLevelHubPage extends ConsumerWidget {
                           const SizedBox(height: 3),
                           Text(
                             '${level.wordCount} kelime',
-                            style:
-                                Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                                ),
                           ),
                         ],
                       ),
@@ -114,19 +121,19 @@ class WordLevelHubPage extends ConsumerWidget {
   String _titleForLevel(String level) {
     switch (level.trim().toUpperCase()) {
       case 'A1':
-        return 'Baslangic';
+        return TrUiTexts.levelA1Title;
       case 'A2':
-        return 'Temel Gelisim';
+        return TrUiTexts.levelA2Title;
       case 'B1':
-        return 'Orta Seviye';
+        return TrUiTexts.levelB1Title;
       case 'B2':
-        return 'Orta-Ust';
+        return TrUiTexts.levelB2Title;
       case 'C1':
-        return 'Ileri Seviye';
+        return TrUiTexts.levelC1Title;
       case 'C2':
-        return 'Akademik Ust';
+        return TrUiTexts.levelC2Title;
       default:
-        return 'Seviye';
+        return TrUiTexts.levelTitleDefault;
     }
   }
 }

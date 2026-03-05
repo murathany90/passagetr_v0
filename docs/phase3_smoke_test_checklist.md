@@ -102,3 +102,15 @@
 2. ReadingDetail'de pack disi bir kelime sec.
 3. Beklenen: Quick Word popup loading sonrasi ceviri gelir.
 4. Beklenen: dis tarayici otomatik acilmaz; sadece `Kaynakta Ac` ile acilir.
+
+## 11) POS/Etiket Filtre Doğruluğu
+1. Kelime listesinde POS olarak `v.` seçildiğinde `adv.` etiketli kayıtlar gelmemelidir.
+2. Kelime listesinde POS olarak `phr. v.` seçildiğinde yalnız bu tokenı içeren kayıtlar gelmelidir.
+3. Seviye kelime sayfasında etiket filtreye `verb` yazıldığında `adverb` tokenı tek başına eşleşme üretmemelidir.
+4. Etiket seçiminde görünen metinler okunabilir formatta olmalıdır (ör. `yds` -> `Yds`).
+
+## 12) Türkçe Metin Tutarlılığı
+1. `Kelime` ekranında `Seviye Merkezi` metni görünmelidir.
+2. Paket kartında CTA `Paket Merkezini Aç` olmalıdır.
+3. Filtre etiketlerinde `Kelime Türü (POS)` ve `Etiket` metinleri görünmelidir.
+4. README mojibake denetimi için `python scripts/check_mojibake.py` komutu hatasız çalışmalıdır.

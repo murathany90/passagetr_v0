@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
-import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../domain/entities/grammar_module.dart';
 import '../../domain/entities/grammar_page.dart';
 import '../../state/providers.dart';
@@ -27,7 +27,20 @@ class GrammarModulePagesPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(module.baslik)),
       body: pagesAsync.when(
-        loading: () => const AppLoadingBlock(message: 'Sayfalar yukleniyor...'),
+        loading: () => const Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: <Widget>[
+              AppShimmerCard(),
+              SizedBox(height: 8),
+              AppShimmerCard(),
+              SizedBox(height: 8),
+              AppShimmerCard(),
+              SizedBox(height: 8),
+              AppShimmerCard(),
+            ],
+          ),
+        ),
         error: (Object error, StackTrace stackTrace) {
           return AppErrorState(
             title: 'Sayfalar yuklenemedi.',

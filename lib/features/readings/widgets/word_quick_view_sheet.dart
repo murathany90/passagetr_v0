@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,7 @@ import '../../../domain/entities/word_item.dart';
 import '../../../domain/repositories/dictionary_repository.dart';
 import '../../../domain/repositories/word_repository.dart';
 import '../../../state/providers.dart';
+import '../../../core/widgets/app_speak_button.dart';
 import '../../flashcard/flashcard_session_page.dart';
 import '../../words/widgets/dictionary_fallback_sheet.dart';
 import '../../words/word_detail_page.dart';
@@ -56,11 +58,11 @@ class WordQuickViewSheet extends ConsumerWidget {
       if (!hostContext.mounted) {
         return;
       }
-      Navigator.of(hostContext).push(
+      unawaited(Navigator.of(hostContext).push(
         MaterialPageRoute<void>(
           builder: (_) => WordDetailPage(word: target),
         ),
-      );
+      ));
       return;
     }
 
@@ -119,13 +121,20 @@ class WordQuickViewSheet extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                normalized,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      normalized,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                  ),
+                  AppSpeakButton(text: normalized),
+                ],
               ),
               const SizedBox(height: 8),
               Wrap(

@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
 import '../../core/widgets/app_error_state.dart';
-import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_section_header.dart';
 import '../../core/widgets/app_stat_tile.dart';
 import '../../core/widgets/app_surface_card.dart';
@@ -17,7 +17,6 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<void> authBootstrap = ref.watch(authBootstrapProvider);
     final AsyncValue<HomeDashboardData> dashboard = ref.watch(
       homeDashboardProvider,
     );
@@ -29,12 +28,6 @@ class ProfilePage extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.invalidate(authBootstrapProvider);
-        try {
-          await ref.read(authBootstrapProvider.future);
-        } catch (_) {
-          // Hata state'i ekranda AppErrorState ile gosterilecek.
-        }
         ref.invalidate(homeDashboardProvider);
         ref.invalidate(packListProvider);
         try {
@@ -98,46 +91,57 @@ class ProfilePage extends ConsumerWidget {
           const SizedBox(height: 12),
           const AppSectionHeader(title: 'Bugunun Ozeti'),
           const SizedBox(height: 8),
-          authBootstrap.when(
-            loading: () =>
-                const AppLoadingBlock(message: 'Anonim oturum hazirlaniyor...'),
+          dashboard.when(
+            loading: () => const Column(
+              children: <Widget>[
+                AppShimmerCard(),
+                SizedBox(height: 8),
+                AppShimmerCard(),
+                SizedBox(height: 8),
+                AppShimmerCard(),
+              ],
+            ),
             error: (Object error, StackTrace stack) => AppErrorState(
-              title: 'Oturum kurulamadigi icin profil metrikleri alinamadi.',
-              detail: _friendlyAuthDetail(error),
-              onRetry: () => ref.invalidate(authBootstrapProvider),
+              title: 'Profil metrikleri alinamadi.',
+              detail: _friendlyDashboardDetail(error),
+              onRetry: () => ref.invalidate(homeDashboardProvider),
             ),
-            data: (_) => dashboard.when(
-              loading: () => const AppLoadingBlock(
-                  message: 'Profil metrikleri yukleniyor...'),
-              error: (Object error, StackTrace stack) => AppErrorState(
-                title: 'Profil metrikleri alinamadi.',
-                detail: _friendlyDashboardDetail(error),
-                onRetry: () => ref.invalidate(homeDashboardProvider),
-              ),
-              data: (HomeDashboardData data) {
-                return Column(
-                  children: <Widget>[
-                    AppStatTile(
-                      label: 'Bugun gorulen kelime',
-                      value: '${data.todayWordCount}',
-                      icon: Icons.school_outlined,
+            data: (HomeDashboardData data) {
+              return Column(
+                children: <Widget>[
+                  if (data.todaySolvedQuestionText == 'Cevrimdisi')
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Chip(
+                        avatar: Icon(
+                          Icons.cloud_off_rounded,
+                          size: 16,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                        label: const Text('Cevrimdisi mod'),
+                        visualDensity: VisualDensity.compact,
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    AppStatTile(
-                      label: 'Bugun okunan cumle',
-                      value: '${data.todayReadSentenceCount}',
-                      icon: Icons.menu_book_outlined,
-                    ),
-                    const SizedBox(height: 8),
-                    AppStatTile(
-                      label: 'Bugun cozulen soru',
-                      value: data.todaySolvedQuestionText,
-                      icon: Icons.quiz_outlined,
-                    ),
-                  ],
-                );
-              },
-            ),
+                  AppStatTile(
+                    label: 'Bugun gorulen kelime',
+                    value: '${data.todayWordCount}',
+                    icon: Icons.school_outlined,
+                  ),
+                  const SizedBox(height: 8),
+                  AppStatTile(
+                    label: 'Bugun okunan cumle',
+                    value: '${data.todayReadSentenceCount}',
+                    icon: Icons.menu_book_outlined,
+                  ),
+                  const SizedBox(height: 8),
+                  AppStatTile(
+                    label: 'Bugun cozulen soru',
+                    value: data.todaySolvedQuestionText,
+                    icon: Icons.quiz_outlined,
+                  ),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 12),
           const AppSectionHeader(title: 'Sistem Durumu'),
@@ -162,11 +166,56 @@ class ProfilePage extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 12),
+          const AppSectionHeader(title: 'Tema'),
+          const SizedBox(height: 8),
+          AppSurfaceCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Gorunum Modu',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color:
+                            Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: double.infinity,
+                  child: SegmentedButton<ThemeMode>(
+                    segments: const <ButtonSegment<ThemeMode>>[
+                      ButtonSegment<ThemeMode>(
+                        value: ThemeMode.light,
+                        icon: Icon(Icons.light_mode_outlined),
+                        label: Text('Light'),
+                      ),
+                      ButtonSegment<ThemeMode>(
+                        value: ThemeMode.dark,
+                        icon: Icon(Icons.dark_mode_outlined),
+                        label: Text('Dark'),
+                      ),
+                      ButtonSegment<ThemeMode>(
+                        value: ThemeMode.system,
+                        icon: Icon(Icons.settings_outlined),
+                        label: Text('System'),
+                      ),
+                    ],
+                    selected: <ThemeMode>{ref.watch(themeModeProvider)},
+                    onSelectionChanged: (Set<ThemeMode> selected) {
+                      ref
+                          .read(themeModeProvider.notifier)
+                          .setMode(selected.first);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
           const AppSectionHeader(title: 'Icerik'),
           const SizedBox(height: 8),
           packs.when(
-            loading: () =>
-                const AppLoadingBlock(message: 'Pack ozeti yukleniyor...'),
+            loading: () => const AppShimmerCard(),
             error: (Object error, StackTrace stack) => AppErrorState(
               title: 'Pack ozeti alinamadi.',
               detail: error.toString(),
@@ -200,13 +249,6 @@ class ProfilePage extends ConsumerWidget {
   }
 }
 
-String _friendlyAuthDetail(Object error) {
-  final String text = error.toString().toLowerCase();
-  if (text.contains('anonymous') || text.contains('auth')) {
-    return 'Anonim oturum su an olusturulamadi. Ag baglantisini kontrol edip tekrar deneyin.';
-  }
-  return error.toString();
-}
 
 String _friendlyDashboardDetail(Object error) {
   final String text = error.toString().toLowerCase();

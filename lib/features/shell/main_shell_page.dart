@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../grammar/grammar_home_page.dart';
 import '../home/home_dashboard_page.dart';
 import '../profile/profile_page.dart';
 import '../readings/reading_home_page.dart';
 import '../words/word_home_page.dart';
+import '../../state/nav_badge_providers.dart';
 
-class MainShellPage extends StatefulWidget {
+class MainShellPage extends ConsumerStatefulWidget {
   const MainShellPage({super.key});
 
   @override
-  State<MainShellPage> createState() => _MainShellPageState();
+  ConsumerState<MainShellPage> createState() => _MainShellPageState();
 }
 
-class _MainShellPageState extends State<MainShellPage> {
+class _MainShellPageState extends ConsumerState<MainShellPage> {
   int _index = 0;
 
   String _titleForIndex(int index) {
@@ -39,6 +41,8 @@ class _MainShellPageState extends State<MainShellPage> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final AsyncValue<int> weakCount = ref.watch(weakWordCountProvider);
+    final int badgeCount = weakCount.valueOrNull ?? 0;
 
     return Scaffold(
       appBar: AppBar(title: Text(_titleForIndex(_index))),
@@ -50,28 +54,38 @@ class _MainShellPageState extends State<MainShellPage> {
             _index = value;
           });
         },
-        destinations: const <NavigationDestination>[
-          NavigationDestination(
+        destinations: <NavigationDestination>[
+          const NavigationDestination(
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
             label: 'Ana Sayfa',
           ),
           NavigationDestination(
-            icon: Icon(Icons.school_outlined),
-            selectedIcon: Icon(Icons.school),
+            icon: badgeCount > 0
+                ? Badge.count(
+                    count: badgeCount,
+                    child: const Icon(Icons.school_outlined),
+                  )
+                : const Icon(Icons.school_outlined),
+            selectedIcon: badgeCount > 0
+                ? Badge.count(
+                    count: badgeCount,
+                    child: const Icon(Icons.school),
+                  )
+                : const Icon(Icons.school),
             label: 'Kelime',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.chrome_reader_mode_outlined),
             selectedIcon: Icon(Icons.chrome_reader_mode),
             label: 'Okuma',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.auto_stories_outlined),
             selectedIcon: Icon(Icons.auto_stories),
             label: 'Gramer',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.person_outline),
             selectedIcon: Icon(Icons.person),
             label: 'Profil',

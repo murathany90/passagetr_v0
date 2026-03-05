@@ -13,9 +13,7 @@ class BootstrapPage extends ConsumerWidget {
 
     return bootstrap.when(
       data: (_) => const MainShellPage(),
-      loading: () => const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+      loading: () => const _BrandedSplash(),
       error: (Object error, StackTrace stack) {
         return Scaffold(
           body: Center(
@@ -24,19 +22,33 @@ class BootstrapPage extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const Text(
+                  Icon(
+                    Icons.error_outline_rounded,
+                    size: 48,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
                     'Uygulama baslatilamadi.',
                     textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     error.toString(),
                     textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
-                  const SizedBox(height: 12),
-                  FilledButton(
+                  const SizedBox(height: 16),
+                  FilledButton.icon(
                     onPressed: () => ref.invalidate(appBootstrapProvider),
-                    child: const Text('Retry'),
+                    icon: const Icon(Icons.refresh_rounded),
+                    label: const Text('Tekrar Dene'),
                   ),
                 ],
               ),
@@ -44,6 +56,98 @@ class BootstrapPage extends ConsumerWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _BrandedSplash extends StatefulWidget {
+  const _BrandedSplash();
+
+  @override
+  State<_BrandedSplash> createState() => _BrandedSplashState();
+}
+
+class _BrandedSplashState extends State<_BrandedSplash>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _fadeIn;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+    _fadeIn = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colors = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      body: Center(
+        child: FadeTransition(
+          opacity: _fadeIn,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: colors.primaryContainer,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Icon(
+                    Icons.school_rounded,
+                    size: 44,
+                    color: colors.primary,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'English Learning',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: colors.onSurface,
+                      ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Kelime, okuma ve gramer — tek uygulamada.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colors.onSurfaceVariant,
+                      ),
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: 160,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: LinearProgressIndicator(
+                      minHeight: 4,
+                      backgroundColor: colors.surfaceContainerHighest,
+                      color: colors.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

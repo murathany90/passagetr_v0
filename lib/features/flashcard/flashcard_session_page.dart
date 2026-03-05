@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,6 +15,7 @@ import '../../domain/repositories/progress_repository.dart';
 import '../../domain/repositories/word_repository.dart';
 import '../../domain/value_objects/flashcard_answer.dart';
 import '../../state/providers.dart';
+import '../../core/widgets/app_speak_button.dart';
 import '../tests/test_hub_page.dart';
 import '../words/widgets/dictionary_fallback_sheet.dart';
 import '../words/word_detail_page.dart';
@@ -194,7 +196,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       });
 
       if (!_isCustomSession && _words.length - _index < 8 && _hasMore) {
-        _loadMore();
+        unawaited(_loadMore());
       }
     } catch (error) {
       if (!mounted) {
@@ -226,11 +228,11 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     }
 
     if (target != null) {
-      Navigator.of(context).push(
+      unawaited(Navigator.of(context).push(
         MaterialPageRoute<void>(
           builder: (_) => WordDetailPage(word: target),
         ),
-      );
+      ));
       return;
     }
 
@@ -371,18 +373,19 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
   }
 }
 
-class _FrontFace extends StatelessWidget {
+class _FrontFace extends ConsumerWidget {
   const _FrontFace({required this.word});
 
   final WordItem word;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(word.enWord, style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 12),
+        AppSpeakButton(text: word.enWord),
+        const SizedBox(height: 4),
         Chip(label: Text(word.pos)),
         const SizedBox(height: 16),
         const Text('Detaylari gormek icin karta dokun'),

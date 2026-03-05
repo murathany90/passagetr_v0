@@ -6,7 +6,7 @@ import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
-import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_section_header.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
@@ -22,6 +22,7 @@ import '../flashcard/flashcard_session_page.dart';
 import '../tests/mcq_session_page.dart';
 import 'widgets/interactive_sentence_text.dart';
 import 'widgets/word_quick_view_sheet.dart';
+import '../../core/widgets/app_speak_button.dart';
 
 class ReadingDetailPage extends ConsumerStatefulWidget {
   const ReadingDetailPage({
@@ -572,7 +573,18 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
 
   Widget _buildBody() {
     if (_loading) {
-      return const AppLoadingBlock(message: 'Okuma yukleniyor...');
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            AppShimmerCard(lineCount: 4),
+            SizedBox(height: 10),
+            AppShimmerCard(),
+            SizedBox(height: 10),
+            AppShimmerCard(),
+          ],
+        ),
+      );
     }
 
     if (_error != null) {
@@ -695,6 +707,10 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                                   decoration: TextDecoration.underline,
                                 ),
                       ),
+                    ),
+                    AppSpeakButton(
+                      text: sentence.sentenceEn,
+                      iconSize: 18,
                     ),
                   ],
                 ),

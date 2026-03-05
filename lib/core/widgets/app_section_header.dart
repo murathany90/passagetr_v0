@@ -14,22 +14,52 @@ class AppSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-          ),
-        ),
-        if (actionLabel != null)
-          TextButton(
-            onPressed: onActionTap,
-            child: Text(actionLabel!),
-          ),
-      ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final Text titleText = Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+        );
+
+        if (actionLabel == null) {
+          if (constraints.hasBoundedWidth) {
+            return Row(
+              children: <Widget>[
+                Expanded(child: titleText),
+              ],
+            );
+          }
+          return titleText;
+        }
+
+        if (constraints.hasBoundedWidth) {
+          return Row(
+            children: <Widget>[
+              Expanded(child: titleText),
+              TextButton(
+                onPressed: onActionTap,
+                child: Text(actionLabel!),
+              ),
+            ],
+          );
+        }
+
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Flexible(
+              fit: FlexFit.loose,
+              child: titleText,
+            ),
+            TextButton(
+              onPressed: onActionTap,
+              child: Text(actionLabel!),
+            ),
+          ],
+        );
+      },
     );
   }
 }

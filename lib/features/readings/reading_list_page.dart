@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/utils/raw_splitter.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
-import '../../core/widgets/app_loading_block.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/reading_passage.dart';
@@ -251,7 +251,20 @@ class _ReadingListPageState extends ConsumerState<ReadingListPage> {
 
   Widget _buildBody() {
     if (_isUiStateLoading || _isInitialLoading) {
-      return const AppLoadingBlock(message: 'Paragraflar yukleniyor...');
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            AppShimmerCard(),
+            SizedBox(height: 8),
+            AppShimmerCard(),
+            SizedBox(height: 8),
+            AppShimmerCard(),
+            SizedBox(height: 8),
+            AppShimmerCard(),
+          ],
+        ),
+      );
     }
 
     if (_error != null && _items.isEmpty) {

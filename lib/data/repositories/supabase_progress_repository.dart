@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
+import '../../core/exceptions/app_exceptions.dart';
 import '../../domain/entities/user_word_progress.dart';
 import '../../domain/repositories/progress_repository.dart';
 import '../../domain/value_objects/flashcard_answer.dart';
@@ -287,7 +288,7 @@ class SupabaseProgressRepository implements ProgressRepository {
       return AppConfig.demoUserUuid;
     }
 
-    throw StateError(
+    throw const AuthMissingException(
       'Auth session yok. Progress yazimi auth olmadan baslatilamaz.',
     );
   }

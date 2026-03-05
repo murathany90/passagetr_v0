@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/i18n/tr_ui_texts.dart';
+import '../../core/utils/pos_label_mapper.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_loading_block.dart';
@@ -206,6 +208,13 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
   @override
   Widget build(BuildContext context) {
     final String levelLabel = widget.level.trim().toUpperCase();
+    final AsyncValue<List<String>> posValuesAsync = ref.watch(
+      distinctPosValuesProvider(
+        DistinctPosRequest(level: widget.level),
+      ),
+    );
+    final List<String> posValues = _resolvePosValues(posValuesAsync);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('$levelLabel Kelimeleri'),
@@ -235,7 +244,7 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                     TextButton.icon(
                       onPressed: _clearFilters,
                       icon: const Icon(Icons.restart_alt_rounded),
-                      label: const Text('Temizle'),
+                      label: const Text(TrUiTexts.clear),
                     ),
                   ],
                 ),
@@ -244,7 +253,7 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                   controller: _searchController,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
-                    hintText: 'Kelime ara',
+                    hintText: TrUiTexts.searchWordHint,
                     suffixIcon: IconButton(
                       onPressed: () {
                         _searchController.clear();
@@ -264,15 +273,18 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                         items: <DropdownMenuItem<String>>[
                           const DropdownMenuItem<String>(
                             value: '',
-                            child: Text('Tum POS'),
+                            child: Text(TrUiTexts.allPos),
                           ),
-                          ...AppConstants.posValues.map(
+                          ...posValues.map(
                             (String value) => DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(PosLabelMapper.labelFor(value)),
                             ),
                           ),
                         ],
+                        decoration: const InputDecoration(
+                          labelText: TrUiTexts.posFilterLabel,
+                        ),
                         onChanged: (String? value) async {
                           setState(() {
                             _selectedPos = value ?? '';
@@ -288,15 +300,15 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                         borderRadius: BorderRadius.circular(8),
                         child: InputDecorator(
                           decoration: const InputDecoration(
-                            labelText: 'Tag',
+                            labelText: TrUiTexts.tagFilterLabel,
                             suffixIcon: Icon(Icons.arrow_drop_down),
                           ),
                           child: Text(
                             _isTagsLoading
-                                ? 'Tag yukleniyor...'
+                                ? TrUiTexts.tagLoading
                                 : (_selectedTag == null
-                                    ? 'Tum Tagler'
-                                    : _selectedTag!),
+                                    ? TrUiTexts.allTags
+                                    : _formatTagLabel(_selectedTag!)),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.bodyMedium,
@@ -317,12 +329,12 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
 
   Widget _buildBody() {
     if (_isInitialLoading) {
-      return const AppLoadingBlock(message: 'Kelimeler yukleniyor...');
+      return const AppLoadingBlock(message: TrUiTexts.wordsLoading);
     }
 
     if (_errorMessage != null && _items.isEmpty) {
       return AppErrorState(
-        title: 'Kelime listesi yuklenemedi.',
+        title: TrUiTexts.wordListLoadError,
         detail: _errorMessage!,
         onRetry: _loadInitial,
       );
@@ -330,8 +342,8 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
 
     if (_items.isEmpty) {
       return const AppEmptyState(
-        title: 'Filtreye uygun kelime bulunamadi',
-        message: 'Arama veya tag/POS filtresini degistirerek tekrar deneyin.',
+        title: TrUiTexts.wordListEmptyTitle,
+        message: TrUiTexts.wordListEmptyMessage,
         icon: Icons.search_off_rounded,
       );
     }
@@ -354,7 +366,8 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                 padding: const EdgeInsets.all(12),
                 child: OutlinedButton(
                   onPressed: _loadNextPage,
-                  child: const Text('Sayfa yukleme hatasi - Retry'),
+                  child: const Text(
+                      '${TrUiTexts.wordsLoadMoreError} - ${TrUiTexts.retry}'),
                 ),
               );
             }
@@ -363,7 +376,7 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                 padding: const EdgeInsets.all(12),
                 child: OutlinedButton(
                   onPressed: _loadNextPage,
-                  child: const Text('Daha fazla yukle'),
+                  child: const Text(TrUiTexts.wordsLoadMore),
                 ),
               );
             }
@@ -414,7 +427,7 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Chip(
-                        label: Text(word.pos),
+                        label: Text(PosLabelMapper.labelFor(word.pos)),
                         visualDensity: VisualDensity.compact,
                       ),
                       if ((word.level ?? '').trim().isNotEmpty)
@@ -442,6 +455,14 @@ class _WordLevelWordsPageState extends ConsumerState<WordLevelWordsPage> {
         },
       ),
     );
+  }
+
+  List<String> _resolvePosValues(AsyncValue<List<String>> async) {
+    final List<String>? values = async.valueOrNull;
+    if (values != null && values.isNotEmpty) {
+      return values;
+    }
+    return AppConstants.posValues;
   }
 }
 
@@ -497,7 +518,7 @@ class _TagSelectorSheetState extends State<_TagSelectorSheet> {
             TextField(
               controller: _searchController,
               decoration: const InputDecoration(
-                hintText: 'Tag ara',
+                hintText: TrUiTexts.searchTagHint,
                 prefixIcon: Icon(Icons.search),
               ),
               onChanged: (_) => setState(() {}),
@@ -508,7 +529,7 @@ class _TagSelectorSheetState extends State<_TagSelectorSheet> {
                 shrinkWrap: true,
                 children: <Widget>[
                   ListTile(
-                    title: const Text('Tum Tagler'),
+                    title: const Text(TrUiTexts.allTags),
                     trailing: widget.currentTag == null
                         ? const Icon(Icons.check_rounded)
                         : null,
@@ -516,7 +537,7 @@ class _TagSelectorSheetState extends State<_TagSelectorSheet> {
                   ),
                   ...filtered.map(
                     (TagCount tag) => ListTile(
-                      title: Text(tag.tag),
+                      title: Text(_formatTagLabel(tag.tag)),
                       subtitle: Text('${tag.count} kelime'),
                       trailing: widget.currentTag == tag.tag
                           ? const Icon(Icons.check_rounded)
@@ -532,4 +553,25 @@ class _TagSelectorSheetState extends State<_TagSelectorSheet> {
       ),
     );
   }
+}
+
+String _formatTagLabel(String raw) {
+  final List<String> parts = raw
+      .trim()
+      .split(RegExp(r'\s+'))
+      .where((String e) => e.isNotEmpty)
+      .map((String e) => e.trim())
+      .toList(growable: false);
+
+  if (parts.isEmpty) {
+    return raw;
+  }
+
+  return parts
+      .map(
+        (String token) => token.isEmpty
+            ? token
+            : '${token[0].toUpperCase()}${token.substring(1).toLowerCase()}',
+      )
+      .join(' ');
 }

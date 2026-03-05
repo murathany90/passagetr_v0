@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/levenshtein.dart';
 import '../../core/utils/text_normalizer.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_loading_block.dart';
@@ -98,7 +99,10 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
     final WordItem current = _questions[_index];
     final String expected = normalizeTypingAnswer(current.enWord);
     final String actual = normalizeTypingAnswer(_answerController.text);
-    final bool isCorrect = actual == expected;
+    final TypingResult result = checkTypingAnswer(expected, actual);
+
+    // Both exact and near-match count as correct for progress tracking.
+    final bool isCorrect = result != TypingResult.wrong;
 
     setState(() {
       _saving = true;
@@ -110,13 +114,22 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
       return;
     }
 
-    if (isCorrect) {
-      _correct++;
-    } else {
-      _wrong++;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Dogru cevap: ${current.enWord}')),
-      );
+    switch (result) {
+      case TypingResult.exact:
+        _correct++;
+      case TypingResult.nearMatch:
+        _correct++;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.amber.shade800,
+            content: Text('Yakin! Dogru yazilisi: ${current.enWord}'),
+          ),
+        );
+      case TypingResult.wrong:
+        _wrong++;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Dogru cevap: ${current.enWord}')),
+        );
     }
 
     _answerController.clear();

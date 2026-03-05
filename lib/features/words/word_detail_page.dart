@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +9,7 @@ import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/dictionary_repository.dart';
 import '../../domain/repositories/word_repository.dart';
 import '../../state/providers.dart';
+import '../../core/widgets/app_speak_button.dart';
 import 'widgets/dictionary_fallback_sheet.dart';
 
 class WordDetailPage extends ConsumerStatefulWidget {
@@ -45,11 +47,11 @@ class _WordDetailPageState extends ConsumerState<WordDetailPage> {
         if (target.id == widget.word.id) {
           return;
         }
-        Navigator.of(context).push(
+        unawaited(Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (_) => WordDetailPage(word: target),
           ),
-        );
+        ));
         return;
       }
 
@@ -101,13 +103,19 @@ class _WordDetailPageState extends ConsumerState<WordDetailPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  widget.word.enWord,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w900,
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        widget.word.enWord,
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                              fontWeight: FontWeight.w900,
+                            ),
                       ),
+                    ),
+                    AppSpeakButton(text: widget.word.enWord),
+                  ],
                 ),
-                const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
