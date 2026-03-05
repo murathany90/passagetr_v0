@@ -22,23 +22,43 @@ class AppErrorState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Icon(
-              Icons.error_outline,
-              size: 36,
-              color: Theme.of(context).colorScheme.error,
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.errorContainer.withValues(alpha: 0.5),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.error_outline,
+                size: 40,
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 20),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w800,
                   ),
             ),
             const SizedBox(height: 8),
-            Text(detail, textAlign: TextAlign.center),
-            const SizedBox(height: 12),
-            FilledButton(onPressed: onRetry, child: Text(retryLabel)),
+            Text(
+              detail,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    height: 1.5,
+                  ),
+            ),
+            const SizedBox(height: 24),
+            FilledButton.tonal(
+              onPressed: onRetry,
+              style: FilledButton.styleFrom(
+                minimumSize: const Size(200, 52),
+              ),
+              child: Text(retryLabel),
+            ),
           ],
         ),
       ),

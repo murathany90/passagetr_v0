@@ -1,8 +1,8 @@
 """
-Markdown to JSON Converter for English Grammar Lessons.
+Markdown -> JSON converter for grammar lesson files.
 
-Bu script docs/gramer altindaki markdown dosyalarini parse eder ve
-Supabase'e yuklenmeye hazir JSON ciktilari uretir.
+This script parses markdown files under docs/gramer and emits JSON payloads
+compatible with Supabase uploader and local app_content.db builder.
 """
 
 from __future__ import annotations
@@ -37,7 +37,7 @@ ICON_MAP: Dict[int, str] = {
     1: "🔤",
     2: "⏰",
     3: "⚡",
-    4: "🔄",
+    4: "🔁",
     5: "📝",
     6: "🎨",
     7: "🏷️",
@@ -85,47 +85,55 @@ class MarkdownToJsonConverter:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.warnings: List[ConversionWarning] = []
 
-    def convert_all(self) -> Dict[str, Any]:
+    def build_modules(self) -> List[Dict[str, Any]]:
         md_files = sorted(self.input_dir.glob("*.md"), key=self._sort_key)
         if not md_files:
-            raise FileNotFoundError(f"Markdown dosyasi bulunamadi: {self.input_dir}")
+            raise FileNotFoundError(f"Markdown dosyası bulunamadı: {self.input_dir}")
 
-        all_modules: List[Dict[str, Any]] = []
-        total_pages = 0
-        total_examples = 0
-        total_tests = 0
-
+        modules: List[Dict[str, Any]] = []
         for index, md_file in enumerate(md_files, start=1):
             parsed = self.parse_markdown_file(md_file)
             pages = parsed["pages"]
             metadata = parsed["metadata"]
+            modules.append(
+                {
+                    "sira": index,
+                    "baslik": self.get_module_title(md_file.name),
+                    "dosya_adi": md_file.name,
+                    "toplam_sayfa": self.resolve_total_pages(metadata, pages),
+                    "icon": ICON_MAP.get(index, "📘"),
+                    "renk": COLOR_MAP.get(index, "#4776E6"),
+                    "sayfalar": pages,
+                }
+            )
+        return modules
 
-            module = {
-                "sira": index,
-                "baslik": self.get_module_title(md_file.name),
-                "dosya_adi": md_file.name,
-                "toplam_sayfa": self.resolve_total_pages(metadata, pages),
-                "icon": ICON_MAP.get(index, "📘"),
-                "renk": COLOR_MAP.get(index, "#4776E6"),
-                "sayfalar": pages,
-            }
-            all_modules.append(module)
+    def convert_all(self) -> Dict[str, Any]:
+        modules = self.build_modules()
+        total_pages = sum(len(module.get("sayfalar", [])) for module in modules)
+        total_examples = sum(
+            len(page.get("examples", []))
+            for module in modules
+            for page in module.get("sayfalar", [])
+        )
+        total_tests = sum(
+            len(page.get("mini_tests", []))
+            for module in modules
+            for page in module.get("sayfalar", [])
+        )
 
-            total_pages += len(pages)
-            total_examples += sum(len(page.get("examples", [])) for page in pages)
-            total_tests += sum(len(page.get("mini_tests", [])) for page in pages)
-
-            module_path = self.output_dir / f"modul_{index:02d}.json"
+        for module in modules:
+            module_path = self.output_dir / f"modul_{int(module['sira']):02d}.json"
             self.write_json(module_path, module)
 
-        combined = {"moduller": all_modules}
+        combined = {"moduller": modules}
         self.write_json(self.output_dir / "tum_gramer_modulleri.json", combined)
 
         report = {
             "created_at_utc": datetime.now(timezone.utc).isoformat(),
             "input_dir": str(self.input_dir),
             "output_dir": str(self.output_dir),
-            "module_count": len(all_modules),
+            "module_count": len(modules),
             "page_count": total_pages,
             "example_count": total_examples,
             "test_count": total_tests,
@@ -139,7 +147,7 @@ class MarkdownToJsonConverter:
         metadata = self.extract_metadata(content, file_path.name)
         pages = self.extract_pages(content, file_path.name, metadata)
         if not pages:
-            self.warn(file_path.name, "Sayfa marker bulunamadi, fallback parse kullanildi.")
+            self.warn(file_path.name, "Sayfa marker bulunamadı, fallback parse kullanıldı.")
         return {
             "file_name": file_path.name,
             "metadata": metadata,
@@ -155,7 +163,7 @@ class MarkdownToJsonConverter:
                 break
 
         if metadata_start is None:
-            self.warn(file_name, "METADATA bolumu bulunamadi.")
+            self.warn(file_name, "METADATA bölümü bulunamadı.")
             return {}
 
         metadata: Dict[str, str] = {}
@@ -192,9 +200,8 @@ class MarkdownToJsonConverter:
                 marker_page_no = self.parse_int(match.group(1), default=idx + 1)
                 pages.append(self.parse_page(chunk, marker_page_no, file_name, metadata))
         else:
-            # Fallback: marker yoksa separator bazli bol.
-            raw_chunks = [chunk.strip() for chunk in content.split("\n---\n") if chunk.strip()]
-            for idx, chunk in enumerate(raw_chunks, start=1):
+            chunks = [chunk.strip() for chunk in content.split("\n---\n") if chunk.strip()]
+            for idx, chunk in enumerate(chunks, start=1):
                 if "SAYFA" not in chunk and "| Sayfa " not in chunk:
                     continue
                 pages.append(self.parse_page(chunk, idx, file_name, metadata))
@@ -250,8 +257,7 @@ class MarkdownToJsonConverter:
                 title = title_line.lstrip("#").strip()
 
         body_start = (page_title_line_idx + 1) if page_title_line_idx is not None else 1
-        body_lines = lines[body_start:]
-        body_lines = self.strip_page_footer_lines(body_lines)
+        body_lines = self.strip_page_footer_lines(lines[body_start:])
         body_markdown = "\n".join(body_lines).strip()
 
         examples = self.extract_examples(body_markdown)
@@ -269,7 +275,6 @@ class MarkdownToJsonConverter:
         }
 
     def extract_examples(self, content: str) -> List[Dict[str, str]]:
-        # EN/TR ciftlerini tum sayfada yakala. Baslik ismi farkli olsa da calisir.
         pattern = re.compile(
             r"\*\*EN:\*\*\s*(.+?)\n\*\*TR:\*\*\s*(.+?)(?:\n(?:→|->)\s*\*\*Açıklama:\*\*\s*(.+?))?(?=\n\*\*EN:\*\*|\n##\s|\n---\n|$)",
             flags=re.DOTALL,
@@ -320,21 +325,18 @@ class MarkdownToJsonConverter:
         return tests
 
     def split_test_questions(self, block: str) -> List[str]:
-        # Supports:
-        # - **Soru:** ...
-        # - ### Soru 1:
         pattern = re.compile(r"(?m)^(?:\*\*Soru:\*\*|###\s*Soru\s+\d+\s*:)\s*")
         matches = list(pattern.finditer(block))
         if not matches:
             return []
-        result: List[str] = []
+        chunks: List[str] = []
         for idx, match in enumerate(matches):
             start = match.start()
             end = matches[idx + 1].start() if idx + 1 < len(matches) else len(block)
             chunk = block[start:end].strip()
             if chunk:
-                result.append(chunk)
-        return result
+                chunks.append(chunk)
+        return chunks
 
     def parse_test_block(self, block: str) -> Dict[str, Any]:
         question = ""
@@ -434,13 +436,13 @@ class MarkdownToJsonConverter:
         declared = self.parse_int(metadata.get("Toplam Sayfa"), default=0)
         if declared:
             return declared
-        if pages:
-            totals = [self.parse_int(page.get("total_pages"), default=0) for page in pages]
-            totals = [value for value in totals if value > 0]
-            if totals:
-                return max(totals)
-            return len(pages)
-        return 0
+        if not pages:
+            return 0
+        totals = [self.parse_int(page.get("total_pages"), default=0) for page in pages]
+        totals = [value for value in totals if value > 0]
+        if totals:
+            return max(totals)
+        return len(pages)
 
     def get_module_title(self, filename: str) -> str:
         return TITLE_MAP.get(filename, filename.replace(".md", "").replace("_", " ").title())
@@ -476,29 +478,34 @@ class MarkdownToJsonConverter:
             )
         )
 
-    def _sort_key(self, path: Path) -> tuple:
+    def _sort_key(self, path: Path) -> tuple[int, str]:
         prefix_match = re.match(r"^(\d+)", path.name)
         if prefix_match:
             return (int(prefix_match.group(1)), path.name)
         return (9999, path.name)
 
 
+def load_grammar_modules_from_markdown(input_dir: str | Path = "docs/gramer") -> List[Dict[str, Any]]:
+    converter = MarkdownToJsonConverter(input_dir=str(input_dir))
+    return converter.build_modules()
+
+
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Markdown dosyalarini JSON'a donusturur.")
+    parser = argparse.ArgumentParser(description="Markdown dosyalarını JSON'a dönüştürür.")
     parser.add_argument(
         "--input-dir",
         default="docs/gramer",
-        help="Markdown dosyalarinin bulundugu klasor (varsayilan: docs/gramer)",
+        help="Markdown dosyalarının bulunduğu klasör (varsayılan: docs/gramer)",
     )
     parser.add_argument(
         "--output-dir",
         default="json_output",
-        help="JSON cikti klasoru (varsayilan: json_output)",
+        help="JSON çıktı klasörü (varsayılan: json_output)",
     )
     parser.add_argument(
         "--strict",
         action="store_true",
-        help="Warning varsa exit code 2 ile cik.",
+        help="Warning varsa exit code 2 ile çık.",
     )
     return parser
 
@@ -510,18 +517,18 @@ def main() -> int:
     report = converter.convert_all()
 
     print("=" * 60)
-    print("MARKDOWN -> JSON DONUSUM TAMAMLANDI")
+    print("MARKDOWN -> JSON DÖNÜŞÜM TAMAMLANDI")
     print("=" * 60)
-    print(f"Modul sayisi      : {report['module_count']}")
-    print(f"Sayfa sayisi      : {report['page_count']}")
-    print(f"Ornek sayisi      : {report['example_count']}")
-    print(f"Mini test sayisi  : {report['test_count']}")
-    print(f"Warning sayisi    : {len(report['warnings'])}")
-    print(f"Cikti klasoru     : {args.output_dir}")
+    print(f"Modül sayısı      : {report['module_count']}")
+    print(f"Sayfa sayısı      : {report['page_count']}")
+    print(f"Örnek sayısı      : {report['example_count']}")
+    print(f"Mini test sayısı  : {report['test_count']}")
+    print(f"Warning sayısı    : {len(report['warnings'])}")
+    print(f"Çıktı klasörü     : {args.output_dir}")
     print("=" * 60)
 
     if args.strict and report["warnings"]:
-        print("Strict mod: warning bulundugu icin hata kodu donuluyor.")
+        print("Strict mod: warning bulunduğu için hata kodu dönülüyor.")
         return 2
     return 0
 

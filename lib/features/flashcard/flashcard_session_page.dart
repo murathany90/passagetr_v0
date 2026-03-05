@@ -19,6 +19,8 @@ import '../../core/widgets/app_speak_button.dart';
 import '../tests/test_hub_page.dart';
 import '../words/widgets/dictionary_fallback_sheet.dart';
 import '../words/word_detail_page.dart';
+import 'package:flip_card/flip_card.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 
 class FlashcardSessionPage extends ConsumerStatefulWidget {
   const FlashcardSessionPage({
@@ -42,7 +44,6 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
 
   bool _loading = true;
   bool _loadingMore = false;
-  bool _showBack = false;
   bool _saving = false;
   bool _hasMore = true;
   int _offset = 0;
@@ -52,6 +53,8 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
   int _knownCount = 0;
   int _unsureCount = 0;
   int _unknownCount = 0;
+
+  final AppinioSwiperController _swiperController = AppinioSwiperController();
 
   bool get _isCustomSession =>
       (widget.customWordIds ?? const <String>[]).isNotEmpty;
@@ -72,7 +75,6 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       _offset = 0;
       _hasMore = true;
       _index = 0;
-      _showBack = false;
       _knownCount = 0;
       _unsureCount = 0;
       _unknownCount = 0;
@@ -192,9 +194,12 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
 
       setState(() {
         _index++;
-        _showBack = false;
       });
 
+      // Instead of changing list length dynamically during swipe, 
+      // load more only if we are deeply running out, but swiper handles it better
+      // if we append. We'll try appending. AppinioSwiper v2 usually tolerates it
+      // if cardCount uses the updated length.
       if (!_isCustomSession && _words.length - _index < 8 && _hasMore) {
         unawaited(_loadMore());
       }
@@ -315,10 +320,6 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       );
     }
 
-    final WordItem word = _words[_index];
-    final List<String> synonyms = parseRawList(word.synonymsRaw);
-    final List<String> antonyms = parseRawList(word.antonymsRaw);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('$_title ${_index + 1}/${_words.length}'),
@@ -329,42 +330,84 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _showBack = !_showBack;
-                  });
+              child: AppinioSwiper(
+                controller: _swiperController,
+                cardCount: _words.length,
+                initialIndex: _index,
+                onSwipeEnd: (int previousIndex, int? targetIndex, SwiperActivity activity) {
+                  if (activity is Swipe) {
+                    if (activity.direction == AxisDirection.right) {
+                      _submit(FlashcardAnswer.known);
+                    } else if (activity.direction == AxisDirection.left) {
+                      _submit(FlashcardAnswer.unknown);
+                    } else if (activity.direction == AxisDirection.up) {
+                      _submit(FlashcardAnswer.unsure);
+                    } else {
+                      _submit(FlashcardAnswer.unsure);
+                    }
+                  }
                 },
-                child: AppSurfaceCard(
-                  padding: const EdgeInsets.all(18),
-                  child: _showBack
-                      ? _BackFace(
-                          word: word,
-                          synonyms: synonyms,
-                          antonyms: antonyms,
-                          onRelatedWordTap: _openRelatedWord,
-                        )
-                      : _FrontFace(word: word),
-                ),
+                cardBuilder: (BuildContext context, int index) {
+                  if (index >= _words.length) {
+                    return const Card(child: Center(child: CircularProgressIndicator()));
+                  }
+                  final WordItem currentCardWord = _words[index];
+                  final List<String> currentSynonyms = parseRawList(currentCardWord.synonymsRaw);
+                  final List<String> currentAntonyms = parseRawList(currentCardWord.antonymsRaw);
+                  return FlipCard(
+                    direction: FlipDirection.HORIZONTAL,
+                    front: AppSurfaceCard(
+                      padding: const EdgeInsets.all(18),
+                      child: _FrontFace(word: currentCardWord),
+                    ),
+                    back: AppSurfaceCard(
+                      padding: const EdgeInsets.all(18),
+                      child: _BackFace(
+                        word: currentCardWord,
+                        synonyms: currentSynonyms,
+                        antonyms: currentAntonyms,
+                        onRelatedWordTap: _openRelatedWord,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 12),
-            AppGradientCtaButton(
-              enabled: !_saving,
-              onTap: _saving ? null : () => _submit(FlashcardAnswer.known),
-              icon: Icons.check_circle_outline,
-              label: 'Biliyordum',
-            ),
-            const SizedBox(height: 8),
-            OutlinedButton(
-              onPressed: _saving ? null : () => _submit(FlashcardAnswer.unsure),
-              child: const Text('Kararsizim'),
-            ),
-            const SizedBox(height: 8),
-            FilledButton.tonal(
-              onPressed:
-                  _saving ? null : () => _submit(FlashcardAnswer.unknown),
-              child: const Text('Bilmiyordum'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                // Unknown (Left)
+                FloatingActionButton.extended(
+                  heroTag: 'btnLeft',
+                  onPressed: _saving ? null : () => _swiperController.swipeLeft(),
+                  backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                  foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
+                  elevation: 0,
+                  icon: const Icon(Icons.close),
+                  label: const Text('Bilmiyordum'),
+                ),
+                // Unsure (Up)
+                FloatingActionButton.extended(
+                  heroTag: 'btnUp',
+                  onPressed: _saving ? null : () => _swiperController.swipeUp(),
+                  backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                  foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                  elevation: 0,
+                  icon: const Icon(Icons.help_outline),
+                  label: const Text('Kararsizim'),
+                ),
+                // Known (Right)
+                FloatingActionButton.extended(
+                  heroTag: 'btnRight',
+                  onPressed: _saving ? null : () => _swiperController.swipeRight(),
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  elevation: 0,
+                  icon: const Icon(Icons.check),
+                  label: const Text('Biliyordum'),
+                ),
+              ],
             ),
           ],
         ),

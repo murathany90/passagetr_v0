@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyles {
   static TextTheme lightTextTheme() {
-    return GoogleFonts.plusJakartaSansTextTheme(
+    return GoogleFonts.outfitTextTheme(
       const TextTheme(
         headlineLarge: TextStyle(fontWeight: FontWeight.w800),
         headlineMedium: TextStyle(fontWeight: FontWeight.w700),
@@ -16,7 +16,7 @@ class AppTextStyles {
   }
 
   static TextTheme darkTextTheme() {
-    return GoogleFonts.plusJakartaSansTextTheme(
+    return GoogleFonts.outfitTextTheme(
       const TextTheme(
         headlineLarge: TextStyle(fontWeight: FontWeight.w800),
         headlineMedium: TextStyle(fontWeight: FontWeight.w700),

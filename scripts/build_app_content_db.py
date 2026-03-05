@@ -14,6 +14,11 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from openpyxl import load_workbook
 
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from markdown_to_json_converter import load_grammar_modules_from_markdown
 from static_content_common import (
     build_search_key,
     canonicalize_pos,
@@ -35,6 +40,7 @@ REQUIRED_DICTIONARY_COLUMNS = ("en_word", "tr_meaning_clean")
 REQUIRED_WORD_COLUMNS = ("en_word", "tr_meaning", "pos")
 REQUIRED_PASSAGE_COLUMNS = ("pack_name", "title", "level", "tags_raw", "category")
 REQUIRED_SENTENCE_COLUMNS = ("passage_title", "idx", "sentence_en")
+
 
 @dataclass
 class DictionaryStats:
@@ -72,6 +78,14 @@ class SentencesStats:
     reindexed_rows: int = 0
 
 
+@dataclass
+class GrammarStats:
+    module_count: int = 0
+    page_count: int = 0
+    example_count: int = 0
+    test_count: int = 0
+
+
 class AppContentBuilder:
     def __init__(
         self,
@@ -79,22 +93,28 @@ class AppContentBuilder:
         words_file: Path,
         passages_file: Path,
         sentences_file: Path,
+        grammar_dir: Path,
         output_db: Path,
         report_file: Path,
         dataset_version: str,
+        skip_grammar: bool,
     ) -> None:
         self.dictionary_xlsx = dictionary_xlsx
         self.words_file = words_file
         self.passages_file = passages_file
         self.sentences_file = sentences_file
+        self.grammar_dir = grammar_dir
         self.output_db = output_db
         self.report_file = report_file
         self.dataset_version = dataset_version
+        self.skip_grammar = skip_grammar
 
         self.dictionary_stats = DictionaryStats()
         self.words_stats = WordsStats()
         self.passages_stats = PassagesStats()
         self.sentences_stats = SentencesStats()
+        self.grammar_stats = GrammarStats()
+        self.grammar_checksum = ""
 
     def run(self) -> Dict[str, Any]:
         started = time.perf_counter()
@@ -124,6 +144,12 @@ class AppContentBuilder:
         sentences_payload = self._build_sentences(
             sentences_rows, sentences_mapping, passage_id_by_title
         )
+        grammar_payload = self._build_grammar_payload() if not self.skip_grammar else {
+            "modules": [],
+            "pages": [],
+            "examples": [],
+            "tests": [],
+        }
 
         self.output_db.parent.mkdir(parents=True, exist_ok=True)
         if self.output_db.exists():
@@ -138,6 +164,11 @@ class AppContentBuilder:
             self._insert_passages(connection, passages_payload)
             self._insert_sentences(connection, sentences_payload)
             self._insert_dictionary(connection, dictionary_rows)
+            if not self.skip_grammar:
+                self._insert_grammar_modules(connection, grammar_payload["modules"])
+                self._insert_grammar_pages(connection, grammar_payload["pages"])
+                self._insert_grammar_examples(connection, grammar_payload["examples"])
+                self._insert_grammar_tests(connection, grammar_payload["tests"])
             self._rebuild_dictionary_fts(connection)
             connection.commit()
             self._optimize(connection)
@@ -158,6 +189,7 @@ class AppContentBuilder:
                 "words_sha256": sha256_file(self.words_file),
                 "passages_sha256": sha256_file(self.passages_file),
                 "sentences_sha256": sha256_file(self.sentences_file),
+                "grammar_sha256": self.grammar_checksum,
             },
             "counts": {
                 "packs": len(pack_ids),
@@ -166,12 +198,17 @@ class AppContentBuilder:
                 "reading_sentences": self.sentences_stats.rows_loaded,
                 "dictionary_entries": self.dictionary_stats.rows_loaded,
                 "dictionary_fts_rows": self.dictionary_stats.rows_loaded,
+                "grammar_modules": self.grammar_stats.module_count,
+                "grammar_pages": self.grammar_stats.page_count,
+                "grammar_examples": self.grammar_stats.example_count,
+                "grammar_tests": self.grammar_stats.test_count,
             },
             "stats": {
                 "dictionary": self.dictionary_stats.__dict__,
                 "words": self.words_stats.__dict__,
                 "passages": self.passages_stats.__dict__,
                 "sentences": self.sentences_stats.__dict__,
+                "grammar": self.grammar_stats.__dict__,
             },
         }
 
@@ -501,6 +538,98 @@ class AppContentBuilder:
             self.sentences_stats.rows_loaded += 1
         return payload
 
+    def _build_grammar_payload(self) -> Dict[str, List[Tuple[Any, ...]]]:
+        if not self.grammar_dir.exists():
+            raise FileNotFoundError(f"Grammar klasoru bulunamadi: {self.grammar_dir}")
+
+        self.grammar_checksum = sha256_markdown_dir(self.grammar_dir)
+        modules = load_grammar_modules_from_markdown(self.grammar_dir)
+
+        now_unix = int(datetime.now(timezone.utc).timestamp())
+        module_rows: List[Tuple[Any, ...]] = []
+        page_rows: List[Tuple[Any, ...]] = []
+        example_rows: List[Tuple[Any, ...]] = []
+        test_rows: List[Tuple[Any, ...]] = []
+
+        for module in modules:
+            module_id = int(module.get("sira") or 0)
+            if module_id <= 0:
+                continue
+
+            module_rows.append(
+                (
+                    module_id,
+                    None,
+                    module_id,
+                    clean_text(str(module.get("baslik") or "")),
+                    clean_text(str(module.get("dosya_adi") or "")),
+                    int(module.get("toplam_sayfa") or 0),
+                    clean_text(str(module.get("icon") or "📘")),
+                    clean_text(str(module.get("renk") or "#4776E6")),
+                    now_unix,
+                )
+            )
+            self.grammar_stats.module_count += 1
+
+            pages = module.get("sayfalar") or []
+            for page in pages:
+                page_no = int(page.get("page_number") or 0)
+                if page_no <= 0:
+                    continue
+                page_id = module_id * 1000 + page_no
+                page_rows.append(
+                    (
+                        page_id,
+                        module_id,
+                        None,
+                        page_no,
+                        clean_text(str(page.get("title") or f"Sayfa {page_no}")),
+                        str(page.get("content_html") or ""),
+                        int(page.get("word_count") or 0),
+                    )
+                )
+                self.grammar_stats.page_count += 1
+
+                for idx, example in enumerate(page.get("examples") or []):
+                    example_id = page_id * 1000 + idx + 1
+                    example_rows.append(
+                        (
+                            example_id,
+                            page_id,
+                            idx,
+                            clean_text(str(example.get("en") or "")),
+                            clean_text(str(example.get("tr") or "")),
+                            clean_text(str(example.get("description") or "")),
+                        )
+                    )
+                    self.grammar_stats.example_count += 1
+
+                tests = page.get("mini_tests") or []
+                if not tests and page.get("mini_test"):
+                    tests = [page.get("mini_test")]
+
+                for idx, test in enumerate(tests):
+                    test_id = page_id * 1000 + idx + 501
+                    test_rows.append(
+                        (
+                            test_id,
+                            page_id,
+                            idx,
+                            clean_text(str(test.get("question") or "")),
+                            json.dumps(test.get("options") or {}, ensure_ascii=False),
+                            clean_text(str(test.get("correct") or "")),
+                            clean_text(str(test.get("explanation") or "")),
+                        )
+                    )
+                    self.grammar_stats.test_count += 1
+
+        return {
+            "modules": module_rows,
+            "pages": page_rows,
+            "examples": example_rows,
+            "tests": test_rows,
+        }
+
     def _create_schema(self, connection: sqlite3.Connection) -> None:
         cursor = connection.cursor()
         cursor.execute("PRAGMA journal_mode = WAL;")
@@ -577,6 +706,62 @@ create table if not exists reading_sentences (
 create index if not exists ix_reading_sentences_passage_idx
   on reading_sentences (passage_id, idx);
 
+create table if not exists grammar_modules (
+  id integer primary key,
+  source_module_id integer,
+  sira integer not null,
+  baslik text not null,
+  dosya_adi text not null,
+  toplam_sayfa integer not null default 0,
+  icon text not null default '📘',
+  renk text not null default '#4776E6',
+  updated_at integer not null
+);
+
+create unique index if not exists ix_grammar_modules_sira
+  on grammar_modules (sira);
+
+create table if not exists grammar_pages (
+  id integer primary key,
+  module_id integer not null,
+  source_page_id integer,
+  sayfa_no integer not null,
+  baslik text not null,
+  icerik_html text not null,
+  kelime_sayisi integer not null default 0,
+  unique (module_id, sayfa_no)
+);
+
+create index if not exists ix_grammar_pages_module_id
+  on grammar_pages (module_id);
+
+create table if not exists grammar_examples (
+  id integer primary key,
+  page_id integer not null,
+  sira integer not null default 0,
+  ingilizce text not null,
+  turkce text not null,
+  aciklama text not null default '',
+  unique (page_id, sira)
+);
+
+create index if not exists ix_grammar_examples_page_id
+  on grammar_examples (page_id);
+
+create table if not exists grammar_tests (
+  id integer primary key,
+  page_id integer not null,
+  sira integer not null default 0,
+  soru text not null,
+  secenekler_json text not null default '{}',
+  dogru_cevap text not null default '',
+  aciklama text not null default '',
+  unique (page_id, sira)
+);
+
+create index if not exists ix_grammar_tests_page_id
+  on grammar_tests (page_id);
+
 create table if not exists dictionary_entries (
   seq_id integer primary key,
   entry_id text not null,
@@ -619,6 +804,7 @@ using fts5(
             ("words_sha256", sha256_file(self.words_file)),
             ("passages_sha256", sha256_file(self.passages_file)),
             ("sentences_sha256", sha256_file(self.sentences_file)),
+            ("grammar_sha256", self.grammar_checksum),
         ]
         cursor = connection.cursor()
         cursor.executemany("insert into meta (key, value) values (?, ?)", rows)
@@ -707,6 +893,99 @@ values (?, ?, ?, ?, ?, ?, ?)
         )
         cursor.close()
 
+    def _insert_grammar_modules(
+        self, connection: sqlite3.Connection, rows: List[Tuple[Any, ...]]
+    ) -> None:
+        if not rows:
+            return
+        cursor = connection.cursor()
+        cursor.executemany(
+            """
+insert into grammar_modules (
+  id,
+  source_module_id,
+  sira,
+  baslik,
+  dosya_adi,
+  toplam_sayfa,
+  icon,
+  renk,
+  updated_at
+)
+values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows,
+        )
+        cursor.close()
+
+    def _insert_grammar_pages(
+        self, connection: sqlite3.Connection, rows: List[Tuple[Any, ...]]
+    ) -> None:
+        if not rows:
+            return
+        cursor = connection.cursor()
+        cursor.executemany(
+            """
+insert into grammar_pages (
+  id,
+  module_id,
+  source_page_id,
+  sayfa_no,
+  baslik,
+  icerik_html,
+  kelime_sayisi
+)
+values (?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows,
+        )
+        cursor.close()
+
+    def _insert_grammar_examples(
+        self, connection: sqlite3.Connection, rows: List[Tuple[Any, ...]]
+    ) -> None:
+        if not rows:
+            return
+        cursor = connection.cursor()
+        cursor.executemany(
+            """
+insert into grammar_examples (
+  id,
+  page_id,
+  sira,
+  ingilizce,
+  turkce,
+  aciklama
+)
+values (?, ?, ?, ?, ?, ?)
+            """,
+            rows,
+        )
+        cursor.close()
+
+    def _insert_grammar_tests(
+        self, connection: sqlite3.Connection, rows: List[Tuple[Any, ...]]
+    ) -> None:
+        if not rows:
+            return
+        cursor = connection.cursor()
+        cursor.executemany(
+            """
+insert into grammar_tests (
+  id,
+  page_id,
+  sira,
+  soru,
+  secenekler_json,
+  dogru_cevap,
+  aciklama
+)
+values (?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows,
+        )
+        cursor.close()
+
     def _insert_dictionary(
         self, connection: sqlite3.Connection, rows: List[Tuple[Any, ...]]
     ) -> None:
@@ -759,6 +1038,15 @@ from dictionary_entries
             raise ValueError(f"{label} eksik kolonlar: {', '.join(missing)}")
 
 
+def sha256_markdown_dir(path: Path) -> str:
+    digest = hashlib.sha256()
+    files = sorted(path.glob("*.md"), key=lambda p: p.name.lower())
+    for file in files:
+        digest.update(file.name.encode("utf-8"))
+        digest.update(sha256_file(file).encode("utf-8"))
+    return digest.hexdigest()
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Dictionary + Words + Readings verisini tek app_content.db SQLite assetine donusturur."
@@ -767,6 +1055,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--words-file", required=True)
     parser.add_argument("--passages-file", required=True)
     parser.add_argument("--sentences-file", required=True)
+    parser.add_argument("--grammar-dir", default="docs/gramer")
+    parser.add_argument("--skip-grammar", action="store_true")
     parser.add_argument("--output-db", default="assets/db/app_content.db")
     parser.add_argument(
         "--report-file", default="json_output/app_content_build_report.json"
@@ -784,6 +1074,7 @@ def main() -> int:
     words_file = Path(args.words_file).expanduser().resolve()
     passages_file = Path(args.passages_file).expanduser().resolve()
     sentences_file = Path(args.sentences_file).expanduser().resolve()
+    grammar_dir = Path(args.grammar_dir).expanduser().resolve()
     output_db = Path(args.output_db).expanduser().resolve()
     report_file = Path(args.report_file).expanduser().resolve()
 
@@ -791,6 +1082,9 @@ def main() -> int:
         if not path.exists():
             print(f"[ERROR] Dosya bulunamadi: {path}")
             return 1
+    if not args.skip_grammar and not grammar_dir.exists():
+        print(f"[ERROR] Grammar klasoru bulunamadi: {grammar_dir}")
+        return 1
 
     if dictionary_xlsx.suffix.lower() != ".xlsx":
         print("[ERROR] --dictionary-xlsx yalnizca .xlsx destekler.")
@@ -801,9 +1095,11 @@ def main() -> int:
         words_file=words_file,
         passages_file=passages_file,
         sentences_file=sentences_file,
+        grammar_dir=grammar_dir,
         output_db=output_db,
         report_file=report_file,
         dataset_version=str(args.dataset_version).strip(),
+        skip_grammar=bool(args.skip_grammar),
     )
     try:
         report = builder.run()

@@ -1,4 +1,4 @@
-create table if not exists public.gramer_modulleri (
+﻿create table if not exists public.gramer_modulleri (
   id bigserial primary key,
   sira integer not null,
   baslik text not null,
@@ -91,3 +91,4 @@ create policy gramer_testler_select_all on public.gramer_testler
 for select
 to anon, authenticated
 using (true);
+

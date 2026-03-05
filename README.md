@@ -540,6 +540,30 @@ Pack listesi ve okuma sayfalarında loading state artık `AppShimmerBlock` / `Ap
 - `TtsService` (hız, dil ayarları) ve `ttsServiceProvider` ile global erişim sağlanır.
 - `AppSpeakButton` kullanılarak kelime kartları ve detay sayfalarında kelimelerin orijinal (İngilizce) telaffuzları dinlenebilir.
 
+### 5.15 Gramer Offline Modu (Hibrit + Local-first)
+
+- Gramer sekmesi artık yalnızca Supabase'e bağımlı değildir.
+- `USE_LOCAL_STATIC_CONTENT=true` modunda önce lokal `app_content.db` kaynakları kullanılır.
+- Lokal grammar tabloları:
+  - `grammar_modules`
+  - `grammar_pages`
+  - `grammar_examples`
+  - `grammar_tests`
+- `HybridGrammarRepository` davranışı:
+  - Önce lokalden okur.
+  - Lokal boşsa Supabase'den çekip lokale yazar.
+  - Ağ/senkron hatası varsa lokal içerikle devam eder.
+- `GrammarHomePage` açılışında non-blocking arka plan senkronu (`syncIfStale`) çalışır.
+
+#### Grammar içeriklerini asset'e gömme komutu
+
+```bash
+python markdown_to_json_converter.py --input-dir docs/gramer --output-dir json_output
+python scripts/build_app_content_db.py --dictionary-xlsx docs/dictionary.xlsx --words-file docs/YDS_Set_001.csv --passages-file docs/readings_passages.csv --sentences-file docs/readings_sentences.csv --grammar-dir docs/gramer --output-db assets/db/app_content.db --report-file json_output/app_content_build_report.json
+```
+
+Detaylı döküman: `docs/grammar_offline_mode.md`
+
 ---
 
 ## Gelecek Fazlarda Geliştirme Önerileri

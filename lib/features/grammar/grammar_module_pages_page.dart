@@ -42,9 +42,12 @@ class GrammarModulePagesPage extends ConsumerWidget {
           ),
         ),
         error: (Object error, StackTrace stackTrace) {
+          final bool localMissing = _isLocalMissingError(error);
           return AppErrorState(
-            title: 'Sayfalar yuklenemedi.',
-            detail: error.toString(),
+            title: localMissing ? 'Lokal içerik yok' : 'Sayfalar yuklenemedi.',
+            detail: localMissing
+                ? 'Bu modulun lokal sayfalari bulunamadi. İnternete baglanip tekrar deneyin.'
+                : error.toString(),
             onRetry: () => ref.invalidate(grammarPagesProvider(module.id)),
           );
         },
@@ -63,7 +66,8 @@ class GrammarModulePagesPage extends ConsumerWidget {
             separatorBuilder: (_, __) => const SizedBox(height: 8),
             itemBuilder: (BuildContext context, int index) {
               final GrammarPage page = pages[index];
-              final bool isResumePage = initialPageId != null && page.id == initialPageId;
+              final bool isResumePage =
+                  initialPageId != null && page.id == initialPageId;
 
               return Card(
                 child: ListTile(
@@ -93,5 +97,11 @@ class GrammarModulePagesPage extends ConsumerWidget {
         },
       ),
     );
+  }
+
+  bool _isLocalMissingError(Object error) {
+    final String text = error.toString().toLowerCase();
+    return text.contains('lokal gramer içerigi yok') ||
+        text.contains('lokal icerik yok');
   }
 }

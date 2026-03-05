@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html_table/flutter_html_table.dart';
@@ -10,7 +11,13 @@ import '../../domain/entities/grammar_module.dart';
 import '../../domain/entities/grammar_page.dart';
 import '../../domain/entities/grammar_page_detail.dart';
 import '../../domain/entities/grammar_mini_test.dart';
+import '../../domain/entities/dictionary_lookup_result.dart';
+import '../../domain/entities/word_item.dart';
+import '../../domain/repositories/dictionary_repository.dart';
+import '../../domain/repositories/word_repository.dart';
 import '../../state/providers.dart';
+import '../words/widgets/dictionary_fallback_sheet.dart';
+import '../words/word_detail_page.dart';
 
 class GrammarReaderPage extends ConsumerStatefulWidget {
   const GrammarReaderPage({
@@ -112,11 +119,25 @@ class _GrammarReaderPageState extends ConsumerState<GrammarReaderPage> {
               },
               itemBuilder: (BuildContext context, int index) {
                 final GrammarPage page = widget.pages[index];
+                final bool isLastPage = index == widget.pages.length - 1;
+
                 return _PageContent(
                   page: page,
                   pageDisplayText: '${index + 1}/$total',
+                  isLastPage: isLastPage,
+                  onNext: () {
+                    if (isLastPage) {
+                      Navigator.of(context).pop();
+                    } else {
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
                 );
               },
+              physics: const NeverScrollableScrollPhysics(),
             ),
           ),
         ],
@@ -129,10 +150,14 @@ class _PageContent extends ConsumerWidget {
   const _PageContent({
     required this.page,
     required this.pageDisplayText,
+    required this.isLastPage,
+    required this.onNext,
   });
 
   final GrammarPage page;
   final String pageDisplayText;
+  final bool isLastPage;
+  final VoidCallback onNext;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -153,6 +178,7 @@ class _PageContent extends ConsumerWidget {
         ),
       ),
       error: (Object error, StackTrace stackTrace) {
+        final bool localMissing = _isLocalMissingError(error);
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -162,7 +188,9 @@ class _PageContent extends ConsumerWidget {
                 const Icon(Icons.error_outline, size: 28),
                 const SizedBox(height: 8),
                 Text(
-                  'Sayfa yuklenemedi.\n${error.toString()}',
+                  localMissing
+                      ? 'Lokal içerik yok.\nİnternete baglanip tekrar deneyin.'
+                      : 'Sayfa yuklenemedi.\n${error.toString()}',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
@@ -178,172 +206,286 @@ class _PageContent extends ConsumerWidget {
         );
       },
       data: (GrammarPageDetail detail) {
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      detail.page.baslik,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w700,
+        return Column(
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            detail.page.baslik,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
                           ),
+                        ),
+                        const SizedBox(width: 12),
+                        Chip(label: Text(pageDisplayText)),
+                      ],
                     ),
+                    const SizedBox(height: 12),
+                    _buildHtml(context, ref, detail.page.icerikHtml),
+                    if (detail.examples.isNotEmpty) ...<Widget>[
+                      const SizedBox(height: 18),
+                      Text(
+                        'Ornekler',
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                      ),
+                      const SizedBox(height: 8),
+                      ...detail.examples.map((example) {
+                        return Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text('EN: ${example.ingilizce}'),
+                                    ),
+                                    AppSpeakButton(
+                                      text: example.ingilizce,
+                                      iconSize: 18,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                                Text('TR: ${example.turkce}'),
+                                if (example.aciklama
+                                    .trim()
+                                    .isNotEmpty) ...<Widget>[
+                                  const SizedBox(height: 6),
+                                  Text('Aciklama: ${example.aciklama}'),
+                                ],
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ],
+                    if (detail.tests.isNotEmpty) ...<Widget>[
+                      const SizedBox(height: 18),
+                      Text(
+                        'Mini Test',
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                      ),
+                      const SizedBox(height: 8),
+                      ...detail.tests.map(_InteractiveTestCard.new),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color:
+                        Theme.of(context).shadowColor.withValues(alpha: 0.05),
+                    offset: const Offset(0, -4),
+                    blurRadius: 16,
                   ),
-                  const SizedBox(width: 12),
-                  Chip(label: Text(pageDisplayText)),
                 ],
               ),
-              const SizedBox(height: 12),
-              _buildHtml(context, detail.page.icerikHtml),
-              if (detail.examples.isNotEmpty) ...<Widget>[
-                const SizedBox(height: 18),
-                Text(
-                  'Ornekler',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                ...detail.examples.map((example) {
-                  return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Text('EN: ${example.ingilizce}'),
-                              ),
-                              AppSpeakButton(
-                                text: example.ingilizce,
-                                iconSize: 18,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6),
-                          Text('TR: ${example.turkce}'),
-                          if (example.aciklama.trim().isNotEmpty) ...<Widget>[
-                            const SizedBox(height: 6),
-                            Text('Aciklama: ${example.aciklama}'),
-                          ],
-                        ],
-                      ),
+              child: SafeArea(
+                top: false,
+                child: FilledButton(
+                  onPressed: onNext,
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                  );
-                }),
-              ],
-              if (detail.tests.isNotEmpty) ...<Widget>[
-                const SizedBox(height: 18),
-                Text(
-                  'Mini Test',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                  ),
+                  child: Text(
+                    isLastPage ? 'Dersi Bitir' : 'Devam Et',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 8),
-                ...detail.tests.map(_InteractiveTestCard.new),
-              ],
-            ],
-          ),
+              ),
+            ),
+          ],
         );
       },
     );
   }
 
-  Widget _buildHtml(BuildContext context, String htmlContent) {
+  bool _isLocalMissingError(Object error) {
+    final String text = error.toString().toLowerCase();
+    return text.contains('lokal gramer içerigi yok') ||
+        text.contains('lokal icerik yok');
+  }
+
+  Future<void> _lookupWord(
+      BuildContext context, WidgetRef ref, String rawWord) async {
+    final String normalized =
+        rawWord.trim().toLowerCase().replaceAll(RegExp(r'[^a-zA-Z\-]'), '');
+    if (normalized.isEmpty) return;
+
+    final WordRepository wordRepo = ref.read(wordRepositoryProvider);
+    final WordItem? existing = await wordRepo.getWordByEnWordGlobal(normalized);
+
+    if (!context.mounted) return;
+
+    if (existing != null) {
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => WordDetailPage(word: existing),
+        ),
+      );
+      return;
+    }
+
+    final DictionaryRepository dictRepo =
+        ref.read(dictionaryRepositoryProvider);
+    final DictionaryLookupResult lookup =
+        await dictRepo.lookup(query: normalized);
+
+    if (!context.mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (_) =>
+          DictionaryFallbackSheet(query: normalized, lookup: lookup),
+    );
+  }
+
+  Widget _buildHtml(BuildContext context, WidgetRef ref, String htmlContent) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final ColorScheme colors = Theme.of(context).colorScheme;
 
-    return Html(
-      data: htmlContent,
-      extensions: const <HtmlExtension>[
-        TableHtmlExtension(),
-      ],
-      style: <String, Style>{
-        'body': Style(
-          margin: Margins.zero,
-          fontSize: FontSize(15),
-          lineHeight: const LineHeight(1.55),
-        ),
-        'h1': Style(
-          fontSize: FontSize(22),
-          fontWeight: FontWeight.w700,
-        ),
-        'h2': Style(
-          fontSize: FontSize(20),
-          fontWeight: FontWeight.w700,
-        ),
-        'h3': Style(
-          fontSize: FontSize(18),
-          fontWeight: FontWeight.w600,
-        ),
-        'strong': Style(fontWeight: FontWeight.w700),
-        'em': Style(fontStyle: FontStyle.italic),
-        'table': Style(
-          backgroundColor: colors.surfaceContainerLowest,
-          border: Border.all(
-            color: colors.outlineVariant,
-            width: 0.8,
+    return SelectionArea(
+      contextMenuBuilder: (
+        BuildContext context,
+        SelectableRegionState selectableRegionState,
+      ) {
+        final List<ContextMenuButtonItem> buttonItems =
+            List<ContextMenuButtonItem>.of(
+          selectableRegionState.contextMenuButtonItems,
+        );
+        buttonItems.insert(
+          0,
+          ContextMenuButtonItem(
+            label: 'Sozlukte Ara',
+            onPressed: () {
+              final String selectedText =
+                  selectableRegionState.textEditingValue.selection.textInside(
+                selectableRegionState.textEditingValue.text,
+              );
+              ContextMenuController.removeAny();
+              _lookupWord(context, ref, selectedText);
+            },
           ),
-          margin: Margins.symmetric(vertical: 8),
-        ),
-        'th': Style(
-          padding: HtmlPaddings.all(6),
-          backgroundColor: colors.surfaceContainerHigh,
-          border: Border.all(
-            color: colors.outlineVariant,
-            width: 0.6,
-          ),
-          fontWeight: FontWeight.w700,
-        ),
-        'td': Style(
-          padding: HtmlPaddings.all(6),
-          border: Border.all(
-            color: colors.outlineVariant,
-            width: 0.6,
-          ),
-        ),
-        'code': Style(
-          backgroundColor: colors.surfaceContainerHigh,
-          fontFamily: 'monospace',
-          fontSize: FontSize(13),
-          padding: HtmlPaddings.symmetric(horizontal: 4, vertical: 2),
-        ),
-        'pre': Style(
-          backgroundColor: colors.surfaceContainerHigh,
-          padding: HtmlPaddings.all(12),
-          margin: Margins.symmetric(vertical: 8),
-        ),
-        'blockquote': Style(
-          border: Border(
-            left: BorderSide(color: colors.primary, width: 3),
-          ),
-          padding: HtmlPaddings.only(left: 12),
-          margin: Margins.symmetric(vertical: 8),
-          fontStyle: FontStyle.italic,
-        ),
-        '.strateji-kutusu': Style(
-          backgroundColor: isDark
-              ? const Color(0xFF1A3A5C)
-              : const Color(0xFFE3F2FD),
-          padding: HtmlPaddings.all(12),
-          margin: Margins.symmetric(vertical: 10),
-        ),
-        '.uyari-kutusu': Style(
-          backgroundColor: isDark
-              ? const Color(0xFF5C1A1A)
-              : const Color(0xFFFFEBEE),
-          padding: HtmlPaddings.all(12),
-          margin: Margins.symmetric(vertical: 10),
-        ),
+        );
+        return AdaptiveTextSelectionToolbar.buttonItems(
+          anchors: selectableRegionState.contextMenuAnchors,
+          buttonItems: buttonItems,
+        );
       },
+      child: Html(
+        data: htmlContent,
+        extensions: const <HtmlExtension>[
+          TableHtmlExtension(),
+        ],
+        style: <String, Style>{
+          'body': Style(
+            margin: Margins.zero,
+            fontSize: FontSize(15),
+            lineHeight: const LineHeight(1.55),
+          ),
+          'h1': Style(
+            fontSize: FontSize(22),
+            fontWeight: FontWeight.w700,
+          ),
+          'h2': Style(
+            fontSize: FontSize(20),
+            fontWeight: FontWeight.w700,
+          ),
+          'h3': Style(
+            fontSize: FontSize(18),
+            fontWeight: FontWeight.w600,
+          ),
+          'strong': Style(fontWeight: FontWeight.w700),
+          'em': Style(fontStyle: FontStyle.italic),
+          'table': Style(
+            backgroundColor: colors.surfaceContainerLowest,
+            border: Border.all(
+              color: colors.outlineVariant,
+              width: 0.8,
+            ),
+            margin: Margins.symmetric(vertical: 8),
+          ),
+          'th': Style(
+            padding: HtmlPaddings.all(6),
+            backgroundColor: colors.surfaceContainerHigh,
+            border: Border.all(
+              color: colors.outlineVariant,
+              width: 0.6,
+            ),
+            fontWeight: FontWeight.w700,
+          ),
+          'td': Style(
+            padding: HtmlPaddings.all(6),
+            border: Border.all(
+              color: colors.outlineVariant,
+              width: 0.6,
+            ),
+          ),
+          'code': Style(
+            backgroundColor: colors.surfaceContainerHigh,
+            fontFamily: 'monospace',
+            fontSize: FontSize(13),
+            padding: HtmlPaddings.symmetric(horizontal: 4, vertical: 2),
+          ),
+          'pre': Style(
+            backgroundColor: colors.surfaceContainerHigh,
+            padding: HtmlPaddings.all(12),
+            margin: Margins.symmetric(vertical: 8),
+          ),
+          'blockquote': Style(
+            border: Border(
+              left: BorderSide(color: colors.primary, width: 3),
+            ),
+            padding: HtmlPaddings.only(left: 12),
+            margin: Margins.symmetric(vertical: 8),
+            fontStyle: FontStyle.italic,
+          ),
+          '.strateji-kutusu': Style(
+            backgroundColor:
+                isDark ? const Color(0xFF1A3A5C) : const Color(0xFFE3F2FD),
+            padding: HtmlPaddings.all(12),
+            margin: Margins.symmetric(vertical: 10),
+          ),
+          '.uyari-kutusu': Style(
+            backgroundColor:
+                isDark ? const Color(0xFF5C1A1A) : const Color(0xFFFFEBEE),
+            padding: HtmlPaddings.all(12),
+            margin: Margins.symmetric(vertical: 10),
+          ),
+        },
+      ),
     );
   }
 }
@@ -398,8 +540,7 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
                   ),
             ),
             const SizedBox(height: 8),
-            for (final String key in keys)
-              _buildOption(context, key, colors),
+            for (final String key in keys) _buildOption(context, key, colors),
             const SizedBox(height: 8),
             if (!_revealed)
               FilledButton.tonal(
@@ -425,9 +566,7 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
                           isCorrect
                               ? Icons.check_circle_rounded
                               : Icons.cancel_rounded,
-                          color: isCorrect
-                              ? colors.primary
-                              : colors.error,
+                          color: isCorrect ? colors.primary : colors.error,
                           size: 20,
                         ),
                         const SizedBox(width: 6),
@@ -439,9 +578,8 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
                                 .titleSmall
                                 ?.copyWith(
                                   fontWeight: FontWeight.w700,
-                                  color: isCorrect
-                                      ? colors.primary
-                                      : colors.error,
+                                  color:
+                                      isCorrect ? colors.primary : colors.error,
                                 ),
                           ),
                         ),

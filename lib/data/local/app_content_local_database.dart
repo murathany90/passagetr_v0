@@ -123,6 +123,97 @@ class AppContentReadingSentences extends Table {
   Set<Column<Object>> get primaryKey => <Column<Object>>{id};
 }
 
+class AppContentGrammarModules extends Table {
+  @override
+  String get tableName => 'grammar_modules';
+
+  IntColumn get id => integer()();
+
+  IntColumn get sourceModuleId =>
+      integer().named('source_module_id').nullable()();
+
+  IntColumn get sira => integer()();
+
+  TextColumn get baslik => text()();
+
+  TextColumn get dosyaAdi => text().named('dosya_adi')();
+
+  IntColumn get toplamSayfa => integer().named('toplam_sayfa')();
+
+  TextColumn get icon => text()();
+
+  TextColumn get renk => text()();
+
+  IntColumn get updatedAt => integer().named('updated_at')();
+
+  @override
+  Set<Column<Object>> get primaryKey => <Column<Object>>{id};
+}
+
+class AppContentGrammarPages extends Table {
+  @override
+  String get tableName => 'grammar_pages';
+
+  IntColumn get id => integer()();
+
+  IntColumn get moduleId => integer().named('module_id')();
+
+  IntColumn get sourcePageId => integer().named('source_page_id').nullable()();
+
+  IntColumn get sayfaNo => integer().named('sayfa_no')();
+
+  TextColumn get baslik => text()();
+
+  TextColumn get icerikHtml => text().named('icerik_html')();
+
+  IntColumn get kelimeSayisi => integer().named('kelime_sayisi')();
+
+  @override
+  Set<Column<Object>> get primaryKey => <Column<Object>>{id};
+}
+
+class AppContentGrammarExamples extends Table {
+  @override
+  String get tableName => 'grammar_examples';
+
+  IntColumn get id => integer()();
+
+  IntColumn get pageId => integer().named('page_id')();
+
+  IntColumn get sira => integer()();
+
+  TextColumn get ingilizce => text()();
+
+  TextColumn get turkce => text()();
+
+  TextColumn get aciklama => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => <Column<Object>>{id};
+}
+
+class AppContentGrammarTests extends Table {
+  @override
+  String get tableName => 'grammar_tests';
+
+  IntColumn get id => integer()();
+
+  IntColumn get pageId => integer().named('page_id')();
+
+  IntColumn get sira => integer()();
+
+  TextColumn get soru => text()();
+
+  TextColumn get seceneklerJson => text().named('secenekler_json')();
+
+  TextColumn get dogruCevap => text().named('dogru_cevap')();
+
+  TextColumn get aciklama => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => <Column<Object>>{id};
+}
+
 @DriftDatabase(
   tables: <Type>[
     AppContentMeta,
@@ -130,13 +221,38 @@ class AppContentReadingSentences extends Table {
     AppContentWords,
     AppContentReadingPassages,
     AppContentReadingSentences,
+    AppContentGrammarModules,
+    AppContentGrammarPages,
+    AppContentGrammarExamples,
+    AppContentGrammarTests,
   ],
 )
 class AppContentLocalDatabase extends _$AppContentLocalDatabase {
   AppContentLocalDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onUpgrade: (Migrator m, int from, int to) async {
+          if (from < 2) {
+            await m.createTable(appContentGrammarModules);
+            await m.createTable(appContentGrammarPages);
+            await m.createTable(appContentGrammarExamples);
+            await m.createTable(appContentGrammarTests);
+            await customStatement(
+              'create unique index if not exists ix_grammar_pages_module_no on grammar_pages(module_id, sayfa_no)',
+            );
+            await customStatement(
+              'create unique index if not exists ix_grammar_examples_page_sira on grammar_examples(page_id, sira)',
+            );
+            await customStatement(
+              'create unique index if not exists ix_grammar_tests_page_sira on grammar_tests(page_id, sira)',
+            );
+          }
+        },
+      );
 }
 
 LazyDatabase _openConnection() {
@@ -200,7 +316,8 @@ Future<void> _copyAppContentIfNeeded(File targetFile) async {
 
 Future<Map<String, dynamic>> _loadAssetMeta() async {
   try {
-    final String raw = await rootBundle.loadString('assets/db/app_content.meta.json');
+    final String raw =
+        await rootBundle.loadString('assets/db/app_content.meta.json');
     final Object? decoded = jsonDecode(raw);
     if (decoded is Map<String, dynamic>) {
       return decoded;

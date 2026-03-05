@@ -1,7 +1,15 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 
 import '../../core/utils/passage_word_extractor.dart';
 import '../../core/utils/pos_label_mapper.dart';
+import '../../domain/entities/grammar_bundle.dart';
+import '../../domain/entities/grammar_example.dart';
+import '../../domain/entities/grammar_mini_test.dart';
+import '../../domain/entities/grammar_module.dart';
+import '../../domain/entities/grammar_page.dart';
+import '../../domain/entities/grammar_page_detail.dart';
 import '../../domain/entities/tag_count.dart';
 import '../../domain/entities/pack.dart';
 import '../../domain/entities/passage_sentence.dart';
@@ -11,7 +19,14 @@ import '../../domain/entities/word_level_summary.dart';
 import '../../domain/value_objects/paged_result.dart';
 import 'app_content_local_database.dart';
 
-class AppContentLocalDataSource {
+abstract class GrammarLocalStore {
+  Future<List<GrammarModule>> getGrammarModules();
+  Future<List<GrammarPage>> getGrammarPagesByModule(int modulId);
+  Future<GrammarPageDetail> getGrammarPageDetail(int sayfaId);
+  Future<void> replaceGrammarBundle(GrammarBundle bundle);
+}
+
+class AppContentLocalDataSource implements GrammarLocalStore {
   AppContentLocalDataSource(this._db);
 
   final AppContentLocalDatabase _db;
@@ -34,6 +49,139 @@ class AppContentLocalDataSource {
           ..limit(1))
         .getSingleOrNull();
     return (row?.value ?? '').trim();
+  }
+
+  @override
+  Future<List<GrammarModule>> getGrammarModules() async {
+    final List<AppContentGrammarModule> rows =
+        await (_db.select(_db.appContentGrammarModules)
+              ..orderBy([(tbl) => OrderingTerm.asc(tbl.sira)]))
+            .get();
+    return rows.map(_grammarModuleFromData).toList(growable: false);
+  }
+
+  @override
+  Future<List<GrammarPage>> getGrammarPagesByModule(int modulId) async {
+    final List<AppContentGrammarPage> rows =
+        await (_db.select(_db.appContentGrammarPages)
+              ..where((tbl) => tbl.moduleId.equals(modulId))
+              ..orderBy([(tbl) => OrderingTerm.asc(tbl.sayfaNo)]))
+            .get();
+    return rows.map(_grammarPageFromData).toList(growable: false);
+  }
+
+  @override
+  Future<GrammarPageDetail> getGrammarPageDetail(int sayfaId) async {
+    final AppContentGrammarPage? pageRow =
+        await (_db.select(_db.appContentGrammarPages)
+              ..where((tbl) => tbl.id.equals(sayfaId))
+              ..limit(1))
+            .getSingleOrNull();
+    if (pageRow == null) {
+      throw StateError('Lokal gramer içerigi yok: sayfa $sayfaId');
+    }
+
+    final List<AppContentGrammarExample> exampleRows =
+        await (_db.select(_db.appContentGrammarExamples)
+              ..where((tbl) => tbl.pageId.equals(sayfaId))
+              ..orderBy([(tbl) => OrderingTerm.asc(tbl.sira)]))
+            .get();
+
+    final List<AppContentGrammarTest> testRows =
+        await (_db.select(_db.appContentGrammarTests)
+              ..where((tbl) => tbl.pageId.equals(sayfaId))
+              ..orderBy([(tbl) => OrderingTerm.asc(tbl.sira)]))
+            .get();
+
+    return GrammarPageDetail(
+      page: _grammarPageFromData(pageRow),
+      examples:
+          exampleRows.map(_grammarExampleFromData).toList(growable: false),
+      tests: testRows.map(_grammarTestFromData).toList(growable: false),
+    );
+  }
+
+  @override
+  Future<void> replaceGrammarBundle(GrammarBundle bundle) async {
+    final int nowUnix = DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000;
+    await _db.transaction(() async {
+      await _db.delete(_db.appContentGrammarTests).go();
+      await _db.delete(_db.appContentGrammarExamples).go();
+      await _db.delete(_db.appContentGrammarPages).go();
+      await _db.delete(_db.appContentGrammarModules).go();
+
+      for (final GrammarModuleBundleItem moduleItem in bundle.modules) {
+        final GrammarModule module = moduleItem.module;
+        final int moduleId = module.id <= 0 ? module.sira : module.id;
+
+        await _db.into(_db.appContentGrammarModules).insert(
+              AppContentGrammarModulesCompanion(
+                id: Value(moduleId),
+                sourceModuleId: Value(moduleItem.sourceModuleId),
+                sira: Value(module.sira),
+                baslik: Value(module.baslik),
+                dosyaAdi: Value(module.dosyaAdi),
+                toplamSayfa: Value(module.toplamSayfa),
+                icon: Value(module.icon),
+                renk: Value(module.renk),
+                updatedAt: Value(nowUnix),
+              ),
+              mode: InsertMode.insertOrReplace,
+            );
+
+        for (final GrammarPageBundleItem pageItem in moduleItem.pages) {
+          final GrammarPage page = pageItem.page;
+          final int pageId =
+              page.id <= 0 ? (moduleId * 1000) + page.sayfaNo : page.id;
+          await _db.into(_db.appContentGrammarPages).insert(
+                AppContentGrammarPagesCompanion(
+                  id: Value(pageId),
+                  moduleId: Value(moduleId),
+                  sourcePageId: Value(pageItem.sourcePageId),
+                  sayfaNo: Value(page.sayfaNo),
+                  baslik: Value(page.baslik),
+                  icerikHtml: Value(page.icerikHtml),
+                  kelimeSayisi: Value(page.kelimeSayisi),
+                ),
+                mode: InsertMode.insertOrReplace,
+              );
+
+          for (final GrammarExample example in pageItem.examples) {
+            final int exampleId = example.id <= 0
+                ? (pageId * 1000) + example.sira + 1
+                : example.id;
+            await _db.into(_db.appContentGrammarExamples).insert(
+                  AppContentGrammarExamplesCompanion(
+                    id: Value(exampleId),
+                    pageId: Value(pageId),
+                    sira: Value(example.sira),
+                    ingilizce: Value(example.ingilizce),
+                    turkce: Value(example.turkce),
+                    aciklama: Value(example.aciklama),
+                  ),
+                  mode: InsertMode.insertOrReplace,
+                );
+          }
+
+          for (final GrammarMiniTest test in pageItem.tests) {
+            final int testId =
+                test.id <= 0 ? (pageId * 1000) + test.sira + 501 : test.id;
+            await _db.into(_db.appContentGrammarTests).insert(
+                  AppContentGrammarTestsCompanion(
+                    id: Value(testId),
+                    pageId: Value(pageId),
+                    sira: Value(test.sira),
+                    soru: Value(test.soru),
+                    seceneklerJson: Value(jsonEncode(test.secenekler)),
+                    dogruCevap: Value(test.dogruCevap),
+                    aciklama: Value(test.aciklama),
+                  ),
+                  mode: InsertMode.insertOrReplace,
+                );
+          }
+        }
+      }
+    });
   }
 
   Future<List<Pack>> getPacksWithWordCount() async {
@@ -715,5 +863,75 @@ order by s.passage_id, s.idx
 
   String _normalizeTokenForContains(String value) {
     return _normalize(value).replaceAll(' ', '');
+  }
+
+  GrammarModule _grammarModuleFromData(AppContentGrammarModule row) {
+    return GrammarModule(
+      id: row.id,
+      sira: row.sira,
+      baslik: row.baslik,
+      dosyaAdi: row.dosyaAdi,
+      toplamSayfa: row.toplamSayfa,
+      icon: row.icon,
+      renk: row.renk,
+    );
+  }
+
+  GrammarPage _grammarPageFromData(AppContentGrammarPage row) {
+    return GrammarPage(
+      id: row.id,
+      modulId: row.moduleId,
+      sayfaNo: row.sayfaNo,
+      baslik: row.baslik,
+      icerikHtml: row.icerikHtml,
+      kelimeSayisi: row.kelimeSayisi,
+    );
+  }
+
+  GrammarExample _grammarExampleFromData(AppContentGrammarExample row) {
+    return GrammarExample(
+      id: row.id,
+      sayfaId: row.pageId,
+      sira: row.sira,
+      ingilizce: row.ingilizce,
+      turkce: row.turkce,
+      aciklama: row.aciklama,
+    );
+  }
+
+  GrammarMiniTest _grammarTestFromData(AppContentGrammarTest row) {
+    return GrammarMiniTest(
+      id: row.id,
+      sayfaId: row.pageId,
+      sira: row.sira,
+      soru: row.soru,
+      secenekler: _decodeOptions(row.seceneklerJson),
+      dogruCevap: row.dogruCevap,
+      aciklama: row.aciklama,
+    );
+  }
+
+  Map<String, String> _decodeOptions(String rawJson) {
+    final String text = rawJson.trim();
+    if (text.isEmpty) {
+      return const <String, String>{};
+    }
+    try {
+      final dynamic decoded = jsonDecode(text);
+      if (decoded is! Map) {
+        return const <String, String>{};
+      }
+      final Map<String, String> options = <String, String>{};
+      for (final MapEntry<dynamic, dynamic> entry in decoded.entries) {
+        final String key = entry.key.toString().trim();
+        final String value = entry.value?.toString().trim() ?? '';
+        if (key.isNotEmpty) {
+          options[key] = value;
+        }
+      }
+      return options;
+    } catch (_) {
+      return const <String, String>{};
+    }
   }
 }

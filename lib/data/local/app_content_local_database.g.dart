@@ -2043,6 +2043,1568 @@ class AppContentReadingSentencesCompanion
   }
 }
 
+class $AppContentGrammarModulesTable extends AppContentGrammarModules
+    with TableInfo<$AppContentGrammarModulesTable, AppContentGrammarModule> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppContentGrammarModulesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _sourceModuleIdMeta =
+      const VerificationMeta('sourceModuleId');
+  @override
+  late final GeneratedColumn<int> sourceModuleId = GeneratedColumn<int>(
+      'source_module_id', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _siraMeta = const VerificationMeta('sira');
+  @override
+  late final GeneratedColumn<int> sira = GeneratedColumn<int>(
+      'sira', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _baslikMeta = const VerificationMeta('baslik');
+  @override
+  late final GeneratedColumn<String> baslik = GeneratedColumn<String>(
+      'baslik', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dosyaAdiMeta =
+      const VerificationMeta('dosyaAdi');
+  @override
+  late final GeneratedColumn<String> dosyaAdi = GeneratedColumn<String>(
+      'dosya_adi', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _toplamSayfaMeta =
+      const VerificationMeta('toplamSayfa');
+  @override
+  late final GeneratedColumn<int> toplamSayfa = GeneratedColumn<int>(
+      'toplam_sayfa', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _iconMeta = const VerificationMeta('icon');
+  @override
+  late final GeneratedColumn<String> icon = GeneratedColumn<String>(
+      'icon', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _renkMeta = const VerificationMeta('renk');
+  @override
+  late final GeneratedColumn<String> renk = GeneratedColumn<String>(
+      'renk', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        sourceModuleId,
+        sira,
+        baslik,
+        dosyaAdi,
+        toplamSayfa,
+        icon,
+        renk,
+        updatedAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_modules';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<AppContentGrammarModule> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('source_module_id')) {
+      context.handle(
+          _sourceModuleIdMeta,
+          sourceModuleId.isAcceptableOrUnknown(
+              data['source_module_id']!, _sourceModuleIdMeta));
+    }
+    if (data.containsKey('sira')) {
+      context.handle(
+          _siraMeta, sira.isAcceptableOrUnknown(data['sira']!, _siraMeta));
+    } else if (isInserting) {
+      context.missing(_siraMeta);
+    }
+    if (data.containsKey('baslik')) {
+      context.handle(_baslikMeta,
+          baslik.isAcceptableOrUnknown(data['baslik']!, _baslikMeta));
+    } else if (isInserting) {
+      context.missing(_baslikMeta);
+    }
+    if (data.containsKey('dosya_adi')) {
+      context.handle(_dosyaAdiMeta,
+          dosyaAdi.isAcceptableOrUnknown(data['dosya_adi']!, _dosyaAdiMeta));
+    } else if (isInserting) {
+      context.missing(_dosyaAdiMeta);
+    }
+    if (data.containsKey('toplam_sayfa')) {
+      context.handle(
+          _toplamSayfaMeta,
+          toplamSayfa.isAcceptableOrUnknown(
+              data['toplam_sayfa']!, _toplamSayfaMeta));
+    } else if (isInserting) {
+      context.missing(_toplamSayfaMeta);
+    }
+    if (data.containsKey('icon')) {
+      context.handle(
+          _iconMeta, icon.isAcceptableOrUnknown(data['icon']!, _iconMeta));
+    } else if (isInserting) {
+      context.missing(_iconMeta);
+    }
+    if (data.containsKey('renk')) {
+      context.handle(
+          _renkMeta, renk.isAcceptableOrUnknown(data['renk']!, _renkMeta));
+    } else if (isInserting) {
+      context.missing(_renkMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AppContentGrammarModule map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppContentGrammarModule(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      sourceModuleId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}source_module_id']),
+      sira: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sira'])!,
+      baslik: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}baslik'])!,
+      dosyaAdi: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}dosya_adi'])!,
+      toplamSayfa: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}toplam_sayfa'])!,
+      icon: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}icon'])!,
+      renk: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}renk'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $AppContentGrammarModulesTable createAlias(String alias) {
+    return $AppContentGrammarModulesTable(attachedDatabase, alias);
+  }
+}
+
+class AppContentGrammarModule extends DataClass
+    implements Insertable<AppContentGrammarModule> {
+  final int id;
+  final int? sourceModuleId;
+  final int sira;
+  final String baslik;
+  final String dosyaAdi;
+  final int toplamSayfa;
+  final String icon;
+  final String renk;
+  final int updatedAt;
+  const AppContentGrammarModule(
+      {required this.id,
+      this.sourceModuleId,
+      required this.sira,
+      required this.baslik,
+      required this.dosyaAdi,
+      required this.toplamSayfa,
+      required this.icon,
+      required this.renk,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    if (!nullToAbsent || sourceModuleId != null) {
+      map['source_module_id'] = Variable<int>(sourceModuleId);
+    }
+    map['sira'] = Variable<int>(sira);
+    map['baslik'] = Variable<String>(baslik);
+    map['dosya_adi'] = Variable<String>(dosyaAdi);
+    map['toplam_sayfa'] = Variable<int>(toplamSayfa);
+    map['icon'] = Variable<String>(icon);
+    map['renk'] = Variable<String>(renk);
+    map['updated_at'] = Variable<int>(updatedAt);
+    return map;
+  }
+
+  AppContentGrammarModulesCompanion toCompanion(bool nullToAbsent) {
+    return AppContentGrammarModulesCompanion(
+      id: Value(id),
+      sourceModuleId: sourceModuleId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sourceModuleId),
+      sira: Value(sira),
+      baslik: Value(baslik),
+      dosyaAdi: Value(dosyaAdi),
+      toplamSayfa: Value(toplamSayfa),
+      icon: Value(icon),
+      renk: Value(renk),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory AppContentGrammarModule.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppContentGrammarModule(
+      id: serializer.fromJson<int>(json['id']),
+      sourceModuleId: serializer.fromJson<int?>(json['sourceModuleId']),
+      sira: serializer.fromJson<int>(json['sira']),
+      baslik: serializer.fromJson<String>(json['baslik']),
+      dosyaAdi: serializer.fromJson<String>(json['dosyaAdi']),
+      toplamSayfa: serializer.fromJson<int>(json['toplamSayfa']),
+      icon: serializer.fromJson<String>(json['icon']),
+      renk: serializer.fromJson<String>(json['renk']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'sourceModuleId': serializer.toJson<int?>(sourceModuleId),
+      'sira': serializer.toJson<int>(sira),
+      'baslik': serializer.toJson<String>(baslik),
+      'dosyaAdi': serializer.toJson<String>(dosyaAdi),
+      'toplamSayfa': serializer.toJson<int>(toplamSayfa),
+      'icon': serializer.toJson<String>(icon),
+      'renk': serializer.toJson<String>(renk),
+      'updatedAt': serializer.toJson<int>(updatedAt),
+    };
+  }
+
+  AppContentGrammarModule copyWith(
+          {int? id,
+          Value<int?> sourceModuleId = const Value.absent(),
+          int? sira,
+          String? baslik,
+          String? dosyaAdi,
+          int? toplamSayfa,
+          String? icon,
+          String? renk,
+          int? updatedAt}) =>
+      AppContentGrammarModule(
+        id: id ?? this.id,
+        sourceModuleId:
+            sourceModuleId.present ? sourceModuleId.value : this.sourceModuleId,
+        sira: sira ?? this.sira,
+        baslik: baslik ?? this.baslik,
+        dosyaAdi: dosyaAdi ?? this.dosyaAdi,
+        toplamSayfa: toplamSayfa ?? this.toplamSayfa,
+        icon: icon ?? this.icon,
+        renk: renk ?? this.renk,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  AppContentGrammarModule copyWithCompanion(
+      AppContentGrammarModulesCompanion data) {
+    return AppContentGrammarModule(
+      id: data.id.present ? data.id.value : this.id,
+      sourceModuleId: data.sourceModuleId.present
+          ? data.sourceModuleId.value
+          : this.sourceModuleId,
+      sira: data.sira.present ? data.sira.value : this.sira,
+      baslik: data.baslik.present ? data.baslik.value : this.baslik,
+      dosyaAdi: data.dosyaAdi.present ? data.dosyaAdi.value : this.dosyaAdi,
+      toplamSayfa:
+          data.toplamSayfa.present ? data.toplamSayfa.value : this.toplamSayfa,
+      icon: data.icon.present ? data.icon.value : this.icon,
+      renk: data.renk.present ? data.renk.value : this.renk,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarModule(')
+          ..write('id: $id, ')
+          ..write('sourceModuleId: $sourceModuleId, ')
+          ..write('sira: $sira, ')
+          ..write('baslik: $baslik, ')
+          ..write('dosyaAdi: $dosyaAdi, ')
+          ..write('toplamSayfa: $toplamSayfa, ')
+          ..write('icon: $icon, ')
+          ..write('renk: $renk, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, sourceModuleId, sira, baslik, dosyaAdi,
+      toplamSayfa, icon, renk, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppContentGrammarModule &&
+          other.id == this.id &&
+          other.sourceModuleId == this.sourceModuleId &&
+          other.sira == this.sira &&
+          other.baslik == this.baslik &&
+          other.dosyaAdi == this.dosyaAdi &&
+          other.toplamSayfa == this.toplamSayfa &&
+          other.icon == this.icon &&
+          other.renk == this.renk &&
+          other.updatedAt == this.updatedAt);
+}
+
+class AppContentGrammarModulesCompanion
+    extends UpdateCompanion<AppContentGrammarModule> {
+  final Value<int> id;
+  final Value<int?> sourceModuleId;
+  final Value<int> sira;
+  final Value<String> baslik;
+  final Value<String> dosyaAdi;
+  final Value<int> toplamSayfa;
+  final Value<String> icon;
+  final Value<String> renk;
+  final Value<int> updatedAt;
+  const AppContentGrammarModulesCompanion({
+    this.id = const Value.absent(),
+    this.sourceModuleId = const Value.absent(),
+    this.sira = const Value.absent(),
+    this.baslik = const Value.absent(),
+    this.dosyaAdi = const Value.absent(),
+    this.toplamSayfa = const Value.absent(),
+    this.icon = const Value.absent(),
+    this.renk = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+  });
+  AppContentGrammarModulesCompanion.insert({
+    this.id = const Value.absent(),
+    this.sourceModuleId = const Value.absent(),
+    required int sira,
+    required String baslik,
+    required String dosyaAdi,
+    required int toplamSayfa,
+    required String icon,
+    required String renk,
+    required int updatedAt,
+  })  : sira = Value(sira),
+        baslik = Value(baslik),
+        dosyaAdi = Value(dosyaAdi),
+        toplamSayfa = Value(toplamSayfa),
+        icon = Value(icon),
+        renk = Value(renk),
+        updatedAt = Value(updatedAt);
+  static Insertable<AppContentGrammarModule> custom({
+    Expression<int>? id,
+    Expression<int>? sourceModuleId,
+    Expression<int>? sira,
+    Expression<String>? baslik,
+    Expression<String>? dosyaAdi,
+    Expression<int>? toplamSayfa,
+    Expression<String>? icon,
+    Expression<String>? renk,
+    Expression<int>? updatedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (sourceModuleId != null) 'source_module_id': sourceModuleId,
+      if (sira != null) 'sira': sira,
+      if (baslik != null) 'baslik': baslik,
+      if (dosyaAdi != null) 'dosya_adi': dosyaAdi,
+      if (toplamSayfa != null) 'toplam_sayfa': toplamSayfa,
+      if (icon != null) 'icon': icon,
+      if (renk != null) 'renk': renk,
+      if (updatedAt != null) 'updated_at': updatedAt,
+    });
+  }
+
+  AppContentGrammarModulesCompanion copyWith(
+      {Value<int>? id,
+      Value<int?>? sourceModuleId,
+      Value<int>? sira,
+      Value<String>? baslik,
+      Value<String>? dosyaAdi,
+      Value<int>? toplamSayfa,
+      Value<String>? icon,
+      Value<String>? renk,
+      Value<int>? updatedAt}) {
+    return AppContentGrammarModulesCompanion(
+      id: id ?? this.id,
+      sourceModuleId: sourceModuleId ?? this.sourceModuleId,
+      sira: sira ?? this.sira,
+      baslik: baslik ?? this.baslik,
+      dosyaAdi: dosyaAdi ?? this.dosyaAdi,
+      toplamSayfa: toplamSayfa ?? this.toplamSayfa,
+      icon: icon ?? this.icon,
+      renk: renk ?? this.renk,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (sourceModuleId.present) {
+      map['source_module_id'] = Variable<int>(sourceModuleId.value);
+    }
+    if (sira.present) {
+      map['sira'] = Variable<int>(sira.value);
+    }
+    if (baslik.present) {
+      map['baslik'] = Variable<String>(baslik.value);
+    }
+    if (dosyaAdi.present) {
+      map['dosya_adi'] = Variable<String>(dosyaAdi.value);
+    }
+    if (toplamSayfa.present) {
+      map['toplam_sayfa'] = Variable<int>(toplamSayfa.value);
+    }
+    if (icon.present) {
+      map['icon'] = Variable<String>(icon.value);
+    }
+    if (renk.present) {
+      map['renk'] = Variable<String>(renk.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarModulesCompanion(')
+          ..write('id: $id, ')
+          ..write('sourceModuleId: $sourceModuleId, ')
+          ..write('sira: $sira, ')
+          ..write('baslik: $baslik, ')
+          ..write('dosyaAdi: $dosyaAdi, ')
+          ..write('toplamSayfa: $toplamSayfa, ')
+          ..write('icon: $icon, ')
+          ..write('renk: $renk, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $AppContentGrammarPagesTable extends AppContentGrammarPages
+    with TableInfo<$AppContentGrammarPagesTable, AppContentGrammarPage> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppContentGrammarPagesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _moduleIdMeta =
+      const VerificationMeta('moduleId');
+  @override
+  late final GeneratedColumn<int> moduleId = GeneratedColumn<int>(
+      'module_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _sourcePageIdMeta =
+      const VerificationMeta('sourcePageId');
+  @override
+  late final GeneratedColumn<int> sourcePageId = GeneratedColumn<int>(
+      'source_page_id', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _sayfaNoMeta =
+      const VerificationMeta('sayfaNo');
+  @override
+  late final GeneratedColumn<int> sayfaNo = GeneratedColumn<int>(
+      'sayfa_no', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _baslikMeta = const VerificationMeta('baslik');
+  @override
+  late final GeneratedColumn<String> baslik = GeneratedColumn<String>(
+      'baslik', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _icerikHtmlMeta =
+      const VerificationMeta('icerikHtml');
+  @override
+  late final GeneratedColumn<String> icerikHtml = GeneratedColumn<String>(
+      'icerik_html', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _kelimeSayisiMeta =
+      const VerificationMeta('kelimeSayisi');
+  @override
+  late final GeneratedColumn<int> kelimeSayisi = GeneratedColumn<int>(
+      'kelime_sayisi', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, moduleId, sourcePageId, sayfaNo, baslik, icerikHtml, kelimeSayisi];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_pages';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<AppContentGrammarPage> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('module_id')) {
+      context.handle(_moduleIdMeta,
+          moduleId.isAcceptableOrUnknown(data['module_id']!, _moduleIdMeta));
+    } else if (isInserting) {
+      context.missing(_moduleIdMeta);
+    }
+    if (data.containsKey('source_page_id')) {
+      context.handle(
+          _sourcePageIdMeta,
+          sourcePageId.isAcceptableOrUnknown(
+              data['source_page_id']!, _sourcePageIdMeta));
+    }
+    if (data.containsKey('sayfa_no')) {
+      context.handle(_sayfaNoMeta,
+          sayfaNo.isAcceptableOrUnknown(data['sayfa_no']!, _sayfaNoMeta));
+    } else if (isInserting) {
+      context.missing(_sayfaNoMeta);
+    }
+    if (data.containsKey('baslik')) {
+      context.handle(_baslikMeta,
+          baslik.isAcceptableOrUnknown(data['baslik']!, _baslikMeta));
+    } else if (isInserting) {
+      context.missing(_baslikMeta);
+    }
+    if (data.containsKey('icerik_html')) {
+      context.handle(
+          _icerikHtmlMeta,
+          icerikHtml.isAcceptableOrUnknown(
+              data['icerik_html']!, _icerikHtmlMeta));
+    } else if (isInserting) {
+      context.missing(_icerikHtmlMeta);
+    }
+    if (data.containsKey('kelime_sayisi')) {
+      context.handle(
+          _kelimeSayisiMeta,
+          kelimeSayisi.isAcceptableOrUnknown(
+              data['kelime_sayisi']!, _kelimeSayisiMeta));
+    } else if (isInserting) {
+      context.missing(_kelimeSayisiMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AppContentGrammarPage map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppContentGrammarPage(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      moduleId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}module_id'])!,
+      sourcePageId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}source_page_id']),
+      sayfaNo: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sayfa_no'])!,
+      baslik: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}baslik'])!,
+      icerikHtml: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}icerik_html'])!,
+      kelimeSayisi: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}kelime_sayisi'])!,
+    );
+  }
+
+  @override
+  $AppContentGrammarPagesTable createAlias(String alias) {
+    return $AppContentGrammarPagesTable(attachedDatabase, alias);
+  }
+}
+
+class AppContentGrammarPage extends DataClass
+    implements Insertable<AppContentGrammarPage> {
+  final int id;
+  final int moduleId;
+  final int? sourcePageId;
+  final int sayfaNo;
+  final String baslik;
+  final String icerikHtml;
+  final int kelimeSayisi;
+  const AppContentGrammarPage(
+      {required this.id,
+      required this.moduleId,
+      this.sourcePageId,
+      required this.sayfaNo,
+      required this.baslik,
+      required this.icerikHtml,
+      required this.kelimeSayisi});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['module_id'] = Variable<int>(moduleId);
+    if (!nullToAbsent || sourcePageId != null) {
+      map['source_page_id'] = Variable<int>(sourcePageId);
+    }
+    map['sayfa_no'] = Variable<int>(sayfaNo);
+    map['baslik'] = Variable<String>(baslik);
+    map['icerik_html'] = Variable<String>(icerikHtml);
+    map['kelime_sayisi'] = Variable<int>(kelimeSayisi);
+    return map;
+  }
+
+  AppContentGrammarPagesCompanion toCompanion(bool nullToAbsent) {
+    return AppContentGrammarPagesCompanion(
+      id: Value(id),
+      moduleId: Value(moduleId),
+      sourcePageId: sourcePageId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sourcePageId),
+      sayfaNo: Value(sayfaNo),
+      baslik: Value(baslik),
+      icerikHtml: Value(icerikHtml),
+      kelimeSayisi: Value(kelimeSayisi),
+    );
+  }
+
+  factory AppContentGrammarPage.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppContentGrammarPage(
+      id: serializer.fromJson<int>(json['id']),
+      moduleId: serializer.fromJson<int>(json['moduleId']),
+      sourcePageId: serializer.fromJson<int?>(json['sourcePageId']),
+      sayfaNo: serializer.fromJson<int>(json['sayfaNo']),
+      baslik: serializer.fromJson<String>(json['baslik']),
+      icerikHtml: serializer.fromJson<String>(json['icerikHtml']),
+      kelimeSayisi: serializer.fromJson<int>(json['kelimeSayisi']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'moduleId': serializer.toJson<int>(moduleId),
+      'sourcePageId': serializer.toJson<int?>(sourcePageId),
+      'sayfaNo': serializer.toJson<int>(sayfaNo),
+      'baslik': serializer.toJson<String>(baslik),
+      'icerikHtml': serializer.toJson<String>(icerikHtml),
+      'kelimeSayisi': serializer.toJson<int>(kelimeSayisi),
+    };
+  }
+
+  AppContentGrammarPage copyWith(
+          {int? id,
+          int? moduleId,
+          Value<int?> sourcePageId = const Value.absent(),
+          int? sayfaNo,
+          String? baslik,
+          String? icerikHtml,
+          int? kelimeSayisi}) =>
+      AppContentGrammarPage(
+        id: id ?? this.id,
+        moduleId: moduleId ?? this.moduleId,
+        sourcePageId:
+            sourcePageId.present ? sourcePageId.value : this.sourcePageId,
+        sayfaNo: sayfaNo ?? this.sayfaNo,
+        baslik: baslik ?? this.baslik,
+        icerikHtml: icerikHtml ?? this.icerikHtml,
+        kelimeSayisi: kelimeSayisi ?? this.kelimeSayisi,
+      );
+  AppContentGrammarPage copyWithCompanion(
+      AppContentGrammarPagesCompanion data) {
+    return AppContentGrammarPage(
+      id: data.id.present ? data.id.value : this.id,
+      moduleId: data.moduleId.present ? data.moduleId.value : this.moduleId,
+      sourcePageId: data.sourcePageId.present
+          ? data.sourcePageId.value
+          : this.sourcePageId,
+      sayfaNo: data.sayfaNo.present ? data.sayfaNo.value : this.sayfaNo,
+      baslik: data.baslik.present ? data.baslik.value : this.baslik,
+      icerikHtml:
+          data.icerikHtml.present ? data.icerikHtml.value : this.icerikHtml,
+      kelimeSayisi: data.kelimeSayisi.present
+          ? data.kelimeSayisi.value
+          : this.kelimeSayisi,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarPage(')
+          ..write('id: $id, ')
+          ..write('moduleId: $moduleId, ')
+          ..write('sourcePageId: $sourcePageId, ')
+          ..write('sayfaNo: $sayfaNo, ')
+          ..write('baslik: $baslik, ')
+          ..write('icerikHtml: $icerikHtml, ')
+          ..write('kelimeSayisi: $kelimeSayisi')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, moduleId, sourcePageId, sayfaNo, baslik, icerikHtml, kelimeSayisi);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppContentGrammarPage &&
+          other.id == this.id &&
+          other.moduleId == this.moduleId &&
+          other.sourcePageId == this.sourcePageId &&
+          other.sayfaNo == this.sayfaNo &&
+          other.baslik == this.baslik &&
+          other.icerikHtml == this.icerikHtml &&
+          other.kelimeSayisi == this.kelimeSayisi);
+}
+
+class AppContentGrammarPagesCompanion
+    extends UpdateCompanion<AppContentGrammarPage> {
+  final Value<int> id;
+  final Value<int> moduleId;
+  final Value<int?> sourcePageId;
+  final Value<int> sayfaNo;
+  final Value<String> baslik;
+  final Value<String> icerikHtml;
+  final Value<int> kelimeSayisi;
+  const AppContentGrammarPagesCompanion({
+    this.id = const Value.absent(),
+    this.moduleId = const Value.absent(),
+    this.sourcePageId = const Value.absent(),
+    this.sayfaNo = const Value.absent(),
+    this.baslik = const Value.absent(),
+    this.icerikHtml = const Value.absent(),
+    this.kelimeSayisi = const Value.absent(),
+  });
+  AppContentGrammarPagesCompanion.insert({
+    this.id = const Value.absent(),
+    required int moduleId,
+    this.sourcePageId = const Value.absent(),
+    required int sayfaNo,
+    required String baslik,
+    required String icerikHtml,
+    required int kelimeSayisi,
+  })  : moduleId = Value(moduleId),
+        sayfaNo = Value(sayfaNo),
+        baslik = Value(baslik),
+        icerikHtml = Value(icerikHtml),
+        kelimeSayisi = Value(kelimeSayisi);
+  static Insertable<AppContentGrammarPage> custom({
+    Expression<int>? id,
+    Expression<int>? moduleId,
+    Expression<int>? sourcePageId,
+    Expression<int>? sayfaNo,
+    Expression<String>? baslik,
+    Expression<String>? icerikHtml,
+    Expression<int>? kelimeSayisi,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (moduleId != null) 'module_id': moduleId,
+      if (sourcePageId != null) 'source_page_id': sourcePageId,
+      if (sayfaNo != null) 'sayfa_no': sayfaNo,
+      if (baslik != null) 'baslik': baslik,
+      if (icerikHtml != null) 'icerik_html': icerikHtml,
+      if (kelimeSayisi != null) 'kelime_sayisi': kelimeSayisi,
+    });
+  }
+
+  AppContentGrammarPagesCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? moduleId,
+      Value<int?>? sourcePageId,
+      Value<int>? sayfaNo,
+      Value<String>? baslik,
+      Value<String>? icerikHtml,
+      Value<int>? kelimeSayisi}) {
+    return AppContentGrammarPagesCompanion(
+      id: id ?? this.id,
+      moduleId: moduleId ?? this.moduleId,
+      sourcePageId: sourcePageId ?? this.sourcePageId,
+      sayfaNo: sayfaNo ?? this.sayfaNo,
+      baslik: baslik ?? this.baslik,
+      icerikHtml: icerikHtml ?? this.icerikHtml,
+      kelimeSayisi: kelimeSayisi ?? this.kelimeSayisi,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (moduleId.present) {
+      map['module_id'] = Variable<int>(moduleId.value);
+    }
+    if (sourcePageId.present) {
+      map['source_page_id'] = Variable<int>(sourcePageId.value);
+    }
+    if (sayfaNo.present) {
+      map['sayfa_no'] = Variable<int>(sayfaNo.value);
+    }
+    if (baslik.present) {
+      map['baslik'] = Variable<String>(baslik.value);
+    }
+    if (icerikHtml.present) {
+      map['icerik_html'] = Variable<String>(icerikHtml.value);
+    }
+    if (kelimeSayisi.present) {
+      map['kelime_sayisi'] = Variable<int>(kelimeSayisi.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarPagesCompanion(')
+          ..write('id: $id, ')
+          ..write('moduleId: $moduleId, ')
+          ..write('sourcePageId: $sourcePageId, ')
+          ..write('sayfaNo: $sayfaNo, ')
+          ..write('baslik: $baslik, ')
+          ..write('icerikHtml: $icerikHtml, ')
+          ..write('kelimeSayisi: $kelimeSayisi')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $AppContentGrammarExamplesTable extends AppContentGrammarExamples
+    with TableInfo<$AppContentGrammarExamplesTable, AppContentGrammarExample> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppContentGrammarExamplesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _pageIdMeta = const VerificationMeta('pageId');
+  @override
+  late final GeneratedColumn<int> pageId = GeneratedColumn<int>(
+      'page_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _siraMeta = const VerificationMeta('sira');
+  @override
+  late final GeneratedColumn<int> sira = GeneratedColumn<int>(
+      'sira', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _ingilizceMeta =
+      const VerificationMeta('ingilizce');
+  @override
+  late final GeneratedColumn<String> ingilizce = GeneratedColumn<String>(
+      'ingilizce', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _turkceMeta = const VerificationMeta('turkce');
+  @override
+  late final GeneratedColumn<String> turkce = GeneratedColumn<String>(
+      'turkce', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _aciklamaMeta =
+      const VerificationMeta('aciklama');
+  @override
+  late final GeneratedColumn<String> aciklama = GeneratedColumn<String>(
+      'aciklama', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, pageId, sira, ingilizce, turkce, aciklama];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_examples';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<AppContentGrammarExample> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('page_id')) {
+      context.handle(_pageIdMeta,
+          pageId.isAcceptableOrUnknown(data['page_id']!, _pageIdMeta));
+    } else if (isInserting) {
+      context.missing(_pageIdMeta);
+    }
+    if (data.containsKey('sira')) {
+      context.handle(
+          _siraMeta, sira.isAcceptableOrUnknown(data['sira']!, _siraMeta));
+    } else if (isInserting) {
+      context.missing(_siraMeta);
+    }
+    if (data.containsKey('ingilizce')) {
+      context.handle(_ingilizceMeta,
+          ingilizce.isAcceptableOrUnknown(data['ingilizce']!, _ingilizceMeta));
+    } else if (isInserting) {
+      context.missing(_ingilizceMeta);
+    }
+    if (data.containsKey('turkce')) {
+      context.handle(_turkceMeta,
+          turkce.isAcceptableOrUnknown(data['turkce']!, _turkceMeta));
+    } else if (isInserting) {
+      context.missing(_turkceMeta);
+    }
+    if (data.containsKey('aciklama')) {
+      context.handle(_aciklamaMeta,
+          aciklama.isAcceptableOrUnknown(data['aciklama']!, _aciklamaMeta));
+    } else if (isInserting) {
+      context.missing(_aciklamaMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AppContentGrammarExample map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppContentGrammarExample(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      pageId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}page_id'])!,
+      sira: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sira'])!,
+      ingilizce: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}ingilizce'])!,
+      turkce: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}turkce'])!,
+      aciklama: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}aciklama'])!,
+    );
+  }
+
+  @override
+  $AppContentGrammarExamplesTable createAlias(String alias) {
+    return $AppContentGrammarExamplesTable(attachedDatabase, alias);
+  }
+}
+
+class AppContentGrammarExample extends DataClass
+    implements Insertable<AppContentGrammarExample> {
+  final int id;
+  final int pageId;
+  final int sira;
+  final String ingilizce;
+  final String turkce;
+  final String aciklama;
+  const AppContentGrammarExample(
+      {required this.id,
+      required this.pageId,
+      required this.sira,
+      required this.ingilizce,
+      required this.turkce,
+      required this.aciklama});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['page_id'] = Variable<int>(pageId);
+    map['sira'] = Variable<int>(sira);
+    map['ingilizce'] = Variable<String>(ingilizce);
+    map['turkce'] = Variable<String>(turkce);
+    map['aciklama'] = Variable<String>(aciklama);
+    return map;
+  }
+
+  AppContentGrammarExamplesCompanion toCompanion(bool nullToAbsent) {
+    return AppContentGrammarExamplesCompanion(
+      id: Value(id),
+      pageId: Value(pageId),
+      sira: Value(sira),
+      ingilizce: Value(ingilizce),
+      turkce: Value(turkce),
+      aciklama: Value(aciklama),
+    );
+  }
+
+  factory AppContentGrammarExample.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppContentGrammarExample(
+      id: serializer.fromJson<int>(json['id']),
+      pageId: serializer.fromJson<int>(json['pageId']),
+      sira: serializer.fromJson<int>(json['sira']),
+      ingilizce: serializer.fromJson<String>(json['ingilizce']),
+      turkce: serializer.fromJson<String>(json['turkce']),
+      aciklama: serializer.fromJson<String>(json['aciklama']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'pageId': serializer.toJson<int>(pageId),
+      'sira': serializer.toJson<int>(sira),
+      'ingilizce': serializer.toJson<String>(ingilizce),
+      'turkce': serializer.toJson<String>(turkce),
+      'aciklama': serializer.toJson<String>(aciklama),
+    };
+  }
+
+  AppContentGrammarExample copyWith(
+          {int? id,
+          int? pageId,
+          int? sira,
+          String? ingilizce,
+          String? turkce,
+          String? aciklama}) =>
+      AppContentGrammarExample(
+        id: id ?? this.id,
+        pageId: pageId ?? this.pageId,
+        sira: sira ?? this.sira,
+        ingilizce: ingilizce ?? this.ingilizce,
+        turkce: turkce ?? this.turkce,
+        aciklama: aciklama ?? this.aciklama,
+      );
+  AppContentGrammarExample copyWithCompanion(
+      AppContentGrammarExamplesCompanion data) {
+    return AppContentGrammarExample(
+      id: data.id.present ? data.id.value : this.id,
+      pageId: data.pageId.present ? data.pageId.value : this.pageId,
+      sira: data.sira.present ? data.sira.value : this.sira,
+      ingilizce: data.ingilizce.present ? data.ingilizce.value : this.ingilizce,
+      turkce: data.turkce.present ? data.turkce.value : this.turkce,
+      aciklama: data.aciklama.present ? data.aciklama.value : this.aciklama,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarExample(')
+          ..write('id: $id, ')
+          ..write('pageId: $pageId, ')
+          ..write('sira: $sira, ')
+          ..write('ingilizce: $ingilizce, ')
+          ..write('turkce: $turkce, ')
+          ..write('aciklama: $aciklama')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, pageId, sira, ingilizce, turkce, aciklama);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppContentGrammarExample &&
+          other.id == this.id &&
+          other.pageId == this.pageId &&
+          other.sira == this.sira &&
+          other.ingilizce == this.ingilizce &&
+          other.turkce == this.turkce &&
+          other.aciklama == this.aciklama);
+}
+
+class AppContentGrammarExamplesCompanion
+    extends UpdateCompanion<AppContentGrammarExample> {
+  final Value<int> id;
+  final Value<int> pageId;
+  final Value<int> sira;
+  final Value<String> ingilizce;
+  final Value<String> turkce;
+  final Value<String> aciklama;
+  const AppContentGrammarExamplesCompanion({
+    this.id = const Value.absent(),
+    this.pageId = const Value.absent(),
+    this.sira = const Value.absent(),
+    this.ingilizce = const Value.absent(),
+    this.turkce = const Value.absent(),
+    this.aciklama = const Value.absent(),
+  });
+  AppContentGrammarExamplesCompanion.insert({
+    this.id = const Value.absent(),
+    required int pageId,
+    required int sira,
+    required String ingilizce,
+    required String turkce,
+    required String aciklama,
+  })  : pageId = Value(pageId),
+        sira = Value(sira),
+        ingilizce = Value(ingilizce),
+        turkce = Value(turkce),
+        aciklama = Value(aciklama);
+  static Insertable<AppContentGrammarExample> custom({
+    Expression<int>? id,
+    Expression<int>? pageId,
+    Expression<int>? sira,
+    Expression<String>? ingilizce,
+    Expression<String>? turkce,
+    Expression<String>? aciklama,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (pageId != null) 'page_id': pageId,
+      if (sira != null) 'sira': sira,
+      if (ingilizce != null) 'ingilizce': ingilizce,
+      if (turkce != null) 'turkce': turkce,
+      if (aciklama != null) 'aciklama': aciklama,
+    });
+  }
+
+  AppContentGrammarExamplesCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? pageId,
+      Value<int>? sira,
+      Value<String>? ingilizce,
+      Value<String>? turkce,
+      Value<String>? aciklama}) {
+    return AppContentGrammarExamplesCompanion(
+      id: id ?? this.id,
+      pageId: pageId ?? this.pageId,
+      sira: sira ?? this.sira,
+      ingilizce: ingilizce ?? this.ingilizce,
+      turkce: turkce ?? this.turkce,
+      aciklama: aciklama ?? this.aciklama,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (pageId.present) {
+      map['page_id'] = Variable<int>(pageId.value);
+    }
+    if (sira.present) {
+      map['sira'] = Variable<int>(sira.value);
+    }
+    if (ingilizce.present) {
+      map['ingilizce'] = Variable<String>(ingilizce.value);
+    }
+    if (turkce.present) {
+      map['turkce'] = Variable<String>(turkce.value);
+    }
+    if (aciklama.present) {
+      map['aciklama'] = Variable<String>(aciklama.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarExamplesCompanion(')
+          ..write('id: $id, ')
+          ..write('pageId: $pageId, ')
+          ..write('sira: $sira, ')
+          ..write('ingilizce: $ingilizce, ')
+          ..write('turkce: $turkce, ')
+          ..write('aciklama: $aciklama')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $AppContentGrammarTestsTable extends AppContentGrammarTests
+    with TableInfo<$AppContentGrammarTestsTable, AppContentGrammarTest> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppContentGrammarTestsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _pageIdMeta = const VerificationMeta('pageId');
+  @override
+  late final GeneratedColumn<int> pageId = GeneratedColumn<int>(
+      'page_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _siraMeta = const VerificationMeta('sira');
+  @override
+  late final GeneratedColumn<int> sira = GeneratedColumn<int>(
+      'sira', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _soruMeta = const VerificationMeta('soru');
+  @override
+  late final GeneratedColumn<String> soru = GeneratedColumn<String>(
+      'soru', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _seceneklerJsonMeta =
+      const VerificationMeta('seceneklerJson');
+  @override
+  late final GeneratedColumn<String> seceneklerJson = GeneratedColumn<String>(
+      'secenekler_json', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dogruCevapMeta =
+      const VerificationMeta('dogruCevap');
+  @override
+  late final GeneratedColumn<String> dogruCevap = GeneratedColumn<String>(
+      'dogru_cevap', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _aciklamaMeta =
+      const VerificationMeta('aciklama');
+  @override
+  late final GeneratedColumn<String> aciklama = GeneratedColumn<String>(
+      'aciklama', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, pageId, sira, soru, seceneklerJson, dogruCevap, aciklama];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_tests';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<AppContentGrammarTest> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('page_id')) {
+      context.handle(_pageIdMeta,
+          pageId.isAcceptableOrUnknown(data['page_id']!, _pageIdMeta));
+    } else if (isInserting) {
+      context.missing(_pageIdMeta);
+    }
+    if (data.containsKey('sira')) {
+      context.handle(
+          _siraMeta, sira.isAcceptableOrUnknown(data['sira']!, _siraMeta));
+    } else if (isInserting) {
+      context.missing(_siraMeta);
+    }
+    if (data.containsKey('soru')) {
+      context.handle(
+          _soruMeta, soru.isAcceptableOrUnknown(data['soru']!, _soruMeta));
+    } else if (isInserting) {
+      context.missing(_soruMeta);
+    }
+    if (data.containsKey('secenekler_json')) {
+      context.handle(
+          _seceneklerJsonMeta,
+          seceneklerJson.isAcceptableOrUnknown(
+              data['secenekler_json']!, _seceneklerJsonMeta));
+    } else if (isInserting) {
+      context.missing(_seceneklerJsonMeta);
+    }
+    if (data.containsKey('dogru_cevap')) {
+      context.handle(
+          _dogruCevapMeta,
+          dogruCevap.isAcceptableOrUnknown(
+              data['dogru_cevap']!, _dogruCevapMeta));
+    } else if (isInserting) {
+      context.missing(_dogruCevapMeta);
+    }
+    if (data.containsKey('aciklama')) {
+      context.handle(_aciklamaMeta,
+          aciklama.isAcceptableOrUnknown(data['aciklama']!, _aciklamaMeta));
+    } else if (isInserting) {
+      context.missing(_aciklamaMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AppContentGrammarTest map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppContentGrammarTest(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      pageId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}page_id'])!,
+      sira: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sira'])!,
+      soru: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}soru'])!,
+      seceneklerJson: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}secenekler_json'])!,
+      dogruCevap: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}dogru_cevap'])!,
+      aciklama: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}aciklama'])!,
+    );
+  }
+
+  @override
+  $AppContentGrammarTestsTable createAlias(String alias) {
+    return $AppContentGrammarTestsTable(attachedDatabase, alias);
+  }
+}
+
+class AppContentGrammarTest extends DataClass
+    implements Insertable<AppContentGrammarTest> {
+  final int id;
+  final int pageId;
+  final int sira;
+  final String soru;
+  final String seceneklerJson;
+  final String dogruCevap;
+  final String aciklama;
+  const AppContentGrammarTest(
+      {required this.id,
+      required this.pageId,
+      required this.sira,
+      required this.soru,
+      required this.seceneklerJson,
+      required this.dogruCevap,
+      required this.aciklama});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['page_id'] = Variable<int>(pageId);
+    map['sira'] = Variable<int>(sira);
+    map['soru'] = Variable<String>(soru);
+    map['secenekler_json'] = Variable<String>(seceneklerJson);
+    map['dogru_cevap'] = Variable<String>(dogruCevap);
+    map['aciklama'] = Variable<String>(aciklama);
+    return map;
+  }
+
+  AppContentGrammarTestsCompanion toCompanion(bool nullToAbsent) {
+    return AppContentGrammarTestsCompanion(
+      id: Value(id),
+      pageId: Value(pageId),
+      sira: Value(sira),
+      soru: Value(soru),
+      seceneklerJson: Value(seceneklerJson),
+      dogruCevap: Value(dogruCevap),
+      aciklama: Value(aciklama),
+    );
+  }
+
+  factory AppContentGrammarTest.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppContentGrammarTest(
+      id: serializer.fromJson<int>(json['id']),
+      pageId: serializer.fromJson<int>(json['pageId']),
+      sira: serializer.fromJson<int>(json['sira']),
+      soru: serializer.fromJson<String>(json['soru']),
+      seceneklerJson: serializer.fromJson<String>(json['seceneklerJson']),
+      dogruCevap: serializer.fromJson<String>(json['dogruCevap']),
+      aciklama: serializer.fromJson<String>(json['aciklama']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'pageId': serializer.toJson<int>(pageId),
+      'sira': serializer.toJson<int>(sira),
+      'soru': serializer.toJson<String>(soru),
+      'seceneklerJson': serializer.toJson<String>(seceneklerJson),
+      'dogruCevap': serializer.toJson<String>(dogruCevap),
+      'aciklama': serializer.toJson<String>(aciklama),
+    };
+  }
+
+  AppContentGrammarTest copyWith(
+          {int? id,
+          int? pageId,
+          int? sira,
+          String? soru,
+          String? seceneklerJson,
+          String? dogruCevap,
+          String? aciklama}) =>
+      AppContentGrammarTest(
+        id: id ?? this.id,
+        pageId: pageId ?? this.pageId,
+        sira: sira ?? this.sira,
+        soru: soru ?? this.soru,
+        seceneklerJson: seceneklerJson ?? this.seceneklerJson,
+        dogruCevap: dogruCevap ?? this.dogruCevap,
+        aciklama: aciklama ?? this.aciklama,
+      );
+  AppContentGrammarTest copyWithCompanion(
+      AppContentGrammarTestsCompanion data) {
+    return AppContentGrammarTest(
+      id: data.id.present ? data.id.value : this.id,
+      pageId: data.pageId.present ? data.pageId.value : this.pageId,
+      sira: data.sira.present ? data.sira.value : this.sira,
+      soru: data.soru.present ? data.soru.value : this.soru,
+      seceneklerJson: data.seceneklerJson.present
+          ? data.seceneklerJson.value
+          : this.seceneklerJson,
+      dogruCevap:
+          data.dogruCevap.present ? data.dogruCevap.value : this.dogruCevap,
+      aciklama: data.aciklama.present ? data.aciklama.value : this.aciklama,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarTest(')
+          ..write('id: $id, ')
+          ..write('pageId: $pageId, ')
+          ..write('sira: $sira, ')
+          ..write('soru: $soru, ')
+          ..write('seceneklerJson: $seceneklerJson, ')
+          ..write('dogruCevap: $dogruCevap, ')
+          ..write('aciklama: $aciklama')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, pageId, sira, soru, seceneklerJson, dogruCevap, aciklama);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppContentGrammarTest &&
+          other.id == this.id &&
+          other.pageId == this.pageId &&
+          other.sira == this.sira &&
+          other.soru == this.soru &&
+          other.seceneklerJson == this.seceneklerJson &&
+          other.dogruCevap == this.dogruCevap &&
+          other.aciklama == this.aciklama);
+}
+
+class AppContentGrammarTestsCompanion
+    extends UpdateCompanion<AppContentGrammarTest> {
+  final Value<int> id;
+  final Value<int> pageId;
+  final Value<int> sira;
+  final Value<String> soru;
+  final Value<String> seceneklerJson;
+  final Value<String> dogruCevap;
+  final Value<String> aciklama;
+  const AppContentGrammarTestsCompanion({
+    this.id = const Value.absent(),
+    this.pageId = const Value.absent(),
+    this.sira = const Value.absent(),
+    this.soru = const Value.absent(),
+    this.seceneklerJson = const Value.absent(),
+    this.dogruCevap = const Value.absent(),
+    this.aciklama = const Value.absent(),
+  });
+  AppContentGrammarTestsCompanion.insert({
+    this.id = const Value.absent(),
+    required int pageId,
+    required int sira,
+    required String soru,
+    required String seceneklerJson,
+    required String dogruCevap,
+    required String aciklama,
+  })  : pageId = Value(pageId),
+        sira = Value(sira),
+        soru = Value(soru),
+        seceneklerJson = Value(seceneklerJson),
+        dogruCevap = Value(dogruCevap),
+        aciklama = Value(aciklama);
+  static Insertable<AppContentGrammarTest> custom({
+    Expression<int>? id,
+    Expression<int>? pageId,
+    Expression<int>? sira,
+    Expression<String>? soru,
+    Expression<String>? seceneklerJson,
+    Expression<String>? dogruCevap,
+    Expression<String>? aciklama,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (pageId != null) 'page_id': pageId,
+      if (sira != null) 'sira': sira,
+      if (soru != null) 'soru': soru,
+      if (seceneklerJson != null) 'secenekler_json': seceneklerJson,
+      if (dogruCevap != null) 'dogru_cevap': dogruCevap,
+      if (aciklama != null) 'aciklama': aciklama,
+    });
+  }
+
+  AppContentGrammarTestsCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? pageId,
+      Value<int>? sira,
+      Value<String>? soru,
+      Value<String>? seceneklerJson,
+      Value<String>? dogruCevap,
+      Value<String>? aciklama}) {
+    return AppContentGrammarTestsCompanion(
+      id: id ?? this.id,
+      pageId: pageId ?? this.pageId,
+      sira: sira ?? this.sira,
+      soru: soru ?? this.soru,
+      seceneklerJson: seceneklerJson ?? this.seceneklerJson,
+      dogruCevap: dogruCevap ?? this.dogruCevap,
+      aciklama: aciklama ?? this.aciklama,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (pageId.present) {
+      map['page_id'] = Variable<int>(pageId.value);
+    }
+    if (sira.present) {
+      map['sira'] = Variable<int>(sira.value);
+    }
+    if (soru.present) {
+      map['soru'] = Variable<String>(soru.value);
+    }
+    if (seceneklerJson.present) {
+      map['secenekler_json'] = Variable<String>(seceneklerJson.value);
+    }
+    if (dogruCevap.present) {
+      map['dogru_cevap'] = Variable<String>(dogruCevap.value);
+    }
+    if (aciklama.present) {
+      map['aciklama'] = Variable<String>(aciklama.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppContentGrammarTestsCompanion(')
+          ..write('id: $id, ')
+          ..write('pageId: $pageId, ')
+          ..write('sira: $sira, ')
+          ..write('soru: $soru, ')
+          ..write('seceneklerJson: $seceneklerJson, ')
+          ..write('dogruCevap: $dogruCevap, ')
+          ..write('aciklama: $aciklama')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppContentLocalDatabase extends GeneratedDatabase {
   _$AppContentLocalDatabase(QueryExecutor e) : super(e);
   $AppContentLocalDatabaseManager get managers =>
@@ -2056,6 +3618,14 @@ abstract class _$AppContentLocalDatabase extends GeneratedDatabase {
       $AppContentReadingPassagesTable(this);
   late final $AppContentReadingSentencesTable appContentReadingSentences =
       $AppContentReadingSentencesTable(this);
+  late final $AppContentGrammarModulesTable appContentGrammarModules =
+      $AppContentGrammarModulesTable(this);
+  late final $AppContentGrammarPagesTable appContentGrammarPages =
+      $AppContentGrammarPagesTable(this);
+  late final $AppContentGrammarExamplesTable appContentGrammarExamples =
+      $AppContentGrammarExamplesTable(this);
+  late final $AppContentGrammarTestsTable appContentGrammarTests =
+      $AppContentGrammarTestsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2065,7 +3635,11 @@ abstract class _$AppContentLocalDatabase extends GeneratedDatabase {
         appContentPacks,
         appContentWords,
         appContentReadingPassages,
-        appContentReadingSentences
+        appContentReadingSentences,
+        appContentGrammarModules,
+        appContentGrammarPages,
+        appContentGrammarExamples,
+        appContentGrammarTests
       ];
 }
 
@@ -3140,6 +4714,843 @@ typedef $$AppContentReadingSentencesTableProcessedTableManager
         ),
         AppContentReadingSentence,
         PrefetchHooks Function()>;
+typedef $$AppContentGrammarModulesTableCreateCompanionBuilder
+    = AppContentGrammarModulesCompanion Function({
+  Value<int> id,
+  Value<int?> sourceModuleId,
+  required int sira,
+  required String baslik,
+  required String dosyaAdi,
+  required int toplamSayfa,
+  required String icon,
+  required String renk,
+  required int updatedAt,
+});
+typedef $$AppContentGrammarModulesTableUpdateCompanionBuilder
+    = AppContentGrammarModulesCompanion Function({
+  Value<int> id,
+  Value<int?> sourceModuleId,
+  Value<int> sira,
+  Value<String> baslik,
+  Value<String> dosyaAdi,
+  Value<int> toplamSayfa,
+  Value<String> icon,
+  Value<String> renk,
+  Value<int> updatedAt,
+});
+
+class $$AppContentGrammarModulesTableFilterComposer extends Composer<
+    _$AppContentLocalDatabase, $AppContentGrammarModulesTable> {
+  $$AppContentGrammarModulesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sourceModuleId => $composableBuilder(
+      column: $table.sourceModuleId,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sira => $composableBuilder(
+      column: $table.sira, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get baslik => $composableBuilder(
+      column: $table.baslik, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get dosyaAdi => $composableBuilder(
+      column: $table.dosyaAdi, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get toplamSayfa => $composableBuilder(
+      column: $table.toplamSayfa, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get icon => $composableBuilder(
+      column: $table.icon, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get renk => $composableBuilder(
+      column: $table.renk, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$AppContentGrammarModulesTableOrderingComposer extends Composer<
+    _$AppContentLocalDatabase, $AppContentGrammarModulesTable> {
+  $$AppContentGrammarModulesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sourceModuleId => $composableBuilder(
+      column: $table.sourceModuleId,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sira => $composableBuilder(
+      column: $table.sira, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get baslik => $composableBuilder(
+      column: $table.baslik, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get dosyaAdi => $composableBuilder(
+      column: $table.dosyaAdi, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get toplamSayfa => $composableBuilder(
+      column: $table.toplamSayfa, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get icon => $composableBuilder(
+      column: $table.icon, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get renk => $composableBuilder(
+      column: $table.renk, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$AppContentGrammarModulesTableAnnotationComposer extends Composer<
+    _$AppContentLocalDatabase, $AppContentGrammarModulesTable> {
+  $$AppContentGrammarModulesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get sourceModuleId => $composableBuilder(
+      column: $table.sourceModuleId, builder: (column) => column);
+
+  GeneratedColumn<int> get sira =>
+      $composableBuilder(column: $table.sira, builder: (column) => column);
+
+  GeneratedColumn<String> get baslik =>
+      $composableBuilder(column: $table.baslik, builder: (column) => column);
+
+  GeneratedColumn<String> get dosyaAdi =>
+      $composableBuilder(column: $table.dosyaAdi, builder: (column) => column);
+
+  GeneratedColumn<int> get toplamSayfa => $composableBuilder(
+      column: $table.toplamSayfa, builder: (column) => column);
+
+  GeneratedColumn<String> get icon =>
+      $composableBuilder(column: $table.icon, builder: (column) => column);
+
+  GeneratedColumn<String> get renk =>
+      $composableBuilder(column: $table.renk, builder: (column) => column);
+
+  GeneratedColumn<int> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$AppContentGrammarModulesTableTableManager extends RootTableManager<
+    _$AppContentLocalDatabase,
+    $AppContentGrammarModulesTable,
+    AppContentGrammarModule,
+    $$AppContentGrammarModulesTableFilterComposer,
+    $$AppContentGrammarModulesTableOrderingComposer,
+    $$AppContentGrammarModulesTableAnnotationComposer,
+    $$AppContentGrammarModulesTableCreateCompanionBuilder,
+    $$AppContentGrammarModulesTableUpdateCompanionBuilder,
+    (
+      AppContentGrammarModule,
+      BaseReferences<_$AppContentLocalDatabase, $AppContentGrammarModulesTable,
+          AppContentGrammarModule>
+    ),
+    AppContentGrammarModule,
+    PrefetchHooks Function()> {
+  $$AppContentGrammarModulesTableTableManager(
+      _$AppContentLocalDatabase db, $AppContentGrammarModulesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AppContentGrammarModulesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AppContentGrammarModulesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AppContentGrammarModulesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int?> sourceModuleId = const Value.absent(),
+            Value<int> sira = const Value.absent(),
+            Value<String> baslik = const Value.absent(),
+            Value<String> dosyaAdi = const Value.absent(),
+            Value<int> toplamSayfa = const Value.absent(),
+            Value<String> icon = const Value.absent(),
+            Value<String> renk = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+          }) =>
+              AppContentGrammarModulesCompanion(
+            id: id,
+            sourceModuleId: sourceModuleId,
+            sira: sira,
+            baslik: baslik,
+            dosyaAdi: dosyaAdi,
+            toplamSayfa: toplamSayfa,
+            icon: icon,
+            renk: renk,
+            updatedAt: updatedAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int?> sourceModuleId = const Value.absent(),
+            required int sira,
+            required String baslik,
+            required String dosyaAdi,
+            required int toplamSayfa,
+            required String icon,
+            required String renk,
+            required int updatedAt,
+          }) =>
+              AppContentGrammarModulesCompanion.insert(
+            id: id,
+            sourceModuleId: sourceModuleId,
+            sira: sira,
+            baslik: baslik,
+            dosyaAdi: dosyaAdi,
+            toplamSayfa: toplamSayfa,
+            icon: icon,
+            renk: renk,
+            updatedAt: updatedAt,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$AppContentGrammarModulesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppContentLocalDatabase,
+        $AppContentGrammarModulesTable,
+        AppContentGrammarModule,
+        $$AppContentGrammarModulesTableFilterComposer,
+        $$AppContentGrammarModulesTableOrderingComposer,
+        $$AppContentGrammarModulesTableAnnotationComposer,
+        $$AppContentGrammarModulesTableCreateCompanionBuilder,
+        $$AppContentGrammarModulesTableUpdateCompanionBuilder,
+        (
+          AppContentGrammarModule,
+          BaseReferences<_$AppContentLocalDatabase,
+              $AppContentGrammarModulesTable, AppContentGrammarModule>
+        ),
+        AppContentGrammarModule,
+        PrefetchHooks Function()>;
+typedef $$AppContentGrammarPagesTableCreateCompanionBuilder
+    = AppContentGrammarPagesCompanion Function({
+  Value<int> id,
+  required int moduleId,
+  Value<int?> sourcePageId,
+  required int sayfaNo,
+  required String baslik,
+  required String icerikHtml,
+  required int kelimeSayisi,
+});
+typedef $$AppContentGrammarPagesTableUpdateCompanionBuilder
+    = AppContentGrammarPagesCompanion Function({
+  Value<int> id,
+  Value<int> moduleId,
+  Value<int?> sourcePageId,
+  Value<int> sayfaNo,
+  Value<String> baslik,
+  Value<String> icerikHtml,
+  Value<int> kelimeSayisi,
+});
+
+class $$AppContentGrammarPagesTableFilterComposer
+    extends Composer<_$AppContentLocalDatabase, $AppContentGrammarPagesTable> {
+  $$AppContentGrammarPagesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get moduleId => $composableBuilder(
+      column: $table.moduleId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sourcePageId => $composableBuilder(
+      column: $table.sourcePageId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sayfaNo => $composableBuilder(
+      column: $table.sayfaNo, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get baslik => $composableBuilder(
+      column: $table.baslik, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get icerikHtml => $composableBuilder(
+      column: $table.icerikHtml, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get kelimeSayisi => $composableBuilder(
+      column: $table.kelimeSayisi, builder: (column) => ColumnFilters(column));
+}
+
+class $$AppContentGrammarPagesTableOrderingComposer
+    extends Composer<_$AppContentLocalDatabase, $AppContentGrammarPagesTable> {
+  $$AppContentGrammarPagesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get moduleId => $composableBuilder(
+      column: $table.moduleId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sourcePageId => $composableBuilder(
+      column: $table.sourcePageId,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sayfaNo => $composableBuilder(
+      column: $table.sayfaNo, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get baslik => $composableBuilder(
+      column: $table.baslik, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get icerikHtml => $composableBuilder(
+      column: $table.icerikHtml, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get kelimeSayisi => $composableBuilder(
+      column: $table.kelimeSayisi,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$AppContentGrammarPagesTableAnnotationComposer
+    extends Composer<_$AppContentLocalDatabase, $AppContentGrammarPagesTable> {
+  $$AppContentGrammarPagesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get moduleId =>
+      $composableBuilder(column: $table.moduleId, builder: (column) => column);
+
+  GeneratedColumn<int> get sourcePageId => $composableBuilder(
+      column: $table.sourcePageId, builder: (column) => column);
+
+  GeneratedColumn<int> get sayfaNo =>
+      $composableBuilder(column: $table.sayfaNo, builder: (column) => column);
+
+  GeneratedColumn<String> get baslik =>
+      $composableBuilder(column: $table.baslik, builder: (column) => column);
+
+  GeneratedColumn<String> get icerikHtml => $composableBuilder(
+      column: $table.icerikHtml, builder: (column) => column);
+
+  GeneratedColumn<int> get kelimeSayisi => $composableBuilder(
+      column: $table.kelimeSayisi, builder: (column) => column);
+}
+
+class $$AppContentGrammarPagesTableTableManager extends RootTableManager<
+    _$AppContentLocalDatabase,
+    $AppContentGrammarPagesTable,
+    AppContentGrammarPage,
+    $$AppContentGrammarPagesTableFilterComposer,
+    $$AppContentGrammarPagesTableOrderingComposer,
+    $$AppContentGrammarPagesTableAnnotationComposer,
+    $$AppContentGrammarPagesTableCreateCompanionBuilder,
+    $$AppContentGrammarPagesTableUpdateCompanionBuilder,
+    (
+      AppContentGrammarPage,
+      BaseReferences<_$AppContentLocalDatabase, $AppContentGrammarPagesTable,
+          AppContentGrammarPage>
+    ),
+    AppContentGrammarPage,
+    PrefetchHooks Function()> {
+  $$AppContentGrammarPagesTableTableManager(
+      _$AppContentLocalDatabase db, $AppContentGrammarPagesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AppContentGrammarPagesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AppContentGrammarPagesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AppContentGrammarPagesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> moduleId = const Value.absent(),
+            Value<int?> sourcePageId = const Value.absent(),
+            Value<int> sayfaNo = const Value.absent(),
+            Value<String> baslik = const Value.absent(),
+            Value<String> icerikHtml = const Value.absent(),
+            Value<int> kelimeSayisi = const Value.absent(),
+          }) =>
+              AppContentGrammarPagesCompanion(
+            id: id,
+            moduleId: moduleId,
+            sourcePageId: sourcePageId,
+            sayfaNo: sayfaNo,
+            baslik: baslik,
+            icerikHtml: icerikHtml,
+            kelimeSayisi: kelimeSayisi,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int moduleId,
+            Value<int?> sourcePageId = const Value.absent(),
+            required int sayfaNo,
+            required String baslik,
+            required String icerikHtml,
+            required int kelimeSayisi,
+          }) =>
+              AppContentGrammarPagesCompanion.insert(
+            id: id,
+            moduleId: moduleId,
+            sourcePageId: sourcePageId,
+            sayfaNo: sayfaNo,
+            baslik: baslik,
+            icerikHtml: icerikHtml,
+            kelimeSayisi: kelimeSayisi,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$AppContentGrammarPagesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppContentLocalDatabase,
+        $AppContentGrammarPagesTable,
+        AppContentGrammarPage,
+        $$AppContentGrammarPagesTableFilterComposer,
+        $$AppContentGrammarPagesTableOrderingComposer,
+        $$AppContentGrammarPagesTableAnnotationComposer,
+        $$AppContentGrammarPagesTableCreateCompanionBuilder,
+        $$AppContentGrammarPagesTableUpdateCompanionBuilder,
+        (
+          AppContentGrammarPage,
+          BaseReferences<_$AppContentLocalDatabase,
+              $AppContentGrammarPagesTable, AppContentGrammarPage>
+        ),
+        AppContentGrammarPage,
+        PrefetchHooks Function()>;
+typedef $$AppContentGrammarExamplesTableCreateCompanionBuilder
+    = AppContentGrammarExamplesCompanion Function({
+  Value<int> id,
+  required int pageId,
+  required int sira,
+  required String ingilizce,
+  required String turkce,
+  required String aciklama,
+});
+typedef $$AppContentGrammarExamplesTableUpdateCompanionBuilder
+    = AppContentGrammarExamplesCompanion Function({
+  Value<int> id,
+  Value<int> pageId,
+  Value<int> sira,
+  Value<String> ingilizce,
+  Value<String> turkce,
+  Value<String> aciklama,
+});
+
+class $$AppContentGrammarExamplesTableFilterComposer extends Composer<
+    _$AppContentLocalDatabase, $AppContentGrammarExamplesTable> {
+  $$AppContentGrammarExamplesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get pageId => $composableBuilder(
+      column: $table.pageId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sira => $composableBuilder(
+      column: $table.sira, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get ingilizce => $composableBuilder(
+      column: $table.ingilizce, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get turkce => $composableBuilder(
+      column: $table.turkce, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get aciklama => $composableBuilder(
+      column: $table.aciklama, builder: (column) => ColumnFilters(column));
+}
+
+class $$AppContentGrammarExamplesTableOrderingComposer extends Composer<
+    _$AppContentLocalDatabase, $AppContentGrammarExamplesTable> {
+  $$AppContentGrammarExamplesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get pageId => $composableBuilder(
+      column: $table.pageId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sira => $composableBuilder(
+      column: $table.sira, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get ingilizce => $composableBuilder(
+      column: $table.ingilizce, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get turkce => $composableBuilder(
+      column: $table.turkce, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get aciklama => $composableBuilder(
+      column: $table.aciklama, builder: (column) => ColumnOrderings(column));
+}
+
+class $$AppContentGrammarExamplesTableAnnotationComposer extends Composer<
+    _$AppContentLocalDatabase, $AppContentGrammarExamplesTable> {
+  $$AppContentGrammarExamplesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get pageId =>
+      $composableBuilder(column: $table.pageId, builder: (column) => column);
+
+  GeneratedColumn<int> get sira =>
+      $composableBuilder(column: $table.sira, builder: (column) => column);
+
+  GeneratedColumn<String> get ingilizce =>
+      $composableBuilder(column: $table.ingilizce, builder: (column) => column);
+
+  GeneratedColumn<String> get turkce =>
+      $composableBuilder(column: $table.turkce, builder: (column) => column);
+
+  GeneratedColumn<String> get aciklama =>
+      $composableBuilder(column: $table.aciklama, builder: (column) => column);
+}
+
+class $$AppContentGrammarExamplesTableTableManager extends RootTableManager<
+    _$AppContentLocalDatabase,
+    $AppContentGrammarExamplesTable,
+    AppContentGrammarExample,
+    $$AppContentGrammarExamplesTableFilterComposer,
+    $$AppContentGrammarExamplesTableOrderingComposer,
+    $$AppContentGrammarExamplesTableAnnotationComposer,
+    $$AppContentGrammarExamplesTableCreateCompanionBuilder,
+    $$AppContentGrammarExamplesTableUpdateCompanionBuilder,
+    (
+      AppContentGrammarExample,
+      BaseReferences<_$AppContentLocalDatabase, $AppContentGrammarExamplesTable,
+          AppContentGrammarExample>
+    ),
+    AppContentGrammarExample,
+    PrefetchHooks Function()> {
+  $$AppContentGrammarExamplesTableTableManager(
+      _$AppContentLocalDatabase db, $AppContentGrammarExamplesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AppContentGrammarExamplesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AppContentGrammarExamplesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AppContentGrammarExamplesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> pageId = const Value.absent(),
+            Value<int> sira = const Value.absent(),
+            Value<String> ingilizce = const Value.absent(),
+            Value<String> turkce = const Value.absent(),
+            Value<String> aciklama = const Value.absent(),
+          }) =>
+              AppContentGrammarExamplesCompanion(
+            id: id,
+            pageId: pageId,
+            sira: sira,
+            ingilizce: ingilizce,
+            turkce: turkce,
+            aciklama: aciklama,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int pageId,
+            required int sira,
+            required String ingilizce,
+            required String turkce,
+            required String aciklama,
+          }) =>
+              AppContentGrammarExamplesCompanion.insert(
+            id: id,
+            pageId: pageId,
+            sira: sira,
+            ingilizce: ingilizce,
+            turkce: turkce,
+            aciklama: aciklama,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$AppContentGrammarExamplesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppContentLocalDatabase,
+        $AppContentGrammarExamplesTable,
+        AppContentGrammarExample,
+        $$AppContentGrammarExamplesTableFilterComposer,
+        $$AppContentGrammarExamplesTableOrderingComposer,
+        $$AppContentGrammarExamplesTableAnnotationComposer,
+        $$AppContentGrammarExamplesTableCreateCompanionBuilder,
+        $$AppContentGrammarExamplesTableUpdateCompanionBuilder,
+        (
+          AppContentGrammarExample,
+          BaseReferences<_$AppContentLocalDatabase,
+              $AppContentGrammarExamplesTable, AppContentGrammarExample>
+        ),
+        AppContentGrammarExample,
+        PrefetchHooks Function()>;
+typedef $$AppContentGrammarTestsTableCreateCompanionBuilder
+    = AppContentGrammarTestsCompanion Function({
+  Value<int> id,
+  required int pageId,
+  required int sira,
+  required String soru,
+  required String seceneklerJson,
+  required String dogruCevap,
+  required String aciklama,
+});
+typedef $$AppContentGrammarTestsTableUpdateCompanionBuilder
+    = AppContentGrammarTestsCompanion Function({
+  Value<int> id,
+  Value<int> pageId,
+  Value<int> sira,
+  Value<String> soru,
+  Value<String> seceneklerJson,
+  Value<String> dogruCevap,
+  Value<String> aciklama,
+});
+
+class $$AppContentGrammarTestsTableFilterComposer
+    extends Composer<_$AppContentLocalDatabase, $AppContentGrammarTestsTable> {
+  $$AppContentGrammarTestsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get pageId => $composableBuilder(
+      column: $table.pageId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sira => $composableBuilder(
+      column: $table.sira, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get soru => $composableBuilder(
+      column: $table.soru, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get seceneklerJson => $composableBuilder(
+      column: $table.seceneklerJson,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get dogruCevap => $composableBuilder(
+      column: $table.dogruCevap, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get aciklama => $composableBuilder(
+      column: $table.aciklama, builder: (column) => ColumnFilters(column));
+}
+
+class $$AppContentGrammarTestsTableOrderingComposer
+    extends Composer<_$AppContentLocalDatabase, $AppContentGrammarTestsTable> {
+  $$AppContentGrammarTestsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get pageId => $composableBuilder(
+      column: $table.pageId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sira => $composableBuilder(
+      column: $table.sira, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get soru => $composableBuilder(
+      column: $table.soru, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get seceneklerJson => $composableBuilder(
+      column: $table.seceneklerJson,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get dogruCevap => $composableBuilder(
+      column: $table.dogruCevap, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get aciklama => $composableBuilder(
+      column: $table.aciklama, builder: (column) => ColumnOrderings(column));
+}
+
+class $$AppContentGrammarTestsTableAnnotationComposer
+    extends Composer<_$AppContentLocalDatabase, $AppContentGrammarTestsTable> {
+  $$AppContentGrammarTestsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get pageId =>
+      $composableBuilder(column: $table.pageId, builder: (column) => column);
+
+  GeneratedColumn<int> get sira =>
+      $composableBuilder(column: $table.sira, builder: (column) => column);
+
+  GeneratedColumn<String> get soru =>
+      $composableBuilder(column: $table.soru, builder: (column) => column);
+
+  GeneratedColumn<String> get seceneklerJson => $composableBuilder(
+      column: $table.seceneklerJson, builder: (column) => column);
+
+  GeneratedColumn<String> get dogruCevap => $composableBuilder(
+      column: $table.dogruCevap, builder: (column) => column);
+
+  GeneratedColumn<String> get aciklama =>
+      $composableBuilder(column: $table.aciklama, builder: (column) => column);
+}
+
+class $$AppContentGrammarTestsTableTableManager extends RootTableManager<
+    _$AppContentLocalDatabase,
+    $AppContentGrammarTestsTable,
+    AppContentGrammarTest,
+    $$AppContentGrammarTestsTableFilterComposer,
+    $$AppContentGrammarTestsTableOrderingComposer,
+    $$AppContentGrammarTestsTableAnnotationComposer,
+    $$AppContentGrammarTestsTableCreateCompanionBuilder,
+    $$AppContentGrammarTestsTableUpdateCompanionBuilder,
+    (
+      AppContentGrammarTest,
+      BaseReferences<_$AppContentLocalDatabase, $AppContentGrammarTestsTable,
+          AppContentGrammarTest>
+    ),
+    AppContentGrammarTest,
+    PrefetchHooks Function()> {
+  $$AppContentGrammarTestsTableTableManager(
+      _$AppContentLocalDatabase db, $AppContentGrammarTestsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AppContentGrammarTestsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AppContentGrammarTestsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AppContentGrammarTestsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> pageId = const Value.absent(),
+            Value<int> sira = const Value.absent(),
+            Value<String> soru = const Value.absent(),
+            Value<String> seceneklerJson = const Value.absent(),
+            Value<String> dogruCevap = const Value.absent(),
+            Value<String> aciklama = const Value.absent(),
+          }) =>
+              AppContentGrammarTestsCompanion(
+            id: id,
+            pageId: pageId,
+            sira: sira,
+            soru: soru,
+            seceneklerJson: seceneklerJson,
+            dogruCevap: dogruCevap,
+            aciklama: aciklama,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int pageId,
+            required int sira,
+            required String soru,
+            required String seceneklerJson,
+            required String dogruCevap,
+            required String aciklama,
+          }) =>
+              AppContentGrammarTestsCompanion.insert(
+            id: id,
+            pageId: pageId,
+            sira: sira,
+            soru: soru,
+            seceneklerJson: seceneklerJson,
+            dogruCevap: dogruCevap,
+            aciklama: aciklama,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$AppContentGrammarTestsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppContentLocalDatabase,
+        $AppContentGrammarTestsTable,
+        AppContentGrammarTest,
+        $$AppContentGrammarTestsTableFilterComposer,
+        $$AppContentGrammarTestsTableOrderingComposer,
+        $$AppContentGrammarTestsTableAnnotationComposer,
+        $$AppContentGrammarTestsTableCreateCompanionBuilder,
+        $$AppContentGrammarTestsTableUpdateCompanionBuilder,
+        (
+          AppContentGrammarTest,
+          BaseReferences<_$AppContentLocalDatabase,
+              $AppContentGrammarTestsTable, AppContentGrammarTest>
+        ),
+        AppContentGrammarTest,
+        PrefetchHooks Function()>;
 
 class $AppContentLocalDatabaseManager {
   final _$AppContentLocalDatabase _db;
@@ -3157,4 +5568,16 @@ class $AppContentLocalDatabaseManager {
       get appContentReadingSentences =>
           $$AppContentReadingSentencesTableTableManager(
               _db, _db.appContentReadingSentences);
+  $$AppContentGrammarModulesTableTableManager get appContentGrammarModules =>
+      $$AppContentGrammarModulesTableTableManager(
+          _db, _db.appContentGrammarModules);
+  $$AppContentGrammarPagesTableTableManager get appContentGrammarPages =>
+      $$AppContentGrammarPagesTableTableManager(
+          _db, _db.appContentGrammarPages);
+  $$AppContentGrammarExamplesTableTableManager get appContentGrammarExamples =>
+      $$AppContentGrammarExamplesTableTableManager(
+          _db, _db.appContentGrammarExamples);
+  $$AppContentGrammarTestsTableTableManager get appContentGrammarTests =>
+      $$AppContentGrammarTestsTableTableManager(
+          _db, _db.appContentGrammarTests);
 }

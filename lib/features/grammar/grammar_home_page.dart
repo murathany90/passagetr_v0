@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_shimmer_block.dart';
+import '../../data/repositories/hybrid_grammar_repository.dart';
 import '../../domain/entities/grammar_module.dart';
 import '../../state/providers.dart';
 import 'grammar_module_pages_page.dart';
@@ -24,11 +25,13 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
   int? _lastModuleId;
   int? _lastPageId;
   Map<int, int> _readPageCounts = const <int, int>{};
+  bool _syncStarted = false;
 
   @override
   void initState() {
     super.initState();
     _loadResume();
+    _startBackgroundSync();
   }
 
   Future<void> _loadResume() async {
@@ -80,7 +83,8 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final AsyncValue<List<GrammarModule>> modulesAsync = ref.watch(grammarModulesProvider);
+    final AsyncValue<List<GrammarModule>> modulesAsync =
+        ref.watch(grammarModulesProvider);
 
     return modulesAsync.when(
       loading: () => Padding(
@@ -99,9 +103,14 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
         ),
       ),
       error: (Object error, StackTrace stackTrace) {
+        final bool localMissing = _isLocalMissingError(error);
         return AppErrorState(
-          title: 'Gramer modulleri yuklenemedi.',
-          detail: error.toString(),
+          title: localMissing
+              ? 'Lokal içerik yok'
+              : 'Guncelleme alinamadi, lokal içerik kullaniliyor',
+          detail: localMissing
+              ? 'Gramer paketi cihazda bulunamadi. İnternete baglanip bir kez acmayi deneyin.'
+              : error.toString(),
           onRetry: () => ref.invalidate(grammarModulesProvider),
         );
       },
@@ -109,7 +118,8 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
         if (modules.isEmpty) {
           return const AppEmptyState(
             title: 'Gramer modulu bulunamadi',
-            message: 'Supabase grammar tablolarini ve yukleme scriptini kontrol edin.',
+            message:
+                'Supabase grammar tablolarini ve yukleme scriptini kontrol edin.',
             icon: Icons.menu_book_outlined,
           );
         }
@@ -197,10 +207,38 @@ class _GrammarHomePageState extends ConsumerState<GrammarHomePage> {
 
     await _loadResume();
     // Reload progress counts after returning from reader
-    final AsyncValue<List<GrammarModule>> modulesAsync = ref.read(grammarModulesProvider);
+    final AsyncValue<List<GrammarModule>> modulesAsync =
+        ref.read(grammarModulesProvider);
     if (modulesAsync.hasValue) {
       await _loadProgressCounts(modulesAsync.value!);
     }
+  }
+
+  void _startBackgroundSync() {
+    if (_syncStarted) {
+      return;
+    }
+    _syncStarted = true;
+    Future<void>.microtask(() async {
+      final repository = ref.read(grammarRepositoryProvider);
+      if (repository is! HybridGrammarRepository) {
+        return;
+      }
+      try {
+        await repository.syncIfStale();
+        if (mounted) {
+          ref.invalidate(grammarModulesProvider);
+        }
+      } catch (_) {
+        // Non-blocking sync: UI should keep rendering local content.
+      }
+    });
+  }
+
+  bool _isLocalMissingError(Object error) {
+    final String text = error.toString().toLowerCase();
+    return text.contains('lokal gramer içerigi yok') ||
+        text.contains('lokal icerik yok');
   }
 }
 
@@ -237,7 +275,8 @@ class _ModuleCard extends StatelessWidget {
                   CircleAvatar(
                     radius: 18,
                     backgroundColor: color.withValues(alpha: 0.15),
-                    child: Text(module.icon, style: const TextStyle(fontSize: 18)),
+                    child:
+                        Text(module.icon, style: const TextStyle(fontSize: 18)),
                   ),
                   const Spacer(),
                   if (isComplete)
