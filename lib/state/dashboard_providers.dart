@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../core/exceptions/app_exceptions.dart';
-import '../data/repositories/supabase_progress_repository.dart';
+import '../core/utils/network_error_classifier.dart';
+import '../data/repositories/resilient_progress_repository.dart';
 import '../domain/entities/home_dashboard_data.dart';
 import '../domain/entities/pack.dart';
 import '../domain/entities/reading_resume_item.dart';
@@ -12,14 +12,18 @@ import '../domain/repositories/progress_repository.dart';
 import '../domain/repositories/reading_repository.dart';
 import '../domain/repositories/word_repository.dart';
 import 'auth_providers.dart';
+import 'offline_sync_providers.dart';
 import 'pack_providers.dart';
 import 'reading_providers.dart';
+import 'remote_repository_providers.dart';
 import 'word_providers.dart';
 
 final Provider<ProgressRepository> progressRepositoryProvider =
     Provider<ProgressRepository>((Ref ref) {
-  final SupabaseClient client = ref.watch(supabaseClientProvider);
-  return SupabaseProgressRepository(client);
+  return ResilientProgressRepository(
+    baseRepository: ref.watch(supabaseProgressRepositoryProvider),
+    syncCoordinator: ref.watch(offlineSyncControllerProvider.notifier),
+  );
 });
 
 final FutureProvider<HomeDashboardData> homeDashboardProvider =
@@ -118,11 +122,8 @@ final FutureProvider<HomeDashboardData> homeDashboardProvider =
     return await loadOperation();
   } catch (error) {
     if (error is! AuthMissingException) {
-      // Check if it's a network error → return offline fallback
-      final String msg = error.toString().toLowerCase();
-      if (msg.contains('socketexception') ||
-          msg.contains('failed host lookup') ||
-          msg.contains('clientexception')) {
+      if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+          NetworkErrorClassifier.isAuthTransientError(error)) {
         return offlineFallback;
       }
       rethrow;

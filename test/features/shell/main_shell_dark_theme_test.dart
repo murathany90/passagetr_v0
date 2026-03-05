@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:passagetr/core/services/offline_sync_controller.dart';
+import 'package:passagetr/core/theme/app_theme.dart';
 import 'package:passagetr/data/local/offline_sync_queue_store.dart';
-import 'package:passagetr/domain/entities/pack.dart';
+import 'package:passagetr/domain/entities/home_dashboard_data.dart';
 import 'package:passagetr/domain/entities/passage_sentence.dart';
 import 'package:passagetr/domain/entities/reading_passage.dart';
 import 'package:passagetr/domain/entities/reading_resume_item.dart';
@@ -15,130 +18,84 @@ import 'package:passagetr/domain/repositories/progress_repository.dart';
 import 'package:passagetr/domain/repositories/reading_repository.dart';
 import 'package:passagetr/domain/value_objects/flashcard_answer.dart';
 import 'package:passagetr/domain/value_objects/paged_result.dart';
-import 'package:passagetr/features/readings/reading_detail_page.dart';
-import 'package:passagetr/state/content_providers.dart';
+import 'package:passagetr/features/shell/main_shell_page.dart';
+import 'package:passagetr/state/auth_providers.dart';
+import 'package:passagetr/state/dashboard_providers.dart';
+import 'package:passagetr/state/nav_badge_providers.dart';
 import 'package:passagetr/state/offline_sync_providers.dart';
-import 'package:passagetr/state/reading_providers.dart';
-import 'package:passagetr/state/translation_providers.dart';
-import 'package:passagetr/state/word_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../helpers/fake_repositories.dart';
 
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues(<String, Object>{});
   });
 
-  const Pack pack = Pack(
-    id: 'pack-1',
-    name: 'YDS Set 001',
-    fromLang: 'en',
-    toLang: 'tr',
-    wordCount: 100,
-  );
-
-  const ReadingPassage passage = ReadingPassage(
-    id: 'passage-1',
-    packId: 'pack-1',
-    packName: 'YDS Set 001',
-    title: 'Reading 001',
-    level: 'B1',
-    tagsRaw: 'daily',
-    category: 'general',
-  );
-
-  const PassageSentence sentence = PassageSentence(
-    id: 's1',
-    passageId: 'passage-1',
-    passageTitle: 'Reading 001',
-    idx: 1,
-    sentenceEn: 'The clean place is calm.',
-    sentenceTr: null,
-  );
-
-  const WordItem knownWord = WordItem(
-    id: 'w-clean',
-    packId: 'pack-1',
-    enWord: 'clean',
-    trMeaning: 'temiz',
-    pos: 'adj',
-    exampleEn: 'The room is clean.',
-    exampleTr: 'Oda temiz.',
-    synonymsRaw: null,
-    antonymsRaw: null,
-    level: 'A2',
-    tagsRaw: null,
-    notes: null,
-  );
-
-  testWidgets(
-      'renders reading sentence and keeps focus panel collapsed by default', (
-    WidgetTester tester,
-  ) async {
+  Future<void> configureViewport(WidgetTester tester) async {
     tester.view.physicalSize = const Size(1080, 2400);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
+  }
 
-    final FakeReadingRepository readingRepository = FakeReadingRepository(
-      sentences: const <PassageSentence>[sentence],
-      passageWords: const <WordItem>[knownWord],
-    );
-    final FakeWordRepository wordRepository = FakeWordRepository(
-      globalWords: const <String, WordItem>{'clean': knownWord},
-      globalIndex: const <WordItem>[knownWord],
-    );
+  testWidgets('MainShellPage renders in dark mode without crash', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
     final OfflineSyncController controller = OfflineSyncController(
       queueStore: OfflineSyncQueueStore(),
-      readingRemote: _NoopReadingRepository(),
-      progressRemote: _NoopProgressRepository(),
+      readingRemote: _FakeReadingRepository(),
+      progressRemote: _FakeProgressRepository(),
     );
 
     await tester.pumpWidget(
       ProviderScope(
         overrides: <Override>[
-          appContentDatasetVersionProvider.overrideWith(
-            (Ref ref) async => 'v-test',
-          ),
-          readingRepositoryProvider
-              .overrideWith((Ref ref) => readingRepository),
-          wordRepositoryProvider.overrideWith((Ref ref) => wordRepository),
-          translationServiceProvider.overrideWith(
-            (Ref ref) => FakeTranslationService(),
-          ),
+          authBootstrapProvider.overrideWith((Ref ref) async {}),
+          weakWordCountProvider.overrideWith((Ref ref) async => 0),
           offlineSyncControllerProvider.overrideWith(
             (Ref ref) => controller,
           ),
+          homeDashboardProvider.overrideWith((Ref ref) async {
+            return const HomeDashboardData(
+              todayWordCount: 0,
+              todayReadSentenceCount: 0,
+              todaySolvedQuestionText: 'Yakinda',
+              quickStart: QuickStartSuggestion(
+                type: QuickStartType.unavailable,
+              ),
+            );
+          }),
         ],
-        child: const MaterialApp(
-          home: ReadingDetailPage(
-            passage: passage,
-            pack: pack,
-          ),
+        child: MaterialApp(
+          theme: AppTheme.light(),
+          darkTheme: AppTheme.dark(),
+          themeMode: ThemeMode.dark,
+          home: const MainShellPage(),
         ),
       ),
     );
 
     await tester.pumpAndSettle();
 
-    expect(
-      find.byWidgetPredicate(
-        (Widget widget) =>
-            widget is RichText &&
-            widget.text.toPlainText().contains('clean place is calm'),
-      ),
-      findsWidgets,
-    );
-    expect(find.text('Ceviriyi Goster'), findsOneWidget);
-    expect(find.text('Odak Kelimeler'), findsOneWidget);
-    expect(find.text('Kelime Calis'), findsNothing);
+    expect(find.text('Ana Sayfa'), findsWidgets);
+    expect(find.byType(NavigationBar), findsOneWidget);
+  });
+
+  test('OfflineSyncBanner color is theme driven (no hardcoded green)', () {
+    final String source = File(
+      'lib/features/shell/main_shell_page.dart',
+    ).readAsStringSync();
+
+    expect(source.contains('Colors.green'), isFalse);
+    expect(source.contains('colorScheme.secondaryContainer'), isTrue);
+    expect(source.contains('onSecondaryContainer'), isTrue);
   });
 }
 
-class _NoopReadingRepository implements ReadingRepository {
+class _FakeReadingRepository implements ReadingRepository {
   @override
   Future<PagedResult<ReadingPassage>> getPassagesByPack({
     required String packId,
@@ -211,7 +168,7 @@ class _NoopReadingRepository implements ReadingRepository {
   }
 }
 
-class _NoopProgressRepository implements ProgressRepository {
+class _FakeProgressRepository implements ProgressRepository {
   @override
   Future<void> applyFlashcardResult({
     required String wordId,
@@ -242,4 +199,3 @@ class _NoopProgressRepository implements ProgressRepository {
     return const <String>[];
   }
 }
-

@@ -114,3 +114,12 @@
 2. Paket kartında CTA `Paket Merkezini Aç` olmalıdır.
 3. Filtre etiketlerinde `Kelime Türü (POS)` ve `Etiket` metinleri görünmelidir.
 4. README mojibake denetimi için `python scripts/check_mojibake.py` komutu hatasız çalışmalıdır.
+
+## 13) Offline Queue + Senkron
+1. Ucak modunda ReadingDetail ekraninda `Ilerledim`/`Okumayi Bitirdim` aksiyonlari app'i kirmadan calismalidir.
+2. Ucak modunda Flashcard/MCQ/Matching/Typing cevaplarinda teknik host/socket hatasi popup olarak gorunmemelidir.
+3. Uygulama ustunde tek bir cevrimdisi banneri gorunmelidir:
+   - `Cevrimdisi: ilerleme cihazda saklaniyor (N)`
+4. Ag geri geldiginde bannerde bekleyen kayit sayisi azalip sifira iner.
+5. Ag geri geldikten sonra Home/Profile metrikleri normal degerlere doner.
+6. Ham teknik metinler (`SocketException`, `Failed host lookup`, `supabase.co/rest/v1/...`) kullaniciya gosterilmemelidir.

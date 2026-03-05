@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/network_error_classifier.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_loading_block.dart';
 import '../../core/widgets/app_surface_card.dart';
@@ -156,12 +157,20 @@ class _MatchingSessionPageState extends ConsumerState<MatchingSessionPage> {
         if (!mounted) {
           return;
         }
+        if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+            NetworkErrorClassifier.isAuthTransientError(error)) {
+          return;
+        }
+        final String message = NetworkErrorClassifier.toUserSafeMessage(
+          error,
+          fallback: 'Ilerleme su an kaydedilemedi.',
+        );
         final bool retry = await showDialog<bool>(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text('Kayit hatasi'),
-                  content: Text(error.toString()),
+                  content: Text(message),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(false),
@@ -287,7 +296,10 @@ class _MatchingSessionPageState extends ConsumerState<MatchingSessionPage> {
                               final bool isSelected =
                                   _selectedLeftIndex == index;
                               final Color? tint = isMatched
-                                  ? Colors.green.withValues(alpha: 0.16)
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer
+                                      .withValues(alpha: 0.45)
                                   : isSelected
                                       ? Theme.of(context)
                                           .colorScheme
@@ -351,7 +363,10 @@ class _MatchingSessionPageState extends ConsumerState<MatchingSessionPage> {
                                   ),
                                 ),
                                 tileColor: isUsed
-                                    ? Colors.green.withValues(alpha: 0.12)
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer
+                                        .withValues(alpha: 0.38)
                                     : null,
                                 title: Text(meaning),
                                 onTap:

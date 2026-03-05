@@ -12,6 +12,7 @@ import '../data/repositories/offline_dictionary_repository.dart';
 import '../domain/entities/dictionary_bootstrap_state.dart';
 import '../domain/repositories/dictionary_repository.dart';
 import 'auth_providers.dart';
+import 'offline_sync_providers.dart';
 import 'translation_providers.dart';
 
 final Provider<AppContentLocalDatabase> appContentLocalDatabaseProvider =
@@ -100,4 +101,7 @@ final FutureProvider<void> appBootstrapProvider = FutureProvider<void>((
   }
   await ref.watch(dictionaryAppBootstrapProvider.future);
   await ref.watch(authBootstrapProvider.future);
+  await ref
+      .read(offlineSyncControllerProvider.notifier)
+      .flushPending(silent: true);
 });

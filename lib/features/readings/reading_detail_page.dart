@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/services/translation_service.dart';
+import '../../core/utils/network_error_classifier.dart';
 import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
@@ -426,7 +427,13 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
 
   String _toTranslationErrorMessage(Object error) {
     if (error is TranslationException) {
-      return error.message;
+      return NetworkErrorClassifier.toUserSafeMessage(
+        error,
+        fallback: 'Ceviri su an alinamadi. Daha sonra tekrar dene.',
+      );
+    }
+    if (NetworkErrorClassifier.isNetworkLikeError(error)) {
+      return 'Ceviri icin internet baglantisi gerekli.';
     }
     return 'Ceviri alinamadi. Daha sonra tekrar dene.';
   }
@@ -495,9 +502,15 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       if (!mounted) {
         return;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Okuma ilerlemesi kaydedilemedi: $error')),
+      if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+          NetworkErrorClassifier.isAuthTransientError(error)) {
+        return;
+      }
+      final String message = NetworkErrorClassifier.toUserSafeMessage(
+        error,
+        fallback: 'Ilerleme su an kaydedilemedi.',
       );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) {
         setState(() {

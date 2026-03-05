@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/utils/levenshtein.dart';
+import '../../core/utils/network_error_classifier.dart';
 import '../../core/utils/text_normalizer.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_loading_block.dart';
@@ -152,12 +153,20 @@ class _TypingSessionPageState extends ConsumerState<TypingSessionPage> {
         if (!mounted) {
           return;
         }
+        if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+            NetworkErrorClassifier.isAuthTransientError(error)) {
+          return;
+        }
+        final String message = NetworkErrorClassifier.toUserSafeMessage(
+          error,
+          fallback: 'Ilerleme su an kaydedilemedi.',
+        );
         final bool retry = await showDialog<bool>(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text('Kayit hatasi'),
-                  content: Text(error.toString()),
+                  content: Text(message),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(false),

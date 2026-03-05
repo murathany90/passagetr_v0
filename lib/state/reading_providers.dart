@@ -1,10 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../core/config/app_config.dart';
 import '../data/local/app_content_local_datasource.dart';
 import '../data/repositories/hybrid_reading_repository.dart';
-import '../data/repositories/supabase_reading_repository.dart';
+import '../data/repositories/resilient_reading_repository.dart';
 import '../domain/entities/passage_sentence.dart';
 import '../domain/entities/reading_passage.dart';
 import '../domain/entities/sentence_translation.dart';
@@ -12,22 +11,30 @@ import '../domain/entities/user_reading_progress.dart';
 import '../domain/entities/word_item.dart';
 import '../domain/repositories/reading_repository.dart';
 import '../domain/value_objects/paged_result.dart';
-import 'auth_providers.dart';
 import 'content_providers.dart';
+import 'offline_sync_providers.dart';
+import 'remote_repository_providers.dart';
 
 final Provider<ReadingRepository> readingRepositoryProvider =
     Provider<ReadingRepository>((Ref ref) {
-  final SupabaseClient client = ref.watch(supabaseClientProvider);
+  final supabaseRepository = ref.watch(supabaseReadingRepositoryProvider);
+  final syncController = ref.watch(offlineSyncControllerProvider.notifier);
+
+  ReadingRepository baseRepository = supabaseRepository;
   if (AppConfig.useLocalStaticContent) {
     final AppContentLocalDataSource local = ref.watch(
       appContentLocalDataSourceProvider,
     );
-    return HybridReadingRepository(
+    baseRepository = HybridReadingRepository(
       localDataSource: local,
-      remoteDataSource: SupabaseReadingRepository(client),
+      remoteDataSource: supabaseRepository,
     );
   }
-  return SupabaseReadingRepository(client);
+
+  return ResilientReadingRepository(
+    baseRepository: baseRepository,
+    syncCoordinator: syncController,
+  );
 });
 
 class ReadingListRequest {

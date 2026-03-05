@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/network_error_classifier.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_loading_block.dart';
 import '../../core/widgets/app_surface_card.dart';
@@ -182,12 +183,20 @@ class _McqSessionPageState extends ConsumerState<McqSessionPage> {
         if (!mounted) {
           return;
         }
+        if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+            NetworkErrorClassifier.isAuthTransientError(error)) {
+          return;
+        }
+        final String message = NetworkErrorClassifier.toUserSafeMessage(
+          error,
+          fallback: 'Ilerleme su an kaydedilemedi.',
+        );
         final bool retry = await showDialog<bool>(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text('Progress kaydi basarisiz'),
-                  content: Text(error.toString()),
+                  content: Text(message),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(false),

@@ -127,7 +127,12 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
         };
 
         return RefreshIndicator(
-          onRefresh: () async => ref.invalidate(homeDashboardProvider),
+          onRefresh: () async {
+            await ref
+                .read(offlineSyncControllerProvider.notifier)
+                .flushPending(silent: true);
+            ref.invalidate(homeDashboardProvider);
+          },
           child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),

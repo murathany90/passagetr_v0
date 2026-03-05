@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/network_error_classifier.dart';
 import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
 import '../../core/widgets/app_surface_card.dart';
@@ -207,8 +208,16 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       if (!mounted) {
         return;
       }
+      if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+          NetworkErrorClassifier.isAuthTransientError(error)) {
+        return;
+      }
+      final String message = NetworkErrorClassifier.toUserSafeMessage(
+        error,
+        fallback: 'Ilerleme su an kaydedilemedi.',
+      );
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Progress kaydi basarisiz: $error')),
+        SnackBar(content: Text(message)),
       );
     } finally {
       if (mounted) {

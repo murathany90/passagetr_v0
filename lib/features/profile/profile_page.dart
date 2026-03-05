@@ -28,6 +28,9 @@ class ProfilePage extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: () async {
+        await ref
+            .read(offlineSyncControllerProvider.notifier)
+            .flushPending(silent: true);
         ref.invalidate(homeDashboardProvider);
         ref.invalidate(packListProvider);
         try {

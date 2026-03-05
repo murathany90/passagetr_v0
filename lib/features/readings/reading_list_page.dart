@@ -286,7 +286,12 @@ class _ReadingListPageState extends ConsumerState<ReadingListPage> {
     }
 
     return RefreshIndicator(
-      onRefresh: _loadInitial,
+      onRefresh: () async {
+        await ref
+            .read(offlineSyncControllerProvider.notifier)
+            .flushPending(silent: true);
+        await _loadInitial();
+      },
       child: Column(
         children: <Widget>[
           _buildLevelFilterBar(),
