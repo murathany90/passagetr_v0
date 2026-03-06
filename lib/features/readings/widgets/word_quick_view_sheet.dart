@@ -121,19 +121,25 @@ class WordQuickViewSheet extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      normalized,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+              Text(
+                normalized,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w800,
                     ),
-                  ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: <Widget>[
                   AppSpeakButton(text: normalized),
+                  OutlinedButton.icon(
+                    onPressed: () => _copy(context, state, normalized),
+                    icon: const Icon(Icons.copy),
+                    label: const Text('Kopyala'),
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -191,11 +197,6 @@ class WordQuickViewSheet extends ConsumerWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: <Widget>[
-                  OutlinedButton.icon(
-                    onPressed: () => _copy(context, state, normalized),
-                    icon: const Icon(Icons.copy),
-                    label: const Text('Kopyala'),
-                  ),
                   OutlinedButton.icon(
                     onPressed: () => _openSource(context, normalized),
                     icon: const Icon(Icons.open_in_new),
@@ -311,12 +312,36 @@ class _FoundWordContent extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8),
-              Text('EN: ${word.exampleEn}'),
+              const SizedBox(height: 10),
+              Text(
+                'Example EN',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                word.exampleEn,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+              ),
               if ((word.exampleTr ?? '').trim().isNotEmpty) ...<Widget>[
-                const SizedBox(height: 3),
-                Text('TR: ${word.exampleTr}'),
+                const SizedBox(height: 8),
+                Text(
+                  'Example TR',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  word.exampleTr!,
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
               if (tags.isNotEmpty) ...<Widget>[
                 const SizedBox(height: 8),
@@ -435,6 +460,8 @@ class _TranslatedWordContent extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w800,
                 ),
+            maxLines: 5,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

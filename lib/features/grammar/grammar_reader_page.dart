@@ -5,13 +5,14 @@ import 'package:flutter_html_table/flutter_html_table.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../core/widgets/app_speak_button.dart';
 import '../../core/widgets/app_shimmer_block.dart';
+import '../../core/widgets/app_speak_button.dart';
+import '../../core/widgets/app_surface_card.dart';
+import '../../domain/entities/dictionary_lookup_result.dart';
+import '../../domain/entities/grammar_mini_test.dart';
 import '../../domain/entities/grammar_module.dart';
 import '../../domain/entities/grammar_page.dart';
 import '../../domain/entities/grammar_page_detail.dart';
-import '../../domain/entities/grammar_mini_test.dart';
-import '../../domain/entities/dictionary_lookup_result.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/repositories/dictionary_repository.dart';
 import '../../domain/repositories/word_repository.dart';
@@ -61,7 +62,6 @@ class _GrammarReaderPageState extends ConsumerState<GrammarReaderPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_lastModuleKey, widget.module.id);
     await prefs.setInt(_lastPageKey, pageId);
-    // Track this page as read for the module
     await _markPageRead(prefs, pageId);
   }
 
@@ -189,8 +189,8 @@ class _PageContent extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Text(
                   localMissing
-                      ? 'Lokal içerik yok.\nİnternete baglanip tekrar deneyin.'
-                      : 'Sayfa yuklenemedi.\n${error.toString()}',
+                      ? 'Lokal içerik yok.\nİnternete bağlanıp tekrar deneyin.'
+                      : 'Sayfa yüklenemedi.\n${error.toString()}',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
@@ -237,44 +237,40 @@ class _PageContent extends ConsumerWidget {
                     if (detail.examples.isNotEmpty) ...<Widget>[
                       const SizedBox(height: 18),
                       Text(
-                        'Ornekler',
+                        'Örnekler',
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
                       ),
                       const SizedBox(height: 8),
-                      ...detail.examples.map((example) {
-                        return Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Text('EN: ${example.ingilizce}'),
-                                    ),
-                                    AppSpeakButton(
-                                      text: example.ingilizce,
-                                      iconSize: 18,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 6),
-                                Text('TR: ${example.turkce}'),
-                                if (example.aciklama
-                                    .trim()
-                                    .isNotEmpty) ...<Widget>[
-                                  const SizedBox(height: 6),
-                                  Text('Aciklama: ${example.aciklama}'),
+                      ...detail.examples.map(
+                        (example) => AppSurfaceCard(
+                          variant: AppSurfaceVariant.grouped,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text('EN: ${example.ingilizce}'),
+                                  ),
+                                  AppSpeakButton(
+                                    text: example.ingilizce,
+                                    iconSize: 18,
+                                  ),
                                 ],
+                              ),
+                              const SizedBox(height: 6),
+                              Text('TR: ${example.turkce}'),
+                              if (example.aciklama.trim().isNotEmpty) ...<Widget>[
+                                const SizedBox(height: 6),
+                                Text('Açıklama: ${example.aciklama}'),
                               ],
-                            ),
+                            ],
                           ),
-                        );
-                      }),
+                        ),
+                      ),
                     ],
                     if (detail.tests.isNotEmpty) ...<Widget>[
                       const SizedBox(height: 18),
@@ -293,9 +289,17 @@ class _PageContent extends ConsumerWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
+                border: Border(
+                  top: BorderSide(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .outlineVariant
+                        .withValues(alpha: 0.72),
+                  ),
+                ),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                     color:
@@ -333,20 +337,27 @@ class _PageContent extends ConsumerWidget {
 
   bool _isLocalMissingError(Object error) {
     final String text = error.toString().toLowerCase();
-    return text.contains('lokal gramer içerigi yok') ||
+    return text.contains('lokal gramer içeriği yok') ||
         text.contains('lokal icerik yok');
   }
 
   Future<void> _lookupWord(
-      BuildContext context, WidgetRef ref, String rawWord) async {
+    BuildContext context,
+    WidgetRef ref,
+    String rawWord,
+  ) async {
     final String normalized =
         rawWord.trim().toLowerCase().replaceAll(RegExp(r'[^a-zA-Z\-]'), '');
-    if (normalized.isEmpty) return;
+    if (normalized.isEmpty) {
+      return;
+    }
 
     final WordRepository wordRepo = ref.read(wordRepositoryProvider);
     final WordItem? existing = await wordRepo.getWordByEnWordGlobal(normalized);
 
-    if (!context.mounted) return;
+    if (!context.mounted) {
+      return;
+    }
 
     if (existing != null) {
       await Navigator.of(context).push(
@@ -362,7 +373,9 @@ class _PageContent extends ConsumerWidget {
     final DictionaryLookupResult lookup =
         await dictRepo.lookup(query: normalized);
 
-    if (!context.mounted) return;
+    if (!context.mounted) {
+      return;
+    }
     await showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -388,7 +401,7 @@ class _PageContent extends ConsumerWidget {
         buttonItems.insert(
           0,
           ContextMenuButtonItem(
-            label: 'Sozlukte Ara',
+            label: 'Sözlükte Ara',
             onPressed: () {
               final String selectedText =
                   selectableRegionState.textEditingValue.selection.textInside(
@@ -490,7 +503,6 @@ class _PageContent extends ConsumerWidget {
   }
 }
 
-/// Interactive mini test card: user picks an answer, then reveals the result.
 class _InteractiveTestCard extends StatefulWidget {
   const _InteractiveTestCard(this.test);
 
@@ -527,90 +539,85 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
     final bool isCorrect = _selectedKey == widget.test.dogruCevap;
     final ColorScheme colors = Theme.of(context).colorScheme;
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              widget.test.soru,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            for (final String key in keys) _buildOption(context, key, colors),
-            const SizedBox(height: 8),
-            if (!_revealed)
-              FilledButton.tonal(
-                onPressed: _selectedKey != null ? _checkAnswer : null,
-                child: const Text('Cevabi Kontrol Et'),
-              )
-            else ...<Widget>[
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: isCorrect
-                      ? colors.primaryContainer
-                      : colors.errorContainer,
-                  borderRadius: BorderRadius.circular(8),
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.grouped,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            widget.test.soru,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          isCorrect
-                              ? Icons.check_circle_rounded
-                              : Icons.cancel_rounded,
-                          color: isCorrect ? colors.primary : colors.error,
-                          size: 20,
+          ),
+          const SizedBox(height: 8),
+          for (final String key in keys) _buildOption(context, key, colors),
+          const SizedBox(height: 8),
+          if (!_revealed)
+            FilledButton.tonal(
+              onPressed: _selectedKey != null ? _checkAnswer : null,
+              child: const Text('Cevabı Kontrol Et'),
+            )
+          else ...<Widget>[
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color:
+                    isCorrect ? colors.primaryContainer : colors.errorContainer,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        isCorrect
+                            ? Icons.check_circle_rounded
+                            : Icons.cancel_rounded,
+                        color: isCorrect ? colors.primary : colors.error,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          isCorrect ? 'Doğru!' : 'Yanlış.',
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color:
+                                        isCorrect ? colors.primary : colors.error,
+                                  ),
                         ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            isCorrect ? 'Dogru!' : 'Yanlis.',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color:
-                                      isCorrect ? colors.primary : colors.error,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (!isCorrect &&
-                        widget.test.dogruCevap.trim().isNotEmpty) ...<Widget>[
-                      const SizedBox(height: 4),
-                      Text(
-                        'Dogru cevap: ${widget.test.dogruCevap}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
                       ),
                     ],
-                    if (widget.test.aciklama.trim().isNotEmpty) ...<Widget>[
-                      const SizedBox(height: 6),
-                      Text(widget.test.aciklama),
-                    ],
+                  ),
+                  if (!isCorrect &&
+                      widget.test.dogruCevap.trim().isNotEmpty) ...<Widget>[
+                    const SizedBox(height: 4),
+                    Text(
+                      'Doğru cevap: ${widget.test.dogruCevap}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
                   ],
-                ),
+                  if (widget.test.aciklama.trim().isNotEmpty) ...<Widget>[
+                    const SizedBox(height: 6),
+                    Text(widget.test.aciklama),
+                  ],
+                ],
               ),
-              const SizedBox(height: 8),
-              OutlinedButton.icon(
-                onPressed: _reset,
-                icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Tekrar Dene'),
-              ),
-            ],
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton.icon(
+              onPressed: _reset,
+              icon: const Icon(Icons.refresh_rounded),
+              label: const Text('Tekrar Dene'),
+            ),
           ],
-        ),
+        ],
       ),
     );
   }

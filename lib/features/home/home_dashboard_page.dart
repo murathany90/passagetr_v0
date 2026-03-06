@@ -5,7 +5,6 @@ import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
 import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_section_header.dart';
-import '../../core/widgets/app_stat_tile.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/home_dashboard_data.dart';
 import '../../domain/entities/pack.dart';
@@ -98,19 +97,18 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
     );
 
     return dashboard.when(
-      loading: () =>
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: <Widget>[
-                AppShimmerCard(lineCount: 4),
-                SizedBox(height: 12),
-                AppShimmerCard(),
-                SizedBox(height: 8),
-                AppShimmerCard(),
-              ],
-            ),
-          ),
+      loading: () => const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            AppShimmerCard(lineCount: 4),
+            SizedBox(height: 12),
+            AppShimmerCard(),
+            SizedBox(height: 8),
+            AppShimmerCard(),
+          ],
+        ),
+      ),
       error: (Object error, StackTrace stack) {
         return AppErrorState(
           title: 'Ana sayfa verisi yuklenemedi.',
@@ -120,10 +118,10 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
       },
       data: (HomeDashboardData data) {
         final String quickStartTitle = switch (data.quickStart.type) {
-          QuickStartType.resumeReading => 'Okumaya Devam Et',
-          QuickStartType.weakWords => 'Zorlandigin Kelimeler',
-          QuickStartType.randomWords => 'Rastgele Flashcard',
-          QuickStartType.unavailable => 'Hizli Basla su an kullanilamiyor',
+          QuickStartType.resumeReading => 'Okumaya devam et',
+          QuickStartType.weakWords => 'Zorlandığın kelimeler',
+          QuickStartType.randomWords => 'Rastgele flashcard',
+          QuickStartType.unavailable => 'Şu an öneri yok',
         };
 
         return RefreshIndicator(
@@ -138,12 +136,13 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
             padding: const EdgeInsets.all(16),
             children: <Widget>[
               AppSurfaceCard(
+                variant: AppSurfaceVariant.feature,
                 padding: const EdgeInsets.all(18),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Bugunun Durumu',
+                      'Bugünkü Eğitim',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.w800,
@@ -151,16 +150,44 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Gunluk hedefini hizli basla ile devam ettir.',
+                      'Reading is Power. Günlük hedefini odaklı bir oturumla sürdür.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurfaceVariant,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                     ),
                     const SizedBox(height: 14),
+                    _CompletionRing(
+                      value: _todayCompletionValue(data),
+                      words: data.todayWordCount,
+                      readCount: data.todayReadSentenceCount,
+                    ),
+                    const SizedBox(height: 14),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondaryContainer
+                            .withValues(alpha: 0.85),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(
+                        'Sıradaki adım: $quickStartTitle',
+                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
+                            ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
                     AppGradientCtaButton(
-                      label: 'Hizli Basla: $quickStartTitle',
+                      label: 'Hızlı Başla',
                       icon: Icons.play_arrow_rounded,
                       enabled: data.quickStart.isAvailable,
                       onTap: () => _onQuickStart(data),
@@ -169,30 +196,55 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              const AppSectionHeader(title: 'Gunluk Metrikler'),
+              const AppSectionHeader(title: 'Günlük Metrikler'),
               const SizedBox(height: 8),
-              AppStatTile(
-                label: 'Bugun gorulen kelime',
-                value: '${data.todayWordCount}',
-                icon: Icons.school_outlined,
+              AppSurfaceCard(
+                variant: AppSurfaceVariant.grouped,
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  children: <Widget>[
+                    _MetricRow(
+                      label: 'Bugün görülen kelime',
+                      value: '${data.todayWordCount}',
+                      icon: Icons.school_outlined,
+                    ),
+                    const Divider(indent: 16, endIndent: 16),
+                    _MetricRow(
+                      label: 'Bugün okunan cümle',
+                      value: '${data.todayReadSentenceCount}',
+                      icon: Icons.menu_book_outlined,
+                    ),
+                    const Divider(indent: 16, endIndent: 16),
+                    _MetricRow(
+                      label: 'Bugün çözülen soru',
+                      value: data.todaySolvedQuestionText,
+                      icon: Icons.quiz_outlined,
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 8),
-              AppStatTile(
-                label: 'Bugun okunan cumle',
-                value: '${data.todayReadSentenceCount}',
-                icon: Icons.menu_book_outlined,
-              ),
-              const SizedBox(height: 8),
-              AppStatTile(
-                label: 'Bugun cozulen soru',
-                value: data.todaySolvedQuestionText,
-                icon: Icons.quiz_outlined,
+              const SizedBox(height: 12),
+              _WeeklyStreakCard(
+                completion: _todayCompletionValue(data),
               ),
             ],
           ),
         );
       },
     );
+  }
+
+  double _todayCompletionValue(HomeDashboardData data) {
+    final int points = (data.todayWordCount * 2) + data.todayReadSentenceCount;
+    const int target = 40;
+    final double raw = points / target;
+    if (raw < 0) {
+      return 0;
+    }
+    if (raw > 1) {
+      return 1;
+    }
+    return raw;
   }
 }
 
@@ -202,4 +254,176 @@ String _friendlyHomeError(Object error) {
     return 'Anonim oturum gecici olarak olusmadi. Ag baglantisini kontrol edip yeniden deneyin.';
   }
   return error.toString();
+}
+
+class _CompletionRing extends StatelessWidget {
+  const _CompletionRing({
+    required this.value,
+    required this.words,
+    required this.readCount,
+  });
+
+  final double value;
+  final int words;
+  final int readCount;
+
+  @override
+  Widget build(BuildContext context) {
+    final int percent = (value * 100).round();
+    return Row(
+      children: <Widget>[
+        SizedBox(
+          width: 120,
+          height: 120,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(
+                value: value,
+                strokeWidth: 10,
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerHighest,
+              ),
+              Text(
+                '%$percent',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Günlük ilerleme',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                '$words kelime',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+              ),
+              const SizedBox(height: 4),
+              Text('$readCount cumle okundu'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _WeeklyStreakCard extends StatelessWidget {
+  const _WeeklyStreakCard({
+    required this.completion,
+  });
+
+  final double completion;
+
+  @override
+  Widget build(BuildContext context) {
+    final int activeIndex = DateTime.now().weekday - 1;
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.grouped,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const AppSectionHeader(title: 'Günlük Seri'),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List<Widget>.generate(7, (int index) {
+              final bool active = index == activeIndex;
+              final bool done = active && completion >= 0.5;
+              return Column(
+                children: <Widget>[
+                  Text(
+                    <String>[
+                      'PZT',
+                      'SAL',
+                      'CAR',
+                      'PER',
+                      'CUM',
+                      'CTS',
+                      'PZR'
+                    ][index],
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  const SizedBox(height: 6),
+                  CircleAvatar(
+                    radius: 11,
+                    backgroundColor: done
+                        ? Theme.of(context).colorScheme.primary
+                        : (active
+                            ? Theme.of(context).colorScheme.secondaryContainer
+                            : Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerHighest),
+                    child: done
+                        ? Icon(
+                            Icons.bolt_rounded,
+                            size: 14,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          )
+                        : null,
+                  ),
+                ],
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MetricRow extends StatelessWidget {
+  const _MetricRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            icon,
+            size: 20,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
 }

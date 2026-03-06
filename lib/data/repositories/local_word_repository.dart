@@ -85,6 +85,11 @@ class LocalWordRepository implements WordRepository {
   }
 
   @override
+  Future<List<String>> getWordIdsByLevel(String level) {
+    return _local.getWordIdsByLevel(level);
+  }
+
+  @override
   Future<List<TagCount>> getTagsByLevel(
     String level, {
     String? search,

@@ -26,7 +26,9 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(offlineSyncControllerProvider.notifier).flushPending(silent: true);
+      ref
+          .read(offlineSyncControllerProvider.notifier)
+          .flushPending(silent: true);
     });
   }
 
@@ -39,7 +41,9 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      ref.read(offlineSyncControllerProvider.notifier).flushPending(silent: true);
+      ref
+          .read(offlineSyncControllerProvider.notifier)
+          .flushPending(silent: true);
     }
   }
 
@@ -69,15 +73,21 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
     final AsyncValue<int> weakCount = ref.watch(weakWordCountProvider);
     final int badgeCount = weakCount.valueOrNull ?? 0;
     final OfflineSyncStatus syncStatus = ref.watch(offlineSyncStatusProvider);
+    final bool showOfflineAction =
+        syncStatus.pendingTotal > 0 || syncStatus.isFlushing;
 
     return Scaffold(
-      appBar: AppBar(title: Text(_titleForIndex(_index))),
-      body: Column(
-        children: <Widget>[
-          if (syncStatus.pendingTotal > 0) OfflineSyncBanner(status: syncStatus),
-          Expanded(child: _buildBodyForIndex(_index)),
+      appBar: AppBar(
+        title: Text(_titleForIndex(_index)),
+        actions: <Widget>[
+          if (showOfflineAction)
+            OfflineSyncStatusAction(
+              status: syncStatus,
+              onPressed: _openOfflineStatusSheet,
+            ),
         ],
       ),
+      body: _buildBodyForIndex(_index),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
         onDestinationSelected: (int value) {
@@ -126,46 +136,201 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
       ),
     );
   }
+
+  Future<void> _openOfflineStatusSheet() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (_) => const OfflineSyncStatusSheet(),
+    );
+  }
 }
 
-class OfflineSyncBanner extends StatelessWidget {
-  const OfflineSyncBanner({required this.status, super.key});
+class OfflineSyncStatusAction extends StatelessWidget {
+  const OfflineSyncStatusAction({
+    required this.status,
+    required this.onPressed,
+    super.key,
+  });
 
   final OfflineSyncStatus status;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final String text = status.isFlushing
-        ? 'Cevrimdisi kayitlar senkronlaniyor... (${status.pendingTotal})'
-        : 'Cevrimdisi: ilerleme cihazda saklaniyor (${status.pendingTotal})';
+    final Widget icon = Icon(
+      status.isFlushing ? Icons.sync_rounded : Icons.cloud_off_rounded,
+      color: Theme.of(context).colorScheme.onSurface,
+    );
 
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.fromLTRB(12, 10, 12, 6),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondaryContainer,
-        borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: IconButton(
+        tooltip: 'Senkron durumu',
+        onPressed: onPressed,
+        icon: status.pendingTotal > 0
+            ? Badge.count(
+                count: status.pendingTotal,
+                child: icon,
+              )
+            : icon,
       ),
-      child: Row(
-        children: <Widget>[
-          Icon(
-            status.isFlushing ? Icons.sync : Icons.cloud_off_rounded,
-            size: 16,
-            color: Theme.of(context).colorScheme.onSecondaryContainer,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    fontWeight: FontWeight.w600,
+    );
+  }
+}
+
+class OfflineSyncStatusSheet extends ConsumerWidget {
+  const OfflineSyncStatusSheet({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final OfflineSyncStatus status = ref.watch(offlineSyncStatusProvider);
+    final OfflineSyncController controller =
+        ref.watch(offlineSyncControllerProvider.notifier);
+    final String lastFlushText = status.lastFlushAtMillis == null
+        ? 'Henüz başarılı bir senkron yok.'
+        : _formatTimestamp(status.lastFlushAtMillis!);
+    final String headline = status.isFlushing
+        ? 'Kayıtlar şu an senkronlanıyor.'
+        : 'Çevrimdışı kayıtlar cihazda tutuluyor.';
+
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Senkron Durumu',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w800,
                   ),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              headline,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+            const SizedBox(height: 16),
+            _StatusRow(
+              icon: Icons.chrome_reader_mode_outlined,
+              label: 'Bekleyen okuma kaydı',
+              value: '${status.pendingReadingCount}',
+            ),
+            const SizedBox(height: 10),
+            _StatusRow(
+              icon: Icons.school_outlined,
+              label: 'Bekleyen kelime olayı',
+              value: '${status.pendingWordEventCount}',
+            ),
+            const SizedBox(height: 10),
+            _StatusRow(
+              icon: Icons.history_toggle_off_rounded,
+              label: 'Son başarılı senkron',
+              value: lastFlushText,
+            ),
+            if (status.droppedCount > 0) ...<Widget>[
+              const SizedBox(height: 10),
+              _StatusRow(
+                icon: Icons.warning_amber_rounded,
+                label: 'Düşürülen kayıt',
+                value: '${status.droppedCount}',
+              ),
+            ],
+            const SizedBox(height: 18),
+            FilledButton.icon(
+              onPressed: status.isFlushing
+                  ? null
+                  : () async {
+                      try {
+                        await controller.flushPending(
+                          silent: false,
+                          force: true,
+                        );
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Senkron denemesi başlatıldı.'),
+                            ),
+                          );
+                        }
+                      } catch (error) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(error.toString())),
+                          );
+                        }
+                      }
+                    },
+              icon: Icon(
+                status.isFlushing
+                    ? Icons.sync_rounded
+                    : Icons.cloud_upload_outlined,
+              ),
+              label: Text(
+                  status.isFlushing ? 'Senkronlanıyor' : 'Şimdi senkronla'),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  static String _formatTimestamp(int millis) {
+    final DateTime date = DateTime.fromMillisecondsSinceEpoch(millis);
+    String twoDigits(int value) => value.toString().padLeft(2, '0');
+    return '${date.day}.${date.month}.${date.year} '
+        '${twoDigits(date.hour)}:${twoDigits(date.minute)}';
+  }
+}
+
+class _StatusRow extends StatelessWidget {
+  const _StatusRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 1),
+          child: Icon(
+            icon,
+            size: 18,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+        ),
+      ],
     );
   }
 }

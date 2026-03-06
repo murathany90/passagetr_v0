@@ -38,6 +38,21 @@ class ResilientReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<PagedResult<ReadingPassage>> getReadingFeed({
+    String? category,
+    String? level,
+    int limit = 20,
+    int offset = 0,
+  }) {
+    return _base.getReadingFeed(
+      category: category,
+      level: level,
+      limit: limit,
+      offset: offset,
+    );
+  }
+
+  @override
   Future<List<PassageSentence>> getSentences({required String passageId}) {
     return _base.getSentences(passageId: passageId);
   }
@@ -183,6 +198,42 @@ class ResilientReadingRepository implements ReadingRepository {
       passageId: passageId,
       limit: limit,
     );
+  }
+
+  @override
+  Future<void> toggleBookmark(String passageId) {
+    return _base.toggleBookmark(passageId);
+  }
+
+  @override
+  Future<void> toggleFavorite(String passageId) {
+    return _base.toggleFavorite(passageId);
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getBookmarkedPassages({
+    int limit = 20,
+    int offset = 0,
+  }) {
+    return _base.getBookmarkedPassages(limit: limit, offset: offset);
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getFavoritePassages({
+    int limit = 20,
+    int offset = 0,
+  }) {
+    return _base.getFavoritePassages(limit: limit, offset: offset);
+  }
+
+  @override
+  Future<bool> isPassageBookmarked(String passageId) {
+    return _base.isPassageBookmarked(passageId);
+  }
+
+  @override
+  Future<bool> isPassageFavorited(String passageId) {
+    return _base.isPassageFavorited(passageId);
   }
 
   UserReadingProgress _toProgress(OfflineReadingProgressEntry entry) {

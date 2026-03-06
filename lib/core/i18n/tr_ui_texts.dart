@@ -1,12 +1,10 @@
 class TrUiTexts {
   const TrUiTexts._();
 
-  // Generic
   static const String retry = 'Tekrar Dene';
   static const String refresh = 'Yenile';
   static const String clear = 'Temizle';
 
-  // Pack
   static const String packsAppBarTitle = 'Paketler';
   static const String packListLoadError = 'Paket listesi yüklenemedi.';
   static const String packListEmptyTitle = 'Henüz paket yok';
@@ -17,7 +15,6 @@ class TrUiTexts {
 
   static String packWordCount(int count) => '$count kelime';
 
-  // Word Home
   static const String wordSearchTitle = 'Kelime / Sözlük Arama';
   static const String wordSearchHint = 'Kelime ara (örn. abandon)';
   static const String searchButton = 'Ara';
@@ -34,7 +31,6 @@ class TrUiTexts {
   static const String wordCardButton = 'Kelime Kartı';
   static const String dictionaryButton = 'Sözlük';
 
-  // Levels
   static const String levelsLoading = 'Seviyeler yükleniyor...';
   static const String levelListLoadError = 'Seviye listesi yüklenemedi.';
   static const String levelEmptyTitle = 'Seviye bulunamadı';
@@ -48,7 +44,6 @@ class TrUiTexts {
   static const String levelC1Title = 'İleri Seviye';
   static const String levelC2Title = 'Akademik Üst';
 
-  // Word list + filters
   static const String wordsLoading = 'Kelimeler yükleniyor...';
   static const String wordListLoadError = 'Kelime listesi yüklenemedi.';
   static const String wordListEmptyTitle = 'Filtreye uygun kelime bulunamadı';
@@ -67,7 +62,6 @@ class TrUiTexts {
   static const String searchTagHint = 'Etiket ara';
   static const String filterTagHint = 'Etiket filtre';
 
-  // Reading Home
   static const String readingPackLoadError = 'Okuma paketleri yüklenemedi.';
   static const String readingPackEmptyTitle = 'Okuma paketi bulunamadı';
   static const String readingPackEmptyMessage =
@@ -84,7 +78,6 @@ class TrUiTexts {
     return '$packCount okuma paketi hazır. $readingHeroSubtitle';
   }
 
-  // Source labels
   static const String sourceLocalDictionary = 'Yerel sözlük';
   static const String sourceServerCache = 'Sunucu önbelleği';
   static const String sourceDeepLFallback = 'DeepL yedeği';

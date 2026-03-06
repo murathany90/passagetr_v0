@@ -76,7 +76,7 @@ abstract class OfflineSyncCoordinator {
     required bool isCorrect,
   });
 
-  Future<void> flushPending({bool silent = true});
+  Future<void> flushPending({bool silent = true, bool force = false});
 
   Future<OfflineReadingProgressEntry?> getQueuedReadingProgress(
     String passageId,
@@ -162,12 +162,13 @@ class OfflineSyncController extends StateNotifier<OfflineSyncStatus>
   }
 
   @override
-  Future<void> flushPending({bool silent = true}) async {
+  Future<void> flushPending({bool silent = true, bool force = false}) async {
     if (_flushInFlight) {
       return;
     }
     final int now = DateTime.now().millisecondsSinceEpoch;
-    if (_lastFlushAttemptMillis != null &&
+    if (!force &&
+        _lastFlushAttemptMillis != null &&
         now - _lastFlushAttemptMillis! < _flushDebounceMillis) {
       return;
     }

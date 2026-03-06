@@ -97,6 +97,46 @@ final readingListProvider =
   },
 );
 
+class ReadingFeedRequest {
+  const ReadingFeedRequest({
+    this.category,
+    this.level,
+    this.limit = 20,
+    this.offset = 0,
+  });
+
+  final String? category;
+  final String? level;
+  final int limit;
+  final int offset;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ReadingFeedRequest &&
+            other.category == category &&
+            other.level == level &&
+            other.limit == limit &&
+            other.offset == offset);
+  }
+
+  @override
+  int get hashCode => Object.hash(category, level, limit, offset);
+}
+
+final readingFeedProvider =
+    FutureProvider.family<PagedResult<ReadingPassage>, ReadingFeedRequest>(
+  (Ref ref, ReadingFeedRequest request) async {
+    final ReadingRepository repository = ref.watch(readingRepositoryProvider);
+    return repository.getReadingFeed(
+      category: request.category,
+      level: request.level,
+      limit: request.limit,
+      offset: request.offset,
+    );
+  },
+);
+
 final readingDetailProvider =
     FutureProvider.family<List<PassageSentence>, String>(
   (Ref ref, String passageId) async {
@@ -153,5 +193,12 @@ final passageWordsProvider = FutureProvider.family<List<WordItem>, String>(
   (Ref ref, String passageId) async {
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getPassageWords(passageId: passageId, limit: 400);
+  },
+);
+
+final passageBookmarkedProvider = FutureProvider.family<bool, String>(
+  (Ref ref, String passageId) async {
+    final ReadingRepository repository = ref.watch(readingRepositoryProvider);
+    return repository.isPassageBookmarked(passageId);
   },
 );

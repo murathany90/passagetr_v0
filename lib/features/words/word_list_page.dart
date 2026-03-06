@@ -291,10 +291,7 @@ class _WordListPageState extends ConsumerState<WordListPage> {
           }
 
           final WordItem word = _items[index];
-          return ListTile(
-            title: Text(word.enWord),
-            subtitle: Text(word.trMeaning),
-            trailing: Chip(label: Text(PosLabelMapper.labelFor(word.pos))),
+          return InkWell(
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
@@ -302,6 +299,62 @@ class _WordListPageState extends ConsumerState<WordListPage> {
                 ),
               );
             },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .outlineVariant
+                        .withValues(alpha: 0.72),
+                  ),
+                ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          word.enWord,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(fontWeight: FontWeight.w700),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          word.trMeaning,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  SizedBox(
+                    width: 70,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Chip(
+                        label: Text(PosLabelMapper.labelFor(word.pos)),
+                        visualDensity: VisualDensity.compact,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),

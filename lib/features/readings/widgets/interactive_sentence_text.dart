@@ -1,13 +1,14 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/word_selection_utils.dart';
 
-class InteractiveSentenceText extends StatefulWidget {
+class InteractiveSentenceText extends StatelessWidget {
   const InteractiveSentenceText({
     required this.sentenceText,
     required this.highlightedWordsSet,
     required this.onWordTap,
+    required this.onSentenceLongPress,
+    this.gestureKey,
     this.baseStyle,
     this.highlightStyle,
     super.key,
@@ -15,49 +16,28 @@ class InteractiveSentenceText extends StatefulWidget {
 
   final String sentenceText;
   final Set<String> highlightedWordsSet;
-  final ValueChanged<String> onWordTap;
+  final ValueChanged<SentenceWordTapDetail> onWordTap;
+  final ValueChanged<SentenceTapDetail> onSentenceLongPress;
+  final Key? gestureKey;
   final TextStyle? baseStyle;
   final TextStyle? highlightStyle;
 
-  @override
-  State<InteractiveSentenceText> createState() =>
-      _InteractiveSentenceTextState();
-}
-
-class _InteractiveSentenceTextState extends State<InteractiveSentenceText> {
   static final RegExp _tokenPattern =
       RegExp(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*|\s+|[^A-Za-z0-9\s]+");
 
-  final List<TapGestureRecognizer> _recognizers = <TapGestureRecognizer>[];
-
-  @override
-  void dispose() {
-    _disposeRecognizers();
-    super.dispose();
-  }
-
-  void _disposeRecognizers() {
-    for (final TapGestureRecognizer recognizer in _recognizers) {
-      recognizer.dispose();
-    }
-    _recognizers.clear();
-  }
-
   @override
   Widget build(BuildContext context) {
-    _disposeRecognizers();
-
-    final TextStyle fallbackBase = widget.baseStyle ??
+    final TextStyle fallbackBase = baseStyle ??
         Theme.of(context).textTheme.bodyLarge ??
         const TextStyle();
-    final TextStyle fallbackHighlight = widget.highlightStyle ??
+    final TextStyle fallbackHighlight = highlightStyle ??
         fallbackBase.copyWith(
           fontWeight: FontWeight.w700,
           decoration: TextDecoration.underline,
         );
 
-    final List<TextSpan> spans = <TextSpan>[];
-    for (final Match match in _tokenPattern.allMatches(widget.sentenceText)) {
+    final List<InlineSpan> spans = <InlineSpan>[];
+    for (final Match match in _tokenPattern.allMatches(sentenceText)) {
       final String raw = match.group(0) ?? '';
       final String normalized = normalizeWordToken(raw);
       final bool isWord = normalized.isNotEmpty;
@@ -67,24 +47,70 @@ class _InteractiveSentenceTextState extends State<InteractiveSentenceText> {
         continue;
       }
 
-      final bool isHighlighted = widget.highlightedWordsSet.contains(normalized);
-      final TapGestureRecognizer recognizer = TapGestureRecognizer()
-        ..onTap = () => widget.onWordTap(normalized);
-      _recognizers.add(recognizer);
-
+      Offset tapPosition = Offset.zero;
+      final bool isHighlighted = highlightedWordsSet.contains(normalized);
       spans.add(
-        TextSpan(
-          text: raw,
-          style: isHighlighted ? fallbackHighlight : fallbackBase,
-          recognizer: recognizer,
+        WidgetSpan(
+          alignment: PlaceholderAlignment.baseline,
+          baseline: TextBaseline.alphabetic,
+          child: GestureDetector(
+            key: ValueKey<String>('interactive-word-$normalized-${match.start}'),
+            behavior: HitTestBehavior.translucent,
+            onTapDown: (TapDownDetails details) {
+              tapPosition = details.globalPosition;
+            },
+            onTap: () {
+              onWordTap(
+                SentenceWordTapDetail(
+                  word: normalized,
+                  globalPosition: tapPosition,
+                ),
+              );
+            },
+            child: Text(
+              raw,
+              style: isHighlighted ? fallbackHighlight : fallbackBase,
+              textScaler: MediaQuery.textScalerOf(context),
+            ),
+          ),
         ),
       );
     }
 
-    return RichText(
-      text: TextSpan(children: spans),
-      textScaler: MediaQuery.textScalerOf(context),
-      softWrap: true,
+    return GestureDetector(
+      key: gestureKey,
+      behavior: HitTestBehavior.translucent,
+      onLongPressStart: (LongPressStartDetails details) {
+        onSentenceLongPress(
+          SentenceTapDetail(globalPosition: details.globalPosition),
+        );
+      },
+      child: RichText(
+        text: TextSpan(
+          style: fallbackBase,
+          children: spans,
+        ),
+        textScaler: MediaQuery.textScalerOf(context),
+        softWrap: true,
+      ),
     );
   }
+}
+
+class SentenceTapDetail {
+  const SentenceTapDetail({
+    required this.globalPosition,
+  });
+
+  final Offset globalPosition;
+}
+
+class SentenceWordTapDetail {
+  const SentenceWordTapDetail({
+    required this.word,
+    required this.globalPosition,
+  });
+
+  final String word;
+  final Offset globalPosition;
 }

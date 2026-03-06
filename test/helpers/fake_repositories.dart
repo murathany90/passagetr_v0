@@ -1,4 +1,4 @@
-﻿import 'package:passagetr/core/services/translation_service.dart';
+import 'package:passagetr/core/services/translation_service.dart';
 import 'package:passagetr/domain/entities/dictionary_bootstrap_state.dart';
 import 'package:passagetr/domain/entities/dictionary_entry.dart';
 import 'package:passagetr/domain/entities/dictionary_lookup_result.dart';
@@ -77,7 +77,26 @@ class FakeWordRepository implements WordRepository {
 
   @override
   Future<WordItem?> getWordByEnWordGlobal(String enWord) async {
-    return _globalWords[_norm(enWord)];
+    final String normalized = _norm(enWord);
+    final WordItem? exact = _globalWords[normalized];
+    if (exact != null) {
+      return exact;
+    }
+
+    WordItem? best;
+    int bestRank = 999;
+    for (final WordItem item in _globalWords.values) {
+      final String candidate = _norm(item.enWord);
+      if (!candidate.contains(normalized)) {
+        continue;
+      }
+      final int rank = candidate.startsWith(normalized) ? 1 : 2;
+      if (rank < bestRank) {
+        bestRank = rank;
+        best = item;
+      }
+    }
+    return best;
   }
 
   @override
@@ -152,6 +171,16 @@ class FakeWordRepository implements WordRepository {
   }
 
   @override
+  Future<List<String>> getWordIdsByLevel(String level) async {
+    return _globalIndex
+        .where((WordItem item) =>
+            (item.level ?? '').trim().toUpperCase() ==
+            level.trim().toUpperCase())
+        .map((WordItem item) => item.id)
+        .toList(growable: false);
+  }
+
+  @override
   Future<List<TagCount>> getTagsByLevel(
     String level, {
     String? search,
@@ -186,10 +215,12 @@ class FakeDictionaryRepository implements DictionaryRepository {
       error: null,
     ),
     this.localResults = const <DictionaryEntry>[],
+    this.lookupError,
   });
 
   final DictionaryLookupResult lookupResult;
   final List<DictionaryEntry> localResults;
+  final Object? lookupError;
 
   @override
   Future<DictionaryBootstrapState> ensureBootstrapped({
@@ -233,6 +264,9 @@ class FakeDictionaryRepository implements DictionaryRepository {
     String sourceLang = 'en',
     String targetLang = 'tr',
   }) async {
+    if (lookupError != null) {
+      throw lookupError!;
+    }
     return lookupResult;
   }
 }
@@ -254,6 +288,20 @@ class FakeReadingRepository implements ReadingRepository {
   Future<PagedResult<ReadingPassage>> getPassagesByPack({
     required String packId,
     Set<String>? levels,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    return const PagedResult<ReadingPassage>(
+      items: <ReadingPassage>[],
+      hasMore: false,
+      nextOffset: 0,
+    );
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getReadingFeed({
+    String? category,
+    String? level,
     int limit = 20,
     int offset = 0,
   }) async {
@@ -341,5 +389,44 @@ class FakeReadingRepository implements ReadingRepository {
     }
     return passageWords.take(limit).toList(growable: false);
   }
-}
 
+  @override
+  Future<void> toggleBookmark(String passageId) async {}
+
+  @override
+  Future<void> toggleFavorite(String passageId) async {}
+
+  @override
+  Future<PagedResult<ReadingPassage>> getBookmarkedPassages({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    return const PagedResult<ReadingPassage>(
+      items: <ReadingPassage>[],
+      hasMore: false,
+      nextOffset: 0,
+    );
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getFavoritePassages({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    return const PagedResult<ReadingPassage>(
+      items: <ReadingPassage>[],
+      hasMore: false,
+      nextOffset: 0,
+    );
+  }
+
+  @override
+  Future<bool> isPassageBookmarked(String passageId) async {
+    return false;
+  }
+
+  @override
+  Future<bool> isPassageFavorited(String passageId) async {
+    return false;
+  }
+}

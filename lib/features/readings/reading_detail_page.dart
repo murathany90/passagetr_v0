@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/services/translation_service.dart';
 import '../../core/utils/network_error_classifier.dart';
+import '../../core/utils/raw_splitter.dart';
 import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
@@ -22,6 +26,7 @@ import '../../state/providers.dart';
 import '../flashcard/flashcard_session_page.dart';
 import '../tests/mcq_session_page.dart';
 import 'widgets/interactive_sentence_text.dart';
+import 'widgets/reading_audio_settings_sheet.dart';
 import 'widgets/word_quick_view_sheet.dart';
 import '../../core/widgets/app_speak_button.dart';
 
@@ -45,46 +50,85 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   static final RegExp _tokenPattern =
       RegExp(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*|\s+|[^A-Za-z0-9\s]+");
 
-  final Set<String> _expandedSentenceIds = <String>{};
   final Set<String> _loadingTranslationIds = <String>{};
   final Map<String, String> _runtimeTranslations = <String, String>{};
   final Map<String, String> _translationErrors = <String, String>{};
   final Map<String, Set<String>> _highlightedWordsBySentence =
       <String, Set<String>>{};
+  final ScrollController _scrollController = ScrollController();
   bool _focusWordsExpanded = false;
 
   bool _loading = true;
   bool _savingProgress = false;
   bool _quickWordSheetOpen = false;
+  bool _isBookmarked = false;
+  bool _bookmarkBusy = false;
+  bool _isFavorite = false;
+  bool _favoriteBusy = false;
   String? _error;
   List<PassageSentence> _sentences = <PassageSentence>[];
   List<PassageFocusWord> _focusWords = <PassageFocusWord>[];
-  String _datasetVersion = '';
 
   int _lastIdx = 0;
   bool _completed = false;
 
+  Offset _sentenceTranslationAnchor = const Offset(180, 220);
+  String? _activeSentenceTranslationId;
+  bool _sentenceTranslationVisible = false;
+
+  OverlayEntry? _inlineBubbleEntry;
+  Timer? _inlineBubbleTimer;
+  Offset _inlineBubbleAnchor = const Offset(180, 180);
+  String _inlineBubbleWord = '';
+  String _inlineBubbleText = '';
+  bool _inlineBubbleLoading = false;
+  bool _inlineBubbleHasDetail = false;
+  bool _inlineBubbleVisible = false;
+
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_onScrollChanged);
     _load();
   }
 
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScrollChanged)
+      ..dispose();
+    _dismissSentenceTranslationPopup(notify: false);
+    _dismissInlineBubble();
+    super.dispose();
+  }
+
+  void _onScrollChanged() {
+    if (_sentenceTranslationVisible) {
+      _dismissSentenceTranslationPopup();
+    }
+    if (_inlineBubbleVisible) {
+      _dismissInlineBubble();
+    }
+  }
+
   Future<void> _load() async {
+    _dismissSentenceTranslationPopup();
+    _dismissInlineBubble();
     setState(() {
       _loading = true;
       _error = null;
       _sentences = <PassageSentence>[];
       _focusWords = <PassageFocusWord>[];
-      _datasetVersion = '';
       _lastIdx = 0;
       _completed = false;
-      _expandedSentenceIds.clear();
+      _isBookmarked = false;
+      _isFavorite = false;
       _loadingTranslationIds.clear();
       _runtimeTranslations.clear();
       _translationErrors.clear();
       _highlightedWordsBySentence.clear();
       _focusWordsExpanded = false;
+      _activeSentenceTranslationId = null;
     });
 
     try {
@@ -128,6 +172,21 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         _lastIdx = nextLastIdx;
         _completed = nextCompleted;
       });
+
+      try {
+        final bool bookmarked =
+            await readingRepository.isPassageBookmarked(widget.passage.id);
+        final bool favorited =
+            await readingRepository.isPassageFavorited(widget.passage.id);
+        if (mounted) {
+          setState(() {
+            _isBookmarked = bookmarked;
+            _isFavorite = favorited;
+          });
+        }
+      } catch (_) {
+        // Optional metadata should not block.
+      }
 
       try {
         await readingRepository.upsertUserReadingProgress(
@@ -261,7 +320,6 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       return;
     }
     setState(() {
-      _datasetVersion = datasetVersion;
       _highlightedWordsBySentence
         ..clear()
         ..addAll(highlighted);
@@ -320,20 +378,24 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     }
   }
 
-  Future<void> _toggleTranslation(PassageSentence sentence) async {
-    final bool isExpanded = _expandedSentenceIds.contains(sentence.id);
-    if (isExpanded) {
-      setState(() {
-        _expandedSentenceIds.remove(sentence.id);
-      });
+  Future<void> _handleSentenceLongPress(
+    PassageSentence sentence,
+    SentenceTapDetail detail,
+  ) async {
+    unawaited(ref.read(ttsServiceProvider).stopIfInteractionEnabled());
+    _dismissInlineBubble();
+
+    if (_sentenceTranslationVisible &&
+        _activeSentenceTranslationId == sentence.id) {
+      _dismissSentenceTranslationPopup();
       return;
     }
 
-    setState(() {
-      _expandedSentenceIds.add(sentence.id);
-    });
-
     await _markProgress(sentence.idx);
+    _showSentenceTranslationPopup(
+      sentenceId: sentence.id,
+      anchor: detail.globalPosition,
+    );
 
     final String? inlineTr = sentence.sentenceTr?.trim();
     if (inlineTr != null && inlineTr.isNotEmpty) {
@@ -361,6 +423,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       _loadingTranslationIds.add(sentence.id);
       _translationErrors.remove(sentence.id);
     });
+    _refreshSentenceTranslationPopup();
 
     final TranslationService translationService =
         ref.read(translationServiceProvider);
@@ -372,6 +435,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       setState(() {
         _loadingTranslationIds.remove(sentence.id);
       });
+      _refreshSentenceTranslationPopup();
       return;
     }
 
@@ -388,6 +452,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
           setState(() {
             _runtimeTranslations[sentence.id] = cached.translatedText.trim();
           });
+          _refreshSentenceTranslationPopup();
         }
         return;
       }
@@ -411,6 +476,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       setState(() {
         _runtimeTranslations[sentence.id] = translated;
       });
+      _refreshSentenceTranslationPopup();
     } catch (error) {
       _handleTranslationError(
         sentenceId: sentence.id,
@@ -421,6 +487,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         setState(() {
           _loadingTranslationIds.remove(sentence.id);
         });
+        _refreshSentenceTranslationPopup();
       }
     }
   }
@@ -448,9 +515,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     setState(() {
       _translationErrors[sentenceId] = message;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    _refreshSentenceTranslationPopup();
   }
 
   Future<void> _markProgress(int idx) async {
@@ -510,11 +575,467 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         error,
         fallback: 'Ilerleme su an kaydedilemedi.',
       );
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) {
         setState(() {
           _savingProgress = false;
+        });
+      }
+    }
+  }
+
+  void _showSentenceTranslationPopup({
+    required String sentenceId,
+    required Offset anchor,
+  }) {
+    if (!mounted) {
+      _activeSentenceTranslationId = sentenceId;
+      _sentenceTranslationAnchor = anchor;
+      _sentenceTranslationVisible = true;
+      return;
+    }
+    setState(() {
+      _activeSentenceTranslationId = sentenceId;
+      _sentenceTranslationAnchor = anchor;
+      _sentenceTranslationVisible = true;
+    });
+  }
+
+  void _refreshSentenceTranslationPopup() {
+    if (_sentenceTranslationVisible && mounted) {
+      setState(() {});
+    }
+  }
+
+  Widget _buildSentenceTranslationOverlay(BuildContext context) {
+    final String? sentenceId = _activeSentenceTranslationId;
+    if (sentenceId == null) {
+      return const SizedBox.shrink();
+    }
+
+    final PassageSentence? sentence = _sentenceById(sentenceId);
+    if (sentence == null) {
+      return const SizedBox.shrink();
+    }
+
+    final String? translation = _resolveTranslation(sentence);
+    final String? error = _translationErrors[sentenceId];
+    final bool loadingTranslate = _loadingTranslationIds.contains(sentenceId);
+    final Size size = MediaQuery.of(context).size;
+    final double maxWidth = size.width < 480 ? size.width - 24 : 360;
+    final double left = (_sentenceTranslationAnchor.dx - (maxWidth / 2)).clamp(
+      12.0,
+      size.width - maxWidth - 12,
+    );
+    final double top = (_sentenceTranslationAnchor.dy + 12).clamp(
+      kToolbarHeight + 16.0,
+      size.height - 220.0,
+    );
+
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _dismissSentenceTranslationPopup,
+            onVerticalDragStart: (_) {
+              _dismissSentenceTranslationPopup();
+            },
+            child: const SizedBox.expand(),
+          ),
+        ),
+        Positioned(
+          left: left,
+          top: top,
+          width: maxWidth,
+          child: Material(
+            color: Colors.transparent,
+            child: AppSurfaceCard(
+              key: const ValueKey<String>('sentence-translation-popup'),
+              variant: AppSurfaceVariant.feature,
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Çeviri',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              fontWeight: FontWeight.w800,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: _dismissSentenceTranslationPopup,
+                        icon: const Icon(Icons.close_rounded),
+                        visualDensity: VisualDensity.compact,
+                        tooltip: 'Kapat',
+                      ),
+                    ],
+                  ),
+                  if (loadingTranslate)
+                    const Row(
+                      children: <Widget>[
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(child: Text('Çeviri yükleniyor...')),
+                      ],
+                    )
+                  else if (translation != null)
+                    Text(
+                      translation,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            height: 1.42,
+                          ),
+                    )
+                  else ...<Widget>[
+                    const Text('Çeviri bulunamadı.'),
+                    if (error != null) ...<Widget>[
+                      const SizedBox(height: 6),
+                      Text(
+                        error,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 8),
+                    TextButton.icon(
+                      onPressed: () => _translateAndCache(sentence),
+                      icon: const Icon(Icons.refresh_rounded),
+                      label: const Text('Tekrar dene'),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _dismissSentenceTranslationPopup({bool notify = true}) {
+    if (mounted && notify) {
+      setState(() {
+        _sentenceTranslationVisible = false;
+        _activeSentenceTranslationId = null;
+      });
+    } else {
+      _sentenceTranslationVisible = false;
+      _activeSentenceTranslationId = null;
+    }
+  }
+
+  PassageSentence? _sentenceById(String sentenceId) {
+    for (final PassageSentence sentence in _sentences) {
+      if (sentence.id == sentenceId) {
+        return sentence;
+      }
+    }
+    return null;
+  }
+
+  Future<void> _onSentenceWordTap(SentenceWordTapDetail tap) async {
+    if (tap.word.trim().isEmpty) {
+      return;
+    }
+    unawaited(ref.read(ttsServiceProvider).stopIfInteractionEnabled());
+    _dismissSentenceTranslationPopup();
+    _showInlineBubble(
+      word: tap.word,
+      anchor: tap.globalPosition,
+      loading: true,
+      text: 'Anlam yukleniyor...',
+      hasDetail: false,
+    );
+
+    final _InlineBubbleResult result =
+        await _resolveInlineBubbleMeaning(tap.word);
+
+    if (!mounted || !_inlineBubbleVisible || _inlineBubbleWord != tap.word) {
+      return;
+    }
+
+    _showInlineBubble(
+      word: tap.word,
+      anchor: tap.globalPosition,
+      loading: false,
+      text: result.text,
+      hasDetail: result.hasDetail,
+    );
+    _inlineBubbleTimer?.cancel();
+    _inlineBubbleTimer = Timer(const Duration(milliseconds: 2500), () {
+      _dismissInlineBubble();
+    });
+  }
+
+  Future<_InlineBubbleResult> _resolveInlineBubbleMeaning(String word) async {
+    final WordRepository wordRepository = ref.read(wordRepositoryProvider);
+
+    final WordItem? inPack = await wordRepository.getWordByEnWord(
+      packId: widget.pack.id,
+      enWord: word,
+    );
+    final WordItem? found =
+        inPack ?? await wordRepository.getWordByEnWordGlobal(word);
+    if (found != null && found.trMeaning.trim().isNotEmpty) {
+      return _InlineBubbleResult(
+        text: found.trMeaning.trim(),
+        hasDetail: true,
+      );
+    }
+
+    final TranslationService translationService =
+        ref.read(translationServiceProvider);
+    if (!translationService.isConfigured) {
+      return const _InlineBubbleResult(
+        text: 'Ceviri servisi hazir degil.',
+        hasDetail: true,
+      );
+    }
+
+    try {
+      final String translated = await translationService.translateEnToTr(word);
+      return _InlineBubbleResult(
+        text: translated.trim().isEmpty ? 'Ceviri bulunamadi.' : translated,
+        hasDetail: true,
+      );
+    } catch (error) {
+      final String safeMessage = NetworkErrorClassifier.toUserSafeMessage(
+        error,
+        fallback: 'Anlam su an alinamadi.',
+      );
+      return _InlineBubbleResult(
+        text: safeMessage,
+        hasDetail: true,
+      );
+    }
+  }
+
+  void _showInlineBubble({
+    required String word,
+    required Offset anchor,
+    required bool loading,
+    required String text,
+    required bool hasDetail,
+  }) {
+    _inlineBubbleWord = word;
+    _inlineBubbleAnchor = anchor;
+    _inlineBubbleLoading = loading;
+    _inlineBubbleText = text;
+    _inlineBubbleHasDetail = hasDetail;
+    _inlineBubbleVisible = true;
+
+    final OverlayState? overlay =
+        Overlay.maybeOf(context, rootOverlay: true) ?? Overlay.maybeOf(context);
+    if (overlay == null) {
+      return;
+    }
+
+    if (_inlineBubbleEntry == null) {
+      _inlineBubbleEntry = OverlayEntry(
+        builder: (BuildContext bubbleContext) {
+          return _buildInlineBubbleOverlay(bubbleContext);
+        },
+      );
+      overlay.insert(_inlineBubbleEntry!);
+    } else {
+      _inlineBubbleEntry!.markNeedsBuild();
+    }
+  }
+
+  Widget _buildInlineBubbleOverlay(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final double maxWidth = size.width * 0.72;
+    final double left = (_inlineBubbleAnchor.dx - (maxWidth / 2))
+        .clamp(12.0, size.width - maxWidth - 12);
+    final double top = (_inlineBubbleAnchor.dy - 94).clamp(
+      kToolbarHeight + 16.0,
+      size.height - 170.0,
+    );
+
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _dismissInlineBubble,
+            child: const SizedBox.expand(),
+          ),
+        ),
+        Positioned(
+          left: left,
+          top: top,
+          width: maxWidth,
+          child: Material(
+            color: Colors.transparent,
+            child: AppSurfaceCard(
+              key: const ValueKey<String>('word-meaning-popup'),
+              variant: AppSurfaceVariant.feature,
+              padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                Text(
+                    _inlineBubbleWord,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 4),
+                  if (_inlineBubbleLoading)
+                    Row(
+                      children: <Widget>[
+                        const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            _inlineBubbleText,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Text(
+                      _inlineBubbleText,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  if (!_inlineBubbleLoading &&
+                      _inlineBubbleHasDetail) ...<Widget>[
+                    const SizedBox(height: 6),
+                    TextButton(
+                      onPressed: () => _openQuickWordPopup(_inlineBubbleWord),
+                      child: const Text('Detay'),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _dismissInlineBubble() {
+    _inlineBubbleTimer?.cancel();
+    _inlineBubbleTimer = null;
+    _inlineBubbleVisible = false;
+    _inlineBubbleEntry?.remove();
+    _inlineBubbleEntry = null;
+  }
+
+  Future<void> _openReaderSettings() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: false,
+      builder: (_) => const ReadingAudioSettingsSheet(),
+    );
+  }
+
+  Future<void> _sharePassage() async {
+    final String payload = <String>[
+      widget.passage.title,
+      '',
+      ..._sentences.map((PassageSentence e) => '${e.idx}. ${e.sentenceEn}'),
+    ].join('\n');
+    await Clipboard.setData(ClipboardData(text: payload));
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Okuma metni panoya kopyalandi.')),
+    );
+  }
+
+  Future<void> _toggleBookmark() async {
+    if (_bookmarkBusy) {
+      return;
+    }
+    setState(() {
+      _bookmarkBusy = true;
+    });
+    try {
+      await ref
+          .read(readingRepositoryProvider)
+          .toggleBookmark(widget.passage.id);
+      final bool bookmarked = await ref
+          .read(readingRepositoryProvider)
+          .isPassageBookmarked(widget.passage.id);
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _isBookmarked = bookmarked;
+      });
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Yer imi guncellenemedi.')),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _bookmarkBusy = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _toggleFavorite() async {
+    if (_favoriteBusy) {
+      return;
+    }
+    setState(() {
+      _favoriteBusy = true;
+    });
+    try {
+      await ref
+          .read(readingRepositoryProvider)
+          .toggleFavorite(widget.passage.id);
+      final bool favorited = await ref
+          .read(readingRepositoryProvider)
+          .isPassageFavorited(widget.passage.id);
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _isFavorite = favorited;
+      });
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Favori guncellenemedi.')),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _favoriteBusy = false;
         });
       }
     }
@@ -527,6 +1048,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     if (normalizedWord.trim().isEmpty) {
       return;
     }
+    _dismissInlineBubble();
     _quickWordSheetOpen = true;
     await showModalBottomSheet<void>(
       context: context,
@@ -570,15 +1092,34 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 72,
-        title: Tooltip(
-          message: widget.passage.title,
-          child: Text(
-            widget.passage.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+        toolbarHeight: 60,
+        title: Text(widget.passage.title),
+        actions: <Widget>[
+          IconButton(
+            tooltip: 'Paylas',
+            onPressed: _sharePassage,
+            icon: const Icon(Icons.share_outlined),
           ),
-        ),
+          IconButton(
+            tooltip: 'Yer imi',
+            onPressed: _bookmarkBusy ? null : _toggleBookmark,
+            icon: Icon(
+              _isBookmarked ? Icons.bookmark : Icons.bookmark_border_rounded,
+            ),
+          ),
+          IconButton(
+            tooltip: 'Favori',
+            onPressed: _favoriteBusy ? null : _toggleFavorite,
+            icon: Icon(
+              _isFavorite ? Icons.favorite : Icons.favorite_border_rounded,
+            ),
+          ),
+          IconButton(
+            tooltip: 'Dinleme ayarlari',
+            onPressed: _openReaderSettings,
+            icon: const Icon(Icons.tune_rounded),
+          ),
+        ],
       ),
       body: _buildBody(),
     );
@@ -621,189 +1162,255 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         _completed ? total : (_lastIdx > total ? total : _lastIdx);
     final double progress = total == 0 ? 0 : shownProgress / total;
 
-    return RefreshIndicator(
-      onRefresh: _load,
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 20),
-        itemCount: _sentences.length + 2,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return AppSurfaceCard(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: <Widget>[
+        RefreshIndicator(
+          onRefresh: _load,
+          child: ListView.builder(
+            controller: _scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 20),
+            itemCount: _sentences.length + 2,
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return _buildHeroAndProgressCard(
+                  shownProgress: shownProgress,
+                  total: total,
+                  progress: progress,
+                );
+              }
+
+              if (index == _sentences.length + 1) {
+                return _buildPassageWordsPanel();
+              }
+
+              final PassageSentence sentence = _sentences[index - 1];
+              final Set<String> highlightedWords =
+                  _highlightedWordsBySentence[sentence.id] ?? const <String>{};
+              final PassageSentence? previous =
+                  index > 1 ? _sentences[index - 2] : null;
+
+              return Column(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        'Ilerleme: $shownProgress/$total',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                ),
-                      ),
-                      const SizedBox(width: 8),
-                      if (_completed)
-                        const Chip(
-                          label: Text('Tamamlandi'),
-                          visualDensity: VisualDensity.compact,
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  LinearProgressIndicator(value: progress),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: _savingProgress || shownProgress >= total
-                              ? null
-                              : _advanceProgress,
-                          icon: const Icon(Icons.arrow_forward_rounded),
-                          label: const Text('Ilerledim'),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: FilledButton.icon(
-                          onPressed: _savingProgress || _completed
-                              ? null
-                              : _completeReading,
-                          icon: const Icon(Icons.task_alt_rounded),
-                          label: const Text('Okumayi Bitirdim'),
-                        ),
-                      ),
-                    ],
+                  if (previous != null && sentence.idx - previous.idx > 1)
+                    _buildSentenceGapMarker(previous.idx, sentence.idx),
+                  _buildSentenceCard(
+                    sentence: sentence,
+                    highlightedWords: highlightedWords,
                   ),
                 ],
-              ),
-            );
-          }
+              );
+            },
+          ),
+        ),
+        if (_sentenceTranslationVisible) _buildSentenceTranslationOverlay(context),
+      ],
+    );
+  }
 
-          if (index == _sentences.length + 1) {
-            return _buildPassageWordsPanel();
-          }
+  Widget _buildSentenceGapMarker(int previousIdx, int currentIdx) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 2, 12, 10),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Divider(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              '... ${previousIdx + 1}-${currentIdx - 1}',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ),
+          Expanded(
+            child: Divider(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-          final PassageSentence sentence = _sentences[index - 1];
-          final bool expanded = _expandedSentenceIds.contains(sentence.id);
-          final bool loadingTranslate =
-              _loadingTranslationIds.contains(sentence.id);
-          final String? translation = _resolveTranslation(sentence);
-          final String? translateError = _translationErrors[sentence.id];
-          final Set<String> highlightedWords =
-              _highlightedWordsBySentence[sentence.id] ?? const <String>{};
+  Widget _buildSentenceCard({
+    required PassageSentence sentence,
+    required Set<String> highlightedWords,
+  }) {
+    final bool isActive = _activeSentenceTranslationId == sentence.id;
 
-          return AppSurfaceCard(
-            margin: const EdgeInsets.only(bottom: 8),
+    return AppSurfaceCard(
+      variant: isActive ? AppSurfaceVariant.feature : AppSurfaceVariant.subtle,
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: 28,
+            height: 28,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(
+              '${sentence.idx}',
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Chip(
-                      label: Text('${sentence.idx}'),
+                InteractiveSentenceText(
+                  sentenceText: sentence.sentenceEn,
+                  highlightedWordsSet: highlightedWords,
+                  gestureKey:
+                      ValueKey<String>('sentence-tap-target-${sentence.id}'),
+                  onWordTap: _onSentenceWordTap,
+                  onSentenceLongPress: (SentenceTapDetail detail) {
+                    _handleSentenceLongPress(sentence, detail);
+                  },
+                  baseStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        height: 1.5,
+                      ),
+                  highlightStyle:
+                      Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            height: 1.5,
+                            fontWeight: FontWeight.w800,
+                            decoration: TextDecoration.underline,
+                          ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                    'Ceviri icin uzun bas, kelime icin dokun.',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                ),
+                ],
+              ),
+            ),
+          const SizedBox(width: 8),
+          AppSpeakButton(
+            text: sentence.sentenceEn,
+            iconSize: 18,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeroAndProgressCard({
+    required int shownProgress,
+    required int total,
+    required double progress,
+  }) {
+    final List<String> tags = parseRawList(widget.passage.tagsRaw);
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.feature,
+      margin: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            widget.passage.title,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+          const SizedBox(height: 8),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: <Widget>[
+                if ((widget.passage.level ?? '').trim().isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: Chip(
+                      label: Text(
+                          (widget.passage.level ?? '').trim().toUpperCase()),
                       visualDensity: VisualDensity.compact,
                     ),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: InteractiveSentenceText(
-                        sentenceText: sentence.sentenceEn,
-                        highlightedWordsSet: highlightedWords,
-                        onWordTap: _openQuickWordPopup,
-                        baseStyle: Theme.of(context).textTheme.bodyLarge,
-                        highlightStyle:
-                            Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  decoration: TextDecoration.underline,
-                                ),
-                      ),
-                    ),
-                    AppSpeakButton(
-                      text: sentence.sentenceEn,
-                      iconSize: 18,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                OutlinedButton.icon(
-                  onPressed: () => _toggleTranslation(sentence),
-                  icon: Icon(
-                    expanded ? Icons.visibility_off : Icons.translate,
                   ),
-                  label: Text(
-                    expanded ? 'Ceviriyi Gizle' : 'Ceviriyi Goster',
+                if ((widget.passage.category ?? '').trim().isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: Chip(
+                      label: Text(widget.passage.category!.trim()),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  ),
+                ...tags.map(
+                  (String tag) => Padding(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: Chip(
+                      label: Text(tag),
+                      visualDensity: VisualDensity.compact,
+                    ),
                   ),
                 ),
-                if (expanded) ...<Widget>[
-                  const SizedBox(height: 6),
-                  if (loadingTranslate)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          ),
-                          SizedBox(width: 8),
-                          Text('Ceviri yukleniyor...'),
-                        ],
-                      ),
-                    ),
-                  if (!loadingTranslate && translation != null)
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'TR:',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(translation),
-                        ],
-                      ),
-                    ),
-                  if (!loadingTranslate && translation == null) ...<Widget>[
-                    const Text('Ceviri bulunamadi.'),
-                    if (translateError != null) ...<Widget>[
-                      const SizedBox(height: 4),
-                      Text(
-                        translateError,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
-                    ],
-                    const SizedBox(height: 6),
-                    TextButton(
-                      onPressed: () => _translateAndCache(sentence),
-                      child: const Text('Retry Ceviri'),
-                    ),
-                  ],
-                ],
               ],
             ),
-          );
-        },
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Çeviri için cümleye dokun. Kelime anlamı için uzun bas.',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: <Widget>[
+              Text(
+                'Ilerleme: $shownProgress/$total',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+              ),
+              const SizedBox(width: 8),
+              if (_completed)
+                const Chip(
+                  label: Text('Tamamlandi'),
+                  visualDensity: VisualDensity.compact,
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          LinearProgressIndicator(value: progress),
+          const SizedBox(height: 10),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: _savingProgress || shownProgress >= total
+                      ? null
+                      : _advanceProgress,
+                  icon: const Icon(Icons.arrow_forward_rounded),
+                  label: const Text('Ilerledim'),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: FilledButton.icon(
+                  onPressed:
+                      _savingProgress || _completed ? null : _completeReading,
+                  icon: const Icon(Icons.task_alt_rounded),
+                  label: const Text('Okumayi Bitirdim'),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -839,15 +1446,6 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                   ),
                 ],
               ),
-              subtitle: _datasetVersion.trim().isEmpty
-                  ? null
-                  : Text(
-                      'Dataset: $_datasetVersion',
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                    ),
               children: <Widget>[
                 if (_focusWords.isEmpty)
                   const Padding(
@@ -865,16 +1463,12 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                       final String trMeaning = word.trMeaning.trim();
                       final String subtitle = trMeaning.isEmpty
                           ? (pos.isEmpty ? '-' : pos)
-                          : (pos.isEmpty ? trMeaning : '$trMeaning • $pos');
+                          : (pos.isEmpty ? trMeaning : '$trMeaning / $pos');
                       return ListTile(
                         dense: true,
                         contentPadding: EdgeInsets.zero,
                         title: Text(word.enWord),
                         subtitle: Text(subtitle),
-                        trailing: Chip(
-                          label: Text('x${word.count}'),
-                          visualDensity: VisualDensity.compact,
-                        ),
                       );
                     },
                   ),
@@ -891,13 +1485,13 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                     builder: (_) => FlashcardSessionPage(
                       pack: widget.pack,
                       customWordIds: focusWordIds,
-                      sessionLabel: 'Passage Focus Words',
+                      sessionLabel: 'Odak Kelimeler',
                     ),
                   ),
                 );
               },
               icon: Icons.school,
-              label: 'Kelime Calis',
+              label: 'Kelime Çalış',
             ),
             const SizedBox(height: 8),
             FilledButton.icon(
@@ -907,14 +1501,14 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                     builder: (_) => McqSessionPage(
                       pack: widget.pack,
                       customWordIds: focusWordIds,
-                      sessionLabel: 'Passage Mini MCQ',
+                      sessionLabel: 'Odak Kelimeler Mini Testi',
                       questionCount: 5,
                     ),
                   ),
                 );
               },
               icon: const Icon(Icons.quiz),
-              label: const Text('Mini MCQ'),
+              label: const Text('Mini Test'),
             ),
           ],
         ],
@@ -933,4 +1527,14 @@ class _SentenceCandidate {
   final String token;
   final WordItem word;
   final int score;
+}
+
+class _InlineBubbleResult {
+  const _InlineBubbleResult({
+    required this.text,
+    required this.hasDetail,
+  });
+
+  final String text;
+  final bool hasDetail;
 }

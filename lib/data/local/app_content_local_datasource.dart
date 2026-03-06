@@ -476,6 +476,31 @@ group by upper(coalesce(level, ''))
         .toList(growable: false);
   }
 
+  Future<List<String>> getWordIdsByLevel(String level) async {
+    final String normalizedLevel = level.trim().toUpperCase();
+    if (normalizedLevel.isEmpty) {
+      return const <String>[];
+    }
+
+    final List<QueryRow> rows = await _db.customSelect(
+      '''
+select id
+from words
+where upper(coalesce(level, '')) = ?1
+order by lower(en_word) asc, en_word asc
+      ''',
+      variables: <Variable<Object>>[Variable<String>(normalizedLevel)],
+      readsFrom: <ResultSetImplementation<dynamic, dynamic>>{
+        _db.appContentWords
+      },
+    ).get();
+
+    return rows
+        .map((QueryRow row) => row.read<String>('id'))
+        .where((String id) => id.trim().isNotEmpty)
+        .toList(growable: false);
+  }
+
   Future<List<TagCount>> getTagsByLevel(
     String level, {
     String? search,
@@ -605,9 +630,44 @@ limit ?8 offset ?9
           ..limit(1))
         .get();
     if (rows.isEmpty) {
-      return null;
+      final List<AppContentWord> partialRows =
+          await (_db.select(_db.appContentWords)
+                ..where((tbl) => tbl.enWordNormalized.like('%$normalizedWord%'))
+                ..limit(20))
+              .get();
+      if (partialRows.isEmpty) {
+        return null;
+      }
+
+      partialRows.sort((AppContentWord a, AppContentWord b) {
+        final int aRank = _matchRank(a.enWordNormalized, normalizedWord);
+        final int bRank = _matchRank(b.enWordNormalized, normalizedWord);
+        if (aRank != bRank) {
+          return aRank.compareTo(bRank);
+        }
+        final int lengthCompare =
+            a.enWordNormalized.length.compareTo(b.enWordNormalized.length);
+        if (lengthCompare != 0) {
+          return lengthCompare;
+        }
+        return a.enWordNormalized.compareTo(b.enWordNormalized);
+      });
+      return _wordFromData(partialRows.first);
     }
     return _wordFromData(rows.first);
+  }
+
+  int _matchRank(String candidate, String query) {
+    if (candidate == query) {
+      return 0;
+    }
+    if (candidate.startsWith(query)) {
+      return 1;
+    }
+    if (candidate.contains(query)) {
+      return 2;
+    }
+    return 3;
   }
 
   Future<PagedResult<ReadingPassage>> getPassagesByPack({

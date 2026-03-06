@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/repositories/progress_repository.dart';
 import 'auth_providers.dart';
-import 'dashboard_providers.dart';
 import 'pack_providers.dart';
+import 'progress_providers.dart';
 
 /// Provides the count of weak words for the default pack.
 /// Returns 0 when no packs exist or an error occurs.

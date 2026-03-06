@@ -17,6 +17,7 @@ class AppStatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppSurfaceCard(
+      variant: AppSurfaceVariant.grouped,
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[

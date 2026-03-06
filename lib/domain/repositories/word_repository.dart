@@ -39,6 +39,8 @@ abstract class WordRepository {
 
   Future<List<WordLevelSummary>> getLevelsWithWordCount();
 
+  Future<List<String>> getWordIdsByLevel(String level);
+
   Future<List<TagCount>> getTagsByLevel(
     String level, {
     String? search,

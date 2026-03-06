@@ -14,6 +14,13 @@ abstract class ReadingRepository {
     int offset = 0,
   });
 
+  Future<PagedResult<ReadingPassage>> getReadingFeed({
+    String? category,
+    String? level,
+    int limit = 20,
+    int offset = 0,
+  });
+
   Future<List<PassageSentence>> getSentences({
     required String passageId,
   });
@@ -53,4 +60,22 @@ abstract class ReadingRepository {
     required String passageId,
     int limit = 20,
   });
+
+  Future<void> toggleBookmark(String passageId);
+
+  Future<void> toggleFavorite(String passageId);
+
+  Future<PagedResult<ReadingPassage>> getBookmarkedPassages({
+    int limit = 20,
+    int offset = 0,
+  });
+
+  Future<PagedResult<ReadingPassage>> getFavoritePassages({
+    int limit = 20,
+    int offset = 0,
+  });
+
+  Future<bool> isPassageBookmarked(String passageId);
+
+  Future<bool> isPassageFavorited(String passageId);
 }

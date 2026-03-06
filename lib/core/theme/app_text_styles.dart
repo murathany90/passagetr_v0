@@ -7,9 +7,13 @@ class AppTextStyles {
       const TextTheme(
         headlineLarge: TextStyle(fontWeight: FontWeight.w800),
         headlineMedium: TextStyle(fontWeight: FontWeight.w700),
+        headlineSmall: TextStyle(fontWeight: FontWeight.w700),
         titleLarge: TextStyle(fontWeight: FontWeight.w700),
+        titleSmall: TextStyle(fontWeight: FontWeight.w700),
         titleMedium: TextStyle(fontWeight: FontWeight.w600),
+        bodyMedium: TextStyle(fontWeight: FontWeight.w400),
         bodyLarge: TextStyle(fontWeight: FontWeight.w500),
+        labelSmall: TextStyle(fontWeight: FontWeight.w600),
         labelLarge: TextStyle(fontWeight: FontWeight.w700),
       ),
     );
@@ -20,9 +24,13 @@ class AppTextStyles {
       const TextTheme(
         headlineLarge: TextStyle(fontWeight: FontWeight.w800),
         headlineMedium: TextStyle(fontWeight: FontWeight.w700),
+        headlineSmall: TextStyle(fontWeight: FontWeight.w700),
         titleLarge: TextStyle(fontWeight: FontWeight.w700),
+        titleSmall: TextStyle(fontWeight: FontWeight.w700),
         titleMedium: TextStyle(fontWeight: FontWeight.w600),
+        bodyMedium: TextStyle(fontWeight: FontWeight.w400),
         bodyLarge: TextStyle(fontWeight: FontWeight.w500),
+        labelSmall: TextStyle(fontWeight: FontWeight.w600),
         labelLarge: TextStyle(fontWeight: FontWeight.w700),
       ),
     );

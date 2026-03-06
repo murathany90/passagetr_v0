@@ -6,17 +6,17 @@ import 'package:passagetr/core/theme/app_colors.dart';
 
 void main() {
   test('dark palette uses expected slate + blue token values', () {
-    expect(AppColors.darkBackground, const Color(0xFF10131A));
-    expect(AppColors.darkSurface, const Color(0xFF171C24));
-    expect(AppColors.darkSurfaceVariant, const Color(0xFF232B37));
-    expect(AppColors.darkOnSurface, const Color(0xFFE8ECF4));
-    expect(AppColors.darkOnSurfaceVariant, const Color(0xFFB6C0CF));
-    expect(AppColors.darkPrimary, const Color(0xFF8EA8FF));
-    expect(AppColors.darkPrimaryContainer, const Color(0xFF2A3E73));
-    expect(AppColors.darkSecondary, const Color(0xFFA9B9E4));
-    expect(AppColors.darkSecondaryContainer, const Color(0xFF2D3A5A));
-    expect(AppColors.darkOutline, const Color(0xFF7F8A9E));
-    expect(AppColors.darkInversePrimary, const Color(0xFF4E6ECF));
+    expect(AppColors.darkBackground, const Color(0xFF14181F));
+    expect(AppColors.darkSurface, const Color(0xFF1B212B));
+    expect(AppColors.darkSurfaceVariant, const Color(0xFF262E3A));
+    expect(AppColors.darkOnSurface, const Color(0xFFE4E8EF));
+    expect(AppColors.darkOnSurfaceVariant, const Color(0xFFAFB8C7));
+    expect(AppColors.darkPrimary, const Color(0xFF9AB6F3));
+    expect(AppColors.darkPrimaryContainer, const Color(0xFF314575));
+    expect(AppColors.darkSecondary, const Color(0xFFAECAC1));
+    expect(AppColors.darkSecondaryContainer, const Color(0xFF2B4942));
+    expect(AppColors.darkOutline, const Color(0xFF788397));
+    expect(AppColors.darkInversePrimary, const Color(0xFF4C6BC0));
   });
 
   test('dark palette keeps readable contrast for key pairs', () {

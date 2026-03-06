@@ -35,6 +35,71 @@ class HybridReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<PagedResult<ReadingPassage>> getReadingFeed({
+    String? category,
+    String? level,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    try {
+      return await _remote.getReadingFeed(
+        category: category,
+        level: level,
+        limit: limit,
+        offset: offset,
+      );
+    } catch (_) {
+      final List<ReadingPassage> all = <ReadingPassage>[];
+      final List<String> packIds =
+          (await _local.getPacksWithWordCount()).map((e) => e.id).toList();
+      for (final String packId in packIds) {
+        final page = await _local.getPassagesByPack(
+          packId: packId,
+          levels: null,
+          limit: 250,
+          offset: 0,
+        );
+        all.addAll(page.items);
+      }
+
+      final String cleanCategory = (category ?? '').trim().toLowerCase();
+      final String cleanLevel = (level ?? '').trim().toUpperCase();
+      final List<ReadingPassage> filtered = all.where((ReadingPassage item) {
+        final bool categoryOk = cleanCategory.isEmpty ||
+            (item.category ?? '').trim().toLowerCase() == cleanCategory;
+        final bool levelOk = cleanLevel.isEmpty ||
+            (item.level ?? '').trim().toUpperCase() == cleanLevel;
+        return categoryOk && levelOk;
+      }).toList()
+        ..sort((ReadingPassage a, ReadingPassage b) {
+          return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+        });
+
+      final int safeOffset = offset < 0 ? 0 : offset;
+      final int end = (safeOffset + limit + 1) > filtered.length
+          ? filtered.length
+          : (safeOffset + limit + 1);
+      if (safeOffset >= filtered.length) {
+        return const PagedResult<ReadingPassage>(
+          items: <ReadingPassage>[],
+          hasMore: false,
+          nextOffset: 0,
+        );
+      }
+
+      final List<ReadingPassage> window = filtered.sublist(safeOffset, end);
+      final bool hasMore = window.length > limit;
+      final List<ReadingPassage> items =
+          hasMore ? window.take(limit).toList(growable: false) : window;
+      return PagedResult<ReadingPassage>(
+        items: items,
+        hasMore: hasMore,
+        nextOffset: safeOffset + items.length,
+      );
+    }
+  }
+
+  @override
   Future<List<PassageSentence>> getSentences({required String passageId}) {
     return _local.getSentences(passageId: passageId);
   }
@@ -133,5 +198,65 @@ class HybridReadingRepository implements ReadingRepository {
       passageId: passageId,
       limit: limit,
     );
+  }
+
+  @override
+  Future<void> toggleBookmark(String passageId) {
+    return _remote.toggleBookmark(passageId);
+  }
+
+  @override
+  Future<void> toggleFavorite(String passageId) {
+    return _remote.toggleFavorite(passageId);
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getBookmarkedPassages({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    try {
+      return await _remote.getBookmarkedPassages(limit: limit, offset: offset);
+    } catch (_) {
+      return const PagedResult<ReadingPassage>(
+        items: <ReadingPassage>[],
+        hasMore: false,
+        nextOffset: 0,
+      );
+    }
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getFavoritePassages({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    try {
+      return await _remote.getFavoritePassages(limit: limit, offset: offset);
+    } catch (_) {
+      return const PagedResult<ReadingPassage>(
+        items: <ReadingPassage>[],
+        hasMore: false,
+        nextOffset: 0,
+      );
+    }
+  }
+
+  @override
+  Future<bool> isPassageBookmarked(String passageId) async {
+    try {
+      return await _remote.isPassageBookmarked(passageId);
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> isPassageFavorited(String passageId) async {
+    try {
+      return await _remote.isPassageFavorited(passageId);
+    } catch (_) {
+      return false;
+    }
   }
 }

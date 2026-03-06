@@ -687,3 +687,11 @@ Aşağıdaki iş kalemleri backend değişikliği, yeni paket veya büyük çapl
 - Content update flow (asset vs. cihaz DB version karşılaştırması)
 - Remote sync (opsiyonel: Supabase'den diff-based content güncelleme)
 - Rollback stratejisi
+
+## Faz 4.1 UI/Feature Patch (Reading Player v2)
+
+- Reading Player app bar: `Paylas`, `Yer imi`, `Dinleme ayarlari`.
+- Kelime dokunusunda inline mini anlam baloncugu + `Detay` ile Quick Word sheet.
+- Reading audio settings sheet: hiz (`x0.5/x1/x1.25/x1.5`), bilgi sikligi, dokunusta durdur.
+- Reading home segmentleri: `Hikayeler`, `Haber Akisi`, `Kitapligim`.
+- Sprint-2 veri katmani: `user_reading_bookmarks` ve `user_reading_favorites` tablolari + RLS.

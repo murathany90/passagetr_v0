@@ -123,3 +123,21 @@
 4. Ag geri geldiginde bannerde bekleyen kayit sayisi azalip sifira iner.
 5. Ag geri geldikten sonra Home/Profile metrikleri normal degerlere doner.
 6. Ham teknik metinler (`SocketException`, `Failed host lookup`, `supabase.co/rest/v1/...`) kullaniciya gosterilmemelidir.
+
+## 14) Reading Player v2
+1. ReadingDetail app barinda `Paylas`, `Yer imi`, `Dinleme ayarlari` aksiyonlari gorunmelidir.
+2. Kelimeye dokununca kisa inline baloncuk acilmali, 2-3 sn icinde otomatik kapanmalidir.
+3. Inline baloncukta `Detay` aksiyonu `WordQuickViewSheet` acmalidir.
+4. Scroll yapildiginda inline baloncuk kapanmalidir.
+5. Quick word sheet uzun metinde tasma yapmamalidir.
+
+## 15) Reading Sekmesi Segmentleri
+1. Okuma ana sayfasinda `Hikayeler / Haber Akisi / Kitapligim` segmentleri gorunmelidir.
+2. `Kitapligim` segmentinde yer imi yoksa bos durum mesaji gorunmelidir.
+3. ReadingDetail'de yer imi ac/kapat sonrasi `Kitapligim` segmentine donuldugunde icerik gorunmelidir.
+4. `Okumaya Devam Et` karti varsa ilgili passage dogru ekranla acilmalidir.
+
+## 16) Dinleme Ayarlari
+1. Reading player `Dinleme ayarlari` panelinde hiz secenekleri gorunmelidir (`x0.5`, `x1`, `x1.25`, `x1.5`).
+2. `Kelimeye dokununca sesi durdur` acikken kelime tap etkileşiminde ses durmalidir.
+3. Ayar degisikligi app yeniden acildiginda korunmalidir.

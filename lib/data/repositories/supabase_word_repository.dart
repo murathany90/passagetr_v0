@@ -223,6 +223,26 @@ class SupabaseWordRepository implements WordRepository {
   }
 
   @override
+  Future<List<String>> getWordIdsByLevel(String level) async {
+    final String cleanLevel = level.trim().toUpperCase();
+    if (cleanLevel.isEmpty) {
+      return const <String>[];
+    }
+
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select('id')
+        .ilike('level', cleanLevel)
+        .limit(10000);
+
+    return rows
+        .map((dynamic row) => (row as Map)['id'] as String?)
+        .whereType<String>()
+        .where((String id) => id.trim().isNotEmpty)
+        .toList(growable: false);
+  }
+
+  @override
   Future<List<TagCount>> getTagsByLevel(
     String level, {
     String? search,
@@ -338,7 +358,14 @@ class SupabaseWordRepository implements WordRepository {
         .limit(20);
 
     if (rows.isEmpty) {
-      return null;
+      final List<dynamic> partialRows = await _client
+          .from('words')
+          .select()
+          .ilike('en_word', '%$normalized%')
+          .order('en_word', ascending: true)
+          .limit(20);
+
+      return _pickBestGlobalMatch(partialRows, normalized);
     }
 
     WordItem? fallback;
@@ -349,7 +376,11 @@ class SupabaseWordRepository implements WordRepository {
       }
       fallback ??= item;
     }
-    return fallback;
+    if (fallback != null) {
+      return fallback;
+    }
+
+    return null;
   }
 
   WordItem _fromRow(Map row) {
@@ -437,5 +468,44 @@ class SupabaseWordRepository implements WordRepository {
       RegExp(r'[\\^$.*+?()\[\]{}|]'),
       (Match match) => '\\${match.group(0)}',
     );
+  }
+
+  WordItem? _pickBestGlobalMatch(List<dynamic> rows, String normalizedQuery) {
+    if (rows.isEmpty) {
+      return null;
+    }
+
+    final List<WordItem> items =
+        rows.map((dynamic row) => _fromRow(row as Map)).toList(growable: false);
+
+    items.sort((WordItem a, WordItem b) {
+      final String aNorm = _normalize(a.enWord);
+      final String bNorm = _normalize(b.enWord);
+      final int aRank = _matchRank(aNorm, normalizedQuery);
+      final int bRank = _matchRank(bNorm, normalizedQuery);
+      if (aRank != bRank) {
+        return aRank.compareTo(bRank);
+      }
+      final int lengthCompare = aNorm.length.compareTo(bNorm.length);
+      if (lengthCompare != 0) {
+        return lengthCompare;
+      }
+      return aNorm.compareTo(bNorm);
+    });
+
+    return items.first;
+  }
+
+  int _matchRank(String candidate, String query) {
+    if (candidate == query) {
+      return 0;
+    }
+    if (candidate.startsWith(query)) {
+      return 1;
+    }
+    if (candidate.contains(query)) {
+      return 2;
+    }
+    return 3;
   }
 }

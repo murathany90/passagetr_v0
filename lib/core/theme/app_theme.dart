@@ -98,17 +98,17 @@ class AppTheme {
         foregroundColor: colorScheme.onSurface,
       ),
       cardTheme: CardThemeData(
-        color: colorScheme.surface,
+        color: colorScheme.surfaceContainerLow,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusMedium),
-          side: BorderSide(color: colorScheme.outlineVariant),
+          side: const BorderSide(color: Colors.transparent),
         ),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: colorScheme.surfaceContainerLow,
         selectedColor: colorScheme.primaryContainer,
-        side: BorderSide(color: colorScheme.outlineVariant),
+        side: const BorderSide(color: Colors.transparent),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(999),
         ),
@@ -138,7 +138,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.surface,
+        fillColor: colorScheme.surfaceContainerLow,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         border: OutlineInputBorder(
@@ -157,7 +157,7 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         height: 72,
         elevation: 0,
-        backgroundColor: colorScheme.surface.withValues(alpha: 0.96),
+        backgroundColor: colorScheme.surfaceContainerLow.withValues(alpha: 0.96),
         indicatorColor: colorScheme.primaryContainer,
         labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
           (Set<WidgetState> states) {
@@ -186,6 +186,11 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusSmall),
         ),
+      ),
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outlineVariant.withValues(alpha: 0.72),
+        thickness: 0.8,
+        space: 1,
       ),
     );
   }

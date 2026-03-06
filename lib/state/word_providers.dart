@@ -12,12 +12,14 @@ import '../domain/entities/dictionary_entry.dart';
 import '../domain/entities/dictionary_lookup_result.dart';
 import '../domain/entities/tag_count.dart';
 import '../domain/entities/word_item.dart';
+import '../domain/entities/word_level_progress_summary.dart';
 import '../domain/entities/word_level_summary.dart';
 import '../domain/repositories/dictionary_repository.dart';
 import '../domain/repositories/word_repository.dart';
 import '../domain/value_objects/paged_result.dart';
 import 'auth_providers.dart';
 import 'content_providers.dart';
+import 'progress_providers.dart';
 
 final Provider<WordRepository> wordRepositoryProvider =
     Provider<WordRepository>((Ref ref) {
@@ -35,6 +37,40 @@ final FutureProvider<List<WordLevelSummary>> wordLevelsProvider =
     FutureProvider<List<WordLevelSummary>>((Ref ref) async {
   final WordRepository repository = ref.watch(wordRepositoryProvider);
   return repository.getLevelsWithWordCount();
+});
+
+final FutureProvider<List<WordLevelProgressSummary>> wordLevelProgressProvider =
+    FutureProvider<List<WordLevelProgressSummary>>((Ref ref) async {
+  final List<WordLevelSummary> levels =
+      await ref.watch(wordLevelsProvider.future);
+  final WordRepository wordRepository = ref.watch(wordRepositoryProvider);
+  final progressRepository = ref.watch(progressRepositoryProvider);
+  const int progressBatchSize = 250;
+
+  final List<WordLevelProgressSummary> enriched = <WordLevelProgressSummary>[];
+  for (final WordLevelSummary level in levels) {
+    final List<String> wordIds =
+        await wordRepository.getWordIdsByLevel(level.level);
+    int studiedWordCount = 0;
+    for (int offset = 0; offset < wordIds.length; offset += progressBatchSize) {
+      final int end = offset + progressBatchSize > wordIds.length
+          ? wordIds.length
+          : offset + progressBatchSize;
+      final List<String> batch = wordIds.sublist(offset, end);
+      final progressMap =
+          await progressRepository.getProgressMap(wordIds: batch);
+      studiedWordCount +=
+          progressMap.values.where((progress) => progress.seenCount > 0).length;
+    }
+    enriched.add(
+      WordLevelProgressSummary(
+        level: level.level,
+        wordCount: level.wordCount,
+        studiedWordCount: studiedWordCount,
+      ),
+    );
+  }
+  return enriched;
 });
 
 class WordLevelTagRequest {

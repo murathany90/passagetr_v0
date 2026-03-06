@@ -122,7 +122,10 @@ class FakeOfflineSyncCoordinator implements OfflineSyncCoordinator {
   }
 
   @override
-  Future<void> flushPending({bool silent = true}) async {}
+  Future<void> flushPending({
+    bool silent = true,
+    bool force = false,
+  }) async {}
 
   @override
   Future<Map<String, OfflineReadingProgressEntry>> getQueuedReadingMap(

@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/exceptions/app_exceptions.dart';
 import '../core/utils/network_error_classifier.dart';
-import '../data/repositories/resilient_progress_repository.dart';
 import '../domain/entities/home_dashboard_data.dart';
 import '../domain/entities/pack.dart';
 import '../domain/entities/reading_resume_item.dart';
@@ -12,19 +11,10 @@ import '../domain/repositories/progress_repository.dart';
 import '../domain/repositories/reading_repository.dart';
 import '../domain/repositories/word_repository.dart';
 import 'auth_providers.dart';
-import 'offline_sync_providers.dart';
 import 'pack_providers.dart';
+import 'progress_providers.dart';
 import 'reading_providers.dart';
-import 'remote_repository_providers.dart';
 import 'word_providers.dart';
-
-final Provider<ProgressRepository> progressRepositoryProvider =
-    Provider<ProgressRepository>((Ref ref) {
-  return ResilientProgressRepository(
-    baseRepository: ref.watch(supabaseProgressRepositoryProvider),
-    syncCoordinator: ref.watch(offlineSyncControllerProvider.notifier),
-  );
-});
 
 final FutureProvider<HomeDashboardData> homeDashboardProvider =
     FutureProvider<HomeDashboardData>((Ref ref) async {
@@ -98,7 +88,7 @@ final FutureProvider<HomeDashboardData> homeDashboardProvider =
     return HomeDashboardData(
       todayWordCount: todayWordCount,
       todayReadSentenceCount: todayReadSentenceCount,
-      todaySolvedQuestionText: 'Yakinda',
+      todaySolvedQuestionText: 'Yakında',
       quickStart: quickStart,
     );
   }
@@ -107,7 +97,7 @@ final FutureProvider<HomeDashboardData> homeDashboardProvider =
   const HomeDashboardData offlineFallback = HomeDashboardData(
     todayWordCount: 0,
     todayReadSentenceCount: 0,
-    todaySolvedQuestionText: 'Cevrimdisi',
+    todaySolvedQuestionText: 'Çevrimdışı',
     quickStart: QuickStartSuggestion(type: QuickStartType.unavailable),
   );
 

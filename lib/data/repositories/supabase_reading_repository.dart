@@ -24,7 +24,8 @@ class SupabaseReadingRepository implements ReadingRepository {
     int limit = 20,
     int offset = 0,
   }) async {
-    dynamic builder = _client.from('reading_passages').select().eq('pack_id', packId);
+    dynamic builder =
+        _client.from('reading_passages').select().eq('pack_id', packId);
     final Set<String> normalizedLevels = (levels ?? <String>{})
         .map((String e) => e.trim().toUpperCase())
         .where((String e) => e.isNotEmpty)
@@ -40,6 +41,42 @@ class SupabaseReadingRepository implements ReadingRepository {
     final bool hasMore = rows.length > limit;
     final List<dynamic> sliced = hasMore ? rows.take(limit).toList() : rows;
 
+    final List<ReadingPassage> items = sliced
+        .map((dynamic e) => _passageFromRow(e as Map))
+        .toList(growable: false);
+
+    return PagedResult<ReadingPassage>(
+      items: items,
+      hasMore: hasMore,
+      nextOffset: offset + items.length,
+    );
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getReadingFeed({
+    String? category,
+    String? level,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    dynamic builder = _client.from('reading_passages').select();
+
+    final String cleanCategory = (category ?? '').trim();
+    if (cleanCategory.isNotEmpty) {
+      builder = builder.ilike('category', cleanCategory);
+    }
+
+    final String cleanLevel = (level ?? '').trim().toUpperCase();
+    if (cleanLevel.isNotEmpty) {
+      builder = builder.ilike('level', cleanLevel);
+    }
+
+    final List<dynamic> rows = await builder
+        .order('title', ascending: true)
+        .range(offset, offset + limit);
+
+    final bool hasMore = rows.length > limit;
+    final List<dynamic> sliced = hasMore ? rows.take(limit).toList() : rows;
     final List<ReadingPassage> items = sliced
         .map((dynamic e) => _passageFromRow(e as Map))
         .toList(growable: false);
@@ -156,7 +193,8 @@ class SupabaseReadingRepository implements ReadingRepository {
         .eq('user_id', userId)
         .inFilter('passage_id', passageIds);
 
-    final Map<String, UserReadingProgress> mapped = <String, UserReadingProgress>{};
+    final Map<String, UserReadingProgress> mapped =
+        <String, UserReadingProgress>{};
     for (final dynamic row in rows) {
       final UserReadingProgress progress = _readingProgressFromRow(row as Map);
       mapped[progress.passageId] = progress;
@@ -235,6 +273,108 @@ class SupabaseReadingRepository implements ReadingRepository {
       passageId: passageId,
       limit: limit,
     );
+  }
+
+  @override
+  Future<void> toggleBookmark(String passageId) async {
+    final String userId = _resolveUserId();
+    final List<dynamic> existing = await _client
+        .from('user_reading_bookmarks')
+        .select('passage_id')
+        .eq('user_id', userId)
+        .eq('passage_id', passageId)
+        .limit(1);
+
+    if (existing.isEmpty) {
+      await _client.from('user_reading_bookmarks').insert(
+        <String, dynamic>{
+          'user_id': userId,
+          'passage_id': passageId,
+        },
+      );
+      return;
+    }
+
+    await _client
+        .from('user_reading_bookmarks')
+        .delete()
+        .eq('user_id', userId)
+        .eq('passage_id', passageId);
+  }
+
+  @override
+  Future<void> toggleFavorite(String passageId) async {
+    final String userId = _resolveUserId();
+    final List<dynamic> existing = await _client
+        .from('user_reading_favorites')
+        .select('passage_id')
+        .eq('user_id', userId)
+        .eq('passage_id', passageId)
+        .limit(1);
+
+    if (existing.isEmpty) {
+      await _client.from('user_reading_favorites').insert(
+        <String, dynamic>{
+          'user_id': userId,
+          'passage_id': passageId,
+        },
+      );
+      return;
+    }
+
+    await _client
+        .from('user_reading_favorites')
+        .delete()
+        .eq('user_id', userId)
+        .eq('passage_id', passageId);
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getBookmarkedPassages({
+    int limit = 20,
+    int offset = 0,
+  }) {
+    return _getPassagesFromUserCollection(
+      table: 'user_reading_bookmarks',
+      limit: limit,
+      offset: offset,
+    );
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getFavoritePassages({
+    int limit = 20,
+    int offset = 0,
+  }) {
+    return _getPassagesFromUserCollection(
+      table: 'user_reading_favorites',
+      limit: limit,
+      offset: offset,
+    );
+  }
+
+  @override
+  Future<bool> isPassageBookmarked(String passageId) async {
+    final String userId = _resolveUserId();
+    final List<dynamic> rows = await _client
+        .from('user_reading_bookmarks')
+        .select('passage_id')
+        .eq('user_id', userId)
+        .eq('passage_id', passageId)
+        .limit(1);
+    return rows.isNotEmpty;
+  }
+
+  @override
+  Future<bool> isPassageFavorited(String passageId) async {
+    final String userId = _resolveUserId();
+    final List<dynamic> rows = await _client
+        .from('user_reading_favorites')
+        .select('passage_id')
+        .eq('user_id', userId)
+        .eq('passage_id', passageId)
+        .limit(1);
+    return rows.isNotEmpty;
   }
 
   ReadingPassage _passageFromRow(Map row) {
@@ -391,6 +531,58 @@ class SupabaseReadingRepository implements ReadingRepository {
       level: data['level'] as String?,
       tagsRaw: data['tags_raw'] as String?,
       notes: data['notes'] as String?,
+    );
+  }
+
+  Future<PagedResult<ReadingPassage>> _getPassagesFromUserCollection({
+    required String table,
+    required int limit,
+    required int offset,
+  }) async {
+    final String userId = _resolveUserId();
+    final List<dynamic> rows = await _client
+        .from(table)
+        .select('passage_id')
+        .eq('user_id', userId)
+        .order('created_at', ascending: false)
+        .range(offset, offset + limit);
+
+    final bool hasMore = rows.length > limit;
+    final List<dynamic> sliced = hasMore ? rows.take(limit).toList() : rows;
+    final List<String> ids = sliced
+        .map((dynamic row) =>
+            (Map<String, dynamic>.from(row as Map)['passage_id'] as String? ??
+                    '')
+                .trim())
+        .where((String id) => id.isNotEmpty)
+        .toList(growable: false);
+
+    if (ids.isEmpty) {
+      return PagedResult<ReadingPassage>(
+        items: const <ReadingPassage>[],
+        hasMore: hasMore,
+        nextOffset: offset,
+      );
+    }
+
+    final List<dynamic> passageRows =
+        await _client.from('reading_passages').select().inFilter('id', ids);
+    final Map<String, ReadingPassage> byId = <String, ReadingPassage>{};
+    for (final dynamic row in passageRows) {
+      final ReadingPassage passage = _passageFromRow(row as Map);
+      byId[passage.id] = passage;
+    }
+    final List<ReadingPassage> items = <ReadingPassage>[];
+    for (final String id in ids) {
+      final ReadingPassage? found = byId[id];
+      if (found != null) {
+        items.add(found);
+      }
+    }
+    return PagedResult<ReadingPassage>(
+      items: items,
+      hasMore: hasMore,
+      nextOffset: offset + items.length,
     );
   }
 

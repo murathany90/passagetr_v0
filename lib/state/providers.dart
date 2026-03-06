@@ -11,6 +11,7 @@ export 'grammar_providers.dart';
 export 'nav_badge_providers.dart';
 export 'offline_sync_providers.dart';
 export 'pack_providers.dart';
+export 'progress_providers.dart';
 export 'remote_repository_providers.dart';
 export 'reading_providers.dart';
 export 'translation_providers.dart';

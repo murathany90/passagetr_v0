@@ -91,7 +91,22 @@ class FakeReadingRepository implements ReadingRepository {
   }
 
   @override
-  Future<List<PassageSentence>> getSentences({required String passageId}) async {
+  Future<PagedResult<ReadingPassage>> getReadingFeed({
+    String? category,
+    String? level,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    return const PagedResult<ReadingPassage>(
+      items: <ReadingPassage>[],
+      hasMore: false,
+      nextOffset: 0,
+    );
+  }
+
+  @override
+  Future<List<PassageSentence>> getSentences(
+      {required String passageId}) async {
     return const <PassageSentence>[];
   }
 
@@ -150,6 +165,42 @@ class FakeReadingRepository implements ReadingRepository {
   }) async {
     return const <WordItem>[];
   }
+
+  @override
+  Future<void> toggleBookmark(String passageId) async {}
+
+  @override
+  Future<void> toggleFavorite(String passageId) async {}
+
+  @override
+  Future<PagedResult<ReadingPassage>> getBookmarkedPassages({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    return const PagedResult<ReadingPassage>(
+      items: <ReadingPassage>[],
+      hasMore: false,
+      nextOffset: 0,
+    );
+  }
+
+  @override
+  Future<PagedResult<ReadingPassage>> getFavoritePassages({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    return const PagedResult<ReadingPassage>(
+      items: <ReadingPassage>[],
+      hasMore: false,
+      nextOffset: 0,
+    );
+  }
+
+  @override
+  Future<bool> isPassageBookmarked(String passageId) async => false;
+
+  @override
+  Future<bool> isPassageFavorited(String passageId) async => false;
 }
 
 class FakeOfflineSyncCoordinator implements OfflineSyncCoordinator {
@@ -190,7 +241,10 @@ class FakeOfflineSyncCoordinator implements OfflineSyncCoordinator {
   }) async {}
 
   @override
-  Future<void> flushPending({bool silent = true}) async {}
+  Future<void> flushPending({
+    bool silent = true,
+    bool force = false,
+  }) async {}
 
   @override
   Future<Map<String, OfflineReadingProgressEntry>> getQueuedReadingMap(
@@ -217,4 +271,3 @@ class FakeOfflineSyncCoordinator implements OfflineSyncCoordinator {
   @override
   Future<int> getQueuedWordEventCountToday() async => 0;
 }
-

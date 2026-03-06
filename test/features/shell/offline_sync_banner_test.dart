@@ -4,7 +4,7 @@ import 'package:passagetr/core/services/offline_sync_controller.dart';
 import 'package:passagetr/features/shell/main_shell_page.dart';
 
 void main() {
-  testWidgets('shows pending count in offline sync banner', (
+  testWidgets('shows pending count in offline status action', (
     WidgetTester tester,
   ) async {
     const OfflineSyncStatus status = OfflineSyncStatus(
@@ -17,15 +17,21 @@ void main() {
     );
 
     await tester.pumpWidget(
-      const MaterialApp(
+      MaterialApp(
         home: Scaffold(
-          body: OfflineSyncBanner(status: status),
+          appBar: AppBar(
+            actions: <Widget>[
+              OfflineSyncStatusAction(
+                status: status,
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );
 
-    expect(find.textContaining('Cevrimdisi'), findsOneWidget);
-    expect(find.textContaining('(5)'), findsOneWidget);
+    expect(find.byTooltip('Senkron durumu'), findsOneWidget);
+    expect(find.text('5'), findsOneWidget);
   });
 }
-

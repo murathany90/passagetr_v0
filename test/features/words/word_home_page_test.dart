@@ -1,9 +1,13 @@
-﻿import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:passagetr/domain/entities/dictionary_lookup_result.dart';
 import 'package:passagetr/domain/entities/pack.dart';
 import 'package:passagetr/domain/entities/word_item.dart';
+import 'package:passagetr/features/packs/pack_list_page.dart';
 import 'package:passagetr/features/words/word_home_page.dart';
 import 'package:passagetr/state/content_providers.dart';
 import 'package:passagetr/state/pack_providers.dart';
@@ -71,7 +75,7 @@ void main() {
     });
   }
 
-  testWidgets('shows Kelime Kartı and Sözlük actions when word card exists', (
+  testWidgets('search enters results mode and filter toggles sections', (
     WidgetTester tester,
   ) async {
     await configureViewport(tester);
@@ -96,17 +100,75 @@ void main() {
       dictionaryRepository: dictionaryRepository,
     );
 
+    expect(find.byType(PackListPage), findsOneWidget);
+
     await tester.enterText(find.byType(TextField), 'abandon');
     tester.testTextInput.hide();
-    await tester.tap(find.text('Ara'));
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word-search-submit-button')),
+    );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Kelime kartında bulundu'), findsOneWidget);
-    expect(find.text('Kelime Kartı'), findsOneWidget);
-    expect(find.text('Sözlük'), findsOneWidget);
+    expect(find.byType(PackListPage), findsNothing);
+    expect(
+      find.byKey(const ValueKey<String>('word-search-results-view')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('word-card-result-section')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsOneWidget,
+    );
+    expect(find.text('Filtre: Tumu'), findsOneWidget);
+
+    final Finder filterBar = find.byKey(
+      const ValueKey<String>('word-search-filter-bar'),
+    );
+    await tester.tap(
+      find.descendant(of: filterBar, matching: find.text('Sozluk')).first,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-card-result-section')),
+      findsNothing,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsOneWidget,
+    );
+
+    await tester.tap(
+      find.descendant(of: filterBar, matching: find.text('Kelime Karti')).first,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-card-result-section')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsNothing,
+    );
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('word-search-clear-button')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(PackListPage), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('word-search-results-view')),
+      findsNothing,
+    );
   });
 
-  testWidgets('shows only Sözlük action when word card does not exist', (
+  testWidgets(
+      'dictionary-only results keep dictionary visible and hide empty card after filter',
+      (
     WidgetTester tester,
   ) async {
     await configureViewport(tester);
@@ -133,12 +195,243 @@ void main() {
 
     await tester.enterText(find.byType(TextField), 'foobar');
     tester.testTextInput.hide();
-    await tester.tap(find.text('Ara'));
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word-search-submit-button')),
+    );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Kelime kartında bulunamadı'), findsOneWidget);
-    expect(find.text('Kelime Kartı'), findsNothing);
-    expect(find.text('Sözlük'), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('word-card-empty-section')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsOneWidget,
+    );
+
+    final Finder filterBar = find.byKey(
+      const ValueKey<String>('word-search-filter-bar'),
+    );
+    await tester.tap(
+      find.descendant(of: filterBar, matching: find.text('Sozluk')).first,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-card-empty-section')),
+      findsNothing,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('partial query still resolves the closest word card match', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
+    final WordItem abandon = buildWord();
+    final FakeWordRepository wordRepository = FakeWordRepository(
+      globalWords: <String, WordItem>{'abandon': abandon},
+      packWords: <String, WordItem>{'pack-1|abandon': abandon},
+      globalIndex: <WordItem>[abandon],
+    );
+    final FakeDictionaryRepository dictionaryRepository =
+        FakeDictionaryRepository(
+      lookupResult: DictionaryLookupResult.fallback(
+        translatedText: 'terk etmek',
+        fromServerCache: false,
+        fromDeepL: true,
+      ),
+    );
+
+    await pumpPage(
+      tester,
+      wordRepository: wordRepository,
+      dictionaryRepository: dictionaryRepository,
+    );
+
+    await tester.enterText(find.byType(TextField), 'aban');
+    tester.testTextInput.hide();
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word-search-submit-button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-card-result-section')),
+      findsOneWidget,
+    );
+    expect(find.text('abandon'), findsOneWidget);
+  });
+
+  testWidgets('word card still appears when dictionary lookup fails', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
+    final WordItem abandon = buildWord();
+    final FakeWordRepository wordRepository = FakeWordRepository(
+      globalWords: <String, WordItem>{'abandon': abandon},
+      packWords: <String, WordItem>{'pack-1|abandon': abandon},
+      globalIndex: <WordItem>[abandon],
+    );
+    final FakeDictionaryRepository dictionaryRepository =
+        FakeDictionaryRepository(
+      lookupError: StateError('dictionary unavailable'),
+    );
+
+    await pumpPage(
+      tester,
+      wordRepository: wordRepository,
+      dictionaryRepository: dictionaryRepository,
+    );
+
+    await tester.enterText(find.byType(TextField), 'abandon');
+    tester.testTextInput.hide();
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word-search-submit-button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-card-result-section')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsOneWidget,
+    );
+    expect(find.textContaining('dictionary unavailable'), findsOneWidget);
+  });
+
+  testWidgets('keyboard submit opens results mode', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
+    final WordItem abandon = buildWord();
+    final FakeWordRepository wordRepository = FakeWordRepository(
+      globalWords: <String, WordItem>{'abandon': abandon},
+      packWords: <String, WordItem>{'pack-1|abandon': abandon},
+      globalIndex: <WordItem>[abandon],
+    );
+    final FakeDictionaryRepository dictionaryRepository =
+        FakeDictionaryRepository(
+      lookupResult: DictionaryLookupResult.fallback(
+        translatedText: 'terk etmek',
+        fromServerCache: false,
+        fromDeepL: true,
+      ),
+    );
+
+    await pumpPage(
+      tester,
+      wordRepository: wordRepository,
+      dictionaryRepository: dictionaryRepository,
+    );
+
+    await tester.tap(find.byKey(const ValueKey<String>('word-search-field')));
+    await tester.pump();
+    await tester.enterText(find.byType(TextField), 'abandon');
+    await tester.testTextInput.receiveAction(TextInputAction.search);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-search-results-view')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('word-search-filter-bar')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('empty word and dictionary results show a single no-results card',
+      (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
+    final FakeWordRepository wordRepository = FakeWordRepository(
+      globalWords: const <String, WordItem>{},
+      packWords: const <String, WordItem>{},
+      globalIndex: const <WordItem>[],
+    );
+    final FakeDictionaryRepository dictionaryRepository =
+        FakeDictionaryRepository(
+      lookupResult: DictionaryLookupResult.empty(),
+    );
+
+    await pumpPage(
+      tester,
+      wordRepository: wordRepository,
+      dictionaryRepository: dictionaryRepository,
+    );
+
+    await tester.enterText(find.byType(TextField), 'missing');
+    tester.testTextInput.hide();
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word-search-submit-button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('word-search-empty-results-section')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('word-card-empty-section')),
+      findsNothing,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('dictionary-result-section')),
+      findsNothing,
+    );
+  });
+
+  testWidgets('search button stays separate and meets minimum hit target', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
+    final FakeWordRepository wordRepository = FakeWordRepository(
+      globalWords: const <String, WordItem>{},
+      packWords: const <String, WordItem>{},
+      globalIndex: const <WordItem>[],
+    );
+    final FakeDictionaryRepository dictionaryRepository =
+        FakeDictionaryRepository(
+      lookupResult: DictionaryLookupResult.empty(),
+    );
+
+    await pumpPage(
+      tester,
+      wordRepository: wordRepository,
+      dictionaryRepository: dictionaryRepository,
+    );
+
+    final Finder submitButton = find.byKey(
+      const ValueKey<String>('word-search-submit-button'),
+    );
+    final Size size = tester.getSize(submitButton);
+    expect(size.height, greaterThanOrEqualTo(48));
+
+    final SemanticsHandle handle = tester.ensureSemantics();
+    try {
+      final SemanticsNode node = tester.getSemantics(submitButton);
+      final SemanticsData data = node.getSemanticsData();
+      expect(
+        data.label,
+        'Ara',
+      );
+      expect(data.flagsCollection.isButton, isTrue);
+      expect(data.flagsCollection.isEnabled != ui.Tristate.none, isTrue);
+      expect(data.flagsCollection.isEnabled == ui.Tristate.isTrue, isTrue);
+    } finally {
+      handle.dispose();
+    }
   });
 }
-

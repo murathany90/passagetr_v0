@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
 import '../../core/widgets/app_error_state.dart';
+import '../../core/widgets/app_gradient_cta_button.dart';
 import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_section_header.dart';
 import '../../core/widgets/app_stat_tile.dart';
@@ -147,111 +148,122 @@ class ProfilePage extends ConsumerWidget {
             },
           ),
           const SizedBox(height: 12),
-          const AppSectionHeader(title: 'Sistem Durumu'),
-          const SizedBox(height: 8),
-          AppSurfaceCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const _InfoRow(
-                  label: 'Auth',
-                  value: 'Anonymous',
-                ),
-                _InfoRow(
-                  label: 'Translate Provider',
-                  value: AppConfig.translateProvider,
-                ),
-                const _InfoRow(
-                  label: 'Progress Mode',
-                  value: AppConfig.useProgressRpc ? 'RPC' : 'Upsert',
-                ),
-              ],
+          AppGradientCtaButton(
+            onTap: () => _openSettingsSheet(
+              context,
+              ref,
+              packs.valueOrNull ?? const <Pack>[],
             ),
+            icon: Icons.settings_outlined,
+            label: 'Profil Ayarlari',
           ),
-          const SizedBox(height: 12),
-          const AppSectionHeader(title: 'Tema'),
           const SizedBox(height: 8),
-          AppSurfaceCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Gorunum Modu',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color:
-                            Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+          Text(
+            'Dil, seviye, tema ve sistem durumunu alt menuden yonetebilirsin.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: double.infinity,
-                  child: SegmentedButton<ThemeMode>(
-                    segments: const <ButtonSegment<ThemeMode>>[
-                      ButtonSegment<ThemeMode>(
-                        value: ThemeMode.light,
-                        icon: Icon(Icons.light_mode_outlined),
-                        label: Text('Light'),
-                      ),
-                      ButtonSegment<ThemeMode>(
-                        value: ThemeMode.dark,
-                        icon: Icon(Icons.dark_mode_outlined),
-                        label: Text('Dark'),
-                      ),
-                      ButtonSegment<ThemeMode>(
-                        value: ThemeMode.system,
-                        icon: Icon(Icons.settings_outlined),
-                        label: Text('System'),
-                      ),
-                    ],
-                    selected: <ThemeMode>{ref.watch(themeModeProvider)},
-                    onSelectionChanged: (Set<ThemeMode> selected) {
-                      ref
-                          .read(themeModeProvider.notifier)
-                          .setMode(selected.first);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-          const AppSectionHeader(title: 'Icerik'),
-          const SizedBox(height: 8),
-          packs.when(
-            loading: () => const AppShimmerCard(),
-            error: (Object error, StackTrace stack) => AppErrorState(
-              title: 'Pack ozeti alinamadi.',
-              detail: error.toString(),
-              onRetry: () => ref.invalidate(packListProvider),
-            ),
-            data: (List<Pack> items) {
-              final int totalWords =
-                  items.fold<int>(0, (int sum, Pack p) => sum + p.wordCount);
-              return AppSurfaceCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    _InfoRow(label: 'Toplam Pack', value: '${items.length}'),
-                    _InfoRow(label: 'Toplam Kelime', value: '$totalWords'),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Faz 3 premium uyum profili aktif.',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                    ),
-                  ],
-                ),
-              );
-            },
           ),
         ],
       ),
     );
   }
-}
 
+  Future<void> _openSettingsSheet(
+    BuildContext context,
+    WidgetRef ref,
+    List<Pack> packs,
+  ) async {
+    final int totalWords =
+        packs.fold<int>(0, (int sum, Pack p) => sum + p.wordCount);
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) {
+        return SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Profil',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                const SizedBox(height: 10),
+                AppSurfaceCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const _InfoRow(label: 'Dil', value: 'Turkce'),
+                      const _InfoRow(label: 'Auth', value: 'Anonymous'),
+                      _InfoRow(
+                        label: 'Translate Provider',
+                        value: AppConfig.translateProvider,
+                      ),
+                      const _InfoRow(
+                        label: 'Progress Mode',
+                        value: AppConfig.useProgressRpc ? 'RPC' : 'Upsert',
+                      ),
+                      _InfoRow(label: 'Toplam Pack', value: '${packs.length}'),
+                      _InfoRow(label: 'Toplam Kelime', value: '$totalWords'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                AppSurfaceCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Gorunum Modu',
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                      const SizedBox(height: 8),
+                      SizedBox(
+                        width: double.infinity,
+                        child: SegmentedButton<ThemeMode>(
+                          segments: const <ButtonSegment<ThemeMode>>[
+                            ButtonSegment<ThemeMode>(
+                              value: ThemeMode.light,
+                              icon: Icon(Icons.light_mode_outlined),
+                              label: Text('Light'),
+                            ),
+                            ButtonSegment<ThemeMode>(
+                              value: ThemeMode.dark,
+                              icon: Icon(Icons.dark_mode_outlined),
+                              label: Text('Dark'),
+                            ),
+                            ButtonSegment<ThemeMode>(
+                              value: ThemeMode.system,
+                              icon: Icon(Icons.settings_outlined),
+                              label: Text('System'),
+                            ),
+                          ],
+                          selected: <ThemeMode>{ref.watch(themeModeProvider)},
+                          onSelectionChanged: (Set<ThemeMode> selected) {
+                            ref
+                                .read(themeModeProvider.notifier)
+                                .setMode(selected.first);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
 
 String _friendlyDashboardDetail(Object error) {
   final String text = error.toString().toLowerCase();
