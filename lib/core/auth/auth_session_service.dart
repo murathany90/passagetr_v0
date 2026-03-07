@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../config/app_config.dart';
+import '../utils/network_error_classifier.dart';
 
 class AuthSessionService {
   AuthSessionService(this._client);
@@ -53,16 +52,7 @@ class AuthSessionService {
 
   /// Checks if the error is a network connectivity issue.
   static bool _isNetworkError(Object error) {
-    if (error is SocketException) {
-      return true;
-    }
-    final String message = error.toString().toLowerCase();
-    return message.contains('socketexception') ||
-        message.contains('failed host lookup') ||
-        message.contains('no address associated') ||
-        message.contains('connection refused') ||
-        message.contains('network is unreachable') ||
-        message.contains('clientexception');
+    return NetworkErrorClassifier.isNetworkLikeError(error);
   }
 }
 

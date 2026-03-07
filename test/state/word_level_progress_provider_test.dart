@@ -13,19 +13,18 @@ import 'package:passagetr/state/progress_providers.dart';
 import 'package:passagetr/state/word_providers.dart';
 
 void main() {
-  test('wordLevelProgressProvider batches large progress queries', () async {
+  test('wordLevelProgressProvider uses aggregated studied counts', () async {
     final _BatchingWordRepository wordRepository = _BatchingWordRepository(
       levels: const <WordLevelSummary>[
         WordLevelSummary(level: 'A1', wordCount: 600),
+        WordLevelSummary(level: 'B1', wordCount: 320),
       ],
-      wordIdsByLevel: <String, List<String>>{
-        'A1': List<String>.generate(600, (int index) => 'w$index'),
-      },
     );
     final _RecordingProgressRepository progressRepository =
         _RecordingProgressRepository(
-      seenWordIds: <String>{
-        for (int index = 0; index < 120; index++) 'w$index',
+      studiedCounts: <String, int>{
+        'A1': 120,
+        'B1': 45,
       },
     );
 
@@ -41,29 +40,29 @@ void main() {
     final List<WordLevelProgressSummary> result =
         await container.read(wordLevelProgressProvider.future);
 
-    expect(result, hasLength(1));
+    expect(result, hasLength(2));
     expect(result.first.level, 'A1');
     expect(result.first.wordCount, 600);
     expect(result.first.studiedWordCount, 120);
-    expect(progressRepository.requestSizes, <int>[250, 250, 100]);
+    expect(result.last.level, 'B1');
+    expect(result.last.studiedWordCount, 45);
+    expect(progressRepository.requestedLevels, <String>['A1', 'B1']);
   });
 }
 
 class _BatchingWordRepository implements WordRepository {
   _BatchingWordRepository({
     required this.levels,
-    required this.wordIdsByLevel,
   });
 
   final List<WordLevelSummary> levels;
-  final Map<String, List<String>> wordIdsByLevel;
 
   @override
   Future<List<WordLevelSummary>> getLevelsWithWordCount() async => levels;
 
   @override
   Future<List<String>> getWordIdsByLevel(String level) async =>
-      wordIdsByLevel[level] ?? const <String>[];
+      const <String>[];
 
   @override
   Future<List<String>> getDistinctPosValues({
@@ -141,31 +140,27 @@ class _BatchingWordRepository implements WordRepository {
 
 class _RecordingProgressRepository implements ProgressRepository {
   _RecordingProgressRepository({
-    required this.seenWordIds,
+    required this.studiedCounts,
   });
 
-  final Set<String> seenWordIds;
-  final List<int> requestSizes = <int>[];
+  final Map<String, int> studiedCounts;
+  final List<String> requestedLevels = <String>[];
 
   @override
   Future<Map<String, UserWordProgress>> getProgressMap({
     required List<String> wordIds,
   }) async {
-    requestSizes.add(wordIds.length);
-    return <String, UserWordProgress>{
-      for (final String wordId in wordIds)
-        if (seenWordIds.contains(wordId))
-          wordId: UserWordProgress(
-            userId: 'u1',
-            wordId: wordId,
-            mastery: 10,
-            seenCount: 1,
-            correctCount: 1,
-            wrongCount: 0,
-            lastSeenAt: null,
-            lastAnswer: 'known',
-          ),
-    };
+    return const <String, UserWordProgress>{};
+  }
+
+  @override
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  }) async {
+    requestedLevels
+      ..clear()
+      ..addAll(levels);
+    return studiedCounts;
   }
 
   @override

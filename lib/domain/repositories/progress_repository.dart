@@ -16,6 +16,10 @@ abstract class ProgressRepository {
     required List<String> wordIds,
   });
 
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  });
+
   Future<int> getTodayWordCount();
 
   Future<List<String>> getWeakWordIds({

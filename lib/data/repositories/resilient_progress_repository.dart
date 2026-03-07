@@ -68,6 +68,21 @@ class ResilientProgressRepository implements ProgressRepository {
   }
 
   @override
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  }) async {
+    try {
+      return await _base.getStudiedWordCountByLevel(levels: levels);
+    } catch (error) {
+      if (NetworkErrorClassifier.isNetworkLikeError(error) ||
+          NetworkErrorClassifier.isAuthTransientError(error)) {
+        return const <String, int>{};
+      }
+      rethrow;
+    }
+  }
+
+  @override
   Future<int> getTodayWordCount() async {
     try {
       return await _base.getTodayWordCount();

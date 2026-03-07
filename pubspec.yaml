@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.5.1
   supabase_flutter: ^2.8.4
   drift: ^2.20.3
@@ -55,5 +58,6 @@ flutter:
   assets:
     - assets/branding/app_icon_source.png
     - assets/db/dictionary_local.sqlite
+    - assets/db/dictionary_local.meta.json
     - assets/db/app_content.db
     - assets/db/app_content.meta.json

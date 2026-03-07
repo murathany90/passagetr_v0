@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/layout/app_breakpoints.dart';
 import '../../core/utils/network_error_classifier.dart';
 import '../../core/utils/raw_splitter.dart';
 import '../../core/utils/word_selection_utils.dart';
@@ -44,11 +47,15 @@ class FlashcardSessionPage extends ConsumerStatefulWidget {
 class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
   final List<WordItem> _words = <WordItem>[];
   final AppinioSwiperController _swiperController = AppinioSwiperController();
+  final FocusNode _desktopFocusNode = FocusNode(
+    debugLabel: 'flashcardDesktopFocus',
+  );
 
   bool _loading = true;
   bool _loadingMore = false;
   bool _saving = false;
   bool _hasMore = true;
+  bool _desktopShowBack = false;
   int _offset = 0;
   int _index = 0;
   String? _errorMessage;
@@ -61,11 +68,18 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       (widget.customWordIds ?? const <String>[]).isNotEmpty;
 
   String get _title => widget.sessionLabel ?? 'Flashcard';
+  bool get _canAnswerCurrent => _index < _words.length;
 
   @override
   void initState() {
     super.initState();
     _loadInitial();
+  }
+
+  @override
+  void dispose() {
+    _desktopFocusNode.dispose();
+    super.dispose();
   }
 
   Future<void> _loadInitial() async {
@@ -75,6 +89,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       _words.clear();
       _offset = 0;
       _hasMore = true;
+      _desktopShowBack = false;
       _index = 0;
       _knownCount = 0;
       _unsureCount = 0;
@@ -105,7 +120,8 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
 
     try {
       final WordRepository repository = ref.read(wordRepositoryProvider);
-      final List<WordItem> words = await repository.getWordsByIds(ids);
+      final List<WordItem> fetchedWords = await repository.getWordsByIds(ids);
+      final List<WordItem> words = _filterRenderableWords(fetchedWords);
       if (!mounted) {
         return;
       }
@@ -113,6 +129,9 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
         _words.addAll(words);
         _offset = words.length;
         _hasMore = false;
+        if (fetchedWords.isNotEmpty && words.isEmpty) {
+          _errorMessage = 'Kelime verisi eksik geldigi icin oturum acilamadi.';
+        }
       });
     } catch (error) {
       if (!mounted) {
@@ -133,19 +152,23 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     });
     try {
       final WordRepository repository = ref.read(wordRepositoryProvider);
-      final List<WordItem> batch = await repository.getSessionBatch(
+      final List<WordItem> fetchedBatch = await repository.getSessionBatch(
         widget.pack.id,
         limit: AppConstants.sessionBatchSize,
         offset: _offset,
       );
+      final List<WordItem> batch = _filterRenderableWords(fetchedBatch);
 
       if (!mounted) {
         return;
       }
       setState(() {
         _words.addAll(batch);
-        _offset += batch.length;
-        _hasMore = batch.length == AppConstants.sessionBatchSize;
+        _offset += fetchedBatch.length;
+        _hasMore = fetchedBatch.length == AppConstants.sessionBatchSize;
+        if (fetchedBatch.isNotEmpty && batch.isEmpty && _words.isEmpty) {
+          _errorMessage = 'Kelime verisi eksik geldigi icin oturum acilamadi.';
+        }
       });
     } catch (error) {
       if (!mounted) {
@@ -191,6 +214,7 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       }
 
       setState(() {
+        _desktopShowBack = false;
         _index++;
       });
 
@@ -209,9 +233,9 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
         error,
         fallback: 'Ilerleme su an kaydedilemedi.',
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) {
         setState(() {
@@ -228,8 +252,9 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     }
 
     final WordRepository wordRepository = ref.read(wordRepositoryProvider);
-    final WordItem? target =
-        await wordRepository.getWordByEnWordGlobal(normalized);
+    final WordItem? target = await wordRepository.getWordByEnWordGlobal(
+      normalized,
+    );
     if (!mounted) {
       return;
     }
@@ -237,18 +262,18 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     if (target != null) {
       unawaited(
         Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (_) => WordDetailPage(word: target),
-          ),
+          MaterialPageRoute<void>(builder: (_) => WordDetailPage(word: target)),
         ),
       );
       return;
     }
 
-    final DictionaryRepository dictionaryRepository =
-        ref.read(dictionaryRepositoryProvider);
-    final DictionaryLookupResult lookup =
-        await dictionaryRepository.lookup(query: normalized);
+    final DictionaryRepository dictionaryRepository = ref.read(
+      dictionaryRepositoryProvider,
+    );
+    final DictionaryLookupResult lookup = await dictionaryRepository.lookup(
+      query: normalized,
+    );
     if (!mounted) {
       return;
     }
@@ -257,15 +282,17 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      builder: (_) => DictionaryFallbackSheet(
-        query: normalized,
-        lookup: lookup,
-      ),
+      builder: (_) =>
+          DictionaryFallbackSheet(query: normalized, lookup: lookup),
     );
   }
 
   void _triggerAnswer(FlashcardAnswer answer) {
     if (_saving) {
+      return;
+    }
+    if (_isDesktopLayout(context)) {
+      unawaited(_submit(answer));
       return;
     }
     switch (answer) {
@@ -278,12 +305,46 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     }
   }
 
+  KeyEventResult _handleDesktopKey(KeyEvent event) {
+    if (event is! KeyDownEvent || _saving || !_canAnswerCurrent) {
+      return KeyEventResult.ignored;
+    }
+
+    if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+      _triggerAnswer(FlashcardAnswer.unknown);
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+      _triggerAnswer(FlashcardAnswer.unsure);
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+      _triggerAnswer(FlashcardAnswer.known);
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
+  List<WordItem> _filterRenderableWords(List<WordItem> words) {
+    return words
+        .where((WordItem word) => _hasDisplayableWordContent(word))
+        .toList(growable: false);
+  }
+
+  bool _hasDisplayableWordContent(WordItem word) {
+    return word.enWord.trim().isNotEmpty ||
+        word.trMeaning.trim().isNotEmpty ||
+        word.exampleEn.trim().isNotEmpty ||
+        (word.exampleTr ?? '').trim().isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool isDesktopPage = _isDesktopLayout(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     if (_loading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (_errorMessage != null && _words.isEmpty) {
@@ -342,70 +403,304 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
       );
     }
 
+    final Widget actionBar = _FlashcardActionBar(
+      saving: _saving,
+      maxWidth: isDesktopPage ? 820 : null,
+      embedded: isDesktopPage,
+      onUnknown: () => _triggerAnswer(FlashcardAnswer.unknown),
+      onUnsure: () => _triggerAnswer(FlashcardAnswer.unsure),
+      onKnown: () => _triggerAnswer(FlashcardAnswer.known),
+    );
+
     return Scaffold(
+      backgroundColor: isDesktopPage ? colorScheme.surfaceContainerLow : null,
       appBar: AppBar(
+        backgroundColor: isDesktopPage ? colorScheme.primary : null,
+        foregroundColor: isDesktopPage ? colorScheme.onPrimary : null,
         title: Text('$_title ${_index + 1}/${_words.length}'),
       ),
-      bottomNavigationBar: _FlashcardActionBar(
-        saving: _saving,
-        onUnknown: () => _triggerAnswer(FlashcardAnswer.unknown),
-        onUnsure: () => _triggerAnswer(FlashcardAnswer.unsure),
-        onKnown: () => _triggerAnswer(FlashcardAnswer.known),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-        child: AppinioSwiper(
-          controller: _swiperController,
-          cardCount: _words.length,
-          initialIndex: _index,
-          onSwipeEnd: (
-            int previousIndex,
-            int? targetIndex,
-            SwiperActivity activity,
-          ) {
-            if (activity is Swipe) {
-              if (activity.direction == AxisDirection.right) {
-                _submit(FlashcardAnswer.known);
-              } else if (activity.direction == AxisDirection.left) {
-                _submit(FlashcardAnswer.unknown);
-              } else if (activity.direction == AxisDirection.up) {
-                _submit(FlashcardAnswer.unsure);
-              } else {
-                _submit(FlashcardAnswer.unsure);
-              }
-            }
-          },
-          cardBuilder: (BuildContext context, int index) {
-            if (index >= _words.length) {
-              return const Card(
-                child: Center(child: CircularProgressIndicator()),
-              );
-            }
-            final WordItem currentCardWord = _words[index];
-            final List<String> currentSynonyms =
-                parseRawList(currentCardWord.synonymsRaw);
-            final List<String> currentAntonyms =
-                parseRawList(currentCardWord.antonymsRaw);
+      bottomNavigationBar: isDesktopPage ? null : actionBar,
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final bool isDesktop = AppBreakpoints.isDesktopWidth(
+            constraints.maxWidth,
+          );
+          const bool useStaticWebScene = kIsWeb;
+          final Widget flashcardScene = useStaticWebScene
+              ? _buildStaticCardScene(compact: !isDesktop)
+              : isDesktop
+                  ? _buildStaticCardScene()
+                  : _buildSwiperScene();
 
-            return FlipCard(
-              direction: FlipDirection.HORIZONTAL,
-              front: AppSurfaceCard(
-                padding: const EdgeInsets.all(18),
-                child: _FrontFace(word: currentCardWord),
-              ),
-              back: AppSurfaceCard(
-                padding: const EdgeInsets.all(18),
-                child: _BackFace(
-                  word: currentCardWord,
-                  synonyms: currentSynonyms,
-                  antonyms: currentAntonyms,
-                  onRelatedWordTap: _openRelatedWord,
+          return Focus(
+            focusNode: _desktopFocusNode,
+            autofocus: isDesktop,
+            onKeyEvent: (_, KeyEvent event) =>
+                isDesktop ? _handleDesktopKey(event) : KeyEventResult.ignored,
+            child: Listener(
+              behavior: HitTestBehavior.translucent,
+              onPointerDown: isDesktop
+                  ? (_) => _desktopFocusNode.requestFocus()
+                  : null,
+              child: isDesktop
+                  ? _buildDesktopBody(flashcardScene, actionBar)
+                  : Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: flashcardScene,
+                    ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  bool _isDesktopLayout(BuildContext context) {
+    return AppBreakpoints.isDesktopWidth(MediaQuery.sizeOf(context).width);
+  }
+
+  Widget _buildDesktopBody(Widget cardScene, Widget actionBar) {
+    final int remaining = (_words.length - _index).clamp(0, _words.length);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+      child: Row(
+        key: const ValueKey<String>('flashcard-desktop-layout'),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 760),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      AppSurfaceCard(
+                        variant: AppSurfaceVariant.feature,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 12,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(
+                                'Kart ${_index + 1}/${_words.length}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.w800),
+                              ),
+                            ),
+                            Text(
+                              'Kalan: $remaining',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurfaceVariant,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      cardScene,
+                      const SizedBox(height: 14),
+                      actionBar,
+                    ],
+                  ),
                 ),
               ),
-            );
-          },
+            ),
+          ),
+          const SizedBox(width: 20),
+          SizedBox(
+            width: 280,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                AppSurfaceCard(
+                  variant: AppSurfaceVariant.feature,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Oturum Durumu',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
+                      ),
+                      const SizedBox(height: 10),
+                      _SessionMetric(label: 'Paket', value: widget.pack.name),
+                      _SessionMetric(label: 'Kalan Kart', value: '$remaining'),
+                      _SessionMetric(label: 'Bilirim', value: '$_knownCount'),
+                      _SessionMetric(label: 'Kararsiz', value: '$_unsureCount'),
+                      _SessionMetric(label: 'Bilmem', value: '$_unknownCount'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                AppSurfaceCard(
+                  variant: AppSurfaceVariant.grouped,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Kisayollar',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Kart uzerine tiklayip odagi koruyabilirsin.',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurfaceVariant,
+                            ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text('Sol ok: Bilmem'),
+                      const SizedBox(height: 6),
+                      const Text('Yukari ok: Kararsiz'),
+                      const SizedBox(height: 6),
+                      const Text('Sag ok: Bilirim'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStaticCardScene({bool compact = false}) {
+    final WordItem currentWord = _words[_index];
+    final List<String> currentSynonyms = parseRawList(currentWord.synonymsRaw);
+    final List<String> currentAntonyms = parseRawList(currentWord.antonymsRaw);
+    final double minHeight = compact ? 420 : 560;
+    final EdgeInsetsGeometry padding = EdgeInsets.all(compact ? 16 : 18);
+    final BorderRadius borderRadius = BorderRadius.circular(compact ? 20 : 24);
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: minHeight),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: borderRadius,
+          border: Border.all(
+            color: Theme.of(
+              context,
+            ).colorScheme.outlineVariant.withValues(alpha: 0.9),
+          ),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              blurRadius: 24,
+              offset: const Offset(0, 14),
+              color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.08),
+            ),
+          ],
+        ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              key: const ValueKey<String>('flashcard-static-scene'),
+              borderRadius: borderRadius,
+              onTap: () {
+                setState(() {
+                _desktopShowBack = !_desktopShowBack;
+              });
+            },
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 220),
+              switchInCurve: Curves.easeOutCubic,
+              switchOutCurve: Curves.easeInCubic,
+              child: Container(
+                key: ValueKey<String>(
+                  'flashcard-${currentWord.id}-${_desktopShowBack ? 'back' : 'front'}',
+                ),
+                constraints: BoxConstraints(minHeight: minHeight),
+                child: DefaultTextStyle.merge(
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  child: _desktopShowBack
+                      ? Padding(
+                          padding: padding,
+                          child: _BackFace(
+                            word: currentWord,
+                            synonyms: currentSynonyms,
+                            antonyms: currentAntonyms,
+                            onRelatedWordTap: _openRelatedWord,
+                          ),
+                        )
+                      : Padding(
+                          padding: padding,
+                          child: Center(child: _FrontFace(word: currentWord)),
+                        ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSwiperScene() {
+    return AppinioSwiper(
+      controller: _swiperController,
+      cardCount: _words.length,
+      initialIndex: _index,
+      onSwipeEnd:
+          (int previousIndex, int? targetIndex, SwiperActivity activity) {
+        if (activity is Swipe) {
+          if (activity.direction == AxisDirection.right) {
+            _submit(FlashcardAnswer.known);
+          } else if (activity.direction == AxisDirection.left) {
+            _submit(FlashcardAnswer.unknown);
+          } else if (activity.direction == AxisDirection.up) {
+            _submit(FlashcardAnswer.unsure);
+          } else {
+            _submit(FlashcardAnswer.unsure);
+          }
+        }
+      },
+      cardBuilder: (BuildContext context, int index) {
+        if (index >= _words.length) {
+          return const Card(child: Center(child: CircularProgressIndicator()));
+        }
+        final WordItem currentCardWord = _words[index];
+        final List<String> currentSynonyms = parseRawList(
+          currentCardWord.synonymsRaw,
+        );
+        final List<String> currentAntonyms = parseRawList(
+          currentCardWord.antonymsRaw,
+        );
+
+        return FlipCard(
+          key: ValueKey<String>('flashcard-${currentCardWord.id}'),
+          direction: FlipDirection.HORIZONTAL,
+          front: AppSurfaceCard(
+            padding: const EdgeInsets.all(18),
+            child: _FrontFace(word: currentCardWord),
+          ),
+          back: AppSurfaceCard(
+            padding: const EdgeInsets.all(18),
+            child: _BackFace(
+              word: currentCardWord,
+              synonyms: currentSynonyms,
+              antonyms: currentAntonyms,
+              onRelatedWordTap: _openRelatedWord,
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -417,23 +712,31 @@ class _FrontFace extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final String displayWord = word.enWord.trim().isEmpty
+        ? 'Kelime verisi eksik'
+        : word.enWord;
+    final bool canSpeak = word.enWord.trim().isNotEmpty;
+    final bool hasPos = word.pos.trim().isNotEmpty;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          word.enWord,
+          displayWord,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w800,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 8),
-        AppSpeakButton(text: word.enWord),
+        if (canSpeak) AppSpeakButton(text: word.enWord),
         const SizedBox(height: 8),
-        Chip(label: Text(word.pos)),
+        if (hasPos) Chip(label: Text(word.pos)),
         const SizedBox(height: 16),
         Text(
-          'Detaylari gormek icin karta dokun',
+          canSpeak
+              ? 'Detaylari gormek icin karta dokun'
+              : 'Bu kelime kaydinda eksik alanlar var.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
@@ -460,135 +763,140 @@ class _BackFace extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> tags = parseRawList(word.tagsRaw);
     final String level = (word.level ?? '').trim().toUpperCase();
-    final bool hasDetailPanel =
-        word.exampleEn.trim().isNotEmpty ||
-            (word.exampleTr ?? '').trim().isNotEmpty ||
-            (word.notes ?? '').trim().isNotEmpty;
+    final String displayMeaning = word.trMeaning.trim().isEmpty
+        ? 'Anlam verisi eksik'
+        : word.trMeaning;
+    final bool canSpeak = word.enWord.trim().isNotEmpty;
+    final bool hasDetailPanel = word.exampleEn.trim().isNotEmpty ||
+        (word.exampleTr ?? '').trim().isNotEmpty ||
+        (word.notes ?? '').trim().isNotEmpty;
 
-    return ListView(
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      word.trMeaning,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                    ),
-                  ),
-                  AppSpeakButton(text: word.enWord),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: <Widget>[
-                  Chip(
-                    label: Text(word.pos),
-                    visualDensity: VisualDensity.compact,
-                  ),
-                  if (level.isNotEmpty)
-                    Chip(
-                      label: Text(level),
-                      visualDensity: VisualDensity.compact,
-                    ),
-                  if (tags.isNotEmpty)
-                    ...tags.take(2).map(
-                      (String tag) => Chip(
-                        label: Text(tag),
-                        visualDensity: VisualDensity.compact,
+    return SingleChildScrollView(
+      key: const ValueKey<String>('flashcard-back-face-list'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        displayMeaning,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(fontWeight: FontWeight.w800),
                       ),
                     ),
+                    if (canSpeak) AppSpeakButton(text: word.enWord),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    if (word.pos.trim().isNotEmpty)
+                      Chip(
+                        label: Text(word.pos),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                    if (level.isNotEmpty)
+                      Chip(
+                        label: Text(level),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                    if (tags.isNotEmpty)
+                      ...tags.take(2).map(
+                        (String tag) => Chip(
+                          label: Text(tag),
+                          visualDensity: VisualDensity.compact,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          if (hasDetailPanel) ...<Widget>[
+            const SizedBox(height: 12),
+            AppSurfaceCard(
+              variant: AppSurfaceVariant.grouped,
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  if (word.exampleEn.trim().isNotEmpty)
+                    _BackFaceInfoBlock(
+                      title: 'EN Ornek',
+                      value: word.exampleEn,
+                      trailing: AppSpeakButton(
+                        text: word.exampleEn,
+                        iconSize: 18,
+                      ),
+                    ),
+                  if ((word.exampleTr ?? '').trim().isNotEmpty) ...<Widget>[
+                    if (word.exampleEn.trim().isNotEmpty)
+                      const SizedBox(height: 12),
+                    _BackFaceInfoBlock(
+                      title: 'TR Ornek',
+                      value: word.exampleTr!,
+                    ),
+                  ],
+                  if ((word.notes ?? '').trim().isNotEmpty) ...<Widget>[
+                    if (word.exampleEn.trim().isNotEmpty ||
+                        (word.exampleTr ?? '').trim().isNotEmpty)
+                      const SizedBox(height: 12),
+                    _BackFaceInfoBlock(title: 'Not', value: word.notes!),
+                  ],
                 ],
               ),
-            ],
-          ),
-        ),
-        if (hasDetailPanel) ...<Widget>[
-          const SizedBox(height: 12),
-          AppSurfaceCard(
-            variant: AppSurfaceVariant.grouped,
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                if (word.exampleEn.trim().isNotEmpty)
-                  _BackFaceInfoBlock(
-                    title: 'EN Ornek',
-                    value: word.exampleEn,
-                    trailing: AppSpeakButton(
-                      text: word.exampleEn,
-                      iconSize: 18,
+            ),
+          ],
+          if (synonyms.isNotEmpty ||
+              antonyms.isNotEmpty ||
+              tags.isNotEmpty) ...<Widget>[
+            const SizedBox(height: 12),
+            AppSurfaceCard(
+              variant: AppSurfaceVariant.grouped,
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  if (synonyms.isNotEmpty)
+                    _RelationSection(
+                      title: 'Synonyms',
+                      values: synonyms,
+                      onTap: onRelatedWordTap,
                     ),
-                  ),
-                if ((word.exampleTr ?? '').trim().isNotEmpty) ...<Widget>[
-                  if (word.exampleEn.trim().isNotEmpty)
-                    const SizedBox(height: 12),
-                  _BackFaceInfoBlock(
-                    title: 'TR Ornek',
-                    value: word.exampleTr!,
-                  ),
+                  if (antonyms.isNotEmpty) ...<Widget>[
+                    if (synonyms.isNotEmpty) const SizedBox(height: 12),
+                    _RelationSection(
+                      title: 'Antonyms',
+                      values: antonyms,
+                      onTap: onRelatedWordTap,
+                    ),
+                  ],
+                  if (tags.isNotEmpty) ...<Widget>[
+                    if (synonyms.isNotEmpty || antonyms.isNotEmpty)
+                      const SizedBox(height: 12),
+                    _RelationSection(title: 'Etiketler', values: tags),
+                  ],
                 ],
-                if ((word.notes ?? '').trim().isNotEmpty) ...<Widget>[
-                  if (word.exampleEn.trim().isNotEmpty ||
-                      (word.exampleTr ?? '').trim().isNotEmpty)
-                    const SizedBox(height: 12),
-                  _BackFaceInfoBlock(
-                    title: 'Not',
-                    value: word.notes!,
-                  ),
-                ],
-              ],
+              ),
             ),
-          ),
+          ],
         ],
-        if (synonyms.isNotEmpty || antonyms.isNotEmpty || tags.isNotEmpty) ...<Widget>[
-          const SizedBox(height: 12),
-          AppSurfaceCard(
-            variant: AppSurfaceVariant.grouped,
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                if (synonyms.isNotEmpty)
-                  _RelationSection(
-                    title: 'Synonyms',
-                    values: synonyms,
-                    onTap: onRelatedWordTap,
-                  ),
-                if (antonyms.isNotEmpty) ...<Widget>[
-                  if (synonyms.isNotEmpty) const SizedBox(height: 12),
-                  _RelationSection(
-                    title: 'Antonyms',
-                    values: antonyms,
-                    onTap: onRelatedWordTap,
-                  ),
-                ],
-                if (tags.isNotEmpty) ...<Widget>[
-                  if (synonyms.isNotEmpty || antonyms.isNotEmpty)
-                    const SizedBox(height: 12),
-                  _RelationSection(
-                    title: 'Etiketler',
-                    values: tags,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ],
-      ],
+      ),
     );
   }
 }
@@ -614,9 +922,9 @@ class _BackFaceInfoBlock extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
               ),
             ),
             if (trailing != null) trailing!,
@@ -647,9 +955,9 @@ class _RelationSection extends StatelessWidget {
       children: <Widget>[
         Text(
           title,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w800,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 6),
         Wrap(
@@ -679,85 +987,150 @@ class _FlashcardActionBar extends StatelessWidget {
     required this.onUnknown,
     required this.onUnsure,
     required this.onKnown,
+    this.maxWidth,
+    this.embedded = false,
   });
 
   final bool saving;
   final VoidCallback onUnknown;
   final VoidCallback onUnsure;
   final VoidCallback onKnown;
+  final double? maxWidth;
+  final bool embedded;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Container(
-        key: const ValueKey<String>('flashcard-action-bar'),
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          border: Border(
-            top: BorderSide(
-              color: Theme.of(context)
-                  .colorScheme
-                  .outlineVariant
-                  .withValues(alpha: 0.72),
-            ),
+    final Widget content = Container(
+      key: const ValueKey<String>('flashcard-action-bar'),
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: embedded
+            ? Border.all(
+                color: Theme.of(
+                  context,
+                ).colorScheme.outlineVariant.withValues(alpha: 0.72),
+              )
+            : Border(
+                top: BorderSide(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outlineVariant.withValues(alpha: 0.72),
+                ),
+              ),
+        borderRadius: embedded ? BorderRadius.circular(20) : null,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          key: const ValueKey<String>('flashcard-action-bar-content'),
+          constraints: BoxConstraints(maxWidth: maxWidth ?? double.infinity),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                'Sola: Bilmem | Yukari: Kararsiz | Saga: Bilirim',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: _ActionButton(
+                      label: 'Bilmem',
+                      icon: Icons.close_rounded,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.errorContainer,
+                      foregroundColor: Theme.of(
+                        context,
+                      ).colorScheme.onErrorContainer,
+                      enabled: !saving,
+                      onPressed: onUnknown,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: _ActionButton(
+                      label: 'Kararsiz',
+                      icon: Icons.help_outline_rounded,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.secondaryContainer,
+                      foregroundColor: Theme.of(
+                        context,
+                      ).colorScheme.onSecondaryContainer,
+                      enabled: !saving,
+                      onPressed: onUnsure,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: _ActionButton(
+                      label: 'Bilirim',
+                      icon: Icons.check_rounded,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer,
+                      foregroundColor: Theme.of(
+                        context,
+                      ).colorScheme.onPrimaryContainer,
+                      enabled: !saving,
+                      onPressed: onKnown,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'Sola: Bilmem | Yukari: Kararsiz | Saga: Bilirim',
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+      ),
+    );
+
+    if (embedded) {
+      return content;
+    }
+
+    return SafeArea(top: false, child: content);
+  }
+}
+
+class _SessionMetric extends StatelessWidget {
+  const _SessionMetric({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
             ),
-            const SizedBox(height: 8),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: _ActionButton(
-                    label: 'Bilmem',
-                    icon: Icons.close_rounded,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.errorContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onErrorContainer,
-                    enabled: !saving,
-                    onPressed: onUnknown,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _ActionButton(
-                    label: 'Kararsiz',
-                    icon: Icons.help_outline_rounded,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    enabled: !saving,
-                    onPressed: onUnsure,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _ActionButton(
-                    label: 'Bilirim',
-                    icon: Icons.check_rounded,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onPrimaryContainer,
-                    enabled: !saving,
-                    onPressed: onKnown,
-                  ),
-                ),
-              ],
+          ),
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              value,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.right,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -790,15 +1163,10 @@ class _ActionButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.w700,
-          ),
+          textStyle: const TextStyle(fontWeight: FontWeight.w700),
         ),
         icon: Icon(icon, size: 18),
-        label: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(label),
-        ),
+        label: FittedBox(fit: BoxFit.scaleDown, child: Text(label)),
       ),
     );
   }
@@ -870,10 +1238,7 @@ class _SummaryView extends StatelessWidget {
 }
 
 class _SummaryMetric extends StatelessWidget {
-  const _SummaryMetric({
-    required this.label,
-    required this.value,
-  });
+  const _SummaryMetric({required this.label, required this.value});
 
   final String label;
   final int value;
@@ -887,9 +1252,9 @@ class _SummaryMetric extends StatelessWidget {
           Expanded(child: Text(label)),
           Text(
             '$value',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
           ),
         ],
       ),

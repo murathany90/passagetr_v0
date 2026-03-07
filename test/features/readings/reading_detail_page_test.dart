@@ -84,7 +84,7 @@ void main() {
   testWidgets(
     'opens translation on sentence long press and dictionary on word tap',
     (WidgetTester tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.physicalSize = const Size(390, 844);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {
         tester.view.resetPhysicalSize();
@@ -121,24 +121,18 @@ void main() {
             appContentDatasetVersionProvider.overrideWith(
               (Ref ref) async => 'v-test',
             ),
-            readingRepositoryProvider
-                .overrideWith((Ref ref) => readingRepository),
+            readingRepositoryProvider.overrideWith(
+              (Ref ref) => readingRepository,
+            ),
             wordRepositoryProvider.overrideWith((Ref ref) => wordRepository),
             translationServiceProvider.overrideWith(
-              (Ref ref) => FakeTranslationService(
-                key: 'fake',
-                translation: 'dummy',
-              ),
+              (Ref ref) =>
+                  FakeTranslationService(key: 'fake', translation: 'dummy'),
             ),
-            offlineSyncControllerProvider.overrideWith(
-              (Ref ref) => controller,
-            ),
+            offlineSyncControllerProvider.overrideWith((Ref ref) => controller),
           ],
           child: const MaterialApp(
-            home: ReadingDetailPage(
-              passage: passage,
-              pack: pack,
-            ),
+            home: ReadingDetailPage(passage: passage, pack: pack),
           ),
         ),
       );
@@ -171,10 +165,7 @@ void main() {
         findsNothing,
       );
 
-      await tester.dragFrom(
-        const Offset(80, 220),
-        const Offset(0, -120),
-      );
+      await tester.dragFrom(const Offset(80, 220), const Offset(0, -120));
       await tester.pumpAndSettle();
 
       expect(
@@ -203,6 +194,170 @@ void main() {
       expect(find.text('Mini Test'), findsOneWidget);
       expect(find.textContaining('dataset'), findsNothing);
       expect(find.text('x1'), findsNothing);
+    },
+  );
+
+  testWidgets('still loads the paragraph when highlight enrichment fails', (
+    WidgetTester tester,
+  ) async {
+    final FakeReadingRepository readingRepository = FakeReadingRepository(
+      sentences: const <PassageSentence>[firstSentence, thirdSentence],
+    );
+    final FakeWordRepository wordRepository = FakeWordRepository(
+      globalWords: const <String, WordItem>{},
+      globalIndex: const <WordItem>[],
+    );
+    final OfflineSyncController controller = OfflineSyncController(
+      queueStore: OfflineSyncQueueStore(),
+      readingRemote: _NoopReadingRepository(),
+      progressRemote: _NoopProgressRepository(),
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: <Override>[
+          appContentDatasetVersionProvider.overrideWith(
+            (Ref ref) async => throw StateError('dataset unavailable'),
+          ),
+          readingRepositoryProvider.overrideWith(
+            (Ref ref) => readingRepository,
+          ),
+          wordRepositoryProvider.overrideWith((Ref ref) => wordRepository),
+          translationServiceProvider.overrideWith(
+            (Ref ref) =>
+                FakeTranslationService(key: 'fake', translation: 'dummy'),
+          ),
+          offlineSyncControllerProvider.overrideWith((Ref ref) => controller),
+        ],
+        child: const MaterialApp(
+          home: ReadingDetailPage(passage: passage, pack: pack),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Paragraf yuklenemedi.'), findsNothing);
+    expect(
+      find.byKey(const ValueKey<String>('sentence-tap-target-s1')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('sentence-tap-target-s3')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets(
+    'desktop uses side panel instead of popups for translation and dictionary',
+    (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(1440, 900);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final FakeReadingRepository readingRepository = FakeReadingRepository(
+        sentences: const <PassageSentence>[firstSentence, thirdSentence],
+        passageWords: const <WordItem>[knownWord],
+        translationMap: <String, SentenceTranslation>{
+          's1|fake|tr': SentenceTranslation(
+            id: 'tr-1',
+            sentenceId: 's1',
+            provider: 'fake',
+            targetLang: 'tr',
+            translatedText: 'Temiz yer sakin.',
+            createdAt: DateTime(2026, 3, 6),
+          ),
+        },
+      );
+      final FakeWordRepository wordRepository = FakeWordRepository(
+        globalWords: const <String, WordItem>{'clean': knownWord},
+        globalIndex: const <WordItem>[knownWord],
+      );
+      final OfflineSyncController controller = OfflineSyncController(
+        queueStore: OfflineSyncQueueStore(),
+        readingRemote: _NoopReadingRepository(),
+        progressRemote: _NoopProgressRepository(),
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: <Override>[
+            appContentDatasetVersionProvider.overrideWith(
+              (Ref ref) async => 'v-test',
+            ),
+            readingRepositoryProvider.overrideWith(
+              (Ref ref) => readingRepository,
+            ),
+            wordRepositoryProvider.overrideWith((Ref ref) => wordRepository),
+            translationServiceProvider.overrideWith(
+              (Ref ref) =>
+                  FakeTranslationService(key: 'fake', translation: 'dummy'),
+            ),
+            offlineSyncControllerProvider.overrideWith((Ref ref) => controller),
+          ],
+          child: const MaterialApp(
+            home: ReadingDetailPage(passage: passage, pack: pack),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(const ValueKey<String>('reading-detail-desktop-layout')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(const ValueKey<String>('reading-detail-side-panel')),
+        findsOneWidget,
+      );
+      expect(find.text('Ilerle'), findsOneWidget);
+      expect(find.text('Bitir'), findsOneWidget);
+      expect(find.text('Secim bekleniyor'), findsOneWidget);
+
+      await tester.longPress(
+        find.byKey(const ValueKey<String>('sentence-tap-target-s1')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(const ValueKey<String>('sentence-translation-popup')),
+        findsNothing,
+      );
+      expect(find.text('Secili cumle'), findsOneWidget);
+      expect(find.text('Temiz yer sakin.'), findsOneWidget);
+
+      await tester.tap(
+        find.byKey(const ValueKey<String>('sentence-translate-action-s1')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Secili cumle'), findsOneWidget);
+      expect(find.text('Temiz yer sakin.'), findsOneWidget);
+
+      await tester.tap(
+        find.byKey(const ValueKey<String>('interactive-word-clean-4')),
+      );
+      await tester.pumpAndSettle();
+
+      final Finder sidePanel = find.byKey(
+        const ValueKey<String>('reading-detail-side-panel'),
+      );
+      expect(
+        find.byKey(const ValueKey<String>('word-meaning-popup')),
+        findsNothing,
+      );
+      expect(
+        find.descendant(of: sidePanel, matching: find.text('clean')),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(of: sidePanel, matching: find.text('temiz')),
+        findsOneWidget,
+      );
     },
   );
 }
@@ -350,6 +505,13 @@ class _NoopProgressRepository implements ProgressRepository {
     required List<String> wordIds,
   }) async {
     return const <String, UserWordProgress>{};
+  }
+
+  @override
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  }) async {
+    return const <String, int>{};
   }
 
   @override

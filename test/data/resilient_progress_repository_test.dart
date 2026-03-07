@@ -83,6 +83,13 @@ class FakeProgressRepository implements ProgressRepository {
   }
 
   @override
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  }) async {
+    return const <String, int>{};
+  }
+
+  @override
   Future<int> getTodayWordCount() async => 0;
 
   @override

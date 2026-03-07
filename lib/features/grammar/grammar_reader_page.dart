@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html_table/flutter_html_table.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/layout/app_breakpoints.dart';
 import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_speak_button.dart';
 import '../../core/widgets/app_surface_card.dart';
@@ -78,71 +80,106 @@ class _GrammarReaderPageState extends ConsumerState<GrammarReaderPage> {
   @override
   Widget build(BuildContext context) {
     final int total = widget.pages.length;
+    final bool isDesktop = AppBreakpoints.isDesktopWidth(
+      MediaQuery.sizeOf(context).width,
+    );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.module.baslik),
-      ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(
-                      '${_currentIndex + 1}/$total',
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: LinearProgressIndicator(
-                        value: total == 0 ? 0 : (_currentIndex + 1) / total,
+      appBar: AppBar(title: Text(widget.module.baslik)),
+      body: Focus(
+        autofocus: isDesktop,
+        onKeyEvent: (_, KeyEvent event) => _handleKeyEvent(event),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '${_currentIndex + 1}/$total',
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-              ],
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: LinearProgressIndicator(
+                          value: total == 0 ? 0 : (_currentIndex + 1) / total,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: widget.pages.length,
-              onPageChanged: (int index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-                _saveResume(widget.pages[index].id);
-              },
-              itemBuilder: (BuildContext context, int index) {
-                final GrammarPage page = widget.pages[index];
-                final bool isLastPage = index == widget.pages.length - 1;
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: widget.pages.length,
+                onPageChanged: (int index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                  _saveResume(widget.pages[index].id);
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  final GrammarPage page = widget.pages[index];
+                  final bool isLastPage = index == widget.pages.length - 1;
 
-                return _PageContent(
-                  page: page,
-                  pageDisplayText: '${index + 1}/$total',
-                  isLastPage: isLastPage,
-                  onNext: () {
-                    if (isLastPage) {
-                      Navigator.of(context).pop();
-                    } else {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
-                );
-              },
-              physics: const NeverScrollableScrollPhysics(),
+                  return _PageContent(
+                    page: page,
+                    pageDisplayText: '${index + 1}/$total',
+                    isLastPage: isLastPage,
+                    canGoPrevious: index > 0,
+                    onPrevious: index > 0 ? _goPrevious : null,
+                    onNext: _goNext,
+                  );
+                },
+                physics: const NeverScrollableScrollPhysics(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  void _goNext() {
+    final bool isLastPage = _currentIndex == widget.pages.length - 1;
+    if (isLastPage) {
+      Navigator.of(context).pop();
+      return;
+    }
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _goPrevious() {
+    if (_currentIndex <= 0) {
+      return;
+    }
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  KeyEventResult _handleKeyEvent(KeyEvent event) {
+    if (event is! KeyDownEvent) {
+      return KeyEventResult.ignored;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+      _goPrevious();
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+      _goNext();
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
   }
 }
 
@@ -151,18 +188,23 @@ class _PageContent extends ConsumerWidget {
     required this.page,
     required this.pageDisplayText,
     required this.isLastPage,
+    required this.canGoPrevious,
+    required this.onPrevious,
     required this.onNext,
   });
 
   final GrammarPage page;
   final String pageDisplayText;
   final bool isLastPage;
+  final bool canGoPrevious;
+  final VoidCallback? onPrevious;
   final VoidCallback onNext;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<GrammarPageDetail> detailAsync =
-        ref.watch(grammarPageDetailProvider(page.id));
+    final AsyncValue<GrammarPageDetail> detailAsync = ref.watch(
+      grammarPageDetailProvider(page.id),
+    );
 
     return detailAsync.when(
       loading: () => const Padding(
@@ -211,80 +253,85 @@ class _PageContent extends ConsumerWidget {
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 960),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            detail.page.baslik,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(
+                                detail.page.baslik,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Chip(label: Text(pageDisplayText)),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        _buildHtml(context, ref, detail.page.icerikHtml),
+                        if (detail.examples.isNotEmpty) ...<Widget>[
+                          const SizedBox(height: 18),
+                          Text(
+                            'Örnekler',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Chip(label: Text(pageDisplayText)),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    _buildHtml(context, ref, detail.page.icerikHtml),
-                    if (detail.examples.isNotEmpty) ...<Widget>[
-                      const SizedBox(height: 18),
-                      Text(
-                        'Örnekler',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
-                      ),
-                      const SizedBox(height: 8),
-                      ...detail.examples.map(
-                        (example) => AppSurfaceCard(
-                          variant: AppSurfaceVariant.grouped,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
+                          const SizedBox(height: 8),
+                          ...detail.examples.map(
+                            (example) => AppSurfaceCard(
+                              variant: AppSurfaceVariant.grouped,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Expanded(
-                                    child: Text('EN: ${example.ingilizce}'),
+                                  Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Text('EN: ${example.ingilizce}'),
+                                      ),
+                                      AppSpeakButton(
+                                        text: example.ingilizce,
+                                        iconSize: 18,
+                                      ),
+                                    ],
                                   ),
-                                  AppSpeakButton(
-                                    text: example.ingilizce,
-                                    iconSize: 18,
-                                  ),
+                                  const SizedBox(height: 6),
+                                  Text('TR: ${example.turkce}'),
+                                  if (example.aciklama
+                                      .trim()
+                                      .isNotEmpty) ...<Widget>[
+                                    const SizedBox(height: 6),
+                                    Text('Açıklama: ${example.aciklama}'),
+                                  ],
                                 ],
                               ),
-                              const SizedBox(height: 6),
-                              Text('TR: ${example.turkce}'),
-                              if (example.aciklama.trim().isNotEmpty) ...<Widget>[
-                                const SizedBox(height: 6),
-                                Text('Açıklama: ${example.aciklama}'),
-                              ],
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
-                    if (detail.tests.isNotEmpty) ...<Widget>[
-                      const SizedBox(height: 18),
-                      Text(
-                        'Mini Test',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
-                      ),
-                      const SizedBox(height: 8),
-                      ...detail.tests.map(_InteractiveTestCard.new),
-                    ],
-                  ],
+                        ],
+                        if (detail.tests.isNotEmpty) ...<Widget>[
+                          const SizedBox(height: 18),
+                          Text(
+                            'Mini Test',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(height: 8),
+                          ...detail.tests.map(_InteractiveTestCard.new),
+                        ],
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -294,16 +341,16 @@ class _PageContent extends ConsumerWidget {
                 color: Theme.of(context).scaffoldBackgroundColor,
                 border: Border(
                   top: BorderSide(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .outlineVariant
-                        .withValues(alpha: 0.72),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.72),
                   ),
                 ),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color:
-                        Theme.of(context).shadowColor.withValues(alpha: 0.05),
+                    color: Theme.of(
+                      context,
+                    ).shadowColor.withValues(alpha: 0.05),
                     offset: const Offset(0, -4),
                     blurRadius: 16,
                   ),
@@ -311,19 +358,57 @@ class _PageContent extends ConsumerWidget {
               ),
               child: SafeArea(
                 top: false,
-                child: FilledButton(
-                  onPressed: onNext,
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size.fromHeight(56),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: Text(
-                    isLastPage ? 'Dersi Bitir' : 'Devam Et',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 720),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            key: const ValueKey<String>(
+                              'grammar-reader-previous-button',
+                            ),
+                            onPressed: canGoPrevious ? onPrevious : null,
+                            icon: const Icon(Icons.arrow_back_rounded),
+                            label: const Text(
+                              'Geri',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: FilledButton.icon(
+                            key: const ValueKey<String>(
+                              'grammar-reader-next-button',
+                            ),
+                            onPressed: onNext,
+                            style: FilledButton.styleFrom(
+                              minimumSize: const Size.fromHeight(56),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                            icon: Icon(
+                              isLastPage
+                                  ? Icons.task_alt_rounded
+                                  : Icons.arrow_forward_rounded,
+                            ),
+                            label: Text(
+                              isLastPage ? 'Dersi Bitir' : 'Ileri',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -346,8 +431,10 @@ class _PageContent extends ConsumerWidget {
     WidgetRef ref,
     String rawWord,
   ) async {
-    final String normalized =
-        rawWord.trim().toLowerCase().replaceAll(RegExp(r'[^a-zA-Z\-]'), '');
+    final String normalized = rawWord.trim().toLowerCase().replaceAll(
+          RegExp(r'[^a-zA-Z\-]'),
+          '',
+        );
     if (normalized.isEmpty) {
       return;
     }
@@ -361,17 +448,17 @@ class _PageContent extends ConsumerWidget {
 
     if (existing != null) {
       await Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => WordDetailPage(word: existing),
-        ),
+        MaterialPageRoute<void>(builder: (_) => WordDetailPage(word: existing)),
       );
       return;
     }
 
-    final DictionaryRepository dictRepo =
-        ref.read(dictionaryRepositoryProvider);
-    final DictionaryLookupResult lookup =
-        await dictRepo.lookup(query: normalized);
+    final DictionaryRepository dictRepo = ref.read(
+      dictionaryRepositoryProvider,
+    );
+    final DictionaryLookupResult lookup = await dictRepo.lookup(
+      query: normalized,
+    );
 
     if (!context.mounted) {
       return;
@@ -390,10 +477,8 @@ class _PageContent extends ConsumerWidget {
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     return SelectionArea(
-      contextMenuBuilder: (
-        BuildContext context,
-        SelectableRegionState selectableRegionState,
-      ) {
+      contextMenuBuilder:
+          (BuildContext context, SelectableRegionState selectableRegionState) {
         final List<ContextMenuButtonItem> buttonItems =
             List<ContextMenuButtonItem>.of(
           selectableRegionState.contextMenuButtonItems,
@@ -403,10 +488,9 @@ class _PageContent extends ConsumerWidget {
           ContextMenuButtonItem(
             label: 'Sözlükte Ara',
             onPressed: () {
-              final String selectedText =
-                  selectableRegionState.textEditingValue.selection.textInside(
-                selectableRegionState.textEditingValue.text,
-              );
+              final String selectedText = selectableRegionState
+                  .textEditingValue.selection
+                  .textInside(selectableRegionState.textEditingValue.text);
               ContextMenuController.removeAny();
               _lookupWord(context, ref, selectedText);
             },
@@ -419,52 +503,32 @@ class _PageContent extends ConsumerWidget {
       },
       child: Html(
         data: htmlContent,
-        extensions: const <HtmlExtension>[
-          TableHtmlExtension(),
-        ],
+        extensions: const <HtmlExtension>[TableHtmlExtension()],
         style: <String, Style>{
           'body': Style(
             margin: Margins.zero,
             fontSize: FontSize(15),
             lineHeight: const LineHeight(1.55),
           ),
-          'h1': Style(
-            fontSize: FontSize(22),
-            fontWeight: FontWeight.w700,
-          ),
-          'h2': Style(
-            fontSize: FontSize(20),
-            fontWeight: FontWeight.w700,
-          ),
-          'h3': Style(
-            fontSize: FontSize(18),
-            fontWeight: FontWeight.w600,
-          ),
+          'h1': Style(fontSize: FontSize(22), fontWeight: FontWeight.w700),
+          'h2': Style(fontSize: FontSize(20), fontWeight: FontWeight.w700),
+          'h3': Style(fontSize: FontSize(18), fontWeight: FontWeight.w600),
           'strong': Style(fontWeight: FontWeight.w700),
           'em': Style(fontStyle: FontStyle.italic),
           'table': Style(
             backgroundColor: colors.surfaceContainerLowest,
-            border: Border.all(
-              color: colors.outlineVariant,
-              width: 0.8,
-            ),
+            border: Border.all(color: colors.outlineVariant, width: 0.8),
             margin: Margins.symmetric(vertical: 8),
           ),
           'th': Style(
             padding: HtmlPaddings.all(6),
             backgroundColor: colors.surfaceContainerHigh,
-            border: Border.all(
-              color: colors.outlineVariant,
-              width: 0.6,
-            ),
+            border: Border.all(color: colors.outlineVariant, width: 0.6),
             fontWeight: FontWeight.w700,
           ),
           'td': Style(
             padding: HtmlPaddings.all(6),
-            border: Border.all(
-              color: colors.outlineVariant,
-              width: 0.6,
-            ),
+            border: Border.all(color: colors.outlineVariant, width: 0.6),
           ),
           'code': Style(
             backgroundColor: colors.surfaceContainerHigh,
@@ -478,9 +542,7 @@ class _PageContent extends ConsumerWidget {
             margin: Margins.symmetric(vertical: 8),
           ),
           'blockquote': Style(
-            border: Border(
-              left: BorderSide(color: colors.primary, width: 3),
-            ),
+            border: Border(left: BorderSide(color: colors.primary, width: 3)),
             padding: HtmlPaddings.only(left: 12),
             margin: Margins.symmetric(vertical: 8),
             fontStyle: FontStyle.italic,
@@ -534,8 +596,9 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> keys =
-        widget.test.secenekler.keys.toList(growable: false)..sort();
+    final List<String> keys = widget.test.secenekler.keys.toList(
+      growable: false,
+    )..sort();
     final bool isCorrect = _selectedKey == widget.test.dogruCevap;
     final ColorScheme colors = Theme.of(context).colorScheme;
 
@@ -546,9 +609,9 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
         children: <Widget>[
           Text(
             widget.test.soru,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
           for (final String key in keys) _buildOption(context, key, colors),
@@ -583,12 +646,14 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
                       Expanded(
                         child: Text(
                           isCorrect ? 'Doğru!' : 'Yanlış.',
-                          style:
-                              Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color:
-                                        isCorrect ? colors.primary : colors.error,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color:
+                                    isCorrect ? colors.primary : colors.error,
+                              ),
                         ),
                       ),
                     ],
@@ -622,11 +687,7 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
     );
   }
 
-  Widget _buildOption(
-    BuildContext context,
-    String key,
-    ColorScheme colors,
-  ) {
+  Widget _buildOption(BuildContext context, String key, ColorScheme colors) {
     final bool isSelected = _selectedKey == key;
     final bool isCorrectKey = key == widget.test.dogruCevap;
     final String optionText = widget.test.secenekler[key] ?? '';
@@ -671,9 +732,7 @@ class _InteractiveTestCardState extends State<_InteractiveTestCard> {
                     : (isSelected ? colors.primary : colors.outline),
               ),
               const SizedBox(width: 8),
-              Expanded(
-                child: Text('$key) $optionText'),
-              ),
+              Expanded(child: Text('$key) $optionText')),
             ],
           ),
         ),

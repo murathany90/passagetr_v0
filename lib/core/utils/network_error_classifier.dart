@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:http/http.dart' as http;
 
@@ -6,7 +6,7 @@ class NetworkErrorClassifier {
   const NetworkErrorClassifier._();
 
   static bool isNetworkLikeError(Object error) {
-    if (error is SocketException || error is http.ClientException) {
+    if (error is TimeoutException || error is http.ClientException) {
       return true;
     }
     final String text = error.toString().toLowerCase();
@@ -17,6 +17,9 @@ class NetworkErrorClassifier {
         text.contains('connection refused') ||
         text.contains('timed out') ||
         text.contains('timeout') ||
+        text.contains('xmlhttprequest error') ||
+        text.contains('typeerror: failed to fetch') ||
+        text.contains('network request failed') ||
         text.contains('clientexception');
   }
 
@@ -51,4 +54,3 @@ class NetworkErrorClassifier {
     return fallback;
   }
 }
-

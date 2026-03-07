@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/layout/responsive_shell_scaffold.dart';
 import '../../core/services/offline_sync_controller.dart';
+import '../../state/content_providers.dart';
+import '../../state/web_warmup_providers.dart';
 import '../grammar/grammar_home_page.dart';
 import '../home/home_dashboard_page.dart';
 import '../profile/profile_page.dart';
@@ -26,9 +31,16 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
+      ref.read(contentHydrationControllerProvider.notifier).ensureHydrated();
+      unawaited(
+        Future<void>.delayed(
+          const Duration(milliseconds: 160),
+          () => ref.read(webStartupWarmupProvider).warmup(),
+        ),
+      );
+      unawaited(ref
           .read(offlineSyncControllerProvider.notifier)
-          .flushPending(silent: true);
+          .flushPending(silent: true));
     });
   }
 
@@ -41,9 +53,9 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      ref
+      unawaited(ref
           .read(offlineSyncControllerProvider.notifier)
-          .flushPending(silent: true);
+          .flushPending(silent: true));
     }
   }
 
@@ -69,71 +81,83 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final AsyncValue<int> weakCount = ref.watch(weakWordCountProvider);
     final int badgeCount = weakCount.valueOrNull ?? 0;
     final OfflineSyncStatus syncStatus = ref.watch(offlineSyncStatusProvider);
+    final bool shouldUseHydrationGate = ref.watch(
+      shouldUseContentHydrationProvider,
+    );
+    final ContentHydrationState hydrationState = ref.watch(
+      contentHydrationControllerProvider,
+    );
     final bool showOfflineAction =
         syncStatus.pendingTotal > 0 || syncStatus.isFlushing;
+    final Widget body = _buildScaffoldBody(
+      hydrationEnabled: shouldUseHydrationGate,
+      hydrationState: hydrationState,
+    );
+    final String? warningMessage = shouldUseHydrationGate && hydrationState.isReady
+        ? hydrationState.warningMessage
+        : null;
+    final List<ResponsiveShellDestination> destinations =
+        <ResponsiveShellDestination>[
+      const ResponsiveShellDestination(
+        icon: Icon(Icons.home_outlined),
+        selectedIcon: Icon(Icons.home),
+        label: 'Ana Sayfa',
+      ),
+      ResponsiveShellDestination(
+        icon: badgeCount > 0
+            ? Badge.count(
+                count: badgeCount,
+                child: const Icon(Icons.school_outlined),
+              )
+            : const Icon(Icons.school_outlined),
+        selectedIcon: badgeCount > 0
+            ? Badge.count(
+                count: badgeCount,
+                child: const Icon(Icons.school),
+              )
+            : const Icon(Icons.school),
+        label: 'Kelime',
+      ),
+      const ResponsiveShellDestination(
+        icon: Icon(Icons.chrome_reader_mode_outlined),
+        selectedIcon: Icon(Icons.chrome_reader_mode),
+        label: 'Okuma',
+      ),
+      const ResponsiveShellDestination(
+        icon: Icon(Icons.auto_stories_outlined),
+        selectedIcon: Icon(Icons.auto_stories),
+        label: 'Gramer',
+      ),
+      const ResponsiveShellDestination(
+        icon: Icon(Icons.person_outline),
+        selectedIcon: Icon(Icons.person),
+        label: 'Profil',
+      ),
+    ];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_titleForIndex(_index)),
-        actions: <Widget>[
-          if (showOfflineAction)
-            OfflineSyncStatusAction(
-              status: syncStatus,
-              onPressed: _openOfflineStatusSheet,
-            ),
-        ],
-      ),
-      body: _buildBodyForIndex(_index),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: (int value) {
-          setState(() {
-            _index = value;
-          });
-        },
-        destinations: <NavigationDestination>[
-          const NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Ana Sayfa',
+    return ResponsiveShellScaffold(
+      title: _titleForIndex(_index),
+      selectedIndex: _index,
+      destinations: destinations,
+      onDestinationSelected: (int value) {
+        setState(() {
+          _index = value;
+        });
+      },
+      actions: <Widget>[
+        if (showOfflineAction)
+          OfflineSyncStatusAction(
+            status: syncStatus,
+            onPressed: _openOfflineStatusSheet,
           ),
-          NavigationDestination(
-            icon: badgeCount > 0
-                ? Badge.count(
-                    count: badgeCount,
-                    child: const Icon(Icons.school_outlined),
-                  )
-                : const Icon(Icons.school_outlined),
-            selectedIcon: badgeCount > 0
-                ? Badge.count(
-                    count: badgeCount,
-                    child: const Icon(Icons.school),
-                  )
-                : const Icon(Icons.school),
-            label: 'Kelime',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.chrome_reader_mode_outlined),
-            selectedIcon: Icon(Icons.chrome_reader_mode),
-            label: 'Okuma',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.auto_stories_outlined),
-            selectedIcon: Icon(Icons.auto_stories),
-            label: 'Gramer',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        surfaceTintColor: colorScheme.surfaceTint,
-      ),
+      ],
+      topBanner: warningMessage == null || warningMessage.trim().isEmpty
+          ? null
+          : _HydrationWarningBar(message: warningMessage),
+      body: body,
     );
   }
 
@@ -143,6 +167,26 @@ class _MainShellPageState extends ConsumerState<MainShellPage>
       showDragHandle: true,
       builder: (_) => const OfflineSyncStatusSheet(),
     );
+  }
+
+  Widget _buildScaffoldBody({
+    required bool hydrationEnabled,
+    required ContentHydrationState hydrationState,
+  }) {
+    final Widget currentBody = _buildBodyForIndex(_index);
+    final bool gateCurrentTab = hydrationEnabled && _index != 4;
+
+    Widget resolvedBody = currentBody;
+    if (gateCurrentTab) {
+      resolvedBody = _ContentHydrationGate(
+        state: hydrationState,
+        onRetry: () {
+          ref.read(contentHydrationControllerProvider.notifier).retry();
+        },
+        child: currentBody,
+      );
+    }
+    return resolvedBody;
   }
 }
 
@@ -331,6 +375,144 @@ class _StatusRow extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ContentHydrationGate extends StatelessWidget {
+  const _ContentHydrationGate({
+    required this.state,
+    required this.onRetry,
+    required this.child,
+  });
+
+  final ContentHydrationState state;
+  final VoidCallback onRetry;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.isReady) {
+      return child;
+    }
+
+    if (state.hasError) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(
+                  Icons.error_outline_rounded,
+                  size: 40,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Yerel icerik hazirlanamadi',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  state.errorMessage ?? 'Bilinmeyen hata',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                ),
+                const SizedBox(height: 16),
+                FilledButton.icon(
+                  onPressed: onRetry,
+                  icon: const Icon(Icons.refresh_rounded),
+                  label: const Text('Tekrar Dene'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(
+                'Web verisi hazirlaniyor',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                state.message,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
+              const SizedBox(height: 16),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(999),
+                child: LinearProgressIndicator(
+                  minHeight: 8,
+                  value: state.progress <= 0 ? null : state.progress,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HydrationWarningBar extends StatelessWidget {
+  const _HydrationWarningBar({
+    required this.message,
+  });
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Material(
+      color: colorScheme.surfaceContainerHigh,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.info_outline_rounded,
+              size: 18,
+              color: colorScheme.primary,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                message,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

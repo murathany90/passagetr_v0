@@ -10,7 +10,7 @@ class BootstrapPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<void> bootstrap = ref.watch(appBootstrapProvider);
+    final AsyncValue<void> bootstrap = ref.watch(coreBootstrapProvider);
 
     return bootstrap.when(
       data: (_) => const MainShellPage(),
@@ -41,13 +41,12 @@ class BootstrapPage extends ConsumerWidget {
                     error.toString(),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color:
-                              Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                   ),
                   const SizedBox(height: 16),
                   FilledButton.icon(
-                    onPressed: () => ref.invalidate(appBootstrapProvider),
+                    onPressed: () => ref.invalidate(coreBootstrapProvider),
                     icon: const Icon(Icons.refresh_rounded),
                     label: const Text('Tekrar Dene'),
                   ),

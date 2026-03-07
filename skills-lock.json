@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "skills": {
+    "flutter-accessibility": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "a30b4908d706d6e60fed9a701f34f80410042334c16e64e3362be8aaef3f8d7b"
+    },
+    "flutter-animation": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "2c8390646edac7ad3787808d92cf1e49d1230127060785a128daef0f515550f2"
+    },
+    "flutter-app-size": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "457acfcc89fa3a1b0e9c18c19846ffad7347c73dfe73c22bcc7166b6ad18f715"
+    },
+    "flutter-architecture": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "2f21e0f4930f805a45cc9abe403429aaf74d4e7b9e66fd4d7096283e43da5bde"
+    },
+    "flutter-caching": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "75f75a7c37735a135bd017e604396e04fc63c5a5b398dd5639069860796028dc"
+    },
+    "flutter-concurrency": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "27c048d297e43e7ee62ca2b389293d6ec6d166bb19981dc1e2e996437b8b309d"
+    },
+    "flutter-databases": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "7998de0a6590129c0dd96fb8e7875ef68a8a8dcfaaccf558ede44b98f68a6c42"
+    },
+    "flutter-environment-setup-linux": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "ce1fa3c8b6edab3b090726bd2c7fe14099b961de64f75f573e10082a986a0ca9"
+    },
+    "flutter-environment-setup-macos": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "fa7fb25ade32288df9ae2b56cb61a4616710add055b33a8e0f0fea2c4d426d03"
+    },
+    "flutter-environment-setup-windows": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "a1b3e0de2c90f1fed66e49d8a38624dbef0893ba83c9a3282fbe0df430456ff7"
+    },
+    "flutter-http-and-json": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "fd0a6ac11247319ff67257153d912f49bced83d1de2f39395dba276448ca9206"
+    },
+    "flutter-layout": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "437843244d7e7b3094e79663821786b35758e5aac7f2163ffcac63ec80837ad2"
+    },
+    "flutter-localization": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "11cb620e03c83fc7fd8007c0fba251a6af0df54dbaf696419f021840712ca182"
+    },
+    "flutter-native-interop": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "b07e87cd0c003f0fc6e61ab2a7df8e60d96725e2700272619ac3bd2612713a43"
+    },
+    "flutter-performance": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "8bf8c014f73aa5820d9c7e0d1796114ada58d1cf6fd95e9ad7e9c862f4e89fb8"
+    },
+    "flutter-platform-views": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "9cc0178cfd27cb2da795d96b7efa95dba9d03ef943f00ff765741267571f7481"
+    },
+    "flutter-plugins": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "928532723d4178e43acb8fd7e761ee44739b03e42850d68e4c2c564a250687d6"
+    },
+    "flutter-routing-and-navigation": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "dee89c01dd58359acc8f2f79545df5cfe2557c651887025706d7fa4129ac3b19"
+    },
+    "flutter-state-management": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "83546063ad49703cb4d475c0d975c6eb0584ef3ec7769eb8a0d1616871648a54"
+    },
+    "flutter-testing": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "15e2f50ce516f4284f909462b76499745c392626273e6711121c257538787750"
+    },
+    "flutter-theming": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "ebc026601a8a3e0991c665444e267226e740fc212c1ee6fcded9fafca33dbbcb"
+    }
+  }
+}

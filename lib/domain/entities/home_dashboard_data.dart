@@ -37,3 +37,15 @@ class HomeDashboardData {
   final String todaySolvedQuestionText;
   final QuickStartSuggestion quickStart;
 }
+
+class HomeMetricsData {
+  const HomeMetricsData({
+    required this.todayWordCount,
+    required this.todayReadSentenceCount,
+    required this.todaySolvedQuestionText,
+  });
+
+  final int todayWordCount;
+  final int todayReadSentenceCount;
+  final String todaySolvedQuestionText;
+}

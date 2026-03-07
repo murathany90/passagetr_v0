@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/i18n/tr_ui_texts.dart';
+import '../../core/layout/app_breakpoints.dart';
+import '../../core/layout/app_page_container.dart';
 import '../../core/utils/word_selection_utils.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/dictionary_lookup_result.dart';
@@ -11,15 +13,13 @@ import '../../domain/repositories/dictionary_repository.dart';
 import '../../domain/repositories/word_repository.dart';
 import '../../state/providers.dart';
 import '../packs/pack_list_page.dart';
+import 'widgets/word_pack_list_desktop.dart';
+import 'widgets/word_results_panel.dart';
+import 'widgets/word_search_sidebar.dart';
+import 'word_search_filter.dart';
 import 'widgets/dictionary_fallback_sheet.dart';
 import 'word_detail_page.dart';
 import 'word_level_hub_page.dart';
-
-enum WordSearchFilter {
-  all,
-  wordCard,
-  dictionary,
-}
 
 class WordHomePage extends ConsumerStatefulWidget {
   const WordHomePage({super.key});
@@ -56,10 +56,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
     super.dispose();
   }
 
-  Future<void> _submitSearch({
-    String? value,
-    String source = 'button',
-  }) async {
+  Future<void> _submitSearch({String? value, String source = 'button'}) async {
     if (_isSearching) {
       return;
     }
@@ -127,12 +124,7 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
         word: word,
         lookup: lookup,
       );
-      _logSearchEvent(
-        'result',
-        query: raw,
-        source: source,
-        result: resultType,
-      );
+      _logSearchEvent('result', query: raw, source: source, result: resultType);
 
       setState(() {
         _matchedWord = word;
@@ -207,17 +199,6 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
     return lookup.hasLocalEntries || lookup.hasFallback;
   }
 
-  String _filterLabel(WordSearchFilter filter) {
-    switch (filter) {
-      case WordSearchFilter.all:
-        return 'Tumu';
-      case WordSearchFilter.wordCard:
-        return 'Kelime Karti';
-      case WordSearchFilter.dictionary:
-        return 'Sozluk';
-    }
-  }
-
   Future<void> _openDictionaryResult() async {
     final String query = _submittedQuery.trim();
     if (query.isEmpty) {
@@ -226,8 +207,9 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
 
     DictionaryLookupResult? lookup = _lookupResult;
     if (lookup == null) {
-      final DictionaryRepository dictionaryRepository =
-          ref.read(dictionaryRepositoryProvider);
+      final DictionaryRepository dictionaryRepository = ref.read(
+        dictionaryRepositoryProvider,
+      );
       lookup = await dictionaryRepository.lookup(query: query);
       if (!mounted) {
         return;
@@ -246,198 +228,171 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      builder: (_) => DictionaryFallbackSheet(
-        query: query,
-        lookup: resolvedLookup,
-      ),
+      builder: (_) =>
+          DictionaryFallbackSheet(query: query, lookup: resolvedLookup),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    return AppPageContainer(
+      padding: EdgeInsets.zero,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final bool isDesktop = AppBreakpoints.isDesktopWidth(
+            constraints.maxWidth,
+          );
+          return isDesktop
+              ? _buildDesktopLayout(context)
+              : _buildMobileLayout(context);
+        },
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout(BuildContext context) {
     return Column(
+      key: const ValueKey<String>('word-home-mobile-layout'),
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-          child: Column(
-            children: <Widget>[
-              AppSurfaceCard(
-                key: const ValueKey<String>('word-search-card'),
-                variant: AppSurfaceVariant.feature,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      TrUiTexts.wordSearchTitle,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      key: const ValueKey<String>('word-search-field'),
-                      controller: _queryController,
-                      focusNode: _queryFocusNode,
-                      textInputAction: TextInputAction.search,
-                      autocorrect: false,
-                      enableSuggestions: false,
-                      onSubmitted: (String value) => _submitSearch(
-                        value: value,
-                        source: 'keyboard',
-                      ),
-                      onEditingComplete: () => _submitSearch(
-                        source: 'keyboard',
-                      ),
-                      onTapOutside: (_) => _queryFocusNode.unfocus(),
-                      onChanged: (_) => setState(() {}),
-                      decoration: const InputDecoration(
-                        hintText: TrUiTexts.wordSearchHint,
-                        prefixIcon: Icon(Icons.search),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton.icon(
-                        key: const ValueKey<String>(
-                          'word-search-submit-button',
-                        ),
-                        style: FilledButton.styleFrom(
-                          minimumSize: const Size.fromHeight(48),
-                        ),
-                        onPressed: _isSearching
-                            ? null
-                            : () => _submitSearch(source: 'button'),
-                        icon: const Icon(Icons.search),
-                        label: const Text(TrUiTexts.searchButton),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        key: const ValueKey<String>('word-level-hub-button'),
-                        style: OutlinedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(48),
-                        ),
-                        onPressed: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) => const WordLevelHubPage(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(Icons.layers_outlined),
-                        label: const Text(TrUiTexts.levelHubCta),
-                      ),
-                    ),
-                    if (_queryController.text.trim().isNotEmpty ||
-                        _showResultsMode) ...<Widget>[
-                      const SizedBox(height: 4),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          key:
-                              const ValueKey<String>('word-search-clear-button'),
-                          onPressed: _clearSearch,
-                          child: const Text(TrUiTexts.clear),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            ],
+          child: WordSearchSidebar(
+            queryController: _queryController,
+            queryFocusNode: _queryFocusNode,
+            onSubmitted: (String value) =>
+                _submitSearch(value: value, source: 'keyboard'),
+            onEditingComplete: () => _submitSearch(source: 'keyboard'),
+            onTextChanged: () => setState(() {}),
+            onSubmitPressed: () => _submitSearch(source: 'button'),
+            onLevelHubPressed: _openLevelHub,
+            onClearPressed: _clearSearch,
+            isSearching: _isSearching,
+            showClearAction:
+                _queryController.text.trim().isNotEmpty || _showResultsMode,
+            showFilters: false,
+            selectedFilter: _selectedFilter,
+            onFilterSelected: _onFilterSelected,
+            resultSummary: _buildSearchSummary(),
           ),
         ),
         const SizedBox(height: 8),
         Expanded(
           child: _showResultsMode
-              ? _buildResultsPane(context)
+              ? _buildResultsPane(context, showInlineFilters: true)
               : const PackListPage(embedded: true),
         ),
       ],
     );
   }
 
-  Widget _buildResultsPane(BuildContext context) {
-    return ListView(
-      key: const ValueKey<String>('word-search-results-view'),
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+  Widget _buildDesktopLayout(BuildContext context) {
+    return Row(
+      key: const ValueKey<String>('word-home-desktop-layout'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        AppSurfaceCard(
-          variant: AppSurfaceVariant.grouped,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      _submittedQuery.trim().isEmpty
-                          ? 'Arama Sonuclari'
-                          : 'Arama Sonuclari: $_submittedQuery',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                    ),
-                  ),
-                  if ((_dictionarySourceLabel(_lookupResult)).isNotEmpty)
-                    Chip(
-                      label: Text(_dictionarySourceLabel(_lookupResult)),
-                      visualDensity: VisualDensity.compact,
-                    ),
-                ],
+        SizedBox(
+          width: 344,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 0, 12),
+            child: SingleChildScrollView(
+              child: WordSearchSidebar(
+                compact: true,
+                queryController: _queryController,
+                queryFocusNode: _queryFocusNode,
+                onSubmitted: (String value) =>
+                    _submitSearch(value: value, source: 'keyboard'),
+                onEditingComplete: () => _submitSearch(source: 'keyboard'),
+                onTextChanged: () => setState(() {}),
+                onSubmitPressed: () => _submitSearch(source: 'button'),
+                onLevelHubPressed: _openLevelHub,
+                onClearPressed: _clearSearch,
+                isSearching: _isSearching,
+                showClearAction:
+                    _queryController.text.trim().isNotEmpty || _showResultsMode,
+                showFilters: _showResultsMode,
+                selectedFilter: _selectedFilter,
+                onFilterSelected: _onFilterSelected,
+                resultSummary: _buildSearchSummary(),
               ),
-              if (_submittedQuery.trim().isNotEmpty) ...<Widget>[
-                const SizedBox(height: 6),
-                Text(
-                  'Filtre: ${_filterLabel(_selectedFilter)}',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                const SizedBox(height: 10),
-                SegmentedButton<WordSearchFilter>(
-                  key: const ValueKey<String>('word-search-filter-bar'),
-                  showSelectedIcon: false,
-                  segments: const <ButtonSegment<WordSearchFilter>>[
-                    ButtonSegment<WordSearchFilter>(
-                      value: WordSearchFilter.all,
-                      label: Text('Tumu'),
-                    ),
-                    ButtonSegment<WordSearchFilter>(
-                      value: WordSearchFilter.wordCard,
-                      label: Text('Kelime Karti'),
-                    ),
-                    ButtonSegment<WordSearchFilter>(
-                      value: WordSearchFilter.dictionary,
-                      label: Text('Sozluk'),
-                    ),
-                  ],
-                  selected: <WordSearchFilter>{_selectedFilter},
-                  onSelectionChanged: (Set<WordSearchFilter> value) {
-                    setState(() {
-                      _selectedFilter = value.first;
-                    });
-                  },
-                ),
-              ],
-            ],
+            ),
           ),
         ),
-        const SizedBox(height: 8),
-        if (_isSearching) _buildLoadingCard(),
-        if (!_isSearching && _error != null) _buildErrorCard(context),
-        if (!_isSearching &&
-            _error == null &&
-            _submittedQuery.trim().isNotEmpty)
-          ..._buildResultSections(context),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(8, 12, 12, 12),
+            child: _showResultsMode
+                ? _buildResultsPane(context, showInlineFilters: false)
+                : const WordPackListDesktop(),
+          ),
+        ),
       ],
     );
+  }
+
+  Widget _buildResultsPane(
+    BuildContext context, {
+    required bool showInlineFilters,
+  }) {
+    return WordResultsPanel(
+      submittedQuery: _submittedQuery,
+      selectedFilter: _selectedFilter,
+      sourceLabel: _dictionarySourceLabel(_lookupResult),
+      isSearching: _isSearching,
+      error: _error,
+      loadingCard: _buildLoadingCard(),
+      errorCard: _buildErrorCard(context),
+      sections:
+          !_isSearching && _error == null && _submittedQuery.trim().isNotEmpty
+          ? _buildResultSections(context)
+          : const <Widget>[],
+      showInlineFilters: showInlineFilters,
+      onFilterSelected: _onFilterSelected,
+    );
+  }
+
+  void _onFilterSelected(WordSearchFilter filter) {
+    setState(() {
+      _selectedFilter = filter;
+    });
+  }
+
+  void _openLevelHub() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const WordLevelHubPage()));
+  }
+
+  String? _buildSearchSummary() {
+    if (!_showResultsMode) {
+      return null;
+    }
+    if (_isSearching) {
+      return 'Arama yapiliyor...';
+    }
+    if (_error != null) {
+      return 'Son arama tamamlanamadi.';
+    }
+    final String query = _submittedQuery.trim();
+    if (query.isEmpty) {
+      return null;
+    }
+    final DictionaryLookupResult lookup =
+        _lookupResult ?? DictionaryLookupResult.empty();
+    final bool hasWord = _matchedWord != null;
+    final bool hasDictionary =
+        _lookupHasVisibleContent(lookup) || lookup.hasError;
+
+    if (!hasWord && !hasDictionary) {
+      return '"$query" icin sonuc bulunamadi.';
+    }
+    if (hasWord && hasDictionary) {
+      return '"$query" icin kelime karti ve sozluk sonucu hazir.';
+    }
+    if (hasWord) {
+      return '"$query" icin kelime karti bulundu.';
+    }
+    return '"$query" icin sozluk sonucu bulundu.';
   }
 
   Widget _buildLoadingCard() {
@@ -458,13 +413,17 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
   }
 
   Widget _buildErrorCard(BuildContext context) {
+    final String? errorMessage = _error;
+    if (errorMessage == null) {
+      return const SizedBox.shrink();
+    }
     return AppSurfaceCard(
       variant: AppSurfaceVariant.grouped,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            _error!,
+            errorMessage,
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
           const SizedBox(height: 8),
@@ -523,47 +482,37 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
         children: <Widget>[
           Text(
             'Kelime Karti',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Text(
             word.enWord,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 4),
           Text(
             word.trMeaning,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: <Widget>[
-              Chip(
-                label: Text(word.pos),
-                visualDensity: VisualDensity.compact,
-              ),
+              Chip(label: Text(word.pos), visualDensity: VisualDensity.compact),
               if (level.isNotEmpty)
-                Chip(
-                  label: Text(level),
-                  visualDensity: VisualDensity.compact,
-                ),
+                Chip(label: Text(level), visualDensity: VisualDensity.compact),
             ],
           ),
           if ((word.exampleEn).trim().isNotEmpty) ...<Widget>[
             const SizedBox(height: 10),
-            Text(
-              word.exampleEn,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            Text(word.exampleEn, maxLines: 2, overflow: TextOverflow.ellipsis),
           ],
           const SizedBox(height: 12),
           FilledButton.tonalIcon(
@@ -591,16 +540,16 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
         children: <Widget>[
           Text(
             'Kelime Karti',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Text(
             TrUiTexts.wordCardMissing,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -616,16 +565,16 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
         children: <Widget>[
           Text(
             'Sonuc bulunamadi',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Text(
             'Bu arama icin kelime karti veya sozluk sonucu bulunamadi.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -651,9 +600,9 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
               Expanded(
                 child: Text(
                   'Sozluk',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
                 ),
               ),
               if (sourceLabel.isNotEmpty)
@@ -674,23 +623,21 @@ class _WordHomePageState extends ConsumerState<WordHomePage> {
           else if (fallbackText.isNotEmpty)
             Text(
               fallbackText,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
             )
           else if (errorText.isNotEmpty)
             Text(
               errorText,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
-              ),
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             )
           else
             Text(
               'Bu sorgu icin sozluk sonucu bulunamadi.',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           const SizedBox(height: 12),
           FilledButton.icon(

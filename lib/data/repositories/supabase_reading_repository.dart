@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
+import '../../core/utils/single_flight.dart';
 import '../../core/utils/passage_word_extractor.dart';
+import '../../core/utils/timed_memory_cache.dart';
 import '../../domain/entities/passage_sentence.dart';
 import '../../domain/entities/reading_passage.dart';
 import '../../domain/entities/reading_resume_item.dart';
@@ -16,6 +18,22 @@ class SupabaseReadingRepository implements ReadingRepository {
   SupabaseReadingRepository(this._client);
 
   final SupabaseClient _client;
+  final TimedMemoryCache<String, PagedResult<ReadingPassage>> _feedCache =
+      TimedMemoryCache<String, PagedResult<ReadingPassage>>(
+    ttl: const Duration(minutes: 5),
+  );
+  final SingleFlight<String, PagedResult<ReadingPassage>> _feedFlight =
+      SingleFlight<String, PagedResult<ReadingPassage>>();
+  final TimedMemoryCache<String, int> _todayReadCountCache =
+      TimedMemoryCache<String, int>(ttl: const Duration(seconds: 45));
+  final SingleFlight<String, int> _todayReadCountFlight =
+      SingleFlight<String, int>();
+  final TimedMemoryCache<String, ReadingResumeItem?> _resumeCache =
+      TimedMemoryCache<String, ReadingResumeItem?>(
+    ttl: const Duration(seconds: 45),
+  );
+  final SingleFlight<String, ReadingResumeItem?> _resumeFlight =
+      SingleFlight<String, ReadingResumeItem?>();
 
   @override
   Future<PagedResult<ReadingPassage>> getPassagesByPack({
@@ -59,33 +77,51 @@ class SupabaseReadingRepository implements ReadingRepository {
     int limit = 20,
     int offset = 0,
   }) async {
-    dynamic builder = _client.from('reading_passages').select();
-
-    final String cleanCategory = (category ?? '').trim();
-    if (cleanCategory.isNotEmpty) {
-      builder = builder.ilike('category', cleanCategory);
+    final String cacheKey =
+        'feed:${(category ?? '').trim().toLowerCase()}:${(level ?? '').trim().toUpperCase()}:$limit:$offset';
+    final bool canCache = offset == 0 && limit <= 20;
+    if (canCache) {
+      final PagedResult<ReadingPassage>? cached = _feedCache.get(cacheKey);
+      if (cached != null) {
+        return cached;
+      }
     }
 
-    final String cleanLevel = (level ?? '').trim().toUpperCase();
-    if (cleanLevel.isNotEmpty) {
-      builder = builder.ilike('level', cleanLevel);
-    }
+    final Future<PagedResult<ReadingPassage>> loader = () async {
+      dynamic builder = _client.from('reading_passages').select();
 
-    final List<dynamic> rows = await builder
-        .order('title', ascending: true)
-        .range(offset, offset + limit);
+      final String cleanCategory = (category ?? '').trim();
+      if (cleanCategory.isNotEmpty) {
+        builder = builder.ilike('category', cleanCategory);
+      }
 
-    final bool hasMore = rows.length > limit;
-    final List<dynamic> sliced = hasMore ? rows.take(limit).toList() : rows;
-    final List<ReadingPassage> items = sliced
-        .map((dynamic e) => _passageFromRow(e as Map))
-        .toList(growable: false);
+      final String cleanLevel = (level ?? '').trim().toUpperCase();
+      if (cleanLevel.isNotEmpty) {
+        builder = builder.ilike('level', cleanLevel);
+      }
 
-    return PagedResult<ReadingPassage>(
-      items: items,
-      hasMore: hasMore,
-      nextOffset: offset + items.length,
-    );
+      final List<dynamic> rows = await builder
+          .order('title', ascending: true)
+          .range(offset, offset + limit);
+
+      final bool hasMore = rows.length > limit;
+      final List<dynamic> sliced = hasMore ? rows.take(limit).toList() : rows;
+      final List<ReadingPassage> items = sliced
+          .map((dynamic e) => _passageFromRow(e as Map))
+          .toList(growable: false);
+
+      final PagedResult<ReadingPassage> result = PagedResult<ReadingPassage>(
+        items: items,
+        hasMore: hasMore,
+        nextOffset: offset + items.length,
+      );
+      if (canCache) {
+        _feedCache.put(cacheKey, result);
+      }
+      return result;
+    }();
+
+    return canCache ? _feedFlight.run(cacheKey, () => loader) : loader;
   }
 
   @override
@@ -176,6 +212,8 @@ class SupabaseReadingRepository implements ReadingRepository {
       },
       onConflict: 'user_id,passage_id',
     );
+    _todayReadCountCache.remove('today-read:$userId');
+    _resumeCache.remove('resume:$userId');
   }
 
   @override
@@ -205,56 +243,85 @@ class SupabaseReadingRepository implements ReadingRepository {
   @override
   Future<int> getTodayReadSentenceCount() async {
     final String userId = _resolveUserId();
-    final DateTime now = DateTime.now();
-    final DateTime startOfDay = DateTime(now.year, now.month, now.day);
-
-    final List<dynamic> rows = await _client
-        .from('user_reading_progress')
-        .select('last_idx')
-        .eq('user_id', userId)
-        .gte('last_seen_at', startOfDay.toUtc().toIso8601String());
-
-    int sum = 0;
-    for (final dynamic row in rows) {
-      final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
-      sum += data['last_idx'] as int? ?? 0;
+    final String cacheKey = 'today-read:$userId';
+    final int? cached = _todayReadCountCache.get(cacheKey);
+    if (cached != null) {
+      return cached;
     }
-    return sum;
+
+    return _todayReadCountFlight.run(cacheKey, () async {
+      final int? fresh = _todayReadCountCache.get(cacheKey);
+      if (fresh != null) {
+        return fresh;
+      }
+
+      final DateTime now = DateTime.now();
+      final DateTime startOfDay = DateTime(now.year, now.month, now.day);
+
+      final List<dynamic> rows = await _client
+          .from('user_reading_progress')
+          .select('last_idx')
+          .eq('user_id', userId)
+          .gte('last_seen_at', startOfDay.toUtc().toIso8601String());
+
+      int sum = 0;
+      for (final dynamic row in rows) {
+        final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
+        sum += data['last_idx'] as int? ?? 0;
+      }
+      _todayReadCountCache.put(cacheKey, sum);
+      return sum;
+    });
   }
 
   @override
   Future<ReadingResumeItem?> getLatestIncompleteReading() async {
     final String userId = _resolveUserId();
-    final List<dynamic> progressRows = await _client
-        .from('user_reading_progress')
-        .select()
-        .eq('user_id', userId)
-        .eq('completed', false)
-        .gt('last_idx', 0)
-        .order('last_seen_at', ascending: false)
-        .limit(1);
-
-    if (progressRows.isEmpty) {
-      return null;
+    final String cacheKey = 'resume:$userId';
+    final ReadingResumeItem? cached = _resumeCache.get(cacheKey);
+    if (cached != null) {
+      return cached;
     }
 
-    final UserReadingProgress progress =
-        _readingProgressFromRow(progressRows.first as Map);
+    return _resumeFlight.run(cacheKey, () async {
+      final ReadingResumeItem? fresh = _resumeCache.get(cacheKey);
+      if (fresh != null) {
+        return fresh;
+      }
 
-    final List<dynamic> passageRows = await _client
-        .from('reading_passages')
-        .select()
-        .eq('id', progress.passageId)
-        .limit(1);
+      final List<dynamic> progressRows = await _client
+          .from('user_reading_progress')
+          .select()
+          .eq('user_id', userId)
+          .eq('completed', false)
+          .gt('last_idx', 0)
+          .order('last_seen_at', ascending: false)
+          .limit(1);
 
-    if (passageRows.isEmpty) {
-      return null;
-    }
+      if (progressRows.isEmpty) {
+        return null;
+      }
 
-    return ReadingResumeItem(
-      passage: _passageFromRow(passageRows.first as Map),
-      progress: progress,
-    );
+      final UserReadingProgress progress =
+          _readingProgressFromRow(progressRows.first as Map);
+
+      final List<dynamic> passageRows = await _client
+          .from('reading_passages')
+          .select()
+          .eq('id', progress.passageId)
+          .limit(1);
+
+      if (passageRows.isEmpty) {
+        return null;
+      }
+
+      final ReadingResumeItem result = ReadingResumeItem(
+        passage: _passageFromRow(passageRows.first as Map),
+        progress: progress,
+      );
+      _resumeCache.put(cacheKey, result);
+      return result;
+    });
   }
 
   @override

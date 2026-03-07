@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/layout/app_breakpoints.dart';
+import '../../core/layout/app_page_container.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
-import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_section_header.dart';
+import '../../core/widgets/app_shimmer_block.dart';
 import '../../core/widgets/app_surface_card.dart';
 import '../../domain/entities/home_dashboard_data.dart';
 import '../../domain/entities/pack.dart';
@@ -12,6 +14,12 @@ import '../../domain/entities/reading_resume_item.dart';
 import '../../state/providers.dart';
 import '../flashcard/flashcard_session_page.dart';
 import '../readings/reading_detail_page.dart';
+
+const HomeMetricsData _defaultHomeMetricsData = HomeMetricsData(
+  todayWordCount: 0,
+  todayReadSentenceCount: 0,
+  todaySolvedQuestionText: 'Yakinda',
+);
 
 class HomeDashboardPage extends ConsumerStatefulWidget {
   const HomeDashboardPage({super.key});
@@ -86,151 +94,235 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
     }
 
     if (mounted && shouldRefresh) {
+      ref.invalidate(homeMetricsProvider);
+      ref.invalidate(homeQuickStartProvider);
       ref.invalidate(homeDashboardProvider);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final AsyncValue<HomeDashboardData> dashboard = ref.watch(
-      homeDashboardProvider,
+    final AsyncValue<HomeMetricsData> metricsAsync = ref.watch(
+      homeMetricsProvider,
+    );
+    final AsyncValue<QuickStartSuggestion> quickStartAsync = ref.watch(
+      homeQuickStartProvider,
+    );
+    final HomeMetricsData metrics =
+        metricsAsync.valueOrNull ?? _defaultHomeMetricsData;
+    final QuickStartSuggestion quickStart =
+        quickStartAsync.valueOrNull ??
+            const QuickStartSuggestion(type: QuickStartType.unavailable);
+    final HomeDashboardData data = HomeDashboardData(
+      todayWordCount: metrics.todayWordCount,
+      todayReadSentenceCount: metrics.todayReadSentenceCount,
+      todaySolvedQuestionText: metrics.todaySolvedQuestionText,
+      quickStart: quickStart,
+    );
+    final bool metricsLoading =
+        metricsAsync.isLoading && metricsAsync.valueOrNull == null;
+    final String quickStartTitle = _resolveQuickStartTitle(
+      quickStartAsync,
+      quickStart,
     );
 
-    return dashboard.when(
-      loading: () => const Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: <Widget>[
-            AppShimmerCard(lineCount: 4),
-            SizedBox(height: 12),
-            AppShimmerCard(),
-            SizedBox(height: 8),
-            AppShimmerCard(),
-          ],
-        ),
-      ),
-      error: (Object error, StackTrace stack) {
-        return AppErrorState(
+    if (metricsAsync.hasError && metricsAsync.valueOrNull == null) {
+      return AppPageContainer(
+        padding: EdgeInsets.zero,
+        child: AppErrorState(
           title: 'Ana sayfa verisi yuklenemedi.',
-          detail: _friendlyHomeError(error),
-          onRetry: () => ref.invalidate(homeDashboardProvider),
-        );
-      },
-      data: (HomeDashboardData data) {
-        final String quickStartTitle = switch (data.quickStart.type) {
-          QuickStartType.resumeReading => 'Okumaya devam et',
-          QuickStartType.weakWords => 'Zorlandığın kelimeler',
-          QuickStartType.randomWords => 'Rastgele flashcard',
-          QuickStartType.unavailable => 'Şu an öneri yok',
-        };
-
-        return RefreshIndicator(
-          onRefresh: () async {
-            await ref
-                .read(offlineSyncControllerProvider.notifier)
-                .flushPending(silent: true);
+          detail: _friendlyHomeError(metricsAsync.error!),
+          onRetry: () {
+            ref.invalidate(homeMetricsProvider);
+            ref.invalidate(homeQuickStartProvider);
             ref.invalidate(homeDashboardProvider);
           },
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16),
-            children: <Widget>[
-              AppSurfaceCard(
-                variant: AppSurfaceVariant.feature,
-                padding: const EdgeInsets.all(18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Bugünkü Eğitim',
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'Reading is Power. Günlük hedefini odaklı bir oturumla sürdür.',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
+      );
+    }
+
+    return AppPageContainer(
+      padding: EdgeInsets.zero,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final bool isDesktop = AppBreakpoints.isDesktopWidth(
+            constraints.maxWidth,
+          );
+
+          return RefreshIndicator(
+            onRefresh: () async {
+              await ref
+                  .read(offlineSyncControllerProvider.notifier)
+                  .flushPending(silent: true);
+              ref.invalidate(homeMetricsProvider);
+              ref.invalidate(homeQuickStartProvider);
+              ref.invalidate(homeDashboardProvider);
+            },
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(16),
+              children: <Widget>[
+                if ((metricsAsync.isLoading && metricsAsync.valueOrNull != null) ||
+                    (quickStartAsync.isLoading &&
+                        quickStartAsync.valueOrNull != null))
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: LinearProgressIndicator(minHeight: 2),
+                  ),
+                ...(isDesktop
+                    ? <Widget>[
+                        Row(
+                          key: const ValueKey<String>(
+                            'home-dashboard-desktop-layout',
                           ),
-                    ),
-                    const SizedBox(height: 14),
-                    _CompletionRing(
-                      value: _todayCompletionValue(data),
-                      words: data.todayWordCount,
-                      readCount: data.todayReadSentenceCount,
-                    ),
-                    const SizedBox(height: 14),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondaryContainer
-                            .withValues(alpha: 0.85),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: Text(
-                        'Sıradaki adım: $quickStartTitle',
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSecondaryContainer,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 8,
+                              child: _buildHeroCard(
+                                context,
+                                data: data,
+                                quickStartTitle: quickStartTitle,
+                                metricsLoading: metricsLoading,
+                              ),
                             ),
-                      ),
-                    ),
-                    const SizedBox(height: 14),
-                    AppGradientCtaButton(
-                      label: 'Hızlı Başla',
-                      icon: Icons.play_arrow_rounded,
-                      enabled: data.quickStart.isAvailable,
-                      onTap: () => _onQuickStart(data),
-                    ),
-                  ],
+                            const SizedBox(width: 12),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                children: <Widget>[
+                                  const Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: AppSectionHeader(
+                                      title: 'Gunluk Metrikler',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  _buildMetricsCard(
+                                    context,
+                                    data,
+                                    loading: metricsLoading,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  _WeeklyStreakCard(
+                                    completion: _todayCompletionValue(data),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ]
+                    : <Widget>[
+                        _buildHeroCard(
+                          context,
+                          data: data,
+                          quickStartTitle: quickStartTitle,
+                          metricsLoading: metricsLoading,
+                        ),
+                        const SizedBox(height: 16),
+                        const AppSectionHeader(title: 'Gunluk Metrikler'),
+                        const SizedBox(height: 8),
+                        _buildMetricsCard(
+                          context,
+                          data,
+                          loading: metricsLoading,
+                        ),
+                        const SizedBox(height: 12),
+                        _WeeklyStreakCard(
+                          completion: _todayCompletionValue(data),
+                        ),
+                      ]),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildHeroCard(
+    BuildContext context, {
+    required HomeDashboardData data,
+    required String quickStartTitle,
+    required bool metricsLoading,
+  }) {
+    final bool isDesktop = _isDesktopLayout(context);
+
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.feature,
+      padding: const EdgeInsets.all(16),
+      child: isDesktop
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: _HeroPrimaryContent(
+                    data: data,
+                    quickStartTitle: quickStartTitle,
+                    isDesktop: true,
+                    completionValue: _todayCompletionValue(data),
+                    metricsLoading: metricsLoading,
+                    onQuickStart: () => _onQuickStart(data),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              const AppSectionHeader(title: 'Günlük Metrikler'),
-              const SizedBox(height: 8),
-              AppSurfaceCard(
-                variant: AppSurfaceVariant.grouped,
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Column(
-                  children: <Widget>[
-                    _MetricRow(
-                      label: 'Bugün görülen kelime',
-                      value: '${data.todayWordCount}',
-                      icon: Icons.school_outlined,
-                    ),
-                    const Divider(indent: 16, endIndent: 16),
-                    _MetricRow(
-                      label: 'Bugün okunan cümle',
-                      value: '${data.todayReadSentenceCount}',
-                      icon: Icons.menu_book_outlined,
-                    ),
-                    const Divider(indent: 16, endIndent: 16),
-                    _MetricRow(
-                      label: 'Bugün çözülen soru',
-                      value: data.todaySolvedQuestionText,
-                      icon: Icons.quiz_outlined,
-                    ),
-                  ],
+                const SizedBox(width: 16),
+                SizedBox(
+                  width: 236,
+                  child: _HeroDesktopAside(
+                    completionValue: _todayCompletionValue(data),
+                    quickStartTitle: quickStartTitle,
+                    wordCount: data.todayWordCount,
+                    readCount: data.todayReadSentenceCount,
+                    metricsLoading: metricsLoading,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              _WeeklyStreakCard(
-                completion: _todayCompletionValue(data),
-              ),
-            ],
+              ],
+            )
+          : _HeroPrimaryContent(
+              data: data,
+              quickStartTitle: quickStartTitle,
+              isDesktop: false,
+              completionValue: _todayCompletionValue(data),
+              metricsLoading: metricsLoading,
+              onQuickStart: () => _onQuickStart(data),
+            ),
+    );
+  }
+
+  Widget _buildMetricsCard(
+    BuildContext context,
+    HomeDashboardData data, {
+    required bool loading,
+  }) {
+    if (loading) {
+      return const AppShimmerCard(lineCount: 3);
+    }
+
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.grouped,
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Column(
+        children: <Widget>[
+          _MetricRow(
+            label: 'Bugun gorulen kelime',
+            value: '${data.todayWordCount}',
+            icon: Icons.school_outlined,
           ),
-        );
-      },
+          const Divider(indent: 16, endIndent: 16),
+          _MetricRow(
+            label: 'Bugun okunan cumle',
+            value: '${data.todayReadSentenceCount}',
+            icon: Icons.menu_book_outlined,
+          ),
+          const Divider(indent: 16, endIndent: 16),
+          _MetricRow(
+            label: 'Bugun cozulen soru',
+            value: data.todaySolvedQuestionText,
+            icon: Icons.quiz_outlined,
+          ),
+        ],
+      ),
     );
   }
 
@@ -248,6 +340,21 @@ class _HomeDashboardPageState extends ConsumerState<HomeDashboardPage> {
   }
 }
 
+String _resolveQuickStartTitle(
+  AsyncValue<QuickStartSuggestion> quickStartAsync,
+  QuickStartSuggestion quickStart,
+) {
+  if (quickStartAsync.isLoading && quickStartAsync.valueOrNull == null) {
+    return 'Oneri hazirlaniyor';
+  }
+  return switch (quickStart.type) {
+    QuickStartType.resumeReading => 'Okumaya devam et',
+    QuickStartType.weakWords => 'Zorlandigin kelimeler',
+    QuickStartType.randomWords => 'Rastgele flashcard',
+    QuickStartType.unavailable => 'Su an oneri yok',
+  };
+}
+
 String _friendlyHomeError(Object error) {
   final String text = error.toString().toLowerCase();
   if (text.contains('auth session yok') || text.contains('anonymous')) {
@@ -261,11 +368,13 @@ class _CompletionRing extends StatelessWidget {
     required this.value,
     required this.words,
     required this.readCount,
+    this.compact = false,
   });
 
   final double value;
   final int words;
   final int readCount;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -273,14 +382,14 @@ class _CompletionRing extends StatelessWidget {
     return Row(
       children: <Widget>[
         SizedBox(
-          width: 120,
-          height: 120,
+          width: compact ? 96 : 120,
+          height: compact ? 96 : 120,
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
               CircularProgressIndicator(
                 value: value,
-                strokeWidth: 10,
+                strokeWidth: compact ? 8 : 10,
                 backgroundColor:
                     Theme.of(context).colorScheme.surfaceContainerHighest,
               ),
@@ -299,7 +408,7 @@ class _CompletionRing extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Günlük ilerleme',
+                'Gunluk ilerleme',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                     ),
@@ -321,6 +430,182 @@ class _CompletionRing extends StatelessWidget {
   }
 }
 
+class _HeroPrimaryContent extends StatelessWidget {
+  const _HeroPrimaryContent({
+    required this.data,
+    required this.quickStartTitle,
+    required this.isDesktop,
+    required this.completionValue,
+    required this.metricsLoading,
+    required this.onQuickStart,
+  });
+
+  final HomeDashboardData data;
+  final String quickStartTitle;
+  final bool isDesktop;
+  final double completionValue;
+  final bool metricsLoading;
+  final VoidCallback onQuickStart;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Bugunku Egitim',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'Reading is Power. Gunluk hedefini odakli bir oturumla surdur.',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+        ),
+        const SizedBox(height: 12),
+        if (metricsLoading)
+          const AppShimmerCard(lineCount: 2)
+        else
+          _CompletionRing(
+            value: completionValue,
+            words: data.todayWordCount,
+            readCount: data.todayReadSentenceCount,
+            compact: isDesktop,
+          ),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: Theme.of(context)
+                .colorScheme
+                .secondaryContainer
+                .withValues(alpha: 0.85),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            'Siradaki adim: $quickStartTitle',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            softWrap: false,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: SizedBox(
+            width: isDesktop ? 240 : double.infinity,
+            child: AppGradientCtaButton(
+              label: 'Hizli Basla',
+              icon: Icons.play_arrow_rounded,
+              enabled: data.quickStart.isAvailable,
+              onTap: onQuickStart,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HeroDesktopAside extends StatelessWidget {
+  const _HeroDesktopAside({
+    required this.completionValue,
+    required this.quickStartTitle,
+    required this.wordCount,
+    required this.readCount,
+    required this.metricsLoading,
+  });
+
+  final double completionValue;
+  final String quickStartTitle;
+  final int wordCount;
+  final int readCount;
+  final bool metricsLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.grouped,
+      padding: const EdgeInsets.all(14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Bugun Plani',
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 10),
+          _HeroAsideRow(label: 'Odak', value: quickStartTitle),
+          const SizedBox(height: 8),
+          _HeroAsideRow(
+            label: 'Kelime',
+            value: metricsLoading ? '--' : '$wordCount',
+          ),
+          const SizedBox(height: 8),
+          _HeroAsideRow(
+            label: 'Cumle',
+            value: metricsLoading ? '--' : '$readCount',
+          ),
+          const SizedBox(height: 8),
+          _HeroAsideRow(
+            label: 'Tamamlama',
+            value: metricsLoading
+                ? '--'
+                : '%${(completionValue * 100).round()}',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HeroAsideRow extends StatelessWidget {
+  const _HeroAsideRow({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+bool _isDesktopLayout(BuildContext context) {
+  return AppBreakpoints.isDesktopWidth(MediaQuery.sizeOf(context).width);
+}
+
 class _WeeklyStreakCard extends StatelessWidget {
   const _WeeklyStreakCard({
     required this.completion,
@@ -336,7 +621,7 @@ class _WeeklyStreakCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const AppSectionHeader(title: 'Günlük Seri'),
+          const AppSectionHeader(title: 'Gunluk Seri'),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -353,7 +638,7 @@ class _WeeklyStreakCard extends StatelessWidget {
                       'PER',
                       'CUM',
                       'CTS',
-                      'PZR'
+                      'PZR',
                     ][index],
                     style: Theme.of(context).textTheme.labelSmall,
                   ),

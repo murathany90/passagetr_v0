@@ -38,6 +38,14 @@ env/*.json
 .pub/
 /build/
 /coverage/
+.cache/
+.firebase/
+firebase-debug.log
+flutter_01.log
+temp/
+temp_supabase_pkg/
+artifacts/
+test-results/
 
 # Symbolication related
 app.*.symbols

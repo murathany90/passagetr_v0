@@ -31,7 +31,7 @@ void main() {
   });
 
   Future<void> configureViewport(WidgetTester tester) async {
-    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -55,17 +55,17 @@ void main() {
         overrides: <Override>[
           authBootstrapProvider.overrideWith((Ref ref) async {}),
           weakWordCountProvider.overrideWith((Ref ref) async => 0),
-          offlineSyncControllerProvider.overrideWith(
-            (Ref ref) => controller,
-          ),
-          homeDashboardProvider.overrideWith((Ref ref) async {
-            return const HomeDashboardData(
+          offlineSyncControllerProvider.overrideWith((Ref ref) => controller),
+          homeMetricsProvider.overrideWith((Ref ref) async {
+            return const HomeMetricsData(
               todayWordCount: 0,
               todayReadSentenceCount: 0,
               todaySolvedQuestionText: 'Yakinda',
-              quickStart: QuickStartSuggestion(
-                type: QuickStartType.unavailable,
-              ),
+            );
+          }),
+          homeQuickStartProvider.overrideWith((Ref ref) async {
+            return const QuickStartSuggestion(
+              type: QuickStartType.unavailable,
             );
           }),
         ],
@@ -125,8 +125,9 @@ class _FakeReadingRepository implements ReadingRepository {
   }
 
   @override
-  Future<List<PassageSentence>> getSentences(
-      {required String passageId}) async {
+  Future<List<PassageSentence>> getSentences({
+    required String passageId,
+  }) async {
     return const <PassageSentence>[];
   }
 
@@ -237,6 +238,13 @@ class _FakeProgressRepository implements ProgressRepository {
     required List<String> wordIds,
   }) async {
     return const <String, UserWordProgress>{};
+  }
+
+  @override
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  }) async {
+    return const <String, int>{};
   }
 
   @override

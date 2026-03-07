@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../core/config/app_config.dart';
+import '../core/utils/provider_cache.dart';
 import '../core/services/translation_service.dart';
 import '../core/utils/lru_cache.dart';
 import '../core/utils/word_selection_utils.dart';
@@ -23,7 +23,10 @@ import 'progress_providers.dart';
 
 final Provider<WordRepository> wordRepositoryProvider =
     Provider<WordRepository>((Ref ref) {
-  if (AppConfig.useLocalStaticContent) {
+  final bool useLocalStaticContent = ref.watch(
+    effectiveUseLocalStaticContentProvider,
+  );
+  if (useLocalStaticContent) {
     final AppContentLocalDataSource local = ref.watch(
       appContentLocalDataSourceProvider,
     );
@@ -33,44 +36,38 @@ final Provider<WordRepository> wordRepositoryProvider =
   return SupabaseWordRepository(client);
 });
 
-final FutureProvider<List<WordLevelSummary>> wordLevelsProvider =
-    FutureProvider<List<WordLevelSummary>>((Ref ref) async {
+final AutoDisposeFutureProvider<List<WordLevelSummary>> wordLevelsProvider =
+    FutureProvider.autoDispose<List<WordLevelSummary>>((Ref ref) async {
+  if (ref.watch(isWebPlatformProvider)) {
+    ref.cacheFor(const Duration(minutes: 5));
+  }
   final WordRepository repository = ref.watch(wordRepositoryProvider);
   return repository.getLevelsWithWordCount();
 });
 
-final FutureProvider<List<WordLevelProgressSummary>> wordLevelProgressProvider =
-    FutureProvider<List<WordLevelProgressSummary>>((Ref ref) async {
+final AutoDisposeFutureProvider<List<WordLevelProgressSummary>>
+    wordLevelProgressProvider =
+    FutureProvider.autoDispose<List<WordLevelProgressSummary>>((Ref ref) async {
+  if (ref.watch(isWebPlatformProvider)) {
+    ref.cacheFor(const Duration(minutes: 5));
+  }
   final List<WordLevelSummary> levels =
       await ref.watch(wordLevelsProvider.future);
-  final WordRepository wordRepository = ref.watch(wordRepositoryProvider);
   final progressRepository = ref.watch(progressRepositoryProvider);
-  const int progressBatchSize = 250;
+  final Map<String, int> studiedCounts =
+      await progressRepository.getStudiedWordCountByLevel(
+    levels: levels.map((WordLevelSummary level) => level.level).toList(),
+  );
 
-  final List<WordLevelProgressSummary> enriched = <WordLevelProgressSummary>[];
-  for (final WordLevelSummary level in levels) {
-    final List<String> wordIds =
-        await wordRepository.getWordIdsByLevel(level.level);
-    int studiedWordCount = 0;
-    for (int offset = 0; offset < wordIds.length; offset += progressBatchSize) {
-      final int end = offset + progressBatchSize > wordIds.length
-          ? wordIds.length
-          : offset + progressBatchSize;
-      final List<String> batch = wordIds.sublist(offset, end);
-      final progressMap =
-          await progressRepository.getProgressMap(wordIds: batch);
-      studiedWordCount +=
-          progressMap.values.where((progress) => progress.seenCount > 0).length;
-    }
-    enriched.add(
-      WordLevelProgressSummary(
-        level: level.level,
-        wordCount: level.wordCount,
-        studiedWordCount: studiedWordCount,
-      ),
-    );
-  }
-  return enriched;
+  return levels
+      .map(
+        (WordLevelSummary level) => WordLevelProgressSummary(
+          level: level.level,
+          wordCount: level.wordCount,
+          studiedWordCount: studiedCounts[level.level] ?? 0,
+        ),
+      )
+      .toList(growable: false);
 });
 
 class WordLevelTagRequest {
@@ -95,8 +92,11 @@ class WordLevelTagRequest {
 }
 
 final wordLevelTagsProvider =
-    FutureProvider.family<List<TagCount>, WordLevelTagRequest>(
+    FutureProvider.autoDispose.family<List<TagCount>, WordLevelTagRequest>(
   (Ref ref, WordLevelTagRequest request) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 2));
+    }
     final WordRepository repository = ref.watch(wordRepositoryProvider);
     return repository.getTagsByLevel(
       request.level,
@@ -139,8 +139,11 @@ class WordLevelListRequest {
 }
 
 final wordLevelWordsProvider =
-    FutureProvider.family<PagedResult<WordItem>, WordLevelListRequest>(
+    FutureProvider.autoDispose.family<PagedResult<WordItem>, WordLevelListRequest>(
   (Ref ref, WordLevelListRequest request) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 2));
+    }
     final WordRepository repository = ref.watch(wordRepositoryProvider);
     return repository.getWordsByLevel(
       level: request.level,
@@ -175,8 +178,11 @@ class DistinctPosRequest {
 }
 
 final distinctPosValuesProvider =
-    FutureProvider.family<List<String>, DistinctPosRequest>(
+    FutureProvider.autoDispose.family<List<String>, DistinctPosRequest>(
   (Ref ref, DistinctPosRequest request) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 2));
+    }
     final WordRepository repository = ref.watch(wordRepositoryProvider);
     return repository.getDistinctPosValues(
       packId: request.packId,

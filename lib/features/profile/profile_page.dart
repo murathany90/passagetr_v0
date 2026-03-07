@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
+import '../../core/layout/app_breakpoints.dart';
+import '../../core/layout/app_page_container.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
 import '../../core/widgets/app_shimmer_block.dart';
@@ -18,152 +20,309 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<HomeDashboardData> dashboard = ref.watch(
-      homeDashboardProvider,
+    final AsyncValue<HomeMetricsData> dashboard = ref.watch(
+      homeMetricsProvider,
     );
     final AsyncValue<List<Pack>> packs = ref.watch(packListProvider);
-    final String? userId = Supabase.instance.client.auth.currentUser?.id;
+    final ThemeMode themeMode = ref.watch(themeModeProvider);
+    String? userId;
+    try {
+      userId = Supabase.instance.client.auth.currentUser?.id;
+    } catch (_) {
+      userId = null;
+    }
     final String shortUid = userId == null
         ? 'oturum_hazirlaniyor'
         : (userId.length > 12 ? '${userId.substring(0, 12)}...' : userId);
 
-    return RefreshIndicator(
-      onRefresh: () async {
-        await ref
-            .read(offlineSyncControllerProvider.notifier)
-            .flushPending(silent: true);
-        ref.invalidate(homeDashboardProvider);
-        ref.invalidate(packListProvider);
-        try {
-          await ref.read(homeDashboardProvider.future);
-        } catch (_) {
-          // Hata state'i ekranda gosterilecek.
-        }
-        try {
-          await ref.read(packListProvider.future);
-        } catch (_) {
-          // Hata state'i ekranda gosterilecek.
-        }
-      },
-      child: ListView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(16),
-        children: <Widget>[
-          AppSurfaceCard(
-            child: Row(
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 28,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer,
-                  child: Icon(
-                    Icons.person_outline_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 30,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
+    return AppPageContainer(
+      padding: EdgeInsets.zero,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final bool isDesktop = AppBreakpoints.isDesktopWidth(
+            constraints.maxWidth,
+          );
+          final List<Widget> children = isDesktop
+              ? <Widget>[
+                  Row(
+                    key: const ValueKey<String>('profile-page-desktop-layout'),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        'Anonim Ogrenci',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w800,
+                      Expanded(
+                        flex: 5,
+                        child: Column(
+                          children: <Widget>[
+                            _buildIdentityCard(context, shortUid),
+                            const SizedBox(height: 12),
+                            _buildSettingsPanel(
+                              context,
+                              ref,
+                              packs.valueOrNull ?? const <Pack>[],
+                              themeMode,
                             ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'UID: $shortUid',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
-                            ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        flex: 6,
+                        child: Column(
+                          children: <Widget>[
+                            _buildDailySummary(context, ref, dashboard),
+                            const SizedBox(height: 12),
+                            _buildSystemStatusCard(context, packs, themeMode),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-                const Chip(
-                  label: Text('Active'),
-                  visualDensity: VisualDensity.compact,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-          const AppSectionHeader(title: 'Bugunun Ozeti'),
-          const SizedBox(height: 8),
-          dashboard.when(
-            loading: () => const Column(
-              children: <Widget>[
-                AppShimmerCard(),
-                SizedBox(height: 8),
-                AppShimmerCard(),
-                SizedBox(height: 8),
-                AppShimmerCard(),
-              ],
-            ),
-            error: (Object error, StackTrace stack) => AppErrorState(
-              title: 'Profil metrikleri alinamadi.',
-              detail: _friendlyDashboardDetail(error),
-              onRetry: () => ref.invalidate(homeDashboardProvider),
-            ),
-            data: (HomeDashboardData data) {
-              return Column(
-                children: <Widget>[
-                  if (data.todaySolvedQuestionText == 'Cevrimdisi')
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Chip(
-                        avatar: Icon(
-                          Icons.cloud_off_rounded,
-                          size: 16,
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                        label: const Text('Cevrimdisi mod'),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                    ),
-                  AppStatTile(
-                    label: 'Bugun gorulen kelime',
-                    value: '${data.todayWordCount}',
-                    icon: Icons.school_outlined,
+                ]
+              : <Widget>[
+                  _buildIdentityCard(context, shortUid),
+                  const SizedBox(height: 12),
+                  _buildDailySummary(context, ref, dashboard),
+                  const SizedBox(height: 12),
+                  _buildSettingsPanel(
+                    context,
+                    ref,
+                    packs.valueOrNull ?? const <Pack>[],
+                    themeMode,
                   ),
-                  const SizedBox(height: 8),
-                  AppStatTile(
-                    label: 'Bugun okunan cumle',
-                    value: '${data.todayReadSentenceCount}',
-                    icon: Icons.menu_book_outlined,
-                  ),
-                  const SizedBox(height: 8),
-                  AppStatTile(
-                    label: 'Bugun cozulen soru',
-                    value: data.todaySolvedQuestionText,
-                    icon: Icons.quiz_outlined,
-                  ),
-                ],
-              );
+                ];
+
+          return RefreshIndicator(
+            onRefresh: () async {
+              await ref
+                  .read(offlineSyncControllerProvider.notifier)
+                  .flushPending(silent: true);
+              ref.invalidate(homeMetricsProvider);
+              ref.invalidate(homeQuickStartProvider);
+              ref.invalidate(homeDashboardProvider);
+              ref.invalidate(packListProvider);
+              try {
+                await ref.read(homeMetricsProvider.future);
+              } catch (_) {
+                // Hata state'i ekranda gosterilecek.
+              }
+              try {
+                await ref.read(packListProvider.future);
+              } catch (_) {
+                // Hata state'i ekranda gosterilecek.
+              }
             },
-          ),
-          const SizedBox(height: 12),
-          AppGradientCtaButton(
-            onTap: () => _openSettingsSheet(
-              context,
-              ref,
-              packs.valueOrNull ?? const <Pack>[],
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(16),
+              children: children,
             ),
-            icon: Icons.settings_outlined,
-            label: 'Profil Ayarlari',
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildIdentityCard(BuildContext context, String shortUid) {
+    return AppSurfaceCard(
+      child: Row(
+        children: <Widget>[
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            child: Icon(
+              Icons.person_outline_rounded,
+              color: Theme.of(context).colorScheme.primary,
+              size: 30,
+            ),
           ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Anonim Ogrenci',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'UID: $shortUid',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          const Chip(
+            label: Text('Active'),
+            visualDensity: VisualDensity.compact,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDailySummary(
+    BuildContext context,
+    WidgetRef ref,
+    AsyncValue<HomeMetricsData> dashboard,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const AppSectionHeader(title: 'Bugunun Ozeti'),
+        const SizedBox(height: 8),
+        dashboard.when(
+          skipLoadingOnRefresh: true,
+          skipLoadingOnReload: true,
+          loading: () => const Column(
+            children: <Widget>[
+              AppShimmerCard(),
+              SizedBox(height: 8),
+              AppShimmerCard(),
+              SizedBox(height: 8),
+              AppShimmerCard(),
+            ],
+          ),
+          error: (Object error, StackTrace stack) => AppErrorState(
+            title: 'Profil metrikleri alinamadi.',
+            detail: _friendlyDashboardDetail(error),
+            onRetry: () => ref.invalidate(homeMetricsProvider),
+          ),
+          data: (HomeMetricsData data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                if (data.todaySolvedQuestionText == 'Cevrimdisi')
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Chip(
+                      avatar: Icon(
+                        Icons.cloud_off_rounded,
+                        size: 16,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                      label: const Text('Cevrimdisi mod'),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  ),
+                AppStatTile(
+                  label: 'Bugun gorulen kelime',
+                  value: '${data.todayWordCount}',
+                  icon: Icons.school_outlined,
+                ),
+                const SizedBox(height: 8),
+                AppStatTile(
+                  label: 'Bugun okunan cumle',
+                  value: '${data.todayReadSentenceCount}',
+                  icon: Icons.menu_book_outlined,
+                ),
+                const SizedBox(height: 8),
+                AppStatTile(
+                  label: 'Bugun cozulen soru',
+                  value: data.todaySolvedQuestionText,
+                  icon: Icons.quiz_outlined,
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSettingsPanel(
+    BuildContext context,
+    WidgetRef ref,
+    List<Pack> packs,
+    ThemeMode themeMode,
+  ) {
+    return AppSurfaceCard(
+      key: const ValueKey<String>('profile-settings-panel'),
+      variant: AppSurfaceVariant.grouped,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const AppSectionHeader(title: 'Ayarlar'),
           const SizedBox(height: 8),
           Text(
-            'Dil, seviye, tema ve sistem durumunu alt menuden yonetebilirsin.',
+            'Tema, dil ve sistem bilgilerini tek alandan yonet.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
           ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              Chip(
+                label: Text('Tema: ${_themeModeLabel(themeMode)}'),
+                visualDensity: VisualDensity.compact,
+              ),
+              Chip(
+                label: Text('Pack: ${packs.length}'),
+                visualDensity: VisualDensity.compact,
+              ),
+              Chip(
+                label: Text(AppConfig.translateProvider),
+                visualDensity: VisualDensity.compact,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: SizedBox(
+              width: AppBreakpoints.isDesktopWidth(
+                      MediaQuery.sizeOf(context).width)
+                  ? 220
+                  : double.infinity,
+              child: AppGradientCtaButton(
+                onTap: () => _openSettingsSheet(context, ref, packs),
+                icon: Icons.settings_outlined,
+                label: 'Profil Ayarlari',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSystemStatusCard(
+    BuildContext context,
+    AsyncValue<List<Pack>> packs,
+    ThemeMode themeMode,
+  ) {
+    final int totalWords = packs.valueOrNull
+            ?.fold<int>(0, (int sum, Pack p) => sum + p.wordCount) ??
+        0;
+
+    return AppSurfaceCard(
+      variant: AppSurfaceVariant.grouped,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const AppSectionHeader(title: 'Sistem Durumu'),
+          const SizedBox(height: 10),
+          const _InfoRow(label: 'Dil', value: 'Turkce'),
+          const _InfoRow(label: 'Auth', value: 'Anonymous'),
+          _InfoRow(
+            label: 'Translate Provider',
+            value: AppConfig.translateProvider,
+          ),
+          _InfoRow(label: 'Tema', value: _themeModeLabel(themeMode)),
+          _InfoRow(
+            label: 'Pack Sayisi',
+            value: packs.maybeWhen(
+              data: (List<Pack> items) => '${items.length}',
+              orElse: () => '--',
+            ),
+          ),
+          _InfoRow(label: 'Toplam Kelime', value: '$totalWords'),
         ],
       ),
     );
@@ -262,6 +421,17 @@ class ProfilePage extends ConsumerWidget {
         );
       },
     );
+  }
+}
+
+String _themeModeLabel(ThemeMode mode) {
+  switch (mode) {
+    case ThemeMode.light:
+      return 'Light';
+    case ThemeMode.dark:
+      return 'Dark';
+    case ThemeMode.system:
+      return 'System';
   }
 }
 

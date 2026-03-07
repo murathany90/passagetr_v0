@@ -3,6 +3,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../core/utils/single_flight.dart';
+import '../../core/utils/timed_memory_cache.dart';
 import '../../domain/entities/grammar_example.dart';
 import '../../domain/entities/grammar_mini_test.dart';
 import '../../domain/entities/grammar_module.dart';
@@ -16,28 +18,51 @@ class SupabaseGrammarRepository implements GrammarRepository {
   final SupabaseClient _client;
 
   static const String _modulesCacheKey = 'grammar_modules_cache_v1';
+  final TimedMemoryCache<String, List<GrammarModule>> _modulesMemoryCache =
+      TimedMemoryCache<String, List<GrammarModule>>(
+    ttl: const Duration(minutes: 5),
+  );
+  final SingleFlight<String, List<GrammarModule>> _modulesFlight =
+      SingleFlight<String, List<GrammarModule>>();
 
   @override
   Future<List<GrammarModule>> getModules() async {
-    try {
-      final List<dynamic> rows = await _client
-          .from('gramer_modulleri')
-          .select()
-          .order('sira', ascending: true);
-
-      final List<GrammarModule> modules = rows
-          .map((dynamic row) => _moduleFromRow(Map<String, dynamic>.from(row as Map)))
-          .toList(growable: false);
-
-      await _cacheModules(modules);
-      return modules;
-    } catch (_) {
-      final List<GrammarModule> cached = await _readModulesFromCache();
-      if (cached.isNotEmpty) {
-        return cached;
-      }
-      rethrow;
+    final List<GrammarModule>? cached = _modulesMemoryCache.get('all');
+    if (cached != null) {
+      return cached;
     }
+
+    return _modulesFlight.run('all', () async {
+      final List<GrammarModule>? fresh = _modulesMemoryCache.get('all');
+      if (fresh != null) {
+        return fresh;
+      }
+
+      try {
+        final List<dynamic> rows = await _client
+            .from('gramer_modulleri')
+            .select()
+            .order('sira', ascending: true);
+
+        final List<GrammarModule> modules = rows
+            .map(
+              (dynamic row) =>
+                  _moduleFromRow(Map<String, dynamic>.from(row as Map)),
+            )
+            .toList(growable: false);
+
+        _modulesMemoryCache.put('all', modules);
+        await _cacheModules(modules);
+        return modules;
+      } catch (_) {
+        final List<GrammarModule> stored = await _readModulesFromCache();
+        if (stored.isNotEmpty) {
+          _modulesMemoryCache.put('all', stored);
+          return stored;
+        }
+        rethrow;
+      }
+    });
   }
 
   @override

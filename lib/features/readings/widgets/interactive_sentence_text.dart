@@ -8,6 +8,7 @@ class InteractiveSentenceText extends StatelessWidget {
     required this.highlightedWordsSet,
     required this.onWordTap,
     required this.onSentenceLongPress,
+    this.onSentenceDoubleTap,
     this.gestureKey,
     this.baseStyle,
     this.highlightStyle,
@@ -18,6 +19,7 @@ class InteractiveSentenceText extends StatelessWidget {
   final Set<String> highlightedWordsSet;
   final ValueChanged<SentenceWordTapDetail> onWordTap;
   final ValueChanged<SentenceTapDetail> onSentenceLongPress;
+  final ValueChanged<SentenceTapDetail>? onSentenceDoubleTap;
   final Key? gestureKey;
   final TextStyle? baseStyle;
   final TextStyle? highlightStyle;
@@ -36,6 +38,7 @@ class InteractiveSentenceText extends StatelessWidget {
           decoration: TextDecoration.underline,
         );
 
+    Offset doubleTapPosition = Offset.zero;
     final List<InlineSpan> spans = <InlineSpan>[];
     for (final Match match in _tokenPattern.allMatches(sentenceText)) {
       final String raw = match.group(0) ?? '';
@@ -67,10 +70,13 @@ class InteractiveSentenceText extends StatelessWidget {
                 ),
               );
             },
-            child: Text(
-              raw,
-              style: isHighlighted ? fallbackHighlight : fallbackBase,
-              textScaler: MediaQuery.textScalerOf(context),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Text(
+                raw,
+                style: isHighlighted ? fallbackHighlight : fallbackBase,
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
             ),
           ),
         ),
@@ -80,6 +86,18 @@ class InteractiveSentenceText extends StatelessWidget {
     return GestureDetector(
       key: gestureKey,
       behavior: HitTestBehavior.translucent,
+      onDoubleTapDown: onSentenceDoubleTap == null
+          ? null
+          : (TapDownDetails details) {
+              doubleTapPosition = details.globalPosition;
+            },
+      onDoubleTap: onSentenceDoubleTap == null
+          ? null
+          : () {
+              onSentenceDoubleTap!(
+                SentenceTapDetail(globalPosition: doubleTapPosition),
+              );
+            },
       onLongPressStart: (LongPressStartDetails details) {
         onSentenceLongPress(
           SentenceTapDetail(globalPosition: details.globalPosition),

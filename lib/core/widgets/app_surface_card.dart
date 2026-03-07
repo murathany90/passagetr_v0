@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AppSurfaceVariant {
-  feature,
-  subtle,
-  grouped,
-}
+enum AppSurfaceVariant { feature, subtle, grouped }
 
 class AppSurfaceCard extends StatelessWidget {
   const AppSurfaceCard({
@@ -31,10 +27,7 @@ class AppSurfaceCard extends StatelessWidget {
       AppSurfaceVariant.subtle => colorScheme.surfaceContainerLow,
       AppSurfaceVariant.grouped => colorScheme.surfaceContainerLowest,
     };
-    final Widget content = Padding(
-      padding: padding,
-      child: child,
-    );
+    final Widget content = Padding(padding: padding, child: child);
 
     return Card(
       margin: margin,
@@ -52,6 +45,8 @@ class AppSurfaceCard extends StatelessWidget {
           ? content
           : InkWell(
               borderRadius: BorderRadius.circular(18),
+              mouseCursor: SystemMouseCursors.click,
+              hoverColor: colorScheme.primary.withValues(alpha: 0.04),
               onTap: onTap,
               child: content,
             ),

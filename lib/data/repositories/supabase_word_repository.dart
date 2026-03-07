@@ -1,6 +1,8 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/utils/single_flight.dart';
+import '../../core/utils/timed_memory_cache.dart';
 import '../../domain/entities/tag_count.dart';
 import '../../domain/entities/word_item.dart';
 import '../../domain/entities/word_level_summary.dart';
@@ -19,6 +21,12 @@ class SupabaseWordRepository implements WordRepository {
     'C1',
     'C2',
   ];
+  final TimedMemoryCache<String, List<WordLevelSummary>> _levelSummaryCache =
+      TimedMemoryCache<String, List<WordLevelSummary>>(
+    ttl: const Duration(minutes: 5),
+  );
+  final SingleFlight<String, List<WordLevelSummary>> _levelSummaryFlight =
+      SingleFlight<String, List<WordLevelSummary>>();
 
   @override
   Future<List<String>> getDistinctPosValues({
@@ -195,6 +203,70 @@ class SupabaseWordRepository implements WordRepository {
 
   @override
   Future<List<WordLevelSummary>> getLevelsWithWordCount() async {
+    final List<WordLevelSummary>? cached = _levelSummaryCache.get('all');
+    if (cached != null) {
+      return cached;
+    }
+
+    return _levelSummaryFlight.run('all', () async {
+      final List<WordLevelSummary>? fresh = _levelSummaryCache.get('all');
+      if (fresh != null) {
+        return fresh;
+      }
+
+      final List<WordLevelSummary> summaries =
+          await _loadLevelCountsFromRpc().catchError((Object _) async {
+        return _loadLevelCountsFromRows();
+      });
+
+      _levelSummaryCache.put('all', summaries);
+      return summaries;
+    });
+  }
+
+  @override
+  Future<List<String>> getWordIdsByLevel(String level) async {
+    final String cleanLevel = level.trim().toUpperCase();
+    if (cleanLevel.isEmpty) {
+      return const <String>[];
+    }
+
+    final List<dynamic> rows = await _client
+        .from('words')
+        .select('id')
+        .ilike('level', cleanLevel)
+        .limit(10000);
+
+    return rows
+        .map((dynamic row) => (row as Map)['id'] as String?)
+        .whereType<String>()
+        .where((String id) => id.trim().isNotEmpty)
+        .toList(growable: false);
+  }
+
+  Future<List<WordLevelSummary>> _loadLevelCountsFromRpc() async {
+    final dynamic response = await _client.rpc('get_word_level_counts');
+    final Map<String, int> counts = <String, int>{};
+    for (final dynamic row in (response as List<dynamic>)) {
+      final Map<String, dynamic> data = Map<String, dynamic>.from(row as Map);
+      final String level =
+          (data['level'] as String? ?? '').trim().toUpperCase();
+      if (level.isEmpty) {
+        continue;
+      }
+      counts[level] = _asInt(data['word_count']);
+    }
+    return _orderedLevels
+        .map(
+          (String level) => WordLevelSummary(
+            level: level,
+            wordCount: counts[level] ?? 0,
+          ),
+        )
+        .toList(growable: false);
+  }
+
+  Future<List<WordLevelSummary>> _loadLevelCountsFromRows() async {
     final List<dynamic> rows = await _client
         .from('words')
         .select('level')
@@ -219,26 +291,6 @@ class SupabaseWordRepository implements WordRepository {
             wordCount: counts[level] ?? 0,
           ),
         )
-        .toList(growable: false);
-  }
-
-  @override
-  Future<List<String>> getWordIdsByLevel(String level) async {
-    final String cleanLevel = level.trim().toUpperCase();
-    if (cleanLevel.isEmpty) {
-      return const <String>[];
-    }
-
-    final List<dynamic> rows = await _client
-        .from('words')
-        .select('id')
-        .ilike('level', cleanLevel)
-        .limit(10000);
-
-    return rows
-        .map((dynamic row) => (row as Map)['id'] as String?)
-        .whereType<String>()
-        .where((String id) => id.trim().isNotEmpty)
         .toList(growable: false);
   }
 
@@ -507,5 +559,15 @@ class SupabaseWordRepository implements WordRepository {
       return 2;
     }
     return 3;
+  }
+
+  int _asInt(dynamic value) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    return int.tryParse(value?.toString() ?? '') ?? 0;
   }
 }

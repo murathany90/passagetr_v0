@@ -695,3 +695,159 @@ Aşağıdaki iş kalemleri backend değişikliği, yeni paket veya büyük çapl
 - Reading audio settings sheet: hiz (`x0.5/x1/x1.25/x1.5`), bilgi sikligi, dokunusta durdur.
 - Reading home segmentleri: `Hikayeler`, `Haber Akisi`, `Kitapligim`.
 - Sprint-2 veri katmani: `user_reading_bookmarks` ve `user_reading_favorites` tablolari + RLS.
+
+## Faz 5.16 Web Runtime + Firebase Hosting + Responsive Desktop (Mart 2026)
+
+Bu repoda web calisma yolu, Firebase Hosting yayini ve masaustu duzeni aktif olarak eklendi.
+
+### 1. Web runtime stratejisi
+
+- Web production modu `remote-first` calisir.
+- `USE_LOCAL_STATIC_CONTENT=false` ile browser tarafinda lokal sqlite yoluna gidilmez.
+- Uygulama web'de Supabase + remote veri akisi ile acilir.
+- Mobil/native tarafindaki lokal Drift/SQLite mantigi korunur.
+
+### 2. Firebase Hosting release akisi
+
+- Hosting config: [firebase.json](/c:/yazilim_projeler/ingilizce_app1/firebase.json)
+- Release guide: [firebase_hosting_release.md](/c:/yazilim_projeler/ingilizce_app1/docs/firebase_hosting_release.md)
+- Build script: [build_web_firebase.ps1](/c:/yazilim_projeler/ingilizce_app1/scripts/build_web_firebase.ps1)
+- Deploy script: [deploy_web_firebase.ps1](/c:/yazilim_projeler/ingilizce_app1/scripts/deploy_web_firebase.ps1)
+- Preflight script: [check_firebase_hosting_ready.ps1](/c:/yazilim_projeler/ingilizce_app1/scripts/check_firebase_hosting_ready.ps1)
+
+Varsayilan production deploy yolu:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy_web_firebase.ps1 -EnvironmentFile env\app.web.prod.json
+```
+
+Not:
+
+- Sadece `flutter build web` + `firebase deploy --only hosting` yapmak yeterli kabul edilmemelidir.
+- Production web icin prune + smoke adimi zorunlu tutulmalidir.
+- `firebase.json` icindeki `ignore` kurallari artik lokal sqlite ve drift worker artefaktlarini ek bir guvenlik katmani olarak bloklar.
+
+### 3. Responsive desktop shell ve ekran varyantlari
+
+Eklenen ana responsive altyapi:
+
+- [app_breakpoints.dart](/c:/yazilim_projeler/ingilizce_app1/lib/core/layout/app_breakpoints.dart)
+- [app_page_container.dart](/c:/yazilim_projeler/ingilizce_app1/lib/core/layout/app_page_container.dart)
+- [responsive_shell_scaffold.dart](/c:/yazilim_projeler/ingilizce_app1/lib/core/layout/responsive_shell_scaffold.dart)
+
+Aktif davranis:
+
+- `<768`: mobile
+- `768-1199`: tablet
+- `>=1200`: desktop
+
+Desktop'ta:
+
+- `NavigationBar` yerine solda `NavigationRail`
+- sayfa ici `max-width` container
+- `Kelime` ekraninda sol arama paneli + sag sonuc/paket alani
+- `Okuma` ana sayfasinda `hero + devam et + iki kolonlu feed`
+- `Okuma` detayinda `sol meta + orta metin + sag sozluk/ceviri paneli`
+- `Ana Sayfa`, `Gramer` ve `Profil` icin iki kolonlu / daha yogun masaustu duzeni
+
+### 4. Canli web smoke ciktisi
+
+Canli Firebase ortami icin temiz Chrome oturumunda alinmis ekran goruntuleri:
+
+- [01-home.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/01-home.png)
+- [02-kelime.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/02-kelime.png)
+- [03-okuma.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/03-okuma.png)
+- [04-gramer.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/04-gramer.png)
+- [05-profil.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/05-profil.png)
+
+Bu smoke seti su script ile tekrar alinabilir:
+
+- [live_smoke_playwright.js](/c:/yazilim_projeler/ingilizce_app1/scripts/live_smoke_playwright.js)
+
+Ornek kullanim:
+
+```powershell
+npm install --prefix temp\playwright-runner playwright
+$env:NODE_PATH = "$PWD\temp\playwright-runner\node_modules"
+node .\scripts\live_smoke_playwright.js https://passagetr-fef48.web.app artifacts\live_smoke
+```
+
+### 5. Responsive test kapsaminda eklenenler
+
+- [main_shell_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/shell/main_shell_page_test.dart)
+- [word_home_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/words/word_home_page_test.dart)
+- [reading_home_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/readings/reading_home_page_test.dart)
+- [reading_detail_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/readings/reading_detail_page_test.dart)
+- [home_dashboard_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/home/home_dashboard_page_test.dart)
+- [profile_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/profile/profile_page_test.dart)
+- [grammar_home_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/grammar/grammar_home_page_test.dart)
+
+## Web Performans Analizi (Mart 2026)
+
+### Neden yavas hissediliyor?
+
+Web tarafindaki en buyuk darboaz koddan once build artefakti ve asset boyutudur.
+
+Bu repoda `pubspec.yaml` su asset'leri web build'e de dahil eder:
+
+- `assets/db/app_content.db` -> yaklasik `56.98 MB`
+- `assets/db/dictionary_local.sqlite` -> yaklasik `36.06 MB`
+- `web/drift_worker.dart.js` -> yaklasik `1.12 MB`
+- `web/sqlite3.wasm` -> yaklasik `0.70 MB`
+
+Toplam etkisi:
+
+- Ilk acilista gereksiz buyuk bundle/caching davranisi
+- Firebase Spark deploy boyutunun sisirilmesi
+- Service worker ve browser cache tarafinda daha agir ilk kurulum
+- Manual deploy yapildiginda production web'e gereksiz lokal-db artefaktlarinin tasinmasi
+
+### Teknik tespit
+
+Web production mantigi zaten `remote-first` calistigi icin bu sqlite dosyalari production browser akisi icin gerekli degildir.
+
+Yani yavasligin ana nedeni:
+
+1. Yanlis veya eksik prune edilmis web deploy
+2. Buyuk DB asset'lerinin web bundle'a girmesi
+3. Browser cache / service worker'in eski bundle'i tutmasi
+4. Desktop breakpoint'i yuksek oldugu icin bazi tarayicilarda masaustu layout'un gec devreye girmesi
+
+### Hizlandirmak icin ne yapilmali?
+
+Zorunlu:
+
+- Production deploy'da her zaman `deploy_web_firebase.ps1` kullan.
+- `firebase.json` ignore kurallarini koru.
+- Web'de `USE_LOCAL_STATIC_CONTENT=false` kalmali.
+- Canli deploy sonrasi eski service worker/cache temizlenmeli.
+
+Yuksek etkili:
+
+- Web'e lokal sqlite DB asset'lerini hic cikarmayacak bir build stratejisine gec.
+- `pubspec.yaml` asset listesini platform bazli ayrisma mantigina yaklastir.
+- `firebase deploy` oncesi prune edilmeyen bundle yayinlamayi operasyonel olarak yasakla.
+
+Orta etkili:
+
+- `main.dart.js`, `canvaskit/*` ve statik assetler icin daha bilincli cache stratejisi degerlendir.
+- Chrome Performance panel ile `network waterfall + scripting + raster` profili alin.
+- Web'de sadece gerekli ekranlar ilk anda acilsin; agir ozellikler lazy acilsin.
+
+UI/UX etkili ama ikincil:
+
+- Desktop breakpoint istenirse `1200` yerine `1024` veya `960` seviyesine cekilebilir.
+- Bu degisiklik performansi degil, masaustu duzenin daha erken devreye girmesini iyilestirir.
+
+### Mevcut repo temizligi
+
+Bu turda buyuk gecici klasorler ve loglar temizlendi:
+
+- `build/`
+- `.dart_tool/`
+- `temp/`
+- `temp_supabase_pkg/`
+- `.firebase/`
+- `__pycache__/`
+
+Kalici smoke ciktisi artik [artifacts/live_smoke](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke) altinda tutulur.

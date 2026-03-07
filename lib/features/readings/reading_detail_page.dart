@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/layout/app_breakpoints.dart';
 import '../../core/services/translation_service.dart';
 import '../../core/utils/network_error_classifier.dart';
 import '../../core/utils/raw_splitter.dart';
@@ -26,6 +28,7 @@ import '../../state/providers.dart';
 import '../flashcard/flashcard_session_page.dart';
 import '../tests/mcq_session_page.dart';
 import 'widgets/interactive_sentence_text.dart';
+import 'widgets/reading_detail_side_panel.dart';
 import 'widgets/reading_audio_settings_sheet.dart';
 import 'widgets/word_quick_view_sheet.dart';
 import '../../core/widgets/app_speak_button.dart';
@@ -47,8 +50,9 @@ class ReadingDetailPage extends ConsumerStatefulWidget {
 }
 
 class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
-  static final RegExp _tokenPattern =
-      RegExp(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*|\s+|[^A-Za-z0-9\s]+");
+  static final RegExp _tokenPattern = RegExp(
+    r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*|\s+|[^A-Za-z0-9\s]+",
+  );
 
   final Set<String> _loadingTranslationIds = <String>{};
   final Map<String, String> _runtimeTranslations = <String, String>{};
@@ -75,6 +79,11 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   Offset _sentenceTranslationAnchor = const Offset(180, 220);
   String? _activeSentenceTranslationId;
   bool _sentenceTranslationVisible = false;
+  ReadingDetailPanelType _desktopPanelType = ReadingDetailPanelType.empty;
+  String? _desktopSelectedWord;
+  bool _desktopWordLoading = false;
+  bool _desktopWordHasDetail = false;
+  String _desktopWordMeaning = '';
 
   OverlayEntry? _inlineBubbleEntry;
   Timer? _inlineBubbleTimer;
@@ -103,10 +112,10 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   }
 
   void _onScrollChanged() {
-    if (_sentenceTranslationVisible) {
+    if (!_isDesktopLayout(context) && _sentenceTranslationVisible) {
       _dismissSentenceTranslationPopup();
     }
-    if (_inlineBubbleVisible) {
+    if (!_isDesktopLayout(context) && _inlineBubbleVisible) {
       _dismissInlineBubble();
     }
   }
@@ -129,11 +138,17 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       _highlightedWordsBySentence.clear();
       _focusWordsExpanded = false;
       _activeSentenceTranslationId = null;
+      _desktopPanelType = ReadingDetailPanelType.empty;
+      _desktopSelectedWord = null;
+      _desktopWordLoading = false;
+      _desktopWordHasDetail = false;
+      _desktopWordMeaning = '';
     });
 
     try {
-      final ReadingRepository readingRepository =
-          ref.read(readingRepositoryProvider);
+      final ReadingRepository readingRepository = ref.read(
+        readingRepositoryProvider,
+      );
       final List<PassageSentence> rows = await readingRepository.getSentences(
         passageId: widget.passage.id,
       );
@@ -174,10 +189,12 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       });
 
       try {
-        final bool bookmarked =
-            await readingRepository.isPassageBookmarked(widget.passage.id);
-        final bool favorited =
-            await readingRepository.isPassageFavorited(widget.passage.id);
+        final bool bookmarked = await readingRepository.isPassageBookmarked(
+          widget.passage.id,
+        );
+        final bool favorited = await readingRepository.isPassageFavorited(
+          widget.passage.id,
+        );
         if (mounted) {
           setState(() {
             _isBookmarked = bookmarked;
@@ -199,9 +216,18 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       }
 
       await _prefetchCachedTranslations();
-      await _buildDeterministicHighlights();
+      try {
+        await _buildDeterministicHighlights();
+      } catch (error, stackTrace) {
+        debugPrint(
+          'ReadingDetailPage highlight enrichment failed for '
+          '${widget.passage.id}: $error\n$stackTrace',
+        );
+      }
 
       ref.invalidate(readingProgressProvider(widget.passage.id));
+      ref.invalidate(homeMetricsProvider);
+      ref.invalidate(homeQuickStartProvider);
       ref.invalidate(homeDashboardProvider);
     } catch (error) {
       if (!mounted) {
@@ -245,8 +271,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     final Map<String, PassageFocusWord> focusMap = <String, PassageFocusWord>{};
 
     for (final PassageSentence sentence in _sentences) {
-      final List<String> tokens =
-          _extractNormalizedWordTokens(sentence.sentenceEn);
+      final List<String> tokens = _extractNormalizedWordTokens(
+        sentence.sentenceEn,
+      );
       if (tokens.isEmpty) {
         continue;
       }
@@ -273,11 +300,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         }
 
         candidates.add(
-          _SentenceCandidate(
-            token: token,
-            word: bestWord,
-            score: bestScore,
-          ),
+          _SentenceCandidate(token: token, word: bestWord, score: bestScore),
         );
       }
 
@@ -349,8 +372,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   }
 
   Future<void> _prefetchCachedTranslations() async {
-    final TranslationService translationService =
-        ref.read(translationServiceProvider);
+    final TranslationService translationService = ref.read(
+      translationServiceProvider,
+    );
     for (final PassageSentence sentence in _sentences) {
       if ((sentence.sentenceTr ?? '').trim().isNotEmpty) {
         continue;
@@ -385,6 +409,25 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     unawaited(ref.read(ttsServiceProvider).stopIfInteractionEnabled());
     _dismissInlineBubble();
 
+    if (_isDesktopLayout(context)) {
+      await _markProgress(sentence.idx);
+      setState(() {
+        _activeSentenceTranslationId = sentence.id;
+        _desktopPanelType = ReadingDetailPanelType.translation;
+        _desktopSelectedWord = null;
+      });
+
+      final String? inlineTr = sentence.sentenceTr?.trim();
+      if (inlineTr != null && inlineTr.isNotEmpty) {
+        return;
+      }
+      if ((_runtimeTranslations[sentence.id] ?? '').trim().isNotEmpty) {
+        return;
+      }
+      await _translateAndCache(sentence);
+      return;
+    }
+
     if (_sentenceTranslationVisible &&
         _activeSentenceTranslationId == sentence.id) {
       _dismissSentenceTranslationPopup();
@@ -409,6 +452,15 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     await _translateAndCache(sentence);
   }
 
+  Future<void> _openDesktopSentenceTranslationAction(
+    PassageSentence sentence,
+  ) async {
+    await _handleSentenceLongPress(
+      sentence,
+      const SentenceTapDetail(globalPosition: Offset.zero),
+    );
+  }
+
   Future<void> _translateAndCache(PassageSentence sentence) async {
     if (_loadingTranslationIds.contains(sentence.id)) {
       return;
@@ -425,8 +477,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     });
     _refreshSentenceTranslationPopup();
 
-    final TranslationService translationService =
-        ref.read(translationServiceProvider);
+    final TranslationService translationService = ref.read(
+      translationServiceProvider,
+    );
     if (!translationService.isConfigured) {
       _handleTranslationError(
         sentenceId: sentence.id,
@@ -525,10 +578,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       return;
     }
     final int nextLastIdx = normalized > _lastIdx ? normalized : _lastIdx;
-    await _persistProgress(
-      lastIdx: nextLastIdx,
-      completed: _completed,
-    );
+    await _persistProgress(lastIdx: nextLastIdx, completed: _completed);
   }
 
   Future<void> _advanceProgress() async {
@@ -562,6 +612,8 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         _completed = completed;
       });
       ref.invalidate(readingProgressProvider(widget.passage.id));
+      ref.invalidate(homeMetricsProvider);
+      ref.invalidate(homeQuickStartProvider);
       ref.invalidate(homeDashboardProvider);
     } catch (error) {
       if (!mounted) {
@@ -575,8 +627,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         error,
         fallback: 'Ilerleme su an kaydedilemedi.',
       );
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) {
         setState(() {
@@ -693,9 +746,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                   else if (translation != null)
                     Text(
                       translation,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            height: 1.42,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(height: 1.42),
                     )
                   else ...<Widget>[
                     const Text('Çeviri bulunamadı.'),
@@ -750,6 +803,14 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       return;
     }
     unawaited(ref.read(ttsServiceProvider).stopIfInteractionEnabled());
+
+    if (_isDesktopLayout(context)) {
+      _dismissSentenceTranslationPopup();
+      _dismissInlineBubble();
+      await _showDesktopWordMeaning(tap.word);
+      return;
+    }
+
     _dismissSentenceTranslationPopup();
     _showInlineBubble(
       word: tap.word,
@@ -759,8 +820,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       hasDetail: false,
     );
 
-    final _InlineBubbleResult result =
-        await _resolveInlineBubbleMeaning(tap.word);
+    final _InlineBubbleResult result = await _resolveInlineBubbleMeaning(
+      tap.word,
+    );
 
     if (!mounted || !_inlineBubbleVisible || _inlineBubbleWord != tap.word) {
       return;
@@ -779,6 +841,28 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     });
   }
 
+  Future<void> _showDesktopWordMeaning(String word) async {
+    setState(() {
+      _desktopPanelType = ReadingDetailPanelType.dictionary;
+      _desktopSelectedWord = word;
+      _desktopWordLoading = true;
+      _desktopWordHasDetail = false;
+      _desktopWordMeaning = 'Anlam yukleniyor...';
+      _activeSentenceTranslationId = null;
+    });
+
+    final _InlineBubbleResult result = await _resolveInlineBubbleMeaning(word);
+    if (!mounted || _desktopSelectedWord != word) {
+      return;
+    }
+
+    setState(() {
+      _desktopWordLoading = false;
+      _desktopWordHasDetail = result.hasDetail;
+      _desktopWordMeaning = result.text;
+    });
+  }
+
   Future<_InlineBubbleResult> _resolveInlineBubbleMeaning(String word) async {
     final WordRepository wordRepository = ref.read(wordRepositoryProvider);
 
@@ -789,14 +873,12 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     final WordItem? found =
         inPack ?? await wordRepository.getWordByEnWordGlobal(word);
     if (found != null && found.trMeaning.trim().isNotEmpty) {
-      return _InlineBubbleResult(
-        text: found.trMeaning.trim(),
-        hasDetail: true,
-      );
+      return _InlineBubbleResult(text: found.trMeaning.trim(), hasDetail: true);
     }
 
-    final TranslationService translationService =
-        ref.read(translationServiceProvider);
+    final TranslationService translationService = ref.read(
+      translationServiceProvider,
+    );
     if (!translationService.isConfigured) {
       return const _InlineBubbleResult(
         text: 'Ceviri servisi hazir degil.',
@@ -815,10 +897,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         error,
         fallback: 'Anlam su an alinamadi.',
       );
-      return _InlineBubbleResult(
-        text: safeMessage,
-        hasDetail: true,
-      );
+      return _InlineBubbleResult(text: safeMessage, hasDetail: true);
     }
   }
 
@@ -857,8 +936,10 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
   Widget _buildInlineBubbleOverlay(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double maxWidth = size.width * 0.72;
-    final double left = (_inlineBubbleAnchor.dx - (maxWidth / 2))
-        .clamp(12.0, size.width - maxWidth - 12);
+    final double left = (_inlineBubbleAnchor.dx - (maxWidth / 2)).clamp(
+      12.0,
+      size.width - maxWidth - 12,
+    );
     final double top = (_inlineBubbleAnchor.dy - 94).clamp(
       kToolbarHeight + 16.0,
       size.height - 170.0,
@@ -887,7 +968,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                Text(
+                  Text(
                     _inlineBubbleWord,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -993,9 +1074,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       if (!mounted) {
         return;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Yer imi guncellenemedi.')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Yer imi guncellenemedi.')));
     } finally {
       if (mounted) {
         setState(() {
@@ -1029,9 +1110,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       if (!mounted) {
         return;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Favori guncellenemedi.')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Favori guncellenemedi.')));
     } finally {
       if (mounted) {
         setState(() {
@@ -1086,6 +1167,26 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     return _sentences
         .map((PassageSentence e) => e.idx)
         .reduce((int a, int b) => a > b ? a : b);
+  }
+
+  bool _isDesktopLayout(BuildContext context) {
+    return AppBreakpoints.isDesktopWidth(MediaQuery.sizeOf(context).width);
+  }
+
+  bool get _useDesktopDoubleTapTranslation => kIsWeb;
+
+  String _buildSentenceHintText() {
+    if (_isDesktopLayout(context) && _useDesktopDoubleTapTranslation) {
+      return 'Ceviri icin cift tikla, kelime icin tikla.';
+    }
+    return 'Ceviri icin uzun bas, kelime icin dokun.';
+  }
+
+  String _buildHeroHintText() {
+    if (_isDesktopLayout(context) && _useDesktopDoubleTapTranslation) {
+      return 'Ceviri icin cumleye cift tikla. Kelime anlami icin kelimeye tikla.';
+    }
+    return 'Ceviri icin cumleye uzun bas. Kelime anlami icin kelimeye dokun.';
   }
 
   @override
@@ -1162,49 +1263,154 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         _completed ? total : (_lastIdx > total ? total : _lastIdx);
     final double progress = total == 0 ? 0 : shownProgress / total;
 
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final bool isDesktop = AppBreakpoints.isDesktopWidth(
+          constraints.maxWidth,
+        );
+        if (isDesktop) {
+          return _buildDesktopBody(
+            shownProgress: shownProgress,
+            total: total,
+            progress: progress,
+          );
+        }
+        return _buildMobileBody(
+          shownProgress: shownProgress,
+          total: total,
+          progress: progress,
+        );
+      },
+    );
+  }
+
+  Widget _buildMobileBody({
+    required int shownProgress,
+    required int total,
+    required double progress,
+  }) {
     return Stack(
       children: <Widget>[
         RefreshIndicator(
           onRefresh: _load,
-          child: ListView.builder(
-            controller: _scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
+          child: _buildSentenceList(
+            includeHeader: true,
+            includeFocusWords: true,
+            shownProgress: shownProgress,
+            total: total,
+            progress: progress,
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 20),
-            itemCount: _sentences.length + 2,
-            itemBuilder: (BuildContext context, int index) {
-              if (index == 0) {
-                return _buildHeroAndProgressCard(
+          ),
+        ),
+        if (_sentenceTranslationVisible)
+          _buildSentenceTranslationOverlay(context),
+      ],
+    );
+  }
+
+  Widget _buildDesktopBody({
+    required int shownProgress,
+    required int total,
+    required double progress,
+  }) {
+    return Row(
+      key: const ValueKey<String>('reading-detail-desktop-layout'),
+      children: <Widget>[
+        SizedBox(
+          width: 252,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(10, 10, 8, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                _buildHeroAndProgressCard(
                   shownProgress: shownProgress,
                   total: total,
                   progress: progress,
-                );
-              }
-
-              if (index == _sentences.length + 1) {
-                return _buildPassageWordsPanel();
-              }
-
-              final PassageSentence sentence = _sentences[index - 1];
-              final Set<String> highlightedWords =
-                  _highlightedWordsBySentence[sentence.id] ?? const <String>{};
-              final PassageSentence? previous =
-                  index > 1 ? _sentences[index - 2] : null;
-
-              return Column(
-                children: <Widget>[
-                  if (previous != null && sentence.idx - previous.idx > 1)
-                    _buildSentenceGapMarker(previous.idx, sentence.idx),
-                  _buildSentenceCard(
-                    sentence: sentence,
-                    highlightedWords: highlightedWords,
-                  ),
-                ],
-              );
-            },
+                ),
+                _buildPassageWordsPanel(),
+              ],
+            ),
           ),
         ),
-        if (_sentenceTranslationVisible) _buildSentenceTranslationOverlay(context),
+        const VerticalDivider(width: 1),
+        Expanded(
+          child: Center(
+            child: SizedBox(
+              width: 760,
+              child: RefreshIndicator(
+                onRefresh: _load,
+                child: _buildSentenceList(
+                  includeHeader: false,
+                  includeFocusWords: false,
+                  shownProgress: shownProgress,
+                  total: total,
+                  progress: progress,
+                  padding: const EdgeInsets.fromLTRB(8, 10, 8, 16),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const VerticalDivider(width: 1),
+        SizedBox(
+          width: 300,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(8, 10, 10, 16),
+            child: SingleChildScrollView(child: _buildDesktopDetailPanel()),
+          ),
+        ),
       ],
+    );
+  }
+
+  Widget _buildSentenceList({
+    required bool includeHeader,
+    required bool includeFocusWords,
+    required int shownProgress,
+    required int total,
+    required double progress,
+    required EdgeInsets padding,
+  }) {
+    final int extraHeader = includeHeader ? 1 : 0;
+    final int extraFooter = includeFocusWords ? 1 : 0;
+
+    return ListView.builder(
+      controller: _scrollController,
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: padding,
+      itemCount: _sentences.length + extraHeader + extraFooter,
+      itemBuilder: (BuildContext context, int index) {
+        if (includeHeader && index == 0) {
+          return _buildHeroAndProgressCard(
+            shownProgress: shownProgress,
+            total: total,
+            progress: progress,
+          );
+        }
+
+        if (includeFocusWords && index == _sentences.length + extraHeader) {
+          return _buildPassageWordsPanel();
+        }
+
+        final int sentenceIndex = includeHeader ? index - 1 : index;
+        final PassageSentence sentence = _sentences[sentenceIndex];
+        final Set<String> highlightedWords =
+            _highlightedWordsBySentence[sentence.id] ?? const <String>{};
+        final PassageSentence? previous =
+            sentenceIndex > 0 ? _sentences[sentenceIndex - 1] : null;
+
+        return Column(
+          children: <Widget>[
+            if (previous != null && sentence.idx - previous.idx > 1)
+              _buildSentenceGapMarker(previous.idx, sentence.idx),
+            _buildSentenceCard(
+              sentence: sentence,
+              highlightedWords: highlightedWords,
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -1214,9 +1420,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Divider(
-              color: Theme.of(context).colorScheme.outlineVariant,
-            ),
+            child: Divider(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -1228,9 +1432,7 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
             ),
           ),
           Expanded(
-            child: Divider(
-              color: Theme.of(context).colorScheme.outlineVariant,
-            ),
+            child: Divider(color: Theme.of(context).colorScheme.outlineVariant),
           ),
         ],
       ),
@@ -1242,17 +1444,18 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
     required Set<String> highlightedWords,
   }) {
     final bool isActive = _activeSentenceTranslationId == sentence.id;
+    final bool isDesktop = _isDesktopLayout(context);
 
     return AppSurfaceCard(
       variant: isActive ? AppSurfaceVariant.feature : AppSurfaceVariant.subtle,
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+      margin: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            width: 28,
-            height: 28,
+            width: 26,
+            height: 26,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -1260,9 +1463,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
             ),
             child: Text(
               '${sentence.idx}',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w800),
             ),
           ),
           const SizedBox(width: 10),
@@ -1273,15 +1476,22 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                 InteractiveSentenceText(
                   sentenceText: sentence.sentenceEn,
                   highlightedWordsSet: highlightedWords,
-                  gestureKey:
-                      ValueKey<String>('sentence-tap-target-${sentence.id}'),
+                  gestureKey: ValueKey<String>(
+                    'sentence-tap-target-${sentence.id}',
+                  ),
                   onWordTap: _onSentenceWordTap,
+                  onSentenceDoubleTap: _isDesktopLayout(context) &&
+                          _useDesktopDoubleTapTranslation
+                      ? (SentenceTapDetail detail) {
+                          _handleSentenceLongPress(sentence, detail);
+                        }
+                      : null,
                   onSentenceLongPress: (SentenceTapDetail detail) {
                     _handleSentenceLongPress(sentence, detail);
                   },
-                  baseStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        height: 1.5,
-                      ),
+                  baseStyle: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(height: 1.5),
                   highlightStyle:
                       Theme.of(context).textTheme.bodyLarge?.copyWith(
                             height: 1.5,
@@ -1291,20 +1501,153 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                    'Ceviri icin uzun bas, kelime icin dokun.',
+                  _buildSentenceHintText(),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                 ),
-                ],
-              ),
+              ],
             ),
+          ),
           const SizedBox(width: 8),
-          AppSpeakButton(
-            text: sentence.sentenceEn,
-            iconSize: 18,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (isDesktop)
+                IconButton(
+                  key: ValueKey<String>(
+                    'sentence-translate-action-${sentence.id}',
+                  ),
+                  tooltip: 'Çeviri',
+                  visualDensity: VisualDensity.compact,
+                  icon: const Icon(Icons.translate_rounded, size: 18),
+                  onPressed: () {
+                    _openDesktopSentenceTranslationAction(sentence);
+                  },
+                ),
+              AppSpeakButton(text: sentence.sentenceEn, iconSize: 18),
+            ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDesktopDetailPanel() {
+    switch (_desktopPanelType) {
+      case ReadingDetailPanelType.translation:
+        final String? sentenceId = _activeSentenceTranslationId;
+        final PassageSentence? sentence =
+            sentenceId == null ? null : _sentenceById(sentenceId);
+        if (sentence == null) {
+          return _buildEmptyDesktopPanel();
+        }
+        final String? translation = _resolveTranslation(sentence);
+        final String? error =
+            sentenceId == null ? null : _translationErrors[sentenceId];
+        final bool loadingTranslate =
+            sentenceId != null && _loadingTranslationIds.contains(sentenceId);
+
+        return ReadingDetailSidePanel(
+          type: ReadingDetailPanelType.translation,
+          title: 'Secili cumle',
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              if (loadingTranslate)
+                const Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(child: Text('Ceviri yukleniyor...')),
+                  ],
+                )
+              else if (translation != null)
+                Text(
+                  translation,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(height: 1.45),
+                )
+              else ...<Widget>[
+                const Text('Ceviri bulunamadi.'),
+                if (error != null) ...<Widget>[
+                  const SizedBox(height: 6),
+                  Text(
+                    error,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ],
+              ],
+            ],
+          ),
+          actionLabel:
+              (!loadingTranslate && translation == null) ? 'Tekrar dene' : null,
+          onAction: (!loadingTranslate && translation == null)
+              ? () => _translateAndCache(sentence)
+              : null,
+        );
+      case ReadingDetailPanelType.dictionary:
+        final String selectedWord = _desktopSelectedWord ?? '';
+        if (selectedWord.trim().isEmpty) {
+          return _buildEmptyDesktopPanel();
+        }
+        return ReadingDetailSidePanel(
+          type: ReadingDetailPanelType.dictionary,
+          title: selectedWord,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              if (_desktopWordLoading)
+                Row(
+                  children: <Widget>[
+                    const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(child: Text(_desktopWordMeaning)),
+                  ],
+                )
+              else
+                Text(
+                  _desktopWordMeaning,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(height: 1.45),
+                ),
+            ],
+          ),
+          actionLabel:
+              (!_desktopWordLoading && _desktopWordHasDetail) ? 'Detay' : null,
+          onAction: (!_desktopWordLoading && _desktopWordHasDetail)
+              ? () => _openQuickWordPopup(selectedWord)
+              : null,
+        );
+      case ReadingDetailPanelType.empty:
+        return _buildEmptyDesktopPanel();
+    }
+  }
+
+  Widget _buildEmptyDesktopPanel() {
+    return ReadingDetailSidePanel(
+      type: ReadingDetailPanelType.empty,
+      title: 'Secim bekleniyor',
+      body: Text(
+        _isDesktopLayout(context) && _useDesktopDoubleTapTranslation
+            ? 'Kelimeye tiklayarak sozluk anlamini gorebilir, cumleye cift tiklayarak ceviriyi bu panelde acabilirsin.'
+            : 'Kelimeye dokunarak sozluk anlamini gorebilir, cumleye uzun basarak ceviriyi bu panelde acabilirsin.',
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              height: 1.45,
+            ),
       ),
     );
   }
@@ -1323,9 +1666,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
         children: <Widget>[
           Text(
             widget.passage.title,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           SingleChildScrollView(
@@ -1337,7 +1680,8 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                     padding: const EdgeInsets.only(right: 6),
                     child: Chip(
                       label: Text(
-                          (widget.passage.level ?? '').trim().toUpperCase()),
+                        (widget.passage.level ?? '').trim().toUpperCase(),
+                      ),
                       visualDensity: VisualDensity.compact,
                     ),
                   ),
@@ -1363,21 +1707,23 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
           ),
           const SizedBox(height: 10),
           Text(
-            'Çeviri için cümleye dokun. Kelime anlamı için uzun bas.',
+            _buildHeroHintText(),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
           ),
           const SizedBox(height: 10),
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               Text(
                 'Ilerleme: $shownProgress/$total',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
-              const SizedBox(width: 8),
               if (_completed)
                 const Chip(
                   label: Text('Tamamlandi'),
@@ -1388,27 +1734,45 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
           const SizedBox(height: 8),
           LinearProgressIndicator(value: progress),
           const SizedBox(height: 10),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: _savingProgress || shownProgress >= total
-                      ? null
-                      : _advanceProgress,
-                  icon: const Icon(Icons.arrow_forward_rounded),
-                  label: const Text('Ilerledim'),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: FilledButton.icon(
-                  onPressed:
-                      _savingProgress || _completed ? null : _completeReading,
-                  icon: const Icon(Icons.task_alt_rounded),
-                  label: const Text('Okumayi Bitirdim'),
-                ),
-              ),
-            ],
+          LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final bool useCompactStack = constraints.maxWidth < 320;
+              final Widget progressButton = _ReadingProgressActionButton(
+                tooltip: 'Ilerledim',
+                label: useCompactStack ? 'Ilerle' : 'Ilerledim',
+                filled: false,
+                enabled: !(_savingProgress || shownProgress >= total),
+                icon: Icons.arrow_forward_rounded,
+                onPressed: _advanceProgress,
+              );
+              final Widget completeButton = _ReadingProgressActionButton(
+                tooltip: 'Okumayi Bitirdim',
+                label: useCompactStack ? 'Bitir' : 'Okumayi Bitirdim',
+                filled: true,
+                enabled: !(_savingProgress || _completed),
+                icon: Icons.task_alt_rounded,
+                onPressed: _completeReading,
+              );
+
+              if (useCompactStack) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    progressButton,
+                    const SizedBox(height: 8),
+                    completeButton,
+                  ],
+                );
+              }
+
+              return Row(
+                children: <Widget>[
+                  Expanded(child: progressButton),
+                  const SizedBox(width: 8),
+                  Expanded(child: completeButton),
+                ],
+              );
+            },
           ),
         ],
       ),
@@ -1438,7 +1802,9 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
               },
               title: Row(
                 children: <Widget>[
-                  const AppSectionHeader(title: 'Odak Kelimeler'),
+                  const Expanded(
+                    child: AppSectionHeader(title: 'Odak Kelimeler'),
+                  ),
                   const SizedBox(width: 8),
                   Chip(
                     label: Text('${_focusWords.length}'),
@@ -1452,26 +1818,25 @@ class _ReadingDetailPageState extends ConsumerState<ReadingDetailPage> {
                     padding: EdgeInsets.only(bottom: 8),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child:
-                          Text('Bu paragrafta secili odak kelime bulunamadi.'),
+                      child: Text(
+                        'Bu paragrafta secili odak kelime bulunamadi.',
+                      ),
                     ),
                   )
                 else ...<Widget>[
-                  ..._focusWords.map(
-                    (PassageFocusWord word) {
-                      final String pos = word.pos.trim();
-                      final String trMeaning = word.trMeaning.trim();
-                      final String subtitle = trMeaning.isEmpty
-                          ? (pos.isEmpty ? '-' : pos)
-                          : (pos.isEmpty ? trMeaning : '$trMeaning / $pos');
-                      return ListTile(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(word.enWord),
-                        subtitle: Text(subtitle),
-                      );
-                    },
-                  ),
+                  ..._focusWords.map((PassageFocusWord word) {
+                    final String pos = word.pos.trim();
+                    final String trMeaning = word.trMeaning.trim();
+                    final String subtitle = trMeaning.isEmpty
+                        ? (pos.isEmpty ? '-' : pos)
+                        : (pos.isEmpty ? trMeaning : '$trMeaning / $pos');
+                    return ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(word.enWord),
+                      subtitle: Text(subtitle),
+                    );
+                  }),
                 ],
               ],
             ),
@@ -1530,11 +1895,67 @@ class _SentenceCandidate {
 }
 
 class _InlineBubbleResult {
-  const _InlineBubbleResult({
-    required this.text,
-    required this.hasDetail,
-  });
+  const _InlineBubbleResult({required this.text, required this.hasDetail});
 
   final String text;
   final bool hasDetail;
+}
+
+class _ReadingProgressActionButton extends StatelessWidget {
+  const _ReadingProgressActionButton({
+    required this.tooltip,
+    required this.label,
+    required this.filled,
+    required this.enabled,
+    required this.icon,
+    required this.onPressed,
+  });
+
+  final String tooltip;
+  final String label;
+  final bool filled;
+  final bool enabled;
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final Text labelWidget = Text(
+      label,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      softWrap: false,
+      textAlign: TextAlign.center,
+    );
+
+    return Tooltip(
+      message: tooltip,
+      waitDuration: const Duration(milliseconds: 300),
+      child: filled
+          ? FilledButton.icon(
+              onPressed: enabled ? onPressed : null,
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+              ),
+              icon: Icon(icon, size: 18),
+              label: labelWidget,
+            )
+          : OutlinedButton.icon(
+              onPressed: enabled ? onPressed : null,
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+              ),
+              icon: Icon(icon, size: 18),
+              label: labelWidget,
+            ),
+    );
+  }
 }

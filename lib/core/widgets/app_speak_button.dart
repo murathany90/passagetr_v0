@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../services/tts_service.dart';
 import '../../state/tts_providers.dart';
 
 /// A compact speaker button that reads [text] aloud via TTS.
@@ -11,6 +12,7 @@ class AppSpeakButton extends ConsumerWidget {
   const AppSpeakButton({
     required this.text,
     this.iconSize = 20,
+    this.language = SpeechLanguage.english,
     super.key,
   });
 
@@ -19,14 +21,18 @@ class AppSpeakButton extends ConsumerWidget {
 
   /// Icon size (defaults to 20).
   final double iconSize;
+  final SpeechLanguage language;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: Icon(Icons.volume_up_rounded, size: iconSize),
-      tooltip: 'Seslendir',
+      tooltip: language == SpeechLanguage.english
+          ? 'Ingilizce okunus'
+          : 'Seslendir',
       visualDensity: VisualDensity.compact,
-      onPressed: () => ref.read(ttsServiceProvider).speak(text),
+      onPressed: () =>
+          ref.read(ttsServiceProvider).speak(text, language: language),
     );
   }
 }

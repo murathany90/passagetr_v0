@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:flutter/services.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
+
+import 'dictionary_local_database_connection_native.dart'
+    if (dart.library.html) 'dictionary_local_database_connection_web.dart';
+import 'local_database_runtime_info.dart';
 
 part 'dictionary_local_database.g.dart';
 
@@ -97,7 +95,9 @@ class LocalDictionaryBootstrapMeta extends Table {
   ],
 )
 class DictionaryLocalDatabase extends _$DictionaryLocalDatabase {
-  DictionaryLocalDatabase() : super(_openConnection());
+  DictionaryLocalDatabase() : super(openDictionaryLocalDatabaseConnection());
+
+  DictionaryLocalDatabase.connect(super.connection);
 
   @override
   int get schemaVersion => 1;
@@ -140,28 +140,6 @@ class DictionaryLocalDatabase extends _$DictionaryLocalDatabase {
       );
 }
 
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final File file = File(p.join(directory.path, 'dictionary_local.sqlite'));
-    await _copyPrebuiltDictionaryIfMissing(file);
-    return NativeDatabase.createInBackground(file);
-  });
-}
-
-Future<void> _copyPrebuiltDictionaryIfMissing(File targetFile) async {
-  if (await targetFile.exists()) {
-    return;
-  }
-
-  try {
-    final ByteData data =
-        await rootBundle.load('assets/db/dictionary_local.sqlite');
-    final Uint8List bytes =
-        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    await targetFile.parent.create(recursive: true);
-    await targetFile.writeAsBytes(bytes, flush: true);
-  } catch (_) {
-    // Asset yoksa Drift onCreate ile bos local DB olusturur.
-  }
+Future<LocalDatabaseRuntimeInfo> getDictionaryLocalDatabaseRuntimeInfo() {
+  return dictionaryLocalDatabaseRuntimeInfo();
 }

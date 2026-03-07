@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../core/config/app_config.dart';
+import '../core/utils/provider_cache.dart';
 import '../data/local/app_content_local_datasource.dart';
 import '../data/repositories/local_pack_repository.dart';
 import '../data/repositories/supabase_pack_repository.dart';
@@ -12,7 +12,10 @@ import 'content_providers.dart';
 
 final Provider<PackRepository> packRepositoryProvider =
     Provider<PackRepository>((Ref ref) {
-  if (AppConfig.useLocalStaticContent) {
+  final bool useLocalStaticContent = ref.watch(
+    effectiveUseLocalStaticContentProvider,
+  );
+  if (useLocalStaticContent) {
     final AppContentLocalDataSource local = ref.watch(
       appContentLocalDataSourceProvider,
     );
@@ -22,9 +25,11 @@ final Provider<PackRepository> packRepositoryProvider =
   return SupabasePackRepository(client);
 });
 
-final FutureProvider<List<Pack>> packListProvider = FutureProvider<List<Pack>>((
-  Ref ref,
-) async {
+final AutoDisposeFutureProvider<List<Pack>> packListProvider =
+    FutureProvider.autoDispose<List<Pack>>((Ref ref) async {
+  if (ref.watch(isWebPlatformProvider)) {
+    ref.cacheFor(const Duration(minutes: 5));
+  }
   final PackRepository repository = ref.watch(packRepositoryProvider);
   return repository.getPacksWithWordCount();
 });

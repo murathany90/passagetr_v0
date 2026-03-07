@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/config/app_config.dart';
+import '../core/utils/provider_cache.dart';
 import '../data/local/app_content_local_datasource.dart';
 import '../data/repositories/hybrid_reading_repository.dart';
 import '../data/repositories/resilient_reading_repository.dart';
@@ -19,9 +19,12 @@ final Provider<ReadingRepository> readingRepositoryProvider =
     Provider<ReadingRepository>((Ref ref) {
   final supabaseRepository = ref.watch(supabaseReadingRepositoryProvider);
   final syncController = ref.watch(offlineSyncControllerProvider.notifier);
+  final bool useLocalStaticContent = ref.watch(
+    effectiveUseLocalStaticContentProvider,
+  );
 
   ReadingRepository baseRepository = supabaseRepository;
-  if (AppConfig.useLocalStaticContent) {
+  if (useLocalStaticContent) {
     final AppContentLocalDataSource local = ref.watch(
       appContentLocalDataSourceProvider,
     );
@@ -85,8 +88,11 @@ bool _setEquals(Set<String> a, Set<String> b) {
 }
 
 final readingListProvider =
-    FutureProvider.family<PagedResult<ReadingPassage>, ReadingListRequest>(
+    FutureProvider.autoDispose.family<PagedResult<ReadingPassage>, ReadingListRequest>(
   (Ref ref, ReadingListRequest request) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 5));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getPassagesByPack(
       packId: request.packId,
@@ -125,8 +131,11 @@ class ReadingFeedRequest {
 }
 
 final readingFeedProvider =
-    FutureProvider.family<PagedResult<ReadingPassage>, ReadingFeedRequest>(
+    FutureProvider.autoDispose.family<PagedResult<ReadingPassage>, ReadingFeedRequest>(
   (Ref ref, ReadingFeedRequest request) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 5));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getReadingFeed(
       category: request.category,
@@ -138,8 +147,11 @@ final readingFeedProvider =
 );
 
 final readingDetailProvider =
-    FutureProvider.family<List<PassageSentence>, String>(
+    FutureProvider.autoDispose.family<List<PassageSentence>, String>(
   (Ref ref, String passageId) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 2));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getSentences(passageId: passageId);
   },
@@ -170,8 +182,11 @@ class SentenceTranslationLookup {
 }
 
 final sentenceTranslationControllerProvider =
-    FutureProvider.family<SentenceTranslation?, SentenceTranslationLookup>(
+    FutureProvider.autoDispose.family<SentenceTranslation?, SentenceTranslationLookup>(
   (Ref ref, SentenceTranslationLookup lookup) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 2));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getCachedTranslation(
       sentenceId: lookup.sentenceId,
@@ -182,22 +197,31 @@ final sentenceTranslationControllerProvider =
 );
 
 final readingProgressProvider =
-    FutureProvider.family<UserReadingProgress?, String>(
+    FutureProvider.autoDispose.family<UserReadingProgress?, String>(
   (Ref ref, String passageId) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(seconds: 45));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getUserReadingProgress(passageId: passageId);
   },
 );
 
-final passageWordsProvider = FutureProvider.family<List<WordItem>, String>(
+final passageWordsProvider = FutureProvider.autoDispose.family<List<WordItem>, String>(
   (Ref ref, String passageId) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(minutes: 2));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.getPassageWords(passageId: passageId, limit: 400);
   },
 );
 
-final passageBookmarkedProvider = FutureProvider.family<bool, String>(
+final passageBookmarkedProvider = FutureProvider.autoDispose.family<bool, String>(
   (Ref ref, String passageId) async {
+    if (ref.watch(isWebPlatformProvider)) {
+      ref.cacheFor(const Duration(seconds: 45));
+    }
     final ReadingRepository repository = ref.watch(readingRepositoryProvider);
     return repository.isPassageBookmarked(passageId);
   },

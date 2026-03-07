@@ -27,8 +27,11 @@ void main() {
     SharedPreferences.setMockInitialValues(<String, Object>{});
   });
 
-  Future<void> configureViewport(WidgetTester tester) async {
-    tester.view.physicalSize = const Size(1080, 2400);
+  Future<void> configureViewport(
+    WidgetTester tester, {
+    required Size size,
+  }) async {
+    tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -36,11 +39,7 @@ void main() {
     });
   }
 
-  testWidgets('MainShellPage shows 5 tabs without Sozluk tab', (
-    WidgetTester tester,
-  ) async {
-    await configureViewport(tester);
-
+  Future<void> pumpShell(WidgetTester tester) async {
     final OfflineSyncController controller = OfflineSyncController(
       queueStore: OfflineSyncQueueStore(),
       readingRemote: _FakeReadingRepository(),
@@ -52,29 +51,42 @@ void main() {
         overrides: <Override>[
           authBootstrapProvider.overrideWith((Ref ref) async {}),
           weakWordCountProvider.overrideWith((Ref ref) async => 0),
-          offlineSyncControllerProvider.overrideWith(
-            (Ref ref) => controller,
-          ),
-          homeDashboardProvider.overrideWith((Ref ref) async {
-            return const HomeDashboardData(
+          offlineSyncControllerProvider.overrideWith((Ref ref) => controller),
+          homeMetricsProvider.overrideWith((Ref ref) async {
+            return const HomeMetricsData(
               todayWordCount: 0,
               todayReadSentenceCount: 0,
               todaySolvedQuestionText: 'Yakinda',
-              quickStart: QuickStartSuggestion(
-                type: QuickStartType.randomWords,
-                wordIds: <String>['w1'],
-              ),
+            );
+          }),
+          homeQuickStartProvider.overrideWith((Ref ref) async {
+            return const QuickStartSuggestion(
+              type: QuickStartType.randomWords,
+              wordIds: <String>['w1'],
             );
           }),
         ],
-        child: const MaterialApp(
-          home: MainShellPage(),
-        ),
+        child: const MaterialApp(home: MainShellPage()),
       ),
     );
 
     await tester.pumpAndSettle();
+  }
 
+  testWidgets('MainShellPage uses bottom navigation on mobile', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester, size: const Size(390, 844));
+    await pumpShell(tester);
+
+    expect(
+      find.byKey(const ValueKey<String>('shell-navigation-bar')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('shell-navigation-rail')),
+      findsNothing,
+    );
     expect(find.byType(NavigationDestination), findsNWidgets(5));
     expect(find.text('Ana Sayfa'), findsWidgets);
     expect(find.text('Kelime'), findsOneWidget);
@@ -82,6 +94,53 @@ void main() {
     expect(find.text('Gramer'), findsOneWidget);
     expect(find.text('Profil'), findsOneWidget);
     expect(find.text('Sozluk'), findsNothing);
+  });
+
+  testWidgets('MainShellPage uses navigation rail on desktop', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester, size: const Size(1024, 900));
+    await pumpShell(tester);
+
+    expect(
+      find.byKey(const ValueKey<String>('shell-navigation-rail')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('shell-navigation-bar')),
+      findsNothing,
+    );
+    expect(find.text('Ana Sayfa'), findsWidgets);
+    expect(find.text('Kelime'), findsWidgets);
+    expect(find.text('Okuma'), findsWidgets);
+    expect(find.text('Gramer'), findsWidgets);
+    expect(find.text('Profil'), findsWidgets);
+
+    await tester.tap(find.text('Okuma').first);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(find.text('Okuma'), findsWidgets);
+    expect(
+      find.byKey(const ValueKey<String>('shell-content-host')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('MainShellPage keeps mobile shell below desktop breakpoint', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester, size: const Size(959, 900));
+    await pumpShell(tester);
+
+    expect(
+      find.byKey(const ValueKey<String>('shell-navigation-bar')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('shell-navigation-rail')),
+      findsNothing,
+    );
   });
 }
 
@@ -115,8 +174,9 @@ class _FakeReadingRepository implements ReadingRepository {
   }
 
   @override
-  Future<List<PassageSentence>> getSentences(
-      {required String passageId}) async {
+  Future<List<PassageSentence>> getSentences({
+    required String passageId,
+  }) async {
     return const <PassageSentence>[];
   }
 
@@ -227,6 +287,13 @@ class _FakeProgressRepository implements ProgressRepository {
     required List<String> wordIds,
   }) async {
     return const <String, UserWordProgress>{};
+  }
+
+  @override
+  Future<Map<String, int>> getStudiedWordCountByLevel({
+    required List<String> levels,
+  }) async {
+    return const <String, int>{};
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../core/config/app_config.dart';
+import '../core/utils/provider_cache.dart';
 import '../data/repositories/hybrid_grammar_repository.dart';
 import '../data/repositories/supabase_grammar_repository.dart';
 import '../domain/entities/grammar_module.dart';
@@ -13,7 +13,10 @@ import 'content_providers.dart';
 
 final Provider<GrammarRepository> grammarRepositoryProvider =
     Provider<GrammarRepository>((Ref ref) {
-  if (AppConfig.useLocalStaticContent) {
+  final bool useLocalStaticContent = ref.watch(
+    effectiveUseLocalStaticContentProvider,
+  );
+  if (useLocalStaticContent) {
     return HybridGrammarRepository(
       localDataSource: ref.watch(appContentLocalDataSourceProvider),
       remoteDataSource:
@@ -24,20 +27,35 @@ final Provider<GrammarRepository> grammarRepositoryProvider =
   return SupabaseGrammarRepository(client);
 });
 
-final FutureProvider<List<GrammarModule>> grammarModulesProvider =
-    FutureProvider<List<GrammarModule>>((Ref ref) async {
+final AutoDisposeFutureProvider<List<GrammarModule>> grammarModulesProvider =
+    FutureProvider.autoDispose<List<GrammarModule>>((Ref ref) async {
+  if (ref.watch(isWebPlatformProvider)) {
+    ref.cacheFor(const Duration(minutes: 5));
+  }
   final GrammarRepository repository = ref.watch(grammarRepositoryProvider);
   return repository.getModules();
 });
 
 final grammarPagesProvider =
-    FutureProvider.family<List<GrammarPage>, int>((Ref ref, int modulId) async {
+    FutureProvider.autoDispose.family<List<GrammarPage>, int>((
+  Ref ref,
+  int modulId,
+) async {
+  if (ref.watch(isWebPlatformProvider)) {
+    ref.cacheFor(const Duration(minutes: 5));
+  }
   final GrammarRepository repository = ref.watch(grammarRepositoryProvider);
   return repository.getPagesByModule(modulId: modulId);
 });
 
 final grammarPageDetailProvider =
-    FutureProvider.family<GrammarPageDetail, int>((Ref ref, int sayfaId) async {
+    FutureProvider.autoDispose.family<GrammarPageDetail, int>((
+  Ref ref,
+  int sayfaId,
+) async {
+  if (ref.watch(isWebPlatformProvider)) {
+    ref.cacheFor(const Duration(minutes: 2));
+  }
   final GrammarRepository repository = ref.watch(grammarRepositoryProvider);
   return repository.getPageDetail(sayfaId: sayfaId);
 });

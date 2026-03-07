@@ -37,42 +37,68 @@ void main() {
     id: 'passage-long',
     packId: 'pack-1',
     packName: 'YDS Set 001',
-    title: 'This is a much longer reading title that should still stretch fully',
+    title:
+        'This is a much longer reading title that should still stretch fully',
     level: 'B2',
     tagsRaw: 'science',
     category: 'science',
   );
 
-  testWidgets('renders feed cards at equal full width with visible badges', (
-    WidgetTester tester,
-  ) async {
-    tester.view.physicalSize = const Size(1080, 2400);
+  const ReadingResumeItem resumeItem = ReadingResumeItem(
+    passage: shortTitlePassage,
+    progress: UserReadingProgress(
+      userId: 'user-1',
+      passageId: 'passage-short',
+      completed: false,
+      lastIdx: 3,
+      lastSeenAt: null,
+    ),
+  );
+
+  Future<void> configureViewport(
+    WidgetTester tester, {
+    Size size = const Size(390, 844),
+  }) async {
+    tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
+  }
 
+  Future<void> pumpPage(
+    WidgetTester tester, {
+    required List<ReadingPassage> feedItems,
+    ReadingResumeItem? resume,
+  }) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: <Override>[
           packListProvider.overrideWith((Ref ref) async => const <Pack>[pack]),
           readingRepositoryProvider.overrideWith(
             (Ref ref) => _FakeReadingRepository(
-              feedItems: const <ReadingPassage>[
-                shortTitlePassage,
-                longTitlePassage,
-              ],
+              feedItems: feedItems,
+              resumeItem: resume,
             ),
           ),
         ],
-        child: const MaterialApp(
-          home: Scaffold(body: ReadingHomePage()),
-        ),
+        child: const MaterialApp(home: Scaffold(body: ReadingHomePage())),
       ),
     );
 
     await tester.pumpAndSettle();
+  }
+
+  testWidgets('renders feed cards at equal full width with visible badges', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester);
+
+    await pumpPage(
+      tester,
+      feedItems: const <ReadingPassage>[shortTitlePassage, longTitlePassage],
+    );
 
     final Finder shortCard = find.byKey(
       const ValueKey<String>('reading-feed-card-passage-short'),
@@ -87,21 +113,60 @@ void main() {
     final Rect shortRect = tester.getRect(shortCard);
     final Rect longRect = tester.getRect(longCard);
     expect(shortRect.width, equals(longRect.width));
-    expect(shortRect.width, greaterThan(900));
+    expect(shortRect.width, greaterThan(320));
 
     expect(find.text('A2'), findsOneWidget);
     expect(find.text('B2'), findsOneWidget);
     expect(find.text('general'), findsOneWidget);
     expect(find.text('science'), findsOneWidget);
   });
+
+  testWidgets('desktop shows split header and grid feed', (
+    WidgetTester tester,
+  ) async {
+    await configureViewport(tester, size: const Size(1440, 900));
+
+    await pumpPage(
+      tester,
+      feedItems: const <ReadingPassage>[shortTitlePassage, longTitlePassage],
+      resume: resumeItem,
+    );
+
+    expect(
+      find.byKey(const ValueKey<String>('reading-home-desktop-header')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('reading-home-resume-card')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('reading-feed-grid')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('reading-feed-list')),
+      findsNothing,
+    );
+
+    final Rect shortRect = tester.getRect(
+      find.byKey(const ValueKey<String>('reading-feed-card-passage-short')),
+    );
+    final Rect longRect = tester.getRect(
+      find.byKey(const ValueKey<String>('reading-feed-card-passage-long')),
+    );
+    expect((shortRect.top - longRect.top).abs(), lessThan(1));
+    expect(shortRect.width, lessThan(700));
+    expect(shortRect.width, equals(longRect.width));
+    expect(find.text('Ilerleme: 3'), findsOneWidget);
+  });
 }
 
 class _FakeReadingRepository implements ReadingRepository {
-  _FakeReadingRepository({
-    required this.feedItems,
-  });
+  _FakeReadingRepository({required this.feedItems, this.resumeItem});
 
   final List<ReadingPassage> feedItems;
+  final ReadingResumeItem? resumeItem;
 
   @override
   Future<PagedResult<ReadingPassage>> getPassagesByPack({
@@ -180,7 +245,7 @@ class _FakeReadingRepository implements ReadingRepository {
   Future<int> getTodayReadSentenceCount() async => 0;
 
   @override
-  Future<ReadingResumeItem?> getLatestIncompleteReading() async => null;
+  Future<ReadingResumeItem?> getLatestIncompleteReading() async => resumeItem;
 
   @override
   Future<List<WordItem>> getPassageWords({

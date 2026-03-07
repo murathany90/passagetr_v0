@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../utils/network_error_classifier.dart';
 
 enum TranslationProvider {
   libre('libre'),
@@ -112,20 +113,20 @@ class LibreTranslateService extends TranslationService {
         lastError = TranslationException(
           'Ceviri istegi zaman asimina ugradi. endpoint: $uri',
         );
-      } on SocketException {
-        lastError = TranslationException(
-          'Ag hatasi nedeniyle ceviri alinamadi. endpoint: $uri',
-        );
-      } on http.ClientException {
-        lastError = TranslationException(
-          'Ceviri servisine baglanilamadi. endpoint: $uri',
-        );
       } on FormatException {
         lastError = TranslationException(
           'Ceviri yaniti gecersiz formatta. endpoint: $uri',
         );
       } on TranslationException catch (error) {
         lastError = error;
+      } catch (error) {
+        if (NetworkErrorClassifier.isNetworkLikeError(error)) {
+          lastError = TranslationException(
+            'Ag hatasi nedeniyle ceviri alinamadi. endpoint: $uri',
+          );
+          continue;
+        }
+        rethrow;
       }
     }
 
@@ -352,12 +353,15 @@ class GoogleCloudTranslateService extends TranslationService {
       return translated.trim();
     } on TimeoutException {
       throw const TranslationException('Ceviri istegi zaman asimina ugradi.');
-    } on SocketException {
-      throw const TranslationException('Ag hatasi nedeniyle ceviri alinamadi.');
-    } on http.ClientException {
-      throw const TranslationException('Ceviri servisine baglanilamadi.');
     } on FormatException {
       throw const TranslationException('Ceviri yaniti gecersiz formatta.');
+    } catch (error) {
+      if (NetworkErrorClassifier.isNetworkLikeError(error)) {
+        throw const TranslationException(
+          'Ag hatasi nedeniyle ceviri alinamadi.',
+        );
+      }
+      rethrow;
     }
   }
 

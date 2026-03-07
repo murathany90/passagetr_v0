@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/i18n/tr_ui_texts.dart';
+import '../../core/layout/app_breakpoints.dart';
+import '../../core/layout/app_page_container.dart';
 import '../../core/widgets/app_empty_state.dart';
 import '../../core/widgets/app_error_state.dart';
 import '../../core/widgets/app_gradient_cta_button.dart';
@@ -17,6 +19,8 @@ import '../../state/providers.dart';
 import 'reading_detail_page.dart';
 import 'reading_level_style.dart';
 import 'reading_list_page.dart';
+import 'widgets/reading_feed_grid.dart';
+import 'widgets/reading_resume_card.dart';
 
 enum ReadingHomeSegment {
   stories('Hikayeler'),
@@ -47,143 +51,218 @@ class _ReadingHomePageState extends ConsumerState<ReadingHomePage> {
       _readingFeedProvider(_segment),
     );
 
-    return packsAsync.when(
-      loading: () => const Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: <Widget>[
-            AppShimmerCard(lineCount: 4),
-            SizedBox(height: 10),
-            AppShimmerCard(),
-            SizedBox(height: 10),
-            AppShimmerCard(lineCount: 2),
-          ],
-        ),
-      ),
-      error: (Object error, StackTrace stack) {
-        return AppErrorState(
-          title: TrUiTexts.readingPackLoadError,
-          detail: error.toString(),
-          onRetry: () => ref.invalidate(packListProvider),
-        );
-      },
-      data: (List<Pack> packs) {
-        if (packs.isEmpty) {
-          return const AppEmptyState(
-            title: TrUiTexts.readingPackEmptyTitle,
-            message: TrUiTexts.readingPackEmptyMessage,
-            icon: Icons.menu_book_outlined,
-          );
-        }
-
-        final Pack primaryPack = packs.first;
-        return RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(packListProvider);
-            ref.invalidate(_latestResumeProvider);
-            ref.invalidate(_readingFeedProvider(_segment));
-            await ref.read(packListProvider.future);
-          },
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16),
+    return AppPageContainer(
+      padding: EdgeInsets.zero,
+      child: packsAsync.when(
+        skipLoadingOnRefresh: true,
+        skipLoadingOnReload: true,
+        loading: () => const Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
             children: <Widget>[
-              _ReadingHeroCard(
-                segment: _segment,
-                onTap: () => _openList(context, primaryPack),
-              ),
-              const SizedBox(height: 10),
-              SegmentedButton<ReadingHomeSegment>(
-                showSelectedIcon: false,
-                segments: ReadingHomeSegment.values
-                    .map(
-                      (ReadingHomeSegment segment) =>
-                          ButtonSegment<ReadingHomeSegment>(
-                        value: segment,
-                        label: Text(segment.label),
-                      ),
-                    )
-                    .toList(growable: false),
-                selected: <ReadingHomeSegment>{_segment},
-                onSelectionChanged: (Set<ReadingHomeSegment> value) {
-                  setState(() {
-                    _segment = value.first;
-                  });
-                },
-              ),
-              const SizedBox(height: 12),
-              _buildResumeStrip(context, resumeAsync, packs),
-              const SizedBox(height: 12),
-              _buildSegmentContent(
-                context: context,
-                feedAsync: feedAsync,
-                packs: packs,
-              ),
+              AppShimmerCard(lineCount: 4),
+              SizedBox(height: 10),
+              AppShimmerCard(),
+              SizedBox(height: 10),
+              AppShimmerCard(lineCount: 2),
             ],
           ),
-        );
+        ),
+        error: (Object error, StackTrace stack) {
+          return AppErrorState(
+            title: TrUiTexts.readingPackLoadError,
+            detail: error.toString(),
+            onRetry: () => ref.invalidate(packListProvider),
+          );
+        },
+        data: (List<Pack> packs) {
+          if (packs.isEmpty) {
+            return const AppEmptyState(
+              title: TrUiTexts.readingPackEmptyTitle,
+              message: TrUiTexts.readingPackEmptyMessage,
+              icon: Icons.menu_book_outlined,
+            );
+          }
+
+          final Pack primaryPack = packs.first;
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final bool isDesktop = AppBreakpoints.isDesktopWidth(
+                constraints.maxWidth,
+              );
+              return RefreshIndicator(
+                onRefresh: () async {
+                  ref.invalidate(packListProvider);
+                  ref.invalidate(_latestResumeProvider);
+                  ref.invalidate(_readingFeedProvider(_segment));
+                  await ref.read(packListProvider.future);
+                },
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(16),
+                  children: isDesktop
+                      ? _buildDesktopSections(
+                          context: context,
+                          primaryPack: primaryPack,
+                          resumeAsync: resumeAsync,
+                          feedAsync: feedAsync,
+                          packs: packs,
+                        )
+                      : _buildMobileSections(
+                          context: context,
+                          primaryPack: primaryPack,
+                          resumeAsync: resumeAsync,
+                          feedAsync: feedAsync,
+                          packs: packs,
+                        ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  List<Widget> _buildMobileSections({
+    required BuildContext context,
+    required Pack primaryPack,
+    required AsyncValue<ReadingResumeItem?> resumeAsync,
+    required AsyncValue<PagedResult<ReadingPassage>> feedAsync,
+    required List<Pack> packs,
+  }) {
+    return <Widget>[
+      _ReadingHeroCard(
+        segment: _segment,
+        onTap: () => _openList(context, primaryPack),
+      ),
+      const SizedBox(height: 10),
+      _buildSegmentSelector(),
+      const SizedBox(height: 12),
+      _buildResumeCard(context, resumeAsync, packs),
+      const SizedBox(height: 12),
+      _buildSegmentContent(
+        context: context,
+        feedAsync: feedAsync,
+        packs: packs,
+      ),
+    ];
+  }
+
+  List<Widget> _buildDesktopSections({
+    required BuildContext context,
+    required Pack primaryPack,
+    required AsyncValue<ReadingResumeItem?> resumeAsync,
+    required AsyncValue<PagedResult<ReadingPassage>> feedAsync,
+    required List<Pack> packs,
+  }) {
+    return <Widget>[
+      Row(
+        key: const ValueKey<String>('reading-home-desktop-header'),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex: 7,
+            child: _ReadingHeroCard(
+              segment: _segment,
+              onTap: () => _openList(context, primaryPack),
+              desktop: true,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            flex: 5,
+            child: _buildResumeCard(
+              context,
+              resumeAsync,
+              packs,
+              desktop: true,
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 12),
+      _buildSegmentSelector(),
+      const SizedBox(height: 12),
+      _buildSegmentContent(
+        context: context,
+        feedAsync: feedAsync,
+        packs: packs,
+        useGrid: true,
+        desktopWidth: MediaQuery.sizeOf(context).width,
+      ),
+    ];
+  }
+
+  Widget _buildSegmentSelector() {
+    return SegmentedButton<ReadingHomeSegment>(
+      key: const ValueKey<String>('reading-home-segment-control'),
+      showSelectedIcon: false,
+      segments: ReadingHomeSegment.values
+          .map(
+            (ReadingHomeSegment segment) => ButtonSegment<ReadingHomeSegment>(
+              value: segment,
+              label: Text(segment.label),
+            ),
+          )
+          .toList(growable: false),
+      selected: <ReadingHomeSegment>{_segment},
+      onSelectionChanged: (Set<ReadingHomeSegment> value) {
+        setState(() {
+          _segment = value.first;
+        });
       },
     );
   }
 
-  Widget _buildResumeStrip(
+  Widget _buildResumeCard(
     BuildContext context,
     AsyncValue<ReadingResumeItem?> resumeAsync,
-    List<Pack> packs,
-  ) {
-    return AppSurfaceCard(
-      child: resumeAsync.when(
-        loading: () => const SizedBox(
-          height: 72,
-          child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-        ),
-        error: (Object _, StackTrace __) => const Text(
-          'Okumaya devam bilgisi su an alinamadi.',
-        ),
-        data: (ReadingResumeItem? resume) {
-          if (resume == null) {
-            return const Text('Yarim kalan okuma bulunmuyor.');
-          }
-          final Pack? pack = packs.cast<Pack?>().firstWhere(
-                (Pack? item) => item?.id == resume.passage.packId,
-                orElse: () => null,
-              );
-          if (pack == null) {
-            return const Text('Devam okunmasi icin uygun paket bulunamadi.');
-          }
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const AppSectionHeader(title: 'Okumaya Devam Et'),
-              const SizedBox(height: 6),
-              Text(
-                resume.passage.title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-              ),
-              const SizedBox(height: 4),
-              Text('Ilerleme: ${resume.progress.lastIdx}'),
-              const SizedBox(height: 8),
-              AppGradientCtaButton(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => ReadingDetailPage(
-                        passage: resume.passage,
-                        pack: pack,
-                        initialLastIdx: resume.progress.lastIdx,
-                      ),
-                    ),
-                  );
-                },
-                icon: Icons.play_arrow_rounded,
-                label: 'Devam Et',
-              ),
-            ],
-          );
-        },
+    List<Pack> packs, {
+    bool desktop = false,
+  }) {
+    return resumeAsync.when(
+      skipLoadingOnRefresh: true,
+      skipLoadingOnReload: true,
+      loading: () => ReadingResumeCard.loading(desktop: desktop),
+      error: (Object _, StackTrace __) => ReadingResumeCard.message(
+        message: 'Okumaya devam bilgisi su an alinamadi.',
+        desktop: desktop,
       ),
+      data: (ReadingResumeItem? resume) {
+        if (resume == null) {
+          return ReadingResumeCard.message(
+            message: 'Yarim kalan okuma bulunmuyor.',
+            desktop: desktop,
+          );
+        }
+        final Pack? pack = packs.cast<Pack?>().firstWhere(
+              (Pack? item) => item?.id == resume.passage.packId,
+              orElse: () => null,
+            );
+        if (pack == null) {
+          return ReadingResumeCard.message(
+            message: 'Devam okunmasi icin uygun paket bulunamadi.',
+            desktop: desktop,
+          );
+        }
+        return ReadingResumeCard.content(
+          title: resume.passage.title,
+          progressText: 'Ilerleme: ${resume.progress.lastIdx}',
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => ReadingDetailPage(
+                  passage: resume.passage,
+                  pack: pack,
+                  initialLastIdx: resume.progress.lastIdx,
+                ),
+              ),
+            );
+          },
+          desktop: desktop,
+        );
+      },
     );
   }
 
@@ -191,10 +270,15 @@ class _ReadingHomePageState extends ConsumerState<ReadingHomePage> {
     required BuildContext context,
     required AsyncValue<PagedResult<ReadingPassage>> feedAsync,
     required List<Pack> packs,
+    bool useGrid = false,
+    double? desktopWidth,
   }) {
     return feedAsync.when(
+      skipLoadingOnRefresh: true,
+      skipLoadingOnReload: true,
       loading: () => const AppShimmerCard(),
-      error: (Object _, StackTrace __) => _buildPackCards(context, packs),
+      error: (Object _, StackTrace __) =>
+          _buildPackCards(context, packs, useGrid: useGrid),
       data: (PagedResult<ReadingPassage> page) {
         if (page.items.isEmpty) {
           if (_segment == ReadingHomeSegment.library) {
@@ -204,76 +288,76 @@ class _ReadingHomePageState extends ConsumerState<ReadingHomePage> {
               icon: Icons.bookmark_outline,
             );
           }
-          return _buildPackCards(context, packs);
+          return _buildPackCards(context, packs, useGrid: useGrid);
         }
+
+        final List<Widget> feedCards = page.items
+            .map(
+              (ReadingPassage passage) => _buildPassageCard(
+                context: context,
+                passage: passage,
+                resolvedPack: _resolvePackForPassage(
+                  packs: packs,
+                  passage: passage,
+                ),
+              ),
+            )
+            .toList(growable: false);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             AppSectionHeader(title: _segment.label),
             const SizedBox(height: 8),
-            ...page.items.map((ReadingPassage passage) {
-              final Pack resolvedPack = _resolvePackForPassage(
-                packs: packs,
-                passage: passage,
-              );
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: AppSurfaceCard(
-                    key: ValueKey<String>('reading-feed-card-${passage.id}'),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => ReadingDetailPage(
-                            passage: passage,
-                            pack: resolvedPack,
-                          ),
-                        ),
-                      );
-                    },
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(minHeight: 112),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            passage.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                          ),
-                          const SizedBox(height: 12),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: <Widget>[
-                              if ((passage.level ?? '').trim().isNotEmpty)
-                                _ReadingMetaBadge.level(
-                                  level: (passage.level ?? '').trim(),
-                                ),
-                              if ((passage.category ?? '').trim().isNotEmpty)
-                                _ReadingMetaBadge.category(
-                                  context: context,
-                                  label: (passage.category ?? '').trim(),
-                                ),
-                            ],
-                          ),
-                        ],
+            if (useGrid)
+              ReadingFeedGrid(
+                crossAxisCount: _desktopFeedColumns(desktopWidth),
+                mainAxisExtent: _desktopFeedExtent(desktopWidth),
+                children: feedCards,
+              )
+            else
+              Column(
+                key: const ValueKey<String>('reading-feed-list'),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: feedCards
+                    .map(
+                      (Widget card) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: card,
                       ),
-                    ),
-                  ),
-                ),
-              );
-            }),
+                    )
+                    .toList(growable: false),
+              ),
           ],
         );
       },
     );
+  }
+
+  int _desktopFeedColumns(double? width) {
+    if (width == null) {
+      return 2;
+    }
+    if (width >= 1680) {
+      return 4;
+    }
+    if (width >= 1280) {
+      return 3;
+    }
+    return 2;
+  }
+
+  double _desktopFeedExtent(double? width) {
+    if (width == null) {
+      return 164;
+    }
+    if (width >= 1680) {
+      return 164;
+    }
+    if (width >= 1280) {
+      return 170;
+    }
+    return 164;
   }
 
   Pack _resolvePackForPassage({
@@ -292,55 +376,160 @@ class _ReadingHomePageState extends ConsumerState<ReadingHomePage> {
     return packs.first;
   }
 
-  Widget _buildPackCards(BuildContext context, List<Pack> packs) {
+  Widget _buildPackCards(
+    BuildContext context,
+    List<Pack> packs, {
+    bool useGrid = false,
+  }) {
+    final List<Widget> packCards = packs
+        .map((Pack pack) => _buildPackCard(context, pack))
+        .toList(growable: false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         const AppSectionHeader(title: 'Okuma Paketleri'),
         const SizedBox(height: 8),
-        ...packs.map(
-          (Pack pack) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: SizedBox(
-              width: double.infinity,
-              child: AppSurfaceCard(
-                onTap: () => _openList(context, pack),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            pack.name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(fontWeight: FontWeight.w800),
-                          ),
-                        ),
-                        const Icon(Icons.chevron_right_rounded),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      pack.wordCount > 0
-                          ? TrUiTexts.packWordCount(pack.wordCount)
-                          : TrUiTexts.packOnlyReading,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                    ),
-                  ],
-                ),
+        if (useGrid)
+          ReadingFeedGrid(
+            crossAxisCount: MediaQuery.sizeOf(context).width >= 1280 ? 3 : 2,
+            mainAxisExtent: 112,
+            children: packCards,
+          )
+        else
+          Column(
+            key: const ValueKey<String>('reading-feed-list'),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: packCards
+                .map(
+                  (Widget card) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: card,
+                  ),
+                )
+                .toList(growable: false),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildPassageCard({
+    required BuildContext context,
+    required ReadingPassage passage,
+    required Pack resolvedPack,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      child: AppSurfaceCard(
+        key: ValueKey<String>('reading-feed-card-${passage.id}'),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => ReadingDetailPage(
+                passage: passage,
+                pack: resolvedPack,
               ),
             ),
+          );
+        },
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 112),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final bool hasBoundedHeight = constraints.hasBoundedHeight;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    passage.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: <Widget>[
+                      if ((passage.level ?? '').trim().isNotEmpty)
+                        _ReadingMetaBadge.level(
+                          level: (passage.level ?? '').trim(),
+                        ),
+                      if ((passage.category ?? '').trim().isNotEmpty)
+                        _ReadingMetaBadge.category(
+                          context: context,
+                          label: (passage.category ?? '').trim(),
+                        ),
+                    ],
+                  ),
+                  if (hasBoundedHeight)
+                    const Spacer()
+                  else
+                    const SizedBox(height: 12),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.arrow_forward_rounded,
+                        size: 18,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Parcayi Ac',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildPackCard(BuildContext context, Pack pack) {
+    return SizedBox(
+      width: double.infinity,
+      child: AppSurfaceCard(
+        onTap: () => _openList(context, pack),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    pack.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontWeight: FontWeight.w800),
+                  ),
+                ),
+                const Icon(Icons.chevron_right_rounded),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              pack.wordCount > 0
+                  ? TrUiTexts.packWordCount(pack.wordCount)
+                  : TrUiTexts.packOnlyReading,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -357,37 +546,52 @@ class _ReadingHeroCard extends StatelessWidget {
   const _ReadingHeroCard({
     required this.segment,
     required this.onTap,
+    this.desktop = false,
   });
 
   final ReadingHomeSegment segment;
   final VoidCallback onTap;
+  final bool desktop;
 
   @override
   Widget build(BuildContext context) {
     return AppSurfaceCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Okuma Deneyimi',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
+      variant: AppSurfaceVariant.feature,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: desktop ? 148 : 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: desktop
+              ? MainAxisAlignment.spaceBetween
+              : MainAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Okuma Deneyimi',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              '${segment.label} modunda hizli bir oturum baslat.',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                width: desktop ? 220 : double.infinity,
+                child: AppGradientCtaButton(
+                  onTap: onTap,
+                  icon: Icons.chrome_reader_mode_outlined,
+                  label: 'Okumaya Basla',
                 ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            '${segment.label} modunda hizli bir oturum baslat.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-          ),
-          const SizedBox(height: 12),
-          AppGradientCtaButton(
-            onTap: onTap,
-            icon: Icons.chrome_reader_mode_outlined,
-            label: 'Okumaya Basla',
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

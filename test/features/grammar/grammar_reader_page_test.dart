@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:passagetr/domain/entities/grammar_example.dart';
@@ -16,9 +17,10 @@ void main() {
     SharedPreferences.setMockInitialValues(<String, Object>{});
   });
 
-  testWidgets('keeps bottom CTA docked and advances pages',
-      (WidgetTester tester) async {
-    tester.view.physicalSize = const Size(1080, 2400);
+  testWidgets('keeps bottom CTA docked and advances pages', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -91,7 +93,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: <Override>[
-          grammarRepositoryProvider.overrideWith((Ref ref) => grammarRepository),
+          grammarRepositoryProvider.overrideWith(
+            (Ref ref) => grammarRepository,
+          ),
         ],
         child: const MaterialApp(
           home: GrammarReaderPage(
@@ -105,28 +109,119 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    expect(tester.takeException(), isNull);
     expect(find.text('1/2'), findsNWidgets(2));
     expect(find.text('Mini Test'), findsOneWidget);
-    expect(find.widgetWithText(FilledButton, 'Devam Et'), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('grammar-reader-previous-button')),
+      findsOneWidget,
+    );
+    expect(find.widgetWithText(FilledButton, 'Ileri'), findsOneWidget);
 
     final Rect ctaRect = tester.getRect(
-      find.widgetWithText(FilledButton, 'Devam Et'),
+      find.byKey(const ValueKey<String>('grammar-reader-next-button')),
     );
-    expect(ctaRect.bottom, greaterThan(2300));
+    expect(ctaRect.bottom, greaterThan(760));
 
-    await tester.tap(find.widgetWithText(FilledButton, 'Devam Et'));
+    final OutlinedButton previousButton = tester.widget(
+      find.byKey(const ValueKey<String>('grammar-reader-previous-button')),
+    );
+    expect(previousButton.onPressed, isNull);
+
+    await tester.tap(find.widgetWithText(FilledButton, 'Ileri'));
     await tester.pumpAndSettle();
 
     expect(find.text('2/2'), findsNWidgets(2));
     expect(find.widgetWithText(FilledButton, 'Dersi Bitir'), findsOneWidget);
     expect(find.text('Sayfa 2'), findsOneWidget);
   });
+
+  testWidgets('supports keyboard navigation with left and right arrows', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1280, 900);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    const GrammarModule module = GrammarModule(
+      id: 1,
+      sira: 1,
+      baslik: 'Temel Gramer',
+      dosyaAdi: 'temel_gramer.md',
+      toplamSayfa: 2,
+      icon: 'book',
+      renk: '#4776E6',
+    );
+
+    const List<GrammarPage> pages = <GrammarPage>[
+      GrammarPage(
+        id: 101,
+        modulId: 1,
+        sayfaNo: 1,
+        baslik: 'Sayfa 1',
+        icerikHtml: '<p>Intro</p>',
+        kelimeSayisi: 10,
+      ),
+      GrammarPage(
+        id: 102,
+        modulId: 1,
+        sayfaNo: 2,
+        baslik: 'Sayfa 2',
+        icerikHtml: '<p>Next</p>',
+        kelimeSayisi: 12,
+      ),
+    ];
+
+    final _FakeGrammarRepository grammarRepository = _FakeGrammarRepository(
+      details: <int, GrammarPageDetail>{
+        101: GrammarPageDetail(
+          page: pages[0],
+          examples: const <GrammarExample>[],
+          tests: const <GrammarMiniTest>[],
+        ),
+        102: GrammarPageDetail(
+          page: pages[1],
+          examples: const <GrammarExample>[],
+          tests: const <GrammarMiniTest>[],
+        ),
+      },
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: <Override>[
+          grammarRepositoryProvider.overrideWith(
+            (Ref ref) => grammarRepository,
+          ),
+        ],
+        child: const MaterialApp(
+          home: GrammarReaderPage(
+            module: module,
+            pages: pages,
+            initialIndex: 0,
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+    expect(find.text('2/2'), findsNWidgets(2));
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowLeft);
+    await tester.pumpAndSettle();
+    expect(find.text('1/2'), findsNWidgets(2));
+  });
 }
 
 class _FakeGrammarRepository implements GrammarRepository {
-  _FakeGrammarRepository({
-    required this.details,
-  });
+  _FakeGrammarRepository({required this.details});
 
   final Map<int, GrammarPageDetail> details;
 

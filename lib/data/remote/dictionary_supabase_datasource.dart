@@ -38,6 +38,39 @@ class DictionarySupabaseDataSource {
 
   final SupabaseClient _client;
 
+  Future<List<DictionaryEntry>> searchEntries({
+    required String query,
+    int limit = 30,
+  }) async {
+    final String normalized = normalizeDictionaryQuery(query);
+    if (normalized.isEmpty) {
+      return const <DictionaryEntry>[];
+    }
+
+    final String prefix = '$normalized%';
+    final String contains = '%$normalized%';
+    final int boundedLimit = limit <= 0 ? 30 : limit;
+
+    final List<dynamic> rows = await _client
+        .from('dictionary_entries')
+        .select()
+        .eq('is_active', true)
+        .or(
+          'en_word_normalized.eq.$normalized,'
+          'en_word_normalized.like.$prefix,'
+          'search_key.like.$prefix,'
+          'en_word_normalized.like.$contains,'
+          'search_key.like.$contains',
+        )
+        .order('en_word_normalized', ascending: true)
+        .limit(boundedLimit);
+
+    return rows
+        .whereType<Map>()
+        .map((Map row) => _entryFromRow(Map<String, dynamic>.from(row)))
+        .toList(growable: false);
+  }
+
   Future<DictionaryRemoteManifest> fetchManifest() async {
     final dynamic response = await _client.rpc('dictionary_bootstrap_manifest');
     if (response is! List || response.isEmpty) {
