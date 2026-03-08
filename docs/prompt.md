@@ -1,73 +1,73 @@
-Aşağıdaki dosyaları birincil kaynak olarak kabul et:
+AÅŸaÄŸÄ±daki dosyalarÄ± birincil kaynak olarak kabul et:
 
 1. `docs/PASSAGETR_v2_Faz_Bazli_Gelistirme_Yol_Haritasi.md`
 2. `DATABASE_SCHEMA.md`
-3. `docs/ui_tasarim/` altındaki web ve android ekranları
+3. `docs/ui_tasarim/` altÄ±ndaki web ve android ekranlarÄ±
 
-Bu görevde senden istenen şey, PASSAGETR v2 için uygulanabilir bir teknik çıktı üretmektir. Bu repo greenfield değildir; kontrollü yeniden yazım reposudur.
+Bu gÃ¶revde senden istenen ÅŸey, PASSAGETR v2 iÃ§in uygulanabilir bir teknik Ã§Ä±ktÄ± Ã¼retmektir. Bu repo greenfield deÄŸildir; kontrollÃ¼ yeniden yazÄ±m reposudur.
 
-# Görev Çerçevesi
+# GÃ¶rev Ã‡erÃ§evesi
 
-- Flutter dışı frontend stack önerme.
+- Flutter dÄ±ÅŸÄ± frontend stack Ã¶nerme.
 - Supabase ana backend olarak kalacak.
 - Android offline-first, web remote-first olacak.
 - v1 veri domainleri korunacak ve migration ile evrilecek.
-- `main` v1 arşiv dalıdır.
-- Aktif geliştirme `v2-rewrite-foundation` çizgisinde ilerler.
-- Aynı repo içinde iki uygulama vardır:
+- `main` v1 arÅŸiv dalÄ±dÄ±r.
+- Aktif geliÅŸtirme `v2-rewrite-foundation` Ã§izgisinde ilerler.
+- AynÄ± repo iÃ§inde iki uygulama vardÄ±r:
   - `apps/student_app`
   - `apps/admin_console`
 
 # Zorunlu Kararlar
 
-Çıktında şu kararları açıkça sabitle:
+Ã‡Ä±ktÄ±nda ÅŸu kararlarÄ± aÃ§Ä±kÃ§a sabitle:
 
 - korunacak v1 domainleri
-- v1 -> v2 schema evolution yaklaşımı
-- workspace klasör ağacı
-- shared paketlerin sorumlulukları
-- offline sync akışı
+- v1 -> v2 schema evolution yaklaÅŸÄ±mÄ±
+- workspace klasÃ¶r aÄŸacÄ±
+- shared paketlerin sorumluluklarÄ±
+- offline sync akÄ±ÅŸÄ±
 - web remote-first veri okuma stratejisi
 - RBAC + RLS modeli
-- admin CMS kapsamı
+- admin CMS kapsamÄ±
 - ilk 3 sprint backlog'u
 - ilk migration listesi
 
-# Uygulanamaz Öneri Yasakları
+# Uygulanamaz Ã–neri YasaklarÄ±
 
-- React / Next.js / farklı frontend stack önerme
-- service role key'i istemciye taşıma
-- web build'e ağır local SQLite asset gömme
-- v1 veri modelini yok sayan sıfırdan şema önerisi üretme
-- “daha sonra karar verilir” gibi belirsiz öneriler bırakma
+- React / Next.js / farklÄ± frontend stack Ã¶nerme
+- service role key'i istemciye taÅŸÄ±ma
+- web build'e aÄŸÄ±r local SQLite asset gÃ¶mme
+- v1 veri modelini yok sayan sÄ±fÄ±rdan ÅŸema Ã¶nerisi Ã¼retme
+- â€œdaha sonra karar verilirâ€ gibi belirsiz Ã¶neriler bÄ±rakma
 
-# Çıktı Formatı
+# Ã‡Ä±ktÄ± FormatÄ±
 
-Çıktı mutlaka şu başlıklarda gelsin:
+Ã‡Ä±ktÄ± mutlaka ÅŸu baÅŸlÄ±klarda gelsin:
 
-1. Karar Özeti
+1. Karar Ã–zeti
 2. v1'den Korunacak Domainler
-3. v2 Workspace Ağacı
-4. Schema Evolution Planı
-5. Offline-First ve Sync Akışı
+3. v2 Workspace AÄŸacÄ±
+4. Schema Evolution PlanÄ±
+5. Offline-First ve Sync AkÄ±ÅŸÄ±
 6. Web Remote-First Stratejisi
-7. RBAC ve RLS Tasarımı
-8. Admin CMS Tasarımı
-9. İlk 10 Migration
-10. İlk 3 Sprint ve İlk 15 Geliştirme Görevi
-11. Riskler ve Varsayımlar
+7. RBAC ve RLS TasarÄ±mÄ±
+8. Admin CMS TasarÄ±mÄ±
+9. Ä°lk 10 Migration
+10. Ä°lk 3 Sprint ve Ä°lk 15 GeliÅŸtirme GÃ¶revi
+11. Riskler ve VarsayÄ±mlar
 
 # Kalite Kriteri
 
-- Çıktı teori değil, uygulanabilir olmalı.
-- Dosya ağacı, migration sırası ve sprint kapsamı net olmalı.
-- Varsayım yaptıysan açıkça “Varsayım” diye işaretle.
-- Roadmap ile çelişme; roadmap ana karar kaynağıdır.
-- README metnini tekrar etme; onu modern mimari gereksinimlere dönüştür.
+- Ã‡Ä±ktÄ± teori deÄŸil, uygulanabilir olmalÄ±.
+- Dosya aÄŸacÄ±, migration sÄ±rasÄ± ve sprint kapsamÄ± net olmalÄ±.
+- VarsayÄ±m yaptÄ±ysan aÃ§Ä±kÃ§a â€œVarsayÄ±mâ€ diye iÅŸaretle.
+- Roadmap ile Ã§eliÅŸme; roadmap ana karar kaynaÄŸÄ±dÄ±r.
+- README metnini tekrar etme; onu modern mimari gereksinimlere dÃ¶nÃ¼ÅŸtÃ¼r.
 
 # Ton
 
-Teknik, kısa, karar odaklı ve implementer için doğrudan kullanılabilir.
+Teknik, kÄ±sa, karar odaklÄ± ve implementer iÃ§in doÄŸrudan kullanÄ±labilir.
 
 # Oturum Kapanisi Icin Onemli Bilgiler
 
