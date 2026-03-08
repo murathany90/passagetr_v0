@@ -1,109 +1,99 @@
-# PASSAGETR v2 - Faz Bazl? Geli?tirme Yol Haritas?
+# PASSAGETR v2 — Flutter + Supabase Tabanlı Faz Bazlı Geliştirme Yol Haritası
 
-> Proje: PASSAGETR v2  
-> Hedef platformlar: Android + Web  
-> Mimari karar: Android offline-first, Web remote-first  
-> Durum: v2 controlled rewrite foundation  
-> Tarih: 8 Mart 2026
-
----
-
-## 1. Executive Summary
-
-PASSAGETR v2, mevcut v1 ?r?n?n?n s?f?rdan yaz?lan ama veri modeli ve i?erik domainleri korunan yeni nesil s?r?m?d?r. Bu ?al??ma greenfield bir ?r?n de?il; controlled rewrite + schema evolution i?idir.
-
-Temel strateji:
-
-- `main`, v1 uygulamas?n?n ar?iv dal?d?r.
-- v2 geli?tirmesi `v2-rewrite-foundation` branch'inde ilerler.
-- v1 veritaban? mant???, i?erik domainleri ve Supabase migration ge?mi?i korunur.
-- Mevcut UI, deployment ve uygulama implementasyonu referans olarak ar?ivlenir; v2 i?in yeni monorepo iskeleti kurulur.
-- Ayn? repo i?inde iki ayr? Flutter uygulamas? bulunur:
-  - `apps/student_app`
-  - `apps/admin_console`
-
-Bu yol haritas?, v2'nin ?r?n stratejisini, veri koruma s?n?rlar?n?, branch/reset modelini, hedef workspace topolojisini ve ilk sprint teslimlerini implementeri yeniden karar vermeye zorlamadan tan?mlar.
+> **Proje:** Flutter ve Supabase tabanlı yeni nesil İngilizce eğitim platformu  
+> **Hedef Platformlar:** Android (APK/AAB) + Web  
+> **Mimari Karar:** Mobilde **offline-first**, webde **remote-first**  
+> **Sürüm:** Taslak v1.0  
+> **Tarih:** 8 Mart 2026
 
 ---
 
-## 2. Vizyon ve Stratejik Hedefler
+## 1. Vizyon ve Stratejik Hedefler
 
-PASSAGETR v2'nin amac? mevcut uygulaman?n i?levlerini yaln?zca yeniden ?retmek de?il; onlar? daha g?venli, daha ?l?eklenebilir, daha h?zl? y?netilebilir ve ?oklu platforma uygun bir ?r?n mimarisine d?n??t?rmektir.
+PASSAGETR v2’nin amacı, mevcut uygulamanın işlevlerini yalnızca yeniden üretmek değil; onları daha güvenli, daha ölçeklenebilir, daha hızlı yönetilebilir ve çoklu platforma uygun bir ürün mimarisine dönüştürmektir.
 
-Yeni sistemin stratejik hedefleri:
+Yeni sistemin stratejik hedefleri şunlardır:
 
-1. **Tek ?r?n, ?oklu platform**
-   - Flutter ile Android ve Web istemcilerini ayn? repo ve ortak domain modeli ile ?retmek.
-   - Ortak i? kurallar?n? korurken platforma g?re veri eri?im stratejisini ay?rmak.
+1. **Tek ürün, çoklu platform**
+   - Flutter ile tek kod tabanından Android ve Web istemcileri üretmek.
+   - Ortak domain modeli ve ortak iş kurallarını korurken platforma göre veri erişim stratejisini ayırmak.
 
-2. **Kesintisiz ??renme deneyimi**
-   - Android uygulamas?nda kullan?c? internet olmasa bile kelime, flashcard, okuma ve gramer mod?llerini kullanabilmelidir.
-   - Kullan?c? ilerlemesi ba?lant? geldi?inde g?venli ve deterministik bi?imde senkronize edilmelidir.
+2. **Kesintisiz öğrenme deneyimi**
+   - Android uygulamasında kullanıcı; internet olmasa bile kelime çalışması, flashcard, okuma ve gramer modüllerini kullanabilmelidir.
+   - Kullanıcı ilerlemesi bağlantı geldiğinde güvenli ve deterministik biçimde senkronize edilmelidir.
 
-3. **??erik operasyonlar?n? geli?tirici ba??ml?l???ndan kurtarmak**
-   - Admin kullan?c?lar? kelime, test, okuma, gramer ve medya i?eriklerini CMS ?zerinden y?netebilmelidir.
-   - ??erik ?retim s?reci script odakl? ak??tan do?rulama, preview ve publish ad?mlar? olan ?r?n ak???na d?n??melidir.
+3. **İçerik operasyonlarını geliştirici bağımlılığından kurtarmak**
+   - Admin kullanıcıları; kelime, test, okuma, gramer ve medya içeriklerini doğrudan CMS üzerinden yönetebilmelidir.
+   - İçerik üretim süreci “dosya üret → script çalıştır → veritabanına yükle” modelinden, doğrulama ve yayınlama adımları olan bir ürün akışına dönüştürülmelidir.
 
-4. **Yetkilendirmeyi veritaban? ?ekirde?ine ta??mak**
-   - Developer, Admin, Pro ve Free ayr?m? yaln?z UI seviyesinde de?il, Supabase RLS seviyesinde de korunmal?d?r.
-   - Premium i?erik, y?netim ekranlar? ve kullan?c? verileri ?ift katmanl? g?venlikle korunmal?d?r.
+4. **Yetkilendirmeyi uygulama kodundan veritabanı çekirdeğine taşımak**
+   - Developer, Admin, Pro ve Free rollerini yalnızca UI seviyesinde değil, Supabase RLS seviyesinde de korumak.
+   - Premium içerik, yönetim ekranları ve kullanıcı verileri için çift katmanlı güvenlik uygulamak.
 
-5. **Web performans?n? ?r?n standard?na ??karmak**
-   - Web s?r?m?nde mobil i?in haz?rlanm?? a??r yerel SQLite asset'leri ta??nmamal?d?r.
-   - ?lk a??l?? s?resi d???r?lmeli, i?erikler lazy-load edilmeli ve admin mod?lleri gerekti?inde y?klenmelidir.
+5. **Web performansını ürün standardına çıkarmak**
+   - Web sürümünde mobil için hazırlanmış büyük yerel veritabanı asset’lerini taşımamak.
+   - İlk açılış süresini düşürmek, içerikleri lazy-load etmek ve admin modüllerini gerektiğinde yüklemek.
 
-6. **Ya?ayan bir platform kurmak**
-   - Yeni mod?l eklenmesini kolayla?t?ran katmanl? mimari, migration disiplini, test altyap?s? ve CI/CD s?reci kurulmal?d?r.
-
----
-
-## 3. Tasar?m ve ?r?n ?lkeleri
-
-### 3.1 Mimari ilkeler
-
-- **Domain-first**: Kod organizasyonu ekranlara g?re de?il, i? alanlar?na g?re ?ekillenmelidir.
-- **Repository abstraction**: UI katman? Supabase, Drift veya ba?ka veri kayna??n? do?rudan bilmemelidir.
-- **Offline write safety**: Mobilde kullan?c? etkile?imleri ?nce yerel olarak i?lenmeli, sonra sunucuya g?nderilmelidir.
-- **Server-authoritative content**: ??erik tablolar?nda nihai otorite sunucudur.
-- **User-owned progress**: Kullan?c? ilerleme verileri kullan?c?ya aittir; sorgular ve g?ncellemeler `auth.uid()` ekseninde korunmal?d?r.
-- **Incremental sync**: T?m i?eri?i yeniden indirmek yerine yaln?z de?i?en sat?rlar ta??nmal?d?r.
-- **Soft-delete ve publish ak???**: ??erikler fiziksel silme yerine yay?n durumuyla y?netilmelidir.
-
-### 3.2 UX ilkeleri
-
-- Mobil ak??lar tek elle kullan?m, h?zl? geri d?n?? ve d???k ba?lant? ko?ullar? d???n?lerek tasarlanmal?d?r.
-- Web taraf?nda `NavigationRail`, iki/?? kolonlu i?erik d?zeni ve geni? ekran ?retkenli?i esas al?nmal?d?r.
-- `docs/ui_tasarim` klas?r? spacing, component breakdown, responsive davran?? ve tema i?in ana referanst?r.
-- Dark ve light mod semantic color token'lar ve eri?ilebilir kontrast oranlar?yla tasarlanmal?d?r.
+6. **Yaşayan bir platform kurmak**
+   - Yeni modül eklenmesini kolaylaştıran katmanlı mimari, migration disiplini, test altyapısı ve CI/CD süreci oluşturmak.
+   - iOS ve masaüstü gibi ileride açılabilecek hedef platformlara teknik borç oluşturmadan ilerlemek.
 
 ---
 
-## 4. v1'den Korunacak Temeller
+## 2. Tasarım ve Ürün İlkeleri
 
-### 4.1 Korunacak ?r?n domainleri
+Bu yeniden yazım sürecinde aşağıdaki ilkeler sabit kabul edilmelidir:
 
-v2'de a?a??daki domainler korunur ve schema evolution ile ta??n?r:
+### 2.1 Mimari İlkeler
 
-- `packs`
-- `words`
-- `reading_passages`
-- `reading_passage_sentences`
-- `reading_passage_words`
-- `reading_sentence_translations`
-- grammar module / page / example / test yap?s?
-- `user_word_progress`
-- `user_reading_progress`
-- `user_reading_bookmarks`
-- `user_reading_favorites`
-- auth / role / premium eri?im mant???
+- **Domain-first**: Kod organizasyonu ekranlara göre değil, iş alanlarına göre şekillenmelidir.
+- **Repository abstraction**: UI katmanı; Supabase, Drift veya başka veri kaynağını doğrudan bilmemelidir.
+- **Offline write safety**: Mobilde kullanıcı etkileşimleri önce yerel olarak işlenmeli, sonra sunucuya gönderilmelidir.
+- **Server-authoritative content**: İçerik tablolarında nihai otorite sunucudur.
+- **User-owned progress**: Kullanıcı ilerleme verileri kullanıcıya aittir; her sorgu ve güncelleme `auth.uid()` ekseninde korunmalıdır.
+- **Incremental sync**: Tüm içeriği yeniden indirmek yerine yalnızca değişen satırlar taşınmalıdır.
+- **Soft-delete ve publish akışı**: İçerikler fiziksel silme yerine yayından kaldırma mantığıyla yönetilmelidir.
 
-### 4.2 v2'de eklenecek alanlar
+### 2.2 UX İlkeleri
 
-Yeni mimari i?in a?a??daki tablolar veya geni?letmeler ?ng?r?l?r:
+- Mobilde akışlar tek elle kullanım, hızlı geri dönüş ve düşük bağlantı koşulları düşünülerek tasarlanmalıdır.
+- Web tarafında `NavigationRail`, iki/üç kolonlu içerik düzeni ve geniş ekran üretkenliği esas alınmalıdır.
+- `docs/ui_tasarim` klasöründeki taslak ekranlar; component breakdown, spacing, responsive davranış ve dark/light tema eşlemesi için ana referans kabul edilmelidir.
+- Dark ve light mod; tema değişkenleri, semantic color token’lar ve erişilebilir kontrast oranları ile tasarlanmalıdır.
+
+---
+
+## 3. Mevcut Sistemden Devralınacak Alanlar
+
+Mevcut yapının veri modeli ve ürün kapsamı, v2 için güçlü bir temel sunmaktadır. Yeni mimari aşağıdaki alanları koruyup iyileştirmelidir:
+
+### 3.1 İçerik Alanları
+
+- **Paketler**: `packs`
+- **Kelime havuzu**: `words`
+- **Okuma parçaları**: `reading_passages`
+- **Cümle bazlı okuma verisi**: `reading_passage_sentences`
+- **Parça-kelime ilişkisi**: `reading_passage_words`
+- **Çeviri cache**: `reading_sentence_translations`
+- **Gramer modülleri**: `gramer_modulleri`
+- **Gramer sayfaları**: `gramer_sayfalari`
+- **Gramer örnekleri**: `gramer_ornekler`
+- **Gramer mini testleri**: `gramer_testler`
+
+### 3.2 Kullanıcı Verisi
+
+- **Kelime ilerlemesi**: `user_word_progress`
+- **Okuma ilerlemesi**: `user_reading_progress`
+- **Yer imleri**: `user_reading_bookmarks`
+- **Favoriler**: `user_reading_favorites`
+
+### 3.3 v2’de Eklenecek Yeni Alanlar
+
+Yeni mimari için aşağıdaki tablolar veya genişletmeler önerilir:
 
 - `profiles`
 - `user_roles`
-- `entitlements`
+- `subscriptions` veya `entitlements`
 - `user_test_attempts`
 - `user_grammar_progress`
 - `user_daily_stats`
@@ -112,91 +102,751 @@ Yeni mimari i?in a?a??daki tablolar veya geni?letmeler ?ng?r?l?r:
 - `audit_logs`
 - `media_assets`
 
-### 4.3 Korunacak repo varl?klar?
+### 3.4 Lokal Veri Katmanı
 
-v2 resetinde a?a??daki alanlar korunur:
+Mevcut yapıda yer alan:
+
+- `assets/db/app_content.db`
+- `assets/db/dictionary_local.sqlite`
+
+yaklaşımı, v2’de mobil için yönetilen Drift şemasına dönüştürülmelidir. Web build’e büyük SQLite asset gömülmemelidir.
+
+---
+
+## 4. Teknoloji Yığını (Tech Stack)
+
+## 4.1 İstemci Katmanı
+
+| Katman | Teknoloji | Gerekçe |
+|---|---|---|
+| UI | Flutter 3.x | Web + Android tek kod tabanı |
+| Dil | Dart 3.x | Modern dil özellikleri, code-gen uyumu |
+| State Management | Riverpod 2.x + generator | Test edilebilir, compile-time güvenli |
+| Routing | `go_router` | URL tabanlı navigasyon, guard, deep link |
+| Form/Validation | `flutter_form_builder` veya sade custom form yapısı | CMS ve auth akışları için |
+| HTML Render | `flutter_html` + tablo desteği | Gramer ve zengin içerik gösterimi |
+| TTS | `flutter_tts` | Kelime ve okuma seslendirme |
+| Charts | `fl_chart` | İlerleme ve analitik ekranları |
+| Connectivity | `connectivity_plus` | Sync tetikleme |
+| Secure local prefs | `shared_preferences` | Tema, son seçimler, basit ayarlar |
+
+## 4.2 Veri Katmanı
+
+| Katman | Teknoloji | Gerekçe |
+|---|---|---|
+| Remote backend | Supabase | Auth, Postgres, Storage, Realtime |
+| Local mobile DB | Drift + SQLite | Type-safe sorgu, migration, offline veri |
+| Network client | `supabase_flutter` + gerektiğinde `dio` | Auth’li istekler ve özel servisler |
+| File storage | Supabase Storage | Ses, görsel, kapak ve import dosyaları |
+
+## 4.3 Backend / Platform Katmanı
+
+| Alan | Teknoloji | Gerekçe |
+|---|---|---|
+| Veritabanı | PostgreSQL (Supabase) | İlişkisel içerik modeli ve RLS |
+| Auth | Supabase Auth | Anonim, e-posta/şifre, OAuth genişleyebilirliği |
+| Yetkilendirme | RLS + JWT custom claims | DB seviyesinde güvenlik |
+| Server-side logic | Supabase Edge Functions | Bulk import, denetim, kontrollü işlemler |
+| Realtime | Supabase Realtime | İçerik değişikliği bildirimleri |
+| CI/CD | GitHub Actions | Otomatik test, build ve deploy |
+| Web hosting | Firebase Hosting veya Supabase hosting benzeri CDN akışı | Hızlı statik dağıtım |
+| Gözlemlenebilirlik | Crashlytics/Sentry + Supabase logs | Hata takibi |
+
+---
+
+## 5. Önerilen Mimari
+
+## 5.1 Katmanlı Yapı
+
+```text
+presentation/
+  widgets/
+  pages/
+  controllers/
+
+application/
+  use_cases/
+  dto/
+  mappers/
+
+domain/
+  entities/
+  repositories/
+  services/
+  value_objects/
+
+data/
+  local/
+    drift/
+    daos/
+    sync/
+  remote/
+    supabase/
+    functions/
+  repositories/
+
+core/
+  config/
+  auth/
+  rbac/
+  theme/
+  errors/
+  utils/
+```
+
+## 5.2 Uygulama Ayrımı
+
+Tek repo, iki ana giriş noktası önerilir:
+
+- `student_app`: Son kullanıcı uygulaması
+- `admin_console`: Admin/CMS arayüzü
+
+Bu ayrım tek repo içinde yapılmalı; ortak domain, entity, mapper ve repository sözleşmeleri paylaşılmalıdır. Böylece CMS ihtiyaçları büyüdüğünde ana uygulamayı gereksiz yüklemeden ayrıştırmak mümkün olur.
+
+## 5.3 Platform Modları
+
+| Mod | Davranış |
+|---|---|
+| `PLATFORM_MODE=mobile` | Drift aktif, hybrid repository, offline-first |
+| `PLATFORM_MODE=web` | Remote-first, ağır lokal asset yok |
+| `BUILD_ENV=dev/stage/prod` | Ortam konfigürasyonu ayrılır |
+
+## 5.4 Repository Stratejisi
+
+Her içerik alanı için hibrit repository tasarlanmalıdır:
+
+- `PackRepository`
+- `WordRepository`
+- `ReadingRepository`
+- `GrammarRepository`
+- `ProgressRepository`
+- `AdminContentRepository`
+
+Mobilde örnek davranış:
+
+1. Önce lokal veriyi döndür.
+2. Arka planda `syncIfStale()` çalıştır.
+3. Yeni veri gelirse provider invalidate et.
+4. Kullanıcı yazma işlemleri lokal outbox’a yazılsın.
+5. Ağ gelince batch push çalışsın.
+
+Webde örnek davranış:
+
+1. Veriyi Supabase’den çek.
+2. Gerekirse memory cache kullan.
+3. Admin ekranları deferred import ile sonradan yüklensin.
+
+---
+
+## 6. RBAC ve Güvenlik Tasarımı
+
+## 6.1 Rol Modeli
+
+Sistem rolleri:
+
+- **Developer**
+- **Admin**
+- **Pro**
+- **Free**
+
+Ancak implementasyon düzeyinde iki kavram ayrı tutulmalıdır:
+
+- **Role**: developer/admin/user-level yetki
+- **Plan/Entitlement**: free/pro erişim seviyesi
+
+Bu ayrım ileride takım planı, kurumsal plan, öğretmen hesabı gibi genişlemeleri kolaylaştırır.
+
+## 6.2 Yetki Matrisi
+
+| Alan | Free | Pro | Admin | Developer |
+|---|---:|---:|---:|---:|
+| Public içerik görüntüleme | ✓ | ✓ | ✓ | ✓ |
+| Premium içerik görüntüleme | – | ✓ | ✓ | ✓ |
+| Flashcard / SRS | Kısıtlı | ✓ | ✓ | ✓ |
+| Test merkezi | Temel | Geniş | ✓ | ✓ |
+| Okuma / çeviri | Kotalı | Geniş | ✓ | ✓ |
+| Analytics | Temel | Gelişmiş | Gelişmiş | Gelişmiş |
+| Offline paket indirme | Kısıtlı | ✓ | ✓ | ✓ |
+| CMS erişimi | – | – | ✓ | ✓ |
+| Kullanıcı rol yönetimi | – | – | Sınırlı | ✓ |
+| Sistem ayarları / flag’ler | – | – | – | ✓ |
+
+## 6.3 Güvenlik Kararları
+
+### Zorunlu kurallar
+
+- `SUPABASE_SERVICE_ROLE_KEY` hiçbir istemciye gömülmeyecek.
+- İstemci yalnızca publishable/anon key ile çalışacak.
+- Tüm `public` şema tablolarında RLS etkin olacak.
+- İçerik tablolarında `select` politikaları plan ve yayın durumuna göre yazılacak.
+- Kullanıcı tablolarında temel politika: `auth.uid() = user_id`.
+- Admin yazma yetkileri, ya admin claim kontrollü RLS ile ya da Edge Function üzerinden verilecek.
+- Storage bucket’ları private olacak; medya erişimi rol/plan bazlı korunacak.
+
+## 6.4 Önerilen Yetki Uygulaması
+
+En doğru yaklaşım:
+
+1. `user_roles` ve `entitlements` verisini veritabanında tut.
+2. Access token üretimi sırasında `user_role` ve `plan` claim’lerini JWT’ye ekle.
+3. RLS politikalarını bu claim’ler üzerinden çalıştır.
+4. UI yalnızca görünürlük kontrolü yapsın; nihai güvenlik veritabanısında olsun.
+
+---
+
+## 7. Offline-First ve Senkronizasyon Stratejisi
+
+## 7.1 Temel Karar
+
+- **Android**: offline-first
+- **Web**: remote-first
+
+Bu ayrım zorunludur. Web tarafında yerel SQLite asset taşımak ilk yükü büyütür, deploy’u şişirir ve kullanıcı deneyimini bozar.
+
+## 7.2 Senkronize Edilecek Veri Sınıfları
+
+### Sunucu otoriteli veri
+- paketler
+- kelimeler
+- okumalar
+- gramer içerikleri
+- medya varlıkları
+
+### Kullanıcı otoriteli veri
+- word progress
+- reading progress
+- test sonuçları
+- grammar progress
+- bookmarks / favorites
+- günlük istatistikler
+
+## 7.3 Lokal Şema Ekleri
+
+Mobil Drift veritabanına aşağıdaki teknik tablolar eklenmelidir:
+
+- `sync_meta`
+  - `scope`
+  - `last_pull_at`
+  - `last_server_cursor`
+  - `last_content_version`
+
+- `sync_outbox`
+  - `event_id`
+  - `entity_type`
+  - `entity_id`
+  - `op`
+  - `payload_json`
+  - `client_ts`
+  - `retry_count`
+  - `status`
+
+## 7.4 Push/Pull Akışı
+
+### Pull
+- Kullanıcı indirdiği paketlerin içerik delta’larını çeker.
+- Kullanıcı verilerinde `updated_at > last_pull_at` filtresiyle fark alınır.
+- `content_versions` tablosu invalidation sinyali olarak kullanılır.
+
+### Push
+- Flashcard, test, okuma ilerlemesi gibi eylemler outbox’a yazılır.
+- Ağ geri geldiğinde batch apply yapılır.
+- Sunucuda idempotent RPC veya Edge Function ile işlenir.
+
+## 7.5 Çakışma Çözümü
+
+İçerik tablolarında çatışma yoktur; sunucu otoritelidir.
+
+Kullanıcı verileri için öneri:
+
+- Varsayılan politika: **Last Write Wins**
+- Sayaç alanları için opsiyonel merge
+- SRS alanlarında sunucu doğrulaması
+- Çift cihaz kullanımında `updated_at` ve `event_id` bazlı deterministik çözüm
+
+## 7.6 İçerik Güncelleme Modeli
+
+Her CMS değişikliği sonrası:
+
+1. içerik tablosu güncellenir
+2. `updated_at` tetiklenir
+3. `content_versions` güncellenir
+4. istemci `syncIfStale()` çağrısında delta alır
+5. lokal DB batch upsert edilir
+6. ilgili provider’lar invalidate edilir
+
+---
+
+## 8. Veritabanı Tasarımı: v2 İçin Hedef Şema
+
+## 8.1 Korunacak Ana Tablolar
+
+- `packs`
+- `words`
+- `reading_passages`
+- `reading_passage_sentences`
+- `reading_passage_words`
+- `reading_sentence_translations`
+- `gramer_modulleri`
+- `gramer_sayfalari`
+- `gramer_ornekler`
+- `gramer_testler`
+- `user_word_progress`
+- `user_reading_progress`
+- `user_reading_bookmarks`
+- `user_reading_favorites`
+
+## 8.2 Standardize Edilecek Alanlar
+
+İçerik tablolarında ortak alan standardı önerilir:
+
+- `created_at`
+- `updated_at`
+- `published_at`
+- `is_published`
+- `is_pro`
+- `deleted_at` (soft delete için opsiyonel)
+- `created_by`
+- `updated_by`
+
+## 8.3 Yeni Tablolar
+
+### `profiles`
+Kullanıcıya ait temel profil bilgileri, avatar, display name, tercih edilen dil, tema, onboarding durumu.
+
+### `user_roles`
+`user_id`, `role`, `granted_at`, `granted_by`
+
+### `entitlements`
+`user_id`, `plan`, `starts_at`, `expires_at`, `source`
+
+### `user_test_attempts`
+Test sonuçlarının saklanması, zorluk analizi ve analytics için gerekli.
+
+### `user_grammar_progress`
+Gramer sayfa tamamlama ve son konum takibi için gerekli.
+
+### `user_daily_stats`
+streak, günlük hedef, okuma adedi, çalışılan kelime sayısı.
+
+### `content_versions`
+tablo bazlı veya scope bazlı içerik sürümü.
+
+### `content_change_log`
+ince taneli delta ve audit için.
+
+### `audit_logs`
+admin işlemleri için kayıt.
+
+---
+
+## 9. Admin CMS Tasarımı
+
+## 9.1 Amaç
+
+Admin paneli, teknik olmayan içerik yöneticisinin aşağıdaki işlemleri yapmasını sağlamalıdır:
+
+- içerik oluşturma
+- içerik düzenleme
+- önizleme
+- yayınlama / yayından kaldırma
+- medya yükleme
+- toplu import
+- kalite kontrol
+- audit inceleme
+
+## 9.2 Modüller
+
+### Admin Dashboard
+- içerik sayıları
+- son güncellenen kayıtlar
+- yayın bekleyen içerikler
+- senkron durum göstergesi
+- import geçmişi
+
+### Kelime Yönetimi
+- EN/TR anlam, POS, örnek cümle, etiket
+- paket atama
+- toplu CSV import
+- duplicate kontrolü
+
+### Okuma Yönetimi
+- başlık, seviye, kategori
+- cümle bazlı içerik düzenleme
+- odak kelime bağlama
+- görsel/ses yükleme
+- önizleme
+
+### Gramer Yönetimi
+- modül sıralama
+- sayfa editörü
+- örnekler ve mini testler
+- HTML/Markdown içerik doğrulama
+
+### Test Yönetimi
+- soru türü
+- doğru cevap yapısı
+- açıklama / ipucu
+- free/pro görünürlük
+
+## 9.3 Teknik Kurallar
+
+- CMS route’ları ayrı guard ile korunmalı.
+- Admin paneli mümkünse web öncelikli çalışmalı.
+- Service role istemciye verilmemeli.
+- Bulk import işlemleri Edge Function veya kontrollü server-side katman ile yapılmalı.
+- Tüm admin mutasyonları `audit_logs` içine yazılmalı.
+
+---
+
+## 10. Faz Bazlı Geliştirme Yol Haritası
+
+## Faz 0 — Keşif, Kurulum ve Teknik İskelet
+
+### Hedef
+Yeni repo yapısını, ortamları ve temel mimari iskeleti kurmak.
+
+### Teknik işler
+- Yeni Flutter workspace oluşturma
+- `student_app`, `admin_console`, `shared` paket ayrımı
+- Riverpod + go_router + Drift + Supabase kurulumları
+- `AppConfig` ve environment yönetimi
+- `dev / stage / prod` Supabase proje ayrımı
+- ilk migration repo standardı
+- tema token altyapısı
+- responsive shell iskeleti
+- dark/light mode temel sistemi
+
+### Çıktılar
+- çalışan boş web + android scaffold
+- login dışı navigation shell
+- CI’da analyze ve test çalışan pipeline
+
+### Kabul kriterleri
+- web ve android build açılıyor
+- environment dosyaları standart
+- temel route yapısı aktif
+- tema geçişi çalışıyor
+
+---
+
+## Faz 1 — Auth, Oturum Yönetimi ve RBAC
+
+### Hedef
+Anonim başlangıç, kayıtlı hesaba yükseltme, rol/plan modeli ve güvenlik omurgasını kurmak.
+
+### Teknik işler
+- Supabase Auth entegrasyonu
+- anonim oturum akışı
+- e-posta/şifre kayıt ve giriş
+- `profiles`, `user_roles`, `entitlements` migration’ları
+- yeni kullanıcıya otomatik `free` rolü
+- JWT custom claims akışı
+- `authGuard`, `adminGuard`, `premiumGate`
+- profil ekranında aktif rol ve plan bilgisi
+- RLS politika seti
+
+### Çıktılar
+- anon → kayıtlı yükseltme
+- free/pro/admin görünürlüğü
+- admin route koruması
+
+### Kabul kriterleri
+- yeni kullanıcı varsayılan `free`
+- admin kullanıcı CMS girişine erişiyor
+- anonim kullanıcı verisi kaybetmeden hesap yükseltebiliyor
+
+---
+
+## Faz 2 — Offline-First Veri Katmanı
+
+### Hedef
+Mobilde lokal veritabanı, senkron motoru ve hibrit repository altyapısını kurmak.
+
+### Teknik işler
+- Drift `AppDatabase`
+- içerik ve kullanıcı tablolarının lokal karşılıkları
+- `sync_meta`, `sync_outbox`
+- DAO katmanı
+- `HybridRepository<T>`
+- `SyncManager`
+- delta sync
+- outbox flush
+- conflict resolver
+- connectivity izleme
+- web build’den SQLite asset çıkarılması
+
+### Çıktılar
+- mobilde lokal veri okunabiliyor
+- offline etkileşim kaybolmuyor
+- tekrar online olduğunda push/pull gerçekleşiyor
+
+### Kabul kriterleri
+- uçak modunda kelime/okuma/gramer içerikleri açılıyor
+- offline flashcard sonrası veri sync oluyor
+- web build büyük lokal DB asset taşımıyor
+
+---
+
+## Faz 3 — Çekirdek Öğrenme Modülleri
+
+### Hedef
+Kelime, flashcard, test ve SRS altyapısını v2 mimarisine taşımak.
+
+### Teknik işler
+- `packs` ve `words` repository’leri
+- kelime listeleme, arama, filtreleme
+- flashcard oturumu
+- SM-2 tabanlı SRS alanları
+- `user_word_progress` genişletmesi
+- test merkezi
+- typing / matching / mcq akışı
+- `user_test_attempts`
+- analytics veri toplama
+
+### Çıktılar
+- kullanıcı kelime paketi seçip çalışabiliyor
+- sistem zor kelimeleri öncelikli çıkarabiliyor
+- test sonuçları kaydediliyor
+
+### Kabul kriterleri
+- flashcard ilerlemesi lokal + remote tutarlı
+- test sonucu analytics’e düşüyor
+- SRS tekrar listesi hesaplanıyor
+
+---
+
+## Faz 4 — Okuma, Çeviri ve Gramer
+
+### Hedef
+Okuma ve gramer modüllerini offline-first ve premium gating mantığıyla yeniden inşa etmek.
+
+### Teknik işler
+- `reading_passages`, `reading_passage_sentences`, `reading_passage_words`
+- inline kelime açılımı ve quick word panel
+- cümle bazlı çeviri cache
+- yer imi ve favori akışı
+- `user_reading_progress`, `user_reading_bookmarks`, `user_reading_favorites`
+- gramer modül/sayfa/örnek/test repository’leri
+- HTML render sanitation
+- gramerde lokal-first + background sync
+- TTS hız ve okuma ayarları
+
+### Çıktılar
+- reading player v2
+- gramer reader
+- bookmark/favorite sistemi
+- free/pro görünürlük farkı
+
+### Kabul kriterleri
+- okuma ekranı çevrimdışı açılıyor
+- çeviri cache tekrar istek atmıyor
+- gramer modülü lokalde boşsa remote fallback çalışıyor
+
+---
+
+## Faz 5 — Admin CMS ve İçerik Operasyonları
+
+### Hedef
+İçerik ekleme, düzenleme ve yayınlama süreçlerini UI üzerinden yönetilebilir hale getirmek.
+
+### Teknik işler
+- admin shell
+- dashboard ve içerik sayacı
+- kelime CRUD
+- okuma CRUD
+- gramer CRUD
+- test CRUD
+- medya upload
+- bulk import
+- validation katmanı
+- preview modu
+- publish / unpublish
+- `content_versions`
+- `audit_logs`
+
+### Çıktılar
+- Admin kullanıcı script çalıştırmadan içerik yönetebiliyor
+- değişiklik mobil istemcilere delta olarak yayılıyor
+
+### Kabul kriterleri
+- admin yeni içerik ekleyebiliyor
+- yayın sonrası mobile sync tetikleniyor
+- audit kayıtları oluşuyor
+
+---
+
+## Faz 6 — Analytics, Streak ve Pro Paketleme
+
+### Hedef
+Ürün motivasyon ve gelir modelini destekleyen metrik ve abonelik katmanını tamamlamak.
+
+### Teknik işler
+- `user_daily_stats`
+- streak servisi
+- günlük hedefler
+- analytics dashboard
+- zorluk analizi
+- pro/free limit ve kota yönetimi
+- abonelik yenileme/iptal modeli
+- ödeme sağlayıcısı entegrasyon hazırlığı
+
+### Çıktılar
+- kullanıcı ilerlemesini görselleştirebiliyor
+- premium kilit mekanizması stabil
+- dashboard ürün hissi kazanıyor
+
+### Kabul kriterleri
+- günlük hedef ve streak doğru hesaplanıyor
+- premium gate bütün kritik ekranlarda tutarlı
+- analytics ekranı veri gösteriyor
+
+---
+
+## Faz 7 — Web, Responsive Shell ve Yayın Hazırlığı
+
+### Hedef
+Web deneyimini performanslı ve üretime uygun hale getirmek.
+
+### Teknik işler
+- responsive shell
+- mobile/tablet/desktop kırılımları
+- `NavigationRail`
+- max-width container sistemi
+- admin ve analytics deferred import
+- web smoke test
+- hosting pipeline
+- asset pruning
+- firebase ignore / deploy doğrulaması
+- LCP ve bundle boyutu optimizasyonu
+
+### Çıktılar
+- web sürümü büyük ekranlarda verimli çalışıyor
+- deploy süreci standart hale geliyor
+
+### Kabul kriterleri
+- web ilk yük hissi kabul edilebilir
+- admin ekranı masaüstünde verimli
+- deploy pipeline tekrarlanabilir
+
+---
+
+## Faz 8 — Test, Kalite ve Operasyonel Sertleştirme
+
+### Hedef
+Canlıya çıkmadan önce sistemin güvenilirliğini ve bakım kolaylığını garanti altına almak.
+
+### Teknik işler
+- unit test
+- repository test
+- Drift migration test
+- RLS smoke test
+- widget test
+- golden test
+- sync senaryosu testleri
+- offline/online geçiş testleri
+- crash ve log entegrasyonu
+- rollback planı
+- beta kanal yayını
+
+### Kabul kriterleri
+- kritik user journey testleri otomatik
+- migration testleri başarısız olduğunda build kırılıyor
+- RLS yanlışsa release engelleniyor
+
+---
+
+## Faz 9 — Canlıya Alma ve Son Optimizasyon
+
+### Hedef
+Üretim dağıtımı, izleme ve ilk bakım döngüsünü tamamlamak.
+
+### Teknik işler
+- production migration freeze
+- veri seed ve başlangıç içerik yükü
+- internal test
+- kademeli rollout
+- performans izleme
+- support playbook
+- ilk 30 gün hata ve metric takibi
+
+### Kabul kriterleri
+- Android ve web sürümü canlı
+- rollback planı doğrulanmış
+- ilk kritik hatalar operasyonel olarak yönetilebiliyor
+
+---
+
+## 11. Riskler ve Azaltma Planı
+
+| Risk | Etki | Azaltma |
+|---|---|---|
+| Drift migration kırılması | Yüksek | sürüm bazlı migration testleri |
+| Yanlış RLS politikası | Çok yüksek | CLI test + code review + stage doğrulama |
+| Web bundle şişmesi | Orta | asset pruning + CI size check |
+| Offline sync veri çakışması | Yüksek | outbox, event_id, LWW, retry |
+| Anonim kullanıcı veri kaybı | Orta | erken upgrade CTA + migration test |
+| Admin yanlış içerik yayını | Orta | preview + publish adımı + audit |
+| Çeviri servis limiti | Düşük/Orta | cache + fallback + kota |
+| CMS kapsamının büyümesi | Orta | ayrı admin_console ve ortak domain katmanı |
+
+---
+
+## 12. İlk Uygulama Sırası Önerisi
+
+Başlangıç için en doğru sıra aşağıdaki gibidir:
+
+1. Faz 0 ve Faz 1 birlikte başlatılsın.
+2. Faz 2 tamamlanmadan çekirdek modüller yeniden yazılmasın.
+3. Faz 3 ve Faz 4 ürün çekirdeğini tamamlasın.
+4. Faz 5 ayrı sprint olarak ele alınsın.
+5. Faz 6–9 üretim sertleştirme ve gelir modeli katmanı olarak planlansın.
+
+Bu sıra korunursa ekip; önce mimari omurgayı, sonra veri güvenliğini, sonra ürün modüllerini, en son da operasyonel büyüme araçlarını tamamlamış olur.
+
+---
+
+## 13. Sonuç
+
+PASSAGETR v2, mevcut uygulamanın birebir taşınmış bir kopyası olmamalıdır. Doğru hedef; aynı eğitim alanlarını koruyan fakat:
+
+- daha hızlı,
+- daha güvenli,
+- yönetilebilir,
+- çevrimdışı dayanıklı,
+- premium modeli net,
+- web ve mobilde tutarlı
+
+bir ürün mimarisine geçmektir.
+
+Bu yol haritası, projeyi “özellik eklenen uygulama” seviyesinden “yaşayan eğitim platformu” seviyesine taşımak için teknik omurgayı tanımlar. Başarı ölçütü yalnızca ekranların çalışması değil; içerik operasyonunun sürdürülebilir, veri güvenliğinin doğrulanabilir ve mobil deneyimin bağlantısız senaryolarda dahi güvenilir olmasıdır.
+---
+
+## 14. Controlled Rewrite Ek Kararlar
+
+Bu belge ilk taslak yol haritasını korur; ancak v2'nin fiili uygulama modeli için aşağıdaki kararlar sabittir.
+
+### 14.1 Branch ve arşiv stratejisi
+
+- `main`, v1 arşiv dalıdır.
+- Güvenli arşiv etiketi: `v1-archive-2026-03-08`
+- Aktif geliştirme dalı: `v2-rewrite-foundation`
+- v2 geliştirmesi, v1 kodunun refactor edilmesi değil; yeni foundation üzerinde kontrollü rewrite olarak ilerler.
+
+### 14.2 Reset ve korunacak alanlar
+
+Korunacak ana varlıklar:
 
 - `docs/`
 - `docs/ui_tasarim/`
 - `DATABASE_SCHEMA.md`
 - `supabase/`
-- `assets/` alt?ndaki ham i?erik ve veritaban? kaynaklar?
-- `scripts/` alt?ndaki import / build / deploy pipeline dosyalar?
+- `assets/` altındaki ham içerik ve veritabanı kaynakları
+- `scripts/` altındaki import / build / deploy pipeline dosyaları
 - `env/*.example`
-- gerekiyorsa v2'ye uyarlanm?? `README.md`
 
-### 4.4 Ar?ivlenecek veya temizlenecek alanlar
+v1 uygulama implementasyonu ise bilinçli olarak temizlenir ve v2 monorepo foundation yapısı kurulur.
 
-v2 resetinde mevcut uygulama implementasyonu s?f?rlan?r:
-
-- `lib/`
-- `test/`
-- `android/`
-- `ios/`
-- `macos/`
-- `linux/`
-- `windows/`
-- `web/`
-- mevcut tek-app Flutter yap?s?na ait root `pubspec.yaml` ve `pubspec.lock`
-
-Ge?ici ve ?retilmi? alanlar temizlenir:
-
-- `.dart_tool/`
-- `build/`
-- `.firebase/`
-- `artifacts/`
-- `test-results/`
-- `scripts/__pycache__/`
-- `supabase/.temp/`
-
-Belirsiz ama potansiyel operasyonel de?eri olan alanlar silinmez; s?n?fland?r?l?r:
-
-- `json_output/`
-- eski smoke test dok?manlar?
-- manuel test dok?manlar?
-- kopya roadmap veya prompt dosyalar?
-
----
-
-## 5. Temel Mimari Kararlar
-
-### 5.1 Platform stratejisi
-
-- Android: `offline-first`
-- Web: `remote-first`
-- Admin: web ?ncelikli, ayr? Flutter app
-
-### 5.2 Veri otoritesi
-
-- ??erik verisi: server-authoritative
-- Kullan?c? ilerlemesi: user-owned, syncable
-- Mobil yazma i?lemleri: ?nce local outbox, sonra remote apply
-- Web: local SQLite asset ta??maz; TTL cache + lazy loading kullan?r
-
-### 5.3 G?venlik modeli
-
-- Supabase ana backend'dir
-- RLS zorunludur
-- `service_role` hi?bir istemciye g?m?lmez
-- UI gating yaln?z g?r?n?rl?k sa?lar; nihai g?venlik DB ve server-side katmandad?r
-- Roller:
-  - `developer`
-  - `admin`
-  - `pro`
-  - `free`
-
-### 5.4 Rol ve plan ayr?m?
-
-Implementasyon d?zeyinde iki kavram ayr?l?r:
-
-- **Role**: developer/admin/user-level yetki
-- **Plan/Entitlement**: free/pro eri?im seviyesi
-
-Bu ayr?m ileride tak?m plan?, kurumsal plan, ??retmen hesab? gibi geni?lemeleri kolayla?t?r?r.
-
-### 5.5 Uygulama ve workspace topolojisi
-
-v2 tek repo i?inde monorepo yap?s?nda ilerler:
+### 14.3 Workspace topolojisi
 
 ```text
 apps/
@@ -207,513 +857,18 @@ packages/
   shared_domain/
   shared_data/
   shared_ui/
-assets/
-  db/
-  content/
 docs/
+  phases/
   ui_tasarim/
   archive/
-  phases/
-scripts/
 supabase/
+scripts/
+assets/
 ```
 
-### 5.6 Katman yap?s?
-
-Payla??lan paketler i?inde a?a??daki ayr?m korunur:
-
-```text
-shared_core/
-  config/
-  auth/
-  theme/
-  routing/
-  errors/
-  utils/
-
-shared_domain/
-  entities/
-  value_objects/
-  repositories/
-  services/
-
-shared_data/
-  local/
-    drift/
-    daos/
-    sync/
-  remote/
-    supabase/
-    functions/
-  repositories/
-
-shared_ui/
-  tokens/
-  components/
-  layouts/
-  patterns/
-```
-
-### 5.7 Teknoloji y???n?
-
-| Alan | Teknoloji | Gerek?e |
-|---|---|---|
-| UI | Flutter 3.x | Android + Web tek repo |
-| Dil | Dart 3.x | type-safe, generator uyumlu |
-| State | Riverpod 2.x | test edilebilir ve compile-time g?venli |
-| Routing | `go_router` | guard ve URL tabanl? navigasyon |
-| Remote | `supabase_flutter` | auth + db + storage |
-| Local mobile DB | Drift + SQLite | offline-first veri katman? |
-| Charts | `fl_chart` | dashboard ve analytics |
-| TTS | `flutter_tts` | kelime ve okuma seslendirme |
-| Connectivity | `connectivity_plus` | sync tetikleme |
-| Error monitoring | Sentry/Crashlytics + Supabase logs | operasyonel izleme |
-
-### 5.8 Repository stratejisi
-
-- Mobilde hibrit repository:
-  - local read
-  - background sync
-  - outbox write
-  - delta pull
-- Web'de remote-first repository:
-  - Supabase read
-  - memory cache + TTL
-  - stale-while-revalidate
-- Ayr? repository s?n?flar?:
-  - `PackRepository`
-  - `WordRepository`
-  - `ReadingRepository`
-  - `GrammarRepository`
-  - `ProgressRepository`
-  - `AdminContentRepository`
-
----
-
-## 6. Offline-First ve Schema Evolution
-
-### 6.1 Mobil sync modeli
-
-Mobil istemci i?in ?u yap?lar zorunludur:
-
-- Drift tabanl? `AppDatabase`
-- `sync_meta`
-- `sync_outbox`
-- `content_versions`
-- `updated_at` / `event_id` / `dirty` benzeri deterministik sync alanlar?
-
-### 6.2 Conflict resolution varsay?lanlar?
-
-- ??erik tablolar?nda conflict yoktur; server her zaman otoritedir.
-- Kullan?c? ilerlemesinde varsay?lan politika `Last Write Wins` olur.
-- Saya? alanlar?nda gerekiyorsa merge uygulan?r.
-- Sync i?lemleri idempotent RPC veya Edge Function ?zerinden i?lenir.
-
-### 6.3 Supabase schema evolution kural?
-
-- v1 tablolar? oldu?u gibi yeniden tasarlanmaz; migration ile evrimle?tirilir.
-- Yeni tablo ve alanlar migration-first ilerler.
-- ?lk eklenecek tablolar:
-  - `profiles`
-  - `user_roles`
-  - `entitlements`
-  - `user_test_attempts`
-  - `user_grammar_progress`
-  - `user_daily_stats`
-  - `content_versions`
-  - `content_change_log`
-  - `audit_logs`
-  - `media_assets`
-
----
-
-## 7. Branch ve Repo Reset Stratejisi
-
-### 7.1 Git stratejisi
-
-- `main`: v1 ar?iv durumu
-- G?venli etiket: `v1-archive-2026-03-08`
-- Yeni ?al??ma dal?: `v2-rewrite-foundation`
-
-### 7.2 Reset kural?
-
-Reset, veri ve operasyon katmanlar?n? silmeden yaln?z uygulama implementasyonunu temizler.
-
-Korunacak eksen:
-
-- veri modeli
-- migration ge?mi?i
-- import/build/deploy pipeline
-- UI referanslar?
-- teknik karar dok?manlar?
-
-Silinecek eksen:
-
-- v1 uygulama kodu
-- v1 platform kabu?u
-- ge?ici ?retim ??kt?lar?
-
----
-
-## 8. Faz Bazl? Yol Haritas?
-
-## Faz 0A - Dok?man Sonland?rma
-
-### Hedef
-Roadmap ve prompt'u v2 i?in karar kayna?? haline getirmek.
-
-### Teknik i?ler
-- roadmap sonland?rma
-- prompt rol?n? daraltma
-- encoding/UTF-8 normalize etmek
-- branch/reset kararlar?n? belgeye eklemek
-- v1 korunacak alanlar listesini sabitlemek
-
-### Kabul kriterleri
-- roadmap karar kayna?? olarak okunabilir
-- prompt agent g?rev tan?m? olarak kullan?labilir
-- mojibake yok
-
----
-
-## Faz 0B - Branch, Ar?iv ve Reset
-
-### Hedef
-v1'i kaybetmeden v2 i?in temiz ?al??ma zemini olu?turmak.
-
-### Teknik i?ler
-- `v1-archive-2026-03-08` etiketi
-- `v2-rewrite-foundation` dal?
-- `docs/archive/v1/` yap?s?n?n olu?turulmas?
-- keep/delete s?n?fland?rmas?
-- mevcut app implementasyonunun temizlenmesi
-
-### Kabul kriterleri
-- v1 ar?ivlenmi? olur
-- v2 branch temiz a??l?r
-- korunacak veri/dok?man klas?rleri kal?r
-
----
-
-## Faz 0C - Workspace Bootstrap
-
-### Hedef
-v2 monorepo iskeletini ?al??an ama bo? foundation olarak kurmak.
-
-### Teknik i?ler
-- `apps/student_app`
-- `apps/admin_console`
-- `packages/shared_core`
-- `packages/shared_domain`
-- `packages/shared_data`
-- `packages/shared_ui`
-- root workspace/melos yap?s?
-- ortak lints, env example, CI skeleton
-- temel theme + routing + shell scaffold
-
-### Kabul kriterleri
-- student_app web/android a??l?r
-- admin_console web a??l?r
-- ortak paket ba?lant?lar? ?al???r
-
----
-
-## Faz 1 - Foundation + Auth + RBAC
-
-### Hedef
-Kimlik, oturum ve rol omurgas?n? kurmak.
-
-### Teknik i?ler
-- Supabase auth entegrasyonu
-- anon session
-- email/password upgrade
-- `profiles`, `user_roles`, `entitlements`
-- auth guard / admin guard / premium gate
-- RLS ilk paket
-
-### ??kt?lar
-- kullan?c? oturumu y?netilebiliyor
-- admin ve premium alanlar? ayr?l?yor
-- shared auth contract netle?iyor
-
-### Kabul kriterleri
-- `free/pro/admin/developer` ayr?m? g?r?n?r
-- admin route DB ve UI taraf?nda korunur
-
----
-
-## Faz 2 - Mobile Offline Data + Schema Evolution
-
-### Hedef
-Mobil veri katman? ve sync omurgas?n? kurmak.
-
-### Teknik i?ler
-- Drift local schema
-- DAO katman?
-- `sync_meta`, `sync_outbox`
-- delta pull
-- outbox push
-- content version invalidation
-
-### ??kt?lar
-- mobilde foundation veri katman? ?al???r
-- i?erik ve progress katman? senkronize edilebilir hale gelir
-
-### Kabul kriterleri
-- mobil offline read yapar
-- ilerleme offline kaybolmaz
-- online olunca sync olur
-
----
-
-## Faz 3 - Student Core MVP
-
-### Hedef
-??renci ?r?n?n?n temel ??renme ak??lar?n? yeniden a?mak.
-
-### Teknik i?ler
-- packs/words
-- kelime listesi + arama
-- flashcard
-- temel test merkezi
-- reading basic
-- progress persistence
-
-### ??kt?lar
-- kullan?c? paket se?er ve ?al???r
-- flashcard ve temel test ak??lar? kullan?labilir olur
-- reading basic a??l?r
-
-### Kabul kriterleri
-- kullan?c? paket se?er ve ?al???r
-- flashcard ve progress ?al???r
-- reading basic a??l?r
-
----
-
-## Faz 4 - Reading Advanced + Grammar
-
-### Hedef
-Okuma ve gramer mod?llerini premium gating ve daha zengin etkile?imle yeniden a?mak.
-
-### Teknik i?ler
-- sentence translation cache
-- bookmarks/favorites
-- grammar module/page/example/test
-- HTML render sanitation
-- TTS ayarlar?
-- premium gating
-
-### ??kt?lar
-- reading player v2
-- grammar reader
-- bookmark/favorite sistemi
-- free/pro g?r?n?rl?k fark?
-
-### Kabul kriterleri
-- okuma ekran? ?evrimd??? a??l?r
-- ?eviri cache tekrar istek atmaz
-- gramer mod?l? lokalde bo?sa remote fallback ?al???r
-
----
-
-## Faz 5 - Admin CMS
-
-### Hedef
-??erik ekleme, d?zenleme ve yay?na alma s?re?lerini UI ?zerinden y?netilebilir hale getirmek.
-
-### Teknik i?ler
-- admin shell
-- kelime/reading/grammar/test CRUD
-- preview
-- publish / unpublish
-- bulk import
-- validation katman?
-- `content_versions`
-- `audit_logs`
-
-### ??kt?lar
-- admin script ?al??t?rmadan i?erik y?netebilir
-- de?i?iklikler istemcilere delta olarak yay?labilir
-
-### Kabul kriterleri
-- admin yeni i?erik ekleyebilir
-- publish sonras? mobile sync tetiklenir
-- audit kay?tlar? olu?ur
-
----
-
-## Faz 6 - Analytics + Pro
-
-### Hedef
-Motivasyon ve gelir modelini destekleyen metrik ve abonelik katman?n? tamamlamak.
-
-### Teknik i?ler
-- daily stats
-- streak
-- quota / entitlement
-- analytics dashboard
-- monetization readiness
-
-### ??kt?lar
-- kullan?c? ilerlemesini g?rselle?tirebilir
-- premium kilit mekanizmas? stabil hale gelir
-- dashboard ?r?n hissi kazan?r
-
-### Kabul kriterleri
-- g?nl?k hedef ve streak do?ru hesaplan?r
-- premium gate kritik ekranlarda tutarl? ?al???r
-- analytics ekran? veri g?sterir
-
----
-
-## Faz 7 - Web Production Readiness
-
-### Hedef
-Web deneyimini performansl? ve ?retime uygun hale getirmek.
-
-### Teknik i?ler
-- responsive shell
-- deferred admin load
-- asset pruning
-- hosting pipeline
-- LCP / bundle optimizasyonu
-- web smoke testi
-
-### ??kt?lar
-- web s?r?m? b?y?k ekranlarda verimli ?al???r
-- deploy s?reci standart hale gelir
-
-### Kabul kriterleri
-- web ilk y?k hissi kabul edilebilir olur
-- admin ekran? masa?st?nde verimli olur
-- deploy pipeline tekrarlanabilir olur
-
----
-
-## Faz 8 - Test ve Operasyonel Sertle?tirme
-
-### Hedef
-Canl?ya ??kmadan ?nce sistemin g?venilirli?ini ve bak?m kolayl???n? garanti alt?na almak.
-
-### Teknik i?ler
-- unit / repository / widget testleri
-- migration testleri
-- RLS smoke testleri
-- beta / rollback plan?
-- offline/online ge?i? testleri
-
-### ??kt?lar
-- kritik user journey testleri otomatikle?ir
-- migration ve RLS g?venlik a?? olu?ur
-
-### Kabul kriterleri
-- migration testleri ba?ar?s?z oldu?unda build k?r?l?r
-- RLS yanl??sa release engellenir
-- kritik yol testleri otomatik ?al???r
-
----
-
-## Faz 9 - Canl?ya Alma
-
-### Hedef
-?retim da??t?m?, izleme ve ilk bak?m d?ng?s?n? tamamlamak.
-
-### Teknik i?ler
-- production migration freeze
-- seed / initial content load
-- staged rollout
-- support playbook
-- first-30-day monitoring
-
-### ??kt?lar
-- Android ve Web s?r?m? canl?ya al?n?r
-- rollback ve operasyon playbook'u haz?r olur
-
-### Kabul kriterleri
-- Android ve Web s?r?m? canl?d?r
-- rollback plan? do?rulanm??t?r
-- ilk kritik hatalar operasyonel olarak y?netilebilir
-
----
-
-## 9. Faz Bazl? ?al??ma Dok?man? Kurgusu
-
-Her faz i?in uygulama ba?lamadan ?nce ve uygulama s?ras?nda ayr? ?al??ma dosyas? tutulur.
-
-?nerilen yap?:
-
-```text
-docs/phases/
-  _phase_calisma_sablonu.md
-  phase_0a_dokuman_sonlandirma.md
-  phase_0b_branch_reset.md
-  phase_0c_workspace_bootstrap.md
-  phase_1_foundation_auth_rbac.md
-  ...
-```
-
-Her faz dosyas?nda en az ?u alanlar bulunur:
-
-- hedef
-- kapsam d??? maddeler
-- yap?lacak i?ler
-- kararlar
-- ba??ml?l?klar
-- riskler
-- test/checklist
-- ilerleme durumu
-- tamamland? notlar?
-
-Kural:
-
-- Yeni geli?tirme do?rudan koda atlanarak ba?lamaz.
-- ?nce ilgili faz dosyas? olu?turulur veya g?ncellenir.
-- Uygulama boyunca bu dosya ya?ayan dok?man olarak i?lenir.
-- Faz tamamlan?nca ??kt? ve ??renimler ayn? dosyaya kaydedilir.
-
----
-
-## 10. ?lk 3 Sprint Teslim S?n?r?
-
-### Sprint 1
-- branch/reset tamam
-- monorepo/workspace olu?mu?
-- student_app ve admin_console bo? shell veriyor
-- ortak paketler compile oluyor
-
-### Sprint 2
-- auth + profiles + roles + entitlements
-- basic route guard
-- shared theme ve responsive shell
-
-### Sprint 3
-- Drift foundation
-- sync_meta + sync_outbox
-- pack list + word list temel ak???
-
-Bu ?? sprint sonunda ekip; ar?ivlenmi? v1, net v2 workspace, auth/RBAC omurgas? ve offline data foundation'a sahip olmal?d?r.
-
----
-
-## 11. Riskler ve Azaltma Plan?
-
-| Risk | Etki | Azaltma |
-|---|---|---|
-| v1 davran???n?n kaybolmas? | Y?ksek | v1 ar?iv etiketi + docs/archive |
-| schema evolution'?n da??lmas? | ?ok y?ksek | migration-first disiplin |
-| mobile offline kapsam ?i?mesi | Y?ksek | Faz 2'de yaln?z foundation teslimi |
-| admin panelin scope ?i?mesi | Orta | Faz 5'e ertelenmi? ayr? app |
-| web bundle ?i?mesi | Orta | remote-first + lazy load |
-| tekrar eden karar dok?manlar? | Orta | roadmap/prompt rol ayr?m? |
-
----
-
-## 12. Son Kararlar
-
-- Bu proje greenfield de?il, controlled rewrite't?r.
-- `main` v1 ar?ividir; aktif geli?tirme `v2-rewrite-foundation` dal?nda yap?l?r.
-- Android offline-first, web remote-first olarak kal?r.
-- `student_app` ve `admin_console` ayr? uygulama giri?leridir.
-- Veritaban? korunur; uygulama kabu?u yeniden kurulur.
-- Faz bazl? ?al??ma dok?manlar? `docs/phases/` alt?nda ya?ayan dok?man olarak tutulur.
+### 14.4 Faz bazlı çalışma kuralı
+
+- Her faz için `docs/phases/` altında ayrı bir çalışma dosyası tutulur.
+- Faz dosyası oluşturulmadan doğrudan implementasyona geçilmez.
+- Faz boyunca kararlar, yapılacak işler, testler ve tamamlananlar aynı dosyada güncellenir.
+- Faz sonunda kısa sonuç ve kalan riskler yine aynı dosyada tutulur.

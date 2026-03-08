@@ -45,3 +45,21 @@ v2 foundation asamasinda hedef; temiz monorepo iskeleti, ortak paket yapisi, stu
 - Agent prompt: `docs/prompt.md`
 - v1 arsiv dokumanlari: `docs/archive/v1/`
 - v1 veri modeli: `DATABASE_SCHEMA.md`
+
+## UTF-8 ve T?rk?e Karakter Korumas?
+
+?lk kurulumdan sonra git hook kur:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install_git_hooks.ps1
+```
+
+Manuel kontrol:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\ensure_utf8.ps1
+```
+
+Detayl? kurallar i?in:
+
+- [docs/ENCODING.md](/c:/yazilim_projeler/passagetr_v0/docs/ENCODING.md)

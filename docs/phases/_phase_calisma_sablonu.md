@@ -1,18 +1,18 @@
-# Faz ?al??ma Dosyas? ?ablonu
+# Faz Çalışma Dosyası Şablonu
 
-## 1. Faz Amac?
+## 1. Faz Amacı
 
 ## 2. Kapsam
 
-## 3. Kapsam D???
+## 3. Kapsam Dışı
 
-## 4. Yap?lacak ??ler
+## 4. Yapılacak İşler
 - [ ]
 
 ## 5. Teknik Kararlar
 - 
 
-## 6. Ba??ml?l?klar
+## 6. Bağımlılıklar
 - 
 
 ## 7. Riskler
@@ -21,9 +21,9 @@
 ## 8. Test ve Kabul Kriterleri
 - 
 
-## 9. ?lerleme Durumu
-- Durum: Planland?
-- Son g?ncelleme: 
+## 9. İlerleme Durumu
+- Durum: Planlandı
+- Son güncelleme: 
 
 ## 10. Tamamlananlar / Notlar
 - 
