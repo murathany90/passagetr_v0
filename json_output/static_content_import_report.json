@@ -1,0 +1,54 @@
+{
+  "mode": "replace",
+  "batch_size": 1000,
+  "generated_at": "2026-03-04T03:11:20.452595+00:00",
+  "duration_ms": 20128,
+  "source_files": {
+    "words_file": "C:\\yazilim_projeler\\ingilizce_app1\\docs\\YDS_Set_001.csv",
+    "passages_file": "C:\\yazilim_projeler\\ingilizce_app1\\docs\\readings_passages.csv",
+    "sentences_file": "C:\\yazilim_projeler\\ingilizce_app1\\docs\\readings_sentences.csv"
+  },
+  "checksums": {
+    "words_sha256": "5a880126b4a8e732d081c09e7289ebbb69ef2c1199acee0db4aff3cdc3354047",
+    "passages_sha256": "ef5f01a4eb135430eb7acc8613618f68607ecd17dc39e4597bb50021d3122ac8",
+    "sentences_sha256": "b4ee01932b407cc7e228ba6136eb004c1d3fa020853113314068ec934f42f3b7"
+  },
+  "packs": {
+    "count": 5,
+    "names": [
+      "YDS Set 001",
+      "YDS Set 002",
+      "YDS Set 003",
+      "YDS Set 004",
+      "YDS Set 005"
+    ]
+  },
+  "words": {
+    "rows_read": 5314,
+    "rows_loaded": 5314,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "empty_meaning_rows": 0,
+    "invalid_pos_rows": 0
+  },
+  "passages": {
+    "rows_read": 678,
+    "rows_loaded": 678,
+    "invalid_rows": 0
+  },
+  "sentences": {
+    "rows_read": 5242,
+    "rows_loaded": 5242,
+    "invalid_rows": 0,
+    "skipped_empty_rows": 0,
+    "unmapped_passage_rows": 0,
+    "reindexed_rows": 0
+  },
+  "id_parity": {
+    "ok": true,
+    "word_mismatch_count": 0,
+    "passage_mismatch_count": 0,
+    "sentence_mismatch_count": 0
+  },
+  "id_parity_ok": true
+}

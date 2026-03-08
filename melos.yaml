@@ -1,0 +1,12 @@
+﻿name: passagetr_v2
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+  analyze: |
+    flutter analyze apps/student_app
+    flutter analyze apps/admin_console
+  test: |
+    flutter test apps/student_app
+    flutter test apps/admin_console

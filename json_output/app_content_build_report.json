@@ -1,0 +1,64 @@
+{
+  "dataset_version": "20260305160340",
+  "generated_at": "2026-03-05T16:04:25.484549+00:00",
+  "duration_ms": 45082,
+  "output_db": "C:\\yazilim_projeler\\ingilizce_app1\\assets\\db\\app_content.db",
+  "db_size_bytes": 56979456,
+  "db_size_mb": 54.34,
+  "checksums": {
+    "dictionary_sha256": "e1f606d276dd7b4565bf0204536ad0c0c11421e609fbae8a917d367d1e4f5b68",
+    "words_sha256": "5a880126b4a8e732d081c09e7289ebbb69ef2c1199acee0db4aff3cdc3354047",
+    "passages_sha256": "ef5f01a4eb135430eb7acc8613618f68607ecd17dc39e4597bb50021d3122ac8",
+    "sentences_sha256": "b4ee01932b407cc7e228ba6136eb004c1d3fa020853113314068ec934f42f3b7",
+    "grammar_sha256": "bf6822a3b1a44107f70e3b9c012e0474803503b4940244542a130b4be4d18cd4"
+  },
+  "counts": {
+    "packs": 5,
+    "words": 5314,
+    "reading_passages": 678,
+    "reading_sentences": 5242,
+    "dictionary_entries": 121772,
+    "dictionary_fts_rows": 121772,
+    "grammar_modules": 12,
+    "grammar_pages": 264,
+    "grammar_examples": 1031,
+    "grammar_tests": 293
+  },
+  "stats": {
+    "dictionary": {
+      "rows_read": 121783,
+      "rows_loaded": 121772,
+      "duplicate_rows": 3,
+      "invalid_rows": 8,
+      "empty_meaning_rows": 0
+    },
+    "words": {
+      "rows_read": 5314,
+      "rows_loaded": 5314,
+      "duplicate_rows": 0,
+      "invalid_rows": 0,
+      "empty_meaning_rows": 0,
+      "invalid_pos_rows": 0
+    },
+    "passages": {
+      "rows_read": 678,
+      "rows_loaded": 678,
+      "invalid_rows": 0
+    },
+    "sentences": {
+      "rows_read": 5242,
+      "rows_loaded": 5242,
+      "invalid_rows": 0,
+      "skipped_empty_rows": 0,
+      "unmapped_passage_rows": 0,
+      "reindexed_rows": 0
+    },
+    "grammar": {
+      "module_count": 12,
+      "page_count": 264,
+      "example_count": 1031,
+      "test_count": 293
+    }
+  },
+  "meta_sidecar": "C:\\yazilim_projeler\\ingilizce_app1\\assets\\db\\app_content.meta.json"
+}

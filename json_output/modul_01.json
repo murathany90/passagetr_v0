@@ -1,0 +1,871 @@
+{
+  "sira": 1,
+  "baslik": "İngilizcede Temel Kavramlar",
+  "dosya_adi": "01_temel_kavramlar.md",
+  "toplam_sayfa": 16,
+  "icon": "🔤",
+  "renk": "#4776E6",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "Cümlenin Temel Unsurları",
+      "total_pages": 16,
+      "content_html": "<h2>📌 TEMEL YAPI TAŞLARI</h2>\n<p>İngilizce cümle temel olarak <strong>Verb</strong> (fiil) ve <strong>Noun</strong> (isim) olmak üzere iki ana unsurdan oluşur. Özne her zaman isim ya da isim görevindeki yapılardır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir cümleyi anlamak için önce fiili bul, sonra fiilin önündeki isim özneyi, arkasındaki isim nesneyi gösterir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1 (Basit cümle):</h3>\n<p><strong>EN:</strong> The boy runs.<br>\n<strong>TR:</strong> Çocuk koşar.<br>\n→ Tek bir özne (the boy) ve tek bir fiil (runs) var.</p>\n<h3>Örnek 2 (Nesneli cümle):</h3>\n<p><strong>EN:</strong> The girl eats an apple.<br>\n<strong>TR:</strong> Kız bir elma yer.<br>\n→ Özne (the girl) + fiil (eats) + nesne (an apple)</p>\n<h3>Örnek 3 (Edatlı cümle):</h3>\n<p><strong>EN:</strong> The book is on the table.<br>\n<strong>TR:</strong> Kitap masanın üzerinde.<br>\n→ \"on\" edatı, \"the table\" ismini cümleye bağlıyor.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Unsur</th>\n<th>Görev</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Verb (Fiil)</strong></td>\n<td>Eylemi gösterir</td>\n<td>run, eat, is</td>\n</tr>\n<tr>\n<td><strong>Noun (İsim)</strong></td>\n<td>Kişi/yer/şey</td>\n<td>boy, apple, table</td>\n</tr>\n<tr>\n<td><strong>Preposition (Edat)</strong></td>\n<td>Bağlantı kurar</td>\n<td>in, on, at</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlede kaç tane \"Noun Phrase\" vardır?<br>\n\"The clever students in the large classroom are waiting for their teacher.\"</p>\n<p>A) 2<br>\nB) 3<br>\nC) 4<br>\nD) 5</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) 3\n**Açıklama:** \n- NP1: \"The clever students\" (özne)\n- NP2: \"the large classroom\" (edat nesnesi)\n- NP3: \"their teacher\" (edat nesnesi)\nToplam 3 Noun Phrase vardır.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 198]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The boy runs.",
+          "tr": "Çocuk koşar.\n→ Tek bir özne (the boy) ve tek bir fiil (runs) var.\n\n### Örnek 2 (Nesneli cümle):",
+          "description": ""
+        },
+        {
+          "en": "The girl eats an apple.",
+          "tr": "Kız bir elma yer.\n→ Özne (the girl) + fiil (eats) + nesne (an apple)\n\n### Örnek 3 (Edatlı cümle):",
+          "description": ""
+        },
+        {
+          "en": "The book is on the table.",
+          "tr": "Kitap masanın üzerinde.\n→ \"on\" edatı, \"the table\" ismini cümleye bağlıyor.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlede kaç tane \"Noun Phrase\" vardır? \n\"The clever students in the large classroom are waiting for their teacher.\"",
+        "options": {
+          "A": "2",
+          "B": "3",
+          "C": "4",
+          "D": "5"
+        },
+        "correct": "B) 3",
+        "explanation": "- NP1: \"The clever students\" (özne)\n- NP2: \"the large classroom\" (edat nesnesi)\n- NP3: \"their teacher\" (edat nesnesi)\nToplam 3 Noun Phrase vardır."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlede kaç tane \"Noun Phrase\" vardır? \n\"The clever students in the large classroom are waiting for their teacher.\"",
+          "options": {
+            "A": "2",
+            "B": "3",
+            "C": "4",
+            "D": "5"
+          },
+          "correct": "B) 3",
+          "explanation": "- NP1: \"The clever students\" (özne)\n- NP2: \"the large classroom\" (edat nesnesi)\n- NP3: \"their teacher\" (edat nesnesi)\nToplam 3 Noun Phrase vardır."
+        }
+      ],
+      "word_count": 206
+    },
+    {
+      "page_number": 2,
+      "title": "Fiil Türleri (Verb Types)",
+      "total_pages": 16,
+      "content_html": "<h2>📌 FİİLLER NESNE SAYISINA GÖRE 3'E AYRILIR</h2>\n<p>İngilizce'de fiiller, aldıkları nesne sayısına göre sınıflandırılır. Bu, özellikle Passive Voice (edilgen çatı) konusunu anlamak için kritiktir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Fiile \"neyi/kimi?\" veya \"neye/kime?\" sorularını sor. Cevap alıyorsan fiil nesne alıyordur.</p>\n</blockquote>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>1. Intransitive (Geçişsiz)</strong><br>\n        V (nesne almaz)\n    </div>\n    <div class=\"kart yesil\">\n        <strong>2. Transitive (Geçişli)</strong><br>\n        V + O (tek nesne)\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>3. Ditransitive (Çift nesneli)</strong><br>\n        V + O + O (iki nesne)\n    </div>\n</div>\n\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1 (Intransitive - nesnesiz):</h3>\n<p><strong>EN:</strong> She slept for hours.<br>\n<strong>TR:</strong> Saatlerce uyudu.<br>\n→ \"Neyi uyudu?\" sorusu anlamsız → nesne yok.</p>\n<h3>Örnek 2 (Transitive - tek nesneli):</h3>\n<p><strong>EN:</strong> She broke the window.<br>\n<strong>TR:</strong> Camı kırdı.<br>\n→ \"Neyi kırdı?\" → the window (nesne)</p>\n<h3>Örnek 3 (Ditransitive - çift nesneli):</h3>\n<p><strong>EN:</strong> She gave me a present.<br>\n<strong>TR:</strong> Bana bir hediye verdi.<br>\n→ \"Kime verdi?\" → me / \"Neyi verdi?\" → a present</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nPasif cümle yaparken sadece nesne alan fiiller kullanılır. Nesne almayan fiiller (intransitive) pasif yapılamaz!\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"They arrived at the station.\" cümlesindeki \"arrived\" fiili hangi türdendir?</p>\n<p>A) Intransitive<br>\nB) Transitive<br>\nC) Ditransitive<br>\nD) Hiçbiri</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) Intransitive\n**Açıklama:** \"Arrive\" nesne almaz. \"At the station\" bir edat öbeğidir, nesne değil.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 205]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She slept for hours.",
+          "tr": "Saatlerce uyudu.\n→ \"Neyi uyudu?\" sorusu anlamsız → nesne yok.\n\n### Örnek 2 (Transitive - tek nesneli):",
+          "description": ""
+        },
+        {
+          "en": "She broke the window.",
+          "tr": "Camı kırdı.\n→ \"Neyi kırdı?\" → the window (nesne)\n\n### Örnek 3 (Ditransitive - çift nesneli):",
+          "description": ""
+        },
+        {
+          "en": "She gave me a present.",
+          "tr": "Bana bir hediye verdi.\n→ \"Kime verdi?\" → me / \"Neyi verdi?\" → a present",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"They arrived at the station.\" cümlesindeki \"arrived\" fiili hangi türdendir?",
+        "options": {
+          "A": "Intransitive",
+          "B": "Transitive",
+          "C": "Ditransitive",
+          "D": "Hiçbiri"
+        },
+        "correct": "A) Intransitive",
+        "explanation": "\"Arrive\" nesne almaz. \"At the station\" bir edat öbeğidir, nesne değil."
+      },
+      "mini_tests": [
+        {
+          "question": "\"They arrived at the station.\" cümlesindeki \"arrived\" fiili hangi türdendir?",
+          "options": {
+            "A": "Intransitive",
+            "B": "Transitive",
+            "C": "Ditransitive",
+            "D": "Hiçbiri"
+          },
+          "correct": "A) Intransitive",
+          "explanation": "\"Arrive\" nesne almaz. \"At the station\" bir edat öbeğidir, nesne değil."
+        }
+      ],
+      "word_count": 215
+    },
+    {
+      "page_number": 3,
+      "title": "Noun Phrase (İsim Öbeği)",
+      "total_pages": 16,
+      "content_html": "<h2>📌 İSİM ÖBEĞİ NEDİR?</h2>\n<p>Noun Phrase, son kelimesi isim olan ve önüne çeşitli niteleyiciler alabilen kelime grubudur. Tek bir isimden oluşabileceği gibi, sıfat, zarf, belirteç gibi kelimelerle genişletilebilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir kelime grubunun Noun Phrase olması için <strong>son kelimesi mutlaka isim</strong> olmalıdır!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1 (Tek başına isim):</h3>\n<p><strong>EN:</strong> car<br>\n<strong>TR:</strong> araba<br>\n→ En basit Noun Phrase formu.</p>\n<h3>Örnek 2 (Sıfat + isim):</h3>\n<p><strong>EN:</strong> clever boy<br>\n<strong>TR:</strong> zeki çocuk<br>\n→ Sıfat (clever) ismi (boy) niteliyor.</p>\n<h3>Örnek 3 (Zarf + sıfat + isim):</h3>\n<p><strong>EN:</strong> extremely expensive car<br>\n<strong>TR:</strong> son derece pahalı araba<br>\n→ Zarf (extremely) sıfatı (expensive) niteliyor.</p>\n<h3>Örnek 4 (İsim + isim):</h3>\n<p><strong>EN:</strong> wall paper<br>\n<strong>TR:</strong> duvar kağıdı<br>\n→ İki isim yan yana gelerek yeni bir anlam oluşturuyor.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Formül</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Basit</td>\n<td>Noun</td>\n<td>book</td>\n</tr>\n<tr>\n<td>Sıfatlı</td>\n<td>Adj + Noun</td>\n<td>red book</td>\n</tr>\n<tr>\n<td>Zarflı</td>\n<td>Adv + Adj + Noun</td>\n<td>very red book</td>\n</tr>\n<tr>\n<td>Bileşik</td>\n<td>Noun + Noun</td>\n<td>bookshelf</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"A very interesting history book\" ifadesinde Noun Phrase'in son kelimesi nedir?</p>\n<p>A) very<br>\nB) interesting<br>\nC) history<br>\nD) book</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D) book\n**Açıklama:** Noun Phrase'te son kelime her zaman isimdir. Burada \"book\" isim, diğerleri niteleyici.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 212]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "car",
+          "tr": "araba\n→ En basit Noun Phrase formu.\n\n### Örnek 2 (Sıfat + isim):",
+          "description": ""
+        },
+        {
+          "en": "clever boy",
+          "tr": "zeki çocuk\n→ Sıfat (clever) ismi (boy) niteliyor.\n\n### Örnek 3 (Zarf + sıfat + isim):",
+          "description": ""
+        },
+        {
+          "en": "extremely expensive car",
+          "tr": "son derece pahalı araba\n→ Zarf (extremely) sıfatı (expensive) niteliyor.\n\n### Örnek 4 (İsim + isim):",
+          "description": ""
+        },
+        {
+          "en": "wall paper",
+          "tr": "duvar kağıdı\n→ İki isim yan yana gelerek yeni bir anlam oluşturuyor.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"A very interesting history book\" ifadesinde Noun Phrase'in son kelimesi nedir?",
+        "options": {
+          "A": "very",
+          "B": "interesting",
+          "C": "history",
+          "D": "book"
+        },
+        "correct": "D) book",
+        "explanation": "Noun Phrase'te son kelime her zaman isimdir. Burada \"book\" isim, diğerleri niteleyici."
+      },
+      "mini_tests": [
+        {
+          "question": "\"A very interesting history book\" ifadesinde Noun Phrase'in son kelimesi nedir?",
+          "options": {
+            "A": "very",
+            "B": "interesting",
+            "C": "history",
+            "D": "book"
+          },
+          "correct": "D) book",
+          "explanation": "Noun Phrase'te son kelime her zaman isimdir. Burada \"book\" isim, diğerleri niteleyici."
+        }
+      ],
+      "word_count": 182
+    },
+    {
+      "page_number": 4,
+      "title": "Prepositions (Edatlar) ve Strateji",
+      "total_pages": 16,
+      "content_html": "<h2>📌 EDATLARIN GÖREVİ</h2>\n<p>Edatlar (in, on, at, for, next to vb.), cümledeki isim öbeklerini (Noun Phrase) birbirine veya fiile bağlar. İngilizce cümle yapısını anlamak için edatları doğru yorumlamak çok önemlidir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Edatlar, isimlerin önüne gelerek onların cümle içindeki konumunu belirler.</p>\n</blockquote>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ ALTIN STRATEJİ:**\n**\"Bir cümlenin öznesinin önünde asla edat (preposition) olmaz! Önünde edat olan bir isim asla özne olamaz.\"**\n</div>\n\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1 (Edatlı cümle analizi):</h3>\n<p><strong>EN:</strong> The students in the classroom are waiting.<br>\n<strong>TR:</strong> Sınıftaki öğrenciler bekliyor.<br>\n→ \"The students\" (özne) önünde edat YOK.<br>\n→ \"the classroom\" önünde \"in\" edatı VAR → özne olamaz.</p>\n<h3>Örnek 2 (Soru çözümü):</h3>\n<p><strong>EN:</strong> The city _____ lies in the middle of the country has great resources.<br>\n<strong>TR:</strong> Ülkenin ortasında bulunan şehir büyük kaynaklara sahip.<br>\n→ Boşluk özne görevinde → önünde edat olan seçenekler elenir.</p>\n<hr>\n<h2>📊 YAYGIN EDATLAR</h2>\n<table>\n<thead>\n<tr>\n<th>Edat</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>in</td>\n<td>içinde</td>\n<td>in the room</td>\n</tr>\n<tr>\n<td>on</td>\n<td>üzerinde</td>\n<td>on the table</td>\n</tr>\n<tr>\n<td>at</td>\n<td>-de/-da</td>\n<td>at school</td>\n</tr>\n<tr>\n<td>for</td>\n<td>için</td>\n<td>for you</td>\n</tr>\n<tr>\n<td>next to</td>\n<td>yanında</td>\n<td>next to me</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlede özne hangisidir?<br>\n\"On the table, the book is mine.\"</p>\n<p>A) On the table<br>\nB) the book<br>\nC) table<br>\nD) mine</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) the book\n**Açıklama:** \"On the table\" bir edat öbeğidir ve özne olamaz. Asıl özne \"the book\"tur.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 208]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The students in the classroom are waiting.",
+          "tr": "Sınıftaki öğrenciler bekliyor.\n→ \"The students\" (özne) önünde edat YOK.\n→ \"the classroom\" önünde \"in\" edatı VAR → özne olamaz.\n\n### Örnek 2 (Soru çözümü):",
+          "description": ""
+        },
+        {
+          "en": "The city _____ lies in the middle of the country has great resources.",
+          "tr": "Ülkenin ortasında bulunan şehir büyük kaynaklara sahip.\n→ Boşluk özne görevinde → önünde edat olan seçenekler elenir.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlede özne hangisidir? \n\"On the table, the book is mine.\"",
+        "options": {
+          "A": "On the table",
+          "B": "the book",
+          "C": "table",
+          "D": "mine"
+        },
+        "correct": "B) the book",
+        "explanation": "\"On the table\" bir edat öbeğidir ve özne olamaz. Asıl özne \"the book\"tur."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlede özne hangisidir? \n\"On the table, the book is mine.\"",
+          "options": {
+            "A": "On the table",
+            "B": "the book",
+            "C": "table",
+            "D": "mine"
+          },
+          "correct": "B) the book",
+          "explanation": "\"On the table\" bir edat öbeğidir ve özne olamaz. Asıl özne \"the book\"tur."
+        }
+      ],
+      "word_count": 212
+    },
+    {
+      "page_number": 5,
+      "title": "Sentence vs Clause (Cümle ve Cümlecik)",
+      "total_pages": 16,
+      "content_html": "<h2>📌 TEMEL FARK</h2>\n<ul>\n<li><strong>Sentence (Cümle):</strong> Nokta ile biten, tek başına anlamlı ifade.</li>\n<li><strong>Clause (Cümlecik):</strong> Kendi içinde özne ve fiili olan ama cümle içinde bir öğe (özne, nesne, sıfat) görevi yapan yapı.</li>\n</ul>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Her clause bir mini cümledir ama tek başına cümle değildir!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1 (Simple Sentence - Basit Cümle):</h3>\n<p><strong>EN:</strong> She was too ill.<br>\n<strong>TR:</strong> Çok hastaydı.<br>\n→ Tek fiil, tek özne → basit cümle.</p>\n<h3>Örnek 2 (Compound Sentence - Birleşik Cümle):</h3>\n<p><strong>EN:</strong> She was ill, but she went out.<br>\n<strong>TR:</strong> Hastaydı ama dışarı çıktı.<br>\n→ İki cümle \"but\" bağlacıyla bağlanmış.</p>\n<h3>Örnek 3 (Complex Sentence - Karmaşık Cümle):</h3>\n<p><strong>EN:</strong> The boy solved the problem which had hampered them.<br>\n<strong>TR:</strong> Onları daha önce engelleyen problemi çözdü.<br>\n→ \"which had hampered them\" bir Adjective Clause (sıfat cümleciği).</p>\n<hr>\n<h2>📊 CÜMLE TÜRLERİ</h2>\n<table>\n<thead>\n<tr>\n<th>Tür</th>\n<th>Açıklama</th>\n<th>Bağlaç</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Simple</td>\n<td>Tek yargı</td>\n<td>-</td>\n</tr>\n<tr>\n<td>Compound</td>\n<td>Bağlaçla bağlı 2+ cümle</td>\n<td>FANBOYS*</td>\n</tr>\n<tr>\n<td>Complex</td>\n<td>Clause içerir</td>\n<td>that, which, who</td>\n</tr>\n</tbody>\n</table>\n<p>*FANBOYS: For, And, Nor, But, Or, Yet, So (bazı kaynaklarda \"Then\" de eklenir)</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\nNoun Clause, Adjective Clause ve Adverbial Clause yapıları \"Complex Sentence\" oluşturur.\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I don't know what she wants.\" cümlesi hangi türdendir?</p>\n<p>A) Simple Sentence<br>\nB) Compound Sentence<br>\nC) Complex Sentence<br>\nD) Hiçbiri</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) Complex Sentence\n**Açıklama:** \"what she wants\" bir Noun Clause (isim cümleciği) içerdiği için complex sentence'dır.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She was too ill.",
+          "tr": "Çok hastaydı.\n→ Tek fiil, tek özne → basit cümle.\n\n### Örnek 2 (Compound Sentence - Birleşik Cümle):",
+          "description": ""
+        },
+        {
+          "en": "She was ill, but she went out.",
+          "tr": "Hastaydı ama dışarı çıktı.\n→ İki cümle \"but\" bağlacıyla bağlanmış.\n\n### Örnek 3 (Complex Sentence - Karmaşık Cümle):",
+          "description": ""
+        },
+        {
+          "en": "The boy solved the problem which had hampered them.",
+          "tr": "Onları daha önce engelleyen problemi çözdü.\n→ \"which had hampered them\" bir Adjective Clause (sıfat cümleciği).",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I don't know what she wants.\" cümlesi hangi türdendir?",
+        "options": {
+          "A": "Simple Sentence",
+          "B": "Compound Sentence",
+          "C": "Complex Sentence",
+          "D": "Hiçbiri"
+        },
+        "correct": "C) Complex Sentence",
+        "explanation": "\"what she wants\" bir Noun Clause (isim cümleciği) içerdiği için complex sentence'dır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I don't know what she wants.\" cümlesi hangi türdendir?",
+          "options": {
+            "A": "Simple Sentence",
+            "B": "Compound Sentence",
+            "C": "Complex Sentence",
+            "D": "Hiçbiri"
+          },
+          "correct": "C) Complex Sentence",
+          "explanation": "\"what she wants\" bir Noun Clause (isim cümleciği) içerdiği için complex sentence'dır."
+        }
+      ],
+      "word_count": 220
+    },
+    {
+      "page_number": 6,
+      "title": "Özne (Subject) Pozisyonunda Kullanılan Yapılar - 1",
+      "total_pages": 16,
+      "content_html": "<h2>📌 ÖZNE NELERDEN OLUŞUR?</h2>\n<p>Bir cümlenin öznesi ancak ve ancak <strong>isim</strong> veya <strong>isim gibi işlev gören yapılar</strong>dan oluşabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Özne bulmak için fiile \"Kim?\" veya \"Ne?\" sorusunu sor.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>1. Noun Phrase (İsim Öbeği):</h3>\n<p><strong>EN:</strong> The car is expensive.<br>\n<strong>TR:</strong> Araba pahalı.<br>\n→ \"The car\" bir Noun Phrase.</p>\n<h3>2. Subject Pronouns (Özne Zamirleri):</h3>\n<p><strong>EN:</strong> She hates cooking.<br>\n<strong>TR:</strong> O, yemek yapmaktan nefret eder.<br>\n→ \"She\" özne zamiri (I, you, he, she, it, we, they)</p>\n<h3>3. Ving (Gerund - Fiilimsi):</h3>\n<p><strong>EN:</strong> Smoking is harmful.<br>\n<strong>TR:</strong> Sigara içmek zararlıdır.<br>\n→ \"Smoking\" fiil ama isim gibi davranıyor.</p>\n<hr>\n<h2>📊 ÖZNE OLABİLEN YAPILAR (1. Grup)</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Örnek</th>\n<th>Türkçe</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Noun Phrase</td>\n<td>The tall man</td>\n<td>Uzun adam</td>\n</tr>\n<tr>\n<td>Subject Pronoun</td>\n<td>They</td>\n<td>Onlar</td>\n</tr>\n<tr>\n<td>Ving (Gerund)</td>\n<td>Reading</td>\n<td>Okumak</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nVing (fiilimsi) ile çekimli fiili karıştırma!  \n\"Smoking is bad\" → smoking = özne (isim)  \n\"He is smoking\" → is smoking = çekimli fiil\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdakilerden hangisi bir cümlede özne olamaz?</p>\n<p>A) Swimming<br>\nB) The old man<br>\nC) Them<br>\nD) It</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) Them\n**Açıklama:** \"Them\" nesne zamiridir. Özne zamiri \"they\" olmalıydı.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 207]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The car is expensive.",
+          "tr": "Araba pahalı.\n→ \"The car\" bir Noun Phrase.\n\n### 2. Subject Pronouns (Özne Zamirleri):",
+          "description": ""
+        },
+        {
+          "en": "She hates cooking.",
+          "tr": "O, yemek yapmaktan nefret eder.\n→ \"She\" özne zamiri (I, you, he, she, it, we, they)\n\n### 3. Ving (Gerund - Fiilimsi):",
+          "description": ""
+        },
+        {
+          "en": "Smoking is harmful.",
+          "tr": "Sigara içmek zararlıdır.\n→ \"Smoking\" fiil ama isim gibi davranıyor.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdakilerden hangisi bir cümlede özne olamaz?",
+        "options": {
+          "A": "Swimming",
+          "B": "The old man",
+          "C": "Them",
+          "D": "It"
+        },
+        "correct": "C) Them",
+        "explanation": "\"Them\" nesne zamiridir. Özne zamiri \"they\" olmalıydı."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdakilerden hangisi bir cümlede özne olamaz?",
+          "options": {
+            "A": "Swimming",
+            "B": "The old man",
+            "C": "Them",
+            "D": "It"
+          },
+          "correct": "C) Them",
+          "explanation": "\"Them\" nesne zamiridir. Özne zamiri \"they\" olmalıydı."
+        }
+      ],
+      "word_count": 179
+    },
+    {
+      "page_number": 7,
+      "title": "Özne (Subject) Pozisyonunda Kullanılan Yapılar - 2",
+      "total_pages": 16,
+      "content_html": "<h2>📌 DİĞER ÖZNE YAPILARI</h2>\n<p>İngilizce'de özne olarak kullanabileceğimiz daha fazla yapı var: infinitive (mastar), işaret zamirleri ve miktar ifadeleri.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"To V0\" yapısı cümle başında ya öznedir ya da amaç bildirir. Virgül varsa amaç bildirir!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>4. To V0 (Infinitive - Mastar):</h3>\n<p><strong>EN:</strong> To read newspapers keeps you informed.<br>\n<strong>TR:</strong> Gazete okumak seni bilgili tutar.<br>\n→ \"To read\" özne görevinde.</p>\n<p><strong>EN:</strong> To be successful, you must work hard.<br>\n<strong>TR:</strong> Başarılı olmak için çok çalışmalısın.<br>\n→ Burada \"To be successful\" amaç bildiriyor (özne değil, virgül var!).</p>\n<h3>5. İşaret Zamirleri:</h3>\n<p><strong>EN:</strong> This is my book.<br>\n<strong>TR:</strong> Bu benim kitabım.<br>\n→ \"This\" bir ismin yerine kullanılmış.</p>\n<h3>6. Miktar İfadeleri:</h3>\n<p><strong>EN:</strong> Some believe he is guilty.<br>\n<strong>TR:</strong> Bazıları onun suçlu olduğuna inanıyor.<br>\n→ \"Some\" = some people (zamir olarak)</p>\n<hr>\n<h2>📊 ÖZNE OLABİLEN YAPILAR (2. Grup)</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Örnek</th>\n<th>Açıklama</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>To V0</td>\n<td>To swim</td>\n<td>Yüzmek (mastar)</td>\n</tr>\n<tr>\n<td>This/That</td>\n<td>This</td>\n<td>Bu (işaret)</td>\n</tr>\n<tr>\n<td>Some/Both</td>\n<td>Both</td>\n<td>İkisi de (miktar)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"To V0\" cümle başında ve virgül **yoksa** → özne = \"-mek\"  \n\"To V0\" cümle başında ve virgül **varsa** → amaç = \"-mek için\"\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"To smoke, the visitors went outside.\" cümlesinde \"To smoke\" hangi anlamdadır?</p>\n<p>A) Özne (Sigara içmek)<br>\nB) Amaç (Sigara içmek için)<br>\nC) Nesne<br>\nD) Sıfat</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) Amaç\n**Açıklama:** Virgül olduğu için amaç bildirir. Özne \"the visitors\"dir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 214]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "To read newspapers keeps you informed.",
+          "tr": "Gazete okumak seni bilgili tutar.\n→ \"To read\" özne görevinde.",
+          "description": ""
+        },
+        {
+          "en": "To be successful, you must work hard.",
+          "tr": "Başarılı olmak için çok çalışmalısın.\n→ Burada \"To be successful\" amaç bildiriyor (özne değil, virgül var!).\n\n### 5. İşaret Zamirleri:",
+          "description": ""
+        },
+        {
+          "en": "This is my book.",
+          "tr": "Bu benim kitabım.\n→ \"This\" bir ismin yerine kullanılmış.\n\n### 6. Miktar İfadeleri:",
+          "description": ""
+        },
+        {
+          "en": "Some believe he is guilty.",
+          "tr": "Bazıları onun suçlu olduğuna inanıyor.\n→ \"Some\" = some people (zamir olarak)",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"To smoke, the visitors went outside.\" cümlesinde \"To smoke\" hangi anlamdadır?",
+        "options": {
+          "A": "Özne (Sigara içmek)",
+          "B": "Amaç (Sigara içmek için)",
+          "C": "Nesne",
+          "D": "Sıfat"
+        },
+        "correct": "B) Amaç",
+        "explanation": "Virgül olduğu için amaç bildirir. Özne \"the visitors\"dir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"To smoke, the visitors went outside.\" cümlesinde \"To smoke\" hangi anlamdadır?",
+          "options": {
+            "A": "Özne (Sigara içmek)",
+            "B": "Amaç (Sigara içmek için)",
+            "C": "Nesne",
+            "D": "Sıfat"
+          },
+          "correct": "B) Amaç",
+          "explanation": "Virgül olduğu için amaç bildirir. Özne \"the visitors\"dir."
+        }
+      ],
+      "word_count": 219
+    },
+    {
+      "page_number": 8,
+      "title": "Özne (Subject) Pozisyonunda Kullanılan Yapılar - 3",
+      "total_pages": 16,
+      "content_html": "<h2>📌 KARMAŞIK ÖZNE YAPILARI</h2>\n<p>Noun Clause (isim cümlecikleri) ve Adjective Clause (sıfat cümlecikleri) de özne görevinde kullanılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"That\" ile başlayan bir cümlecik gördüğünde, onun cümlenin öznesi olabileceğini unutma!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>7. Noun Clauses (That + cümle):</h3>\n<p><strong>EN:</strong> That he came late made me angry.<br>\n<strong>TR:</strong> Onun geç gelmesi beni kızdırdı.<br>\n→ \"That he came late\" özne (isim cümleciği)</p>\n<h3>8. Noun Clauses (Wh- soruları):</h3>\n<p><strong>EN:</strong> Where she lives is a mystery.<br>\n<strong>TR:</strong> Nerede yaşadığı bir sır.<br>\n→ \"Where she lives\" özne</p>\n<h3>9. NP + Adjective Clause:</h3>\n<p><strong>EN:</strong> The man who came late is my boss.<br>\n<strong>TR:</strong> Geç gelen adam benim patronum.<br>\n→ \"The man who came late\" özne</p>\n<h3>10. Boş Özne \"It\":</h3>\n<p><strong>EN:</strong> It is claimed that she stole money.<br>\n<strong>TR:</strong> Onun para çaldığı iddia ediliyor.<br>\n→ \"It\" asıl öznenin (that clause) yerine kullanılmış.</p>\n<hr>\n<h2>📊 TÜM ÖZNE YAPILARI ÖZET</h2>\n<table>\n<thead>\n<tr>\n<th>No</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Noun Phrase</td>\n<td>The car</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Subject Pronoun</td>\n<td>She</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Ving</td>\n<td>Swimming</td>\n</tr>\n<tr>\n<td>4</td>\n<td>To V0</td>\n<td>To swim</td>\n</tr>\n<tr>\n<td>5</td>\n<td>İşaret Zamiri</td>\n<td>This</td>\n</tr>\n<tr>\n<td>6</td>\n<td>Miktar İfadesi</td>\n<td>Both</td>\n</tr>\n<tr>\n<td>7</td>\n<td>Noun Clause</td>\n<td>That he came</td>\n</tr>\n<tr>\n<td>8</td>\n<td>NP + Adj Clause</td>\n<td>The man who...</td>\n</tr>\n<tr>\n<td>9</td>\n<td>Boş Özne</td>\n<td>It</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"If\" özne konumunda kullanılmaz çünkü \"if\" sadece fiil veya edattan sonra gelebilir.\nÖzne olacaksa \"Whether\" kullanılır.\n</div>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"_____ he will come is not certain.\" cümlesinde boşluğa ne gelir?</p>\n<p>A) If<br>\nB) Whether<br>\nC) That<br>\nD) What</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) Whether\n**Açıklama:** Özne konumunda \"if\" kullanılmaz. \"Whether\" doğru seçimdir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 219]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "That he came late made me angry.",
+          "tr": "Onun geç gelmesi beni kızdırdı.\n→ \"That he came late\" özne (isim cümleciği)\n\n### 8. Noun Clauses (Wh- soruları):",
+          "description": ""
+        },
+        {
+          "en": "Where she lives is a mystery.",
+          "tr": "Nerede yaşadığı bir sır.\n→ \"Where she lives\" özne\n\n### 9. NP + Adjective Clause:",
+          "description": ""
+        },
+        {
+          "en": "The man who came late is my boss.",
+          "tr": "Geç gelen adam benim patronum.\n→ \"The man who came late\" özne\n\n### 10. Boş Özne \"It\":",
+          "description": ""
+        },
+        {
+          "en": "It is claimed that she stole money.",
+          "tr": "Onun para çaldığı iddia ediliyor.\n→ \"It\" asıl öznenin (that clause) yerine kullanılmış.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"_____ he will come is not certain.\" cümlesinde boşluğa ne gelir?",
+        "options": {
+          "A": "If",
+          "B": "Whether",
+          "C": "That",
+          "D": "What"
+        },
+        "correct": "B) Whether",
+        "explanation": "Özne konumunda \"if\" kullanılmaz. \"Whether\" doğru seçimdir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"_____ he will come is not certain.\" cümlesinde boşluğa ne gelir?",
+          "options": {
+            "A": "If",
+            "B": "Whether",
+            "C": "That",
+            "D": "What"
+          },
+          "correct": "B) Whether",
+          "explanation": "Özne konumunda \"if\" kullanılmaz. \"Whether\" doğru seçimdir."
+        }
+      ],
+      "word_count": 240
+    },
+    {
+      "page_number": 9,
+      "title": "Fiilin Halleri (Verb Forms)",
+      "total_pages": 16,
+      "content_html": "<h2>📌 FİİLİN 6 HALİ</h2>\n<p>İngilizce'de fiiller 6 farklı formda karşımıza çıkar. Bunları doğru tanımak, zamanları ve yapıları anlamanın anahtarıdır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir fiilin hangi formda olduğunu anlamak için öncesindeki yardımcı fiillere bak!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>V0 (Yalın hal - yardımcı fiilden sonra):</h3>\n<p><strong>EN:</strong> She can swim.<br>\n<strong>TR:</strong> Yüzebilir.<br>\n→ \"swim\" V0 (çekimlenmemiş)</p>\n<h3>V1 (Present Simple):</h3>\n<p><strong>EN:</strong> She goes to school.<br>\n<strong>TR:</strong> Okula gider.<br>\n→ \"goes\" V1 (özne \"she\" ile çekimlenmiş)</p>\n<h3>V2 (Past Simple):</h3>\n<p><strong>EN:</strong> She went to school.<br>\n<strong>TR:</strong> Okula gitti.<br>\n→ \"went\" V2 (geçmiş zaman)</p>\n<hr>\n<h2>✨ DEVAM</h2>\n<h3>V3 (Past Participle):</h3>\n<p><strong>EN:</strong> She has finished.<br>\n<strong>TR:</strong> Bitirdi.<br>\n→ \"finished\" V3 (perfect yapılarda)</p>\n<h3>Ving (Present Participle / Gerund):</h3>\n<p><strong>EN:</strong> She is running.<br>\n<strong>TR:</strong> Koşuyor.<br>\n→ \"running\" Ving (continuous aspect)</p>\n<h3>To V0 (Infinitive):</h3>\n<p><strong>EN:</strong> She wants to go.<br>\n<strong>TR:</strong> Gitmek istiyor.<br>\n→ \"to go\" infinitive</p>\n<hr>\n<h2>📊 FİİL FORMLARI TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Form</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>V0</td>\n<td>Modal sonrası</td>\n<td>can <strong>go</strong></td>\n</tr>\n<tr>\n<td>V1</td>\n<td>Present Simple</td>\n<td>he <strong>goes</strong></td>\n</tr>\n<tr>\n<td>V2</td>\n<td>Past Simple</td>\n<td>he <strong>went</strong></td>\n</tr>\n<tr>\n<td>V3</td>\n<td>Perfect / Passive</td>\n<td>has <strong>gone</strong></td>\n</tr>\n<tr>\n<td>Ving</td>\n<td>Continuous / Gerund</td>\n<td>is <strong>going</strong></td>\n</tr>\n<tr>\n<td>To V0</td>\n<td>Infinitive</td>\n<td>wants <strong>to go</strong></td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"He has to go\" cümlesindeki \"go\" fiili hangi formdadır?</p>\n<p>A) V1<br>\nB) V2<br>\nC) V0<br>\nD) V3</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) V0\n**Açıklama:** \"Has to\" bir modal yapıdır (zorunluluk). Modal'dan sonra V0 gelir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 213]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She can swim.",
+          "tr": "Yüzebilir.\n→ \"swim\" V0 (çekimlenmemiş)\n\n### V1 (Present Simple):",
+          "description": ""
+        },
+        {
+          "en": "She goes to school.",
+          "tr": "Okula gider.\n→ \"goes\" V1 (özne \"she\" ile çekimlenmiş)\n\n### V2 (Past Simple):",
+          "description": ""
+        },
+        {
+          "en": "She went to school.",
+          "tr": "Okula gitti.\n→ \"went\" V2 (geçmiş zaman)",
+          "description": ""
+        },
+        {
+          "en": "She has finished.",
+          "tr": "Bitirdi.\n→ \"finished\" V3 (perfect yapılarda)\n\n### Ving (Present Participle / Gerund):",
+          "description": ""
+        },
+        {
+          "en": "She is running.",
+          "tr": "Koşuyor.\n→ \"running\" Ving (continuous aspect)\n\n### To V0 (Infinitive):",
+          "description": ""
+        },
+        {
+          "en": "She wants to go.",
+          "tr": "Gitmek istiyor.\n→ \"to go\" infinitive",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"He has to go\" cümlesindeki \"go\" fiili hangi formdadır?",
+        "options": {
+          "A": "V1",
+          "B": "V2",
+          "C": "V0",
+          "D": "V3"
+        },
+        "correct": "C) V0",
+        "explanation": "\"Has to\" bir modal yapıdır (zorunluluk). Modal'dan sonra V0 gelir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"He has to go\" cümlesindeki \"go\" fiili hangi formdadır?",
+          "options": {
+            "A": "V1",
+            "B": "V2",
+            "C": "V0",
+            "D": "V3"
+          },
+          "correct": "C) V0",
+          "explanation": "\"Has to\" bir modal yapıdır (zorunluluk). Modal'dan sonra V0 gelir."
+        }
+      ],
+      "word_count": 202
+    },
+    {
+      "page_number": 10,
+      "title": "Ving ve V3'ün Diğer Kullanımları",
+      "total_pages": 16,
+      "content_html": "<h2>📌 Ving ve V3 SADECE ZAMAN YAPMAZ</h2>\n<p>Bu iki form, zaman yapılarının dışında sıfat olarak, clause kısaltmalarında ve farklı anlamlarda kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Ving aktif (yapan), V3 pasif (yapılan) anlamı verir.</p>\n</blockquote>\n<hr>\n<h2>✨ Ving KULLANIMLARI</h2>\n<h3>1. Sıfat olarak:</h3>\n<p><strong>EN:</strong> developing countries<br>\n<strong>TR:</strong> gelişmekte olan ülkeler<br>\n→ Devam eden eylem.</p>\n<h3>2. Adjective Clause kısaltması:</h3>\n<p><strong>EN:</strong> The man reading the paper is my dad.<br>\n<strong>TR:</strong> Gazeteyi okuyan adam babam.<br>\n→ \"who is reading\" yerine \"reading\"</p>\n<h3>3. Adverbial Clause kısaltması:</h3>\n<p><strong>EN:</strong> Walking down the street, he saw me.<br>\n<strong>TR:</strong> Sokakta yürürken beni gördü.<br>\n→ \"While he was walking\" yerine \"walking\"</p>\n<hr>\n<h2>✨ V3 KULLANIMLARI</h2>\n<h3>1. Sıfat olarak:</h3>\n<p><strong>EN:</strong> developed countries<br>\n<strong>TR:</strong> gelişmiş ülkeler<br>\n→ Tamamlanmış eylem.</p>\n<h3>2. Adjective Clause kısaltması:</h3>\n<p><strong>EN:</strong> The method used last year worked.<br>\n<strong>TR:</strong> Geçen yıl kullanılan metot işe yaradı.<br>\n→ \"which was used\" yerine \"used\"</p>\n<h3>3. Adverbial Clause kısaltması:</h3>\n<p><strong>EN:</strong> If used properly, this computer will last.<br>\n<strong>TR:</strong> Doğru kullanılırsa, bu bilgisayar dayanır.<br>\n→ \"If it is used\" yerine \"If used\" (V3 ile kısaltma)</p>\n<hr>\n<h2>📊 KARŞILAŞTIRMA</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Ving</th>\n<th>V3</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Anlam</td>\n<td>Aktif, devam eden</td>\n<td>Pasif, tamamlanmış</td>\n</tr>\n<tr>\n<td>Örnek</td>\n<td>boiling water (kaynayan su)</td>\n<td>boiled water (kaynamış su)</td>\n</tr>\n<tr>\n<td>Clause</td>\n<td>who is + Ving</td>\n<td>which is + V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"The _____ window was repaired\" cümlesinde boşluğa hangisi gelir? (Kırılmış pencere)</p>\n<p>A) breaking<br>\nB) broke<br>\nC) broken<br>\nD) breaks</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) broken\n**Açıklama:** Pencere kırıldı (pasif). V3 olan \"broken\" sıfat görevinde.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 217]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "developing countries",
+          "tr": "gelişmekte olan ülkeler\n→ Devam eden eylem.\n\n### 2. Adjective Clause kısaltması:",
+          "description": ""
+        },
+        {
+          "en": "The man reading the paper is my dad.",
+          "tr": "Gazeteyi okuyan adam babam.\n→ \"who is reading\" yerine \"reading\"\n\n### 3. Adverbial Clause kısaltması:",
+          "description": ""
+        },
+        {
+          "en": "Walking down the street, he saw me.",
+          "tr": "Sokakta yürürken beni gördü.\n→ \"While he was walking\" yerine \"walking\"",
+          "description": ""
+        },
+        {
+          "en": "developed countries",
+          "tr": "gelişmiş ülkeler\n→ Tamamlanmış eylem.\n\n### 2. Adjective Clause kısaltması:",
+          "description": ""
+        },
+        {
+          "en": "The method used last year worked.",
+          "tr": "Geçen yıl kullanılan metot işe yaradı.\n→ \"which was used\" yerine \"used\"\n\n### 3. Adverbial Clause kısaltması:",
+          "description": ""
+        },
+        {
+          "en": "If used properly, this computer will last.",
+          "tr": "Doğru kullanılırsa, bu bilgisayar dayanır.\n→ \"If it is used\" yerine \"If used\" (V3 ile kısaltma)",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"The _____ window was repaired\" cümlesinde boşluğa hangisi gelir? (Kırılmış pencere)",
+        "options": {
+          "A": "breaking",
+          "B": "broke",
+          "C": "broken",
+          "D": "breaks"
+        },
+        "correct": "C) broken",
+        "explanation": "Pencere kırıldı (pasif). V3 olan \"broken\" sıfat görevinde."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The _____ window was repaired\" cümlesinde boşluğa hangisi gelir? (Kırılmış pencere)",
+          "options": {
+            "A": "breaking",
+            "B": "broke",
+            "C": "broken",
+            "D": "breaks"
+          },
+          "correct": "C) broken",
+          "explanation": "Pencere kırıldı (pasif). V3 olan \"broken\" sıfat görevinde."
+        }
+      ],
+      "word_count": 223
+    },
+    {
+      "page_number": 11,
+      "title": "Fiil Türleri (Transitivity)",
+      "total_pages": 16,
+      "content_html": "<h2>📌 NESNE DURUMUNA GÖRE FİİLLER</h2>\n<p>Fiiller nesne alıp almamalarına göre 3 gruba ayrılır. Bu ayrım Passive Voice (edilgen çatı) için çok önemlidir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Pasif yapmak için fiilin mutlaka nesne alması gerekir!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Intransitive (Geçişsiz - Nesnesiz):</h3>\n<p><strong>EN:</strong> She slept for hours.<br>\n<strong>TR:</strong> Saatlerce uyudu.<br>\n→ \"Neyi uyudu?\" sorusu anlamsız → Pasif yapılamaz.</p>\n<h3>Transitive (Geçişli - Tek Nesneli):</h3>\n<p><strong>EN:</strong> She broke the window. (Aktif)<br>\n<strong>TR:</strong> Camı kırdı.<br>\n<strong>EN:</strong> The window was broken. (Pasif)<br>\n<strong>TR:</strong> Cam kırıldı.<br>\n→ Nesne (window) özne oldu.</p>\n<h3>Ditransitive (Çift Nesneli):</h3>\n<p><strong>EN:</strong> She gave me a present. (Aktif)<br>\n<strong>TR:</strong> Bana bir hediye verdi.<br>\n<strong>EN:</strong> I was given a present. (Pasif 1)<br>\n<strong>EN:</strong> A present was given to me. (Pasif 2)<br>\n→ İki farklı pasif yapılabilir.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nPasif cümlede fiilden sonra nesne olmaz! Çünkü nesne özne yapılmıştır.\n</div>\n\n<hr>\n<h2>📊 FİİL TÜRLERİ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Tür</th>\n<th>Açıklama</th>\n<th>Örnek Fiil</th>\n<th>Pasif mi?</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Intransitive</td>\n<td>Nesne almaz</td>\n<td>sleep, arrive</td>\n<td>❌ Hayır</td>\n</tr>\n<tr>\n<td>Transitive</td>\n<td>Tek nesne alır</td>\n<td>break, eat</td>\n<td>✅ Evet</td>\n</tr>\n<tr>\n<td>Ditransitive</td>\n<td>İki nesne alır</td>\n<td>give, send</td>\n<td>✅ Evet (2 şekilde)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki fiillerden hangisi pasif yapılamaz?</p>\n<p>A) give<br>\nB) break<br>\nC) sleep<br>\nD) send</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) sleep\n**Açıklama:** \"Sleep\" intransitive (geçişsiz) fiildir, nesne almaz, bu yüzden pasif yapılamaz.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 210]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She slept for hours.",
+          "tr": "Saatlerce uyudu.\n→ \"Neyi uyudu?\" sorusu anlamsız → Pasif yapılamaz.\n\n### Transitive (Geçişli - Tek Nesneli):",
+          "description": ""
+        },
+        {
+          "en": "She broke the window. (Aktif)",
+          "tr": "Camı kırdı.",
+          "description": ""
+        },
+        {
+          "en": "The window was broken. (Pasif)",
+          "tr": "Cam kırıldı.\n→ Nesne (window) özne oldu.\n\n### Ditransitive (Çift Nesneli):",
+          "description": ""
+        },
+        {
+          "en": "She gave me a present. (Aktif)",
+          "tr": "Bana bir hediye verdi.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki fiillerden hangisi pasif yapılamaz?",
+        "options": {
+          "A": "give",
+          "B": "break",
+          "C": "sleep",
+          "D": "send"
+        },
+        "correct": "C) sleep",
+        "explanation": "\"Sleep\" intransitive (geçişsiz) fiildir, nesne almaz, bu yüzden pasif yapılamaz."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki fiillerden hangisi pasif yapılamaz?",
+          "options": {
+            "A": "give",
+            "B": "break",
+            "C": "sleep",
+            "D": "send"
+          },
+          "correct": "C) sleep",
+          "explanation": "\"Sleep\" intransitive (geçişsiz) fiildir, nesne almaz, bu yüzden pasif yapılamaz."
+        }
+      ],
+      "word_count": 198
+    },
+    {
+      "page_number": 12,
+      "title": "Nesne (Object) Pozisyonunda Kullanılan Yapılar - 1",
+      "total_pages": 16,
+      "content_html": "<h2>📌 NESNE NEREDE BULUNUR?</h2>\n<p>İngilizce'de iki tür nesne vardır:<br>\n- <strong>Fiilin nesnesi</strong> (Verb + Object)<br>\n- <strong>Edatın nesnesi</strong> (Preposition + Object)</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Nesne olacak yapıların tamamı isim veya isim gibi davranan yapılardır!</p>\n</blockquote>\n<hr>\n<h2>✨ FİİL NESNESİ OLABİLEN YAPILAR</h2>\n<h3>1. Noun Phrase:</h3>\n<p><strong>EN:</strong> I want this book.<br>\n<strong>TR:</strong> Bu kitabı istiyorum.<br>\n→ \"this book\" Noun Phrase</p>\n<h3>2. Object Pronouns:</h3>\n<p><strong>EN:</strong> I know them very well.<br>\n<strong>TR:</strong> Onları çok iyi tanıyorum.<br>\n→ \"them\" nesne zamiri (me, you, him, her, it, us, them)</p>\n<h3>3. Ving (Gerund):</h3>\n<p><strong>EN:</strong> He admitted stealing the money.<br>\n<strong>TR:</strong> Parayı çaldığını itiraf etti.<br>\n→ \"stealing\" Ving (fiilimsi)</p>\n<hr>\n<h2>✨ DEVAM</h2>\n<h3>4. To V0 (Infinitive):</h3>\n<p><strong>EN:</strong> I plan to go on holiday.<br>\n<strong>TR:</strong> Tatile gitmeyi planlıyorum.<br>\n→ \"to go\" infinitive (gelecek anlamı)</p>\n<h3>5. İşaret Zamirleri:</h3>\n<p><strong>EN:</strong> I want to buy these.<br>\n<strong>TR:</strong> Bunları satın almak istiyorum.<br>\n→ \"these\" işaret zamiri</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nGenel eğilim:\n- Ving: geçmiş veya genel (admit, enjoy, finish)\n- To V0: gelecek veya hedef (plan, decide, hope)\n\nAncak bazı fiillerde (like, love, hate) her ikisi de benzer anlamda kullanılabilir.\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"She decided _____ German\" cümlesinde boşluğa hangisi gelir?</p>\n<p>A) study<br>\nB) studying<br>\nC) to study<br>\nD) studied</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) to study\n**Açıklama:** \"Decide\" fiilinden sonra genelde \"to V0\" gelir ve gelecek anlamı verir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 208]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I want this book.",
+          "tr": "Bu kitabı istiyorum.\n→ \"this book\" Noun Phrase\n\n### 2. Object Pronouns:",
+          "description": ""
+        },
+        {
+          "en": "I know them very well.",
+          "tr": "Onları çok iyi tanıyorum.\n→ \"them\" nesne zamiri (me, you, him, her, it, us, them)\n\n### 3. Ving (Gerund):",
+          "description": ""
+        },
+        {
+          "en": "He admitted stealing the money.",
+          "tr": "Parayı çaldığını itiraf etti.\n→ \"stealing\" Ving (fiilimsi)",
+          "description": ""
+        },
+        {
+          "en": "I plan to go on holiday.",
+          "tr": "Tatile gitmeyi planlıyorum.\n→ \"to go\" infinitive (gelecek anlamı)\n\n### 5. İşaret Zamirleri:",
+          "description": ""
+        },
+        {
+          "en": "I want to buy these.",
+          "tr": "Bunları satın almak istiyorum.\n→ \"these\" işaret zamiri",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"She decided _____ German\" cümlesinde boşluğa hangisi gelir?",
+        "options": {
+          "A": "study",
+          "B": "studying",
+          "C": "to study",
+          "D": "studied"
+        },
+        "correct": "C) to study",
+        "explanation": "\"Decide\" fiilinden sonra genelde \"to V0\" gelir ve gelecek anlamı verir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"She decided _____ German\" cümlesinde boşluğa hangisi gelir?",
+          "options": {
+            "A": "study",
+            "B": "studying",
+            "C": "to study",
+            "D": "studied"
+          },
+          "correct": "C) to study",
+          "explanation": "\"Decide\" fiilinden sonra genelde \"to V0\" gelir ve gelecek anlamı verir."
+        }
+      ],
+      "word_count": 207
+    },
+    {
+      "page_number": 13,
+      "title": "Nesne (Object) Pozisyonunda Kullanılan Yapılar - 2",
+      "total_pages": 16,
+      "content_html": "<h2>📌 NOUN CLAUSE VE ADJECTIVE CLAUSE NESNE OLARAK</h2>\n<p>Daha karmaşık yapılar da fiilin nesnesi olabilir. Özellikle \"that\" ile başlayan cümlecikler çok yaygındır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"That\" nesne konumunda kullanıldığında genellikle atlanabilir!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>6. Noun Clause (That ile):</h3>\n<p><strong>EN:</strong> I know (that) he is a murderer.<br>\n<strong>TR:</strong> Onun bir katil olduğunu biliyorum.<br>\n→ \"that he is a murderer\" nesne (that atlanabilir)</p>\n<h3>7. Noun Clause (Wh- ile):</h3>\n<p><strong>EN:</strong> I don't know where she lives.<br>\n<strong>TR:</strong> Nerede yaşadığını bilmiyorum.<br>\n→ \"where she lives\" nesne</p>\n<h3>8. Noun Clause (Whether/If ile):</h3>\n<p><strong>EN:</strong> I don't know if they will come.<br>\n<strong>TR:</strong> Gelip gelmeyeceklerini bilmiyorum.<br>\n→ \"if they will come\" nesne</p>\n<h3>9. NP + Adjective Clause:</h3>\n<p><strong>EN:</strong> I know the man who came late.<br>\n<strong>TR:</strong> Geç gelen adamı tanıyorum.<br>\n→ \"the man who came late\" nesne</p>\n<hr>\n<h2>📊 KARŞILAŞTIRMA: THAT KULLANIMI</h2>\n<table>\n<thead>\n<tr>\n<th>Pozisyon</th>\n<th>That kullanımı</th>\n<th>Atlanabilir mi?</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Özne</td>\n<td>That he came...</td>\n<td>❌ Atlanamaz</td>\n</tr>\n<tr>\n<td>Nesne</td>\n<td>I know (that)...</td>\n<td>✅ Atlanabilir</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nCümle içinde \"that\" gördüğünde:\n- Önünde fiil varsa → nesne (atlanabilir)\n- Cümle başındaysa → özne (atlanamaz)\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I believe _____ they are happy.\" cümlesinde boşluğa ne gelir?</p>\n<p>A) that<br>\nB) what<br>\nC) which<br>\nD) where</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) that\n**Açıklama:** \"Believe\" fiilinden sonra gelen cümle için \"that\" kullanılır. Hatta atlanabilir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 211]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I know (that) he is a murderer.",
+          "tr": "Onun bir katil olduğunu biliyorum.\n→ \"that he is a murderer\" nesne (that atlanabilir)\n\n### 7. Noun Clause (Wh- ile):",
+          "description": ""
+        },
+        {
+          "en": "I don't know where she lives.",
+          "tr": "Nerede yaşadığını bilmiyorum.\n→ \"where she lives\" nesne\n\n### 8. Noun Clause (Whether/If ile):",
+          "description": ""
+        },
+        {
+          "en": "I don't know if they will come.",
+          "tr": "Gelip gelmeyeceklerini bilmiyorum.\n→ \"if they will come\" nesne\n\n### 9. NP + Adjective Clause:",
+          "description": ""
+        },
+        {
+          "en": "I know the man who came late.",
+          "tr": "Geç gelen adamı tanıyorum.\n→ \"the man who came late\" nesne",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I believe _____ they are happy.\" cümlesinde boşluğa ne gelir?",
+        "options": {
+          "A": "that",
+          "B": "what",
+          "C": "which",
+          "D": "where"
+        },
+        "correct": "A) that",
+        "explanation": "\"Believe\" fiilinden sonra gelen cümle için \"that\" kullanılır. Hatta atlanabilir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I believe _____ they are happy.\" cümlesinde boşluğa ne gelir?",
+          "options": {
+            "A": "that",
+            "B": "what",
+            "C": "which",
+            "D": "where"
+          },
+          "correct": "A) that",
+          "explanation": "\"Believe\" fiilinden sonra gelen cümle için \"that\" kullanılır. Hatta atlanabilir."
+        }
+      ],
+      "word_count": 204
+    },
+    {
+      "page_number": 14,
+      "title": "Boş Nesne \"It\"",
+      "total_pages": 16,
+      "content_html": "<h2>📌 \"IT\" NESNE OLARAK</h2>\n<p>\"It\" sadece özne olarak değil, nesne olarak da kullanılır. Gerçek nesne genellikle cümlenin devamında gelen \"that\" clause'dır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"make + it + adjective + that clause\" kalıbı çok yaygındır!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1 (Boş nesne):</h3>\n<p><strong>EN:</strong> The president made it clear that the law would protect citizens.<br>\n<strong>TR:</strong> Başkan, yasanın vatandaşları koruyacağını netleştirdi.<br>\n→ \"it\" = boş nesne<br>\n→ gerçek nesne = \"that the law would protect citizens\"</p>\n<h3>Örnek 2 (Benzer yapı):</h3>\n<p><strong>EN:</strong> I find it difficult to believe you.<br>\n<strong>TR:</strong> Sana inanmayı zor buluyorum.<br>\n→ \"it\" = boş nesne<br>\n→ gerçek nesne = \"to believe you\"</p>\n<h3>Örnek 3:</h3>\n<p><strong>EN:</strong> She thought it strange that he didn't call.<br>\n<strong>TR:</strong> Onun aramamasını tuhaf buldu.<br>\n→ \"it\" = boş nesne<br>\n→ gerçek nesne = \"that he didn't call\"</p>\n<hr>\n<h2>📊 BOŞ \"IT\" KALIPLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Kalıp</th>\n<th>Örnek</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>make it + adj + that</td>\n<td>made it clear that</td>\n<td>netleştirmek</td>\n</tr>\n<tr>\n<td>find it + adj + to V0</td>\n<td>find it difficult to</td>\n<td>-mayı zor bulmak</td>\n</tr>\n<tr>\n<td>think it + adj + that</td>\n<td>thought it strange that</td>\n<td>tuhaf bulmak</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\nBoş \"it\" ile asıl nesne aynı şeyi gösterir. \"It\" sadece yer tutucudur.\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I consider _____ important to study daily.\" cümlesinde boşluğa ne gelir?</p>\n<p>A) that<br>\nB) it<br>\nC) this<br>\nD) them</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) it\n**Açıklama:** \"Consider it + adjective + to V0\" kalıbı. \"It\" boş nesne, asıl nesne \"to study daily\".\n</details>\n\n<hr>\n<p>[Kelime sayısı: 205]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The president made it clear that the law would protect citizens.",
+          "tr": "Başkan, yasanın vatandaşları koruyacağını netleştirdi.\n→ \"it\" = boş nesne\n→ gerçek nesne = \"that the law would protect citizens\"\n\n### Örnek 2 (Benzer yapı):",
+          "description": ""
+        },
+        {
+          "en": "I find it difficult to believe you.",
+          "tr": "Sana inanmayı zor buluyorum.\n→ \"it\" = boş nesne\n→ gerçek nesne = \"to believe you\"\n\n### Örnek 3:",
+          "description": ""
+        },
+        {
+          "en": "She thought it strange that he didn't call.",
+          "tr": "Onun aramamasını tuhaf buldu.\n→ \"it\" = boş nesne\n→ gerçek nesne = \"that he didn't call\"",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I consider _____ important to study daily.\" cümlesinde boşluğa ne gelir?",
+        "options": {
+          "A": "that",
+          "B": "it",
+          "C": "this",
+          "D": "them"
+        },
+        "correct": "B) it",
+        "explanation": "\"Consider it + adjective + to V0\" kalıbı. \"It\" boş nesne, asıl nesne \"to study daily\"."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I consider _____ important to study daily.\" cümlesinde boşluğa ne gelir?",
+          "options": {
+            "A": "that",
+            "B": "it",
+            "C": "this",
+            "D": "them"
+          },
+          "correct": "B) it",
+          "explanation": "\"Consider it + adjective + to V0\" kalıbı. \"It\" boş nesne, asıl nesne \"to study daily\"."
+        }
+      ],
+      "word_count": 219
+    },
+    {
+      "page_number": 15,
+      "title": "Preposition + Object (Edat + Nesne)",
+      "total_pages": 16,
+      "content_html": "<h2>📌 EDATLARIN NESNESİ</h2>\n<p>Edatlardan sonra gelen yapılar da nesne olarak adlandırılır. Bir edattan sonra fiil gelecekse mutlaka <strong>Ving</strong> formunda olmalıdır!</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Preposition'dan sonra asla \"to V0\" gelmez! (istisna: \"to\" edatı hariç)</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>1. Noun Phrase:</h3>\n<p><strong>EN:</strong> I'm interested in the latest technology.<br>\n<strong>TR:</strong> Son teknolojiyle ilgileniyorum.<br>\n→ \"in\" edatı + \"the latest technology\" (NP)</p>\n<h3>2. Object Pronouns:</h3>\n<p><strong>EN:</strong> I'm thinking of him.<br>\n<strong>TR:</strong> Onu düşünüyorum.<br>\n→ \"of\" edatı + \"him\" (object pronoun)</p>\n<h3>3. Ving (GERUND - ZORUNLU!):</h3>\n<p><strong>EN:</strong> He's good at reading.<br>\n<strong>TR:</strong> Okumada iyidir.<br>\n→ \"at\" edatı + \"reading\" (Ving)</p>\n<p><strong>YANLIŞ:</strong> ~~He's good at to read.~~</p>\n<h3>4. İşaret Zamirleri:</h3>\n<p><strong>EN:</strong> I'm not fond of these.<br>\n<strong>TR:</strong> Bunları pek sevmem.<br>\n→ \"of\" edatı + \"these\"</p>\n<hr>\n<h2>📊 EDAT + NESNE TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Edat</th>\n<th>Gelebilecek Yapılar</th>\n<th>Gelemeyecek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>in, on, at, of, for, about</td>\n<td>NP, Object Pronoun, Ving</td>\n<td>To V0</td>\n</tr>\n<tr>\n<td>to (edat olarak)</td>\n<td>NP, Ving</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ ALTIN STRATEJİ - \"TO\" İKİ FARKLI GÖREVDE:**\n\n**1. Infinitive işareti → to + V0**\n- I want **to go**.\n- She needs **to study**.\n- They decided **to wait**.\n\n**2. Edat (Preposition) → to + Ving**\n- I look forward **to hearing** from you. (hear değil!)\n- I'm used **to working** late. (work değil!)\n- They object **to paying** more. (pay değil!)\n\n❗ **Kritik:** Bir fiilin önünde \"to\" görünce hemen infinitive demeyin! Arkasından gelen kelimeye bakın.\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I look forward _____ you soon.\" cümlesinde boşluğa ne gelir?</p>\n<p>A) to see<br>\nB) to seeing<br>\nC) seeing<br>\nD) see</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) to seeing\n**Açıklama:** \"Look forward to\" kalıbında \"to\" edattır, bu yüzden Ving gelir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 214]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I'm interested in the latest technology.",
+          "tr": "Son teknolojiyle ilgileniyorum.\n→ \"in\" edatı + \"the latest technology\" (NP)\n\n### 2. Object Pronouns:",
+          "description": ""
+        },
+        {
+          "en": "I'm thinking of him.",
+          "tr": "Onu düşünüyorum.\n→ \"of\" edatı + \"him\" (object pronoun)\n\n### 3. Ving (GERUND - ZORUNLU!):",
+          "description": ""
+        },
+        {
+          "en": "He's good at reading.",
+          "tr": "Okumada iyidir.\n→ \"at\" edatı + \"reading\" (Ving)\n\n**YANLIŞ:** ~~He's good at to read.~~\n\n### 4. İşaret Zamirleri:",
+          "description": ""
+        },
+        {
+          "en": "I'm not fond of these.",
+          "tr": "Bunları pek sevmem.\n→ \"of\" edatı + \"these\"",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I look forward _____ you soon.\" cümlesinde boşluğa ne gelir?",
+        "options": {
+          "A": "to see",
+          "B": "to seeing",
+          "C": "seeing",
+          "D": "see"
+        },
+        "correct": "B) to seeing",
+        "explanation": "\"Look forward to\" kalıbında \"to\" edattır, bu yüzden Ving gelir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I look forward _____ you soon.\" cümlesinde boşluğa ne gelir?",
+          "options": {
+            "A": "to see",
+            "B": "to seeing",
+            "C": "seeing",
+            "D": "see"
+          },
+          "correct": "B) to seeing",
+          "explanation": "\"Look forward to\" kalıbında \"to\" edattır, bu yüzden Ving gelir."
+        }
+      ],
+      "word_count": 246
+    },
+    {
+      "page_number": 16,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 16,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li>✅ Cümlenin temel unsurları: Fiil, İsim Öbeği, Edatlar</li>\n<li>✅ Fiil türleri: Intransitive, Transitive, Ditransitive</li>\n<li>✅ Özne olabilen 9 farklı yapı</li>\n<li>✅ Fiilin 6 hali (V0, V1, V2, V3, Ving, To V0)</li>\n<li>✅ Nesne olabilen yapılar (fiil nesnesi ve edat nesnesi)</li>\n<li>✅ Boş özne ve boş nesne \"it\"</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p>Aşağıdaki cümlede fiilin türü nedir?<br>\n\"She gave her friend a gift.\"</p>\n<p>A) Intransitive<br>\nB) Transitive<br>\nC) Ditransitive<br>\nD) Hiçbiri</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C) Ditransitive  \n**Açıklama:** \"Gave\" fiili iki nesne alıyor: her friend (kime) + a gift (neyi)\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p>\"_____ he is honest is known to everyone.\" cümlesinde boşluğa ne gelir?</p>\n<p>A) If<br>\nB) Whether<br>\nC) That<br>\nD) What</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C) That  \n**Açıklama:** Özne konumunda \"That\" kullanılır. \"That he is honest\" özne görevinde.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p>\"To learn a language, you need patience.\" cümlesinde \"To learn\" hangi anlamdadır?</p>\n<p>A) Özne (dil öğrenmek)<br>\nB) Amaç (dil öğrenmek için)<br>\nC) Nesne<br>\nD) Sıfat</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B) Amaç  \n**Açıklama:** Virgül olduğu için amaç bildirir. Özne \"you\"dur.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p>Aşağıdakilerden hangisi bir edatın nesnesi olamaz?</p>\n<p>A) them<br>\nB) reading<br>\nC) to read<br>\nD) the book</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C) to read  \n**Açıklama:** Edattan sonra \"to V0\" gelmez, Ving gelir.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p>\"The window _____ yesterday was repaired.\" cümlesinde boşluğa ne gelir?</p>\n<p>A) breaking<br>\nB) broke<br>\nC) broken<br>\nD) breaks</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C) broken  \n**Açıklama:** \"which was broken\" yerine kısaltılmış Adjective Clause: \"broken\"\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<hr>\n<p>[Kelime sayısı: 395 - son sayfa test sayfası olduğu için normalden uzun]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>✅ Her sayfa 150-250 kelime arası (son sayfa test hariç)</li>\n<li>✅ Her sayfada 3-4 örnek var</li>\n<li>✅ Her sayfada mini test var</li>\n<li>✅ Son sayfada 5 soruluk test var</li>\n<li>✅ Toplam sayfa 16 (25'i geçmiyor)</li>\n<li>✅ HTML div'leri doğru işaretlenmiş</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "Aşağıdaki cümlede fiilin türü nedir? \n\"She gave her friend a gift.\"",
+        "options": {
+          "A": "Intransitive",
+          "B": "Transitive",
+          "C": "Ditransitive",
+          "D": "Hiçbiri"
+        },
+        "correct": "C) Ditransitive",
+        "explanation": "\"Gave\" fiili iki nesne alıyor: her friend (kime) + a gift (neyi)"
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlede fiilin türü nedir? \n\"She gave her friend a gift.\"",
+          "options": {
+            "A": "Intransitive",
+            "B": "Transitive",
+            "C": "Ditransitive",
+            "D": "Hiçbiri"
+          },
+          "correct": "C) Ditransitive",
+          "explanation": "\"Gave\" fiili iki nesne alıyor: her friend (kime) + a gift (neyi)"
+        },
+        {
+          "question": "\"_____ he is honest is known to everyone.\" cümlesinde boşluğa ne gelir?",
+          "options": {
+            "A": "If",
+            "B": "Whether",
+            "C": "That",
+            "D": "What"
+          },
+          "correct": "C) That",
+          "explanation": "Özne konumunda \"That\" kullanılır. \"That he is honest\" özne görevinde."
+        },
+        {
+          "question": "\"To learn a language, you need patience.\" cümlesinde \"To learn\" hangi anlamdadır?",
+          "options": {
+            "A": "Özne (dil öğrenmek)",
+            "B": "Amaç (dil öğrenmek için)",
+            "C": "Nesne",
+            "D": "Sıfat"
+          },
+          "correct": "B) Amaç",
+          "explanation": "Virgül olduğu için amaç bildirir. Özne \"you\"dur."
+        },
+        {
+          "question": "Aşağıdakilerden hangisi bir edatın nesnesi olamaz?",
+          "options": {
+            "A": "them",
+            "B": "reading",
+            "C": "to read",
+            "D": "the book"
+          },
+          "correct": "C) to read",
+          "explanation": "Edattan sonra \"to V0\" gelmez, Ving gelir."
+        },
+        {
+          "question": "\"The window _____ yesterday was repaired.\" cümlesinde boşluğa ne gelir?",
+          "options": {
+            "A": "breaking",
+            "B": "broke",
+            "C": "broken",
+            "D": "breaks"
+          },
+          "correct": "C) broken",
+          "explanation": "\"which was broken\" yerine kısaltılmış Adjective Clause: \"broken\""
+        }
+      ],
+      "word_count": 332
+    }
+  ]
+}

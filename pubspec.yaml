@@ -1,63 +1,13 @@
-name: passagetr
-description: PASSAGETR - Reading is Power.
-publish_to: "none"
-version: 0.1.0+1
+﻿name: passagetr_v2_workspace
+publish_to: none
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ^3.11.0
 
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  cupertino_icons: ^1.0.8
-  flutter_riverpod: ^2.5.1
-  supabase_flutter: ^2.8.4
-  drift: ^2.20.3
-  sqlite3_flutter_libs: ^0.5.24
-  path_provider: ^2.1.4
-  path: ^1.9.0
-  shared_preferences: ^2.3.2
-  flutter_html: ^3.0.0-beta.2
-  flutter_html_table: ^3.0.0
-  http: ^1.2.2
-  url_launcher: ^6.3.1
-  google_fonts: ^6.2.1
-  flutter_tts: ^4.2.0
-  appinio_swiper: ^2.1.1
-  flip_card: ^0.7.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^4.0.0
-  build_runner: ^2.4.13
-  drift_dev: ^2.20.3
-  flutter_launcher_icons: ^0.14.3
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  web:
-    generate: true
-    image_path: assets/branding/app_icon_source.png
-    background_color: "#F5C33B"
-    theme_color: "#F5C33B"
-  windows:
-    generate: true
-    image_path: assets/branding/app_icon_source.png
-    icon_size: 256
-  macos:
-    generate: true
-    image_path: assets/branding/app_icon_source.png
-  image_path: assets/branding/app_icon_source.png
-
-flutter:
-  uses-material-design: true
-  assets:
-    - assets/branding/app_icon_source.png
-    - assets/db/dictionary_local.sqlite
-    - assets/db/dictionary_local.meta.json
-    - assets/db/app_content.db
-    - assets/db/app_content.meta.json
+workspace:
+  - apps/student_app
+  - apps/admin_console
+  - packages/shared_core
+  - packages/shared_domain
+  - packages/shared_data
+  - packages/shared_ui

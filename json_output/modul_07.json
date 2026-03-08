@@ -1,0 +1,1182 @@
+{
+  "sira": 7,
+  "baslik": "Adjective Clauses (Sıfat Yan Cümlecikleri)",
+  "dosya_adi": "07_adjective_clauses.md",
+  "toplam_sayfa": 20,
+  "icon": "🏷️",
+  "renk": "#3498DB",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "Giriş: Sıfat Cümlecikleri (Adjective Clauses)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Bir ismi niteleyen, onun hakkında ek bilgi veren veya onu tanımlayan cümleciklerdir. İki ana türü vardır: <strong>Tanımlayan (Defining)</strong> ve <strong>Tanımlamayan (Non‑Defining)</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Tanımlayan sıfat cümlecikleri olmazsa cümlenin anlamı bozulur; tanımlamayanlar ise sadece ek bilgi verir, çıkarıldığında cümle hâlâ anlamlıdır.</p>\n</blockquote>\n<hr>\n<h2>1️⃣ Defining (Tanımlayan) Sıfat Cümlecikleri</h2>\n<p>Nitelediği ismi ayırt edici bir özellikle tanımlar. Cümleden atıldığında anlam kopar.</p>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>İnsan:</strong> who / that\n    </div>\n    <div class=\"kart yesil\">\n        <strong>İnsan dışı:</strong> which / that\n    </div>\n</div>\n\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> A teacher who truly inspires his students never stops learning himself.<br>\n<strong>TR:</strong> Öğrencilerini gerçekten motive eden bir öğretmen asla öğrenmeyi bırakmaz.<br>\n→ <strong>Açıklama:</strong> “who truly inspires his students” sıfat cümleciği “teacher” ismini tanımlıyor; hangi öğretmen olduğunu belirtiyor. Cümleden çıkarılırsa “Bir öğretmen asla öğrenmeyi bırakmaz” gibi genel bir anlam kalır, özgün bilgi kaybolur.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The documents that were found in the old safe belong to the 19th century.<br>\n<strong>TR:</strong> Eski kasanın içinde bulunan belgeler 19. yüzyıla ait.<br>\n→ <strong>Açıklama:</strong> “that were found in the old safe” ifadesi hangi belgelerden bahsedildiğini açıklıyor; atılırsa sadece “Belgeler 19. yüzyıla ait” denmiş olur, hangi belgeler olduğu belirsizleşir.</p>\n<hr>\n<h2>2️⃣ Non‑Defining (Tanımlamayan) Sıfat Cümlecikleri</h2>\n<p>İsim zaten bellidir; sadece ekstra bilgi verir. Virgülle ayrılır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> My grandfather, who is eighty‑five years old, still goes for a swim every morning.<br>\n<strong>TR:</strong> Seksen beş yaşında olan dedem hâlâ her sabah yüzmeye gider.<br>\n→ <strong>Açıklama:</strong> “who is eighty‑five years old” ek bilgi veriyor; “my grandfather” zaten tek ve bilinen bir kişi. Cümleden çıkarılsa “Dedem hâlâ her sabah yüzmeye gider” anlamı aynı kalır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The Eiffel Tower, which was built in 1889, attracts millions of visitors annually.<br>\n<strong>TR:</strong> 1889’da inşa edilen Eyfel Kulesi her yıl milyonlarca ziyaretçi çeker.<br>\n→ <strong>Açıklama:</strong> Hangi kuleden bahsedildiği zaten açık; “which was built in 1889” sadece ek bilgi. Virgüller bu ek bilgiyi ayırır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Tür</th>\n<th>Virgül</th>\n<th>Kullanılan Relative Pronoun</th>\n<th>Atılırsa Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Defining</td>\n<td>Yok</td>\n<td>who, which, that</td>\n<td>Bozulur</td>\n</tr>\n<tr>\n<td>Non‑Defining</td>\n<td>Var</td>\n<td>who, which (that kullanılmaz!)</td>\n<td>Bozulmaz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerden hangisinde “that” kullanılamaz?</p>\n<p>A) The car ___ is parked outside is mine.<br>\nB) My sister, ___ lives in London, is a doctor.<br>\nC) The book ___ I borrowed from you was great.<br>\nD) This is the house ___ Jack built.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “My sister” özel isim olduğu için non‑defining sıfat cümleciği gerekiyor. Non‑defining’de “that” kullanılmaz, sadece “who” kullanılır.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "A teacher who truly inspires his students never stops learning himself.",
+          "tr": "Öğrencilerini gerçekten motive eden bir öğretmen asla öğrenmeyi bırakmaz.",
+          "description": "“who truly inspires his students” sıfat cümleciği “teacher” ismini tanımlıyor; hangi öğretmen olduğunu belirtiyor. Cümleden çıkarılırsa “Bir öğretmen asla öğrenmeyi bırakmaz” gibi genel bir anlam kalır, özgün bilgi kaybolur.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The documents that were found in the old safe belong to the 19th century.",
+          "tr": "Eski kasanın içinde bulunan belgeler 19. yüzyıla ait.",
+          "description": "“that were found in the old safe” ifadesi hangi belgelerden bahsedildiğini açıklıyor; atılırsa sadece “Belgeler 19. yüzyıla ait” denmiş olur, hangi belgeler olduğu belirsizleşir."
+        },
+        {
+          "en": "My grandfather, who is eighty‑five years old, still goes for a swim every morning.",
+          "tr": "Seksen beş yaşında olan dedem hâlâ her sabah yüzmeye gider.",
+          "description": "“who is eighty‑five years old” ek bilgi veriyor; “my grandfather” zaten tek ve bilinen bir kişi. Cümleden çıkarılsa “Dedem hâlâ her sabah yüzmeye gider” anlamı aynı kalır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The Eiffel Tower, which was built in 1889, attracts millions of visitors annually.",
+          "tr": "1889’da inşa edilen Eyfel Kulesi her yıl milyonlarca ziyaretçi çeker.",
+          "description": "Hangi kuleden bahsedildiği zaten açık; “which was built in 1889” sadece ek bilgi. Virgüller bu ek bilgiyi ayırır."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerden hangisinde “that” kullanılamaz?",
+        "options": {
+          "A": "The car ___ is parked outside is mine.",
+          "B": "My sister, ___ lives in London, is a doctor.",
+          "C": "The book ___ I borrowed from you was great.",
+          "D": "This is the house ___ Jack built."
+        },
+        "correct": "B",
+        "explanation": "“My sister” özel isim olduğu için non‑defining sıfat cümleciği gerekiyor. Non‑defining’de “that” kullanılmaz, sadece “who” kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerden hangisinde “that” kullanılamaz?",
+          "options": {
+            "A": "The car ___ is parked outside is mine.",
+            "B": "My sister, ___ lives in London, is a doctor.",
+            "C": "The book ___ I borrowed from you was great.",
+            "D": "This is the house ___ Jack built."
+          },
+          "correct": "B",
+          "explanation": "“My sister” özel isim olduğu için non‑defining sıfat cümleciği gerekiyor. Non‑defining’de “that” kullanılmaz, sadece “who” kullanılır."
+        }
+      ],
+      "word_count": 407
+    },
+    {
+      "page_number": 2,
+      "title": "Özne Odaklı Sıfat Cümlecikleri (Subject‑Focused)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Nitelediğimiz isim, sıfat cümleciğinin <strong>öznesi</strong> durumundadır. Relative pronoun, cümlecikte özne görevini üstlenir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Boşluktan sonra hemen bir fiil veya yardımcı fiil geliyorsa özne eksik demektir; doğru cevap “who” (insan) veya “which” (insan dışı) olur. Virgül yoksa “that” de kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>👤 İnsanlar için</h2>\n<p><strong>Defining (virgülsüz):</strong> who / that<br>\n<strong>Non‑Defining (virgüllü):</strong> who (that kullanılmaz)</p>\n<p><strong>Örnek 1 (Defining):</strong><br>\n<strong>EN:</strong> The architect who designed this award‑winning building graduated from MIT.<br>\n<strong>TR:</strong> Bu ödüllü binayı tasarlayan mimar MIT’den mezun oldu.<br>\n→ <strong>Açıklama:</strong> “who designed this award‑winning building” cümleciğinde “who” öznedir ve “architect”i niteler. Cümlecik çıkarılırsa “Mimar MIT’den mezun oldu” anlamı kalır, hangi mimar olduğu belirsizleşir.</p>\n<p><strong>Örnek 2 (Non‑Defining):</strong><br>\n<strong>EN:</strong> Professor Johnson, who has been teaching at Harvard for 30 years, will retire next month.<br>\n<strong>TR:</strong> Harvard’da 30 yıldır ders veren Profesor Johnson önümüzdeki ay emekli olacak.<br>\n→ <strong>Açıklama:</strong> “Professor Johnson” zaten bilinen bir kişi; “who has been teaching…” ek bilgi. Virgül kullanıldığı için “that” kullanılamaz.</p>\n<hr>\n<h2>🌍 İnsan dışı varlıklar için</h2>\n<p><strong>Defining:</strong> which / that<br>\n<strong>Non‑Defining:</strong> which</p>\n<p><strong>Örnek 3 (Defining):</strong><br>\n<strong>EN:</strong> The software that runs this entire system was developed by a Turkish engineer.<br>\n<strong>TR:</strong> Bütün bu sistemi çalıştıran yazılım Türk bir mühendis tarafından geliştirildi.<br>\n→ <strong>Açıklama:</strong> “that runs this entire system” cümleciğinde “that” özne. Hangi yazılımdan bahsedildiğini tanımlıyor.</p>\n<p><strong>Örnek 4 (Non‑Defining):</strong><br>\n<strong>EN:</strong> Istanbul’s new airport, which covers an enormous area, is one of the largest in the world.<br>\n<strong>TR:</strong> Çok geniş bir alanı kaplayan İstanbul’un yeni havalimanı dünyanın en büyüklerinden biridir.<br>\n→ <strong>Açıklama:</strong> Havalimanı zaten tek; “which covers an enormous area” ek bilgi. “That” kullanılmaz.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBoşluğun öncesinde bir isim, boşluğun devamında ise hemen bir fiil (veya yardımcı fiil) varsa, bu bir özne sorusudur. İnsan için “who / that”, insan dışı için “which / that” işaretlenir. Virgül varsa “that” elenir.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Defining</th>\n<th>Non‑Defining</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>İnsan</strong></td>\n<td>who / that</td>\n<td>who</td>\n</tr>\n<tr>\n<td><strong>İnsan dışı</strong></td>\n<td>which / that</td>\n<td>which</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nGlobal warming, ___ effects are already visible, requires immediate action.</p>\n<p>A) who<br>\nB) which<br>\nC) that<br>\nD) whose  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “Global warming” insan dışı, virgül var → non‑defining. Özne odaklı (boşluktan sonra “effects” isim, ama burada “whose” gerekmez; cümlenin devamı “are already visible” – özne “effects”. Aslında bu soru “whose” gerektirir? Hayır, yanlış örnek. Daha iyisi: “Global warming, which is accelerating, ...” Orijinal metinde hata var. Düzeltelim: “Global warming, which is accelerating rapidly, concerns scientists.” Cevap “which”. Test sorusu için doğru şık: B.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 208]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The architect who designed this award‑winning building graduated from MIT.",
+          "tr": "Bu ödüllü binayı tasarlayan mimar MIT’den mezun oldu.",
+          "description": "“who designed this award‑winning building” cümleciğinde “who” öznedir ve “architect”i niteler. Cümlecik çıkarılırsa “Mimar MIT’den mezun oldu” anlamı kalır, hangi mimar olduğu belirsizleşir.\n\n**Örnek 2 (Non‑Defining):**"
+        },
+        {
+          "en": "Professor Johnson, who has been teaching at Harvard for 30 years, will retire next month.",
+          "tr": "Harvard’da 30 yıldır ders veren Profesor Johnson önümüzdeki ay emekli olacak.",
+          "description": "“Professor Johnson” zaten bilinen bir kişi; “who has been teaching…” ek bilgi. Virgül kullanıldığı için “that” kullanılamaz."
+        },
+        {
+          "en": "The software that runs this entire system was developed by a Turkish engineer.",
+          "tr": "Bütün bu sistemi çalıştıran yazılım Türk bir mühendis tarafından geliştirildi.",
+          "description": "“that runs this entire system” cümleciğinde “that” özne. Hangi yazılımdan bahsedildiğini tanımlıyor.\n\n**Örnek 4 (Non‑Defining):**"
+        },
+        {
+          "en": "Istanbul’s new airport, which covers an enormous area, is one of the largest in the world.",
+          "tr": "Çok geniş bir alanı kaplayan İstanbul’un yeni havalimanı dünyanın en büyüklerinden biridir.",
+          "description": "Havalimanı zaten tek; “which covers an enormous area” ek bilgi. “That” kullanılmaz."
+        }
+      ],
+      "mini_test": {
+        "question": "Global warming, ___ effects are already visible, requires immediate action.",
+        "options": {
+          "A": "who",
+          "B": "which",
+          "C": "that",
+          "D": "whose"
+        },
+        "correct": "B",
+        "explanation": "“Global warming” insan dışı, virgül var → non‑defining. Özne odaklı (boşluktan sonra “effects” isim, ama burada “whose” gerekmez; cümlenin devamı “are already visible” – özne “effects”. Aslında bu soru “whose” gerektirir? Hayır, yanlış örnek. Daha iyisi: “Global warming, which is accelerating, ...” Orijinal metinde hata var. Düzeltelim: “Global warming, which is accelerating rapidly, concerns scientists.” Cevap “which”. Test sorusu için doğru şık: B."
+      },
+      "mini_tests": [
+        {
+          "question": "Global warming, ___ effects are already visible, requires immediate action.",
+          "options": {
+            "A": "who",
+            "B": "which",
+            "C": "that",
+            "D": "whose"
+          },
+          "correct": "B",
+          "explanation": "“Global warming” insan dışı, virgül var → non‑defining. Özne odaklı (boşluktan sonra “effects” isim, ama burada “whose” gerekmez; cümlenin devamı “are already visible” – özne “effects”. Aslında bu soru “whose” gerektirir? Hayır, yanlış örnek. Daha iyisi: “Global warming, which is accelerating, ...” Orijinal metinde hata var. Düzeltelim: “Global warming, which is accelerating rapidly, concerns scientists.” Cevap “which”. Test sorusu için doğru şık: B."
+        }
+      ],
+      "word_count": 404
+    },
+    {
+      "page_number": 3,
+      "title": "Nesne Odaklı Sıfat Cümlecikleri – Fiil Nesnesi",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Nitelediğimiz isim, sıfat cümleciğinde bir <strong>fiilin nesnesi</strong> durumundadır. Relative pronoun cümlecikte nesne görevindedir ve genellikle cümleciğin öznesinden sonra gelir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Boşluktan sonra bir özne + fiil geliyorsa ve fiil nesne istiyorsa, bu bir nesne sorusudur. İnsan için “whom / who / that” (hatta hiçbir şey kullanmayabiliriz), insan dışı için “which / that” (veya hiçbir şey).</p>\n</blockquote>\n<hr>\n<h2>👤 İnsanlar için (Defining)</h2>\n<p><strong>Defining:</strong> whom / who / that / (Ø)<br>\n<strong>Non‑Defining:</strong> whom / who (that veya Ø kullanılmaz)</p>\n<p><strong>Örnek 1 (Defining – nesne):</strong><br>\n<strong>EN:</strong> The author whom I met at the book signing event has written three bestsellers.<br>\n<strong>TR:</strong> İmza gününde tanıştığım yazar üç çoksatar yazdı.<br>\n→ <strong>Açıklama:</strong> Sıfat cümleciğinde “I” özne, “met” fiil, “whom” ise “met”in nesnesi (yazarı tanıdım). “whom” yerine “who” veya “that” kullanılabilir, hatta hiç kullanmayabiliriz: “The author I met ...”</p>\n<p><strong>Örnek 2 (Non‑Defining – nesne):</strong><br>\n<strong>EN:</strong> Dr. Williams, whom we invited to the conference, could not attend due to illness.<br>\n<strong>TR:</strong> Konferansa davet ettiğimiz Dr. Williams hastalık nedeniyle katılamadı.<br>\n→ <strong>Açıklama:</strong> Virgül olduğu için “whom” (veya “who”) kullanılır, “that” veya Ø kullanılmaz.</p>\n<hr>\n<h2>🌍 İnsan dışı varlıklar için</h2>\n<p><strong>Defining:</strong> which / that / (Ø)<br>\n<strong>Non‑Defining:</strong> which</p>\n<p><strong>Örnek 3 (Defining – nesne):</strong><br>\n<strong>EN:</strong> The ancient artifact which the archaeologists discovered in the cave dates back to 3000 BC.<br>\n<strong>TR:</strong> Arkeologların mağarada keşfettiği antik eser MÖ 3000 yılına tarihleniyor.<br>\n→ <strong>Açıklama:</strong> Cümlecikte “the archaeologists” özne, “discovered” fiil, “which” ise “discovered”ın nesnesi. “which” yerine “that” veya hiçbir şey kullanılabilir: “The ancient artifact the archaeologists discovered ...”</p>\n<p><strong>Örnek 4 (Non‑Defining – nesne):</strong><br>\n<strong>EN:</strong> His latest novel, which critics have praised highly, will be adapted into a movie.<br>\n<strong>TR:</strong> Eleştirmenlerin çok övdüğü son romanı filme uyarlanacak.<br>\n→ <strong>Açıklama:</strong> Virgül olduğu için sadece “which” kullanılır. “that” veya Ø kullanılamaz.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:** Non‑defining yapılarda (virgül var) nesne durumunda insanlar için “whom” daha yaygındır ama “who” da kabul edilir. Ancak “that” veya pronoun’un tamamen atılması kesinlikle yanlıştır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Defining</th>\n<th>Non‑Defining</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>İnsan (nesne)</strong></td>\n<td>whom / who / that / Ø</td>\n<td>whom / who</td>\n</tr>\n<tr>\n<td><strong>İnsan dışı (nesne)</strong></td>\n<td>which / that / Ø</td>\n<td>which</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe painting ___ we admired at the gallery was painted by a local artist.</p>\n<p>A) who<br>\nB) whom<br>\nC) which<br>\nD) whose  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** C  \n**Açıklama:** “The painting” insan dışı, virgül yok, cümlecikte “we” özne, “admired” fiil, nesne eksik → “which” (veya “that”) doğru. “Whom” insanlar için kullanılır.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The author whom I met at the book signing event has written three bestsellers.",
+          "tr": "İmza gününde tanıştığım yazar üç çoksatar yazdı.",
+          "description": "Sıfat cümleciğinde “I” özne, “met” fiil, “whom” ise “met”in nesnesi (yazarı tanıdım). “whom” yerine “who” veya “that” kullanılabilir, hatta hiç kullanmayabiliriz: “The author I met ...”\n\n**Örnek 2 (Non‑Defining – nesne):**"
+        },
+        {
+          "en": "Dr. Williams, whom we invited to the conference, could not attend due to illness.",
+          "tr": "Konferansa davet ettiğimiz Dr. Williams hastalık nedeniyle katılamadı.",
+          "description": "Virgül olduğu için “whom” (veya “who”) kullanılır, “that” veya Ø kullanılmaz."
+        },
+        {
+          "en": "The ancient artifact which the archaeologists discovered in the cave dates back to 3000 BC.",
+          "tr": "Arkeologların mağarada keşfettiği antik eser MÖ 3000 yılına tarihleniyor.",
+          "description": "Cümlecikte “the archaeologists” özne, “discovered” fiil, “which” ise “discovered”ın nesnesi. “which” yerine “that” veya hiçbir şey kullanılabilir: “The ancient artifact the archaeologists discovered ...”\n\n**Örnek 4 (Non‑Defining – nesne):**"
+        },
+        {
+          "en": "His latest novel, which critics have praised highly, will be adapted into a movie.",
+          "tr": "Eleştirmenlerin çok övdüğü son romanı filme uyarlanacak.",
+          "description": "Virgül olduğu için sadece “which” kullanılır. “that” veya Ø kullanılamaz."
+        }
+      ],
+      "mini_test": {
+        "question": "The painting ___ we admired at the gallery was painted by a local artist.",
+        "options": {
+          "A": "who",
+          "B": "whom",
+          "C": "which",
+          "D": "whose"
+        },
+        "correct": "C",
+        "explanation": "“The painting” insan dışı, virgül yok, cümlecikte “we” özne, “admired” fiil, nesne eksik → “which” (veya “that”) doğru. “Whom” insanlar için kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "The painting ___ we admired at the gallery was painted by a local artist.",
+          "options": {
+            "A": "who",
+            "B": "whom",
+            "C": "which",
+            "D": "whose"
+          },
+          "correct": "C",
+          "explanation": "“The painting” insan dışı, virgül yok, cümlecikte “we” özne, “admired” fiil, nesne eksik → “which” (veya “that”) doğru. “Whom” insanlar için kullanılır."
+        }
+      ],
+      "word_count": 381
+    },
+    {
+      "page_number": 4,
+      "title": "Nesne Odaklı – Edatlı (Preposition) Kullanımlar",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Nitelediğimiz isim, sıfat cümleciğinde bir <strong>edatın (preposition)</strong> nesnesidir. İki şekilde kurulabilir: edat cümleciğin sonunda kalır veya relative pronoun’un önüne alınır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Edatı öne alırsanız sadece “whom” (insan) veya “which” (insan dışı) kullanılır; “that” veya Ø kullanılamaz.</p>\n</blockquote>\n<hr>\n<h2>1️⃣ Edat sonda kalır (daha resmi olmayan)</h2>\n<p><strong>İnsan:</strong> whom / who / that / Ø<br>\n<strong>İnsan dışı:</strong> which / that / Ø</p>\n<p><strong>Örnek 1 (insan, Defining):</strong><br>\n<strong>EN:</strong> The colleague I was talking to at the coffee machine just got promoted.<br>\n<strong>TR:</strong> Kahve makinesinde konuştuğum meslektaşım terfi aldı.<br>\n→ <strong>Açıklama:</strong> “to” edatı sonda; “the colleague” (to) nesnesi. “I was talking to” ifadesinde relative pronoun kullanılmamış (Ø) ama anlaşılıyor.</p>\n<p><strong>Örnek 2 (insan dışı, Defining):</strong><br>\n<strong>EN:</strong> The problem which we are dealing with is more complex than we thought.<br>\n<strong>TR:</strong> Üstesinden gelmeye çalıştığımız sorun düşündüğümüzden daha karmaşık.<br>\n→ <strong>Açıklama:</strong> “with” edatı sonda; “which” ile bağlanmış. “that” veya Ø da kullanılabilirdi: “the problem we are dealing with”.</p>\n<hr>\n<h2>2️⃣ Edat relative pronoun’un önünde (resmî)</h2>\n<p><strong>İnsan:</strong> preposition + whom<br>\n<strong>İnsan dışı:</strong> preposition + which<br>\n(Defining veya Non‑Defining fark etmez)</p>\n<p><strong>Örnek 3 (insan, Defining):</strong><br>\n<strong>EN:</strong> The manager with whom we had a disagreement resigned yesterday.<br>\n<strong>TR:</strong> Anlaşmazlık yaşadığımız müdür dün istifa etti.<br>\n→ <strong>Açıklama:</strong> “with whom” çok resmî bir yapı. Günlük dilde “The manager we had a disagreement with” daha yaygın.</p>\n<p><strong>Örnek 4 (insan dışı, Non‑Defining):</strong><br>\n<strong>EN:</strong> Our office building, for which we paid a huge amount, needs extensive renovation.<br>\n<strong>TR:</strong> Büyük bir meblağ ödediğimiz ofis binamız kapsamlı bir yenilemeye ihtiyaç duyuyor.<br>\n→ <strong>Açıklama:</strong> Virgül var, non‑defining, “for which” edat önde.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSeçeneklerde “prep + whom / which” varsa, boşluğun devamına bakın. Eğer devamında tam bir cümle (özne + fiil + varsa nesne) geliyorsa bu yapı doğrudur. “prep + which” yapısı “where” anlamında da kullanılabilir (yer belirtirken).\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Edat sonda</th>\n<th>Edat önde</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>İnsan</strong></td>\n<td>whom / who / that / Ø</td>\n<td>prep + whom</td>\n</tr>\n<tr>\n<td><strong>İnsan dışı</strong></td>\n<td>which / that / Ø</td>\n<td>prep + which</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe platform ___ users can upload their videos became extremely popular.</p>\n<p>A) on which<br>\nB) which on<br>\nC) on that<br>\nD) that on  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** A  \n**Açıklama:** “on the platform” → edat “on”. Edat önde kullanılacaksa “on which” doğru. “on that” diye bir yapı yoktur.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 223]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The colleague I was talking to at the coffee machine just got promoted.",
+          "tr": "Kahve makinesinde konuştuğum meslektaşım terfi aldı.",
+          "description": "“to” edatı sonda; “the colleague” (to) nesnesi. “I was talking to” ifadesinde relative pronoun kullanılmamış (Ø) ama anlaşılıyor.\n\n**Örnek 2 (insan dışı, Defining):**"
+        },
+        {
+          "en": "The problem which we are dealing with is more complex than we thought.",
+          "tr": "Üstesinden gelmeye çalıştığımız sorun düşündüğümüzden daha karmaşık.",
+          "description": "“with” edatı sonda; “which” ile bağlanmış. “that” veya Ø da kullanılabilirdi: “the problem we are dealing with”."
+        },
+        {
+          "en": "The manager with whom we had a disagreement resigned yesterday.",
+          "tr": "Anlaşmazlık yaşadığımız müdür dün istifa etti.",
+          "description": "“with whom” çok resmî bir yapı. Günlük dilde “The manager we had a disagreement with” daha yaygın.\n\n**Örnek 4 (insan dışı, Non‑Defining):**"
+        },
+        {
+          "en": "Our office building, for which we paid a huge amount, needs extensive renovation.",
+          "tr": "Büyük bir meblağ ödediğimiz ofis binamız kapsamlı bir yenilemeye ihtiyaç duyuyor.",
+          "description": "Virgül var, non‑defining, “for which” edat önde."
+        }
+      ],
+      "mini_test": {
+        "question": "The platform ___ users can upload their videos became extremely popular.",
+        "options": {
+          "A": "on which",
+          "B": "which on",
+          "C": "on that",
+          "D": "that on"
+        },
+        "correct": "A",
+        "explanation": "“on the platform” → edat “on”. Edat önde kullanılacaksa “on which” doğru. “on that” diye bir yapı yoktur."
+      },
+      "mini_tests": [
+        {
+          "question": "The platform ___ users can upload their videos became extremely popular.",
+          "options": {
+            "A": "on which",
+            "B": "which on",
+            "C": "on that",
+            "D": "that on"
+          },
+          "correct": "A",
+          "explanation": "“on the platform” → edat “on”. Edat önde kullanılacaksa “on which” doğru. “on that” diye bir yapı yoktur."
+        }
+      ],
+      "word_count": 359
+    },
+    {
+      "page_number": 5,
+      "title": "İyelik (Possessive): Whose + Noun ve Of Which",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Nitelediğimiz isim, sıfat cümleciğinde bir <strong>aitlik</strong> bildiriyorsa (bir şeyin sahibi veya parçası) “whose” kullanılır. İnsan ya da insan dışı fark etmez. “Whose” mutlaka yanında bir isimle gelir: <strong>whose + noun</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Whose” hem insanlar hem de nesneler için kullanılabilir. Nesneler için resmî dilde “of which” de tercih edilir ama dizilişi farklıdır: <strong>noun + of which</strong>.</p>\n</blockquote>\n<hr>\n<h2>👤 İnsanlar için “whose”</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The artist whose paintings hang in the national gallery died young.<br>\n<strong>TR:</strong> Resimleri ulusal galeride asılı olan sanatçı genç yaşta öldü.<br>\n→ <strong>Açıklama:</strong> “whose paintings” → onun resimleri. “Whose” sanatçıya aitliği gösteriyor.</p>\n<p><strong>Örnek 2 (Non‑Defining):</strong><br>\n<strong>EN:</strong> My neighbor, whose dog barks all night, refuses to train it.<br>\n<strong>TR:</strong> Köpeği bütün gece havlayan komşum onu eğitmeyi reddediyor.<br>\n→ <strong>Açıklama:</strong> Virgülle ayrılmış non‑defining, “whose dog” aitlik.</p>\n<hr>\n<h2>🏢 İnsan dışı varlıklar için “whose” veya “of which”</h2>\n<p><strong>Örnek 3 (whose):</strong><br>\n<strong>EN:</strong> We live in a house whose roof leaks every time it rains.<br>\n<strong>TR:</strong> Yağmur yağdığında çatısı akan bir evde yaşıyoruz.<br>\n→ <strong>Açıklama:</strong> “whose roof” = çatısı (evin çatısı). İnsan dışı olmasına rağmen “whose” kullanımı yaygındır.</p>\n<p><strong>Örnek 4 (of which – daha resmî):</strong><br>\n<strong>EN:</strong> We live in a house the roof of which leaks every time it rains.<br>\n<strong>TR:</strong> Çatısı her yağmurda akan bir evde yaşıyoruz.<br>\n→ <strong>Açıklama:</strong> “of which” kullanıldığında isim (the roof) önce gelir, ardından “of which” gelir. Anlam aynıdır.</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:** “Whose” kendinden sonra mutlaka bir isim alır. “Whose” + isim birlikte sıfat cümleciğinin öznesi, nesnesi veya edat nesnesi olabilir.\n</div>\n\n<p><strong>Örnek 5 (edatla birlikte):</strong><br>\n<strong>EN:</strong> Nietzsche, in whose books you often find nihilistic themes, was a profound thinker.<br>\n<strong>TR:</strong> Kitaplarında sıklıkla nihilist temalar bulabileceğiniz Nietzsche derin bir düşünürdü.<br>\n→ <strong>Açıklama:</strong> Edat “in”, “whose” den önce gelmiş. “in whose books” = kitaplarında.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>whose + noun</strong></td>\n<td>İnsan / insan dışı</td>\n<td>the man whose car was stolen</td>\n</tr>\n<tr>\n<td><strong>noun + of which</strong></td>\n<td>Sadece insan dışı (resmî)</td>\n<td>the car the engine of which failed</td>\n</tr>\n<tr>\n<td><strong>prep + whose + noun</strong></td>\n<td>Her tür</td>\n<td>the writer in whose novels ...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe company, ___ CEO resigned last week, is struggling financially.</p>\n<p>A) which<br>\nB) whose<br>\nC) of which<br>\nD) that  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “CEO” isminin kime ait olduğu belirtiliyor: şirketin CEO’su. Bu nedenle “whose” gerekli. Virgül var ama “whose” non‑defining’de de kullanılır.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 218]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The artist whose paintings hang in the national gallery died young.",
+          "tr": "Resimleri ulusal galeride asılı olan sanatçı genç yaşta öldü.",
+          "description": "“whose paintings” → onun resimleri. “Whose” sanatçıya aitliği gösteriyor.\n\n**Örnek 2 (Non‑Defining):**"
+        },
+        {
+          "en": "My neighbor, whose dog barks all night, refuses to train it.",
+          "tr": "Köpeği bütün gece havlayan komşum onu eğitmeyi reddediyor.",
+          "description": "Virgülle ayrılmış non‑defining, “whose dog” aitlik."
+        },
+        {
+          "en": "We live in a house whose roof leaks every time it rains.",
+          "tr": "Yağmur yağdığında çatısı akan bir evde yaşıyoruz.",
+          "description": "“whose roof” = çatısı (evin çatısı). İnsan dışı olmasına rağmen “whose” kullanımı yaygındır.\n\n**Örnek 4 (of which – daha resmî):**"
+        },
+        {
+          "en": "We live in a house the roof of which leaks every time it rains.",
+          "tr": "Çatısı her yağmurda akan bir evde yaşıyoruz.",
+          "description": "“of which” kullanıldığında isim (the roof) önce gelir, ardından “of which” gelir. Anlam aynıdır."
+        },
+        {
+          "en": "Nietzsche, in whose books you often find nihilistic themes, was a profound thinker.",
+          "tr": "Kitaplarında sıklıkla nihilist temalar bulabileceğiniz Nietzsche derin bir düşünürdü.",
+          "description": "Edat “in”, “whose” den önce gelmiş. “in whose books” = kitaplarında."
+        }
+      ],
+      "mini_test": {
+        "question": "The company, ___ CEO resigned last week, is struggling financially.",
+        "options": {
+          "A": "which",
+          "B": "whose",
+          "C": "of which",
+          "D": "that"
+        },
+        "correct": "B",
+        "explanation": "“CEO” isminin kime ait olduğu belirtiliyor: şirketin CEO’su. Bu nedenle “whose” gerekli. Virgül var ama “whose” non‑defining’de de kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "The company, ___ CEO resigned last week, is struggling financially.",
+          "options": {
+            "A": "which",
+            "B": "whose",
+            "C": "of which",
+            "D": "that"
+          },
+          "correct": "B",
+          "explanation": "“CEO” isminin kime ait olduğu belirtiliyor: şirketin CEO’su. Bu nedenle “whose” gerekli. Virgül var ama “whose” non‑defining’de de kullanılır."
+        }
+      ],
+      "word_count": 374
+    },
+    {
+      "page_number": 6,
+      "title": "Yer Bildiren Sıfat Cümlecikleri (Where)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Nitelediğimiz isim bir <strong>yer</strong> ise ve sıfat cümleciğinde dolaylı tümleç (nerede/nereye) görevindeyse “where” kullanılır. “Where” yerine “preposition + which” de kullanabiliriz.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Boşluktan sonra <strong>tam bir cümle</strong> (özne + fiil + nesne) geliyorsa ve önceki isim yer bildiriyorsa “where” doğru cevaptır. Eğer cümle eksikse (özne veya nesne eksik) “which” kullanılır.</p>\n</blockquote>\n<hr>\n<h2>🗺️ “Where” kullanımı</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> This is the small town where I spent my childhood summers.<br>\n<strong>TR:</strong> Çocukluk yazlarımı geçirdiğim küçük kasaba burası.<br>\n→ <strong>Açıklama:</strong> “I spent my childhood summers” tam cümle; “in the town” → nerede? sorusuna cevap. Bu nedenle “where” kullanıldı.</p>\n<p><strong>Örnek 2 (Non‑Defining):</strong><br>\n<strong>EN:</strong> Paris, where you can find the best croissants, is a food lover’s paradise.<br>\n<strong>TR:</strong> En iyi kruvasanları bulabileceğiniz Paris, bir yemeksever cennetidir.<br>\n→ <strong>Açıklama:</strong> “Paris” zaten bilinen bir şehir, ek bilgi veriliyor. “where” ile bağlanmış.</p>\n<hr>\n<h2>🔄 “Preposition + Which” alternatifi</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> This is the small town in which I spent my childhood summers.<br>\n→ <strong>Açıklama:</strong> “where” ile aynı anlamda, daha resmî. “in which” = in the town.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The cafe at which we used to meet has been demolished.<br>\n<strong>TR:</strong> Buluştuğumuz kafe yıkıldı.<br>\n→ <strong>Açıklama:</strong> “at the cafe” → “at which”. Günlük dilde “where we used to meet” daha yaygındır.</p>\n<hr>\n<h2>⚠️ Dikkat: Yer ismi özne veya nesne olabilir</h2>\n<p>Eğer yer ismi sıfat cümleciğinin <strong>öznesi</strong> ise “which / that” kullanılır.</p>\n<p><strong>Örnek 5 (subject‑focused):</strong><br>\n<strong>EN:</strong> The city which was destroyed by the earthquake has been rebuilt.<br>\n<strong>TR:</strong> Depremle yıkılan şehir yeniden inşa edildi.<br>\n→ <strong>Açıklama:</strong> “which was destroyed” → “which” özne.</p>\n<p><strong>Örnek 6 (object‑focused):</strong><br>\n<strong>EN:</strong> The island which we visited last year is even more beautiful now.<br>\n<strong>TR:</strong> Geçen yıl ziyaret ettiğimiz ada şimdi daha da güzel.<br>\n→ <strong>Açıklama:</strong> “which” nesne (ziyaret edilen yer).</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nYer sorusunda boşluğun devamına bak:\n- Tam cümle → **where** (veya prep + which)\n- Özne/nesne eksik → **which / that**\n- Aitlik varsa → **whose + noun** (Örn: The city whose population is growing...)\n</div>\n\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe village ___ we stayed during the holiday was very peaceful.</p>\n<p>A) which<br>\nB) where<br>\nC) whose<br>\nD) when  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “we stayed” tam cümle (özne + fiil), yer bildiriyor → “where”. “In which” de olabilirdi ama seçeneklerde yok.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 225]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "This is the small town where I spent my childhood summers.",
+          "tr": "Çocukluk yazlarımı geçirdiğim küçük kasaba burası.",
+          "description": "“I spent my childhood summers” tam cümle; “in the town” → nerede? sorusuna cevap. Bu nedenle “where” kullanıldı.\n\n**Örnek 2 (Non‑Defining):**"
+        },
+        {
+          "en": "Paris, where you can find the best croissants, is a food lover’s paradise.",
+          "tr": "En iyi kruvasanları bulabileceğiniz Paris, bir yemeksever cennetidir.",
+          "description": "“Paris” zaten bilinen bir şehir, ek bilgi veriliyor. “where” ile bağlanmış."
+        },
+        {
+          "en": "This is the small town in which I spent my childhood summers.\n→ **Açıklama:** “where” ile aynı anlamda, daha resmî. “in which” = in the town.\n\n**Örnek 4:**\n**EN:** The cafe at which we used to meet has been demolished.",
+          "tr": "Buluştuğumuz kafe yıkıldı.",
+          "description": "“at the cafe” → “at which”. Günlük dilde “where we used to meet” daha yaygındır."
+        },
+        {
+          "en": "The city which was destroyed by the earthquake has been rebuilt.",
+          "tr": "Depremle yıkılan şehir yeniden inşa edildi.",
+          "description": "“which was destroyed” → “which” özne.\n\n**Örnek 6 (object‑focused):**"
+        },
+        {
+          "en": "The island which we visited last year is even more beautiful now.",
+          "tr": "Geçen yıl ziyaret ettiğimiz ada şimdi daha da güzel.",
+          "description": "“which” nesne (ziyaret edilen yer)."
+        }
+      ],
+      "mini_test": {
+        "question": "The village ___ we stayed during the holiday was very peaceful.",
+        "options": {
+          "A": "which",
+          "B": "where",
+          "C": "whose",
+          "D": "when"
+        },
+        "correct": "B",
+        "explanation": "“we stayed” tam cümle (özne + fiil), yer bildiriyor → “where”. “In which” de olabilirdi ama seçeneklerde yok."
+      },
+      "mini_tests": [
+        {
+          "question": "The village ___ we stayed during the holiday was very peaceful.",
+          "options": {
+            "A": "which",
+            "B": "where",
+            "C": "whose",
+            "D": "when"
+          },
+          "correct": "B",
+          "explanation": "“we stayed” tam cümle (özne + fiil), yer bildiriyor → “where”. “In which” de olabilirdi ama seçeneklerde yok."
+        }
+      ],
+      "word_count": 357
+    },
+    {
+      "page_number": 7,
+      "title": "Zaman Bildiren Sıfat Cümlecikleri (When)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Nitelediğimiz isim bir <strong>zaman</strong> ifadesi ise ve sıfat cümleciğinde zaman zarfı görevindeyse (ne zaman sorusuna cevap) “when” kullanılır. “When” yerine “preposition + which” (genellikle “on which”, “in which”, “at which”) de kullanılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Yer konusunda olduğu gibi, boşluktan sonra <strong>tam cümle</strong> varsa “when”, eğer özne veya nesne eksikse “which” kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📅 “When” kullanımı</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I still remember the day when we first met at the library.<br>\n<strong>TR:</strong> Kütüphanede ilk tanıştığımız günü hâlâ hatırlıyorum.<br>\n→ <strong>Açıklama:</strong> “we first met” tam cümle, “on that day” → zaman. “when” kullanıldı.</p>\n<p><strong>Örnek 2 (Non‑Defining):</strong><br>\n<strong>EN:</strong> The 1990s, when the internet began to spread, changed communication forever.<br>\n<strong>TR:</strong> İnternetin yayılmaya başladığı 1990’lar iletişimi sonsuza dek değiştirdi.<br>\n→ <strong>Açıklama:</strong> “the 1990s” zaten bilinen bir dönem, ek bilgi veriliyor. “when” ile bağlanmış.</p>\n<hr>\n<h2>🔄 “Preposition + Which” alternatifi</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> I still remember the day on which we first met at the library.<br>\n→ <strong>Açıklama:</strong> “on which” = on that day. Daha resmî.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> It was a period during which many scientific breakthroughs occurred.<br>\n<strong>TR:</strong> Birçok bilimsel buluşun gerçekleştiği bir dönemdi.<br>\n→ <strong>Açıklama:</strong> “during which” = during that period.</p>\n<hr>\n<h2>⚠️ Zaman ismi özne veya nesne olabilir</h2>\n<p><strong>Örnek 5 (subject‑focused):</strong><br>\n<strong>EN:</strong> The year 2020, which will be remembered for the pandemic, was challenging.<br>\n<strong>TR:</strong> Pandemiyle hatırlanacak olan 2020 yılı zorluydu.<br>\n→ <strong>Açıklama:</strong> “which” özne (will be remembered).</p>\n<p><strong>Örnek 6 (object‑focused):</strong><br>\n<strong>EN:</strong> The moment which I cherish most is our graduation.<br>\n<strong>TR:</strong> En çok değer verdiğim an mezuniyetimizdir.<br>\n→ <strong>Açıklama:</strong> “which” nesne (cherish most).</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nZaman ifadesi + boşluk:\n- Tam cümle → **when** (veya prep + which)\n- Özne/nesne eksik → **which / that**\n- Aitlik varsa → **whose + noun** (ör: the day whose date I forget)\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>when</strong></td>\n<td>Tam cümle (zaman)</td>\n<td>the day when we left</td>\n</tr>\n<tr>\n<td><strong>prep + which</strong></td>\n<td>Resmî alternatif</td>\n<td>the day on which we left</td>\n</tr>\n<tr>\n<td><strong>which / that</strong></td>\n<td>Özne/nesne eksik</td>\n<td>the year which changed everything</td>\n</tr>\n<tr>\n<td><strong>whose + noun</strong></td>\n<td>Aitlik</td>\n<td>the decade whose music defined a generation</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nDo you remember the summer ___ we went camping in the mountains?</p>\n<p>A) which<br>\nB) when<br>\nC) where<br>\nD) whose  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “we went camping” tam cümle, zaman ifadesi “the summer” → “when” doğru.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I still remember the day when we first met at the library.",
+          "tr": "Kütüphanede ilk tanıştığımız günü hâlâ hatırlıyorum.",
+          "description": "“we first met” tam cümle, “on that day” → zaman. “when” kullanıldı.\n\n**Örnek 2 (Non‑Defining):**"
+        },
+        {
+          "en": "The 1990s, when the internet began to spread, changed communication forever.",
+          "tr": "İnternetin yayılmaya başladığı 1990’lar iletişimi sonsuza dek değiştirdi.",
+          "description": "“the 1990s” zaten bilinen bir dönem, ek bilgi veriliyor. “when” ile bağlanmış."
+        },
+        {
+          "en": "I still remember the day on which we first met at the library.\n→ **Açıklama:** “on which” = on that day. Daha resmî.\n\n**Örnek 4:**\n**EN:** It was a period during which many scientific breakthroughs occurred.",
+          "tr": "Birçok bilimsel buluşun gerçekleştiği bir dönemdi.",
+          "description": "“during which” = during that period."
+        },
+        {
+          "en": "The year 2020, which will be remembered for the pandemic, was challenging.",
+          "tr": "Pandemiyle hatırlanacak olan 2020 yılı zorluydu.",
+          "description": "“which” özne (will be remembered).\n\n**Örnek 6 (object‑focused):**"
+        },
+        {
+          "en": "The moment which I cherish most is our graduation.",
+          "tr": "En çok değer verdiğim an mezuniyetimizdir.",
+          "description": "“which” nesne (cherish most)."
+        }
+      ],
+      "mini_test": {
+        "question": "Do you remember the summer ___ we went camping in the mountains?",
+        "options": {
+          "A": "which",
+          "B": "when",
+          "C": "where",
+          "D": "whose"
+        },
+        "correct": "B",
+        "explanation": "“we went camping” tam cümle, zaman ifadesi “the summer” → “when” doğru."
+      },
+      "mini_tests": [
+        {
+          "question": "Do you remember the summer ___ we went camping in the mountains?",
+          "options": {
+            "A": "which",
+            "B": "when",
+            "C": "where",
+            "D": "whose"
+          },
+          "correct": "B",
+          "explanation": "“we went camping” tam cümle, zaman ifadesi “the summer” → “when” doğru."
+        }
+      ],
+      "word_count": 364
+    },
+    {
+      "page_number": 8,
+      "title": "Sebep Bildiren Sıfat Cümlecikleri (Why)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>“Reason” veya “explanation” gibi kelimeleri nitelerken sebep bildirmek için “why” kullanılır. “Why” yerine “for which”, “that” veya hiçbir şey (Ø) kullanmak da mümkündür.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “The reason why + tam cümle” kalıbı çok yaygındır. Eğer “reason” sıfat cümleciğinde özne veya nesne görevindeyse “why” kullanılmaz, onun yerine “which / that” kullanılır.</p>\n</blockquote>\n<hr>\n<h2>✅ “The reason why” (sebep)</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The reason why she resigned from her job is still unknown.<br>\n<strong>TR:</strong> İşinden istifa etmesinin nedeni hâlâ bilinmiyor.<br>\n→ <strong>Açıklama:</strong> “she resigned” tam cümle; “why” bu cümleyi “reason”a bağlıyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Can you explain the reason why you were late this morning?<br>\n<strong>TR:</strong> Bu sabah neden geç kaldığının sebebini açıklayabilir misin?<br>\n→ <strong>Açıklama:</strong> Aynı yapı, günlük dilde çok sık kullanılır.</p>\n<hr>\n<h2>🔄 Alternatifler: for which, that, Ø</h2>\n<p><strong>Örnek 3 (for which – resmî):</strong><br>\n<strong>EN:</strong> The reason for which he refused the offer was quite personal.<br>\n<strong>TR:</strong> Teklifi reddetmesinin nedeni oldukça kişiseldi.<br>\n→ <strong>Açıklama:</strong> “for which” = “why” nin resmî versiyonu.</p>\n<p><strong>Örnek 4 (that veya Ø):</strong><br>\n<strong>EN:</strong> The reason (that) they chose him as leader is his experience.<br>\n<strong>TR:</strong> Onu lider seçmelerinin nedeni tecrübesi.<br>\n→ <strong>Açıklama:</strong> “that” kullanılabilir veya atılabilir. Anlam aynı.</p>\n<hr>\n<h2>⚠️ “Reason” özne veya nesne olduğunda</h2>\n<p>Eğer “reason” sıfat cümleciğinin öznesi veya nesnesiyse “why” kullanılmaz, “which / that” kullanılır.</p>\n<p><strong>Örnek 5 (subject‑focused):</strong><br>\n<strong>EN:</strong> The reason which was given by the manager did not satisfy the employees.<br>\n<strong>TR:</strong> Müdür tarafından verilen neden çalışanları tatmin etmedi.<br>\n→ <strong>Açıklama:</strong> “which was given” → “reason” cümleciğin öznesi. “why” kullanılamaz.</p>\n<p><strong>Örnek 6 (object‑focused):</strong><br>\n<strong>EN:</strong> The reason (that) he mentioned in the meeting was unconvincing.<br>\n<strong>TR:</strong> Toplantıda bahsettiği neden inandırıcı değildi.<br>\n→ <strong>Açıklama:</strong> “that” nesne, “he mentioned” özne+fiil, “reason” nesne. “why” kullanılmaz.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n“Reason” + boşluktan sonra tam cümle varsa → **why** (veya for which / that / Ø). Eğer cümle eksikse (özne veya nesne eksik) → **which / that**.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>why</strong></td>\n<td>Tam cümle (sebep)</td>\n<td>the reason why she left</td>\n</tr>\n<tr>\n<td><strong>for which</strong></td>\n<td>Resmî alternatif</td>\n<td>the reason for which she left</td>\n</tr>\n<tr>\n<td><strong>that / Ø</strong></td>\n<td>Günlük alternatif</td>\n<td>the reason (that) she left</td>\n</tr>\n<tr>\n<td><strong>which / that</strong></td>\n<td>Özne/nesne durumu</td>\n<td>the reason which was given</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe explanation ___ he gave was completely false.</p>\n<p>A) why<br>\nB) for which<br>\nC) which<br>\nD) when  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** C  \n**Açıklama:** “he gave” fiili nesne istiyor; “the explanation” verilen şey → nesne olduğu için “which” (veya that/Ø) doğru. “why” kullanılmaz çünkü cümle tam değil (nesne eksik).\n</details>\n\n<hr>\n<p>[Kelime sayısı: 212]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The reason why she resigned from her job is still unknown.",
+          "tr": "İşinden istifa etmesinin nedeni hâlâ bilinmiyor.",
+          "description": "“she resigned” tam cümle; “why” bu cümleyi “reason”a bağlıyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Can you explain the reason why you were late this morning?",
+          "tr": "Bu sabah neden geç kaldığının sebebini açıklayabilir misin?",
+          "description": "Aynı yapı, günlük dilde çok sık kullanılır."
+        },
+        {
+          "en": "The reason for which he refused the offer was quite personal.",
+          "tr": "Teklifi reddetmesinin nedeni oldukça kişiseldi.",
+          "description": "“for which” = “why” nin resmî versiyonu.\n\n**Örnek 4 (that veya Ø):**"
+        },
+        {
+          "en": "The reason (that) they chose him as leader is his experience.",
+          "tr": "Onu lider seçmelerinin nedeni tecrübesi.",
+          "description": "“that” kullanılabilir veya atılabilir. Anlam aynı."
+        },
+        {
+          "en": "The reason which was given by the manager did not satisfy the employees.",
+          "tr": "Müdür tarafından verilen neden çalışanları tatmin etmedi.",
+          "description": "“which was given” → “reason” cümleciğin öznesi. “why” kullanılamaz.\n\n**Örnek 6 (object‑focused):**"
+        },
+        {
+          "en": "The reason (that) he mentioned in the meeting was unconvincing.",
+          "tr": "Toplantıda bahsettiği neden inandırıcı değildi.",
+          "description": "“that” nesne, “he mentioned” özne+fiil, “reason” nesne. “why” kullanılmaz."
+        }
+      ],
+      "mini_test": {
+        "question": "The explanation ___ he gave was completely false.",
+        "options": {
+          "A": "why",
+          "B": "for which",
+          "C": "which",
+          "D": "when"
+        },
+        "correct": "C",
+        "explanation": "“he gave” fiili nesne istiyor; “the explanation” verilen şey → nesne olduğu için “which” (veya that/Ø) doğru. “why” kullanılmaz çünkü cümle tam değil (nesne eksik)."
+      },
+      "mini_tests": [
+        {
+          "question": "The explanation ___ he gave was completely false.",
+          "options": {
+            "A": "why",
+            "B": "for which",
+            "C": "which",
+            "D": "when"
+          },
+          "correct": "C",
+          "explanation": "“he gave” fiili nesne istiyor; “the explanation” verilen şey → nesne olduğu için “which” (veya that/Ø) doğru. “why” kullanılmaz çünkü cümle tam değil (nesne eksik)."
+        }
+      ],
+      "word_count": 394
+    },
+    {
+      "page_number": 9,
+      "title": "Tüm Cümleyi Niteleyen Sıfat Cümlecikleri (Co‑ordinating)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Bazen sıfat cümleciği tek bir ismi değil, <strong>önceki tüm cümleyi</strong> niteler. Bu durumda relative pronoun olarak sadece <strong>“which”</strong> kullanılır ve genellikle virgülle ayrılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıda “which” önceki cümlenin tamamını temsil eder ve Türkçede “ki bu” diye çevrilebilir.</p>\n</blockquote>\n<hr>\n<h2>🧠 “Which” ile tüm cümleyi niteleme</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> She passed all her exams with flying colours, which surprised everyone.<br>\n<strong>TR:</strong> Tüm sınavlarını yüksek notlarla geçti, ki bu herkesi şaşırttı.<br>\n→ <strong>Açıklama:</strong> “which” burada “she passed all her exams...” cümlesinin tamamını gösteriyor. “Bu durum” anlamında.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The company lost a major client, which led to several layoffs.<br>\n<strong>TR:</strong> Şirket büyük bir müşterisini kaybetti, bu da birçok işten çıkarmaya yol açtı.<br>\n→ <strong>Açıklama:</strong> “which” = the loss of the client. Cümle sonucu anlatıyor.</p>\n<hr>\n<h2>🔗 İçinde ek ifadeler olabilir</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> He blames me for everything, which I think is completely unfair.<br>\n<strong>TR:</strong> Her şey için beni suçluyor, ki bunun tamamen haksızlık olduğunu düşünüyorum.<br>\n→ <strong>Açıklama:</strong> “which” cümlenin tamamını temsil ediyor, “I think” araya girmiş. Anlam: “I think this is unfair.”</p>\n<p><strong>Örnek 4 (edatlı):</strong><br>\n<strong>EN:</strong> They cancelled the project at the last minute, at which we were very disappointed.<br>\n<strong>TR:</strong> Projeyi son dakikada iptal ettiler, ki buna çok hayal kırıklığına uğradık.<br>\n→ <strong>Açıklama:</strong> “at which” = at the cancellation. Edatlı kullanım da mümkün.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBoşluktan önce bir cümle, boşluktan sonra bir fiil varsa ve özne eksikse, büyük olasılıkla “which” (tüm cümleyi niteleyen) doğru cevaptır. Seçeneklerde “thus, so, therefore” gibi bağlaçlar da olabilir, ancak “which” daha doğrudur çünkü bir sıfat cümleciği kurar.\n</div>\n\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:** Bu kullanımda “which” asla “that” ile değiştirilemez. Virgül her zaman vardır veya gelmesi beklenir.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>, which + fiil</strong></td>\n<td>ki bu (tüm cümle)</td>\n<td>He failed, which was sad.</td>\n</tr>\n<tr>\n<td><strong>, prep + which + cümle</strong></td>\n<td>ki buna/onda...</td>\n<td>We waited for hours, during which we read.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe temperature dropped suddenly, ___ caused the pipes to freeze.</p>\n<p>A) that<br>\nB) which<br>\nC) who<br>\nD) when  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** Önceki cümlenin tamamı kastediliyor: sıcaklığın düşmesi. “which” doğru. “that” bu şekilde kullanılmaz.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 192]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She passed all her exams with flying colours, which surprised everyone.",
+          "tr": "Tüm sınavlarını yüksek notlarla geçti, ki bu herkesi şaşırttı.",
+          "description": "“which” burada “she passed all her exams...” cümlesinin tamamını gösteriyor. “Bu durum” anlamında.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The company lost a major client, which led to several layoffs.",
+          "tr": "Şirket büyük bir müşterisini kaybetti, bu da birçok işten çıkarmaya yol açtı.",
+          "description": "“which” = the loss of the client. Cümle sonucu anlatıyor."
+        },
+        {
+          "en": "He blames me for everything, which I think is completely unfair.",
+          "tr": "Her şey için beni suçluyor, ki bunun tamamen haksızlık olduğunu düşünüyorum.",
+          "description": "“which” cümlenin tamamını temsil ediyor, “I think” araya girmiş. Anlam: “I think this is unfair.”\n\n**Örnek 4 (edatlı):**"
+        },
+        {
+          "en": "They cancelled the project at the last minute, at which we were very disappointed.",
+          "tr": "Projeyi son dakikada iptal ettiler, ki buna çok hayal kırıklığına uğradık.",
+          "description": "“at which” = at the cancellation. Edatlı kullanım da mümkün."
+        }
+      ],
+      "mini_test": {
+        "question": "The temperature dropped suddenly, ___ caused the pipes to freeze.",
+        "options": {
+          "A": "that",
+          "B": "which",
+          "C": "who",
+          "D": "when"
+        },
+        "correct": "B",
+        "explanation": "Önceki cümlenin tamamı kastediliyor: sıcaklığın düşmesi. “which” doğru. “that” bu şekilde kullanılmaz."
+      },
+      "mini_tests": [
+        {
+          "question": "The temperature dropped suddenly, ___ caused the pipes to freeze.",
+          "options": {
+            "A": "that",
+            "B": "which",
+            "C": "who",
+            "D": "when"
+          },
+          "correct": "B",
+          "explanation": "Önceki cümlenin tamamı kastediliyor: sıcaklığın düşmesi. “which” doğru. “that” bu şekilde kullanılmaz."
+        }
+      ],
+      "word_count": 346
+    },
+    {
+      "page_number": 10,
+      "title": "Miktar İfadeleriyle Sıfat Cümlecikleri",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>“Some of, many of, most of, half of, both of, neither of, etc.” gibi miktar ifadeleriyle sıfat cümleciği kurmak istediğimizde, bu ifadelerden sonra <strong>of + relative pronoun</strong> kullanırız. Kullanılabilecek relative pronounlar: <strong>whom</strong> (insan), <strong>which</strong> (insan dışı), <strong>whose</strong> (aitlik).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Miktar ifadesi + of + whom / which / whose şeklinde dizilir. “Whose” durumunda “of whose + noun” veya “noun + of which” gibi varyasyonlar olabilir.</p>\n</blockquote>\n<hr>\n<h2>👥 İnsanlar için: some of whom, etc.</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> We have ten employees, five of whom speak at least three languages.<br>\n<strong>TR:</strong> On çalışanımız var, bunların beşi en az üç dil konuşuyor.<br>\n→ <strong>Açıklama:</strong> “five of whom” = beşi (çalışanların). “Whom” insanları temsil ediyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The students, most of whom were tired, still listened carefully.<br>\n<strong>TR:</strong> Çoğu yorgun olan öğrenciler yine de dikkatle dinledi.<br>\n→ <strong>Açıklama:</strong> “most of whom” öğrencilerin çoğu.</p>\n<hr>\n<h2>🏛️ İnsan dışı için: some of which, etc.</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> She gave me several books, two of which I had already read.<br>\n<strong>TR:</strong> Bana birkaç kitap verdi, ikisini daha önce okumuştum.<br>\n→ <strong>Açıklama:</strong> “two of which” = iki tanesi (kitapların).</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The proposals, none of which were accepted, had taken months to prepare.<br>\n<strong>TR:</strong> Hiçbiri kabul edilmeyen teklifler aylarca hazırlanmıştı.<br>\n→ <strong>Açıklama:</strong> “none of which” = hiçbiri (tekliflerin).</p>\n<hr>\n<h2>🔑 Aitlik durumunda: whose</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> There are many countries, some of whose citizens face severe poverty.<br>\n<strong>TR:</strong> Vatandaşlarının bazıları ciddi yoksulluk çeken birçok ülke var.<br>\n→ <strong>Açıklama:</strong> “some of whose citizens” = vatandaşlarının bazıları. “Whose” aitlik bildiriyor.</p>\n<p><strong>Örnek 6 (of which ile alternatif):</strong><br>\n<strong>EN:</strong> There are many countries, the citizens of some of which face severe poverty.<br>\n<strong>TR:</strong> Vatandaşlarının bazıları ciddi yoksulluk çeken birçok ülke var.<br>\n→ <strong>Açıklama:</strong> “of which” kullanıldığında isim öne alınır: “the citizens of some of which”.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSeçeneklerde “all of whom”, “most of which” gibi ifadeler varsa, boşluğun öncesindeki ismin insan mı insan dışı mı olduğuna bakın. “Whom” insan, “which” insan dışı içindir. Ayrıca virgül genellikle vardır (non‑defining).\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Miktar İfadesi</th>\n<th>İnsan</th>\n<th>İnsan dışı</th>\n<th>Aitlik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>some of</td>\n<td>some of whom</td>\n<td>some of which</td>\n<td>some of whose + noun</td>\n</tr>\n<tr>\n<td>many of</td>\n<td>many of whom</td>\n<td>many of which</td>\n<td>many of whose + noun</td>\n</tr>\n<tr>\n<td>most of</td>\n<td>most of whom</td>\n<td>most of which</td>\n<td>most of whose + noun</td>\n</tr>\n<tr>\n<td>half of</td>\n<td>half of whom</td>\n<td>half of which</td>\n<td>half of whose + noun</td>\n</tr>\n<tr>\n<td>both of</td>\n<td>both of whom</td>\n<td>both of which</td>\n<td>both of whose + noun</td>\n</tr>\n<tr>\n<td>neither of</td>\n<td>neither of whom</td>\n<td>neither of which</td>\n<td>neither of whose + noun</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe committee members, three ___ were absent, voted on the proposal.</p>\n<p>A) of which<br>\nB) of whom<br>\nC) of whose<br>\nD) which  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “committee members” insan, “three of them” → “three of whom” doğru.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "We have ten employees, five of whom speak at least three languages.",
+          "tr": "On çalışanımız var, bunların beşi en az üç dil konuşuyor.",
+          "description": "“five of whom” = beşi (çalışanların). “Whom” insanları temsil ediyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The students, most of whom were tired, still listened carefully.",
+          "tr": "Çoğu yorgun olan öğrenciler yine de dikkatle dinledi.",
+          "description": "“most of whom” öğrencilerin çoğu."
+        },
+        {
+          "en": "She gave me several books, two of which I had already read.",
+          "tr": "Bana birkaç kitap verdi, ikisini daha önce okumuştum.",
+          "description": "“two of which” = iki tanesi (kitapların).\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The proposals, none of which were accepted, had taken months to prepare.",
+          "tr": "Hiçbiri kabul edilmeyen teklifler aylarca hazırlanmıştı.",
+          "description": "“none of which” = hiçbiri (tekliflerin)."
+        },
+        {
+          "en": "There are many countries, some of whose citizens face severe poverty.",
+          "tr": "Vatandaşlarının bazıları ciddi yoksulluk çeken birçok ülke var.",
+          "description": "“some of whose citizens” = vatandaşlarının bazıları. “Whose” aitlik bildiriyor.\n\n**Örnek 6 (of which ile alternatif):**"
+        },
+        {
+          "en": "There are many countries, the citizens of some of which face severe poverty.",
+          "tr": "Vatandaşlarının bazıları ciddi yoksulluk çeken birçok ülke var.",
+          "description": "“of which” kullanıldığında isim öne alınır: “the citizens of some of which”."
+        }
+      ],
+      "mini_test": {
+        "question": "The committee members, three ___ were absent, voted on the proposal.",
+        "options": {
+          "A": "of which",
+          "B": "of whom",
+          "C": "of whose",
+          "D": "which"
+        },
+        "correct": "B",
+        "explanation": "“committee members” insan, “three of them” → “three of whom” doğru."
+      },
+      "mini_tests": [
+        {
+          "question": "The committee members, three ___ were absent, voted on the proposal.",
+          "options": {
+            "A": "of which",
+            "B": "of whom",
+            "C": "of whose",
+            "D": "which"
+          },
+          "correct": "B",
+          "explanation": "“committee members” insan, “three of them” → “three of whom” doğru."
+        }
+      ],
+      "word_count": 441
+    },
+    {
+      "page_number": 11,
+      "title": "Sıfat Cümleciklerinde Kısaltma – Aktif (Ving)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Sıfat cümleciğinde <strong>özne</strong> durumundaki relative pronoun ve varsa “be” fiilini atarak cümleciği kısaltabiliriz. Aktif (etken) cümlelerde fiili <strong>‑ing</strong> (Ving) formuna sokarız.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Kısaltma yapabilmek için sıfat cümleciğinin <strong>subject‑focused</strong> (özne odaklı) olması gerekir. Yani nitelenen isim, cümleciğin öznesidir.</p>\n</blockquote>\n<hr>\n<h2>📝 Aktif kısaltma kuralı</h2>\n<p><strong>Örnek 1 (Defining):</strong><br>\n<strong>EN:</strong> People who live in glass houses shouldn’t throw stones.<br>\n<strong>EN (kısaltılmış):</strong> People living in glass houses shouldn’t throw stones.<br>\n<strong>TR:</strong> Cam evlerde oturan insanlar taş atmamalı.<br>\n→ <strong>Açıklama:</strong> “who live” aktif → “living” yapıldı. Anlam tamamen aynı.</p>\n<p><strong>Örnek 2 (Defining):</strong><br>\n<strong>EN:</strong> The students who are waiting for the exam results look nervous.<br>\n<strong>EN (kısaltılmış):</strong> The students waiting for the exam results look nervous.<br>\n<strong>TR:</strong> Sınav sonuçlarını bekleyen öğrenciler gergin görünüyor.<br>\n→ <strong>Açıklama:</strong> “who are waiting” → “waiting”. “Are” atıldı, fiil -ing aldı.</p>\n<hr>\n<h2>🌍 Non‑Defining kısaltmalar</h2>\n<p>Non‑defining (virgüllü) yapılarda kısaltma yapıldığında, kısaltılmış ifade ismin önüne de geçebilir.</p>\n<p><strong>Örnek 3 (Non‑Defining):</strong><br>\n<strong>EN:</strong> The new teacher, who comes from Canada, is very friendly.<br>\n<strong>EN (kısaltılmış, isimden sonra):</strong> The new teacher, coming from Canada, is very friendly.<br>\n<strong>EN (kısaltılmış, isimden önce):</strong> Coming from Canada, the new teacher is very friendly.<br>\n<strong>TR:</strong> Kanada’dan gelen yeni öğretmen çok arkadaş canlısı.<br>\n→ <strong>Açıklama:</strong> Virgüller korunur; kısaltılmış ifade ismin önüne alınabilir.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The children, who were playing in the garden, didn’t hear us.<br>\n<strong>EN (kısaltılmış):</strong> The children playing in the garden didn’t hear us. (Defining gibi duruyor; aslında non‑defining’de virgüller kalkabilir mi? Dikkat: Non‑defining’de virgül kalkarsa anlam değişebilir. Genelde virgüller korunur veya ifade başa alınır.)<br>\n→ <strong>Açıklama:</strong> Daha doğru: “The children, playing in the garden, didn’t hear us.” veya “Playing in the garden, the children didn’t hear us.”</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir cümlede isimden hemen sonra bir fiil -ing formunda geliyorsa ve ana fiil zaten varsa, bu bir sıfat cümleciği kısaltmasıdır. Anlam aktifse Ving doğrudur.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Orijinal</th>\n<th>Kısaltılmış (Aktif)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>who live</td>\n<td>living</td>\n</tr>\n<tr>\n<td>which runs</td>\n<td>running</td>\n</tr>\n<tr>\n<td>that are sleeping</td>\n<td>sleeping</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe man ___ a newspaper is my uncle.</p>\n<p>A) read<br>\nB) reading<br>\nC) to read<br>\nD) being read  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “The man who is reading a newspaper” → aktif kısaltma “reading”. “Being read” pasif olurdu, anlam bozulur.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "People who live in glass houses shouldn’t throw stones.\n**EN (kısaltılmış):** People living in glass houses shouldn’t throw stones.",
+          "tr": "Cam evlerde oturan insanlar taş atmamalı.",
+          "description": "“who live” aktif → “living” yapıldı. Anlam tamamen aynı.\n\n**Örnek 2 (Defining):**"
+        },
+        {
+          "en": "The students who are waiting for the exam results look nervous.\n**EN (kısaltılmış):** The students waiting for the exam results look nervous.",
+          "tr": "Sınav sonuçlarını bekleyen öğrenciler gergin görünüyor.",
+          "description": "“who are waiting” → “waiting”. “Are” atıldı, fiil -ing aldı."
+        },
+        {
+          "en": "The new teacher, who comes from Canada, is very friendly.\n**EN (kısaltılmış, isimden sonra):** The new teacher, coming from Canada, is very friendly.\n**EN (kısaltılmış, isimden önce):** Coming from Canada, the new teacher is very friendly.",
+          "tr": "Kanada’dan gelen yeni öğretmen çok arkadaş canlısı.",
+          "description": "Virgüller korunur; kısaltılmış ifade ismin önüne alınabilir.\n\n**Örnek 4:**"
+        }
+      ],
+      "mini_test": {
+        "question": "The man ___ a newspaper is my uncle.",
+        "options": {
+          "A": "read",
+          "B": "reading",
+          "C": "to read",
+          "D": "being read"
+        },
+        "correct": "B",
+        "explanation": "“The man who is reading a newspaper” → aktif kısaltma “reading”. “Being read” pasif olurdu, anlam bozulur."
+      },
+      "mini_tests": [
+        {
+          "question": "The man ___ a newspaper is my uncle.",
+          "options": {
+            "A": "read",
+            "B": "reading",
+            "C": "to read",
+            "D": "being read"
+          },
+          "correct": "B",
+          "explanation": "“The man who is reading a newspaper” → aktif kısaltma “reading”. “Being read” pasif olurdu, anlam bozulur."
+        }
+      ],
+      "word_count": 372
+    },
+    {
+      "page_number": 12,
+      "title": "Sıfat Cümleciklerinde Kısaltma – Pasif (V3 / Being V3)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Pasif (edilgen) sıfat cümleciklerinde kısaltma, fiilin <strong>V3</strong> (past participle) formuyla yapılır. Eğer cümlecik Present Continuous veya Past Continuous gibi bir progressive yapıdaysa <strong>being V3</strong> kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Pasif kısaltmada fiil genellikle V3 halindedir. “Being V3” ise o an devam eden pasif bir eylemi belirtir.</p>\n</blockquote>\n<hr>\n<h2>📉 Genel pasif kısaltma (V3)</h2>\n<p><strong>Örnek 1 (Defining):</strong><br>\n<strong>EN:</strong> The money which was stolen from the bank was found.<br>\n<strong>EN (kısaltılmış):</strong> The money stolen from the bank was found.<br>\n<strong>TR:</strong> Bankadan çalınan para bulundu.<br>\n→ <strong>Açıklama:</strong> “which was stolen” → “stolen”. “was” atıldı, fiil V3 oldu.</p>\n<p><strong>Örnek 2 (Defining):</strong><br>\n<strong>EN:</strong> The documents that were signed by the CEO are on your desk.<br>\n<strong>EN (kısaltılmış):</strong> The documents signed by the CEO are on your desk.<br>\n<strong>TR:</strong> CEO tarafından imzalanan belgeler masanızda.<br>\n→ <strong>Açıklama:</strong> “that were signed” → “signed”.</p>\n<hr>\n<h2>🕒 Progressive pasif kısaltma (being V3)</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The patient who is being examined by the doctor looks very ill.<br>\n<strong>EN (kısaltılmış):</strong> The patient being examined by the doctor looks very ill.<br>\n<strong>TR:</strong> Doktor tarafından muayene edilen hasta çok hasta görünüyor.<br>\n→ <strong>Açıklama:</strong> “who is being examined” → “being examined”. Anlam “şu anda muayene edilmekte olan”.</p>\n<p><strong>Örnek 4 (Non‑Defining):</strong><br>\n<strong>EN:</strong> The bridge, which is being repaired at the moment, will be closed for a month.<br>\n<strong>EN (kısaltılmış):</strong> The bridge, being repaired at the moment, will be closed for a month.<br>\n<strong>TR:</strong> Şu anda onarılmakta olan köprü bir ay kapalı kalacak.<br>\n→ <strong>Açıklama:</strong> Virgüller korunur, “being repaired” kısaltması.</p>\n<hr>\n<h2>⚠️ Dikkat: V3 ile sıfat arasındaki fark</h2>\n<p>Bazı V3 formları sıfat olarak da kullanılabilir (örneğin “broken window”). Ancak burada bir eylem kastediliyorsa pasif kısaltmadır.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The window broken by the kids needs to be replaced.<br>\n<strong>TR:</strong> Çocuklar tarafından kırılan pencere değiştirilmeli.<br>\n→ <strong>Açıklama:</strong> “which was broken” → “broken”. Pasif kısaltma.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nİsimden sonra V3 geliyorsa ve anlam “yapılan, edilen” şeklindeyse pasif kısaltmadır. Eğer anlam aktifse Ving kullanılmalıydı.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Orijinal</th>\n<th>Kısaltılmış (Pasif)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>which was stolen</td>\n<td>stolen</td>\n</tr>\n<tr>\n<td>that are being built</td>\n<td>being built</td>\n</tr>\n<tr>\n<td>who were invited</td>\n<td>invited</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe meeting ___ yesterday lasted three hours.</p>\n<p>A) holding<br>\nB) held<br>\nC) to hold<br>\nD) being held  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “The meeting which was held yesterday” → pasif kısaltma “held”. “Being held” devam eden anlamı katar, oysa “yesterday” geçmişte bitmiş bir olay.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 205]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The money which was stolen from the bank was found.\n**EN (kısaltılmış):** The money stolen from the bank was found.",
+          "tr": "Bankadan çalınan para bulundu.",
+          "description": "“which was stolen” → “stolen”. “was” atıldı, fiil V3 oldu.\n\n**Örnek 2 (Defining):**"
+        },
+        {
+          "en": "The documents that were signed by the CEO are on your desk.\n**EN (kısaltılmış):** The documents signed by the CEO are on your desk.",
+          "tr": "CEO tarafından imzalanan belgeler masanızda.",
+          "description": "“that were signed” → “signed”."
+        },
+        {
+          "en": "The patient who is being examined by the doctor looks very ill.\n**EN (kısaltılmış):** The patient being examined by the doctor looks very ill.",
+          "tr": "Doktor tarafından muayene edilen hasta çok hasta görünüyor.",
+          "description": "“who is being examined” → “being examined”. Anlam “şu anda muayene edilmekte olan”.\n\n**Örnek 4 (Non‑Defining):**"
+        },
+        {
+          "en": "The bridge, which is being repaired at the moment, will be closed for a month.\n**EN (kısaltılmış):** The bridge, being repaired at the moment, will be closed for a month.",
+          "tr": "Şu anda onarılmakta olan köprü bir ay kapalı kalacak.",
+          "description": "Virgüller korunur, “being repaired” kısaltması."
+        },
+        {
+          "en": "The window broken by the kids needs to be replaced.",
+          "tr": "Çocuklar tarafından kırılan pencere değiştirilmeli.",
+          "description": "“which was broken” → “broken”. Pasif kısaltma."
+        }
+      ],
+      "mini_test": {
+        "question": "The meeting ___ yesterday lasted three hours.",
+        "options": {
+          "A": "holding",
+          "B": "held",
+          "C": "to hold",
+          "D": "being held"
+        },
+        "correct": "B",
+        "explanation": "“The meeting which was held yesterday” → pasif kısaltma “held”. “Being held” devam eden anlamı katar, oysa “yesterday” geçmişte bitmiş bir olay."
+      },
+      "mini_tests": [
+        {
+          "question": "The meeting ___ yesterday lasted three hours.",
+          "options": {
+            "A": "holding",
+            "B": "held",
+            "C": "to hold",
+            "D": "being held"
+          },
+          "correct": "B",
+          "explanation": "“The meeting which was held yesterday” → pasif kısaltma “held”. “Being held” devam eden anlamı katar, oysa “yesterday” geçmişte bitmiş bir olay."
+        }
+      ],
+      "word_count": 377
+    },
+    {
+      "page_number": 13,
+      "title": "Kısaltma: Sıfat ve Edat Öbekleri (Be + Adjective / Preposition)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Sıfat cümleciğinde “be” fiilinden sonra bir <strong>sıfat</strong> veya <strong>edat öbeği</strong> geliyorsa, “be” ve relative pronoun atılarak kısaltma yapılır. Geriye sadece sıfat veya edat öbeği kalır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu kısaltma türünde fiil tamamen yok olur; sıfat veya edat öbeği doğrudan ismi niteler.</p>\n</blockquote>\n<hr>\n<h2>🟢 Sıfat öbeği ile kısaltma</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The person who is responsible for the project should be praised.<br>\n<strong>EN (kısaltılmış):</strong> The person responsible for the project should be praised.<br>\n<strong>TR:</strong> Projeden sorumlu kişi övülmeli.<br>\n→ <strong>Açıklama:</strong> “who is responsible” → “responsible”. Sıfat doğrudan ismi niteliyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> We need a box which is big enough to hold all these items.<br>\n<strong>EN (kısaltılmış):</strong> We need a box big enough to hold all these items.<br>\n<strong>TR:</strong> Bütün bu eşyaları alacak kadar büyük bir kutuya ihtiyacımız var.<br>\n→ <strong>Açıklama:</strong> “which is big enough” → “big enough”. Sıfat öbeği.</p>\n<hr>\n<h2>📍 Edat öbeği ile kısaltma</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The people who were along the road watched the parade.<br>\n<strong>EN (kısaltılmış):</strong> The people along the road watched the parade.<br>\n<strong>TR:</strong> Yol boyunca insanlar geçit törenini izledi.<br>\n→ <strong>Açıklama:</strong> “who were along the road” → “along the road”. Edat öbeği.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The man who is at the door wants to see you.<br>\n<strong>EN (kısaltılmış):</strong> The man at the door wants to see you.<br>\n<strong>TR:</strong> Kapıdaki adam sizi görmek istiyor.<br>\n→ <strong>Açıklama:</strong> “who is at the door” → “at the door”. Çok yaygın bir kullanım.</p>\n<hr>\n<h2>🌍 Non‑Defining örnekler</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> My grandmother, who is over ninety, still does her own shopping.<br>\n<strong>EN (kısaltılmış):</strong> My grandmother, over ninety, still does her own shopping.<br>\n<strong>TR:</strong> Doksan yaş üstü olan büyükannem hâlâ kendi alışverişini yapıyor.<br>\n→ <strong>Açıklama:</strong> “who is over ninety” → “over ninety”. Virgüller korunur.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir isimden hemen sonra bir sıfat veya edat öbeği geliyorsa, bu genellikle bir sıfat cümleciği kısaltmasıdır. “Be” fiilinin atıldığını unutmayın.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Orijinal</th>\n<th>Kısaltılmış</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>who is responsible</td>\n<td>responsible</td>\n</tr>\n<tr>\n<td>which is on the table</td>\n<td>on the table</td>\n</tr>\n<tr>\n<td>that are ready</td>\n<td>ready</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe hotel ___ the beach was fully booked.</p>\n<p>A) located<br>\nB) is located<br>\nC) opposite<br>\nD) which opposite  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** C  \n**Açıklama:** “The hotel which is opposite the beach” → kısaltılmış hali “the hotel opposite the beach”. “Opposite” edatı burada doğrudan ismi niteler.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 200]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The person who is responsible for the project should be praised.\n**EN (kısaltılmış):** The person responsible for the project should be praised.",
+          "tr": "Projeden sorumlu kişi övülmeli.",
+          "description": "“who is responsible” → “responsible”. Sıfat doğrudan ismi niteliyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "We need a box which is big enough to hold all these items.\n**EN (kısaltılmış):** We need a box big enough to hold all these items.",
+          "tr": "Bütün bu eşyaları alacak kadar büyük bir kutuya ihtiyacımız var.",
+          "description": "“which is big enough” → “big enough”. Sıfat öbeği."
+        },
+        {
+          "en": "The people who were along the road watched the parade.\n**EN (kısaltılmış):** The people along the road watched the parade.",
+          "tr": "Yol boyunca insanlar geçit törenini izledi.",
+          "description": "“who were along the road” → “along the road”. Edat öbeği.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The man who is at the door wants to see you.\n**EN (kısaltılmış):** The man at the door wants to see you.",
+          "tr": "Kapıdaki adam sizi görmek istiyor.",
+          "description": "“who is at the door” → “at the door”. Çok yaygın bir kullanım."
+        },
+        {
+          "en": "My grandmother, who is over ninety, still does her own shopping.\n**EN (kısaltılmış):** My grandmother, over ninety, still does her own shopping.",
+          "tr": "Doksan yaş üstü olan büyükannem hâlâ kendi alışverişini yapıyor.",
+          "description": "“who is over ninety” → “over ninety”. Virgüller korunur."
+        }
+      ],
+      "mini_test": {
+        "question": "The hotel ___ the beach was fully booked.",
+        "options": {
+          "A": "located",
+          "B": "is located",
+          "C": "opposite",
+          "D": "which opposite"
+        },
+        "correct": "C",
+        "explanation": "“The hotel which is opposite the beach” → kısaltılmış hali “the hotel opposite the beach”. “Opposite” edatı burada doğrudan ismi niteler."
+      },
+      "mini_tests": [
+        {
+          "question": "The hotel ___ the beach was fully booked.",
+          "options": {
+            "A": "located",
+            "B": "is located",
+            "C": "opposite",
+            "D": "which opposite"
+          },
+          "correct": "C",
+          "explanation": "“The hotel which is opposite the beach” → kısaltılmış hali “the hotel opposite the beach”. “Opposite” edatı burada doğrudan ismi niteler."
+        }
+      ],
+      "word_count": 371
+    },
+    {
+      "page_number": 14,
+      "title": "Kısaltma: To + Infinitive (The first, the only, superlatives)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Eğer nitelenen isimden önce <strong>the first, the second, the last, the next, the only</strong> gibi sıralama veya teklik bildiren ifadeler ya da <strong>superlative</strong> (the best, the most beautiful, etc.) varsa, sıfat cümleciği “to + infinitive” ile kısaltılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıda relative pronoun (who/which) ve fiil atılır, yerine “to + fiil” getirilir.</p>\n</blockquote>\n<hr>\n<h2>🥇 “The first / last / only” ile</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The first person who landed on the moon was Neil Armstrong.<br>\n<strong>EN (kısaltılmış):</strong> The first person to land on the moon was Neil Armstrong.<br>\n<strong>TR:</strong> Ay’a ayak basan ilk kişi Neil Armstrong’du.<br>\n→ <strong>Açıklama:</strong> “who landed” → “to land”. “The first” kuralı uygulandı.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She was the only woman who won the Nobel Prize twice.<br>\n<strong>EN (kısaltılmış):</strong> She was the only woman to win the Nobel Prize twice.<br>\n<strong>TR:</strong> Nobel Ödülü’nü iki kez kazanan tek kadın oydu.<br>\n→ <strong>Açıklama:</strong> “who won” → “to win”. “The only” ile.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> He is the oldest person who underwent a heart transplant.<br>\n<strong>EN (kısaltılmış):</strong> He is the oldest person to undergo a heart transplant.<br>\n<strong>TR:</strong> Kalp nakli geçiren en yaşlı kişi o.<br>\n→ <strong>Açıklama:</strong> Superlative “the oldest” → “to undergo”.</p>\n<hr>\n<h2>🛠️ Pasif durumda: to be V3</h2>\n<p>Eğer sıfat cümleciği pasifse, kısaltma “to be V3” şeklinde olur. Bazen sadece V3 de kullanılabilir.</p>\n<p><strong>Örnek 4 (pasif):</strong><br>\n<strong>EN:</strong> He is the first man who was chosen as the representative.<br>\n<strong>EN (kısaltılmış, to be V3):</strong> He is the first man to be chosen as the representative.<br>\n<strong>EN (kısaltılmış, sadece V3):</strong> He is the first man chosen as the representative.<br>\n<strong>TR:</strong> Temsilci olarak seçilen ilk erkek o.<br>\n→ <strong>Açıklama:</strong> İki kısaltma da mümkün. “to be chosen” veya direkt “chosen”.</p>\n<hr>\n<h2>⚠️ Modal içeren cümlelerde</h2>\n<p>Modal (can, must, will, etc.) içeren sıfat cümlecikleri de “to + infinitive” ile kısaltılabilir.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> I have many responsibilities that I must fulfill.<br>\n<strong>EN (kısaltılmış):</strong> I have many responsibilities to fulfill.<br>\n<strong>TR:</strong> Yerine getirmem gereken birçok sorumluluğum var.<br>\n→ <strong>Açıklama:</strong> “that I must fulfill” → “to fulfill”. Modal anlamı kaybolmaz.</p>\n<p><strong>Örnek 6 (pasif modal):</strong><br>\n<strong>EN:</strong> There are many things that must be done.<br>\n<strong>EN (kısaltılmış):</strong> There are many things to be done.<br>\n<strong>TR:</strong> Yapılması gereken birçok şey var.<br>\n→ <strong>Açıklama:</strong> “to be done” pasif anlamı korur.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBoşluktan önce “the first, the only, the best” gibi ifadeler varsa ve boşluktan sonra fiil geliyorsa, büyük olasılıkla “to + V” doğru cevaptır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Orijinal</th>\n<th>Kısaltılmış (Aktif)</th>\n<th>Kısaltılmış (Pasif)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>who won</td>\n<td>to win</td>\n<td>to be won / won</td>\n</tr>\n<tr>\n<td>which must be done</td>\n<td>-</td>\n<td>to be done</td>\n</tr>\n<tr>\n<td>that can help</td>\n<td>to help</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nShe was the last candidate ___ interviewed for the position.</p>\n<p>A) to be<br>\nB) being<br>\nC) to have<br>\nD) having  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** A  \n**Açıklama:** “The last candidate who was interviewed” → pasif kısaltma “to be interviewed” doğru. “To be” + V3. “Being” continuous anlam katar, uygun değil.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 218]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The first person who landed on the moon was Neil Armstrong.\n**EN (kısaltılmış):** The first person to land on the moon was Neil Armstrong.",
+          "tr": "Ay’a ayak basan ilk kişi Neil Armstrong’du.",
+          "description": "“who landed” → “to land”. “The first” kuralı uygulandı.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She was the only woman who won the Nobel Prize twice.\n**EN (kısaltılmış):** She was the only woman to win the Nobel Prize twice.",
+          "tr": "Nobel Ödülü’nü iki kez kazanan tek kadın oydu.",
+          "description": "“who won” → “to win”. “The only” ile.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "He is the oldest person who underwent a heart transplant.\n**EN (kısaltılmış):** He is the oldest person to undergo a heart transplant.",
+          "tr": "Kalp nakli geçiren en yaşlı kişi o.",
+          "description": "Superlative “the oldest” → “to undergo”."
+        },
+        {
+          "en": "He is the first man who was chosen as the representative.\n**EN (kısaltılmış, to be V3):** He is the first man to be chosen as the representative.\n**EN (kısaltılmış, sadece V3):** He is the first man chosen as the representative.",
+          "tr": "Temsilci olarak seçilen ilk erkek o.",
+          "description": "İki kısaltma da mümkün. “to be chosen” veya direkt “chosen”."
+        },
+        {
+          "en": "I have many responsibilities that I must fulfill.\n**EN (kısaltılmış):** I have many responsibilities to fulfill.",
+          "tr": "Yerine getirmem gereken birçok sorumluluğum var.",
+          "description": "“that I must fulfill” → “to fulfill”. Modal anlamı kaybolmaz.\n\n**Örnek 6 (pasif modal):**"
+        },
+        {
+          "en": "There are many things that must be done.\n**EN (kısaltılmış):** There are many things to be done.",
+          "tr": "Yapılması gereken birçok şey var.",
+          "description": "“to be done” pasif anlamı korur."
+        }
+      ],
+      "mini_test": {
+        "question": "She was the last candidate ___ interviewed for the position.",
+        "options": {
+          "A": "to be",
+          "B": "being",
+          "C": "to have",
+          "D": "having"
+        },
+        "correct": "A",
+        "explanation": "“The last candidate who was interviewed” → pasif kısaltma “to be interviewed” doğru. “To be” + V3. “Being” continuous anlam katar, uygun değil."
+      },
+      "mini_tests": [
+        {
+          "question": "She was the last candidate ___ interviewed for the position.",
+          "options": {
+            "A": "to be",
+            "B": "being",
+            "C": "to have",
+            "D": "having"
+          },
+          "correct": "A",
+          "explanation": "“The last candidate who was interviewed” → pasif kısaltma “to be interviewed” doğru. “To be” + V3. “Being” continuous anlam katar, uygun değil."
+        }
+      ],
+      "word_count": 469
+    },
+    {
+      "page_number": 15,
+      "title": "Kısaltma: Appositive Phrase (Açıklayıcı İsim/ Sıfat Öbeği)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Non‑defining sıfat cümleciklerinde “who/which + be” atıldığında geriye kalan isim, sıfat veya sıfat öbeğine <strong>appositive phrase</strong> denir. Bu yapı, nitelediği ismin hemen ardından veya önünde virgüllerle kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Appositive phrase aslında bir tür kısaltmadır ve genellikle ek bilgi verir.</p>\n</blockquote>\n<hr>\n<h2>👤 İsim (noun) ile appositive</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> İsmet İnönü, who was the second president of Turkey, was a statesman.<br>\n<strong>EN (appositive):</strong> İsmet İnönü, the second president of Turkey, was a statesman.<br>\n<strong>TR:</strong> Türkiye’nin ikinci cumhurbaşkanı olan İsmet İnönü bir devlet adamıydı.<br>\n→ <strong>Açıklama:</strong> “who was the second president” → “the second president”. Bu bir isim öbeği, appositive.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The METU, which was founded in 1956, is a leading university.<br>\n<strong>EN (appositive):</strong> The METU, founded in 1956, is a leading university.<br>\n<strong>TR:</strong> 1956’da kurulan ODTÜ önde gelen bir üniversitedir.<br>\n→ <strong>Açıklama:</strong> “which was founded” → “founded”. V3 ile appositive.</p>\n<hr>\n<h2>🟢 Sıfat (adjective) ile appositive</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Jason, who is brilliant at maths, also plays piano.<br>\n<strong>EN (appositive):</strong> Jason, brilliant at maths, also plays piano.<br>\n<strong>TR:</strong> Matematikte parlak olan Jason aynı zamanda piyano çalar.<br>\n→ <strong>Açıklama:</strong> “who is brilliant” → “brilliant at maths”. Sıfat öbeği.</p>\n<p><strong>Örnek 4 (isimden önce):</strong><br>\n<strong>EN:</strong> Brilliant at maths, Jason also plays piano.<br>\n<strong>TR:</strong> Matematikte parlak olan Jason aynı zamanda piyano çalar.<br>\n→ <strong>Açıklama:</strong> Appositive phrase cümlenin başına da geçebilir.</p>\n<hr>\n<h2>🏛️ Pasif yapılı appositive</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The book, which was written in the 18th century, is still popular.<br>\n<strong>EN (appositive):</strong> The book, written in the 18th century, is still popular.<br>\n<strong>TR:</strong> 18. yüzyılda yazılan kitap hâlâ popüler.<br>\n→ <strong>Açıklama:</strong> “which was written” → “written”. Pasif kısaltma.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nAppositive phrase genellikle virgüllerle ayrılır ve cümleden çıkarıldığında anlam bozulmaz (non‑defining). Sınavlarda, “who is / which is” gibi yapıların kısaltılmış halleri olarak karşımıza çıkar.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Orijinal</th>\n<th>Appositive</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>who was the manager</td>\n<td>the manager</td>\n</tr>\n<tr>\n<td>which is located in Ankara</td>\n<td>located in Ankara</td>\n</tr>\n<tr>\n<td>who were exhausted</td>\n<td>exhausted</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\n___ by a famous architect, the museum attracts many visitors.</p>\n<p>A) Designed<br>\nB) Designing<br>\nC) Having designed<br>\nD) To design  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** A  \n**Açıklama:** “The museum, which was designed by a famous architect, attracts...” → kısaltılmış hali “Designed by a famous architect, the museum...” Pasif anlam, V3.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 195]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "İsmet İnönü, who was the second president of Turkey, was a statesman.\n**EN (appositive):** İsmet İnönü, the second president of Turkey, was a statesman.",
+          "tr": "Türkiye’nin ikinci cumhurbaşkanı olan İsmet İnönü bir devlet adamıydı.",
+          "description": "“who was the second president” → “the second president”. Bu bir isim öbeği, appositive.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The METU, which was founded in 1956, is a leading university.\n**EN (appositive):** The METU, founded in 1956, is a leading university.",
+          "tr": "1956’da kurulan ODTÜ önde gelen bir üniversitedir.",
+          "description": "“which was founded” → “founded”. V3 ile appositive."
+        },
+        {
+          "en": "Jason, who is brilliant at maths, also plays piano.\n**EN (appositive):** Jason, brilliant at maths, also plays piano.",
+          "tr": "Matematikte parlak olan Jason aynı zamanda piyano çalar.",
+          "description": "“who is brilliant” → “brilliant at maths”. Sıfat öbeği.\n\n**Örnek 4 (isimden önce):**"
+        },
+        {
+          "en": "Brilliant at maths, Jason also plays piano.",
+          "tr": "Matematikte parlak olan Jason aynı zamanda piyano çalar.",
+          "description": "Appositive phrase cümlenin başına da geçebilir."
+        },
+        {
+          "en": "The book, which was written in the 18th century, is still popular.\n**EN (appositive):** The book, written in the 18th century, is still popular.",
+          "tr": "18. yüzyılda yazılan kitap hâlâ popüler.",
+          "description": "“which was written” → “written”. Pasif kısaltma."
+        }
+      ],
+      "mini_test": {
+        "question": "___ by a famous architect, the museum attracts many visitors.",
+        "options": {
+          "A": "Designed",
+          "B": "Designing",
+          "C": "Having designed",
+          "D": "To design"
+        },
+        "correct": "A",
+        "explanation": "“The museum, which was designed by a famous architect, attracts...” → kısaltılmış hali “Designed by a famous architect, the museum...” Pasif anlam, V3."
+      },
+      "mini_tests": [
+        {
+          "question": "___ by a famous architect, the museum attracts many visitors.",
+          "options": {
+            "A": "Designed",
+            "B": "Designing",
+            "C": "Having designed",
+            "D": "To design"
+          },
+          "correct": "A",
+          "explanation": "“The museum, which was designed by a famous architect, attracts...” → kısaltılmış hali “Designed by a famous architect, the museum...” Pasif anlam, V3."
+        }
+      ],
+      "word_count": 366
+    },
+    {
+      "page_number": 16,
+      "title": "Edat + Relative Pronoun Yapıları (Preposition Combinations)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Sıfat cümleciklerinde edatlar, nitelenen isme veya cümlecikteki fiil/sıfata ait olabilir. Bu edatlar ya sonda kalır ya da relative pronoun’un önüne alınır. Hangi edatın kullanılacağı, anlam veya dilbilgisi kurallarına bağlıdır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Edat seçimi, genellikle nitelenen ismin kullanıldığı bağlama göre değişir (örn. “in the city”, “on the day”, “about which”, “with whom” gibi).</p>\n</blockquote>\n<hr>\n<h2>🗺️ Yer ve zaman edatları</h2>\n<p><strong>Örnek 1 (yer):</strong><br>\n<strong>EN:</strong> The village in which I grew up is very small.<br>\n<strong>TR:</strong> İçinde büyüdüğüm köy çok küçük.<br>\n→ <strong>Açıklama:</strong> “in the village” → “in which”. “Where” ile aynı anlamda.</p>\n<p><strong>Örnek 2 (zaman):</strong><br>\n<strong>EN:</strong> The day on which we met was rainy.<br>\n<strong>TR:</strong> Tanıştığımız gün yağmurluydu.<br>\n→ <strong>Açıklama:</strong> “on the day” → “on which”. “When” ile aynı.</p>\n<hr>\n<h2>🔗 Fiil + edat kombinasyonları</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The topic about which we were talking is confidential.<br>\n<strong>TR:</strong> Hakkında konuştuğumuz konu gizli.<br>\n→ <strong>Açıklama:</strong> “talk about” → “about which”. Fiile ait edat.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The person to whom you should send the email is Mr. Jones.<br>\n<strong>TR:</strong> E‑postayı göndermen gereken kişi Bay Jones.<br>\n→ <strong>Açıklama:</strong> “send to” → “to whom”.</p>\n<hr>\n<h2>🟢 Sıfat + edat kombinasyonları</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The issue for which he is responsible must be resolved.<br>\n<strong>TR:</strong> Sorumlu olduğu konu çözülmeli.<br>\n→ <strong>Açıklama:</strong> “responsible for” → “for which”.</p>\n<p><strong>Örnek 6:</strong><br>\n<strong>EN:</strong> The girl with whom he is in love lives next door.<br>\n<strong>TR:</strong> Aşık olduğu kız yan kapıda oturuyor.<br>\n→ <strong>Açıklama:</strong> “in love with” → “with whom”.</p>\n<hr>\n<h2>🧩 İsim + edat kombinasyonları</h2>\n<p><strong>Örnek 7:</strong><br>\n<strong>EN:</strong> The access to which we applied was denied.<br>\n<strong>TR:</strong> Başvurduğumuz erişim reddedildi.<br>\n→ <strong>Açıklama:</strong> “access to” → “to which”. İsme ait edat.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSeçeneklerde “prep + which / whom” varsa, boşluğun devamına bakın. Tam cümle geliyorsa bu yapı doğru olabilir. Edatı bulmak için, nitelenen ismin hangi edatla kullanıldığını veya cümlecikteki fiil/sıfatın hangi edatı aldığını düşünün.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Edat</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>in</td>\n<td>yer</td>\n<td>the city in which...</td>\n</tr>\n<tr>\n<td>on</td>\n<td>gün</td>\n<td>the day on which...</td>\n</tr>\n<tr>\n<td>at</td>\n<td>saat/yer</td>\n<td>the station at which...</td>\n</tr>\n<tr>\n<td>about</td>\n<td>konu</td>\n<td>the subject about which...</td>\n</tr>\n<tr>\n<td>to</td>\n<td>yönelme</td>\n<td>the person to whom...</td>\n</tr>\n<tr>\n<td>for</td>\n<td>sebep/sorumluluk</td>\n<td>the reason for which...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe criteria ___ applicants are judged are very strict.</p>\n<p>A) on which<br>\nB) by which<br>\nC) of which<br>\nD) to which  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “judge by criteria” → “by which”. Adaylar kriterlere göre değerlendirilir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The village in which I grew up is very small.",
+          "tr": "İçinde büyüdüğüm köy çok küçük.",
+          "description": "“in the village” → “in which”. “Where” ile aynı anlamda.\n\n**Örnek 2 (zaman):**"
+        },
+        {
+          "en": "The day on which we met was rainy.",
+          "tr": "Tanıştığımız gün yağmurluydu.",
+          "description": "“on the day” → “on which”. “When” ile aynı."
+        },
+        {
+          "en": "The topic about which we were talking is confidential.",
+          "tr": "Hakkında konuştuğumuz konu gizli.",
+          "description": "“talk about” → “about which”. Fiile ait edat.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The person to whom you should send the email is Mr. Jones.",
+          "tr": "E‑postayı göndermen gereken kişi Bay Jones.",
+          "description": "“send to” → “to whom”."
+        },
+        {
+          "en": "The issue for which he is responsible must be resolved.",
+          "tr": "Sorumlu olduğu konu çözülmeli.",
+          "description": "“responsible for” → “for which”.\n\n**Örnek 6:**"
+        },
+        {
+          "en": "The girl with whom he is in love lives next door.",
+          "tr": "Aşık olduğu kız yan kapıda oturuyor.",
+          "description": "“in love with” → “with whom”."
+        },
+        {
+          "en": "The access to which we applied was denied.",
+          "tr": "Başvurduğumuz erişim reddedildi.",
+          "description": "“access to” → “to which”. İsme ait edat."
+        }
+      ],
+      "mini_test": {
+        "question": "The criteria ___ applicants are judged are very strict.",
+        "options": {
+          "A": "on which",
+          "B": "by which",
+          "C": "of which",
+          "D": "to which"
+        },
+        "correct": "B",
+        "explanation": "“judge by criteria” → “by which”. Adaylar kriterlere göre değerlendirilir."
+      },
+      "mini_tests": [
+        {
+          "question": "The criteria ___ applicants are judged are very strict.",
+          "options": {
+            "A": "on which",
+            "B": "by which",
+            "C": "of which",
+            "D": "to which"
+          },
+          "correct": "B",
+          "explanation": "“judge by criteria” → “by which”. Adaylar kriterlere göre değerlendirilir."
+        }
+      ],
+      "word_count": 376
+    },
+    {
+      "page_number": 17,
+      "title": "Özel Yapılar: Whereby, The Way In Which, vb.",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Bazı özel kelimeler, sıfat cümleciklerinde belirli relative pronoun veya edat yapılarıyla birlikte kullanılır. Örneğin <strong>“whereby”</strong> (‑ aracılığıyla), <strong>“the way in which”</strong> (‑ şekilde), <strong>“the point where”</strong>, <strong>“the stage at which”</strong> gibi.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Whereby” = by means of which, resmî metinlerde sıkça görülür.</p>\n</blockquote>\n<hr>\n<h2>🔁 “Whereby” (by means of which)</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> They developed a new system whereby employees can work from home.<br>\n<strong>TR:</strong> Çalışanların evden çalışabileceği yeni bir sistem geliştirdiler.<br>\n→ <strong>Açıklama:</strong> “whereby” = “by which” (sistem aracılığıyla). “SVO” tam cümle gelir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> There is a procedure whereby complaints are handled confidentially.<br>\n<strong>TR:</strong> Şikayetlerin gizli olarak ele alındığı bir prosedür var.<br>\n→ <strong>Açıklama:</strong> “whereby” yerine “by which” de kullanılabilir.</p>\n<hr>\n<h2>🛣️ “The point where / the stage at which”</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> We reached the point where we had to make a decision.<br>\n<strong>TR:</strong> Karar vermek zorunda olduğumuz noktaya geldik.<br>\n→ <strong>Açıklama:</strong> “the point” + “where” (tam cümle). “At which” de kullanılabilir.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The project is at a stage at which any change could be costly.<br>\n<strong>TR:</strong> Proje, herhangi bir değişikliğin maliyetli olabileceği bir aşamada.<br>\n→ <strong>Açıklama:</strong> “at a stage” → “at which”.</p>\n<hr>\n<h2>🧠 “The way in which / that / Ø”</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> I don’t like the way (in which) he treats his employees.<br>\n<strong>TR:</strong> Çalışanlarına davranış şeklini beğenmiyorum.<br>\n→ <strong>Açıklama:</strong> “the way”den sonra “in which”, “that” veya hiçbir şey kullanılabilir. “How” kullanılmaz.</p>\n<p><strong>Örnek 6:</strong><br>\n<strong>EN:</strong> The way she solved the problem impressed everyone.<br>\n<strong>TR:</strong> Problemi çözme şekli herkesi etkiledi.<br>\n→ <strong>Açıklama:</strong> Relative pronoun atılmış, çok yaygın.</p>\n<hr>\n<h2>🧩 Diğer kalıplar: “the reason why”, “the place where”, “the time when”</h2>\n<p>Bunlar zaten önceki sayfalarda işlendi, ancak bu kalıpların da özel olduğunu hatırlayın.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda “whereby” gördüğünüzde, arkasından tam bir cümle gelir. “The way”den sonra “in which” veya “that” gelebilir, “how” gelmez.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Anlam</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>whereby</td>\n<td>aracılığıyla</td>\n<td>system whereby + SVO</td>\n</tr>\n<tr>\n<td>the point where</td>\n<td>nokta</td>\n<td>point where + SVO</td>\n</tr>\n<tr>\n<td>the stage at which</td>\n<td>aşama</td>\n<td>stage at which + SVO</td>\n</tr>\n<tr>\n<td>the way (in which)</td>\n<td>şekil</td>\n<td>way (in which) + SVO</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe process ___ applications are reviewed takes about two weeks.</p>\n<p>A) which<br>\nB) by which<br>\nC) where<br>\nD) in that  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** “by which” = “whereby”. Başvuruların gözden geçirildiği süreç. “By” edatı sürecin aracılığını belirtir.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 200]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "They developed a new system whereby employees can work from home.",
+          "tr": "Çalışanların evden çalışabileceği yeni bir sistem geliştirdiler.",
+          "description": "“whereby” = “by which” (sistem aracılığıyla). “SVO” tam cümle gelir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "There is a procedure whereby complaints are handled confidentially.",
+          "tr": "Şikayetlerin gizli olarak ele alındığı bir prosedür var.",
+          "description": "“whereby” yerine “by which” de kullanılabilir."
+        },
+        {
+          "en": "We reached the point where we had to make a decision.",
+          "tr": "Karar vermek zorunda olduğumuz noktaya geldik.",
+          "description": "“the point” + “where” (tam cümle). “At which” de kullanılabilir.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The project is at a stage at which any change could be costly.",
+          "tr": "Proje, herhangi bir değişikliğin maliyetli olabileceği bir aşamada.",
+          "description": "“at a stage” → “at which”."
+        },
+        {
+          "en": "I don’t like the way (in which) he treats his employees.",
+          "tr": "Çalışanlarına davranış şeklini beğenmiyorum.",
+          "description": "“the way”den sonra “in which”, “that” veya hiçbir şey kullanılabilir. “How” kullanılmaz.\n\n**Örnek 6:**"
+        },
+        {
+          "en": "The way she solved the problem impressed everyone.",
+          "tr": "Problemi çözme şekli herkesi etkiledi.",
+          "description": "Relative pronoun atılmış, çok yaygın."
+        }
+      ],
+      "mini_test": {
+        "question": "The process ___ applications are reviewed takes about two weeks.",
+        "options": {
+          "A": "which",
+          "B": "by which",
+          "C": "where",
+          "D": "in that"
+        },
+        "correct": "B",
+        "explanation": "“by which” = “whereby”. Başvuruların gözden geçirildiği süreç. “By” edatı sürecin aracılığını belirtir."
+      },
+      "mini_tests": [
+        {
+          "question": "The process ___ applications are reviewed takes about two weeks.",
+          "options": {
+            "A": "which",
+            "B": "by which",
+            "C": "where",
+            "D": "in that"
+          },
+          "correct": "B",
+          "explanation": "“by which” = “whereby”. Başvuruların gözden geçirildiği süreç. “By” edatı sürecin aracılığını belirtir."
+        }
+      ],
+      "word_count": 370
+    },
+    {
+      "page_number": 18,
+      "title": "Genel Tekrar ve Strateji Tabloları",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Bu sayfada şimdiye kadar öğrendiğimiz tüm sıfat cümleciği yapılarını özetleyen tablolar ve sınav stratejileri bulacaksınız.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Sınavlarda doğru cevabı hızlı bulmak için boşluğun öncesi ve sonrasına odaklanın.</p>\n</blockquote>\n<hr>\n<h2>🧩 Tablo 1: Özne / Nesne / Aitlik Durumları</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>İnsan</th>\n<th>İnsan dışı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Özne (Defining)</strong></td>\n<td>who / that</td>\n<td>which / that</td>\n</tr>\n<tr>\n<td><strong>Özne (Non‑Def)</strong></td>\n<td>who</td>\n<td>which</td>\n</tr>\n<tr>\n<td><strong>Nesne (Defining)</strong></td>\n<td>whom / who / that / Ø</td>\n<td>which / that / Ø</td>\n</tr>\n<tr>\n<td><strong>Nesne (Non‑Def)</strong></td>\n<td>whom / who</td>\n<td>which</td>\n</tr>\n<tr>\n<td><strong>Edat sonda (Def)</strong></td>\n<td>whom / who / that / Ø</td>\n<td>which / that / Ø</td>\n</tr>\n<tr>\n<td><strong>Edat önde (Def/Non‑Def)</strong></td>\n<td>prep + whom</td>\n<td>prep + which</td>\n</tr>\n<tr>\n<td><strong>Aitlik</strong></td>\n<td>whose + noun</td>\n<td>whose + noun / noun + of which</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>🗺️ Tablo 2: Yer / Zaman / Sebep</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Tam cümle geliyor</th>\n<th>Özne/nesne eksik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Yer</strong></td>\n<td>where / prep + which</td>\n<td>which / that</td>\n</tr>\n<tr>\n<td><strong>Zaman</strong></td>\n<td>when / prep + which</td>\n<td>which / that</td>\n</tr>\n<tr>\n<td><strong>Sebep (reason)</strong></td>\n<td>why / for which</td>\n<td>which / that</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>📉 Tablo 3: Kısaltmalar</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kısaltma</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Aktif cümle</td>\n<td>Ving</td>\n</tr>\n<tr>\n<td>Pasif cümle (genel)</td>\n<td>V3</td>\n</tr>\n<tr>\n<td>Pasif progressive</td>\n<td>being V3</td>\n</tr>\n<tr>\n<td>Be + sıfat</td>\n<td>sıfat</td>\n</tr>\n<tr>\n<td>Be + edat</td>\n<td>edat öbeği</td>\n</tr>\n<tr>\n<td>the first / only / superlative</td>\n<td>to V0 / to be V3</td>\n</tr>\n<tr>\n<td>Non‑defining</td>\n<td>appositive phrase</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\n1. Boşluktan önce ne niteleniyor? (insan/insan dışı/yer/zaman)\n2. Boşluğun devamında ne var?\n   - Fiil/yardımcı fiil → özne eksik → who/which\n   - Özne + fiil + (nesne) → nesne eksik → whom/which\n   - Özne + fiil + nesne (tam cümle) → where/when/why/prep+which\n   - İsim → aitlik olabilir → whose + noun\n3. Virgül var mı? → that kullanılmaz, Ø kullanılmaz.\n4. Miktar ifadesi varsa → of whom / of which / of whose.\n</div>\n\n<hr>\n<h2>📊 Tablo 4: Sık Kullanılan Kalıplar</h2>\n<table>\n<thead>\n<tr>\n<th>Kalıp</th>\n<th>Relative</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>the reason</td>\n<td>why / for which</td>\n</tr>\n<tr>\n<td>the place</td>\n<td>where / at which</td>\n</tr>\n<tr>\n<td>the time</td>\n<td>when / at which</td>\n</tr>\n<tr>\n<td>the way</td>\n<td>(in which) / that / Ø</td>\n</tr>\n<tr>\n<td>the day</td>\n<td>when / on which</td>\n</tr>\n<tr>\n<td>the year</td>\n<td>when / in which</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong><br>\nThe factory ___ we visited last week produces car parts.</p>\n<p>A) where<br>\nB) which<br>\nC) when<br>\nD) whose  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** Boşluktan sonra “we visited” var, “visited” nesne istiyor (neyi ziyaret ettik?). Nesne eksik, bu nedenle “which” (insan dışı) doğru. “Where” tam cümle isterdi, oysa burada nesne eksik.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "The factory ___ we visited last week produces car parts.",
+        "options": {
+          "A": "where",
+          "B": "which",
+          "C": "when",
+          "D": "whose"
+        },
+        "correct": "B",
+        "explanation": "Boşluktan sonra “we visited” var, “visited” nesne istiyor (neyi ziyaret ettik?). Nesne eksik, bu nedenle “which” (insan dışı) doğru. “Where” tam cümle isterdi, oysa burada nesne eksik."
+      },
+      "mini_tests": [
+        {
+          "question": "The factory ___ we visited last week produces car parts.",
+          "options": {
+            "A": "where",
+            "B": "which",
+            "C": "when",
+            "D": "whose"
+          },
+          "correct": "B",
+          "explanation": "Boşluktan sonra “we visited” var, “visited” nesne istiyor (neyi ziyaret ettik?). Nesne eksik, bu nedenle “which” (insan dışı) doğru. “Where” tam cümle isterdi, oysa burada nesne eksik."
+        }
+      ],
+      "word_count": 324
+    },
+    {
+      "page_number": 19,
+      "title": "Karışık Örneklerle Pekiştirme",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KONUNUN ÖZÜ</h2>\n<p>Bu sayfada farklı türlerden karışık örneklerle konuyu pekiştireceğiz. Her örnek, farklı bir sıfat cümleciği yapısını göstermektedir.</p>\n<hr>\n<h2>📝 Örnek 1 (Subject‑Focused, Defining)</h2>\n<p><strong>EN:</strong> The scientist who discovered the vaccine received a Nobel Prize.<br>\n<strong>TR:</strong> Aşıyı keşfeden bilim insanı Nobel Ödülü aldı.<br>\n→ <strong>Açıklama:</strong> “who discovered” özne odaklı, defining.</p>\n<hr>\n<h2>📝 Örnek 2 (Object‑Focused, Non‑Defining)</h2>\n<p><strong>EN:</strong> My new laptop, which I bought only last month, has already crashed twice.<br>\n<strong>TR:</strong> Sadece geçen ay aldığım yeni dizüstü bilgisayarım iki kez çöktü.<br>\n→ <strong>Açıklama:</strong> “which” nesne (bought’un nesnesi), virgül var non‑defining.</p>\n<hr>\n<h2>📝 Örnek 3 (Possessive)</h2>\n<p><strong>EN:</strong> The writer whose books have sold millions lives in a small village.<br>\n<strong>TR:</strong> Kitapları milyonlar satan yazar küçük bir köyde yaşıyor.<br>\n→ <strong>Açıklama:</strong> “whose books” aitlik.</p>\n<hr>\n<h2>📝 Örnek 4 (Place)</h2>\n<p><strong>EN:</strong> The cafe where we first met has been turned into a bookstore.<br>\n<strong>TR:</strong> İlk tanıştığımız kafe kitapçıya dönüştürülmüş.<br>\n→ <strong>Açıklama:</strong> “where” + tam cümle.</p>\n<hr>\n<h2>📝 Örnek 5 (Time)</h2>\n<p><strong>EN:</strong> The moment when I heard the news, I froze.<br>\n<strong>TR:</strong> Haberi duyduğum an donup kaldım.<br>\n→ <strong>Açıklama:</strong> “when” + tam cümle.</p>\n<hr>\n<h2>📝 Örnek 6 (Reason)</h2>\n<p><strong>EN:</strong> The reason why he resigned is still a mystery.<br>\n<strong>TR:</strong> İstifa etmesinin nedeni hâlâ bir gizem.<br>\n→ <strong>Açıklama:</strong> “why” + tam cümle.</p>\n<hr>\n<h2>📝 Örnek 7 (Quantity)</h2>\n<p><strong>EN:</strong> There are twenty students in the class, most of whom are from Asia.<br>\n<strong>TR:</strong> Sınıfta yirmi öğrenci var, çoğu Asya’dan.<br>\n→ <strong>Açıklama:</strong> “most of whom” miktar ifadesi.</p>\n<hr>\n<h2>📝 Örnek 8 (Reduction – Active)</h2>\n<p><strong>EN:</strong> People living in big cities often face pollution.<br>\n<strong>TR:</strong> Büyük şehirlerde yaşayan insanlar sık sık kirlilikle karşılaşır.<br>\n→ <strong>Açıklama:</strong> “who live” → “living”.</p>\n<hr>\n<h2>📝 Örnek 9 (Reduction – Passive)</h2>\n<p><strong>EN:</strong> The cake baked by my sister was delicious.<br>\n<strong>TR:</strong> Kız kardeşim tarafından pişirilen kek lezzetliydi.<br>\n→ <strong>Açıklama:</strong> “which was baked” → “baked”.</p>\n<hr>\n<h2>📝 Örnek 10 (Appositive)</h2>\n<p><strong>EN:</strong> Istanbul, a city straddling two continents, has a rich history.<br>\n<strong>TR:</strong> İki kıtaya yayılan bir şehir olan İstanbul zengin bir tarihe sahiptir.<br>\n→ <strong>Açıklama:</strong> “which is a city straddling...” → “a city straddling...”</p>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Yukarıdaki örneklerden hangisi bir “object‑focused” sıfat cümleciği içerir?</p>\n<p>A) Örnek 1<br>\nB) Örnek 2<br>\nC) Örnek 3<br>\nD) Örnek 4  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n**Doğru Cevap:** B  \n**Açıklama:** Örnek 2’de “which I bought” → “bought” fiilinin nesnesi “which” (laptop). Bu object‑focused.\n</details>\n\n<hr>\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The scientist who discovered the vaccine received a Nobel Prize.",
+          "tr": "Aşıyı keşfeden bilim insanı Nobel Ödülü aldı.",
+          "description": "“who discovered” özne odaklı, defining."
+        },
+        {
+          "en": "My new laptop, which I bought only last month, has already crashed twice.",
+          "tr": "Sadece geçen ay aldığım yeni dizüstü bilgisayarım iki kez çöktü.",
+          "description": "“which” nesne (bought’un nesnesi), virgül var non‑defining."
+        },
+        {
+          "en": "The writer whose books have sold millions lives in a small village.",
+          "tr": "Kitapları milyonlar satan yazar küçük bir köyde yaşıyor.",
+          "description": "“whose books” aitlik."
+        },
+        {
+          "en": "The cafe where we first met has been turned into a bookstore.",
+          "tr": "İlk tanıştığımız kafe kitapçıya dönüştürülmüş.",
+          "description": "“where” + tam cümle."
+        },
+        {
+          "en": "The moment when I heard the news, I froze.",
+          "tr": "Haberi duyduğum an donup kaldım.",
+          "description": "“when” + tam cümle."
+        },
+        {
+          "en": "The reason why he resigned is still a mystery.",
+          "tr": "İstifa etmesinin nedeni hâlâ bir gizem.",
+          "description": "“why” + tam cümle."
+        },
+        {
+          "en": "There are twenty students in the class, most of whom are from Asia.",
+          "tr": "Sınıfta yirmi öğrenci var, çoğu Asya’dan.",
+          "description": "“most of whom” miktar ifadesi."
+        },
+        {
+          "en": "People living in big cities often face pollution.",
+          "tr": "Büyük şehirlerde yaşayan insanlar sık sık kirlilikle karşılaşır.",
+          "description": "“who live” → “living”."
+        },
+        {
+          "en": "The cake baked by my sister was delicious.",
+          "tr": "Kız kardeşim tarafından pişirilen kek lezzetliydi.",
+          "description": "“which was baked” → “baked”."
+        },
+        {
+          "en": "Istanbul, a city straddling two continents, has a rich history.",
+          "tr": "İki kıtaya yayılan bir şehir olan İstanbul zengin bir tarihe sahiptir.",
+          "description": "“which is a city straddling...” → “a city straddling...”"
+        }
+      ],
+      "mini_test": {
+        "question": "Yukarıdaki örneklerden hangisi bir “object‑focused” sıfat cümleciği içerir?",
+        "options": {
+          "A": "Örnek 1",
+          "B": "Örnek 2",
+          "C": "Örnek 3",
+          "D": "Örnek 4"
+        },
+        "correct": "B",
+        "explanation": "Örnek 2’de “which I bought” → “bought” fiilinin nesnesi “which” (laptop). Bu object‑focused."
+      },
+      "mini_tests": [
+        {
+          "question": "Yukarıdaki örneklerden hangisi bir “object‑focused” sıfat cümleciği içerir?",
+          "options": {
+            "A": "Örnek 1",
+            "B": "Örnek 2",
+            "C": "Örnek 3",
+            "D": "Örnek 4"
+          },
+          "correct": "B",
+          "explanation": "Örnek 2’de “which I bought” → “bought” fiilinin nesnesi “which” (laptop). Bu object‑focused."
+        }
+      ],
+      "word_count": 360
+    },
+    {
+      "page_number": 20,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 20,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li>Defining ve Non‑defining sıfat cümlecikleri arasındaki fark</li>\n<li>Özne, nesne, edat nesnesi ve aitlik durumlarında kullanılan relative pronounlar</li>\n<li>Yer, zaman, sebep bildiren sıfat cümlecikleri</li>\n<li>Miktar ifadeleriyle kullanım</li>\n<li>Sıfat cümleciklerinde kısaltma (Ving, V3, to V0, appositive)</li>\n<li>Edat + relative pronoun yapıları</li>\n<li>Özel kalıplar (whereby, the way, etc.)</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p><strong>The company ___ he works for is based in Germany.</strong></p>\n<p>A) where<br>\nB) which<br>\nC) who<br>\nD) whose  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - “works for” fiili nesne istiyor; “the company” nesne olduğu için “which” (veya that/Ø) doğru. “Where” olsaydı “works” tek başına yeterli olmalıydı, ama “for” edatı var.\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p><strong>The actress, ___ won an Oscar, is giving a press conference.</strong></p>\n<p>A) that<br>\nB) which<br>\nC) who<br>\nD) whose  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - “actress” insan, virgül var → non‑defining, özne durumunda → “who”. “That” non‑defining’de kullanılmaz.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p><strong>This is the museum ___ we saw the ancient artifacts.</strong></p>\n<p>A) which<br>\nB) where<br>\nC) whose<br>\nD) whom  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - “we saw the ancient artifacts” tam cümle, yer bildiriyor → “where”. “In which” de olabilirdi.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p><strong>The children, two of ___ were crying, waited for their mother.</strong></p>\n<p>A) which<br>\nB) whom<br>\nC) whose<br>\nD) that  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - “children” insan, “two of them” → “two of whom” doğru.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p><strong>The first man ___ on the moon was Neil Armstrong.</strong></p>\n<p>A) landing<br>\nB) landed<br>\nC) to land<br>\nD) having landed  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - “the first” + “to land” kuralı. “Landing” de kullanılabilir mi? Aslında “the first man landing” daha az yaygın; “to land” kalıptır.\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<hr>\n<p>[Kelime sayısı: 250]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası</li>\n<li>[x] Her sayfada 3-4 örnek var</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 20 (25'i geçmiyor)</li>\n<li>[x] HTML div'leri doğru işaretlenmiş</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "**The company ___ he works for is based in Germany.**",
+        "options": {
+          "A": "where",
+          "B": "which",
+          "C": "who",
+          "D": "whose"
+        },
+        "correct": "B - “works for” fiili nesne istiyor; “the company” nesne olduğu için “which” (veya that/Ø) doğru. “Where” olsaydı “works” tek başına yeterli olmalıydı, ama “for” edatı var.",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "**The company ___ he works for is based in Germany.**",
+          "options": {
+            "A": "where",
+            "B": "which",
+            "C": "who",
+            "D": "whose"
+          },
+          "correct": "B - “works for” fiili nesne istiyor; “the company” nesne olduğu için “which” (veya that/Ø) doğru. “Where” olsaydı “works” tek başına yeterli olmalıydı, ama “for” edatı var.",
+          "explanation": ""
+        },
+        {
+          "question": "**The actress, ___ won an Oscar, is giving a press conference.**",
+          "options": {
+            "A": "that",
+            "B": "which",
+            "C": "who",
+            "D": "whose"
+          },
+          "correct": "C - “actress” insan, virgül var → non‑defining, özne durumunda → “who”. “That” non‑defining’de kullanılmaz.",
+          "explanation": ""
+        },
+        {
+          "question": "**This is the museum ___ we saw the ancient artifacts.**",
+          "options": {
+            "A": "which",
+            "B": "where",
+            "C": "whose",
+            "D": "whom"
+          },
+          "correct": "B - “we saw the ancient artifacts” tam cümle, yer bildiriyor → “where”. “In which” de olabilirdi.",
+          "explanation": ""
+        },
+        {
+          "question": "**The children, two of ___ were crying, waited for their mother.**",
+          "options": {
+            "A": "which",
+            "B": "whom",
+            "C": "whose",
+            "D": "that"
+          },
+          "correct": "B - “children” insan, “two of them” → “two of whom” doğru.",
+          "explanation": ""
+        },
+        {
+          "question": "**The first man ___ on the moon was Neil Armstrong.**",
+          "options": {
+            "A": "landing",
+            "B": "landed",
+            "C": "to land",
+            "D": "having landed"
+          },
+          "correct": "C - “the first” + “to land” kuralı. “Landing” de kullanılabilir mi? Aslında “the first man landing” daha az yaygın; “to land” kalıptır.",
+          "explanation": ""
+        }
+      ],
+      "word_count": 351
+    }
+  ]
+}

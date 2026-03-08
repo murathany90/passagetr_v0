@@ -1,0 +1,1310 @@
+{
+  "sira": 11,
+  "baslik": "Determiners and Quantifiers (Belirleyiciler ve Miktar Belirten Sözcükler)",
+  "dosya_adi": "11_determiners.md",
+  "toplam_sayfa": 25,
+  "icon": "🔢",
+  "renk": "#34495E",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "A LOT OF / LOTS OF / PLENTY OF",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ÇOK MİKTAR İFADELERİ</h2>\n<p>\"A lot of\", \"lots of\" ve \"plenty of\" yapıları \"çok, birçok\" anlamında kullanılır ve hem çoğul hem de sayılamayan isimlerle beraber kullanılabilir. Genellikle olumlu cümlelerde tercih edilirler.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu üç yapı da aynı anlama gelir ve birbirinin yerine kullanılabilir. \"Plenty of\" genellikle \"fazlasıyla, yeterinden fazla\" vurgusu taşır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Çoğul İsim):</strong><br>\n<strong>EN:</strong> A lot of people from different countries gathered in the city center to protest against the new tax laws that the government recently announced.<br>\n<strong>TR:</strong> Hükümetin yakın zamanda duyurduğu yeni vergi yasalarını protesto etmek için farklı ülkelerden birçok insan şehir merkezinde toplandı.<br>\n→ <strong>Açıklama:</strong> Bu cümlede \"a lot of\" yapısı çoğul isim olan \"people\" ile kullanılmıştır. Çoğul özne olduğu için fiil \"gathered\" (çoğul) olarak çekimlenmiştir. \"A lot of\" hem resmi hem de resmi olmayan konuşmalarda yaygın olarak kullanılır.</p>\n<p><strong>Örnek 2 (Sayılamayan İsim):</strong><br>\n<strong>EN:</strong> To become a successful surgeon, you need lots of patience and dedication because the training process takes many years and requires intense focus.<br>\n<strong>TR:</strong> Başarılı bir cerrah olmak için çok sabır ve özveriye ihtiyacınız var çünkü eğitim süreci uzun yıllar alır ve yoğun odaklanma gerektirir.<br>\n→ <strong>Açıklama:</strong> Bu örnekte \"lots of\" sayılamayan isim olan \"patience\" (sabır) ile kullanılmıştır. Sayılamayan isimler tekil kabul edildiğinden, cümlenin devamında \"takes\" (tekil) fiili kullanılmıştır. \"Lots of\" yapısı \"a lot of\"a göre biraz daha samimi ve günlük konuşma dilinde yaygındır.</p>\n<p><strong>Örnek 3 (Plenty of - Fazlasıyla):</strong><br>\n<strong>EN:</strong> Don't worry about the presentation tomorrow; we have plenty of time to prepare all the slides and rehearse everything at least twice before the meeting.<br>\n<strong>TR:</strong> Yarınki sunum için endişelenme; tüm slaytları hazırlamak ve her şeyi toplantıdan önce en az iki kez prova etmek için fazlasıyla zamanımız var.<br>\n→ <strong>Açıklama:</strong> \"Plenty of\" bu cümlede \"yeterinden fazla\" anlamı vurgulamaktadır. Sayılamayan \"time\" (zaman) ismiyle kullanılmıştır. \"Plenty of\" genellikle ihtiyaçtan fazla miktar olduğunu belirtir ve olumlu bir anlam taşır.</p>\n<p><strong>Örnek 4 (Günlük Hayat):</strong><br>\n<strong>EN:</strong> There are a lot of excellent restaurants serving authentic Italian food in this neighborhood, but most of them are quite expensive for students.<br>\n<strong>TR:</strong> Bu mahallede otantik İtalyan yemeği servis eden birçok mükemmel restoran var, ancak çoğu öğrenciler için oldukça pahalı.<br>\n→ <strong>Açıklama:</strong> \"A lot of\" burada çoğul isim olan \"restaurants\" ile kullanılmıştır. Cümle \"There are\" ile başladığı için çoğul yapıya dikkat edilmelidir. \"A lot of\" günlük konuşmada \"many\" yerine sıklıkla tercih edilir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Örnek İsim</th>\n<th>Fiil Uyumu</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>A lot of</strong></td>\n<td>Çoğul + Sayılamayan</td>\n<td>people / patience</td>\n<td>isme göre değişir</td>\n</tr>\n<tr>\n<td><strong>Lots of</strong></td>\n<td>Çoğul + Sayılamayan</td>\n<td>books / water</td>\n<td>isme göre değişir</td>\n</tr>\n<tr>\n<td><strong>Plenty of</strong></td>\n<td>Çoğul + Sayılamayan</td>\n<td>time / ideas</td>\n<td>isme göre değişir</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Cümleyi tamamlayın: \"In every profession, _____ patience and hard work are required to achieve success.\"</p>\n<p>A) a lot of<br>\nB) many<br>\nC) several</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) a lot of\n\n**Açıklama:** \"Patience\" sayılamayan bir isimdir, bu nedenle \"many\" ve \"several\" (çoğul isimlerle kullanılır) doğru değildir. \"A lot of\" hem sayılamayan hem de çoğul isimlerle kullanılabilir.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "A lot of people from different countries gathered in the city center to protest against the new tax laws that the government recently announced.",
+          "tr": "Hükümetin yakın zamanda duyurduğu yeni vergi yasalarını protesto etmek için farklı ülkelerden birçok insan şehir merkezinde toplandı.",
+          "description": "Bu cümlede \"a lot of\" yapısı çoğul isim olan \"people\" ile kullanılmıştır. Çoğul özne olduğu için fiil \"gathered\" (çoğul) olarak çekimlenmiştir. \"A lot of\" hem resmi hem de resmi olmayan konuşmalarda yaygın olarak kullanılır.\n\n**Örnek 2 (Sayılamayan İsim):**"
+        },
+        {
+          "en": "To become a successful surgeon, you need lots of patience and dedication because the training process takes many years and requires intense focus.",
+          "tr": "Başarılı bir cerrah olmak için çok sabır ve özveriye ihtiyacınız var çünkü eğitim süreci uzun yıllar alır ve yoğun odaklanma gerektirir.",
+          "description": "Bu örnekte \"lots of\" sayılamayan isim olan \"patience\" (sabır) ile kullanılmıştır. Sayılamayan isimler tekil kabul edildiğinden, cümlenin devamında \"takes\" (tekil) fiili kullanılmıştır. \"Lots of\" yapısı \"a lot of\"a göre biraz daha samimi ve günlük konuşma dilinde yaygındır.\n\n**Örnek 3 (Plenty of - Fazlasıyla):**"
+        },
+        {
+          "en": "Don't worry about the presentation tomorrow; we have plenty of time to prepare all the slides and rehearse everything at least twice before the meeting.",
+          "tr": "Yarınki sunum için endişelenme; tüm slaytları hazırlamak ve her şeyi toplantıdan önce en az iki kez prova etmek için fazlasıyla zamanımız var.",
+          "description": "\"Plenty of\" bu cümlede \"yeterinden fazla\" anlamı vurgulamaktadır. Sayılamayan \"time\" (zaman) ismiyle kullanılmıştır. \"Plenty of\" genellikle ihtiyaçtan fazla miktar olduğunu belirtir ve olumlu bir anlam taşır.\n\n**Örnek 4 (Günlük Hayat):**"
+        },
+        {
+          "en": "There are a lot of excellent restaurants serving authentic Italian food in this neighborhood, but most of them are quite expensive for students.",
+          "tr": "Bu mahallede otantik İtalyan yemeği servis eden birçok mükemmel restoran var, ancak çoğu öğrenciler için oldukça pahalı.",
+          "description": "\"A lot of\" burada çoğul isim olan \"restaurants\" ile kullanılmıştır. Cümle \"There are\" ile başladığı için çoğul yapıya dikkat edilmelidir. \"A lot of\" günlük konuşmada \"many\" yerine sıklıkla tercih edilir."
+        }
+      ],
+      "mini_test": {
+        "question": "Cümleyi tamamlayın: \"In every profession, _____ patience and hard work are required to achieve success.\"",
+        "options": {
+          "A": "a lot of",
+          "B": "many",
+          "C": "several"
+        },
+        "correct": "A) a lot of",
+        "explanation": "\"Patience\" sayılamayan bir isimdir, bu nedenle \"many\" ve \"several\" (çoğul isimlerle kullanılır) doğru değildir. \"A lot of\" hem sayılamayan hem de çoğul isimlerle kullanılabilir."
+      },
+      "mini_tests": [
+        {
+          "question": "Cümleyi tamamlayın: \"In every profession, _____ patience and hard work are required to achieve success.\"",
+          "options": {
+            "A": "a lot of",
+            "B": "many",
+            "C": "several"
+          },
+          "correct": "A) a lot of",
+          "explanation": "\"Patience\" sayılamayan bir isimdir, bu nedenle \"many\" ve \"several\" (çoğul isimlerle kullanılır) doğru değildir. \"A lot of\" hem sayılamayan hem de çoğul isimlerle kullanılabilir."
+        }
+      ],
+      "word_count": 486
+    },
+    {
+      "page_number": 2,
+      "title": "SADECE ÇOĞUL İSİM ALAN YAPILAR",
+      "total_pages": 25,
+      "content_html": "<h2>📌 BİRÇOK ANLAMINDAKİ YAPILAR</h2>\n<p>\"A number of\", \"large numbers of\", \"scores of\", \"a great many\" ve \"quite a few\" yapıları sadece çoğul isimlerle kullanılır ve \"birçok\" anlamına gelir. Özne olarak kullanıldıklarında fiil çoğul olur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıların hepsi çoğul isim gerektirir. Cümlede fiilin çoğul olmasına dikkat edin!</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (A number of):</strong><br>\n<strong>EN:</strong> A number of complex technical problems have to be solved immediately before we can launch the new software update next month.<br>\n<strong>TR:</strong> Gelecek ay yeni yazılım güncellemesini piyasaya sürmeden önce birçok karmaşık teknik problemin hemen çözülmesi gerekiyor.<br>\n→ <strong>Açıklama:</strong> \"A number of\" yapısı \"problems\" çoğul ismiyle kullanılmıştır. Özne çoğul olduğu için yardımcı fiil \"have\" (çoğul) olarak çekimlenmiştir. \"The number of\" (sayısı) ile karıştırılmamalıdır; \"the number of\" tekil fiil alır.</p>\n<p><strong>Örnek 2 (Scores of):</strong><br>\n<strong>EN:</strong> I witnessed scores of tourists fainting in the intense heat while visiting the ancient ruins without drinking enough water throughout the day.<br>\n<strong>TR:</strong> Gün boyunca yeterince su içmeden antik kalıntıları ziyaret eden birçok turistin yoğun sıcakta bayılmasına tanıklık ettim.<br>\n→ <strong>Açıklama:</strong> \"Scores of\" yapısı \"tourists\" çoğul ismiyle kullanılmıştır. \"Score\" aslında 20 anlamına gelir, ancak \"scores of\" zamanla \"çok sayıda\" anlamında kalıplaşmıştır. Resmi ve edebi metinlerde sıkça kullanılır.</p>\n<p><strong>Örnek 3 (Quite a few):</strong><br>\n<strong>EN:</strong> There were quite a few pages that needed to be filed before the audit, so the intern stayed at the office until midnight to complete the task.<br>\n<strong>TR:</strong> Denetimden önce dosyalanması gereken birçok sayfa vardı, bu yüzden stajyer görevi tamamlamak için gece yarısına kadar ofiste kaldı.<br>\n→ <strong>Açıklama:</strong> \"Quite a few\" yapısı \"birkaç\" değil, aslında \"oldukça çok, epey\" anlamındadır. \"Pages\" çoğul ismiyle kullanılmış ve \"were\" çoğul fiili gelmiştir. \"Few\" tek başına \"az\" anlamındayken, \"quite a few\" çokluk ifade eder.</p>\n<p><strong>Örnek 4 (A great many):</strong><br>\n<strong>EN:</strong> A great many ancient philosophers contributed to the development of modern scientific thinking, but their works were often misunderstood for centuries.<br>\n<strong>TR:</strong> Birçok antik filozof modern bilimsel düşüncenin gelişimine katkıda bulundu, ancak eserleri yüzyıllar boyunca sık sık yanlış anlaşıldı.<br>\n→ <strong>Açıklama:</strong> \"A great many\" yapısı \"philosophers\" çoğul ismiyle kullanılmıştır. \"Many\" tek başına da kullanılabilir, ancak \"a great many\" daha vurgulu ve resmi bir ifadedir. Fiil \"contributed\" çoğul özneye göre çekimlenmiştir.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nYDS ve benzeri sınavlarda \"a number of\" gördüğünüzde, devamında çoğul isim ve çoğul fiil arayın. \"The number of\" ise tekil isim ve tekil fiil alır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Fiil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>A number of</strong></td>\n<td>birçok</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>Scores of</strong></td>\n<td>birçok</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>Quite a few</strong></td>\n<td>epey, birçok</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>A great many</strong></td>\n<td>pek çok</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> 2002 YDS sorusu: \"The new personnel manager told us that he had visited _____ countries in Europe.\"</p>\n<p>A) a great deal of<br>\nB) a number of<br>\nC) much</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) a number of\n\n**Açıklama:** \"Countries\" çoğul bir isimdir. \"A great deal of\" ve \"much\" sadece sayılamayan isimlerle kullanılır.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "A number of complex technical problems have to be solved immediately before we can launch the new software update next month.",
+          "tr": "Gelecek ay yeni yazılım güncellemesini piyasaya sürmeden önce birçok karmaşık teknik problemin hemen çözülmesi gerekiyor.",
+          "description": "\"A number of\" yapısı \"problems\" çoğul ismiyle kullanılmıştır. Özne çoğul olduğu için yardımcı fiil \"have\" (çoğul) olarak çekimlenmiştir. \"The number of\" (sayısı) ile karıştırılmamalıdır; \"the number of\" tekil fiil alır.\n\n**Örnek 2 (Scores of):**"
+        },
+        {
+          "en": "I witnessed scores of tourists fainting in the intense heat while visiting the ancient ruins without drinking enough water throughout the day.",
+          "tr": "Gün boyunca yeterince su içmeden antik kalıntıları ziyaret eden birçok turistin yoğun sıcakta bayılmasına tanıklık ettim.",
+          "description": "\"Scores of\" yapısı \"tourists\" çoğul ismiyle kullanılmıştır. \"Score\" aslında 20 anlamına gelir, ancak \"scores of\" zamanla \"çok sayıda\" anlamında kalıplaşmıştır. Resmi ve edebi metinlerde sıkça kullanılır.\n\n**Örnek 3 (Quite a few):**"
+        },
+        {
+          "en": "There were quite a few pages that needed to be filed before the audit, so the intern stayed at the office until midnight to complete the task.",
+          "tr": "Denetimden önce dosyalanması gereken birçok sayfa vardı, bu yüzden stajyer görevi tamamlamak için gece yarısına kadar ofiste kaldı.",
+          "description": "\"Quite a few\" yapısı \"birkaç\" değil, aslında \"oldukça çok, epey\" anlamındadır. \"Pages\" çoğul ismiyle kullanılmış ve \"were\" çoğul fiili gelmiştir. \"Few\" tek başına \"az\" anlamındayken, \"quite a few\" çokluk ifade eder.\n\n**Örnek 4 (A great many):**"
+        },
+        {
+          "en": "A great many ancient philosophers contributed to the development of modern scientific thinking, but their works were often misunderstood for centuries.",
+          "tr": "Birçok antik filozof modern bilimsel düşüncenin gelişimine katkıda bulundu, ancak eserleri yüzyıllar boyunca sık sık yanlış anlaşıldı.",
+          "description": "\"A great many\" yapısı \"philosophers\" çoğul ismiyle kullanılmıştır. \"Many\" tek başına da kullanılabilir, ancak \"a great many\" daha vurgulu ve resmi bir ifadedir. Fiil \"contributed\" çoğul özneye göre çekimlenmiştir."
+        }
+      ],
+      "mini_test": {
+        "question": "2002 YDS sorusu: \"The new personnel manager told us that he had visited _____ countries in Europe.\"",
+        "options": {
+          "A": "a great deal of",
+          "B": "a number of",
+          "C": "much"
+        },
+        "correct": "B) a number of",
+        "explanation": "\"Countries\" çoğul bir isimdir. \"A great deal of\" ve \"much\" sadece sayılamayan isimlerle kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "2002 YDS sorusu: \"The new personnel manager told us that he had visited _____ countries in Europe.\"",
+          "options": {
+            "A": "a great deal of",
+            "B": "a number of",
+            "C": "much"
+          },
+          "correct": "B) a number of",
+          "explanation": "\"Countries\" çoğul bir isimdir. \"A great deal of\" ve \"much\" sadece sayılamayan isimlerle kullanılır."
+        }
+      ],
+      "word_count": 479
+    },
+    {
+      "page_number": 3,
+      "title": "SADECE SAYILAMAYAN İSİM ALAN YAPILAR",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ÇOK MİKTAR İFADELERİ</h2>\n<p>\"A great deal of\", \"a large amount of\" ve \"a large quantity of\" yapıları sadece sayılamayan isimlerle kullanılır ve \"çok miktarda\" anlamına gelir. Özne olarak kullanıldıklarında fiil tekil olur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıları gördüğünüzde devamında mutlaka sayılamayan bir isim (money, time, water, information gibi) arayın.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (A great deal of):</strong><br>\n<strong>EN:</strong> The executive secretary definitely has a great deal of urgent work to complete today, including preparing the quarterly financial reports and scheduling meetings with international clients.<br>\n<strong>TR:</strong> Yönetici asistanının bugün tamamlaması gereken, üç aylık mali raporları hazırlamak ve uluslararası müşterilerle toplantıları planlamak dahil, çok miktarda acil işi var.<br>\n→ <strong>Açıklama:</strong> \"A great deal of\" yapısı sayılamayan \"work\" (iş) ismiyle kullanılmıştır. \"Work\" burada genel bir kavramdır ve sayılamaz. Cümlede özne \"secretary\" olduğu için fiil \"has\" (tekil) olarak çekimlenmiştir.</p>\n<p><strong>Örnek 2 (A large amount of):</strong><br>\n<strong>EN:</strong> A large amount of investors' money was invested in the newly devised renewable energy project, which promised high returns within five years.<br>\n<strong>TR:</strong> Yatırımcıların parasının büyük bir miktarı, beş yıl içinde yüksek getiri vaat eden yeni geliştirilen yenilenebilir enerji projesine yatırıldı.<br>\n→ <strong>Açıklama:</strong> \"A large amount of\" sayılamayan \"money\" (para) ismiyle kullanılmıştır. Özne olan \"a large amount of money\" tekil kabul edildiği için fiil \"was invested\" (tekil) olarak çekimlenmiştir. \"Money\" sayılamayan bir isimdir, ancak \"dollars\" sayılabilir.</p>\n<p><strong>Örnek 3 (A large quantity of):</strong><br>\n<strong>EN:</strong> A significant quantity of valuable information was obtained from the confidential documents that the journalist received from an anonymous source last week.<br>\n<strong>TR:</strong> Gazetecinin geçen hafta isimsiz bir kaynaktan aldığı gizli belgelerden önemli miktarda değerli bilgi elde edildi.<br>\n→ <strong>Açıklama:</strong> \"A large quantity of\" sayılamayan \"information\" (bilgi) ismiyle kullanılmıştır. \"Information\" İngilizce'de sayılamayan bir isimdir ve asla çoğul yapılmaz (informations yanlıştır). Fiil \"was obtained\" tekil olarak gelmiştir.</p>\n<p><strong>Örnek 4 (Resmi Kullanım):</strong><br>\n<strong>EN:</strong> The research team has spent a great deal of time analyzing the data collected from thousands of participants across five different countries over the past decade.<br>\n<strong>TR:</strong> Araştırma ekibi, geçtiğimiz on yıl boyunca beş farklı ülkede binlerce katılımcıdan toplanan verileri analiz etmek için çok miktarda zaman harcadı.<br>\n→ <strong>Açıklama:</strong> \"A great deal of\" sayılamayan \"time\" (zaman) ismiyle kullanılmıştır. Bu yapı özellikle akademik ve resmi metinlerde \"much\" yerine tercih edilir. \"Time\" burada genel bir kavram olarak sayılamaz.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"Money\", \"time\", \"information\", \"advice\", \"news\", \"furniture\", \"equipment\" gibi kelimeler İngilizce'de sayılamaz. Bu kelimelerle \"a number of\" veya \"many\" kullanılamaz!\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Fiil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>A great deal of</strong></td>\n<td>çok miktarda</td>\n<td>sayılamayan</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>A large amount of</strong></td>\n<td>büyük miktarda</td>\n<td>sayılamayan</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>A large quantity of</strong></td>\n<td>büyük miktarda</td>\n<td>sayılamayan</td>\n<td>tekil</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Doğru seçeneği bulun: \"The government spent _____ money on the new infrastructure project.\"</p>\n<p>A) a large number of<br>\nB) a great deal of<br>\nC) several</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) a great deal of\n\n**Açıklama:** \"Money\" sayılamayan bir isimdir. \"A large number of\" ve \"several\" sadece çoğul isimlerle kullanılır.\n</details>\n\n<p>[Kelime sayısı: 238]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The executive secretary definitely has a great deal of urgent work to complete today, including preparing the quarterly financial reports and scheduling meetings with international clients.",
+          "tr": "Yönetici asistanının bugün tamamlaması gereken, üç aylık mali raporları hazırlamak ve uluslararası müşterilerle toplantıları planlamak dahil, çok miktarda acil işi var.",
+          "description": "\"A great deal of\" yapısı sayılamayan \"work\" (iş) ismiyle kullanılmıştır. \"Work\" burada genel bir kavramdır ve sayılamaz. Cümlede özne \"secretary\" olduğu için fiil \"has\" (tekil) olarak çekimlenmiştir.\n\n**Örnek 2 (A large amount of):**"
+        },
+        {
+          "en": "A large amount of investors' money was invested in the newly devised renewable energy project, which promised high returns within five years.",
+          "tr": "Yatırımcıların parasının büyük bir miktarı, beş yıl içinde yüksek getiri vaat eden yeni geliştirilen yenilenebilir enerji projesine yatırıldı.",
+          "description": "\"A large amount of\" sayılamayan \"money\" (para) ismiyle kullanılmıştır. Özne olan \"a large amount of money\" tekil kabul edildiği için fiil \"was invested\" (tekil) olarak çekimlenmiştir. \"Money\" sayılamayan bir isimdir, ancak \"dollars\" sayılabilir.\n\n**Örnek 3 (A large quantity of):**"
+        },
+        {
+          "en": "A significant quantity of valuable information was obtained from the confidential documents that the journalist received from an anonymous source last week.",
+          "tr": "Gazetecinin geçen hafta isimsiz bir kaynaktan aldığı gizli belgelerden önemli miktarda değerli bilgi elde edildi.",
+          "description": "\"A large quantity of\" sayılamayan \"information\" (bilgi) ismiyle kullanılmıştır. \"Information\" İngilizce'de sayılamayan bir isimdir ve asla çoğul yapılmaz (informations yanlıştır). Fiil \"was obtained\" tekil olarak gelmiştir.\n\n**Örnek 4 (Resmi Kullanım):**"
+        },
+        {
+          "en": "The research team has spent a great deal of time analyzing the data collected from thousands of participants across five different countries over the past decade.",
+          "tr": "Araştırma ekibi, geçtiğimiz on yıl boyunca beş farklı ülkede binlerce katılımcıdan toplanan verileri analiz etmek için çok miktarda zaman harcadı.",
+          "description": "\"A great deal of\" sayılamayan \"time\" (zaman) ismiyle kullanılmıştır. Bu yapı özellikle akademik ve resmi metinlerde \"much\" yerine tercih edilir. \"Time\" burada genel bir kavram olarak sayılamaz."
+        }
+      ],
+      "mini_test": {
+        "question": "Doğru seçeneği bulun: \"The government spent _____ money on the new infrastructure project.\"",
+        "options": {
+          "A": "a large number of",
+          "B": "a great deal of",
+          "C": "several"
+        },
+        "correct": "B) a great deal of",
+        "explanation": "\"Money\" sayılamayan bir isimdir. \"A large number of\" ve \"several\" sadece çoğul isimlerle kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "Doğru seçeneği bulun: \"The government spent _____ money on the new infrastructure project.\"",
+          "options": {
+            "A": "a large number of",
+            "B": "a great deal of",
+            "C": "several"
+          },
+          "correct": "B) a great deal of",
+          "explanation": "\"Money\" sayılamayan bir isimdir. \"A large number of\" ve \"several\" sadece çoğul isimlerle kullanılır."
+        }
+      ],
+      "word_count": 484
+    },
+    {
+      "page_number": 4,
+      "title": "MANY / SEVERAL / A FEW / FEW",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ÇOĞUL İSİMLERLE KULLANILAN MİKTAR İFADELERİ</h2>\n<p>\"Many\" (birçok), \"several\" (birkaç), \"a few\" (birkaç - yeterli miktarda) ve \"few\" (az - neredeyse yok) yapıları sadece çoğul isimlerle kullanılır. Özne olarak kullanıldıklarında fiil çoğul olur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"A few\" olumlu, \"few\" ise olumsuz bir anlam taşır. \"A few\" var olduğunu, \"few\" ise neredeyse yok denecek kadar az olduğunu vurgular.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Several):</strong><br>\n<strong>EN:</strong> Several important questions regarding the budget cuts remained completely unanswered despite a lengthy discussion that lasted more than ten hours in the parliament.<br>\n<strong>TR:</strong> Bütçe kesintileriyle ilgili birkaç önemli soru, parlamentoda on saatten fazla süren uzun bir tartışmaya rağmen tamamen yanıtsız kaldı.<br>\n→ <strong>Açıklama:</strong> \"Several\" yapısı \"questions\" çoğul ismiyle kullanılmıştır. \"Several\" genellikle 3-5 arası bir sayıyı ifade eder ve \"birkaç\" anlamındadır. Fiil \"remained\" (çoğul) özneye uygun olarak çekimlenmiştir.</p>\n<p><strong>Örnek 2 (Many):</strong><br>\n<strong>EN:</strong> Many children who grow up in densely populated urban areas unfortunately suffer from loneliness and social anxiety because they have limited opportunities for outdoor play.<br>\n<strong>TR:</strong> Yoğun nüfuslu kentsel alanlarda büyüyen çoğu çocuk, açık havada oyun oynama fırsatları sınırlı olduğu için ne yazık ki yalnızlık ve sosyal kaygıdan sıkıntı çekiyor.<br>\n→ <strong>Açıklama:</strong> \"Many\" yapısı \"children\" çoğul ismiyle kullanılmıştır. \"Children\" düzensiz çoğul bir isimdir (child → children). Fiil \"suffer\" çoğul özneye göre \"-s\" almadan kullanılmıştır.</p>\n<p><strong>Örnek 3 (A few - olumlu anlam):</strong><br>\n<strong>EN:</strong> The experienced conference interpreter was unexpectedly fired because of a few vital mistakes he made during the very last speech of the international summit.<br>\n<strong>TR:</strong> Deneyimli konferans tercümanı, uluslararası zirvenin en son konuşmasında yaptığı birkaç hayati hatadan dolayı beklenmedik bir şekilde işten atıldı.<br>\n→ <strong>Açıklama:</strong> \"A few\" yapısı \"mistakes\" çoğul ismiyle kullanılmıştır. \"A few\" burada \"birkaç tane\" anlamında olup, sayının az ama var olduğunu vurgular. Olumlu bir anlam taşır ve genellikle \"yeterli\" veya \"mevcut\" hissi verir.</p>\n<p><strong>Örnek 4 (Few - olumsuz anlam):</strong><br>\n<strong>EN:</strong> Few passengers on the crowded bus got seriously injured in the accident thanks to the relatively low speed of the vehicle at the time of the collision.<br>\n<strong>TR:</strong> Kalabalık otobüsteki çok az yolcu, çarpışma anında aracın nispeten düşük hızı sayesinde kazada ciddi şekilde yaralandı.<br>\n→ <strong>Açıklama:</strong> \"Few\" yapısı \"passengers\" çoğul ismiyle kullanılmıştır. \"Few\" neredeyse yok denecek kadar az olduğunu vurgular. \"A few\"den farklı olarak olumsuz bir anlam taşır ve \"neredeyse hiç\" hissi verir.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"Few\" ve \"a few\" arasındaki farkı hatırlamak için: \"a few\" = birkaç tane var (+), \"few\" = neredeyse hiç yok (-). Aynı mantık \"little\" ve \"a little\" için de geçerlidir.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Fiil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Many</strong></td>\n<td>birçok</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>Several</strong></td>\n<td>birkaç</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>A few</strong></td>\n<td>birkaç (var)</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>Few</strong></td>\n<td>az (neredeyse yok)</td>\n<td>çoğul</td>\n<td>çoğul</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur? \"The student answered nearly all the questions, except for _____ difficult ones.\"</p>\n<p>A) a few<br>\nB) few<br>\nC) several</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) a few\n\n**Açıklama:** \"Except for a few\" (birkaçı hariç) anlamındadır. Cümle olumlu bir anlam taşıdığı için \"a few\" kullanılmalıdır.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Several important questions regarding the budget cuts remained completely unanswered despite a lengthy discussion that lasted more than ten hours in the parliament.",
+          "tr": "Bütçe kesintileriyle ilgili birkaç önemli soru, parlamentoda on saatten fazla süren uzun bir tartışmaya rağmen tamamen yanıtsız kaldı.",
+          "description": "\"Several\" yapısı \"questions\" çoğul ismiyle kullanılmıştır. \"Several\" genellikle 3-5 arası bir sayıyı ifade eder ve \"birkaç\" anlamındadır. Fiil \"remained\" (çoğul) özneye uygun olarak çekimlenmiştir.\n\n**Örnek 2 (Many):**"
+        },
+        {
+          "en": "Many children who grow up in densely populated urban areas unfortunately suffer from loneliness and social anxiety because they have limited opportunities for outdoor play.",
+          "tr": "Yoğun nüfuslu kentsel alanlarda büyüyen çoğu çocuk, açık havada oyun oynama fırsatları sınırlı olduğu için ne yazık ki yalnızlık ve sosyal kaygıdan sıkıntı çekiyor.",
+          "description": "\"Many\" yapısı \"children\" çoğul ismiyle kullanılmıştır. \"Children\" düzensiz çoğul bir isimdir (child → children). Fiil \"suffer\" çoğul özneye göre \"-s\" almadan kullanılmıştır.\n\n**Örnek 3 (A few - olumlu anlam):**"
+        },
+        {
+          "en": "The experienced conference interpreter was unexpectedly fired because of a few vital mistakes he made during the very last speech of the international summit.",
+          "tr": "Deneyimli konferans tercümanı, uluslararası zirvenin en son konuşmasında yaptığı birkaç hayati hatadan dolayı beklenmedik bir şekilde işten atıldı.",
+          "description": "\"A few\" yapısı \"mistakes\" çoğul ismiyle kullanılmıştır. \"A few\" burada \"birkaç tane\" anlamında olup, sayının az ama var olduğunu vurgular. Olumlu bir anlam taşır ve genellikle \"yeterli\" veya \"mevcut\" hissi verir.\n\n**Örnek 4 (Few - olumsuz anlam):**"
+        },
+        {
+          "en": "Few passengers on the crowded bus got seriously injured in the accident thanks to the relatively low speed of the vehicle at the time of the collision.",
+          "tr": "Kalabalık otobüsteki çok az yolcu, çarpışma anında aracın nispeten düşük hızı sayesinde kazada ciddi şekilde yaralandı.",
+          "description": "\"Few\" yapısı \"passengers\" çoğul ismiyle kullanılmıştır. \"Few\" neredeyse yok denecek kadar az olduğunu vurgular. \"A few\"den farklı olarak olumsuz bir anlam taşır ve \"neredeyse hiç\" hissi verir."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur? \"The student answered nearly all the questions, except for _____ difficult ones.\"",
+        "options": {
+          "A": "a few",
+          "B": "few",
+          "C": "several"
+        },
+        "correct": "A) a few",
+        "explanation": "\"Except for a few\" (birkaçı hariç) anlamındadır. Cümle olumlu bir anlam taşıdığı için \"a few\" kullanılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur? \"The student answered nearly all the questions, except for _____ difficult ones.\"",
+          "options": {
+            "A": "a few",
+            "B": "few",
+            "C": "several"
+          },
+          "correct": "A) a few",
+          "explanation": "\"Except for a few\" (birkaçı hariç) anlamındadır. Cümle olumlu bir anlam taşıdığı için \"a few\" kullanılmalıdır."
+        }
+      ],
+      "word_count": 481
+    },
+    {
+      "page_number": 5,
+      "title": "\"OF\" İLE KULLANIM",
+      "total_pages": 25,
+      "content_html": "<h2>📌 MİKTAR İFADELERİ + \"OF\" YAPISI</h2>\n<p>\"Many\", \"several\", \"a few\", \"few\" gibi yapılar \"of\" alarak kullanılacaklarsa, devamında mutlaka bir object pronoun (them, us, you) veya bir determiner (the, these, those, my, his) + çoğul isim alırlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Of\" kullanıldığında, bahsedilen grup belirlidir. \"Many people\" (genel) iken \"many of the people\" (belirli bir gruptaki insanlar) anlamındadır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Several of + the + çoğul isim):</strong><br>\n<strong>EN:</strong> Several of the questions that were asked during the job interview yesterday still remain unanswered, and the candidates are anxiously waiting for feedback.<br>\n<strong>TR:</strong> Dünkü iş görüşmesi sırasında sorulan soruların birkaçı halen yanıtsız duruyor ve adaylar endişeyle geri bildirim bekliyorlar.<br>\n→ <strong>Açıklama:</strong> \"Several of\" yapısından sonra \"the questions\" (determiner + çoğul isim) gelmiştir. Bu yapı, belirli bir grup sorudan (görüşmede sorulanlar) bahsedildiğini gösterir. \"Several questions\" deseydik genel bir anlam olurdu.</p>\n<p><strong>Örnek 2 (Many of + determiner + çoğul isim):</strong><br>\n<strong>EN:</strong> Many of the children who are in the difficult adolescence period suffer from intense loneliness and depression, especially in large urban areas far from family support.<br>\n<strong>TR:</strong> Zorlu ergenlik dönemindeki çocukların çoğu, özellikle aile desteğinden uzak büyük kentsel alanlarda, yoğun yalnızlık ve depresyondan sıkıntı çekiyor.<br>\n→ <strong>Açıklama:</strong> \"Many of\" yapısı \"the children\" (determiner + çoğul isim) ile kullanılmıştır. Burada tüm çocuklardan değil, belirli bir gruptaki (ergenlik dönemindeki) çocuklardan bahsedilmektedir.</p>\n<p><strong>Örnek 3 (A few of + possessive adjective + çoğul isim):</strong><br>\n<strong>EN:</strong> A few of my closest childhood friends were with me at my birthday party yesterday, so I felt genuinely happy and grateful for their presence.<br>\n<strong>TR:</strong> En yakın çocukluk arkadaşlarımdan birkaçı dün doğum günü partimde benimleydi, bu yüzden varlıkları için gerçekten çok mutlu ve minnettar hissettim.<br>\n→ <strong>Açıklama:</strong> \"A few of\" yapısından sonra \"my closest friends\" (possessive adjective + çoğul isim) gelmiştir. Burada konuşmacının kendi arkadaş grubundan bahsedilmektedir. \"My\" iyelik sıfatıdır.</p>\n<p><strong>Örnek 4 (Few of + object pronoun):</strong><br>\n<strong>EN:</strong> The student answered nearly all of the questions correctly during the exam, except for few of them, which were extremely challenging and confusing.<br>\n<strong>TR:</strong> Öğrenci sınav sırasında soruların neredeyse tamamını doğru yanıtladı, son derece zorlu ve kafa karıştırıcı olan birkaçı hariç.<br>\n→ <strong>Açıklama:</strong> \"Few of\" yapısından sonra \"them\" (object pronoun) gelmiştir. \"Them\" daha önce bahsedilen \"questions\" (sorular) zamiridir. \"Of\" kullanıldığı için object pronoun zorunludur.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nBu yapılar \"of\" ile kullanıldığında, devamında MUTLAKA bir determiner (the, my, these) veya object pronoun (them, us) gelmelidir. \"Many of students\" YANLIŞ, \"many of THE students\" veya \"many of THEM\" DOĞRU.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>+ of</th>\n<th>+ Determiner/Object</th>\n<th>+ Çoğul İsim</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Many</strong></td>\n<td>of</td>\n<td>the / my / these / them</td>\n<td>students</td>\n</tr>\n<tr>\n<td><strong>Several</strong></td>\n<td>of</td>\n<td>the / our / those / us</td>\n<td>questions</td>\n</tr>\n<tr>\n<td><strong>A few</strong></td>\n<td>of</td>\n<td>his / their / you</td>\n<td>friends</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) Many of students passed the exam.<br>\nB) Many of the students passed the exam.<br>\nC) Many students of passed the exam.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) Many of the students passed the exam.\n\n**Açıklama:** \"Many of\" yapısından sonra mutlaka bir determiner (the, these, my) gelmelidir.\n</details>\n\n<p>[Kelime sayısı: 236]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Several of the questions that were asked during the job interview yesterday still remain unanswered, and the candidates are anxiously waiting for feedback.",
+          "tr": "Dünkü iş görüşmesi sırasında sorulan soruların birkaçı halen yanıtsız duruyor ve adaylar endişeyle geri bildirim bekliyorlar.",
+          "description": "\"Several of\" yapısından sonra \"the questions\" (determiner + çoğul isim) gelmiştir. Bu yapı, belirli bir grup sorudan (görüşmede sorulanlar) bahsedildiğini gösterir. \"Several questions\" deseydik genel bir anlam olurdu.\n\n**Örnek 2 (Many of + determiner + çoğul isim):**"
+        },
+        {
+          "en": "Many of the children who are in the difficult adolescence period suffer from intense loneliness and depression, especially in large urban areas far from family support.",
+          "tr": "Zorlu ergenlik dönemindeki çocukların çoğu, özellikle aile desteğinden uzak büyük kentsel alanlarda, yoğun yalnızlık ve depresyondan sıkıntı çekiyor.",
+          "description": "\"Many of\" yapısı \"the children\" (determiner + çoğul isim) ile kullanılmıştır. Burada tüm çocuklardan değil, belirli bir gruptaki (ergenlik dönemindeki) çocuklardan bahsedilmektedir.\n\n**Örnek 3 (A few of + possessive adjective + çoğul isim):**"
+        },
+        {
+          "en": "A few of my closest childhood friends were with me at my birthday party yesterday, so I felt genuinely happy and grateful for their presence.",
+          "tr": "En yakın çocukluk arkadaşlarımdan birkaçı dün doğum günü partimde benimleydi, bu yüzden varlıkları için gerçekten çok mutlu ve minnettar hissettim.",
+          "description": "\"A few of\" yapısından sonra \"my closest friends\" (possessive adjective + çoğul isim) gelmiştir. Burada konuşmacının kendi arkadaş grubundan bahsedilmektedir. \"My\" iyelik sıfatıdır.\n\n**Örnek 4 (Few of + object pronoun):**"
+        },
+        {
+          "en": "The student answered nearly all of the questions correctly during the exam, except for few of them, which were extremely challenging and confusing.",
+          "tr": "Öğrenci sınav sırasında soruların neredeyse tamamını doğru yanıtladı, son derece zorlu ve kafa karıştırıcı olan birkaçı hariç.",
+          "description": "\"Few of\" yapısından sonra \"them\" (object pronoun) gelmiştir. \"Them\" daha önce bahsedilen \"questions\" (sorular) zamiridir. \"Of\" kullanıldığı için object pronoun zorunludur."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "Many of students passed the exam.",
+          "B": "Many of the students passed the exam.",
+          "C": "Many students of passed the exam."
+        },
+        "correct": "B) Many of the students passed the exam.",
+        "explanation": "\"Many of\" yapısından sonra mutlaka bir determiner (the, these, my) gelmelidir."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "Many of students passed the exam.",
+            "B": "Many of the students passed the exam.",
+            "C": "Many students of passed the exam."
+          },
+          "correct": "B) Many of the students passed the exam.",
+          "explanation": "\"Many of\" yapısından sonra mutlaka bir determiner (the, these, my) gelmelidir."
+        }
+      ],
+      "word_count": 482
+    },
+    {
+      "page_number": 6,
+      "title": "MUCH / A LITTLE / LITTLE",
+      "total_pages": 25,
+      "content_html": "<h2>📌 SAYILAMAYAN İSİMLERLE KULLANILAN MİKTAR İFADELERİ</h2>\n<p>\"Much\" (çok), \"a little\" (biraz - yeterli miktarda) ve \"little\" (az - neredeyse yok) yapıları sadece sayılamayan isimlerle kullanılır. Özne olarak kullanıldıklarında fiil tekil olur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"A little\" olumlu, \"little\" ise olumsuz bir anlam taşır. \"A little\" var olduğunu, \"little\" ise neredeyse yok denecek kadar az olduğunu vurgular.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Little - olumsuz anlam):</strong><br>\n<strong>EN:</strong> I have always had very little interest in following politics regularly because I find the constant arguments and conflicts quite exhausting and unproductive.<br>\n<strong>TR:</strong> Siyaseti düzenli olarak takip etmeye her zaman çok az ilgim oldu çünkü sürekli tartışmaları ve çatışmaları oldukça yorucu ve verimsiz buluyorum.<br>\n→ <strong>Açıklama:</strong> \"Little\" yapısı sayılamayan \"interest\" (ilgi) ismiyle kullanılmıştır. \"Little\" neredeyse yok denecek kadar az olduğunu vurgular ve olumsuz bir anlam taşır. Cümlede \"very\" ile pekiştirilmiştir.</p>\n<p><strong>Örnek 2 (A little - olumlu anlam):</strong><br>\n<strong>EN:</strong> We have got a little bacon left in the refrigerator and a few eggs in the basket, so we can definitely prepare a nice breakfast for everyone this morning.<br>\n<strong>TR:</strong> Buzdolabında biraz pastırma kalmış ve sepette birkaç yumurta var, bu yüzden bu sabah herkese kesinlikle güzel bir kahvaltı hazırlayabiliriz.<br>\n→ <strong>Açıklama:</strong> \"A little\" yapısı sayılamayan \"bacon\" (pastırma) ismiyle kullanılmıştır. \"A little\" biraz olduğunu, yani var olduğunu vurgular. Olumlu bir anlam taşır. Dikkat: \"a few eggs\" (çoğul isim) ile birlikte kullanılmıştır.</p>\n<p><strong>Örnek 3 (Much - soru cümlesinde):</strong><br>\n<strong>EN:</strong> Since the busy mayor didn't have much time to spare for the interview, it unfortunately happened to be a very short and superficial conversation.<br>\n<strong>TR:</strong> Meşgul belediye başkanının röportaj için ayıracak çok zamanı olmadığı için, ne yazık ki çok kısa ve yüzeysel bir konuşma oldu.<br>\n→ <strong>Açıklama:</strong> \"Much\" sayılamayan \"time\" (zaman) ismiyle kullanılmıştır. Bu cümle olumsuz olduğu için (\"didn't have\") \"much\" kullanımı doğaldır. \"Much\" genellikle olumsuz ve soru cümlelerinde tercih edilir.</p>\n<p><strong>Örnek 4 (Much - olumlu cümlede \"so\" ile):</strong><br>\n<strong>EN:</strong> She has so much patience with difficult children that everyone in the neighborhood asks her for advice on parenting issues.<br>\n<strong>TR:</strong> Zor çocuklara karşı o kadar çok sabrı var ki mahalledeki herkes ona ebeveynlik konularında tavsiye soruyor.<br>\n→ <strong>Açıklama:</strong> \"Much\" sayılamayan \"patience\" ile kullanılmıştır. Olumlu cümlede \"much\" tek başına kullanılmaz, \"so much\", \"very much\", \"too much\" şeklinde kullanılmalıdır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"Much\" tek başına genellikle olumsuz ve soru cümlelerinde kullanılır. Olumlu cümlelerde \"a lot of\" tercih edilir veya \"so/very/too\" ile birlikte \"much\" kullanılır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Fiil</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Much</strong></td>\n<td>çok</td>\n<td>sayılamayan</td>\n<td>tekil</td>\n<td>olumsuz/soru</td>\n</tr>\n<tr>\n<td><strong>A little</strong></td>\n<td>biraz (var)</td>\n<td>sayılamayan</td>\n<td>tekil</td>\n<td>olumlu</td>\n</tr>\n<tr>\n<td><strong>Little</strong></td>\n<td>az (yok gibi)</td>\n<td>sayılamayan</td>\n<td>tekil</td>\n<td>olumsuz anlam</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi yanlıştır?</p>\n<p>A) She has much patience. (YANLIŞ)<br>\nB) She has so much patience. (DOĞRU)<br>\nC) She has a lot of patience. (DOĞRU)</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A şıkkı yanlıştır.\n\n**Açıklama:** Olumlu cümlelerde \"much\" tek başına kullanılmaz. \"So much\", \"very much\" veya \"too much\" şeklinde kullanılmalıdır.\n</details>\n\n<p>[Kelime sayısı: 239]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I have always had very little interest in following politics regularly because I find the constant arguments and conflicts quite exhausting and unproductive.",
+          "tr": "Siyaseti düzenli olarak takip etmeye her zaman çok az ilgim oldu çünkü sürekli tartışmaları ve çatışmaları oldukça yorucu ve verimsiz buluyorum.",
+          "description": "\"Little\" yapısı sayılamayan \"interest\" (ilgi) ismiyle kullanılmıştır. \"Little\" neredeyse yok denecek kadar az olduğunu vurgular ve olumsuz bir anlam taşır. Cümlede \"very\" ile pekiştirilmiştir.\n\n**Örnek 2 (A little - olumlu anlam):**"
+        },
+        {
+          "en": "We have got a little bacon left in the refrigerator and a few eggs in the basket, so we can definitely prepare a nice breakfast for everyone this morning.",
+          "tr": "Buzdolabında biraz pastırma kalmış ve sepette birkaç yumurta var, bu yüzden bu sabah herkese kesinlikle güzel bir kahvaltı hazırlayabiliriz.",
+          "description": "\"A little\" yapısı sayılamayan \"bacon\" (pastırma) ismiyle kullanılmıştır. \"A little\" biraz olduğunu, yani var olduğunu vurgular. Olumlu bir anlam taşır. Dikkat: \"a few eggs\" (çoğul isim) ile birlikte kullanılmıştır.\n\n**Örnek 3 (Much - soru cümlesinde):**"
+        },
+        {
+          "en": "Since the busy mayor didn't have much time to spare for the interview, it unfortunately happened to be a very short and superficial conversation.",
+          "tr": "Meşgul belediye başkanının röportaj için ayıracak çok zamanı olmadığı için, ne yazık ki çok kısa ve yüzeysel bir konuşma oldu.",
+          "description": "\"Much\" sayılamayan \"time\" (zaman) ismiyle kullanılmıştır. Bu cümle olumsuz olduğu için (\"didn't have\") \"much\" kullanımı doğaldır. \"Much\" genellikle olumsuz ve soru cümlelerinde tercih edilir.\n\n**Örnek 4 (Much - olumlu cümlede \"so\" ile):**"
+        },
+        {
+          "en": "She has so much patience with difficult children that everyone in the neighborhood asks her for advice on parenting issues.",
+          "tr": "Zor çocuklara karşı o kadar çok sabrı var ki mahalledeki herkes ona ebeveynlik konularında tavsiye soruyor.",
+          "description": "\"Much\" sayılamayan \"patience\" ile kullanılmıştır. Olumlu cümlede \"much\" tek başına kullanılmaz, \"so much\", \"very much\", \"too much\" şeklinde kullanılmalıdır."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi yanlıştır?",
+        "options": {
+          "A": "She has much patience. (YANLIŞ)",
+          "B": "She has so much patience. (DOĞRU)",
+          "C": "She has a lot of patience. (DOĞRU)"
+        },
+        "correct": "A şıkkı yanlıştır.",
+        "explanation": "Olumlu cümlelerde \"much\" tek başına kullanılmaz. \"So much\", \"very much\" veya \"too much\" şeklinde kullanılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi yanlıştır?",
+          "options": {
+            "A": "She has much patience. (YANLIŞ)",
+            "B": "She has so much patience. (DOĞRU)",
+            "C": "She has a lot of patience. (DOĞRU)"
+          },
+          "correct": "A şıkkı yanlıştır.",
+          "explanation": "Olumlu cümlelerde \"much\" tek başına kullanılmaz. \"So much\", \"very much\" veya \"too much\" şeklinde kullanılmalıdır."
+        }
+      ],
+      "word_count": 475
+    },
+    {
+      "page_number": 7,
+      "title": "MOST / SOME",
+      "total_pages": 25,
+      "content_html": "<h2>📌 HEM ÇOĞUL HEM SAYILAMAYAN İSİMLERLE KULLANILAN YAPILAR</h2>\n<p>\"Most\" (çoğu, pek çok) ve \"some\" (biraz, birkaç, bazı) yapıları hem çoğul hem de sayılamayan isimlerle kullanılabilir. Zamir olarak da kullanılabilirler.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Most\" genellikle \"%90'dan fazla\" anlamındayken, \"some\" daha belirsiz bir miktarı ifade eder. \"Some\" olumlu cümlelerde kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Most + sayılamayan isim):</strong><br>\n<strong>EN:</strong> Most cheese that you find in regular supermarkets is typically made from cow's milk, although there are also varieties made from goat or sheep milk.<br>\n<strong>TR:</strong> Normal süpermarketlerde bulduğunuz çoğu peynir tipik olarak inek sütünden yapılır, ancak keçi veya koyun sütünden yapılan çeşitler de vardır.<br>\n→ <strong>Açıklama:</strong> \"Most\" sayılamayan \"cheese\" ismiyle kullanılmıştır. Sayılamayan isim olduğu için fiil \"is made\" (tekil) olarak çekimlenmiştir. \"Most\" burada genel bir ifadeyle peynirlerin büyük çoğunluğunu kastetmektedir.</p>\n<p><strong>Örnek 2 (Most + çoğul isim):</strong><br>\n<strong>EN:</strong> Most Swiss people naturally understand French quite well because Switzerland has four official languages and French is widely spoken in several cantons.<br>\n<strong>TR:</strong> Çoğu İsviçreli doğal olarak Fransızcayı oldukça iyi anlar çünkü İsviçre'nin dört resmi dili vardır ve Fransızca birkaç kantonda yaygın olarak konuşulur.<br>\n→ <strong>Açıklama:</strong> \"Most\" çoğul \"people\" ismiyle kullanılmıştır. Çoğul isim olduğu için fiil \"understand\" (çoğul) olarak çekimlenmiş ve \"-s\" takısı almamıştır. \"Most people\" genel bir ifadeyle insanların çoğunu kasteder.</p>\n<p><strong>Örnek 3 (Most - zamir olarak):</strong><br>\n<strong>EN:</strong> Some people in the audience had great difficulty in understanding the complex scientific lecture, but most understood the main concepts quite easily.<br>\n<strong>TR:</strong> Dinleyiciler arasındaki bazı insanlar karmaşık bilimsel konferansı anlamakta büyük zorluk çektiler, ama çoğu ana kavramları oldukça kolay anladı.<br>\n→ <strong>Açıklama:</strong> \"Most\" bu cümlede zamir olarak kullanılmıştır ve \"most people\" anlamına gelir. Daha önce bahsedilen bir ismin (people) yerine geçmiştir. Tek başına kullanıldığında anlam bağlamdan anlaşılır.</p>\n<p><strong>Örnek 4 (Some - çoğul isimle):</strong><br>\n<strong>EN:</strong> Some controversial aspects of artificial intelligence technology will be thoroughly analysed in the upcoming documentary series on public television.<br>\n<strong>TR:</strong> Yapay zeka teknolojisinin bazı tartışmalı yönleri, kamu televizyonundaki yaklaşan belgesel dizisinde derinlemesine analiz edilecek.<br>\n→ <strong>Açıklama:</strong> \"Some\" çoğul \"aspects\" ismiyle kullanılmıştır. \"Some\" olumlu cümlelerde \"bazı\" anlamındadır. Tekil isimlerle kullanıldığında \"bir\" anlamına gelir (some man = bir adam).</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\n\"Most\" ve \"some\" \"of\" ile kullanıldığında, belirli bir gruba işaret eder: \"most of the people\" (bu gruptaki insanların çoğu), \"some of the money\" (paranın bir kısmı).\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Most</strong></td>\n<td>çoğu</td>\n<td>çoğul / sayılamayan</td>\n<td>most people / most cheese</td>\n</tr>\n<tr>\n<td><strong>Some</strong></td>\n<td>bazı, biraz</td>\n<td>çoğul / sayılamayan</td>\n<td>some aspects / some attention</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Cümleyi tamamlayın: \"Many people like chocolate, but _____ hate it because they find it too sweet.\"</p>\n<p>A) most<br>\nB) some<br>\nC) much</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) some\n\n**Açıklama:** Cümlede \"some\" zamir olarak kullanılmıştır ve \"some people\" anlamındadır. \"Most\" (çoğu) anlamı cümleye uymaz.\n</details>\n\n<p>[Kelime sayısı: 241]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Most cheese that you find in regular supermarkets is typically made from cow's milk, although there are also varieties made from goat or sheep milk.",
+          "tr": "Normal süpermarketlerde bulduğunuz çoğu peynir tipik olarak inek sütünden yapılır, ancak keçi veya koyun sütünden yapılan çeşitler de vardır.",
+          "description": "\"Most\" sayılamayan \"cheese\" ismiyle kullanılmıştır. Sayılamayan isim olduğu için fiil \"is made\" (tekil) olarak çekimlenmiştir. \"Most\" burada genel bir ifadeyle peynirlerin büyük çoğunluğunu kastetmektedir.\n\n**Örnek 2 (Most + çoğul isim):**"
+        },
+        {
+          "en": "Most Swiss people naturally understand French quite well because Switzerland has four official languages and French is widely spoken in several cantons.",
+          "tr": "Çoğu İsviçreli doğal olarak Fransızcayı oldukça iyi anlar çünkü İsviçre'nin dört resmi dili vardır ve Fransızca birkaç kantonda yaygın olarak konuşulur.",
+          "description": "\"Most\" çoğul \"people\" ismiyle kullanılmıştır. Çoğul isim olduğu için fiil \"understand\" (çoğul) olarak çekimlenmiş ve \"-s\" takısı almamıştır. \"Most people\" genel bir ifadeyle insanların çoğunu kasteder.\n\n**Örnek 3 (Most - zamir olarak):**"
+        },
+        {
+          "en": "Some people in the audience had great difficulty in understanding the complex scientific lecture, but most understood the main concepts quite easily.",
+          "tr": "Dinleyiciler arasındaki bazı insanlar karmaşık bilimsel konferansı anlamakta büyük zorluk çektiler, ama çoğu ana kavramları oldukça kolay anladı.",
+          "description": "\"Most\" bu cümlede zamir olarak kullanılmıştır ve \"most people\" anlamına gelir. Daha önce bahsedilen bir ismin (people) yerine geçmiştir. Tek başına kullanıldığında anlam bağlamdan anlaşılır.\n\n**Örnek 4 (Some - çoğul isimle):**"
+        },
+        {
+          "en": "Some controversial aspects of artificial intelligence technology will be thoroughly analysed in the upcoming documentary series on public television.",
+          "tr": "Yapay zeka teknolojisinin bazı tartışmalı yönleri, kamu televizyonundaki yaklaşan belgesel dizisinde derinlemesine analiz edilecek.",
+          "description": "\"Some\" çoğul \"aspects\" ismiyle kullanılmıştır. \"Some\" olumlu cümlelerde \"bazı\" anlamındadır. Tekil isimlerle kullanıldığında \"bir\" anlamına gelir (some man = bir adam)."
+        }
+      ],
+      "mini_test": {
+        "question": "Cümleyi tamamlayın: \"Many people like chocolate, but _____ hate it because they find it too sweet.\"",
+        "options": {
+          "A": "most",
+          "B": "some",
+          "C": "much"
+        },
+        "correct": "B) some",
+        "explanation": "Cümlede \"some\" zamir olarak kullanılmıştır ve \"some people\" anlamındadır. \"Most\" (çoğu) anlamı cümleye uymaz."
+      },
+      "mini_tests": [
+        {
+          "question": "Cümleyi tamamlayın: \"Many people like chocolate, but _____ hate it because they find it too sweet.\"",
+          "options": {
+            "A": "most",
+            "B": "some",
+            "C": "much"
+          },
+          "correct": "B) some",
+          "explanation": "Cümlede \"some\" zamir olarak kullanılmıştır ve \"some people\" anlamındadır. \"Most\" (çoğu) anlamı cümleye uymaz."
+        }
+      ],
+      "word_count": 446
+    },
+    {
+      "page_number": 8,
+      "title": "ANY",
+      "total_pages": 25,
+      "content_html": "<h2>📌 SORU, OLUMSUZ VE OLUMLU CÜMLELERDE \"ANY\"</h2>\n<p>\"Any\" yapısı çoğul, sayılamayan ve tekil isimlerle kullanılabilir. Soru ve olumsuz cümlelerde \"hiç\", olumlu cümlelerde ise \"her, herhangi\" anlamına gelir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Any\" olumlu cümlelerde tekil isimle kullanılır ve \"herhangi bir\" anlamı verir. Olumsuzluk bildiren zarflarla (hardly, barely) çoğul isim alabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Any + sayılamayan isim - olumsuz):</strong><br>\n<strong>EN:</strong> If the young candidate doesn't have any hesitation about presenting his innovative ideas, he can confidently do whatever he has in mind during the meeting.<br>\n<strong>TR:</strong> Eğer genç adayın yenilikçi fikirlerini sunma konusunda hiç tereddütü yoksa, toplantı sırasında aklındaki her şeyi güvenle yapabilir.<br>\n→ <strong>Açıklama:</strong> \"Any\" sayılamayan \"hesitation\" (tereddüt) ismiyle kullanılmıştır. Cümle olumsuz olduğu için (\"doesn't have\") \"any\" \"hiç\" anlamındadır. Olumsuz cümlelerde \"some\" değil \"any\" kullanılır.</p>\n<p><strong>Örnek 2 (Any + çoğul isim - olumsuz):</strong><br>\n<strong>EN:</strong> Despite walking through the dense forest for hours, I couldn't see any wild animals at all, which was quite disappointing for a nature enthusiast like me.<br>\n<strong>TR:</strong> Yoğun ormanda saatlerce yürümeme rağmen, hiç vahşi hayvan göremedim, bu benim gibi bir doğa meraklısı için oldukça hayal kırıklığıydı.<br>\n→ <strong>Açıklama:</strong> \"Any\" çoğul \"animals\" ismiyle kullanılmıştır. Cümle olumsuz olduğu için (\"couldn't see\") \"any\" yine \"hiç\" anlamındadır. Olumsuzluk fiille sağlanmıştır.</p>\n<p><strong>Örnek 3 (Any + tekil isim - olumlu):</strong><br>\n<strong>EN:</strong> Any intelligent person with basic common sense will immediately recognize where the hidden trap is if you place that obvious rope in such a visible location.<br>\n<strong>TR:</strong> Eğer o bariz ipi görünür bir yere koyarsan, temel sağduyuya sahip herhangi bir zeki insan gizli tuzağın nerede olduğunu hemen fark edecektir.<br>\n→ <strong>Açıklama:</strong> \"Any\" olumlu cümlede tekil \"person\" ismiyle kullanılmıştır. Bu kullanımda \"herhangi bir\" anlamına gelir. Olumlu cümlelerde \"any\" genellikle tekil isim alır ve özne pozisyonunda kullanılabilir.</p>\n<p><strong>Örnek 4 (Any + çoğul isim - anlamca olumsuz):</strong><br>\n<strong>EN:</strong> The desperate patient gave up any hopes of recovery after receiving the devastating diagnosis from the specialist last week.<br>\n<strong>TR:</strong> Çaresiz hasta, geçen hafta uzmandan yıkıcı teşhisi aldıktan sonra iyileşmeye dair bütün ümitlerini yitirdi.<br>\n→ <strong>Açıklama:</strong> \"Any\" burada çoğul \"hopes\" ismiyle kullanılmıştır. Cümle yapıca olumlu görünse de \"give up\" fiili anlamca olumsuzluk taşıdığı için \"any\" kullanılmıştır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nYDS'de \"any\" ile ilgili sorularda, boşluktan sonra tekil bir isim varsa ve cümle olumluysa \"any\" doğru cevap olabilir: \"any opportunity\" (her fırsat), \"any person\" (herhangi bir kişi).\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Örnek Cümle</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Olumsuz</td>\n<td>hiç</td>\n<td>çoğul/sayılamayan</td>\n<td>I don't have any money.</td>\n</tr>\n<tr>\n<td>Soru</td>\n<td>hiç</td>\n<td>çoğul/sayılamayan</td>\n<td>Do you have any questions?</td>\n</tr>\n<tr>\n<td>Olumlu</td>\n<td>her/herhangi</td>\n<td>tekil</td>\n<td>Any student can join.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"Chipmaking is very competitive, so _____ opportunity to cut costs and improve yields is highly prized.\"</p>\n<p>A) all<br>\nB) some<br>\nC) any</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) any\n\n**Açıklama:** \"Opportunity\" tekil bir isimdir. Olumlu cümlede \"her fırsat\" anlamı için \"any\" doğrudur. \"All\" ve \"some\" çoğul isim gerektirir.\n</details>\n\n<p>[Kelime sayısı: 243]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If the young candidate doesn't have any hesitation about presenting his innovative ideas, he can confidently do whatever he has in mind during the meeting.",
+          "tr": "Eğer genç adayın yenilikçi fikirlerini sunma konusunda hiç tereddütü yoksa, toplantı sırasında aklındaki her şeyi güvenle yapabilir.",
+          "description": "\"Any\" sayılamayan \"hesitation\" (tereddüt) ismiyle kullanılmıştır. Cümle olumsuz olduğu için (\"doesn't have\") \"any\" \"hiç\" anlamındadır. Olumsuz cümlelerde \"some\" değil \"any\" kullanılır.\n\n**Örnek 2 (Any + çoğul isim - olumsuz):**"
+        },
+        {
+          "en": "Despite walking through the dense forest for hours, I couldn't see any wild animals at all, which was quite disappointing for a nature enthusiast like me.",
+          "tr": "Yoğun ormanda saatlerce yürümeme rağmen, hiç vahşi hayvan göremedim, bu benim gibi bir doğa meraklısı için oldukça hayal kırıklığıydı.",
+          "description": "\"Any\" çoğul \"animals\" ismiyle kullanılmıştır. Cümle olumsuz olduğu için (\"couldn't see\") \"any\" yine \"hiç\" anlamındadır. Olumsuzluk fiille sağlanmıştır.\n\n**Örnek 3 (Any + tekil isim - olumlu):**"
+        },
+        {
+          "en": "Any intelligent person with basic common sense will immediately recognize where the hidden trap is if you place that obvious rope in such a visible location.",
+          "tr": "Eğer o bariz ipi görünür bir yere koyarsan, temel sağduyuya sahip herhangi bir zeki insan gizli tuzağın nerede olduğunu hemen fark edecektir.",
+          "description": "\"Any\" olumlu cümlede tekil \"person\" ismiyle kullanılmıştır. Bu kullanımda \"herhangi bir\" anlamına gelir. Olumlu cümlelerde \"any\" genellikle tekil isim alır ve özne pozisyonunda kullanılabilir.\n\n**Örnek 4 (Any + çoğul isim - anlamca olumsuz):**"
+        },
+        {
+          "en": "The desperate patient gave up any hopes of recovery after receiving the devastating diagnosis from the specialist last week.",
+          "tr": "Çaresiz hasta, geçen hafta uzmandan yıkıcı teşhisi aldıktan sonra iyileşmeye dair bütün ümitlerini yitirdi.",
+          "description": "\"Any\" burada çoğul \"hopes\" ismiyle kullanılmıştır. Cümle yapıca olumlu görünse de \"give up\" fiili anlamca olumsuzluk taşıdığı için \"any\" kullanılmıştır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"Chipmaking is very competitive, so _____ opportunity to cut costs and improve yields is highly prized.\"",
+        "options": {
+          "A": "all",
+          "B": "some",
+          "C": "any"
+        },
+        "correct": "C) any",
+        "explanation": "\"Opportunity\" tekil bir isimdir. Olumlu cümlede \"her fırsat\" anlamı için \"any\" doğrudur. \"All\" ve \"some\" çoğul isim gerektirir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Chipmaking is very competitive, so _____ opportunity to cut costs and improve yields is highly prized.\"",
+          "options": {
+            "A": "all",
+            "B": "some",
+            "C": "any"
+          },
+          "correct": "C) any",
+          "explanation": "\"Opportunity\" tekil bir isimdir. Olumlu cümlede \"her fırsat\" anlamı için \"any\" doğrudur. \"All\" ve \"some\" çoğul isim gerektirir."
+        }
+      ],
+      "word_count": 463
+    },
+    {
+      "page_number": 9,
+      "title": "NO",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"NO\" - OLUMSUZLUK İFADESİ</h2>\n<p>\"No\" yapısı çoğul, sayılamayan ve tekil isimlerle kullanılabilir ve \"hiç\" anlamına gelir. Kendisi zaten olumsuz olduğu için bulunduğu cümle yapıca olumlu olmalıdır. \"No\" \"of\" alamaz ve tek başına kullanılamaz.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"No\" = \"not any\" anlamına gelir. \"No\" kullanıldığında cümlede ikinci bir olumsuzluk olmamalıdır. \"I don't have no money\" YANLIŞ!</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (No + çoğul isim):</strong><br>\n<strong>EN:</strong> No logical reasons were given to us by the management for the unexpected delay in the project, which made everyone frustrated and confused.<br>\n<strong>TR:</strong> Projedeki beklenmedik erteleme için yönetim tarafından bize hiçbir mantıklı sebep sunulmadı, bu da herkesi hayal kırıklığına uğrattı ve kafa karışıklığına yol açtı.<br>\n→ <strong>Açıklama:</strong> \"No\" çoğul \"reasons\" ismiyle kullanılmıştır. \"No\" zaten olumsuz olduğu için cümle yapıca olumludur (\"were given\" - olumsuzluk eki yok). \"No\" çoğul isimle kullanıldığında fiil tekil veya çoğul olabilir, ancak yazı dilinde tekil daha yaygındır.</p>\n<p><strong>Örnek 2 (No + sayılamayan isim):</strong><br>\n<strong>EN:</strong> Surprisingly, the patient received no practical advice or guidance from the doctor after the intensive two-hour therapy session last week.<br>\n<strong>TR:</strong> Şaşırtıcı bir şekilde, hasta geçen haftaki yoğun iki saatlik terapi seansının ardından doktordan hiç pratik tavsiye veya rehberlik almadı.<br>\n→ <strong>Açıklama:</strong> \"No\" sayılamayan \"advice\" ismiyle kullanılmıştır. \"Advice\" İngilizce'de sayılamayan bir isimdir ve asla çoğul yapılmaz. Cümle yapıca olumlu (\"did get\") ancak anlamca olumsuzdur.</p>\n<p><strong>Örnek 3 (No + tekil isim - özne pozisyonunda):</strong><br>\n<strong>EN:</strong> No ambitious business attempt will ever flourish and succeed unless the entrepreneur truly believes in the idea and works hard to make it happen.<br>\n<strong>TR:</strong> Girişimci gerçekten fikre inanıp onu gerçekleştirmek için çok çalışmadıkça, hiçbir hırslı iş girişimi başarılı olmaz ve gelişmez.<br>\n→ <strong>Açıklama:</strong> \"No\" tekil \"attempt\" ismiyle kullanılmış ve cümlede özne pozisyonundadır. Tekil isim olduğu için fiil \"will flourish\" (tekil yardımcı fiil) olarak çekimlenmiştir. \"No\" özne olduğunda fiil genellikle tekil olur.</p>\n<p><strong>Örnek 4 (No + tekil isim):</strong><br>\n<strong>EN:</strong> There is absolutely no time left to discuss the details of the contract, so we need to schedule another meeting as soon as possible.<br>\n<strong>TR:</strong> Sözleşmenin ayrıntılarını tartışmak için kesinlikle hiç zaman kalmadı, bu yüzden mümkün olan en kısa sürede başka bir toplantı planlamalıyız.<br>\n→ <strong>Açıklama:</strong> \"No\" tekil \"time\" ismiyle kullanılmıştır. \"There is\" yapısıyla birlikte kullanıldığında, isim tekil olduğu için \"is\" kullanılır. \"No\" her zaman isimle birlikte kullanılır, asla tek başına gelmez.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"None\" ile \"no\" karıştırılmamalıdır. \"No\" her zaman bir isimle birlikte kullanılırken, \"none\" tek başına kullanılan bir zamirdir. \"No money\" (doğru) - \"None money\" (yanlış) - \"None of the money\" (doğru).\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Cümle Yapısı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>No + çoğul isim</strong></td>\n<td>hiç</td>\n<td>çoğul</td>\n<td>yapıca olumlu</td>\n</tr>\n<tr>\n<td><strong>No + sayılamayan</strong></td>\n<td>hiç</td>\n<td>sayılamayan</td>\n<td>yapıca olumlu</td>\n</tr>\n<tr>\n<td><strong>No + tekil isim</strong></td>\n<td>hiç</td>\n<td>tekil</td>\n<td>yapıca olumlu</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) I don't have no money.<br>\nB) I have no money.<br>\nC) I no have money.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) I have no money.\n\n**Açıklama:** \"No\" zaten olumsuzluk ifade ettiği için cümlede başka olumsuzluk olmamalıdır. \"I have no money\" = \"I don't have any money\" anlamına gelir.\n</details>\n\n<p>[Kelime sayısı: 237]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "No logical reasons were given to us by the management for the unexpected delay in the project, which made everyone frustrated and confused.",
+          "tr": "Projedeki beklenmedik erteleme için yönetim tarafından bize hiçbir mantıklı sebep sunulmadı, bu da herkesi hayal kırıklığına uğrattı ve kafa karışıklığına yol açtı.",
+          "description": "\"No\" çoğul \"reasons\" ismiyle kullanılmıştır. \"No\" zaten olumsuz olduğu için cümle yapıca olumludur (\"were given\" - olumsuzluk eki yok). \"No\" çoğul isimle kullanıldığında fiil tekil veya çoğul olabilir, ancak yazı dilinde tekil daha yaygındır.\n\n**Örnek 2 (No + sayılamayan isim):**"
+        },
+        {
+          "en": "Surprisingly, the patient received no practical advice or guidance from the doctor after the intensive two-hour therapy session last week.",
+          "tr": "Şaşırtıcı bir şekilde, hasta geçen haftaki yoğun iki saatlik terapi seansının ardından doktordan hiç pratik tavsiye veya rehberlik almadı.",
+          "description": "\"No\" sayılamayan \"advice\" ismiyle kullanılmıştır. \"Advice\" İngilizce'de sayılamayan bir isimdir ve asla çoğul yapılmaz. Cümle yapıca olumlu (\"did get\") ancak anlamca olumsuzdur.\n\n**Örnek 3 (No + tekil isim - özne pozisyonunda):**"
+        },
+        {
+          "en": "No ambitious business attempt will ever flourish and succeed unless the entrepreneur truly believes in the idea and works hard to make it happen.",
+          "tr": "Girişimci gerçekten fikre inanıp onu gerçekleştirmek için çok çalışmadıkça, hiçbir hırslı iş girişimi başarılı olmaz ve gelişmez.",
+          "description": "\"No\" tekil \"attempt\" ismiyle kullanılmış ve cümlede özne pozisyonundadır. Tekil isim olduğu için fiil \"will flourish\" (tekil yardımcı fiil) olarak çekimlenmiştir. \"No\" özne olduğunda fiil genellikle tekil olur.\n\n**Örnek 4 (No + tekil isim):**"
+        },
+        {
+          "en": "There is absolutely no time left to discuss the details of the contract, so we need to schedule another meeting as soon as possible.",
+          "tr": "Sözleşmenin ayrıntılarını tartışmak için kesinlikle hiç zaman kalmadı, bu yüzden mümkün olan en kısa sürede başka bir toplantı planlamalıyız.",
+          "description": "\"No\" tekil \"time\" ismiyle kullanılmıştır. \"There is\" yapısıyla birlikte kullanıldığında, isim tekil olduğu için \"is\" kullanılır. \"No\" her zaman isimle birlikte kullanılır, asla tek başına gelmez."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "I don't have no money.",
+          "B": "I have no money.",
+          "C": "I no have money."
+        },
+        "correct": "B) I have no money.",
+        "explanation": "\"No\" zaten olumsuzluk ifade ettiği için cümlede başka olumsuzluk olmamalıdır. \"I have no money\" = \"I don't have any money\" anlamına gelir."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "I don't have no money.",
+            "B": "I have no money.",
+            "C": "I no have money."
+          },
+          "correct": "B) I have no money.",
+          "explanation": "\"No\" zaten olumsuzluk ifade ettiği için cümlede başka olumsuzluk olmamalıdır. \"I have no money\" = \"I don't have any money\" anlamına gelir."
+        }
+      ],
+      "word_count": 490
+    },
+    {
+      "page_number": 10,
+      "title": "BOTH / EITHER / NEITHER",
+      "total_pages": 25,
+      "content_html": "<h2>📌 İKİ ŞEY İÇİN KULLANILAN YAPILAR</h2>\n<p>\"Both\" (her ikisi), \"either\" (ikisinden biri) ve \"neither\" (ikisinden hiçbiri) yapıları sadece iki şeyden bahsederken kullanılır. \"Both\" çoğul isimle, \"either\" ve \"neither\" ise tekil isimle kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Both\" olumlu, \"either\" seçenek sunar, \"neither\" ise olumsuzdur. \"Neither\" zaten olumsuz olduğu için cümlede ikinci bir olumsuzluk olmaz.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Both + çoğul isim):</strong><br>\n<strong>EN:</strong> Both delegates representing their countries at the international conference were strongly in favour of signing the new trade agreement immediately.<br>\n<strong>TR:</strong> Uluslararası konferansta ülkelerini temsil eden her iki delege de yeni ticaret anlaşmasını hemen imzalamayı güçlü bir şekilde destekliyordu.<br>\n→ <strong>Açıklama:</strong> \"Both\" çoğul \"delegates\" ismiyle kullanılmıştır. \"Both\" her zaman çoğul isim alır ve fiil çoğul olur (\"were\"). İki kişiden veya iki şeyden bahsederken kullanılır.</p>\n<p><strong>Örnek 2 (Both - zamir olarak):</strong><br>\n<strong>EN:</strong> There are two new students in the class this semester, and both are over 25 years old with significant work experience.<br>\n<strong>TR:</strong> Bu dönem sınıfta iki yeni öğrenci var ve her ikisi de önemli iş deneyimiyle 25 yaşın üstünde.<br>\n→ <strong>Açıklama:</strong> \"Both\" bu cümlede zamir olarak kullanılmıştır ve \"both students\" anlamına gelir. Daha önce bahsedilen iki öğrenciye gönderme yapmaktadır. Zamir olarak kullanıldığında da çoğul kabul edilir.</p>\n<p><strong>Örnek 3 (Either + tekil isim):</strong><br>\n<strong>EN:</strong> Either reaction from the audience, whether positive or negative, can influence the speaker's confidence.<br>\n<strong>TR:</strong> Seyirciden gelecek iki tepkiden biri (olumlu ya da olumsuz), konuşmacının özgüvenini etkileyebilir.<br>\n→ <strong>Açıklama:</strong> \"Either\" tekil \"reaction\" ile kullanıldığında \"ikisinden biri\" anlamı verir ve fiil tekil kabul edilir. \"Either A or B\" yapısında fiil uyumu genellikle yakın özneye göre belirlenir.</p>\n<p><strong>Örnek 4 (Neither + tekil isim):</strong><br>\n<strong>EN:</strong> Neither job offer from the two companies appeals to me personally because of the relatively low salaries and limited career advancement opportunities.<br>\n<strong>TR:</strong> İki şirketten gelen iş teklifinden hiçbiri, nispeten düşük maaşlar ve sınırlı kariyer gelişim fırsatları nedeniyle bana kişisel olarak cazip gelmiyor.<br>\n→ <strong>Açıklama:</strong> \"Neither\" tekil \"offer\" ismiyle kullanılmıştır. \"Neither\" olumsuz anlam taşır ve tekil kabul edilir, bu nedenle fiil \"appeals\" (tekil) olarak çekimlenmiştir. \"Neither\" zaten olumsuz olduğu için cümlede \"not\" kullanılmaz.</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>Both:</strong> Her ikisi de (+)\n    </div>\n    <div class=\"kart yesil\">\n        <strong>Either:</strong> İkisinden biri (seçenek)\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Neither:</strong> İkisinden hiçbiri (-)\n    </div>\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Fiil</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Both</strong></td>\n<td>her ikisi de</td>\n<td>çoğul</td>\n<td>çoğul</td>\n<td>Both students are here.</td>\n</tr>\n<tr>\n<td><strong>Either</strong></td>\n<td>ikisinden biri</td>\n<td>tekil</td>\n<td>tekil</td>\n<td>Either answer is correct.</td>\n</tr>\n<tr>\n<td><strong>Neither</strong></td>\n<td>ikisinden hiçbiri</td>\n<td>tekil</td>\n<td>tekil</td>\n<td>Neither option works.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"The two men walked back to the village together, but _____ of them spoke during the entire journey.\"</p>\n<p>A) either<br>\nB) neither<br>\nC) both</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) neither\n\n**Açıklama:** \"But\" zıtlık bildirir. \"İkisi de konuşmadı\" anlamı için \"neither\" doğrudur. \"Neither of them\" = onlardan hiçbiri.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Both delegates representing their countries at the international conference were strongly in favour of signing the new trade agreement immediately.",
+          "tr": "Uluslararası konferansta ülkelerini temsil eden her iki delege de yeni ticaret anlaşmasını hemen imzalamayı güçlü bir şekilde destekliyordu.",
+          "description": "\"Both\" çoğul \"delegates\" ismiyle kullanılmıştır. \"Both\" her zaman çoğul isim alır ve fiil çoğul olur (\"were\"). İki kişiden veya iki şeyden bahsederken kullanılır.\n\n**Örnek 2 (Both - zamir olarak):**"
+        },
+        {
+          "en": "There are two new students in the class this semester, and both are over 25 years old with significant work experience.",
+          "tr": "Bu dönem sınıfta iki yeni öğrenci var ve her ikisi de önemli iş deneyimiyle 25 yaşın üstünde.",
+          "description": "\"Both\" bu cümlede zamir olarak kullanılmıştır ve \"both students\" anlamına gelir. Daha önce bahsedilen iki öğrenciye gönderme yapmaktadır. Zamir olarak kullanıldığında da çoğul kabul edilir.\n\n**Örnek 3 (Either + tekil isim):**"
+        },
+        {
+          "en": "Either reaction from the audience, whether positive or negative, can influence the speaker's confidence.",
+          "tr": "Seyirciden gelecek iki tepkiden biri (olumlu ya da olumsuz), konuşmacının özgüvenini etkileyebilir.",
+          "description": "\"Either\" tekil \"reaction\" ile kullanıldığında \"ikisinden biri\" anlamı verir ve fiil tekil kabul edilir. \"Either A or B\" yapısında fiil uyumu genellikle yakın özneye göre belirlenir.\n\n**Örnek 4 (Neither + tekil isim):**"
+        },
+        {
+          "en": "Neither job offer from the two companies appeals to me personally because of the relatively low salaries and limited career advancement opportunities.",
+          "tr": "İki şirketten gelen iş teklifinden hiçbiri, nispeten düşük maaşlar ve sınırlı kariyer gelişim fırsatları nedeniyle bana kişisel olarak cazip gelmiyor.",
+          "description": "\"Neither\" tekil \"offer\" ismiyle kullanılmıştır. \"Neither\" olumsuz anlam taşır ve tekil kabul edilir, bu nedenle fiil \"appeals\" (tekil) olarak çekimlenmiştir. \"Neither\" zaten olumsuz olduğu için cümlede \"not\" kullanılmaz."
+        }
+      ],
+      "mini_test": {
+        "question": "\"The two men walked back to the village together, but _____ of them spoke during the entire journey.\"",
+        "options": {
+          "A": "either",
+          "B": "neither",
+          "C": "both"
+        },
+        "correct": "B) neither",
+        "explanation": "\"But\" zıtlık bildirir. \"İkisi de konuşmadı\" anlamı için \"neither\" doğrudur. \"Neither of them\" = onlardan hiçbiri."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The two men walked back to the village together, but _____ of them spoke during the entire journey.\"",
+          "options": {
+            "A": "either",
+            "B": "neither",
+            "C": "both"
+          },
+          "correct": "B) neither",
+          "explanation": "\"But\" zıtlık bildirir. \"İkisi de konuşmadı\" anlamı için \"neither\" doğrudur. \"Neither of them\" = onlardan hiçbiri."
+        }
+      ],
+      "word_count": 461
+    },
+    {
+      "page_number": 11,
+      "title": "BOTH / EITHER / NEITHER - \"OF\" KULLANIMI",
+      "total_pages": 25,
+      "content_html": "<h2>📌 İKİLİ YAPILARIN \"OF\" İLE KULLANIMI</h2>\n<p>\"Both\", \"either\" ve \"neither\" yapıları \"of\" alarak kullanıldıklarında, devamında object pronoun (them, us, you) veya determiner (the, these, my) + çoğul isim alırlar. \"Both\" çoğul fiil alırken, \"either\" ve \"neither\" tekil veya çoğul fiil alabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Both of\" çoğul fiil alır. \"Either of\" ve \"neither of\" resmi yazışmalarda genellikle tekil fiil alır, ancak günlük konuşmada çoğul fiil de kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Both of + object pronoun):</strong><br>\n<strong>EN:</strong> Both of them have been experiencing the same persistent technical troubles with their new computers since they purchased them last month.<br>\n<strong>TR:</strong> Onların her ikisi de geçen ay satın aldıklarından beri yeni bilgisayarlarıyla aynı kalıcı teknik sorunları yaşıyorlar.<br>\n→ <strong>Açıklama:</strong> \"Both of\" yapısından sonra \"them\" (object pronoun) gelmiştir. \"Both\" çoğul anlam taşıdığı için fiil \"have\" (çoğul) olarak çekimlenmiştir. Object pronoun ile kullanıldığında \"of\" zorunludur.</p>\n<p><strong>Örnek 2 (Both + (of) the + çoğul isim):</strong><br>\n<strong>EN:</strong> Both (of the) explanations provided by the witness during the trial were intended to illustrate the real circumstances of the crime scene.<br>\n<strong>TR:</strong> Duruşma sırasında tanık tarafından sağlanan açıklamaların her ikisi de suç mahallinin gerçek koşullarını göstermeyi amaçlıyordu.<br>\n→ <strong>Açıklama:</strong> \"Both of the explanations\" veya \"both the explanations\" şeklinde kullanılabilir. \"Of\" isteğe bağlıdır. Determiner + çoğul isim ile kullanıldığında \"of\" atılabilir. Fiil \"were\" çoğuldur.</p>\n<p><strong>Örnek 3 (Either of + çoğul isim):</strong><br>\n<strong>EN:</strong> Either of the two candidates applying for the managerial position is well qualified for the job, so the selection process will be quite difficult.<br>\n<strong>TR:</strong> Yöneticilik pozisyonuna başvuran iki adaydan her biri iş için iyi niteliklere sahip, bu yüzden seçim süreci oldukça zor olacak.<br>\n→ <strong>Açıklama:</strong> \"Either of\" yapısından sonra \"the candidates\" (determiner + çoğul isim) gelmiştir. \"Either\" tekil kabul edildiği için fiil \"is\" (tekil) olarak çekimlenmiştir, ancak günlük konuşmada \"are\" de kullanılabilir.</p>\n<p><strong>Örnek 4 (Neither of + object pronoun):</strong><br>\n<strong>EN:</strong> Neither of them is allowed to enter this exclusive night club because they are both under the legal age requirement of twenty-one.<br>\n<strong>TR:</strong> Onların ikisi de bu özel gece kulübüne giremez çünkü ikisi de yirmi bir olan yasal yaş sınırının altında.<br>\n→ <strong>Açıklama:</strong> \"Neither of\" yapısından sonra \"them\" (object pronoun) gelmiştir. \"Neither\" olumsuz anlam taşır ve genellikle tekil fiil (\"is\") alır, ancak çoğul fiil (\"are\") de kullanılabilir. Yazı dilinde tekil tercih edilir.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda \"neither of\" gördüğünüzde, fiilin tekil mi çoğul mu olduğuna bakın. Her ikisi de doğru kabul edilebilir, ancak resmi sınavlarda genellikle tekil fiil doğru cevaptır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>+ of</th>\n<th>+ Object Pronoun</th>\n<th>+ Determiner + Çoğul İsim</th>\n<th>Fiil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Both</strong></td>\n<td>of</td>\n<td>them / us</td>\n<td>the students</td>\n<td>çoğul</td>\n</tr>\n<tr>\n<td><strong>Either</strong></td>\n<td>of</td>\n<td>them / us</td>\n<td>the students</td>\n<td>tekil/çoğul</td>\n</tr>\n<tr>\n<td><strong>Neither</strong></td>\n<td>of</td>\n<td>them / us</td>\n<td>the students</td>\n<td>tekil/çoğul</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"Neither of the games _____ as exciting as we had expected before watching them.\"</p>\n<p>A) was<br>\nB) were<br>\nC) is</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) was (resmi) veya B) were (günlük)\n\n**Açıklama:** \"Neither of\" yapısından sonra resmi yazışmalarda tekil fiil (was) tercih edilir, ancak günlük konuşmada çoğul fiil (were) de yaygındır.\n</details>\n\n<p>[Kelime sayısı: 238]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Both of them have been experiencing the same persistent technical troubles with their new computers since they purchased them last month.",
+          "tr": "Onların her ikisi de geçen ay satın aldıklarından beri yeni bilgisayarlarıyla aynı kalıcı teknik sorunları yaşıyorlar.",
+          "description": "\"Both of\" yapısından sonra \"them\" (object pronoun) gelmiştir. \"Both\" çoğul anlam taşıdığı için fiil \"have\" (çoğul) olarak çekimlenmiştir. Object pronoun ile kullanıldığında \"of\" zorunludur.\n\n**Örnek 2 (Both + (of) the + çoğul isim):**"
+        },
+        {
+          "en": "Both (of the) explanations provided by the witness during the trial were intended to illustrate the real circumstances of the crime scene.",
+          "tr": "Duruşma sırasında tanık tarafından sağlanan açıklamaların her ikisi de suç mahallinin gerçek koşullarını göstermeyi amaçlıyordu.",
+          "description": "\"Both of the explanations\" veya \"both the explanations\" şeklinde kullanılabilir. \"Of\" isteğe bağlıdır. Determiner + çoğul isim ile kullanıldığında \"of\" atılabilir. Fiil \"were\" çoğuldur.\n\n**Örnek 3 (Either of + çoğul isim):**"
+        },
+        {
+          "en": "Either of the two candidates applying for the managerial position is well qualified for the job, so the selection process will be quite difficult.",
+          "tr": "Yöneticilik pozisyonuna başvuran iki adaydan her biri iş için iyi niteliklere sahip, bu yüzden seçim süreci oldukça zor olacak.",
+          "description": "\"Either of\" yapısından sonra \"the candidates\" (determiner + çoğul isim) gelmiştir. \"Either\" tekil kabul edildiği için fiil \"is\" (tekil) olarak çekimlenmiştir, ancak günlük konuşmada \"are\" de kullanılabilir.\n\n**Örnek 4 (Neither of + object pronoun):**"
+        },
+        {
+          "en": "Neither of them is allowed to enter this exclusive night club because they are both under the legal age requirement of twenty-one.",
+          "tr": "Onların ikisi de bu özel gece kulübüne giremez çünkü ikisi de yirmi bir olan yasal yaş sınırının altında.",
+          "description": "\"Neither of\" yapısından sonra \"them\" (object pronoun) gelmiştir. \"Neither\" olumsuz anlam taşır ve genellikle tekil fiil (\"is\") alır, ancak çoğul fiil (\"are\") de kullanılabilir. Yazı dilinde tekil tercih edilir."
+        }
+      ],
+      "mini_test": {
+        "question": "\"Neither of the games _____ as exciting as we had expected before watching them.\"",
+        "options": {
+          "A": "was",
+          "B": "were",
+          "C": "is"
+        },
+        "correct": "A) was (resmi) veya B) were (günlük)",
+        "explanation": "\"Neither of\" yapısından sonra resmi yazışmalarda tekil fiil (was) tercih edilir, ancak günlük konuşmada çoğul fiil (were) de yaygındır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Neither of the games _____ as exciting as we had expected before watching them.\"",
+          "options": {
+            "A": "was",
+            "B": "were",
+            "C": "is"
+          },
+          "correct": "A) was (resmi) veya B) were (günlük)",
+          "explanation": "\"Neither of\" yapısından sonra resmi yazışmalarda tekil fiil (was) tercih edilir, ancak günlük konuşmada çoğul fiil (were) de yaygındır."
+        }
+      ],
+      "word_count": 490
+    },
+    {
+      "page_number": 12,
+      "title": "EACH or EVERY?",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"HER BİR\" vs \"HER\"</h2>\n<p>\"Each\" ve \"every\" yapıları sayılabilen tekil isimlerle kullanılır ve tekil kabul edilir. \"Each\" bir grubu oluşturan öğeleri ayrı ayrı vurgularken, \"every\" grubu bir bütün olarak niteler.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Each\" bireyselliği, \"every\" genelliği vurgular. \"Each\" zamir olarak kullanılabilirken, \"every\" kullanılamaz. \"Every\" \"almost, nearly, not\" ile nitelenebilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Each - bireysel vurgu):</strong><br>\n<strong>EN:</strong> Each child in the elementary school was questioned separately by the counselor about the fight that happened in the playground yesterday afternoon.<br>\n<strong>TR:</strong> İlkokuldaki her çocuk, dün öğleden sonra oyun alanında meydana gelen kavga ile ilgili olarak danışman tarafından ayrı ayrı sorgulandı.<br>\n→ <strong>Açıklama:</strong> \"Each\" tekil \"child\" ismiyle kullanılmıştır. \"Separately\" (ayrı ayrı) kelimesi, \"each\" in bireysel vurgusunu desteklemektedir. Her çocuğun tek tek sorgulandığını vurgular. Fiil \"was questioned\" (tekil) olarak çekimlenmiştir.</p>\n<p><strong>Örnek 2 (Every - genel vurgu):</strong><br>\n<strong>EN:</strong> Every young child in the world naturally enjoys celebrating New Year's Eve because of the fireworks, parties, and festive atmosphere.<br>\n<strong>TR:</strong> Dünyadaki her çocuk, havai fişekler, partiler ve şenlikli atmosfer nedeniyle doğal olarak yılbaşında eğlenir.<br>\n→ <strong>Açıklama:</strong> \"Every\" tekil \"child\" ismiyle kullanılmıştır. Burada çocuklar ayrı ayrı değil, genel bir grup olarak ele alınmıştır. \"Every\" genel bir ifadeyle tüm çocukları kasteder. Fiil \"enjoys\" (tekil) -s takısı almıştır.</p>\n<p><strong>Örnek 3 (Each - zamir olarak):</strong><br>\n<strong>EN:</strong> I talked enthusiastically about the upcoming picnic with all the students in the class, and each promised to bring something different and delicious to share.<br>\n<strong>TR:</strong> Sınıftaki tüm öğrencilerle yaklaşan piknik hakkında coşkuyla konuştum ve her biri paylaşmak için farklı ve lezzetli bir şey getirmeye söz verdi.<br>\n→ <strong>Açıklama:</strong> \"Each\" bu cümlede zamir olarak kullanılmıştır ve \"each student\" anlamına gelir. Daha önce bahsedilen öğrencilere gönderme yapar. \"Every\" bu şekilde tek başına kullanılamaz. Fiil \"promised\" geçmiş zamanda çoğul gibi görünse de özne \"each\" tekil kabul edilir.</p>\n<p><strong>Örnek 4 (Every + almost/nearly):</strong><br>\n<strong>EN:</strong> Almost every historic building in the city center was severely damaged or completely destroyed in the devastating earthquake last year.<br>\n<strong>TR:</strong> Şehir merkezindeki neredeyse her tarihi bina, geçen yılki yıkıcı depremde ciddi şekilde hasar gördü veya tamamen yıkıldı.<br>\n→ <strong>Açıklama:</strong> \"Every\" \"almost\" (neredeyse) zarfıyla nitelenmiştir. \"Each\" bu şekilde zarflarla nitelenemez. \"Every\" genel bir ifade olduğu için \"almost every\" (neredeyse her) kullanımı yaygındır.</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\n\"Each of\" kullanılırken devamında çoğul isim veya object pronoun gelir: \"each of the students\" (tekil fiil alır). \"Every\" ise \"every one of\" şeklinde kullanılır: \"every one of the students\".\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Özellik</th>\n<th>Each</th>\n<th>Every</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Vurgu</strong></td>\n<td>bireysel, ayrı ayrı</td>\n<td>genel, bütün olarak</td>\n</tr>\n<tr>\n<td><strong>Zamir olarak</strong></td>\n<td>✓ kullanılabilir</td>\n<td>✗ kullanılamaz</td>\n</tr>\n<tr>\n<td><strong>Zarfla nitelenme</strong></td>\n<td>✗ almost each (yanlış)</td>\n<td>✓ almost every (doğru)</td>\n</tr>\n<tr>\n<td><strong>\"of\" kullanımı</strong></td>\n<td>each of the...</td>\n<td>every one of the...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"The body is composed of many different types of cells, _____ with its own unique structure and specific function.\"</p>\n<p>A) each<br>\nB) every<br>\nC) all</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) each\n\n**Açıklama:** \"Each\" zamir olarak kullanılmıştır ve \"her bir hücre\" anlamındadır. \"Its own\" (kendine has) ifadesi bireysel vurguyu destekler.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Each child in the elementary school was questioned separately by the counselor about the fight that happened in the playground yesterday afternoon.",
+          "tr": "İlkokuldaki her çocuk, dün öğleden sonra oyun alanında meydana gelen kavga ile ilgili olarak danışman tarafından ayrı ayrı sorgulandı.",
+          "description": "\"Each\" tekil \"child\" ismiyle kullanılmıştır. \"Separately\" (ayrı ayrı) kelimesi, \"each\" in bireysel vurgusunu desteklemektedir. Her çocuğun tek tek sorgulandığını vurgular. Fiil \"was questioned\" (tekil) olarak çekimlenmiştir.\n\n**Örnek 2 (Every - genel vurgu):**"
+        },
+        {
+          "en": "Every young child in the world naturally enjoys celebrating New Year's Eve because of the fireworks, parties, and festive atmosphere.",
+          "tr": "Dünyadaki her çocuk, havai fişekler, partiler ve şenlikli atmosfer nedeniyle doğal olarak yılbaşında eğlenir.",
+          "description": "\"Every\" tekil \"child\" ismiyle kullanılmıştır. Burada çocuklar ayrı ayrı değil, genel bir grup olarak ele alınmıştır. \"Every\" genel bir ifadeyle tüm çocukları kasteder. Fiil \"enjoys\" (tekil) -s takısı almıştır.\n\n**Örnek 3 (Each - zamir olarak):**"
+        },
+        {
+          "en": "I talked enthusiastically about the upcoming picnic with all the students in the class, and each promised to bring something different and delicious to share.",
+          "tr": "Sınıftaki tüm öğrencilerle yaklaşan piknik hakkında coşkuyla konuştum ve her biri paylaşmak için farklı ve lezzetli bir şey getirmeye söz verdi.",
+          "description": "\"Each\" bu cümlede zamir olarak kullanılmıştır ve \"each student\" anlamına gelir. Daha önce bahsedilen öğrencilere gönderme yapar. \"Every\" bu şekilde tek başına kullanılamaz. Fiil \"promised\" geçmiş zamanda çoğul gibi görünse de özne \"each\" tekil kabul edilir.\n\n**Örnek 4 (Every + almost/nearly):**"
+        },
+        {
+          "en": "Almost every historic building in the city center was severely damaged or completely destroyed in the devastating earthquake last year.",
+          "tr": "Şehir merkezindeki neredeyse her tarihi bina, geçen yılki yıkıcı depremde ciddi şekilde hasar gördü veya tamamen yıkıldı.",
+          "description": "\"Every\" \"almost\" (neredeyse) zarfıyla nitelenmiştir. \"Each\" bu şekilde zarflarla nitelenemez. \"Every\" genel bir ifade olduğu için \"almost every\" (neredeyse her) kullanımı yaygındır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"The body is composed of many different types of cells, _____ with its own unique structure and specific function.\"",
+        "options": {
+          "A": "each",
+          "B": "every",
+          "C": "all"
+        },
+        "correct": "A) each",
+        "explanation": "\"Each\" zamir olarak kullanılmıştır ve \"her bir hücre\" anlamındadır. \"Its own\" (kendine has) ifadesi bireysel vurguyu destekler."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The body is composed of many different types of cells, _____ with its own unique structure and specific function.\"",
+          "options": {
+            "A": "each",
+            "B": "every",
+            "C": "all"
+          },
+          "correct": "A) each",
+          "explanation": "\"Each\" zamir olarak kullanılmıştır ve \"her bir hücre\" anlamındadır. \"Its own\" (kendine has) ifadesi bireysel vurguyu destekler."
+        }
+      ],
+      "word_count": 483
+    },
+    {
+      "page_number": 13,
+      "title": "ALL or WHOLE?",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"BÜTÜN, TAMAMI\" İFADELERİ</h2>\n<p>\"All\" ve \"whole\" yapıları \"bütün, tüm, hepsi\" anlamına gelir. \"All\" çoğul ve sayılamayan isimlerle, \"whole\" ise genellikle tekil isimlerle kullanılır. \"All\" determiner'dan önce, \"whole\" determiner'dan sonra gelir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"All\" = \"hepsi\" (parçalara odaklanır), \"whole\" = \"bütün\" (tam bir birim olarak). \"All the students\" (tüm öğrenciler - ayrı ayrı), \"the whole class\" (bütün sınıf - tek bir birim).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (All + çoğul isim):</strong><br>\n<strong>EN:</strong> All books, regardless of their genre or subject matter, are of high importance in terms of broadening one's perspective and gaining new ideas.<br>\n<strong>TR:</strong> Türü veya konusu ne olursa olsun bütün kitaplar, kişinin bakış açısını genişletme ve yeni fikirler edinme açısından çok önemlidir.<br>\n→ <strong>Açıklama:</strong> \"All\" çoğul \"books\" ismiyle kullanılmıştır. \"All\" genel bir ifadeyle tüm kitapları kasteder. Fiil \"are\" çoğul olarak çekimlenmiştir. \"All\" determiner'dan önce gelir: \"all the books\" veya \"all books\" şeklinde kullanılabilir.</p>\n<p><strong>Örnek 2 (All + sayılamayan isim):</strong><br>\n<strong>EN:</strong> All bread, whether it's white, whole wheat, or rye, tends to get stale quite quickly if not stored properly in a sealed container.<br>\n<strong>TR:</strong> Beyaz, tam buğday veya çavdar olsun, bütün ekmekler uygun şekilde kapalı bir kapta saklanmazsa oldukça çabuk bayatlar.<br>\n→ <strong>Açıklama:</strong> \"All\" sayılamayan \"bread\" ismiyle kullanılmıştır. Sayılamayan isim olduğu için fiil \"tends\" (tekil) olarak çekimlenmiştir. \"All bread\" genel bir ifadeyle tüm ekmek çeşitlerini kasteder.</p>\n<p><strong>Örnek 3 (Whole + tekil isim - determiner önde):</strong><br>\n<strong>EN:</strong> He ate the whole loaf of bread by himself in just a few minutes because he was extremely hungry after working all day.<br>\n<strong>TR:</strong> Bütün gün çalıştıktan sonra çok acıktığı için, bütün ekmeği kendi başına sadece birkaç dakikada yedi.<br>\n→ <strong>Açıklama:</strong> \"Whole\" tekil \"loaf\" ismiyle kullanılmıştır. Determiner (\"the\") \"whole\" dan önce gelir: \"the whole loaf\". \"All\" ile karşılaştırın: \"all the loaf\" (daha az yaygın) veya \"the whole loaf\" (daha yaygın).</p>\n<p><strong>Örnek 4 (Zaman ifadeleriyle kullanım):</strong><br>\n<strong>EN:</strong> I waited all week for him to reply to my important email, but he never responded, which was quite frustrating.<br>\n<strong>TR:</strong> Önemli e-postamı cevaplaması için bütün hafta bekledim, ama asla yanıt vermedi, bu oldukça sinir bozucuydu.<br>\n→ <strong>Açıklama:</strong> Zaman ifadelerinde \"all\" ve \"whole\" benzer anlamda kullanılabilir. \"All week\" (tüm hafta) veya \"the whole week\" (bütün hafta). \"All\" zaman ifadelerinde \"the\" alabilir veya almayabilir: \"all (the) week\".</p>\n<hr>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>All forests</strong> were destroyed.</div>\n    <div class=\"turkce\">→ Bütün ormanlar (her bir orman tek tek)</div>\n    <div class=\"ingilizce\"><strong>Whole forests</strong> were destroyed.</div>\n    <div class=\"turkce\">→ Ormanlık alanların tamamı (geniş alanlar)</div>\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>İsim Türü</th>\n<th>Pozisyon</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>All</strong></td>\n<td>all + isim</td>\n<td>çoğul/sayılamayan</td>\n<td>determiner'dan önce</td>\n<td>all the students</td>\n</tr>\n<tr>\n<td><strong>Whole</strong></td>\n<td>the + whole + isim</td>\n<td>tekil (genelde)</td>\n<td>determiner'dan sonra</td>\n<td>the whole class</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) He spent his whole life searching.<br>\nB) He spent whole his life searching.<br>\nC) He spent all his life searching.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) He spent his whole life searching. (ve C de doğru)\n\n**Açıklama:** \"Whole\" possessive adjective'ten (his) sonra gelir: \"his whole life\". \"All\" ise önce gelir: \"all his life\". Her ikisi de doğrudur.\n</details>\n\n<p>[Kelime sayısı: 239]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "All books, regardless of their genre or subject matter, are of high importance in terms of broadening one's perspective and gaining new ideas.",
+          "tr": "Türü veya konusu ne olursa olsun bütün kitaplar, kişinin bakış açısını genişletme ve yeni fikirler edinme açısından çok önemlidir.",
+          "description": "\"All\" çoğul \"books\" ismiyle kullanılmıştır. \"All\" genel bir ifadeyle tüm kitapları kasteder. Fiil \"are\" çoğul olarak çekimlenmiştir. \"All\" determiner'dan önce gelir: \"all the books\" veya \"all books\" şeklinde kullanılabilir.\n\n**Örnek 2 (All + sayılamayan isim):**"
+        },
+        {
+          "en": "All bread, whether it's white, whole wheat, or rye, tends to get stale quite quickly if not stored properly in a sealed container.",
+          "tr": "Beyaz, tam buğday veya çavdar olsun, bütün ekmekler uygun şekilde kapalı bir kapta saklanmazsa oldukça çabuk bayatlar.",
+          "description": "\"All\" sayılamayan \"bread\" ismiyle kullanılmıştır. Sayılamayan isim olduğu için fiil \"tends\" (tekil) olarak çekimlenmiştir. \"All bread\" genel bir ifadeyle tüm ekmek çeşitlerini kasteder.\n\n**Örnek 3 (Whole + tekil isim - determiner önde):**"
+        },
+        {
+          "en": "He ate the whole loaf of bread by himself in just a few minutes because he was extremely hungry after working all day.",
+          "tr": "Bütün gün çalıştıktan sonra çok acıktığı için, bütün ekmeği kendi başına sadece birkaç dakikada yedi.",
+          "description": "\"Whole\" tekil \"loaf\" ismiyle kullanılmıştır. Determiner (\"the\") \"whole\" dan önce gelir: \"the whole loaf\". \"All\" ile karşılaştırın: \"all the loaf\" (daha az yaygın) veya \"the whole loaf\" (daha yaygın).\n\n**Örnek 4 (Zaman ifadeleriyle kullanım):**"
+        },
+        {
+          "en": "I waited all week for him to reply to my important email, but he never responded, which was quite frustrating.",
+          "tr": "Önemli e-postamı cevaplaması için bütün hafta bekledim, ama asla yanıt vermedi, bu oldukça sinir bozucuydu.",
+          "description": "Zaman ifadelerinde \"all\" ve \"whole\" benzer anlamda kullanılabilir. \"All week\" (tüm hafta) veya \"the whole week\" (bütün hafta). \"All\" zaman ifadelerinde \"the\" alabilir veya almayabilir: \"all (the) week\"."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "He spent his whole life searching.",
+          "B": "He spent whole his life searching.",
+          "C": "He spent all his life searching."
+        },
+        "correct": "A) He spent his whole life searching. (ve C de doğru)",
+        "explanation": "\"Whole\" possessive adjective'ten (his) sonra gelir: \"his whole life\". \"All\" ise önce gelir: \"all his life\". Her ikisi de doğrudur."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "He spent his whole life searching.",
+            "B": "He spent whole his life searching.",
+            "C": "He spent all his life searching."
+          },
+          "correct": "A) He spent his whole life searching. (ve C de doğru)",
+          "explanation": "\"Whole\" possessive adjective'ten (his) sonra gelir: \"his whole life\". \"All\" ise önce gelir: \"all his life\". Her ikisi de doğrudur."
+        }
+      ],
+      "word_count": 503
+    },
+    {
+      "page_number": 14,
+      "title": "NO or NONE?",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"HİÇ\" İFADELERİ</h2>\n<p>\"No\" ve \"none\" yapıları \"hiç\" anlamına gelir, ancak kullanımları farklıdır. \"No\" mutlaka bir isimle birlikte kullanılır (sıfat görevinde), \"none\" ise tek başına kullanılır (zamir görevinde). \"None\" \"of\" alarak kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"No\" = not any + isim, \"none\" = not one/any of them. \"No\" dan sonra isim gelir, \"none\" dan sonra isim gelmez (ama \"none of\" dan sonra isim gelir).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (No + tekil isim):</strong><br>\n<strong>EN:</strong> No commercial aeroplane in the world can be considered 100% safe because there are always some risks associated with air travel, however minimal.<br>\n<strong>TR:</strong> Dünyadaki hiçbir ticari uçak yüzde yüz güvenli kabul edilemez çünkü hava yolculuğuyla ilişkili her zaman, ne kadar minimal olursa olsun, bazı riskler vardır.<br>\n→ <strong>Açıklama:</strong> \"No\" tekil \"aeroplane\" ismiyle kullanılmıştır. \"No\" sıfat görevindedir ve mutlaka bir isimle birlikte gelir. Cümle yapıca olumlu (\"can be\") ancak anlamca olumsuzdur.</p>\n<p><strong>Örnek 2 (No + çoğul isim):</strong><br>\n<strong>EN:</strong> We have made no specific plans for the summer holiday yet because we are still undecided about where to go and what to do.<br>\n<strong>TR:</strong> Yaz tatili için henüz hiçbir özel plan yapmadık çünkü nereye gideceğimiz ve ne yapacağımız konusunda hala kararsızız.<br>\n→ <strong>Açıklama:</strong> \"No\" çoğul \"plans\" ismiyle kullanılmıştır. \"No\" her zaman ismin hemen önünde yer alır. \"Have made\" fiili olumlu formda olmasına rağmen, \"no\" ile anlam olumsuzdur.</p>\n<p><strong>Örnek 3 (None of + çoğul isim):</strong><br>\n<strong>EN:</strong> None of my older brothers remembered my birthday last week, which made me feel quite sad and disappointed with my family.<br>\n<strong>TR:</strong> Büyük kardeşlerimden hiçbiri geçen hafta doğum günümü hatırlamadı, bu da beni oldukça üzgün ve ailemle ilgili hayal kırıklığına uğrattı.<br>\n→ <strong>Açıklama:</strong> \"None of\" yapısı \"my brothers\" (possessive + çoğul isim) ile kullanılmıştır. \"None\" zamir görevindedir. \"None of\" dan sonra gelen isim çoğul olmasına rağmen, fiil tekil (\"remembered\") veya çoğul olabilir, ancak tekil daha resmidir.</p>\n<p><strong>Örnek 4 (None - zamir olarak):</strong><br>\n<strong>EN:</strong> A: How many of the books on the reading list have you actually read this semester? B: None, unfortunately, because I was too busy with other courses.<br>\n<strong>TR:</strong> A: Okuma listesindeki kitapların kaç tanesini bu dönem gerçekten okudun? B: Ne yazık ki hiçbirini, çünkü diğer derslerle çok meşguldüm.<br>\n→ <strong>Açıklama:</strong> \"None\" burada kısa cevapta zamir olarak tek başına kullanılmıştır. Daha önce bahsedilen kitapların yerine geçer. \"No\" bu şekilde tek başına kullanılamaz.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"None of\" dan sonra gelen isim çoğul olsa bile, fiil tekil olabilir: \"None of the students is here.\" (resmi) veya \"None of the students are here.\" (günlük). Her ikisi de doğrudur.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Görev</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>No</strong></td>\n<td>sıfat</td>\n<td>No + isim</td>\n<td>No money, no students</td>\n</tr>\n<tr>\n<td><strong>None</strong></td>\n<td>zamir</td>\n<td>Tek başına</td>\n<td>\"How many?\" - \"None.\"</td>\n</tr>\n<tr>\n<td><strong>None of</strong></td>\n<td>zamir</td>\n<td>None of + the/my/them + isim</td>\n<td>None of the money</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) No of the students passed the exam.<br>\nB) None students passed the exam.<br>\nC) None of the students passed the exam.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) None of the students passed the exam.\n\n**Açıklama:** \"None of\" + determiner + çoğul isim doğru yapıdır. \"No\" isimle birlikte kullanılır: \"No students passed\" (doğru ama daha az yaygın).\n</details>\n\n<p>[Kelime sayısı: 236]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "No commercial aeroplane in the world can be considered 100% safe because there are always some risks associated with air travel, however minimal.",
+          "tr": "Dünyadaki hiçbir ticari uçak yüzde yüz güvenli kabul edilemez çünkü hava yolculuğuyla ilişkili her zaman, ne kadar minimal olursa olsun, bazı riskler vardır.",
+          "description": "\"No\" tekil \"aeroplane\" ismiyle kullanılmıştır. \"No\" sıfat görevindedir ve mutlaka bir isimle birlikte gelir. Cümle yapıca olumlu (\"can be\") ancak anlamca olumsuzdur.\n\n**Örnek 2 (No + çoğul isim):**"
+        },
+        {
+          "en": "We have made no specific plans for the summer holiday yet because we are still undecided about where to go and what to do.",
+          "tr": "Yaz tatili için henüz hiçbir özel plan yapmadık çünkü nereye gideceğimiz ve ne yapacağımız konusunda hala kararsızız.",
+          "description": "\"No\" çoğul \"plans\" ismiyle kullanılmıştır. \"No\" her zaman ismin hemen önünde yer alır. \"Have made\" fiili olumlu formda olmasına rağmen, \"no\" ile anlam olumsuzdur.\n\n**Örnek 3 (None of + çoğul isim):**"
+        },
+        {
+          "en": "None of my older brothers remembered my birthday last week, which made me feel quite sad and disappointed with my family.",
+          "tr": "Büyük kardeşlerimden hiçbiri geçen hafta doğum günümü hatırlamadı, bu da beni oldukça üzgün ve ailemle ilgili hayal kırıklığına uğrattı.",
+          "description": "\"None of\" yapısı \"my brothers\" (possessive + çoğul isim) ile kullanılmıştır. \"None\" zamir görevindedir. \"None of\" dan sonra gelen isim çoğul olmasına rağmen, fiil tekil (\"remembered\") veya çoğul olabilir, ancak tekil daha resmidir.\n\n**Örnek 4 (None - zamir olarak):**"
+        },
+        {
+          "en": "A: How many of the books on the reading list have you actually read this semester? B: None, unfortunately, because I was too busy with other courses.",
+          "tr": "A: Okuma listesindeki kitapların kaç tanesini bu dönem gerçekten okudun? B: Ne yazık ki hiçbirini, çünkü diğer derslerle çok meşguldüm.",
+          "description": "\"None\" burada kısa cevapta zamir olarak tek başına kullanılmıştır. Daha önce bahsedilen kitapların yerine geçer. \"No\" bu şekilde tek başına kullanılamaz."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "No of the students passed the exam.",
+          "B": "None students passed the exam.",
+          "C": "None of the students passed the exam."
+        },
+        "correct": "C) None of the students passed the exam.",
+        "explanation": "\"None of\" + determiner + çoğul isim doğru yapıdır. \"No\" isimle birlikte kullanılır: \"No students passed\" (doğru ama daha az yaygın)."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "No of the students passed the exam.",
+            "B": "None students passed the exam.",
+            "C": "None of the students passed the exam."
+          },
+          "correct": "C) None of the students passed the exam.",
+          "explanation": "\"None of\" + determiner + çoğul isim doğru yapıdır. \"No\" isimle birlikte kullanılır: \"No students passed\" (doğru ama daha az yaygın)."
+        }
+      ],
+      "word_count": 508
+    },
+    {
+      "page_number": 15,
+      "title": "HALF",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"YARIM, YARI\" İFADELERİ</h2>\n<p>\"Half\" yapısı sayılabilen tekil, sayılamayan ve çoğul isimlerle kullanılabilir. Genellikle \"of\" alarak kullanılır. \"Of\" + determiner yapısında \"of\" atılabilir, ancak object pronoun ile kullanıldığında \"of\" zorunludur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Half\" genellikle \"of\" ile kullanılır. \"Half the students\" = \"half of the students\" (yarısı). \"Half of them\" (onların yarısı) - burada \"of\" zorunlu.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Half + of + the + çoğul isim):</strong><br>\n<strong>EN:</strong> Half of the answers on the final exam were already written on a separate sheet of paper that the teacher provided to students with special needs.<br>\n<strong>TR:</strong> Final sınavındaki cevapların yarısı, öğretmenin özel ihtiyaçları olan öğrencilere sağladığı ayrı bir kağıt zaten yazılmıştı.<br>\n→ <strong>Açıklama:</strong> \"Half of\" yapısı \"the answers\" (determiner + çoğul isim) ile kullanılmıştır. Çoğul isim olduğu için fiil \"were\" (çoğul) olarak çekimlenmiştir. \"Half of the answers\" = cevapların yarısı.</p>\n<p><strong>Örnek 2 (Half + of + the + sayılamayan isim):</strong><br>\n<strong>EN:</strong> After raising half of the money required for the new community center project, the fundraising committee celebrated their partial success.<br>\n<strong>TR:</strong> Yeni toplum merkezi projesi için gereken paranın yarısını topladıktan sonra, bağış toplama komitesi kısmi başarılarını kutladı.<br>\n→ <strong>Açıklama:</strong> \"Half of\" sayılamayan \"money\" ismiyle kullanılmıştır. \"Money\" sayılamayan olduğu için fiil \"was raised\" (tekil) olurdu, ancak bu cümlede \"after raising\" zarf fiil olduğu için fiil yok. \"Half of the money\" = paranın yarısı.</p>\n<p><strong>Örnek 3 (Half + the + tekil isim - \"of\" atılmış):</strong><br>\n<strong>EN:</strong> For tomorrow's literature class, you are going to summarize half the book and prepare a critical analysis of the main characters.<br>\n<strong>TR:</strong> Yarınki edebiyat dersi için, kitabın yarısını özetleyecek ve ana karakterlerin eleştirel bir analizini hazırlayacaksınız.<br>\n→ <strong>Açıklama:</strong> \"Half the book\" = \"half of the book\" (kitabın yarısı). \"Of\" atılmıştır. \"Book\" tekil isim olduğu için, \"half the book\" ifadesi tekil bir birimi ifade eder. \"Half\" tekil isimle kullanıldığında fiil tekil olur.</p>\n<p><strong>Örnek 4 (Half of + object pronoun - \"of\" zorunlu):</strong><br>\n<strong>EN:</strong> Not all the books on the shelf here are mine; actually, half of them belong to my roommate who is studying abroad this semester.<br>\n<strong>TR:</strong> Buradaki raftaki kitapların tamamı benim değil; aslında, onların yarısı bu dönem yurtdışında okuyan oda arkadaşıma ait.<br>\n→ <strong>Açıklama:</strong> \"Half of\" yapısından sonra \"them\" (object pronoun) gelmiştir. Object pronoun ile kullanıldığında \"of\" zorunludur, atılamaz. \"Half them\" YANLIŞ, \"half of them\" DOĞRU.</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>Half of the students</strong> = Öğrencilerin yarısı\n    </div>\n    <div class=\"kart yesil\">\n        <strong>Half the money</strong> = Paranın yarısı (of atılabilir)\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Half of them</strong> = Onların yarısı (of zorunlu)\n    </div>\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>\"of\" Kullanımı</th>\n<th>İsim Türü</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Half + of + the + isim</strong></td>\n<td>gerekli değil (atılabilir)</td>\n<td>çoğul/tekil/sayılamayan</td>\n<td>half (of) the students</td>\n</tr>\n<tr>\n<td><strong>Half + object pronoun</strong></td>\n<td>ZORUNLU</td>\n<td>them / us / you / it</td>\n<td>half of them</td>\n</tr>\n<tr>\n<td><strong>Half + a/an + isim</strong></td>\n<td>\"of\" kullanılmaz</td>\n<td>tekil sayılabilen</td>\n<td>half an hour</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi yanlıştır?</p>\n<p>A) Half of them are here.<br>\nB) Half them are here.<br>\nC) Half the students are here.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) Half them are here. (YANLIŞ)\n\n**Açıklama:** Object pronoun (them) ile kullanıldığında \"of\" zorunludur: \"half of them\". \"Half the students\" (of atılabilir) ve \"half of them\" (of zorunlu) doğrudur.\n</details>\n\n<p>[Kelime sayısı: 238]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Half of the answers on the final exam were already written on a separate sheet of paper that the teacher provided to students with special needs.",
+          "tr": "Final sınavındaki cevapların yarısı, öğretmenin özel ihtiyaçları olan öğrencilere sağladığı ayrı bir kağıt zaten yazılmıştı.",
+          "description": "\"Half of\" yapısı \"the answers\" (determiner + çoğul isim) ile kullanılmıştır. Çoğul isim olduğu için fiil \"were\" (çoğul) olarak çekimlenmiştir. \"Half of the answers\" = cevapların yarısı.\n\n**Örnek 2 (Half + of + the + sayılamayan isim):**"
+        },
+        {
+          "en": "After raising half of the money required for the new community center project, the fundraising committee celebrated their partial success.",
+          "tr": "Yeni toplum merkezi projesi için gereken paranın yarısını topladıktan sonra, bağış toplama komitesi kısmi başarılarını kutladı.",
+          "description": "\"Half of\" sayılamayan \"money\" ismiyle kullanılmıştır. \"Money\" sayılamayan olduğu için fiil \"was raised\" (tekil) olurdu, ancak bu cümlede \"after raising\" zarf fiil olduğu için fiil yok. \"Half of the money\" = paranın yarısı.\n\n**Örnek 3 (Half + the + tekil isim - \"of\" atılmış):**"
+        },
+        {
+          "en": "For tomorrow's literature class, you are going to summarize half the book and prepare a critical analysis of the main characters.",
+          "tr": "Yarınki edebiyat dersi için, kitabın yarısını özetleyecek ve ana karakterlerin eleştirel bir analizini hazırlayacaksınız.",
+          "description": "\"Half the book\" = \"half of the book\" (kitabın yarısı). \"Of\" atılmıştır. \"Book\" tekil isim olduğu için, \"half the book\" ifadesi tekil bir birimi ifade eder. \"Half\" tekil isimle kullanıldığında fiil tekil olur.\n\n**Örnek 4 (Half of + object pronoun - \"of\" zorunlu):**"
+        },
+        {
+          "en": "Not all the books on the shelf here are mine; actually, half of them belong to my roommate who is studying abroad this semester.",
+          "tr": "Buradaki raftaki kitapların tamamı benim değil; aslında, onların yarısı bu dönem yurtdışında okuyan oda arkadaşıma ait.",
+          "description": "\"Half of\" yapısından sonra \"them\" (object pronoun) gelmiştir. Object pronoun ile kullanıldığında \"of\" zorunludur, atılamaz. \"Half them\" YANLIŞ, \"half of them\" DOĞRU."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi yanlıştır?",
+        "options": {
+          "A": "Half of them are here.",
+          "B": "Half them are here.",
+          "C": "Half the students are here."
+        },
+        "correct": "B) Half them are here. (YANLIŞ)",
+        "explanation": "Object pronoun (them) ile kullanıldığında \"of\" zorunludur: \"half of them\". \"Half the students\" (of atılabilir) ve \"half of them\" (of zorunlu) doğrudur."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi yanlıştır?",
+          "options": {
+            "A": "Half of them are here.",
+            "B": "Half them are here.",
+            "C": "Half the students are here."
+          },
+          "correct": "B) Half them are here. (YANLIŞ)",
+          "explanation": "Object pronoun (them) ile kullanıldığında \"of\" zorunludur: \"half of them\". \"Half the students\" (of atılabilir) ve \"half of them\" (of zorunlu) doğrudur."
+        }
+      ],
+      "word_count": 513
+    },
+    {
+      "page_number": 16,
+      "title": "MANY A / AN",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"BİRÇOK\" İFADESİNİN FARKLI KULLANIMI</h2>\n<p>\"Many a/an\" yapısı, kendinden sonra tekil bir isim almasına rağmen \"birçok\" anlamına sahiptir. Özne olarak kullanıldığında fiil tekil olur. Bu yapı genellikle resmi, edebi veya şiirsel metinlerde kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Many a\" + tekil isim + tekil fiil = \"birçok\" anlamına gelir. \"Many students are\" (normal) iken \"many a student is\" (edebi) aynı anlama gelir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Many a + tekil isim - özne):</strong><br>\n<strong>EN:</strong> Many a concerned citizen has gathered in front of the city hall to peacefully protest against the new and controversial regulations announced last week.<br>\n<strong>TR:</strong> Geçen hafta duyurulan yeni ve tartışmalı düzenlemeleri protesto etmek üzere birçok endişeli vatandaş belediye binasının önünde toplandı.<br>\n→ <strong>Açıklama:</strong> \"Many a\" yapısı tekil \"citizen\" ismiyle kullanılmıştır. İsim tekil olmasına rağmen anlam çoğuldur (\"birçok vatandaş\"). Fiil \"has gathered\" (tekil) olarak çekimlenmiştir, çünkü dilbilgisel olarak özne tekil kabul edilir.</p>\n<p><strong>Örnek 2 (Many an + sesli harfle başlayan isim):</strong><br>\n<strong>EN:</strong> Many an ambitious entrepreneur has failed in their first business venture before eventually achieving great success later in life.<br>\n<strong>TR:</strong> Birçok hırslı girişimci, hayatlarının ilerleyen dönemlerinde büyük başarı elde etmeden önce ilk iş girişimlerinde başarısız olmuştur.<br>\n→ <strong>Açıklama:</strong> Sesli harfle başlayan kelimelerden önce \"many a\" değil \"many an\" kullanılır. \"Entrepreneur\" sesli harfle başladığı için \"many an entrepreneur\" denmiştir. Fiil \"has failed\" (tekil) olarak gelmiştir.</p>\n<p><strong>Örnek 3 (Many a - resmi kullanım):</strong><br>\n<strong>EN:</strong> Many a heated debate has taken place in this very parliament chamber over the centuries regarding important national issues.<br>\n<strong>TR:</strong> Yüzyıllar boyunca bu meclis salonunda önemli ulusal meselelerle ilgili birçok hararetli tartışma yaşanmıştır.<br>\n→ <strong>Açıklama:</strong> \"Many a\" resmi ve edebi bir ifadedir. Günlük konuşmada \"many debates\" daha yaygındır. \"Debate\" tekil isim olmasına rağmen, \"many a debate\" ifadesi \"birçok tartışma\" anlamına gelir. Fiil \"has taken\" tekil.</p>\n<p><strong>Örnek 4 (Many a - günlük hayatta nadir):</strong><br>\n<strong>EN:</strong> Many a time I have warned you about the dangers of driving too fast on wet roads, but you never listen to my advice.<br>\n<strong>TR:</strong> Islak yollarda çok hızlı araba kullanmanın tehlikeleri konusunda seni birçok kez uyardım, ama tavsiyelerimi asla dinlemiyorsun.<br>\n→ <strong>Açıklama:</strong> \"Many a time\" kalıplaşmış bir ifadedir ve \"birçok kez, sık sık\" anlamına gelir. \"Time\" tekil olmasına rağmen anlam çoğuldur. Bu ifade günlük konuşmada da kullanılabilir, ancak genellikle resmiyet katar.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda \"many a\" gördüğünüzde, fiilin tekil olması gerektiğini unutmayın. \"Many a student is...\" doğru, \"many a student are...\" yanlıştır. Anlam çoğul, ama dilbilgisi tekil!\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>İsim Türü</th>\n<th>Fiil</th>\n<th>Anlam</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Many a + isim</strong></td>\n<td>tekil</td>\n<td>tekil</td>\n<td>birçok</td>\n<td>resmi/edebi</td>\n</tr>\n<tr>\n<td><strong>Many an + isim</strong></td>\n<td>tekil (sesli)</td>\n<td>tekil</td>\n<td>birçok</td>\n<td>resmi/edebi</td>\n</tr>\n<tr>\n<td><strong>Many + isim</strong></td>\n<td>çoğul</td>\n<td>çoğul</td>\n<td>birçok</td>\n<td>günlük/resmi</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Cümleyi tamamlayın: \"Many a man _____ gathered to protest against the new law.\"</p>\n<p>A) have<br>\nB) has<br>\nC) are</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) has\n\n**Açıklama:** \"Many a man\" yapısı tekil kabul edilir, bu nedenle yardımcı fiil \"has\" (tekil) olmalıdır. Anlam çoğul olmasına rağmen dilbilgisi kuralı tekil fiil gerektirir.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Many a concerned citizen has gathered in front of the city hall to peacefully protest against the new and controversial regulations announced last week.",
+          "tr": "Geçen hafta duyurulan yeni ve tartışmalı düzenlemeleri protesto etmek üzere birçok endişeli vatandaş belediye binasının önünde toplandı.",
+          "description": "\"Many a\" yapısı tekil \"citizen\" ismiyle kullanılmıştır. İsim tekil olmasına rağmen anlam çoğuldur (\"birçok vatandaş\"). Fiil \"has gathered\" (tekil) olarak çekimlenmiştir, çünkü dilbilgisel olarak özne tekil kabul edilir.\n\n**Örnek 2 (Many an + sesli harfle başlayan isim):**"
+        },
+        {
+          "en": "Many an ambitious entrepreneur has failed in their first business venture before eventually achieving great success later in life.",
+          "tr": "Birçok hırslı girişimci, hayatlarının ilerleyen dönemlerinde büyük başarı elde etmeden önce ilk iş girişimlerinde başarısız olmuştur.",
+          "description": "Sesli harfle başlayan kelimelerden önce \"many a\" değil \"many an\" kullanılır. \"Entrepreneur\" sesli harfle başladığı için \"many an entrepreneur\" denmiştir. Fiil \"has failed\" (tekil) olarak gelmiştir.\n\n**Örnek 3 (Many a - resmi kullanım):**"
+        },
+        {
+          "en": "Many a heated debate has taken place in this very parliament chamber over the centuries regarding important national issues.",
+          "tr": "Yüzyıllar boyunca bu meclis salonunda önemli ulusal meselelerle ilgili birçok hararetli tartışma yaşanmıştır.",
+          "description": "\"Many a\" resmi ve edebi bir ifadedir. Günlük konuşmada \"many debates\" daha yaygındır. \"Debate\" tekil isim olmasına rağmen, \"many a debate\" ifadesi \"birçok tartışma\" anlamına gelir. Fiil \"has taken\" tekil.\n\n**Örnek 4 (Many a - günlük hayatta nadir):**"
+        },
+        {
+          "en": "Many a time I have warned you about the dangers of driving too fast on wet roads, but you never listen to my advice.",
+          "tr": "Islak yollarda çok hızlı araba kullanmanın tehlikeleri konusunda seni birçok kez uyardım, ama tavsiyelerimi asla dinlemiyorsun.",
+          "description": "\"Many a time\" kalıplaşmış bir ifadedir ve \"birçok kez, sık sık\" anlamına gelir. \"Time\" tekil olmasına rağmen anlam çoğuldur. Bu ifade günlük konuşmada da kullanılabilir, ancak genellikle resmiyet katar."
+        }
+      ],
+      "mini_test": {
+        "question": "Cümleyi tamamlayın: \"Many a man _____ gathered to protest against the new law.\"",
+        "options": {
+          "A": "have",
+          "B": "has",
+          "C": "are"
+        },
+        "correct": "B) has",
+        "explanation": "\"Many a man\" yapısı tekil kabul edilir, bu nedenle yardımcı fiil \"has\" (tekil) olmalıdır. Anlam çoğul olmasına rağmen dilbilgisi kuralı tekil fiil gerektirir."
+      },
+      "mini_tests": [
+        {
+          "question": "Cümleyi tamamlayın: \"Many a man _____ gathered to protest against the new law.\"",
+          "options": {
+            "A": "have",
+            "B": "has",
+            "C": "are"
+          },
+          "correct": "B) has",
+          "explanation": "\"Many a man\" yapısı tekil kabul edilir, bu nedenle yardımcı fiil \"has\" (tekil) olmalıdır. Anlam çoğul olmasına rağmen dilbilgisi kuralı tekil fiil gerektirir."
+        }
+      ],
+      "word_count": 483
+    },
+    {
+      "page_number": 17,
+      "title": "OTHER / OTHERS",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"DİĞER, BAŞKA\" İFADELERİ</h2>\n<p>\"Other\" ve \"others\" yapıları \"başka, diğer\" anlamına gelir. \"Other\" sıfat olarak çoğul veya sayılamayan isimlerle sık kullanılır; tekil sayılabilir isimlerde çoğunlukla \"another/the other\" tercih edilir. \"Others\" ise zamir olarak tek başına, isim almadan gelir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Other\" + çoğul/sayılamayan isim, \"another\" + tekil sayılabilir isim, \"the other\" + belirli kalan öğe; \"others/the others\" ise isim yerine geçen zamirlerdir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Other + çoğul isim - sıfat olarak):</strong><br>\n<strong>EN:</strong> These teaching methods are not effective for advanced students; we should definitely find other ways of teaching essay writing to challenge them.<br>\n<strong>TR:</strong> Bu öğretim yöntemleri ileri düzey öğrenciler için etkili değil; onları zorlamak için makale yazmayı öğretmenin başka yollarını kesinlikle bulmalıyız.<br>\n→ <strong>Açıklama:</strong> \"Other\" burada sıfat olarak çoğul \"ways\" ile kullanılmıştır. Tekil sayılabilir isimde çoğunlukla \"another/the other\" tercih edilir; sayılamayan isimlerde ise \"other\" doğrudan kullanılabilir (other information).</p>\n<p><strong>Örnek 2 (Others - zamir olarak - belirsiz sayı):</strong><br>\n<strong>EN:</strong> Some experienced writers use allegory frequently in their works to convey deeper meanings, but others completely refuse to use it, preferring direct language.<br>\n<strong>TR:</strong> Bazı deneyimli yazarlar eserlerinde daha derin anlamlar iletmek için sık sık kinaye kullanır, ama diğerleri doğrudan dili tercih ederek kinaye kullanmayı tamamen reddeder.<br>\n→ <strong>Açıklama:</strong> \"Others\" burada zamir olarak kullanılmıştır ve \"other writers\" anlamına gelir. Belirli bir sayıya gönderme yapmaz, genel bir ifadedir. \"Some... others...\" kalıbı sıkça kullanılır.</p>\n<p><strong>Örnek 3 (Any other - herhangi başka):</strong><br>\n<strong>EN:</strong> We don't have any other realistic option but to get along with our new director if we want to keep our jobs in this company.<br>\n<strong>TR:</strong> Bu şirkette işlerimizi korumak istiyorsak, yeni müdürümüz ile iyi geçinmekten başka hiçbir gerçekçi seçeneğimiz yok.<br>\n→ <strong>Açıklama:</strong> \"Any other\" yapısı \"herhangi başka\" anlamındadır. Olumsuz cümlelerde \"any other\" kullanılır. \"Option\" tekil olmasına rağmen, \"any other\" genellikle tekil isimle kullanılır.</p>\n<p><strong>Örnek 4 (Some other - başka bazı):</strong><br>\n<strong>EN:</strong> Some other qualified applicants will be interviewed this afternoon, and some others will come tomorrow morning for the same position.<br>\n<strong>TR:</strong> Diğer bazı nitelikli adaylar bugün öğleden sonra mülakata alınacak ve diğer bazıları da aynı pozisyon için yarın sabah gelecek.<br>\n→ <strong>Açıklama:</strong> \"Some other\" + çoğul isim (applicants) veya \"some others\" (zamir) kullanılabilir. \"Some other\" sıfat, \"some others\" ise zamir görevindedir. İkisi de \"başka bazıları\" anlamına gelir.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nYDS'de kıyaslama yapılan cümlelerde \"any other\" sıkça çıkar: \"İstanbul handles more foreign trade than any other city in Turkey.\" (Türkiye'deki diğer herhangi bir şehirden daha fazla)\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Görev</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Other + çoğul isim</strong></td>\n<td>sıfat</td>\n<td>diğer, başka</td>\n<td>other people</td>\n</tr>\n<tr>\n<td><strong>Others</strong></td>\n<td>zamir</td>\n<td>diğerleri</td>\n<td>Some like it, others don't.</td>\n</tr>\n<tr>\n<td><strong>Any other + isim</strong></td>\n<td>sıfat</td>\n<td>herhangi başka</td>\n<td>any other city</td>\n</tr>\n<tr>\n<td><strong>Some other + isim</strong></td>\n<td>sıfat</td>\n<td>başka bazı</td>\n<td>some other reasons</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"Istanbul handles more foreign trade than _____ city in Turkey because of its economic power.\"</p>\n<p>A) some other<br>\nB) other<br>\nC) any other</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) any other\n\n**Açıklama:** Kıyaslama cümlelerinde \"than any other + tekil isim\" kalıbı kullanılır. \"Diğer herhangi bir şehirden daha fazla\" anlamındadır.\n</details>\n\n<p>[Kelime sayısı: 241]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "These teaching methods are not effective for advanced students; we should definitely find other ways of teaching essay writing to challenge them.",
+          "tr": "Bu öğretim yöntemleri ileri düzey öğrenciler için etkili değil; onları zorlamak için makale yazmayı öğretmenin başka yollarını kesinlikle bulmalıyız.",
+          "description": "\"Other\" burada sıfat olarak çoğul \"ways\" ile kullanılmıştır. Tekil sayılabilir isimde çoğunlukla \"another/the other\" tercih edilir; sayılamayan isimlerde ise \"other\" doğrudan kullanılabilir (other information).\n\n**Örnek 2 (Others - zamir olarak - belirsiz sayı):**"
+        },
+        {
+          "en": "Some experienced writers use allegory frequently in their works to convey deeper meanings, but others completely refuse to use it, preferring direct language.",
+          "tr": "Bazı deneyimli yazarlar eserlerinde daha derin anlamlar iletmek için sık sık kinaye kullanır, ama diğerleri doğrudan dili tercih ederek kinaye kullanmayı tamamen reddeder.",
+          "description": "\"Others\" burada zamir olarak kullanılmıştır ve \"other writers\" anlamına gelir. Belirli bir sayıya gönderme yapmaz, genel bir ifadedir. \"Some... others...\" kalıbı sıkça kullanılır.\n\n**Örnek 3 (Any other - herhangi başka):**"
+        },
+        {
+          "en": "We don't have any other realistic option but to get along with our new director if we want to keep our jobs in this company.",
+          "tr": "Bu şirkette işlerimizi korumak istiyorsak, yeni müdürümüz ile iyi geçinmekten başka hiçbir gerçekçi seçeneğimiz yok.",
+          "description": "\"Any other\" yapısı \"herhangi başka\" anlamındadır. Olumsuz cümlelerde \"any other\" kullanılır. \"Option\" tekil olmasına rağmen, \"any other\" genellikle tekil isimle kullanılır.\n\n**Örnek 4 (Some other - başka bazı):**"
+        },
+        {
+          "en": "Some other qualified applicants will be interviewed this afternoon, and some others will come tomorrow morning for the same position.",
+          "tr": "Diğer bazı nitelikli adaylar bugün öğleden sonra mülakata alınacak ve diğer bazıları da aynı pozisyon için yarın sabah gelecek.",
+          "description": "\"Some other\" + çoğul isim (applicants) veya \"some others\" (zamir) kullanılabilir. \"Some other\" sıfat, \"some others\" ise zamir görevindedir. İkisi de \"başka bazıları\" anlamına gelir."
+        }
+      ],
+      "mini_test": {
+        "question": "\"Istanbul handles more foreign trade than _____ city in Turkey because of its economic power.\"",
+        "options": {
+          "A": "some other",
+          "B": "other",
+          "C": "any other"
+        },
+        "correct": "C) any other",
+        "explanation": "Kıyaslama cümlelerinde \"than any other + tekil isim\" kalıbı kullanılır. \"Diğer herhangi bir şehirden daha fazla\" anlamındadır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Istanbul handles more foreign trade than _____ city in Turkey because of its economic power.\"",
+          "options": {
+            "A": "some other",
+            "B": "other",
+            "C": "any other"
+          },
+          "correct": "C) any other",
+          "explanation": "Kıyaslama cümlelerinde \"than any other + tekil isim\" kalıbı kullanılır. \"Diğer herhangi bir şehirden daha fazla\" anlamındadır."
+        }
+      ],
+      "word_count": 491
+    },
+    {
+      "page_number": 18,
+      "title": "THE OTHER / THE OTHERS",
+      "total_pages": 25,
+      "content_html": "<h2>📌 BELİRLİ \"DİĞER\" İFADELERİ</h2>\n<p>\"The other\" ve \"the others\" yapıları, sayısı belli olan bir gruptaki \"diğer\" öğeleri ifade eder. \"The other\" tekil veya çoğul isimle kullanılabilir (sıfat) veya zamir olarak tekil bir ismin yerine geçer. \"The others\" ise sadece zamir olarak kullanılır ve çoğul bir isme gönderme yapar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Other\" (belirsiz) iken \"the other\" (belirli)dir. \"Other people\" (genel, belirsiz) - \"the other people\" (belirli bir gruptaki diğer insanlar).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (The other + çoğul isim - belirli grup):</strong><br>\n<strong>EN:</strong> Two of the five students in the study group failed the difficult exam, but the other students all passed with surprisingly high scores.<br>\n<strong>TR:</strong> Çalışma grubundaki beş öğrenciden ikisi zor sınavdan kaldı, ama diğer öğrencilerin hepsi şaşırtıcı derecede yüksek puanlarla geçti.<br>\n→ <strong>Açıklama:</strong> \"The other\" çoğul \"students\" ismiyle kullanılmıştır. Burada belirli bir grup (çalışma grubundaki 5 öğrenci) söz konusudur. \"The other students\" = gruptaki diğer 3 öğrenci. Sayı bellidir.</p>\n<p><strong>Örnek 2 (The other + tekil isim - iki şeyden biri):</strong><br>\n<strong>EN:</strong> She has two personal computers at home; one of them is located in her home office, and the other PC is in the living room for entertainment purposes.<br>\n<strong>TR:</strong> Evinde iki kişisel bilgisayarı var; onlardan biri ev ofisinde bulunuyor ve diğer bilgisayar eğlence amaçlı oturma odasında.<br>\n→ <strong>Açıklama:</strong> \"The other\" tekil \"PC\" ismiyle kullanılmıştır. İki bilgisayardan birincisinden bahsedildikten sonra, ikincisi (diğeri) için \"the other PC\" kullanılmıştır. Sayı iki olduğu için net bir şekilde diğerini işaret eder.</p>\n<p><strong>Örnek 3 (The other - zamir olarak, tekil):</strong><br>\n<strong>EN:</strong> She has two powerful laptops for her work; one of them is kept in her office for daily use, and the other is at her home for remote work.<br>\n<strong>TR:</strong> İşi için iki güçlü dizüstü bilgisayarı var; onlardan biri günlük kullanım için ofisinde duruyor ve diğeri evde uzaktan çalışma için.<br>\n→ <strong>Açıklama:</strong> \"The other\" bu cümlede zamir olarak kullanılmıştır ve \"the other laptop\" anlamına gelir. Daha önce bahsedilen iki bilgisayardan ikincisine gönderme yapar. Tekil bir ismin yerine geçtiği için tekil kabul edilir.</p>\n<p><strong>Örnek 4 (The others - zamir olarak, çoğul, belirli):</strong><br>\n<strong>EN:</strong> I have carefully read seven of these ten books on the syllabus so far this semester; the others still remain untouched on my bookshelf.<br>\n<strong>TR:</strong> Bu dönem müfredattaki bu on kitabın yedi tanesini dikkatlice okudum; diğerleri kitaplığımda hâlâ el değmemiş duruyor.<br>\n→ <strong>Açıklama:</strong> \"The others\" zamir olarak kullanılmıştır ve \"the other books\" (diğer 3 kitap) anlamına gelir. Sayı bellidir (10 kitaptan 7'si okunmuş, kalan 3'ü). \"Others\" (belirsiz) ile \"the others\" (belirli) arasındaki farka dikkat edin.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"The others\" her zaman belirli bir gruptaki kalanların tamamını ifade eder. \"Others\" ise genel ve belirsizdir. \"Some students passed, others failed\" (belirsiz) - \"Five students passed, the others failed\" (belirli, kalan 5 kişi).\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Görev</th>\n<th>Anlam</th>\n<th>Sayı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>The other + tekil isim</strong></td>\n<td>sıfat</td>\n<td>diğer (tekil)</td>\n<td>2 şeyden biri</td>\n<td>the other book</td>\n</tr>\n<tr>\n<td><strong>The other + çoğul isim</strong></td>\n<td>sıfat</td>\n<td>diğer (çoğul)</td>\n<td>belirli grup</td>\n<td>the other students</td>\n</tr>\n<tr>\n<td><strong>The other</strong></td>\n<td>zamir</td>\n<td>diğeri</td>\n<td>2 şeyden ikincisi</td>\n<td>One is here, the other is there.</td>\n</tr>\n<tr>\n<td><strong>The others</strong></td>\n<td>zamir</td>\n<td>diğerleri</td>\n<td>belirli grup, çoğul</td>\n<td>I read two, the others are new.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"Basically a country has two objectives in imposing tariffs; one is to raise revenue for government, _____ is to protect home industries.\"</p>\n<p>A) other<br>\nB) another<br>\nC) the other</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) the other\n\n**Açıklama:** \"Two objectives\" (iki amaç) ifadesi sayıyı belirtmektedir. Birincisinden sonra ikincisi (diğeri) için \"the other\" kullanılır.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Two of the five students in the study group failed the difficult exam, but the other students all passed with surprisingly high scores.",
+          "tr": "Çalışma grubundaki beş öğrenciden ikisi zor sınavdan kaldı, ama diğer öğrencilerin hepsi şaşırtıcı derecede yüksek puanlarla geçti.",
+          "description": "\"The other\" çoğul \"students\" ismiyle kullanılmıştır. Burada belirli bir grup (çalışma grubundaki 5 öğrenci) söz konusudur. \"The other students\" = gruptaki diğer 3 öğrenci. Sayı bellidir.\n\n**Örnek 2 (The other + tekil isim - iki şeyden biri):**"
+        },
+        {
+          "en": "She has two personal computers at home; one of them is located in her home office, and the other PC is in the living room for entertainment purposes.",
+          "tr": "Evinde iki kişisel bilgisayarı var; onlardan biri ev ofisinde bulunuyor ve diğer bilgisayar eğlence amaçlı oturma odasında.",
+          "description": "\"The other\" tekil \"PC\" ismiyle kullanılmıştır. İki bilgisayardan birincisinden bahsedildikten sonra, ikincisi (diğeri) için \"the other PC\" kullanılmıştır. Sayı iki olduğu için net bir şekilde diğerini işaret eder.\n\n**Örnek 3 (The other - zamir olarak, tekil):**"
+        },
+        {
+          "en": "She has two powerful laptops for her work; one of them is kept in her office for daily use, and the other is at her home for remote work.",
+          "tr": "İşi için iki güçlü dizüstü bilgisayarı var; onlardan biri günlük kullanım için ofisinde duruyor ve diğeri evde uzaktan çalışma için.",
+          "description": "\"The other\" bu cümlede zamir olarak kullanılmıştır ve \"the other laptop\" anlamına gelir. Daha önce bahsedilen iki bilgisayardan ikincisine gönderme yapar. Tekil bir ismin yerine geçtiği için tekil kabul edilir.\n\n**Örnek 4 (The others - zamir olarak, çoğul, belirli):**"
+        },
+        {
+          "en": "I have carefully read seven of these ten books on the syllabus so far this semester; the others still remain untouched on my bookshelf.",
+          "tr": "Bu dönem müfredattaki bu on kitabın yedi tanesini dikkatlice okudum; diğerleri kitaplığımda hâlâ el değmemiş duruyor.",
+          "description": "\"The others\" zamir olarak kullanılmıştır ve \"the other books\" (diğer 3 kitap) anlamına gelir. Sayı bellidir (10 kitaptan 7'si okunmuş, kalan 3'ü). \"Others\" (belirsiz) ile \"the others\" (belirli) arasındaki farka dikkat edin."
+        }
+      ],
+      "mini_test": {
+        "question": "\"Basically a country has two objectives in imposing tariffs; one is to raise revenue for government, _____ is to protect home industries.\"",
+        "options": {
+          "A": "other",
+          "B": "another",
+          "C": "the other"
+        },
+        "correct": "C) the other",
+        "explanation": "\"Two objectives\" (iki amaç) ifadesi sayıyı belirtmektedir. Birincisinden sonra ikincisi (diğeri) için \"the other\" kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Basically a country has two objectives in imposing tariffs; one is to raise revenue for government, _____ is to protect home industries.\"",
+          "options": {
+            "A": "other",
+            "B": "another",
+            "C": "the other"
+          },
+          "correct": "C) the other",
+          "explanation": "\"Two objectives\" (iki amaç) ifadesi sayıyı belirtmektedir. Birincisinden sonra ikincisi (diğeri) için \"the other\" kullanılır."
+        }
+      ],
+      "word_count": 566
+    },
+    {
+      "page_number": 19,
+      "title": "ANOTHER",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"BİR DİĞER, BİR BAŞKA\" İFADESİ</h2>\n<p>\"Another\" yapısı \"bir diğer, bir başka\" anlamına gelir. \"An\" + \"other\" dan oluşur. Sıfat olarak kullanıldığında kendinden sonra tekil bir isim alır. Zamir olarak da kullanılabilir. Gruplandırma ifade eden rakamlarla çoğul isim de alabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Another\" = \"an + other\" = bir + diğer. Bu nedenle zaten \"bir\" anlamını içerdiği için tekil isimle kullanılır. \"Another book\" (başka bir kitap) - \"other books\" (diğer kitaplar).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Another + tekil isim - sıfat olarak):</strong><br>\n<strong>EN:</strong> Monday is not convenient for me at all because I have a prior commitment; can you please schedule the meeting for another day next week?<br>\n<strong>TR:</strong> Pazartesi benim için hiç uygun değil çünkü önceden yapılmış bir randevum var; lütfen toplantıyı gelecek hafta başka bir gün için planlayabilir misiniz?<br>\n→ <strong>Açıklama:</strong> \"Another\" tekil \"day\" ismiyle kullanılmıştır. \"Another day\" = başka bir gün. \"Other day\" (yanlış) çünkü \"other\" tek başına tekil isimle kullanılmaz. \"Another\" zaten içinde \"an\" barındırdığı için ayrıca \"a/an\" eklenmez.</p>\n<p><strong>Örnek 2 (Another - zamir olarak):</strong><br>\n<strong>EN:</strong> One sheet of paper is definitely not enough for the detailed report; could you please give me another from the drawer?<br>\n<strong>TR:</strong> Bir sayfa kağıt detaylı rapor için kesinlikle yeterli değil; lütfen çekmeceden bana bir tane daha verir misiniz?<br>\n→ <strong>Açıklama:</strong> \"Another\" bu cümlede zamir olarak kullanılmıştır ve \"another sheet\" anlamına gelir. Daha önce bahsedilen \"sheet\" kelimesinin yerine geçmiştir. Tekil bir ismin yerini tutar.</p>\n<p><strong>Örnek 3 (Another + rakam + çoğul isim):</strong><br>\n<strong>EN:</strong> It has been tragically reported that another 300 innocent people were killed in the devastating earthquake that struck the region last night.<br>\n<strong>TR:</strong> Bölgeyi dün gece vuran yıkıcı depremde bir 300 masum kişinin daha hayatını kaybettiği trajik bir şekilde bildirildi.<br>\n→ <strong>Açıklama:</strong> \"Another\" normalde tekil isim almasına rağmen, rakamlarla kullanıldığında çoğul isim alabilir. \"Another 300 people\" = 300 kişi daha. Burada \"another\" \"ek olarak, daha\" anlamı katar.</p>\n<p><strong>Örnek 4 (One... another... kalıbı):</strong><br>\n<strong>EN:</strong> One student wanted to go to the museum, another suggested visiting the art gallery, and a third proposed spending the day at the beach.<br>\n<strong>TR:</strong> Bir öğrenci müzeye gitmek istedi, bir diğeri sanat galerisini ziyaret etmeyi önerdi ve üçüncüsü günü sahilde geçirmeyi teklif etti.<br>\n→ <strong>Açıklama:</strong> \"One... another...\" kalıbı, birden fazla seçenek veya kişi olduğunda kullanılır. \"Another\" burada \"bir diğeri\" anlamındadır ve zamir olarak kullanılmıştır. Üçüncü için \"a third\" kullanılmıştır.</p>\n<hr>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>Another</strong> book = Başka bir kitap (tekil)</div>\n    <div class=\"ingilizce\"><strong>Other</strong> books = Diğer kitaplar (çoğul)</div>\n    <div class=\"ingilizce\"><strong>The other</strong> book = Diğer kitap (belirli, 2 kitaptan ikincisi)</div>\n    <div class=\"ingilizce\"><strong>Another</strong> 20 dollars = 20 dolar daha (rakam + çoğul)</div>\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Anlamı</th>\n<th>İsim Türü</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Another + tekil isim</strong></td>\n<td>başka bir</td>\n<td>tekil</td>\n<td>another chance</td>\n</tr>\n<tr>\n<td><strong>Another</strong> (zamir)</td>\n<td>bir tane daha</td>\n<td>tekil (yerine)</td>\n<td>One was broken, I bought another.</td>\n</tr>\n<tr>\n<td><strong>Another + rakam + çoğul</strong></td>\n<td>... daha</td>\n<td>rakam + çoğul</td>\n<td>another ten minutes</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) I need other chance.<br>\nB) I need another chance.<br>\nC) I need an other chance.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) I need another chance.\n\n**Açıklama:** \"Another\" zaten \"an+other\" olduğu için ayrıca \"an\" eklenmez. \"Other\" tek başına tekil isimle kullanılmaz. \"Another chance\" = başka bir şans.\n</details>\n\n<p>[Kelime sayısı: 237]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Monday is not convenient for me at all because I have a prior commitment; can you please schedule the meeting for another day next week?",
+          "tr": "Pazartesi benim için hiç uygun değil çünkü önceden yapılmış bir randevum var; lütfen toplantıyı gelecek hafta başka bir gün için planlayabilir misiniz?",
+          "description": "\"Another\" tekil \"day\" ismiyle kullanılmıştır. \"Another day\" = başka bir gün. \"Other day\" (yanlış) çünkü \"other\" tek başına tekil isimle kullanılmaz. \"Another\" zaten içinde \"an\" barındırdığı için ayrıca \"a/an\" eklenmez.\n\n**Örnek 2 (Another - zamir olarak):**"
+        },
+        {
+          "en": "One sheet of paper is definitely not enough for the detailed report; could you please give me another from the drawer?",
+          "tr": "Bir sayfa kağıt detaylı rapor için kesinlikle yeterli değil; lütfen çekmeceden bana bir tane daha verir misiniz?",
+          "description": "\"Another\" bu cümlede zamir olarak kullanılmıştır ve \"another sheet\" anlamına gelir. Daha önce bahsedilen \"sheet\" kelimesinin yerine geçmiştir. Tekil bir ismin yerini tutar.\n\n**Örnek 3 (Another + rakam + çoğul isim):**"
+        },
+        {
+          "en": "It has been tragically reported that another 300 innocent people were killed in the devastating earthquake that struck the region last night.",
+          "tr": "Bölgeyi dün gece vuran yıkıcı depremde bir 300 masum kişinin daha hayatını kaybettiği trajik bir şekilde bildirildi.",
+          "description": "\"Another\" normalde tekil isim almasına rağmen, rakamlarla kullanıldığında çoğul isim alabilir. \"Another 300 people\" = 300 kişi daha. Burada \"another\" \"ek olarak, daha\" anlamı katar.\n\n**Örnek 4 (One... another... kalıbı):**"
+        },
+        {
+          "en": "One student wanted to go to the museum, another suggested visiting the art gallery, and a third proposed spending the day at the beach.",
+          "tr": "Bir öğrenci müzeye gitmek istedi, bir diğeri sanat galerisini ziyaret etmeyi önerdi ve üçüncüsü günü sahilde geçirmeyi teklif etti.",
+          "description": "\"One... another...\" kalıbı, birden fazla seçenek veya kişi olduğunda kullanılır. \"Another\" burada \"bir diğeri\" anlamındadır ve zamir olarak kullanılmıştır. Üçüncü için \"a third\" kullanılmıştır."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "I need other chance.",
+          "B": "I need another chance.",
+          "C": "I need an other chance."
+        },
+        "correct": "B) I need another chance.",
+        "explanation": "\"Another\" zaten \"an+other\" olduğu için ayrıca \"an\" eklenmez. \"Other\" tek başına tekil isimle kullanılmaz. \"Another chance\" = başka bir şans."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "I need other chance.",
+            "B": "I need another chance.",
+            "C": "I need an other chance."
+          },
+          "correct": "B) I need another chance.",
+          "explanation": "\"Another\" zaten \"an+other\" olduğu için ayrıca \"an\" eklenmez. \"Other\" tek başına tekil isimle kullanılmaz. \"Another chance\" = başka bir şans."
+        }
+      ],
+      "word_count": 523
+    },
+    {
+      "page_number": 20,
+      "title": "EACH OTHER / ONE ANOTHER",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"BİRBİRİ\" İFADELERİ</h2>\n<p>\"Each other\" ve \"one another\" yapıları, taraflar arasında karşılıklı bir ilişkiye gönderme yapar ve \"birbiri, birbirleri\" anlamına gelir. \"Each other\" genellikle iki kişi/şey için, \"one another\" ise ikiden fazla kişi/şey için kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Günlük kullanımda bu ayrım giderek kaybolmaktadır, ancak resmi sınavlarda dikkat edilmelidir. \"Each other\" (2), \"one another\" (2+).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Each other - iki kişi arasında):</strong><br>\n<strong>EN:</strong> The young couple, who have been dating for over three years, truly love each other deeply and are planning to get married next summer.<br>\n<strong>TR:</strong> Üç yıldan fazladır çıkan genç çift, gerçekten birbirlerini derinden seviyor ve önümüzdeki yaz evlenmeyi planlıyorlar.<br>\n→ <strong>Açıklama:</strong> \"Each other\" iki kişi arasındaki karşılıklı ilişkiyi ifade eder. Bu cümlede bir çiftten (iki kişi) bahsedildiği için \"each other\" kullanılmıştır. \"Love each other\" = birbirlerini sevmek.</p>\n<p><strong>Örnek 2 (One another - ikiden fazla kişi):</strong><br>\n<strong>EN:</strong> Everybody in the large classroom should help one another with the challenging assignments if they want to complete the project successfully on time.<br>\n<strong>TR:</strong> Büyük sınıftaki herkes, projeyi zamanında başarıyla tamamlamak istiyorlarsa, zorlu ödevlerde birbirlerine yardım etmelidir.<br>\n→ <strong>Açıklama:</strong> \"One another\" ikiden fazla kişi arasındaki karşılıklı ilişki için kullanılır. \"Everybody\" (herkes) ifadesi birden fazla kişiyi kastettiği için \"one another\" uygundur. \"Help one another\" = birbirine yardım etmek.</p>\n<p><strong>Örnek 3 (Each other - nesne pozisyonunda):</strong><br>\n<strong>EN:</strong> The two rival companies have been accusing each other of industrial espionage for years, but no concrete evidence has been found yet.<br>\n<strong>TR:</strong> İki rakip şirket yıllardır birbirlerini endüstriyel casuslukla suçluyorlar, ancak henüz somut bir kanıt bulunamadı.<br>\n→ <strong>Açıklama:</strong> İki şirket (two companies) arasındaki ilişki için \"each other\" kullanılmıştır. \"Accusing each other\" = birbirini suçlamak. Burada \"each other\" fiilin nesnesi konumundadır.</p>\n<p><strong>Örnek 4 (One another - edatla birlikte):</strong><br>\n<strong>EN:</strong> The members of the international team, coming from ten different countries, communicated with one another in English, the common language.<br>\n<strong>TR:</strong> On farklı ülkeden gelen uluslararası ekibin üyeleri, ortak dil olan İngilizce ile birbirleriyle iletişim kurdular.<br>\n→ <strong>Açıklama:</strong> On farklı ülkeden gelen ekip üyeleri (ikiden fazla) arasındaki iletişim için \"one another\" kullanılmıştır. Edatla birlikte kullanım: \"with one another\" = birbirleriyle.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda \"birbirleri\" anlamı varsa ve seçeneklerde her iki yapı da varsa, soruda 2 şeyin etkileşimi varsa \"each other\", ikiden fazla şeyin etkileşimi varsa \"one another\" doğru yanıt olur.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Each other</strong></td>\n<td>2 kişi/şey için</td>\n<td>birbirini</td>\n<td>They love each other. (2 kişi)</td>\n</tr>\n<tr>\n<td><strong>One another</strong></td>\n<td>2+ kişi/şey için</td>\n<td>birbirlerini</td>\n<td>They all love one another. (grup)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"A structural formula is a chemical formula that shows how the atoms are bonded to _____ in a molecule.\"</p>\n<p>A) another<br>\nB) each other<br>\nC) one another</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) each other\n\n**Açıklama:** Moleküldeki atomlar birbirine bağlanır. Atom sayısı ikiden fazla olabilir ancak kimyada genellikle \"each other\" kullanılır. Ayrıca seçeneklerde \"one another\" olmadığı için \"each other\" doğrudur. (Not: 1998 YDS sorusu)\n</details>\n\n<p>[Kelime sayısı: 236]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The young couple, who have been dating for over three years, truly love each other deeply and are planning to get married next summer.",
+          "tr": "Üç yıldan fazladır çıkan genç çift, gerçekten birbirlerini derinden seviyor ve önümüzdeki yaz evlenmeyi planlıyorlar.",
+          "description": "\"Each other\" iki kişi arasındaki karşılıklı ilişkiyi ifade eder. Bu cümlede bir çiftten (iki kişi) bahsedildiği için \"each other\" kullanılmıştır. \"Love each other\" = birbirlerini sevmek.\n\n**Örnek 2 (One another - ikiden fazla kişi):**"
+        },
+        {
+          "en": "Everybody in the large classroom should help one another with the challenging assignments if they want to complete the project successfully on time.",
+          "tr": "Büyük sınıftaki herkes, projeyi zamanında başarıyla tamamlamak istiyorlarsa, zorlu ödevlerde birbirlerine yardım etmelidir.",
+          "description": "\"One another\" ikiden fazla kişi arasındaki karşılıklı ilişki için kullanılır. \"Everybody\" (herkes) ifadesi birden fazla kişiyi kastettiği için \"one another\" uygundur. \"Help one another\" = birbirine yardım etmek.\n\n**Örnek 3 (Each other - nesne pozisyonunda):**"
+        },
+        {
+          "en": "The two rival companies have been accusing each other of industrial espionage for years, but no concrete evidence has been found yet.",
+          "tr": "İki rakip şirket yıllardır birbirlerini endüstriyel casuslukla suçluyorlar, ancak henüz somut bir kanıt bulunamadı.",
+          "description": "İki şirket (two companies) arasındaki ilişki için \"each other\" kullanılmıştır. \"Accusing each other\" = birbirini suçlamak. Burada \"each other\" fiilin nesnesi konumundadır.\n\n**Örnek 4 (One another - edatla birlikte):**"
+        },
+        {
+          "en": "The members of the international team, coming from ten different countries, communicated with one another in English, the common language.",
+          "tr": "On farklı ülkeden gelen uluslararası ekibin üyeleri, ortak dil olan İngilizce ile birbirleriyle iletişim kurdular.",
+          "description": "On farklı ülkeden gelen ekip üyeleri (ikiden fazla) arasındaki iletişim için \"one another\" kullanılmıştır. Edatla birlikte kullanım: \"with one another\" = birbirleriyle."
+        }
+      ],
+      "mini_test": {
+        "question": "\"A structural formula is a chemical formula that shows how the atoms are bonded to _____ in a molecule.\"",
+        "options": {
+          "A": "another",
+          "B": "each other",
+          "C": "one another"
+        },
+        "correct": "B) each other",
+        "explanation": "Moleküldeki atomlar birbirine bağlanır. Atom sayısı ikiden fazla olabilir ancak kimyada genellikle \"each other\" kullanılır. Ayrıca seçeneklerde \"one another\" olmadığı için \"each other\" doğrudur. (Not: 1998 YDS sorusu)"
+      },
+      "mini_tests": [
+        {
+          "question": "\"A structural formula is a chemical formula that shows how the atoms are bonded to _____ in a molecule.\"",
+          "options": {
+            "A": "another",
+            "B": "each other",
+            "C": "one another"
+          },
+          "correct": "B) each other",
+          "explanation": "Moleküldeki atomlar birbirine bağlanır. Atom sayısı ikiden fazla olabilir ancak kimyada genellikle \"each other\" kullanılır. Ayrıca seçeneklerde \"one another\" olmadığı için \"each other\" doğrudur. (Not: 1998 YDS sorusu)"
+        }
+      ],
+      "word_count": 476
+    },
+    {
+      "page_number": 21,
+      "title": "SUBJECT / OBJECT PRONOUNS & POSSESSIVES",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ZAMİRLER VE İYELİK YAPILARI</h2>\n<p>İngilizce'de zamirler üç grupta incelenir: Subject Pronouns (özne zamirleri), Object Pronouns (nesne zamirleri) ve Possessive Pronouns (iyelik zamirleri). Ayrıca Possessive Adjectives (iyelik sıfatları) kendilerinden sonra mutlaka isim alır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Possessive Pronouns (mine, yours, his...) ismin yerine geçer ve arkasından isim gelmez. Possessive Adjectives (my, your, his...) ise mutlaka isimle birlikte kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 TABLO: ZAMİRLER VE İYELİK YAPILARI</h2>\n<table>\n<thead>\n<tr>\n<th>Subject</th>\n<th>Object</th>\n<th>Possessive Adj</th>\n<th>Possessive Pron</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>I</td>\n<td>me</td>\n<td>my + noun</td>\n<td>mine</td>\n</tr>\n<tr>\n<td>You</td>\n<td>you</td>\n<td>your + noun</td>\n<td>yours</td>\n</tr>\n<tr>\n<td>He</td>\n<td>him</td>\n<td>his + noun</td>\n<td>his</td>\n</tr>\n<tr>\n<td>She</td>\n<td>her</td>\n<td>her + noun</td>\n<td>hers</td>\n</tr>\n<tr>\n<td>It</td>\n<td>it</td>\n<td>its + noun</td>\n<td>its</td>\n</tr>\n<tr>\n<td>We</td>\n<td>us</td>\n<td>our + noun</td>\n<td>ours</td>\n</tr>\n<tr>\n<td>You</td>\n<td>you</td>\n<td>your + noun</td>\n<td>yours</td>\n</tr>\n<tr>\n<td>They</td>\n<td>them</td>\n<td>their + noun</td>\n<td>theirs</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Possessive Adjective vs Possessive Pronoun):</strong><br>\n<strong>EN:</strong> Your calculator is on the desk in the study room, but my calculator is right here on this table next to my books.<br>\n<strong>TR:</strong> Senin hesap makinen çalışma odasındaki masanın üstünde, ama benim hesap makinem tam burada, kitaplarımın yanındaki masada.<br>\n→ <strong>Açıklama:</strong> \"Your\" ve \"my\" possessive adjective'lerdir ve mutlaka \"calculator\" ismiyle birlikte kullanılmıştır. Devamında ise \"yours\" (seninki) ve \"mine\" (benimki) possessive pronoun'ları ismin yerine geçerek kullanılmıştır: \"Yours is on the desk. Mine is here.\"</p>\n<p><strong>Örnek 2 (Possessive Pronouns - özne ve nesne):</strong><br>\n<strong>EN:</strong> She will bring her powerful laptop to the presentation, and they will bring their new tablets to demonstrate the software.<br>\n<strong>TR:</strong> O sunuma kendi güçlü dizüstü bilgisayarını getirecek ve onlar yazılımı göstermek için kendi yeni tabletlerini getirecekler.<br>\n→ <strong>Açıklama:</strong> Bu cümle \"She will bring hers and they will bring theirs.\" şeklinde de ifade edilebilir. \"Hers\" = her laptop (onun dizüstü bilgisayarı), \"theirs\" = their tablets (onların tabletleri). Possessive pronoun'lar ismin yerini tutar.</p>\n<p><strong>Örnek 3 (Subject Pronouns - özne pozisyonu):</strong><br>\n<strong>EN:</strong> He was finally able to produce a creative solution to the complex problem that had been troubling the team for weeks.<br>\n<strong>TR:</strong> O, nihayet ekibi haftalardır rahatsız eden karmaşık soruna yaratıcı bir çözüm üretebildi.<br>\n→ <strong>Açıklama:</strong> \"He\" subject pronoun (özne zamiri) olarak cümlenin öznesi konumunda kullanılmıştır. Subject pronouns her zaman fiilden önce gelir ve eylemi yapanı belirtir.</p>\n<p><strong>Örnek 4 (Object Pronouns - fiil veya edat nesnesi):</strong><br>\n<strong>EN:</strong> She kindly invited me to her birthday party last weekend, and I stayed with them at their beautiful beach house.<br>\n<strong>TR:</strong> O geçen hafta sonu doğum günü partisine beni nazikçe davet etti ve ben onların güzel sahil evinde onlarla kaldım.<br>\n→ <strong>Açıklama:</strong> \"Me\" fiilin (\"invited\") nesnesi olarak, \"them\" ise edatın (\"with\") nesnesi olarak kullanılmıştır. Object pronouns her zaman fiil veya edattan sonra gelir.</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\n\"His\" ve \"its\" hem possessive adjective hem de possessive pronoun olarak aynı formda kalır: \"This is his book\" (sıfat) - \"This book is his\" (zamir). \"Its\" çok nadir zamir olarak kullanılır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kategori</th>\n<th>Görev</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Subject Pronouns</strong></td>\n<td>özne</td>\n<td>I, you, he, she, it, we, they</td>\n</tr>\n<tr>\n<td><strong>Object Pronouns</strong></td>\n<td>nesne (fiil/edat)</td>\n<td>me, you, him, her, it, us, them</td>\n</tr>\n<tr>\n<td><strong>Possessive Adjectives</strong></td>\n<td>isimden önce</td>\n<td>my book, your car</td>\n</tr>\n<tr>\n<td><strong>Possessive Pronouns</strong></td>\n<td>ismin yerine</td>\n<td>mine, yours, his, hers, ours, theirs</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) This book is my.<br>\nB) This is mine book.<br>\nC) This book is mine.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) This book is mine.\n\n**Açıklama:** \"Mine\" possessive pronoun'dur ve ismin yerine geçer, bu nedenle arkasından isim gelmez. \"My\" ise possessive adjective'dir ve mutlaka isimle kullanılır: \"This is my book.\"\n</details>\n\n<p>[Kelime sayısı: 243]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Your calculator is on the desk in the study room, but my calculator is right here on this table next to my books.",
+          "tr": "Senin hesap makinen çalışma odasındaki masanın üstünde, ama benim hesap makinem tam burada, kitaplarımın yanındaki masada.",
+          "description": "\"Your\" ve \"my\" possessive adjective'lerdir ve mutlaka \"calculator\" ismiyle birlikte kullanılmıştır. Devamında ise \"yours\" (seninki) ve \"mine\" (benimki) possessive pronoun'ları ismin yerine geçerek kullanılmıştır: \"Yours is on the desk. Mine is here.\"\n\n**Örnek 2 (Possessive Pronouns - özne ve nesne):**"
+        },
+        {
+          "en": "She will bring her powerful laptop to the presentation, and they will bring their new tablets to demonstrate the software.",
+          "tr": "O sunuma kendi güçlü dizüstü bilgisayarını getirecek ve onlar yazılımı göstermek için kendi yeni tabletlerini getirecekler.",
+          "description": "Bu cümle \"She will bring hers and they will bring theirs.\" şeklinde de ifade edilebilir. \"Hers\" = her laptop (onun dizüstü bilgisayarı), \"theirs\" = their tablets (onların tabletleri). Possessive pronoun'lar ismin yerini tutar.\n\n**Örnek 3 (Subject Pronouns - özne pozisyonu):**"
+        },
+        {
+          "en": "He was finally able to produce a creative solution to the complex problem that had been troubling the team for weeks.",
+          "tr": "O, nihayet ekibi haftalardır rahatsız eden karmaşık soruna yaratıcı bir çözüm üretebildi.",
+          "description": "\"He\" subject pronoun (özne zamiri) olarak cümlenin öznesi konumunda kullanılmıştır. Subject pronouns her zaman fiilden önce gelir ve eylemi yapanı belirtir.\n\n**Örnek 4 (Object Pronouns - fiil veya edat nesnesi):**"
+        },
+        {
+          "en": "She kindly invited me to her birthday party last weekend, and I stayed with them at their beautiful beach house.",
+          "tr": "O geçen hafta sonu doğum günü partisine beni nazikçe davet etti ve ben onların güzel sahil evinde onlarla kaldım.",
+          "description": "\"Me\" fiilin (\"invited\") nesnesi olarak, \"them\" ise edatın (\"with\") nesnesi olarak kullanılmıştır. Object pronouns her zaman fiil veya edattan sonra gelir."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "This book is my.",
+          "B": "This is mine book.",
+          "C": "This book is mine."
+        },
+        "correct": "C) This book is mine.",
+        "explanation": "\"Mine\" possessive pronoun'dur ve ismin yerine geçer, bu nedenle arkasından isim gelmez. \"My\" ise possessive adjective'dir ve mutlaka isimle kullanılır: \"This is my book.\""
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "This book is my.",
+            "B": "This is mine book.",
+            "C": "This book is mine."
+          },
+          "correct": "C) This book is mine.",
+          "explanation": "\"Mine\" possessive pronoun'dur ve ismin yerine geçer, bu nedenle arkasından isim gelmez. \"My\" ise possessive adjective'dir ve mutlaka isimle kullanılır: \"This is my book.\""
+        }
+      ],
+      "word_count": 547
+    },
+    {
+      "page_number": 22,
+      "title": "REFLEXIVE PRONOUNS",
+      "total_pages": 25,
+      "content_html": "<h2>📌 DÖNÜŞLÜLÜK ZAMİRLERİ</h2>\n<p>Reflexive pronouns (dönüşlülük zamirleri), cümlenin öznesi ile nesnesinin aynı kişi/şey olduğunu belirtir. Türkçe'deki \"-ın, -in, -ını, -ini\" eklerine karşılık gelir (kendim, kendin, kendisi...).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Reflexive pronoun kullanmak için özne ve nesne aynı olmalıdır. \"I cut myself.\" (Kendimi kestim) - Özne (I) ve nesne (myself) aynı kişi.</p>\n</blockquote>\n<hr>\n<h2>📏 TABLO: REFLEXIVE PRONOUNS</h2>\n<table>\n<thead>\n<tr>\n<th>Subject</th>\n<th>Reflexive</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>I</td>\n<td>myself</td>\n</tr>\n<tr>\n<td>You</td>\n<td>yourself</td>\n</tr>\n<tr>\n<td>He</td>\n<td>himself</td>\n</tr>\n<tr>\n<td>She</td>\n<td>herself</td>\n</tr>\n<tr>\n<td>It</td>\n<td>itself</td>\n</tr>\n<tr>\n<td>We</td>\n<td>ourselves</td>\n</tr>\n<tr>\n<td>You</td>\n<td>yourselves</td>\n</tr>\n<tr>\n<td>They</td>\n<td>themselves</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Özne ve nesne aynı):</strong><br>\n<strong>EN:</strong> She unfairly blamed herself for the terrible car accident, even though it was clearly caused by the other driver's negligence and speeding.<br>\n<strong>TR:</strong> Araba kazasının diğer sürücünün ihmali ve hız yapmasından kaynaklanmasına rağmen, kendini haksız yere suçladı.<br>\n→ <strong>Açıklama:</strong> Özne \"She\" ve nesne \"herself\" aynı kişidir. \"Blamed herself\" = kendini suçladı. Eylem özneye dönmektedir. Özne ve nesne farklı olsaydı object pronoun kullanılırdı: \"She blamed him.\"</p>\n<p><strong>Örnek 2 (Fiil + reflexive):</strong><br>\n<strong>EN:</strong> The little boy accidentally cut himself while trying to open a package with a sharp knife he found in the kitchen drawer.<br>\n<strong>TR:</strong> Küçük çocuk, mutfak çekmecesinde bulduğu keskin bir bıçakla bir paketi açmaya çalışırken yanlışlıkla kendini kesti.<br>\n→ <strong>Açıklama:</strong> \"Cut himself\" = kendini kesti. Özne (the little boy) ve nesne (himself) aynıdır. Bu tür fiziksel eylemlerde reflexive pronoun sıkça kullanılır.</p>\n<p><strong>Örnek 3 (Özne ve nesne farklı - object pronoun kullanılır):</strong><br>\n<strong>EN:</strong> She cut him accidentally while they were both playing with scissors, and she immediately apologized for the injury.<br>\n<strong>TR:</strong> İkisi birlikte makasla oynarken onu yanlışlıkla kesti ve hemen yaralanma için özür diledi.<br>\n→ <strong>Açıklama:</strong> Bu cümlede özne \"she\", nesne ise \"him\" (başka bir kişi). Özne ve nesne farklı olduğu için reflexive pronoun (herself) değil, object pronoun (him) kullanılmıştır.</p>\n<p><strong>Örnek 4 (Reflexive pronoun - vurgu amaçlı):</strong><br>\n<strong>EN:</strong> The CEO himself attended the meeting to show how important the project was to the company's future success.<br>\n<strong>TR:</strong> Projenin şirketin gelecekteki başarısı için ne kadar önemli olduğunu göstermek için CEO'nun kendisi toplantıya katıldı.<br>\n→ <strong>Açıklama:</strong> \"Himself\" burada vurgu amaçlı kullanılmıştır. \"The CEO himself\" = CEO'nun kendisi (başkası değil, bizzat kendisi). Bu kullanımda reflexive pronoun özneyi vurgular.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nBazı fiiller Türkçe'de dönüşlü gibi görünse de İngilizce'de reflexive pronoun almaz: \"feel\" (hissetmek), \"wash\" (yıkanmak), \"dress\" (giyinmek), \"shave\" (tıraş olmak). \"I feel myself\" YANLIŞ, \"I feel good\" DOĞRU.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Özne = nesne</strong></td>\n<td>kendime/ine/ine</td>\n<td>I hurt myself.</td>\n</tr>\n<tr>\n<td><strong>Vurgu</strong></td>\n<td>bizzat kendisi</td>\n<td>The president himself came.</td>\n</tr>\n<tr>\n<td><strong>By + reflexive</strong></td>\n<td>yalnız, kendi başına</td>\n<td>She did it by herself.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"He was an extremely entertaining speaker, so we all enjoyed _____ even more than we had expected to.\"</p>\n<p>A) ourselves<br>\nB) us<br>\nC) himself</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) ourselves\n\n**Açıklama:** \"Enjoy oneself\" kalıbı \"iyi vakit geçirmek, eğlenmek\" anlamındadır. Özne \"we\" olduğu için \"ourselves\" kullanılmalıdır. (1998 YDS sorusu)\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She unfairly blamed herself for the terrible car accident, even though it was clearly caused by the other driver's negligence and speeding.",
+          "tr": "Araba kazasının diğer sürücünün ihmali ve hız yapmasından kaynaklanmasına rağmen, kendini haksız yere suçladı.",
+          "description": "Özne \"She\" ve nesne \"herself\" aynı kişidir. \"Blamed herself\" = kendini suçladı. Eylem özneye dönmektedir. Özne ve nesne farklı olsaydı object pronoun kullanılırdı: \"She blamed him.\"\n\n**Örnek 2 (Fiil + reflexive):**"
+        },
+        {
+          "en": "The little boy accidentally cut himself while trying to open a package with a sharp knife he found in the kitchen drawer.",
+          "tr": "Küçük çocuk, mutfak çekmecesinde bulduğu keskin bir bıçakla bir paketi açmaya çalışırken yanlışlıkla kendini kesti.",
+          "description": "\"Cut himself\" = kendini kesti. Özne (the little boy) ve nesne (himself) aynıdır. Bu tür fiziksel eylemlerde reflexive pronoun sıkça kullanılır.\n\n**Örnek 3 (Özne ve nesne farklı - object pronoun kullanılır):**"
+        },
+        {
+          "en": "She cut him accidentally while they were both playing with scissors, and she immediately apologized for the injury.",
+          "tr": "İkisi birlikte makasla oynarken onu yanlışlıkla kesti ve hemen yaralanma için özür diledi.",
+          "description": "Bu cümlede özne \"she\", nesne ise \"him\" (başka bir kişi). Özne ve nesne farklı olduğu için reflexive pronoun (herself) değil, object pronoun (him) kullanılmıştır.\n\n**Örnek 4 (Reflexive pronoun - vurgu amaçlı):**"
+        },
+        {
+          "en": "The CEO himself attended the meeting to show how important the project was to the company's future success.",
+          "tr": "Projenin şirketin gelecekteki başarısı için ne kadar önemli olduğunu göstermek için CEO'nun kendisi toplantıya katıldı.",
+          "description": "\"Himself\" burada vurgu amaçlı kullanılmıştır. \"The CEO himself\" = CEO'nun kendisi (başkası değil, bizzat kendisi). Bu kullanımda reflexive pronoun özneyi vurgular."
+        }
+      ],
+      "mini_test": {
+        "question": "\"He was an extremely entertaining speaker, so we all enjoyed _____ even more than we had expected to.\"",
+        "options": {
+          "A": "ourselves",
+          "B": "us",
+          "C": "himself"
+        },
+        "correct": "A) ourselves",
+        "explanation": "\"Enjoy oneself\" kalıbı \"iyi vakit geçirmek, eğlenmek\" anlamındadır. Özne \"we\" olduğu için \"ourselves\" kullanılmalıdır. (1998 YDS sorusu)"
+      },
+      "mini_tests": [
+        {
+          "question": "\"He was an extremely entertaining speaker, so we all enjoyed _____ even more than we had expected to.\"",
+          "options": {
+            "A": "ourselves",
+            "B": "us",
+            "C": "himself"
+          },
+          "correct": "A) ourselves",
+          "explanation": "\"Enjoy oneself\" kalıbı \"iyi vakit geçirmek, eğlenmek\" anlamındadır. Özne \"we\" olduğu için \"ourselves\" kullanılmalıdır. (1998 YDS sorusu)"
+        }
+      ],
+      "word_count": 459
+    },
+    {
+      "page_number": 23,
+      "title": "REFLEXIVE PRONOUNS - ÖZEL KULLANIMLAR",
+      "total_pages": 25,
+      "content_html": "<h2>📌 DÖNÜŞLÜLÜK ZAMİRLERİNİN ÖZEL KULLANIMLARI</h2>\n<p>Reflexive pronouns edatlarla birlikte kullanılabilir, özneyi veya nesneyi vurgulayabilir ve \"by + reflexive\" şeklinde \"yalnız, kendi başına\" anlamı verebilir. Edat yer ifade ediyorsa object pronoun kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"By myself\" = on my own (kendi başıma, yalnız). Edat yer belirtiyorsa (with, near, etc.) ve özne aynı olsa bile object pronoun kullanılır: \"He has no money with him.\"</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Preposition + reflexive - eylemden etkilenme):</strong><br>\n<strong>EN:</strong> The old man was sitting alone in the park, talking quietly to himself about his memories and past experiences.<br>\n<strong>TR:</strong> Yaşlı adam parkta tek başına oturuyor, anıları ve geçmiş deneyimleri hakkında kendi kendine sessizce konuşuyordu.<br>\n→ <strong>Açıklama:</strong> \"To himself\" = kendi kendine. Edat (\"to\") öznenin eylemden etkilendiğini gösterir ve özne ile nesne aynı olduğu için reflexive pronoun kullanılmıştır. \"Talking to himself\" yaygın bir ifadedir.</p>\n<p><strong>Örnek 2 (Preposition + object pronoun - yer ifadesi):</strong><br>\n<strong>EN:</strong> The traveler realized he didn't have any local currency with him, so he couldn't pay for the taxi ride from the airport.<br>\n<strong>TR:</strong> Gezgin, üzerinde hiç yerel para olmadığını fark etti, bu yüzden havaalanından taksi yolculuğunu ödeyemedi.<br>\n→ <strong>Açıklama:</strong> \"With him\" = yanında, üzerinde. \"With\" edatı yer ifade ettiği için, özne (\"he\") ile nesne aynı olmasına rağmen reflexive pronoun (\"himself\") değil, object pronoun (\"him\") kullanılmıştır.</p>\n<p><strong>Örnek 3 (By + reflexive - yalnız veya yardım almadan):</strong><br>\n<strong>EN:</strong> The elderly woman lives by herself in a small apartment downtown, but her children visit her every weekend to check on her.<br>\n<strong>TR:</strong> Yaşlı kadın şehir merkezinde küçük bir apartman dairesinde yalnız yaşıyor, ama çocukları onu kontrol etmek için her hafta sonu ziyaret ediyor.<br>\n→ <strong>Açıklama:</strong> \"By herself\" = yalnız başına, tek başına. Bu kullanım \"on her own\" ile aynı anlama gelir. \"By + reflexive\" kalıbı hem \"yalnız\" hem de \"yardım almadan\" anlamında kullanılabilir.</p>\n<p><strong>Örnek 4 (Vurgu amaçlı - nesne vurgusu):</strong><br>\n<strong>EN:</strong> We demanded to speak to the manager herself, not to her assistant, because the issue was extremely sensitive and important.<br>\n<strong>TR:</strong> Müdürün asistanıyla değil, kendisiyle konuşmayı talep ettik çünkü konu son derece hassas ve önemliydi.<br>\n→ <strong>Açıklama:</strong> \"The manager herself\" = müdürün kendisi. Burada reflexive pronoun (\"herself\") nesneyi (\"the manager\") vurgulamak için kullanılmıştır. \"Herself\" nesneden hemen sonra gelir.</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>By myself</strong> = yalnız / kendi başıma\n    </div>\n    <div class=\"kart yesil\">\n        <strong>On my own</strong> = yalnız / kendi başıma\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Yourself!</strong> = Kendin yap! (emir)\n    </div>\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>By + reflexive</strong></td>\n<td>yalnız, kendi başına</td>\n<td>She did it by herself.</td>\n</tr>\n<tr>\n<td><strong>Preposition + reflexive</strong></td>\n<td>eylem özneye dönük</td>\n<td>He talked to himself.</td>\n</tr>\n<tr>\n<td><strong>Preposition + object</strong></td>\n<td>yer/bulunma ifadesi</td>\n<td>He had money with him.</td>\n</tr>\n<tr>\n<td><strong>Noun + reflexive</strong></td>\n<td>vurgu</td>\n<td>The king himself came.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"She's far too young to go there by _____; couldn't a friend of yours take her?\"</p>\n<p>A) herself<br>\nB) her<br>\nC) hers</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) herself\n\n**Açıklama:** \"By herself\" = yalnız başına, kendi başına. Cümlenin öznesi \"she\" olduğu için \"herself\" doğrudur. \"A friend of yours\" = senin bir arkadaşın.\n</details>\n\n<p>[Kelime sayısı: 238]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The old man was sitting alone in the park, talking quietly to himself about his memories and past experiences.",
+          "tr": "Yaşlı adam parkta tek başına oturuyor, anıları ve geçmiş deneyimleri hakkında kendi kendine sessizce konuşuyordu.",
+          "description": "\"To himself\" = kendi kendine. Edat (\"to\") öznenin eylemden etkilendiğini gösterir ve özne ile nesne aynı olduğu için reflexive pronoun kullanılmıştır. \"Talking to himself\" yaygın bir ifadedir.\n\n**Örnek 2 (Preposition + object pronoun - yer ifadesi):**"
+        },
+        {
+          "en": "The traveler realized he didn't have any local currency with him, so he couldn't pay for the taxi ride from the airport.",
+          "tr": "Gezgin, üzerinde hiç yerel para olmadığını fark etti, bu yüzden havaalanından taksi yolculuğunu ödeyemedi.",
+          "description": "\"With him\" = yanında, üzerinde. \"With\" edatı yer ifade ettiği için, özne (\"he\") ile nesne aynı olmasına rağmen reflexive pronoun (\"himself\") değil, object pronoun (\"him\") kullanılmıştır.\n\n**Örnek 3 (By + reflexive - yalnız veya yardım almadan):**"
+        },
+        {
+          "en": "The elderly woman lives by herself in a small apartment downtown, but her children visit her every weekend to check on her.",
+          "tr": "Yaşlı kadın şehir merkezinde küçük bir apartman dairesinde yalnız yaşıyor, ama çocukları onu kontrol etmek için her hafta sonu ziyaret ediyor.",
+          "description": "\"By herself\" = yalnız başına, tek başına. Bu kullanım \"on her own\" ile aynı anlama gelir. \"By + reflexive\" kalıbı hem \"yalnız\" hem de \"yardım almadan\" anlamında kullanılabilir.\n\n**Örnek 4 (Vurgu amaçlı - nesne vurgusu):**"
+        },
+        {
+          "en": "We demanded to speak to the manager herself, not to her assistant, because the issue was extremely sensitive and important.",
+          "tr": "Müdürün asistanıyla değil, kendisiyle konuşmayı talep ettik çünkü konu son derece hassas ve önemliydi.",
+          "description": "\"The manager herself\" = müdürün kendisi. Burada reflexive pronoun (\"herself\") nesneyi (\"the manager\") vurgulamak için kullanılmıştır. \"Herself\" nesneden hemen sonra gelir."
+        }
+      ],
+      "mini_test": {
+        "question": "\"She's far too young to go there by _____; couldn't a friend of yours take her?\"",
+        "options": {
+          "A": "herself",
+          "B": "her",
+          "C": "hers"
+        },
+        "correct": "A) herself",
+        "explanation": "\"By herself\" = yalnız başına, kendi başına. Cümlenin öznesi \"she\" olduğu için \"herself\" doğrudur. \"A friend of yours\" = senin bir arkadaşın."
+      },
+      "mini_tests": [
+        {
+          "question": "\"She's far too young to go there by _____; couldn't a friend of yours take her?\"",
+          "options": {
+            "A": "herself",
+            "B": "her",
+            "C": "hers"
+          },
+          "correct": "A) herself",
+          "explanation": "\"By herself\" = yalnız başına, kendi başına. Cümlenin öznesi \"she\" olduğu için \"herself\" doğrudur. \"A friend of yours\" = senin bir arkadaşın."
+        }
+      ],
+      "word_count": 487
+    },
+    {
+      "page_number": 24,
+      "title": "INDEFINITE PRONOUNS",
+      "total_pages": 25,
+      "content_html": "<h2>📌 BELGİSİZ ZAMİRLER</h2>\n<p>Indefinite pronouns (belgisiz zamirler), \"some\", \"any\", \"every\" ve \"no\" yapılarının \"body\", \"one\", \"thing\" ile birleşmesiyle oluşur. Özne olduklarında tekil kabul edilirler ve fiil tekil çekimlenir. Yer bildiren versiyonları da vardır (somewhere, anywhere...).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Some- olumlu cümlelerde, any- soru ve olumsuz cümlelerde, no- olumsuz anlamda kullanılır. \"Everybody\" = herkes (tekil fiil alır).</p>\n</blockquote>\n<hr>\n<h2>📏 TABLO: BELGİSİZ ZAMİRLER</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Kişi (body)</th>\n<th>Kişi (one)</th>\n<th>Şey (thing)</th>\n<th>Yer (where)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Some</strong></td>\n<td>somebody</td>\n<td>someone</td>\n<td>something</td>\n<td>somewhere</td>\n</tr>\n<tr>\n<td><strong>Any</strong></td>\n<td>anybody</td>\n<td>anyone</td>\n<td>anything</td>\n<td>anywhere</td>\n</tr>\n<tr>\n<td><strong>Every</strong></td>\n<td>everybody</td>\n<td>everyone</td>\n<td>everything</td>\n<td>everywhere</td>\n</tr>\n<tr>\n<td><strong>No</strong></td>\n<td>nobody</td>\n<td>no one</td>\n<td>nothing</td>\n<td>nowhere</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Someone - olumlu cümle):</strong><br>\n<strong>EN:</strong> Someone is secretly following us through the dark streets, and I'm getting really nervous about our safety right now.<br>\n<strong>TR:</strong> Birisi karanlık sokaklarda bizi gizlice takip ediyor ve şu anda güvenliğimiz konusunda gerçekten endişelenmeye başlıyorum.<br>\n→ <strong>Açıklama:</strong> \"Someone\" (birisi) belgisiz zamiri özne pozisyonunda kullanılmıştır. Tekil kabul edildiği için fiil \"is following\" (tekil) olarak çekimlenmiştir. Olumlu cümlede \"some-\" kullanılır.</p>\n<p><strong>Örnek 2 (Nothing - olumsuz anlam, yapıca olumlu):</strong><br>\n<strong>EN:</strong> Nothing significant can be achieved in this company without your dedicated effort and commitment to excellence.<br>\n<strong>TR:</strong> Bu şirkette senin özverili çaban ve mükemmelliğe bağlılığın olmadan hiçbir önemli şey başarılamaz.<br>\n→ <strong>Açıklama:</strong> \"Nothing\" (hiçbir şey) özne pozisyonunda kullanılmıştır. \"Nothing\" zaten olumsuz anlam taşıdığı için cümle yapıca olumludur (\"can be\"). Tekil kabul edilir.</p>\n<p><strong>Örnek 3 (Anywhere - soru cümlesi):</strong><br>\n<strong>EN:</strong> I don't have anywhere to stay tonight because all the hotels in the city center are fully booked for the conference.<br>\n<strong>TR:</strong> Bu gece kalacak hiçbir yerim yok çünkü şehir merkezindeki tüm oteller konferans için tamamen dolu.<br>\n→ <strong>Açıklama:</strong> \"Anywhere\" (hiçbir yer) olumsuz cümlede kullanılmıştır. \"Don't have\" olumsuzluğu ile birlikte \"anywhere\" gelmiştir. Olumlu cümlede \"somewhere\" kullanılırdı.</p>\n<p><strong>Örnek 4 (Everybody - tekil fiil):</strong><br>\n<strong>EN:</strong> Everybody in the large conference room was completely silent when the CEO announced the unexpected merger with the rival company.<br>\n<strong>TR:</strong> CEO rakip şirketle beklenmedik birleşmeyi duyurduğunda, büyük konferans salonundaki herkes tamamen sessizdi.<br>\n→ <strong>Açıklama:</strong> \"Everybody\" (herkes) anlamca çoğul gibi görünse de, dilbilgisel olarak tekil kabul edilir. Bu nedenle fiil \"was\" (tekil) olarak çekimlenmiştir. \"Everyone\" da aynı şekilde tekil fiil alır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nIndefinite pronouns ile ilgili en sık yapılan hata, \"everyone\" gibi kelimeleri çoğul sanıp çoğul fiil kullanmaktır. Unutmayın: EVERYONE IS (herkes -dir), EVERYBODY IS, NOTHING IS, SOMETHING IS.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>Kullanım</th>\n<th>Fiil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Someone / somebody</strong></td>\n<td>birisi</td>\n<td>olumlu</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>Anyone / anybody</strong></td>\n<td>herhangi biri/hiç kimse</td>\n<td>soru/olumsuz</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>Everyone / everybody</strong></td>\n<td>herkes</td>\n<td>olumlu</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>No one / nobody</strong></td>\n<td>hiç kimse</td>\n<td>olumsuz anlam</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>Something</strong></td>\n<td>bir şey</td>\n<td>olumlu</td>\n<td>tekil</td>\n</tr>\n<tr>\n<td><strong>Anything</strong></td>\n<td>herhangi bir şey/hiçbir şey</td>\n<td>soru/olumsuz</td>\n<td>tekil</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi doğrudur?</p>\n<p>A) Everyone are here.<br>\nB) Everyone is here.<br>\nC) Everyone am here.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) Everyone is here.\n\n**Açıklama:** \"Everyone\" (herkes) anlamca çoğul gibi görünse de dilbilgisel olarak tekil kabul edilir ve tekil fiil (is) alır.\n</details>\n\n<p>[Kelime sayısı: 237]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Someone is secretly following us through the dark streets, and I'm getting really nervous about our safety right now.",
+          "tr": "Birisi karanlık sokaklarda bizi gizlice takip ediyor ve şu anda güvenliğimiz konusunda gerçekten endişelenmeye başlıyorum.",
+          "description": "\"Someone\" (birisi) belgisiz zamiri özne pozisyonunda kullanılmıştır. Tekil kabul edildiği için fiil \"is following\" (tekil) olarak çekimlenmiştir. Olumlu cümlede \"some-\" kullanılır.\n\n**Örnek 2 (Nothing - olumsuz anlam, yapıca olumlu):**"
+        },
+        {
+          "en": "Nothing significant can be achieved in this company without your dedicated effort and commitment to excellence.",
+          "tr": "Bu şirkette senin özverili çaban ve mükemmelliğe bağlılığın olmadan hiçbir önemli şey başarılamaz.",
+          "description": "\"Nothing\" (hiçbir şey) özne pozisyonunda kullanılmıştır. \"Nothing\" zaten olumsuz anlam taşıdığı için cümle yapıca olumludur (\"can be\"). Tekil kabul edilir.\n\n**Örnek 3 (Anywhere - soru cümlesi):**"
+        },
+        {
+          "en": "I don't have anywhere to stay tonight because all the hotels in the city center are fully booked for the conference.",
+          "tr": "Bu gece kalacak hiçbir yerim yok çünkü şehir merkezindeki tüm oteller konferans için tamamen dolu.",
+          "description": "\"Anywhere\" (hiçbir yer) olumsuz cümlede kullanılmıştır. \"Don't have\" olumsuzluğu ile birlikte \"anywhere\" gelmiştir. Olumlu cümlede \"somewhere\" kullanılırdı.\n\n**Örnek 4 (Everybody - tekil fiil):**"
+        },
+        {
+          "en": "Everybody in the large conference room was completely silent when the CEO announced the unexpected merger with the rival company.",
+          "tr": "CEO rakip şirketle beklenmedik birleşmeyi duyurduğunda, büyük konferans salonundaki herkes tamamen sessizdi.",
+          "description": "\"Everybody\" (herkes) anlamca çoğul gibi görünse de, dilbilgisel olarak tekil kabul edilir. Bu nedenle fiil \"was\" (tekil) olarak çekimlenmiştir. \"Everyone\" da aynı şekilde tekil fiil alır."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi doğrudur?",
+        "options": {
+          "A": "Everyone are here.",
+          "B": "Everyone is here.",
+          "C": "Everyone am here."
+        },
+        "correct": "B) Everyone is here.",
+        "explanation": "\"Everyone\" (herkes) anlamca çoğul gibi görünse de dilbilgisel olarak tekil kabul edilir ve tekil fiil (is) alır."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi doğrudur?",
+          "options": {
+            "A": "Everyone are here.",
+            "B": "Everyone is here.",
+            "C": "Everyone am here."
+          },
+          "correct": "B) Everyone is here.",
+          "explanation": "\"Everyone\" (herkes) anlamca çoğul gibi görünse de dilbilgisel olarak tekil kabul edilir ve tekil fiil (is) alır."
+        }
+      ],
+      "word_count": 469
+    },
+    {
+      "page_number": 25,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 25,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li><strong>A lot of / lots of / plenty of</strong>: Çoğul ve sayılamayan isimlerle kullanılan \"çok\" ifadeleri</li>\n<li><strong>Many / much / a few / few / a little / little</strong>: Sayılabilen ve sayılamayan isimlerle miktar ifadeleri</li>\n<li><strong>Both / either / neither</strong>: İki şey için kullanılan yapılar</li>\n<li><strong>Each / every</strong>: \"Her bir\" ve \"her\" arasındaki fark</li>\n<li><strong>All / whole</strong>: \"Bütün, tüm\" ifadeleri</li>\n<li><strong>No / none</strong>: \"Hiç\" ifadeleri (sıfat vs zamir)</li>\n<li><strong>Other / another / the other / others</strong>: \"Diğer, başka\" ifadeleri</li>\n<li><strong>Reflexive pronouns</strong>: Dönüşlülük zamirleri (myself, yourself...)</li>\n<li><strong>Indefinite pronouns</strong>: Belgisiz zamirler (someone, anything...)</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p>The new personnel manager told us that he had visited _____ countries in Europe.</p>\n<p>A) a great deal of<br>\nB) a number of<br>\nC) much<br>\nD) any</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B) a number of - \"Countries\" çoğul isimdir, bu nedenle sadece çoğul isimlerle kullanılan \"a number of\" doğrudur. (2002 YDS sorusu)\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p>Chipmaking is very competitive, so _____ opportunity to cut costs and improve yields is highly prized.</p>\n<p>A) all<br>\nB) certain<br>\nC) some<br>\nD) any</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** D) any - \"Opportunity\" tekil isimdir. Olumlu cümlede \"her fırsat\" anlamı için \"any\" doğrudur. (YDS benzeri soru)\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p>The two men walked back to the village together, but _____ of them spoke during the entire journey.</p>\n<p>A) either<br>\nB) neither<br>\nC) both<br>\nD) any</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B) neither - \"But\" zıtlık bildirir. \"İkisi de konuşmadı\" anlamı için \"neither\" doğrudur. \"Neither of them\" = onlardan hiçbiri.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p>The body is composed of many different types of cells, _____ with its own unique structure and specific function.</p>\n<p>A) each<br>\nB) every<br>\nC) all<br>\nD) both</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A) each - \"Each\" zamir olarak kullanılmıştır ve \"her bir hücre\" anlamındadır. \"Its own\" (kendine has) ifadesi bireysel vurguyu destekler.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p>She's far too young to go there by <strong><em>_</em>; couldn't a friend of </strong>___ take her?</p>\n<p>A) herself / yours<br>\nB) her / your<br>\nC) herself / your<br>\nD) hers / yours</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A) herself / yours - \"By herself\" = yalnız başına. \"A friend of yours\" = senin bir arkadaşın (possessive pronoun).\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p>[Kelime sayısı: 245]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası</li>\n<li>[x] Her sayfada 3-4 örnek var</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 25'i geçmiyor</li>\n<li>[x] HTML div'leri doğru işaretlenmiş</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "The new personnel manager told us that he had visited _____ countries in Europe.",
+        "options": {
+          "A": "a great deal of",
+          "B": "a number of",
+          "C": "much",
+          "D": "any"
+        },
+        "correct": "B) a number of - \"Countries\" çoğul isimdir, bu nedenle sadece çoğul isimlerle kullanılan \"a number of\" doğrudur. (2002 YDS sorusu)",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "The new personnel manager told us that he had visited _____ countries in Europe.",
+          "options": {
+            "A": "a great deal of",
+            "B": "a number of",
+            "C": "much",
+            "D": "any"
+          },
+          "correct": "B) a number of - \"Countries\" çoğul isimdir, bu nedenle sadece çoğul isimlerle kullanılan \"a number of\" doğrudur. (2002 YDS sorusu)",
+          "explanation": ""
+        },
+        {
+          "question": "Chipmaking is very competitive, so _____ opportunity to cut costs and improve yields is highly prized.",
+          "options": {
+            "A": "all",
+            "B": "certain",
+            "C": "some",
+            "D": "any"
+          },
+          "correct": "D) any - \"Opportunity\" tekil isimdir. Olumlu cümlede \"her fırsat\" anlamı için \"any\" doğrudur. (YDS benzeri soru)",
+          "explanation": ""
+        },
+        {
+          "question": "The two men walked back to the village together, but _____ of them spoke during the entire journey.",
+          "options": {
+            "A": "either",
+            "B": "neither",
+            "C": "both",
+            "D": "any"
+          },
+          "correct": "B) neither - \"But\" zıtlık bildirir. \"İkisi de konuşmadı\" anlamı için \"neither\" doğrudur. \"Neither of them\" = onlardan hiçbiri.",
+          "explanation": ""
+        },
+        {
+          "question": "The body is composed of many different types of cells, _____ with its own unique structure and specific function.",
+          "options": {
+            "A": "each",
+            "B": "every",
+            "C": "all",
+            "D": "both"
+          },
+          "correct": "A) each - \"Each\" zamir olarak kullanılmıştır ve \"her bir hücre\" anlamındadır. \"Its own\" (kendine has) ifadesi bireysel vurguyu destekler.",
+          "explanation": ""
+        },
+        {
+          "question": "She's far too young to go there by _____; couldn't a friend of _____ take her?",
+          "options": {
+            "A": "herself / yours",
+            "B": "her / your",
+            "C": "herself / your",
+            "D": "hers / yours"
+          },
+          "correct": "A) herself / yours - \"By herself\" = yalnız başına. \"A friend of yours\" = senin bir arkadaşın (possessive pronoun).",
+          "explanation": ""
+        }
+      ],
+      "word_count": 418
+    }
+  ]
+}

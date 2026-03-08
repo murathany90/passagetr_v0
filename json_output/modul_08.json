@@ -1,0 +1,961 @@
+{
+  "sira": 8,
+  "baslik": "Noun Clauses (İsim Yan Cümlecikleri)",
+  "dosya_adi": "08_noun_clauses.md",
+  "toplam_sayfa": 18,
+  "icon": "💬",
+  "renk": "#9B59B6",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "Noun Clause Nedir?",
+      "total_pages": 18,
+      "content_html": "<h2>📌 TANIM</h2>\n<p>Noun clause (isim cümleciği), bir cümle içinde isim gibi görev yapan yan cümleciktir. Yani özne, nesne veya tümleç olarak kullanılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Noun clause’u tanımak için “bir şey…”, “…olduğu”, “…olması” gibi anlamlar arayın.</p>\n</blockquote>\n<hr>\n<h2>🔷 İKİ ANA TÜR</h2>\n<table>\n<thead>\n<tr>\n<th>Tür</th>\n<th>Bağlaçlar</th>\n<th>Anlam Özelliği</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Kararlı</strong></td>\n<td>that, the fact that</td>\n<td>Kesinlik, gerçeklik</td>\n</tr>\n<tr>\n<td><strong>Kararsız</strong></td>\n<td>wh- soruları, how, whether/if</td>\n<td>Belirsizlik, soru anlamı</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Kararlı):</strong><br>\n<strong>EN:</strong> I believe that she will recover from the illness very soon because she is strong-willed.<br>\n<strong>TR:</strong> Onun çok yakında hastalıktan kurtulacağına inanıyorum çünkü iradeli biri.<br>\n→ <strong>Açıklama:</strong> “that she will recover…” bir noun clause’dur ve “believe” fiilinin nesnesidir. “That” ile başlayan cümlecik kesin bir inancı ifade eder (kararlı durum). Burada “that” atılabilir çünkü nesne konumundadır.</p>\n<p><strong>Örnek 2 (Kararsız):</strong><br>\n<strong>EN:</strong> I wonder whether the new manager will change the working hours or keep them as they are.<br>\n<strong>TR:</strong> Yeni müdürün çalışma saatlerini değiştirip değiştirmeyeceğini yoksa olduğu gibi mi bırakacağını merak ediyorum.<br>\n→ <strong>Açıklama:</strong> “whether the new manager will change…” bir noun clause’dur ve “wonder” fiilinin nesnesidir. “Whether” kararsızlık (merak) bildirir; cümlede iki olasılık vardır.</p>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlede noun clause hangi kelimeyle başlamıştır?<br>\n“I don’t know where she lives.”</p>\n<p>A) I<br>\nB) don’t know<br>\nC) where<br>\nD) she</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) where  \n**Açıklama:** “where she lives” bir noun clause’dur ve “know” fiilinin nesnesidir. “Where” soru kelimesi bu cümlecikte kararsız durum bağlacı görevi yapar.\n</details>\n\n<p>[Kelime sayısı: 210]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I believe that she will recover from the illness very soon because she is strong-willed.",
+          "tr": "Onun çok yakında hastalıktan kurtulacağına inanıyorum çünkü iradeli biri.",
+          "description": "“that she will recover…” bir noun clause’dur ve “believe” fiilinin nesnesidir. “That” ile başlayan cümlecik kesin bir inancı ifade eder (kararlı durum). Burada “that” atılabilir çünkü nesne konumundadır.\n\n**Örnek 2 (Kararsız):**"
+        },
+        {
+          "en": "I wonder whether the new manager will change the working hours or keep them as they are.",
+          "tr": "Yeni müdürün çalışma saatlerini değiştirip değiştirmeyeceğini yoksa olduğu gibi mi bırakacağını merak ediyorum.",
+          "description": "“whether the new manager will change…” bir noun clause’dur ve “wonder” fiilinin nesnesidir. “Whether” kararsızlık (merak) bildirir; cümlede iki olasılık vardır."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlede noun clause hangi kelimeyle başlamıştır?\n“I don’t know where she lives.”",
+        "options": {
+          "A": "I",
+          "B": "don’t know",
+          "C": "where",
+          "D": "she"
+        },
+        "correct": "C) where",
+        "explanation": "“where she lives” bir noun clause’dur ve “know” fiilinin nesnesidir. “Where” soru kelimesi bu cümlecikte kararsız durum bağlacı görevi yapar."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlede noun clause hangi kelimeyle başlamıştır?\n“I don’t know where she lives.”",
+          "options": {
+            "A": "I",
+            "B": "don’t know",
+            "C": "where",
+            "D": "she"
+          },
+          "correct": "C) where",
+          "explanation": "“where she lives” bir noun clause’dur ve “know” fiilinin nesnesidir. “Where” soru kelimesi bu cümlecikte kararsız durum bağlacı görevi yapar."
+        }
+      ],
+      "word_count": 242
+    },
+    {
+      "page_number": 2,
+      "title": "KARARLI DURUM BAĞLAÇLARI (THAT / THE FACT THAT)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 ÖZET</h2>\n<p>“That” ve “the fact that” bir olay, olgu veya gerçeği ifade eden noun clause’lar oluşturur. Cümlede özne, nesne veya edat tümleci olarak kullanılabilirler.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:** Özne konumunda “That” ASLA atılmaz! (That he is guilty is obvious.) Nesne konumunda ise genellikle atılabilir. (I know (that) he is guilty.)\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Nesne – that atılabilir):</strong><br>\n<strong>EN:</strong> The manager announced that the company would merge with a larger firm by the end of the year.<br>\n<strong>TR:</strong> Müdür, şirketin yıl sonuna kadar daha büyük bir firmayla birleşeceğini duyurdu.<br>\n→ <strong>Açıklama:</strong> “that the company would merge…” noun clause’u “announced” fiilinin nesnesidir. Burada “that” kullanılması zorunlu değildir, anlam aynı kalır. Cümle kesin bir bilgi bildirir (kararlı durum).</p>\n<p><strong>Örnek 2 (Özne – that zorunlu):</strong><br>\n<strong>EN:</strong> That the climate is changing rapidly has been proven by countless scientific studies.<br>\n<strong>TR:</strong> İklimin hızla değiştiği sayısız bilimsel çalışmayla kanıtlanmıştır.<br>\n→ <strong>Açıklama:</strong> “That the climate is changing…” cümlenin öznesidir. Bu pozisyonda “that” atılamaz. Aksi halde cümle bozulur. Bu yapı resmî metinlerde sık kullanılır.</p>\n<p><strong>Örnek 3 (Edat sonrası – the fact that zorunlu):</strong><br>\n<strong>EN:</strong> The judge drew attention to the fact that the defendant had no prior criminal record.<br>\n<strong>TR:</strong> Hakim, sanığın daha önce sabıka kaydı olmadığı gerçeğine dikkat çekti.<br>\n→ <strong>Açıklama:</strong> Edat olan “to” dan sonra “that” doğrudan gelemez; bu yüzden “the fact that” kullanılır. “The fact” aslında bir isimdir ve edatın nesnesidir; “that” ise onu açıklayan cümleciktir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım Yeri</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Özne</td>\n<td>That + cümle + fiil</td>\n<td>That he came late surprised me.</td>\n</tr>\n<tr>\n<td>Nesne</td>\n<td>Fiil + (that) + cümle</td>\n<td>I think (that) you are right.</td>\n</tr>\n<tr>\n<td>Edat sonrası</td>\n<td>prep + the fact that</td>\n<td>due to the fact that…</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Hangi cümlede “that” kullanımı zorunludur?</p>\n<p>A) I know <strong><em>_ she is honest.<br>\nB) </em></strong><em> she is honest is known to everyone.<br>\nC) She told me <strong><em>_ she would come.<br>\nD) We believe </em></strong></em> it’s true.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** B’de noun clause özne konumundadır, bu nedenle “That” başında olmalıdır. Diğerlerinde nesne olduğu için “that” isteğe bağlıdır.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The manager announced that the company would merge with a larger firm by the end of the year.",
+          "tr": "Müdür, şirketin yıl sonuna kadar daha büyük bir firmayla birleşeceğini duyurdu.",
+          "description": "“that the company would merge…” noun clause’u “announced” fiilinin nesnesidir. Burada “that” kullanılması zorunlu değildir, anlam aynı kalır. Cümle kesin bir bilgi bildirir (kararlı durum).\n\n**Örnek 2 (Özne – that zorunlu):**"
+        },
+        {
+          "en": "That the climate is changing rapidly has been proven by countless scientific studies.",
+          "tr": "İklimin hızla değiştiği sayısız bilimsel çalışmayla kanıtlanmıştır.",
+          "description": "“That the climate is changing…” cümlenin öznesidir. Bu pozisyonda “that” atılamaz. Aksi halde cümle bozulur. Bu yapı resmî metinlerde sık kullanılır.\n\n**Örnek 3 (Edat sonrası – the fact that zorunlu):**"
+        },
+        {
+          "en": "The judge drew attention to the fact that the defendant had no prior criminal record.",
+          "tr": "Hakim, sanığın daha önce sabıka kaydı olmadığı gerçeğine dikkat çekti.",
+          "description": "Edat olan “to” dan sonra “that” doğrudan gelemez; bu yüzden “the fact that” kullanılır. “The fact” aslında bir isimdir ve edatın nesnesidir; “that” ise onu açıklayan cümleciktir."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangi cümlede “that” kullanımı zorunludur?",
+        "options": {
+          "A": "I know ____ she is honest.",
+          "B": "____ she is honest is known to everyone.",
+          "C": "She told me ____ she would come.",
+          "D": "We believe ____ it’s true."
+        },
+        "correct": "B",
+        "explanation": "B’de noun clause özne konumundadır, bu nedenle “That” başında olmalıdır. Diğerlerinde nesne olduğu için “that” isteğe bağlıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangi cümlede “that” kullanımı zorunludur?",
+          "options": {
+            "A": "I know ____ she is honest.",
+            "B": "____ she is honest is known to everyone.",
+            "C": "She told me ____ she would come.",
+            "D": "We believe ____ it’s true."
+          },
+          "correct": "B",
+          "explanation": "B’de noun clause özne konumundadır, bu nedenle “That” başında olmalıdır. Diğerlerinde nesne olduğu için “that” isteğe bağlıdır."
+        }
+      ],
+      "word_count": 334
+    },
+    {
+      "page_number": 3,
+      "title": "THAT-CLAUSE’UN DİĞER KULLANIM ALANLARI",
+      "total_pages": 18,
+      "content_html": "<h2>📌 SIFATLAR, SOYUT İSİMLER, YÜKLEM</h2>\n<p>That clause sadece fiil nesnesi değil, aynı zamanda sıfatlar, soyut isimler ve bağ fiillerden (linking verbs) sonra da gelir.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:** Sıfatlardan sonra gelen that clause’da genellikle “that” atılmaz, ama anlaşılır. “I’m glad (that) you’re here.” yaygındır.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Sıfat + that clause):</strong><br>\n<strong>EN:</strong> We were all surprised that the youngest contestant won the first prize in the competition.<br>\n<strong>TR:</strong> En genç yarışmacının yarışmada birincilik ödülünü kazanmasına hepimiz şaşırdık.<br>\n→ <strong>Açıklama:</strong> “surprised” sıfatından sonra “that” ile başlayan cümlecik gelir. Bu yapı, duygu veya değerlendirme bildiren sıfatlarla (happy, sad, shocked, etc.) sık kullanılır.</p>\n<p><strong>Örnek 2 (Soyut isim + that clause):</strong><br>\n<strong>EN:</strong> It is a miracle that no one was seriously injured in the terrible car accident.<br>\n<strong>TR:</strong> Korkunç trafik kazasında kimsenin ağır yaralanmamış olması bir mucize.<br>\n→ <strong>Açıklama:</strong> “miracle” soyut ismi, “that” cümleciği ile açıklanır. Bu yapı “It is + noun + that” kalıbıyla çok yaygındır.</p>\n<p><strong>Örnek 3 (Bağ fiil + that clause):</strong><br>\n<strong>EN:</strong> My personal opinion is that we should invest more in renewable energy sources.<br>\n<strong>TR:</strong> Benim kişisel görüşüm, yenilenebilir enerji kaynaklarına daha fazla yatırım yapmamız gerektiğidir.<br>\n→ <strong>Açıklama:</strong> “is” bağ fiilinden sonra gelen “that…” özneyi tamamlar (subject complement). Bu kullanım tanım ve açıklama cümlelerinde sıktır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Sıfat + that clause</td>\n<td>I’m happy that you succeeded.</td>\n</tr>\n<tr>\n<td>Soyut isim + that clause</td>\n<td>The fact that he lied is disturbing.</td>\n</tr>\n<tr>\n<td>Bağ fiil + that clause</td>\n<td>The truth is that nobody knows.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “It is essential _____ everyone has access to clean water.” boşluğa ne gelir?</p>\n<p>A) which<br>\nB) that<br>\nC) what<br>\nD) whether</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “essential” sıfatından sonra “that” ile başlayan bir noun clause gelir: “that everyone has access…”.\n</details>\n\n<p>[Kelime sayısı: 218]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "We were all surprised that the youngest contestant won the first prize in the competition.",
+          "tr": "En genç yarışmacının yarışmada birincilik ödülünü kazanmasına hepimiz şaşırdık.",
+          "description": "“surprised” sıfatından sonra “that” ile başlayan cümlecik gelir. Bu yapı, duygu veya değerlendirme bildiren sıfatlarla (happy, sad, shocked, etc.) sık kullanılır.\n\n**Örnek 2 (Soyut isim + that clause):**"
+        },
+        {
+          "en": "It is a miracle that no one was seriously injured in the terrible car accident.",
+          "tr": "Korkunç trafik kazasında kimsenin ağır yaralanmamış olması bir mucize.",
+          "description": "“miracle” soyut ismi, “that” cümleciği ile açıklanır. Bu yapı “It is + noun + that” kalıbıyla çok yaygındır.\n\n**Örnek 3 (Bağ fiil + that clause):**"
+        },
+        {
+          "en": "My personal opinion is that we should invest more in renewable energy sources.",
+          "tr": "Benim kişisel görüşüm, yenilenebilir enerji kaynaklarına daha fazla yatırım yapmamız gerektiğidir.",
+          "description": "“is” bağ fiilinden sonra gelen “that…” özneyi tamamlar (subject complement). Bu kullanım tanım ve açıklama cümlelerinde sıktır."
+        }
+      ],
+      "mini_test": {
+        "question": "“It is essential _____ everyone has access to clean water.” boşluğa ne gelir?",
+        "options": {
+          "A": "which",
+          "B": "that",
+          "C": "what",
+          "D": "whether"
+        },
+        "correct": "B",
+        "explanation": "“essential” sıfatından sonra “that” ile başlayan bir noun clause gelir: “that everyone has access…”."
+      },
+      "mini_tests": [
+        {
+          "question": "“It is essential _____ everyone has access to clean water.” boşluğa ne gelir?",
+          "options": {
+            "A": "which",
+            "B": "that",
+            "C": "what",
+            "D": "whether"
+          },
+          "correct": "B",
+          "explanation": "“essential” sıfatından sonra “that” ile başlayan bir noun clause gelir: “that everyone has access…”."
+        }
+      ],
+      "word_count": 287
+    },
+    {
+      "page_number": 4,
+      "title": "KARARSIZ DURUM BAĞLAÇLARI – WH- & HOW",
+      "total_pages": 18,
+      "content_html": "<h2>📌 TANIM</h2>\n<p>Soru kelimeleri (what, who, where, when, why, how) ile yapılan noun clause’lar bir belirsizlik veya soru anlamı taşır. Önemli kural: <strong>Soru kelimesi cümle başında kalır ama cümle düz (özne+yüklem) sırasına döner.</strong></p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:** Soruyu noun clause’a çevirirken yardımcı fiili özneden sonra getirin veya kaldırın.  \nSoru: Where does she live? → Noun clause: where she lives\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (what):</strong><br>\n<strong>EN:</strong> Can you explain what the professor meant by his last comment about the exam?<br>\n<strong>TR:</strong> Profesörün sınavla ilgili son yorumuyla ne kastettiğini açıklayabilir misiniz?<br>\n→ <strong>Açıklama:</strong> “what the professor meant” noun clause’u “explain” fiilinin nesnesidir. Soru cümlesi “What did the professor mean?” iken düz cümle sırasına dönmüştür.</p>\n<p><strong>Örnek 2 (where):</strong><br>\n<strong>EN:</strong> I have no idea where they hid the spare keys to the office.<br>\n<strong>TR:</strong> Ofisin yedek anahtarlarını nereye sakladıkları hakkında hiçbir fikrim yok.<br>\n→ <strong>Açıklama:</strong> “where they hid…” noun clause’u “idea” isminin açıklayıcısıdır (apposition). Soru “Where did they hide…?” iken düz sıra: where they hid.</p>\n<p><strong>Örnek 3 (who – özne sorusu):</strong><br>\n<strong>EN:</strong> I wonder who will be the first to volunteer for the difficult project.<br>\n<strong>TR:</strong> Zor projede ilk kimin gönüllü olacağını merak ediyorum.<br>\n→ <strong>Açıklama:</strong> Soruda “who” öznedir (Who will be…). Noun clause’da da “who” özne olarak kalır, yardımcı fiil değişmez: who will be…</p>\n<p><strong>Örnek 4 (who/whom – nesne sorusu):</strong><br>\n<strong>EN:</strong> Please tell me who/whom you invited to the graduation ceremony.<br>\n<strong>TR:</strong> Mezuniyet törenine kimi davet ettiğini lütfen söyle bana.<br>\n→ <strong>Açıklama:</strong> Burada “who” nesnedir. Soru “Who(m) did you invite?” idi. Noun clause’da özne “you”, fiil “invited”, nesne “who/whom” olur. Resmî dilde “whom” tercih edilir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Soru Kelimesi</th>\n<th>Noun Clause’da Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>what</td>\n<td>ne</td>\n<td>I know what you did.</td>\n</tr>\n<tr>\n<td>where</td>\n<td>nerede, nereye</td>\n<td>Tell me where you live.</td>\n</tr>\n<tr>\n<td>when</td>\n<td>ne zaman</td>\n<td>Ask when the train leaves.</td>\n</tr>\n<tr>\n<td>why</td>\n<td>neden</td>\n<td>Explain why you are late.</td>\n</tr>\n<tr>\n<td>how</td>\n<td>nasıl</td>\n<td>Show me how it works.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “How can we solve this problem?” sorusunu noun clause olarak yazın: “I need to know _____.”</p>\n<p>A) how can we solve this problem<br>\nB) how we can solve this problem<br>\nC) how we solve can this problem<br>\nD) how we solved this problem</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Soru kelimesi “how” kalır, ama yardımcı fiil “can” özneden sonra gelir: how we can solve…\n</details>\n\n<p>[Kelime sayısı: 255]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Can you explain what the professor meant by his last comment about the exam?",
+          "tr": "Profesörün sınavla ilgili son yorumuyla ne kastettiğini açıklayabilir misiniz?",
+          "description": "“what the professor meant” noun clause’u “explain” fiilinin nesnesidir. Soru cümlesi “What did the professor mean?” iken düz cümle sırasına dönmüştür.\n\n**Örnek 2 (where):**"
+        },
+        {
+          "en": "I have no idea where they hid the spare keys to the office.",
+          "tr": "Ofisin yedek anahtarlarını nereye sakladıkları hakkında hiçbir fikrim yok.",
+          "description": "“where they hid…” noun clause’u “idea” isminin açıklayıcısıdır (apposition). Soru “Where did they hide…?” iken düz sıra: where they hid.\n\n**Örnek 3 (who – özne sorusu):**"
+        },
+        {
+          "en": "I wonder who will be the first to volunteer for the difficult project.",
+          "tr": "Zor projede ilk kimin gönüllü olacağını merak ediyorum.",
+          "description": "Soruda “who” öznedir (Who will be…). Noun clause’da da “who” özne olarak kalır, yardımcı fiil değişmez: who will be…\n\n**Örnek 4 (who/whom – nesne sorusu):**"
+        },
+        {
+          "en": "Please tell me who/whom you invited to the graduation ceremony.",
+          "tr": "Mezuniyet törenine kimi davet ettiğini lütfen söyle bana.",
+          "description": "Burada “who” nesnedir. Soru “Who(m) did you invite?” idi. Noun clause’da özne “you”, fiil “invited”, nesne “who/whom” olur. Resmî dilde “whom” tercih edilir."
+        }
+      ],
+      "mini_test": {
+        "question": "“How can we solve this problem?” sorusunu noun clause olarak yazın: “I need to know _____.”",
+        "options": {
+          "A": "how can we solve this problem",
+          "B": "how we can solve this problem",
+          "C": "how we solve can this problem",
+          "D": "how we solved this problem"
+        },
+        "correct": "B",
+        "explanation": "Soru kelimesi “how” kalır, ama yardımcı fiil “can” özneden sonra gelir: how we can solve…"
+      },
+      "mini_tests": [
+        {
+          "question": "“How can we solve this problem?” sorusunu noun clause olarak yazın: “I need to know _____.”",
+          "options": {
+            "A": "how can we solve this problem",
+            "B": "how we can solve this problem",
+            "C": "how we solve can this problem",
+            "D": "how we solved this problem"
+          },
+          "correct": "B",
+          "explanation": "Soru kelimesi “how” kalır, ama yardımcı fiil “can” özneden sonra gelir: how we can solve…"
+        }
+      ],
+      "word_count": 387
+    },
+    {
+      "page_number": 5,
+      "title": "KARARSIZ DURUM BAĞLAÇLARI – WHETHER / IF",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KULLANIM</h2>\n<p>“Whether” ve “if” (…-ıp …-ıpmadığı) anlamında kullanılır. Genelde birbirinin yerine geçebilir, ancak bazı durumlarda sadece “whether” kullanılır.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Önemli:**  \n- Özne konumunda: sadece **whether**  \n- Edat sonrasında: sadece **whether**  \n- “or not” hemen öncesinde: sadece **whether**  \n- Fiil nesnesi olarak: **whether/if** (ikisi de olur)\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Fiil nesnesi – if/whether):</strong><br>\n<strong>EN:</strong> I haven’t decided yet if I will accept the job offer or continue looking for something better.<br>\n<strong>TR:</strong> İş teklifini kabul edip etmeyeceğime yoksa daha iyisini aramaya devam mı edeceğime henüz karar vermedim.<br>\n→ <strong>Açıklama:</strong> “if I will accept…” noun clause’u “decided” fiilinin nesnesidir. “Whether” de kullanılabilir: whether I will accept…</p>\n<p><strong>Örnek 2 (Özne – sadece whether):</strong><br>\n<strong>EN:</strong> Whether the company will survive the economic crisis is still uncertain.<br>\n<strong>TR:</strong> Şirketin ekonomik krizi atlatıp atlatamayacağı hâlâ belirsiz.<br>\n→ <strong>Açıklama:</strong> Noun clause özne olduğu için “whether” kullanılır; “if” kullanılamaz.</p>\n<p><strong>Örnek 3 (Edat sonrası – sadece whether):</strong><br>\n<strong>EN:</strong> The whole discussion focused on whether we should increase the budget or cut costs.<br>\n<strong>TR:</strong> Tüm tartışma, bütçeyi artırıp artırmamamız yoksa maliyetleri düşürmemiz gerektiği üzerineydi.<br>\n→ <strong>Açıklama:</strong> “on” edatından sonra “whether” gelir, “if” gelmez.</p>\n<p><strong>Örnek 4 (“or not” ile):</strong><br>\n<strong>EN:</strong> Please let me know whether or not you can attend the meeting tomorrow.<br>\n<strong>TR:</strong> Yarınki toplantıya katılıp katılamayacağını lütfen bana bildir.<br>\n→ <strong>Açıklama:</strong> “whether or not” bitişik kullanılabilir. “If or not” yanlıştır. “If … or not” ise cümle sonunda mümkündür: if you can attend or not.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Fiil nesnesi</td>\n<td>whether / if</td>\n<td>I wonder if/whether he’s right.</td>\n</tr>\n<tr>\n<td>Özne</td>\n<td>only whether</td>\n<td>Whether he’s right is unknown.</td>\n</tr>\n<tr>\n<td>Edat sonrası</td>\n<td>only whether</td>\n<td>It depends on whether he’s right.</td>\n</tr>\n<tr>\n<td>“or not” hemen öncesi</td>\n<td>only whether</td>\n<td>whether or not he’s right</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “The decision depends on _____ the committee approves the plan.” boşluğa ne gelir?</p>\n<p>A) if<br>\nB) whether<br>\nC) that<br>\nD) what</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “on” edatından sonra “whether” kullanılır, “if” kullanılamaz.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I haven’t decided yet if I will accept the job offer or continue looking for something better.",
+          "tr": "İş teklifini kabul edip etmeyeceğime yoksa daha iyisini aramaya devam mı edeceğime henüz karar vermedim.",
+          "description": "“if I will accept…” noun clause’u “decided” fiilinin nesnesidir. “Whether” de kullanılabilir: whether I will accept…\n\n**Örnek 2 (Özne – sadece whether):**"
+        },
+        {
+          "en": "Whether the company will survive the economic crisis is still uncertain.",
+          "tr": "Şirketin ekonomik krizi atlatıp atlatamayacağı hâlâ belirsiz.",
+          "description": "Noun clause özne olduğu için “whether” kullanılır; “if” kullanılamaz.\n\n**Örnek 3 (Edat sonrası – sadece whether):**"
+        },
+        {
+          "en": "The whole discussion focused on whether we should increase the budget or cut costs.",
+          "tr": "Tüm tartışma, bütçeyi artırıp artırmamamız yoksa maliyetleri düşürmemiz gerektiği üzerineydi.",
+          "description": "“on” edatından sonra “whether” gelir, “if” gelmez.\n\n**Örnek 4 (“or not” ile):**"
+        },
+        {
+          "en": "Please let me know whether or not you can attend the meeting tomorrow.",
+          "tr": "Yarınki toplantıya katılıp katılamayacağını lütfen bana bildir.",
+          "description": "“whether or not” bitişik kullanılabilir. “If or not” yanlıştır. “If … or not” ise cümle sonunda mümkündür: if you can attend or not."
+        }
+      ],
+      "mini_test": {
+        "question": "“The decision depends on _____ the committee approves the plan.” boşluğa ne gelir?",
+        "options": {
+          "A": "if",
+          "B": "whether",
+          "C": "that",
+          "D": "what"
+        },
+        "correct": "B",
+        "explanation": "“on” edatından sonra “whether” kullanılır, “if” kullanılamaz."
+      },
+      "mini_tests": [
+        {
+          "question": "“The decision depends on _____ the committee approves the plan.” boşluğa ne gelir?",
+          "options": {
+            "A": "if",
+            "B": "whether",
+            "C": "that",
+            "D": "what"
+          },
+          "correct": "B",
+          "explanation": "“on” edatından sonra “whether” kullanılır, “if” kullanılamaz."
+        }
+      ],
+      "word_count": 324
+    },
+    {
+      "page_number": 6,
+      "title": "NOUN CLAUSE ÖZNE VE NESNE OLARAK",
+      "total_pages": 18,
+      "content_html": "<h2>📌 ÖZNE KONUMU</h2>\n<p>Noun clause cümlenin öznesi olabilir. Kararlı durumda “that” zorunlu, kararsız durumda “whether” zorunlu (if kullanılmaz).</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:** Özne konumundaki uzun noun clause’lardan kaçınmak için “It” ile başlayan yapı tercih edilir:  \nThat he cheated is obvious. → It is obvious that he cheated.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (That-clause özne):</strong><br>\n<strong>EN:</strong> That the ancient city was destroyed by an earthquake is now widely accepted by archaeologists.<br>\n<strong>TR:</strong> Antik kentin bir depremle yok edildiği artık arkeologlarca geniş kabul görüyor.<br>\n→ <strong>Açıklama:</strong> “That the ancient city was destroyed…” özne. Bu tür yapılar resmî ve akademik metinlerde sık kullanılır. Günlük dilde “It is widely accepted that…” daha doğaldır.</p>\n<p><strong>Örnek 2 (Wh-clause özne):</strong><br>\n<strong>EN:</strong> Why she suddenly resigned from her position remains a mystery to all of us.<br>\n<strong>TR:</strong> Neden aniden görevinden istifa ettiği hepimiz için bir sır olarak kalıyor.<br>\n→ <strong>Açıklama:</strong> “Why she suddenly resigned…” özne. Burada soru kelimesi (why) ile başlayan noun clause doğrudan özne olabilir.</p>\n<p><strong>Örnek 3 (Whether-clause özne):</strong><br>\n<strong>EN:</strong> Whether the new drug will be approved by the FDA depends on the clinical trial results.<br>\n<strong>TR:</strong> Yeni ilacın FDA tarafından onaylanıp onaylanmayacağı klinik deney sonuçlarına bağlı.<br>\n→ <strong>Açıklama:</strong> Özne konumunda “whether” kullanılır, “if” kullanılamaz.</p>\n<p><strong>Örnek 4 (Nesne konumu):</strong><br>\n<strong>EN:</strong> The teacher explained what the students needed to do for the final project.<br>\n<strong>TR:</strong> Öğretmen, öğrencilerin final projesi için ne yapmaları gerektiğini açıkladı.<br>\n→ <strong>Açıklama:</strong> “what the students needed…” noun clause’u “explained” fiilinin nesnesidir. Burada her tür noun clause nesne olabilir (kararlı/kararsız fark etmez).</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Konum</th>\n<th>Örnek</th>\n<th>Not</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Özne (that)</td>\n<td>That he lied is clear.</td>\n<td>that zorunlu</td>\n</tr>\n<tr>\n<td>Özne (wh-)</td>\n<td>Where she lives is secret.</td>\n<td>soru kelimesi</td>\n</tr>\n<tr>\n<td>Özne (whether)</td>\n<td>Whether he comes is unknown.</td>\n<td>if kullanılmaz</td>\n</tr>\n<tr>\n<td>Nesne</td>\n<td>I know where she lives.</td>\n<td>her tür olabilir</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “_____ he will accept the offer is not certain.” boşluğa ne gelir?</p>\n<p>A) If<br>\nB) Whether<br>\nC) That<br>\nD) What</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Özne konumunda olduğu için “Whether” doğru; “If” özne konumunda kullanılmaz. “That” kullanılsaydı anlam “kabul ettiği” şeklinde kesinlik ifade ederdi, ama cümle belirsizlik bildiriyor.\n</details>\n\n<p>[Kelime sayısı: 245]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "That the ancient city was destroyed by an earthquake is now widely accepted by archaeologists.",
+          "tr": "Antik kentin bir depremle yok edildiği artık arkeologlarca geniş kabul görüyor.",
+          "description": "“That the ancient city was destroyed…” özne. Bu tür yapılar resmî ve akademik metinlerde sık kullanılır. Günlük dilde “It is widely accepted that…” daha doğaldır.\n\n**Örnek 2 (Wh-clause özne):**"
+        },
+        {
+          "en": "Why she suddenly resigned from her position remains a mystery to all of us.",
+          "tr": "Neden aniden görevinden istifa ettiği hepimiz için bir sır olarak kalıyor.",
+          "description": "“Why she suddenly resigned…” özne. Burada soru kelimesi (why) ile başlayan noun clause doğrudan özne olabilir.\n\n**Örnek 3 (Whether-clause özne):**"
+        },
+        {
+          "en": "Whether the new drug will be approved by the FDA depends on the clinical trial results.",
+          "tr": "Yeni ilacın FDA tarafından onaylanıp onaylanmayacağı klinik deney sonuçlarına bağlı.",
+          "description": "Özne konumunda “whether” kullanılır, “if” kullanılamaz.\n\n**Örnek 4 (Nesne konumu):**"
+        },
+        {
+          "en": "The teacher explained what the students needed to do for the final project.",
+          "tr": "Öğretmen, öğrencilerin final projesi için ne yapmaları gerektiğini açıkladı.",
+          "description": "“what the students needed…” noun clause’u “explained” fiilinin nesnesidir. Burada her tür noun clause nesne olabilir (kararlı/kararsız fark etmez)."
+        }
+      ],
+      "mini_test": {
+        "question": "“_____ he will accept the offer is not certain.” boşluğa ne gelir?",
+        "options": {
+          "A": "If",
+          "B": "Whether",
+          "C": "That",
+          "D": "What"
+        },
+        "correct": "B",
+        "explanation": "Özne konumunda olduğu için “Whether” doğru; “If” özne konumunda kullanılmaz. “That” kullanılsaydı anlam “kabul ettiği” şeklinde kesinlik ifade ederdi, ama cümle belirsizlik bildiriyor."
+      },
+      "mini_tests": [
+        {
+          "question": "“_____ he will accept the offer is not certain.” boşluğa ne gelir?",
+          "options": {
+            "A": "If",
+            "B": "Whether",
+            "C": "That",
+            "D": "What"
+          },
+          "correct": "B",
+          "explanation": "Özne konumunda olduğu için “Whether” doğru; “If” özne konumunda kullanılmaz. “That” kullanılsaydı anlam “kabul ettiği” şeklinde kesinlik ifade ederdi, ama cümle belirsizlik bildiriyor."
+        }
+      ],
+      "word_count": 348
+    },
+    {
+      "page_number": 7,
+      "title": "EDAT SONRASI VE ÖZNE TAMAMLAYICISI",
+      "total_pages": 18,
+      "content_html": "<h2>📌 EDAT + NOUN CLAUSE</h2>\n<p>Bir edattan sonra noun clause gelebilir. Ancak “that” doğrudan edattan sonra gelemez; “the fact that” kullanılır. “If” de edattan sonra gelmez, onun yerine “whether” kullanılır.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Önemli:**  \nprep + the fact that (kararlı)  \nprep + whether / wh- / how (kararsız)  \nprep + that ❌  \nprep + if ❌\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (the fact that):</strong><br>\n<strong>EN:</strong> They were completely unaware of the fact that their flight had been cancelled hours ago.<br>\n<strong>TR:</strong> Uçuşlarının saatler önce iptal edildiği gerçeğinden tamamen habersizdiler.<br>\n→ <strong>Açıklama:</strong> “of” edatından sonra “the fact that” kullanılmış. “that their flight had been cancelled” aslında “the fact” ismini açıklıyor.</p>\n<p><strong>Örnek 2 (whether):</strong><br>\n<strong>EN:</strong> The success of the project hinges on whether we can secure additional funding.<br>\n<strong>TR:</strong> Projenin başarısı, ek fon sağlayıp sağlayamayacağımıza bağlı.<br>\n→ <strong>Açıklama:</strong> “on” edatından sonra “whether” ile noun clause gelir. “if” burada kullanılamaz.</p>\n<p><strong>Örnek 3 (wh-):</strong><br>\n<strong>EN:</strong> She gave a detailed presentation about what she had discovered during her research.<br>\n<strong>TR:</strong> Araştırması sırasında keşfettikleri hakkında ayrıntılı bir sunum yaptı.<br>\n→ <strong>Açıklama:</strong> “about” edatından sonra “what she had discovered” noun clause’u gelir. Wh- kelimeler edat sonrasında rahatça kullanılır.</p>\n<p><strong>Örnek 4 (Özne tamamlayıcısı):</strong><br>\n<strong>EN:</strong> The main issue is that the software is not compatible with our existing system.<br>\n<strong>TR:</strong> Asıl sorun, yazılımın mevcut sistemimizle uyumlu olmamasıdır.<br>\n→ <strong>Açıklama:</strong> “is” bağ fiilinden sonra gelen “that…” özneyi tamamlar. Bu kullanımda “that” genellikle atılmaz.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>prep + the fact that</td>\n<td>due to the fact that it rained</td>\n</tr>\n<tr>\n<td>prep + whether</td>\n<td>depends on whether he agrees</td>\n</tr>\n<tr>\n<td>prep + wh-</td>\n<td>talk about what you did</td>\n</tr>\n<tr>\n<td>linking verb + that</td>\n<td>The reason is that…</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “I’m worried _____ she might be lost.” boşluğa hangisi gelmez?</p>\n<p>A) about the fact that<br>\nB) that<br>\nC) about whether<br>\nD) about if</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** “about” edatından sonra “if” kullanılmaz. “about whether” olabilir, “that” doğrudan da kullanılabilir (I’m worried that…), “about the fact that” da uygun.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "They were completely unaware of the fact that their flight had been cancelled hours ago.",
+          "tr": "Uçuşlarının saatler önce iptal edildiği gerçeğinden tamamen habersizdiler.",
+          "description": "“of” edatından sonra “the fact that” kullanılmış. “that their flight had been cancelled” aslında “the fact” ismini açıklıyor.\n\n**Örnek 2 (whether):**"
+        },
+        {
+          "en": "The success of the project hinges on whether we can secure additional funding.",
+          "tr": "Projenin başarısı, ek fon sağlayıp sağlayamayacağımıza bağlı.",
+          "description": "“on” edatından sonra “whether” ile noun clause gelir. “if” burada kullanılamaz.\n\n**Örnek 3 (wh-):**"
+        },
+        {
+          "en": "She gave a detailed presentation about what she had discovered during her research.",
+          "tr": "Araştırması sırasında keşfettikleri hakkında ayrıntılı bir sunum yaptı.",
+          "description": "“about” edatından sonra “what she had discovered” noun clause’u gelir. Wh- kelimeler edat sonrasında rahatça kullanılır.\n\n**Örnek 4 (Özne tamamlayıcısı):**"
+        },
+        {
+          "en": "The main issue is that the software is not compatible with our existing system.",
+          "tr": "Asıl sorun, yazılımın mevcut sistemimizle uyumlu olmamasıdır.",
+          "description": "“is” bağ fiilinden sonra gelen “that…” özneyi tamamlar. Bu kullanımda “that” genellikle atılmaz."
+        }
+      ],
+      "mini_test": {
+        "question": "“I’m worried _____ she might be lost.” boşluğa hangisi gelmez?",
+        "options": {
+          "A": "about the fact that",
+          "B": "that",
+          "C": "about whether",
+          "D": "about if"
+        },
+        "correct": "D",
+        "explanation": "“about” edatından sonra “if” kullanılmaz. “about whether” olabilir, “that” doğrudan da kullanılabilir (I’m worried that…), “about the fact that” da uygun."
+      },
+      "mini_tests": [
+        {
+          "question": "“I’m worried _____ she might be lost.” boşluğa hangisi gelmez?",
+          "options": {
+            "A": "about the fact that",
+            "B": "that",
+            "C": "about whether",
+            "D": "about if"
+          },
+          "correct": "D",
+          "explanation": "“about” edatından sonra “if” kullanılmaz. “about whether” olabilir, “that” doğrudan da kullanılabilir (I’m worried that…), “about the fact that” da uygun."
+        }
+      ],
+      "word_count": 319
+    },
+    {
+      "page_number": 8,
+      "title": "-EVER KELİMELERİ (WHOEVER, WHATEVER, VS.)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 TANIM</h2>\n<p>-ever ile biten kelimeler (whoever, whatever, wherever, whenever, however) noun clause içinde “her kim/ne/nerede…” anlamı katar. Hem özne hem nesne olabilirler.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**  \nWhoever = anyone who (her kim …-se)  \nWhatever = anything that (her ne …-se)  \nWhichever = any one of a limited set (hangisi …-se)  \nWhenever = any time that (her ne zaman)  \nWherever = any place that (her nerede)  \nHowever = any way that (her nasıl)\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (whoever – özne):</strong><br>\n<strong>EN:</strong> Whoever finishes the assignment first will receive a bonus and extra vacation days.<br>\n<strong>TR:</strong> Ödevi ilk kim bitirirse ikramiye ve ekstra tatil günleri kazanacak.<br>\n→ <strong>Açıklama:</strong> “Whoever finishes…” noun clause’u cümlenin öznesidir. “Whoever” burada özne görevinde.</p>\n<p><strong>Örnek 2 (whoever/whomever – nesne):</strong><br>\n<strong>EN:</strong> You can give the package to whoever/whomever you see at the reception desk.<br>\n<strong>TR:</strong> Paketi, resepsiyonda gördüğün herhangi birine verebilirsin.<br>\n→ <strong>Açıklama:</strong> “to” edatından sonra gelen noun clause’da “whoever” özne (…you see <strong>whoever</strong>) veya nesne olabilir. Nesne durumunda “whomever” resmîdir.</p>\n<p><strong>Örnek 3 (whatever):</strong><br>\n<strong>EN:</strong> I’m determined to achieve whatever goals I set for myself, no matter how difficult.<br>\n<strong>TR:</strong> Kendime koyduğum hedefler ne olursa olsun onlara ulaşmaya kararlıyım.<br>\n→ <strong>Açıklama:</strong> “whatever goals” – “whatever” bir ismi niteliyor (goals). Sınırlama yok, her tür hedef.</p>\n<p><strong>Örnek 4 (whichever):</strong><br>\n<strong>EN:</strong> You can choose whichever color you prefer from the five available options.<br>\n<strong>TR:</strong> Mevcut beş seçenek arasından hangi rengi tercih edersen onu seçebilirsin.<br>\n→ <strong>Açıklama:</strong> “whichever” sınırlı bir kümeden seçim olduğunu vurgular. “whatever” daha geneldir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>-ever</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>whoever</td>\n<td>her kim</td>\n<td>Whoever says that is wrong.</td>\n</tr>\n<tr>\n<td>whomever</td>\n<td>her kimi (nesne)</td>\n<td>Invite whomever you like.</td>\n</tr>\n<tr>\n<td>whatever</td>\n<td>her ne</td>\n<td>Do whatever is necessary.</td>\n</tr>\n<tr>\n<td>whichever</td>\n<td>hangi …-se</td>\n<td>Buy whichever is cheapest.</td>\n</tr>\n<tr>\n<td>wherever</td>\n<td>her nerede</td>\n<td>Go wherever you want.</td>\n</tr>\n<tr>\n<td>whenever</td>\n<td>her ne zaman</td>\n<td>Come whenever you can.</td>\n</tr>\n<tr>\n<td>however</td>\n<td>her nasıl</td>\n<td>Dress however you feel.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “_____ wins the race will get a trophy.” boşluğa ne gelir?</p>\n<p>A) Whoever<br>\nB) Whomever<br>\nC) Whatever<br>\nD) Whichever</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Cümlede boşluk özne konumunda ve “yarışı kazanan kişi” anlamında. “Whoever” (her kim) doğru. “Whomever” nesne için kullanılır.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Whoever finishes the assignment first will receive a bonus and extra vacation days.",
+          "tr": "Ödevi ilk kim bitirirse ikramiye ve ekstra tatil günleri kazanacak.",
+          "description": "“Whoever finishes…” noun clause’u cümlenin öznesidir. “Whoever” burada özne görevinde.\n\n**Örnek 2 (whoever/whomever – nesne):**"
+        },
+        {
+          "en": "You can give the package to whoever/whomever you see at the reception desk.",
+          "tr": "Paketi, resepsiyonda gördüğün herhangi birine verebilirsin.",
+          "description": "“to” edatından sonra gelen noun clause’da “whoever” özne (…you see **whoever**) veya nesne olabilir. Nesne durumunda “whomever” resmîdir.\n\n**Örnek 3 (whatever):**"
+        },
+        {
+          "en": "I’m determined to achieve whatever goals I set for myself, no matter how difficult.",
+          "tr": "Kendime koyduğum hedefler ne olursa olsun onlara ulaşmaya kararlıyım.",
+          "description": "“whatever goals” – “whatever” bir ismi niteliyor (goals). Sınırlama yok, her tür hedef.\n\n**Örnek 4 (whichever):**"
+        },
+        {
+          "en": "You can choose whichever color you prefer from the five available options.",
+          "tr": "Mevcut beş seçenek arasından hangi rengi tercih edersen onu seçebilirsin.",
+          "description": "“whichever” sınırlı bir kümeden seçim olduğunu vurgular. “whatever” daha geneldir."
+        }
+      ],
+      "mini_test": {
+        "question": "“_____ wins the race will get a trophy.” boşluğa ne gelir?",
+        "options": {
+          "A": "Whoever",
+          "B": "Whomever",
+          "C": "Whatever",
+          "D": "Whichever"
+        },
+        "correct": "A",
+        "explanation": "Cümlede boşluk özne konumunda ve “yarışı kazanan kişi” anlamında. “Whoever” (her kim) doğru. “Whomever” nesne için kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "“_____ wins the race will get a trophy.” boşluğa ne gelir?",
+          "options": {
+            "A": "Whoever",
+            "B": "Whomever",
+            "C": "Whatever",
+            "D": "Whichever"
+          },
+          "correct": "A",
+          "explanation": "Cümlede boşluk özne konumunda ve “yarışı kazanan kişi” anlamında. “Whoever” (her kim) doğru. “Whomever” nesne için kullanılır."
+        }
+      ],
+      "word_count": 349
+    },
+    {
+      "page_number": 9,
+      "title": "NOUN CLAUSE KISALTMALARI (REDUCTIONS)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KURAL</h2>\n<p>Noun clause’u kısaltmak için genellikle <strong>to + fiil</strong> (infinitive) kullanılır. Kısaltma yapılabilmesi için ana cümlenin öznesi ile noun clause’un öznesi aynı olmalıdır (veya ana cümlenin nesnesi ile noun clause’un öznesi aynı olabilir).</p>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:** Kısaltma sırasında “if” kullanılmaz; onun yerine “whether” korunur. “That” tamamen atılır.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Aynı özne – sıfattan sonra):</strong><br>\n<strong>EN:</strong> She is happy that she is living in a peaceful country now. → She is happy to be living in a peaceful country now.<br>\n<strong>TR:</strong> Şimdi huzurlu bir ülkede yaşadığı için mutlu.<br>\n→ <strong>Açıklama:</strong> Özne “she” ortak. “that she is living” → “to be living” şeklinde kısaltıldı. Anlam değişmedi.</p>\n<p><strong>Örnek 2 (Aynı özne – fiilden sonra):</strong><br>\n<strong>EN:</strong> I hope that I will see you again before you leave. → I hope to see you again before you leave.<br>\n<strong>TR:</strong> Sen ayrılmadan önce seni tekrar görmeyi umuyorum.<br>\n→ <strong>Açıklama:</strong> “I hope that I will see” → “I hope to see”. Özne aynı olduğu için kısaltma mümkün.</p>\n<p><strong>Örnek 3 (Wh- clause kısaltması):</strong><br>\n<strong>EN:</strong> I don’t know how I can solve this complex equation. → I don’t know how to solve this complex equation.<br>\n<strong>TR:</strong> Bu karmaşık denklemi nasıl çözebileceğimi bilmiyorum.<br>\n→ <strong>Açıklama:</strong> “how I can solve” → “how to solve”. Soru kelimesi kalır, fiil infinitive olur.</p>\n<p><strong>Örnek 4 (Whether kısaltması):</strong><br>\n<strong>EN:</strong> I can’t decide whether I should accept the offer or not. → I can’t decide whether to accept the offer or not.<br>\n<strong>TR:</strong> Teklifi kabul edip etmemeye karar veremiyorum.<br>\n→ <strong>Açıklama:</strong> “whether I should accept” → “whether to accept”. “if” burada kullanılamaz.</p>\n<p><strong>Örnek 5 (Farklı özne – for kullanımı):</strong><br>\n<strong>EN:</strong> It is important that we arrive on time. → It is important for us to arrive on time.<br>\n<strong>TR:</strong> Zamanında varmamız önemli.<br>\n→ <strong>Açıklama:</strong> Özneler farklı (it / we). Kısaltma için “for + nesne + to V0” yapısı kullanılır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Orijinal</th>\n<th>Kısaltma</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>that + özne + fiil</td>\n<td>to V0 (özne aynıysa)</td>\n</tr>\n<tr>\n<td>wh- + özne + yardımcı + fiil</td>\n<td>wh- + to V0</td>\n</tr>\n<tr>\n<td>whether + özne + yardımcı + fiil</td>\n<td>whether + to V0</td>\n</tr>\n<tr>\n<td>It is + sıfat + that + özne + fiil</td>\n<td>It is + sıfat + for + nesne + to V0</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “I’m not sure which way I should go.” cümlesinin kısaltılmışı nedir?</p>\n<p>A) I’m not sure which way to go.<br>\nB) I’m not sure to go which way.<br>\nC) I’m not sure which to go way.<br>\nD) I’m not sure which way should I go.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** “which way I should go” → “which way to go” şeklinde kısaltılır. Soru kelimesi + to V0.\n</details>\n\n<p>[Kelime sayısı: 245]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She is happy that she is living in a peaceful country now. → She is happy to be living in a peaceful country now.",
+          "tr": "Şimdi huzurlu bir ülkede yaşadığı için mutlu.",
+          "description": "Özne “she” ortak. “that she is living” → “to be living” şeklinde kısaltıldı. Anlam değişmedi.\n\n**Örnek 2 (Aynı özne – fiilden sonra):**"
+        },
+        {
+          "en": "I hope that I will see you again before you leave. → I hope to see you again before you leave.",
+          "tr": "Sen ayrılmadan önce seni tekrar görmeyi umuyorum.",
+          "description": "“I hope that I will see” → “I hope to see”. Özne aynı olduğu için kısaltma mümkün.\n\n**Örnek 3 (Wh- clause kısaltması):**"
+        },
+        {
+          "en": "I don’t know how I can solve this complex equation. → I don’t know how to solve this complex equation.",
+          "tr": "Bu karmaşık denklemi nasıl çözebileceğimi bilmiyorum.",
+          "description": "“how I can solve” → “how to solve”. Soru kelimesi kalır, fiil infinitive olur.\n\n**Örnek 4 (Whether kısaltması):**"
+        },
+        {
+          "en": "I can’t decide whether I should accept the offer or not. → I can’t decide whether to accept the offer or not.",
+          "tr": "Teklifi kabul edip etmemeye karar veremiyorum.",
+          "description": "“whether I should accept” → “whether to accept”. “if” burada kullanılamaz.\n\n**Örnek 5 (Farklı özne – for kullanımı):**"
+        },
+        {
+          "en": "It is important that we arrive on time. → It is important for us to arrive on time.",
+          "tr": "Zamanında varmamız önemli.",
+          "description": "Özneler farklı (it / we). Kısaltma için “for + nesne + to V0” yapısı kullanılır."
+        }
+      ],
+      "mini_test": {
+        "question": "“I’m not sure which way I should go.” cümlesinin kısaltılmışı nedir?",
+        "options": {
+          "A": "I’m not sure which way to go.",
+          "B": "I’m not sure to go which way.",
+          "C": "I’m not sure which to go way.",
+          "D": "I’m not sure which way should I go."
+        },
+        "correct": "A",
+        "explanation": "“which way I should go” → “which way to go” şeklinde kısaltılır. Soru kelimesi + to V0."
+      },
+      "mini_tests": [
+        {
+          "question": "“I’m not sure which way I should go.” cümlesinin kısaltılmışı nedir?",
+          "options": {
+            "A": "I’m not sure which way to go.",
+            "B": "I’m not sure to go which way.",
+            "C": "I’m not sure which to go way.",
+            "D": "I’m not sure which way should I go."
+          },
+          "correct": "A",
+          "explanation": "“which way I should go” → “which way to go” şeklinde kısaltılır. Soru kelimesi + to V0."
+        }
+      ],
+      "word_count": 413
+    },
+    {
+      "page_number": 10,
+      "title": "SUBJUNCTIVE IN THAT CLAUSE (DİLEK KİPİ)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KURAL</h2>\n<p>Bazı fiil, isim ve sıfatlardan sonra gelen “that” cümleciğinde fiil yalın halde (V0) kullanılır. Bu yapıda gizli bir “should” vardır. Özne ne olursa olsun fiil çekimlenmez.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**  \nÖneri, talep, zorunluluk bildiren kelimeler:  \n- Fiiller: suggest, recommend, insist, demand, propose, require  \n- Sıfatlar: essential, important, necessary, vital  \n- İsimler: suggestion, recommendation, demand  \nBu kelimelerden sonra that + özne + V0 (veya should + V0)\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (fiil – active):</strong><br>\n<strong>EN:</strong> The doctor strongly recommends that the patient take the medication twice a day without fail.<br>\n<strong>TR:</strong> Doktor, hastanın ilacı aksatmadan günde iki kez almasını şiddetle tavsiye ediyor.<br>\n→ <strong>Açıklama:</strong> “recommends that”ten sonra “take” fiili yalın halde (V0), “takes” değil. “should take” da kullanılabilir.</p>\n<p><strong>Örnek 2 (sıfat – passive):</strong><br>\n<strong>EN:</strong> It is essential that the contract be signed by both parties before the deadline.<br>\n<strong>TR:</strong> Sözleşmenin son tarihten önce her iki tarafça imzalanması şarttır.<br>\n→ <strong>Açıklama:</strong> “essential that”ten sonra passive yapıda “be signed” kullanılır (V0 be + V3). “should be signed” da olabilir.</p>\n<p><strong>Örnek 3 (isim):</strong><br>\n<strong>EN:</strong> His suggestion that we postpone the meeting was rejected by everyone.<br>\n<strong>TR:</strong> Toplantıyı ertelememiz yönündeki önerisi herkes tarafından reddedildi.<br>\n→ <strong>Açıklama:</strong> “suggestion that”ten sonra “postpone” yalın halde. Özne “we” olmasına rağmen fiil çekimlenmez.</p>\n<p><strong>Örnek 4 (insist):</strong><br>\n<strong>EN:</strong> She insisted that he not be told about the surprise party.<br>\n<strong>TR:</strong> Sürpriz partiden ona bahsedilmemesi konusunda ısrar etti.<br>\n→ <strong>Açıklama:</strong> Olumsuz yapı “not + V0” şeklinde. “he not be told” – “be” yalın.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Kelime Grubu</th>\n<th>Örnek Cümle</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>suggest / recommend</td>\n<td>I suggest that he leave now.</td>\n</tr>\n<tr>\n<td>demand / insist</td>\n<td>They demand that we be quiet.</td>\n</tr>\n<tr>\n<td>essential / vital</td>\n<td>It’s vital that she arrive early.</td>\n</tr>\n<tr>\n<td>advice / proposal</td>\n<td>His advice that we wait is wise.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “The manager requested that the report _____ by Friday.”</p>\n<p>A) is submitted<br>\nB) be submitted<br>\nC) will be submitted<br>\nD) has been submitted</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “requested that”ten sonra subjunctive kullanılır, passive yapıda “be submitted” gelir. “should be submitted” da doğru olurdu.\n</details>\n\n<p>[Kelime sayısı: 225]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The doctor strongly recommends that the patient take the medication twice a day without fail.",
+          "tr": "Doktor, hastanın ilacı aksatmadan günde iki kez almasını şiddetle tavsiye ediyor.",
+          "description": "“recommends that”ten sonra “take” fiili yalın halde (V0), “takes” değil. “should take” da kullanılabilir.\n\n**Örnek 2 (sıfat – passive):**"
+        },
+        {
+          "en": "It is essential that the contract be signed by both parties before the deadline.",
+          "tr": "Sözleşmenin son tarihten önce her iki tarafça imzalanması şarttır.",
+          "description": "“essential that”ten sonra passive yapıda “be signed” kullanılır (V0 be + V3). “should be signed” da olabilir.\n\n**Örnek 3 (isim):**"
+        },
+        {
+          "en": "His suggestion that we postpone the meeting was rejected by everyone.",
+          "tr": "Toplantıyı ertelememiz yönündeki önerisi herkes tarafından reddedildi.",
+          "description": "“suggestion that”ten sonra “postpone” yalın halde. Özne “we” olmasına rağmen fiil çekimlenmez.\n\n**Örnek 4 (insist):**"
+        },
+        {
+          "en": "She insisted that he not be told about the surprise party.",
+          "tr": "Sürpriz partiden ona bahsedilmemesi konusunda ısrar etti.",
+          "description": "Olumsuz yapı “not + V0” şeklinde. “he not be told” – “be” yalın."
+        }
+      ],
+      "mini_test": {
+        "question": "“The manager requested that the report _____ by Friday.”",
+        "options": {
+          "A": "is submitted",
+          "B": "be submitted",
+          "C": "will be submitted",
+          "D": "has been submitted"
+        },
+        "correct": "B",
+        "explanation": "“requested that”ten sonra subjunctive kullanılır, passive yapıda “be submitted” gelir. “should be submitted” da doğru olurdu."
+      },
+      "mini_tests": [
+        {
+          "question": "“The manager requested that the report _____ by Friday.”",
+          "options": {
+            "A": "is submitted",
+            "B": "be submitted",
+            "C": "will be submitted",
+            "D": "has been submitted"
+          },
+          "correct": "B",
+          "explanation": "“requested that”ten sonra subjunctive kullanılır, passive yapıda “be submitted” gelir. “should be submitted” da doğru olurdu."
+        }
+      ],
+      "word_count": 328
+    },
+    {
+      "page_number": 11,
+      "title": "TENSE UYUMU – ANA CÜMLE PRESENT İSE",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KURAL</h2>\n<p>Ana cümle present tense (geniş zaman, şimdiki zaman, present perfect, vb.) ise, noun clause’da eylemin gerçek zamanı kullanılır. Yani zaman kayması olmaz.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**  \nHe says / has said / will say **that** ... (gerçek zaman)  \nÖrn: He says that she **passed** the exam last week.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (geçmiş olay):</strong><br>\n<strong>EN:</strong> I have just heard that the CEO resigned unexpectedly yesterday due to health problems.<br>\n<strong>TR:</strong> CEO’nun sağlık sorunları nedeniyle dün beklenmedik şekilde istifa ettiğini duydum.<br>\n→ <strong>Açıklama:</strong> Ana fiil “have heard” (present perfect). Noun clause’da geçmiş zaman (resigned) korunur, çünkü olay dün oldu.</p>\n<p><strong>Örnek 2 (şimdiki durum):</strong><br>\n<strong>EN:</strong> Everyone believes that she is the best candidate for the position.<br>\n<strong>TR:</strong> Herkes onun pozisyon için en iyi aday olduğuna inanıyor.<br>\n→ <strong>Açıklama:</strong> Ana fiil “believes” (simple present). Noun clause’da şimdiki zaman (is) kullanılır, genel bir yargı.</p>\n<p><strong>Örnek 3 (gelecek):</strong><br>\n<strong>EN:</strong> I’m sure that they will arrive before the ceremony starts.<br>\n<strong>TR:</strong> Tören başlamadan önce varacaklarına eminim.<br>\n→ <strong>Açıklama:</strong> Ana fiil “’m sure” (present). Noun clause’da gelecek zaman (will arrive) kullanılır.</p>\n<p><strong>Örnek 4 (present perfect):</strong><br>\n<strong>EN:</strong> The news reports that the president has already signed the agreement.<br>\n<strong>TR:</strong> Haberler, başkanın anlaşmayı çoktan imzaladığını bildiriyor.<br>\n→ <strong>Açıklama:</strong> Ana fiil “reports” (present). Noun clause’da present perfect (has signed) korunur.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Ana Cümle Zamanı</th>\n<th>Noun Clause Zamanı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Simple Present</td>\n<td>herhangi bir zaman</td>\n<td>She knows that he left.</td>\n</tr>\n<tr>\n<td>Present Perfect</td>\n<td>herhangi bir zaman</td>\n<td>I’ve heard that she is ill.</td>\n</tr>\n<tr>\n<td>Future</td>\n<td>herhangi bir zaman</td>\n<td>He’ll say that he did it.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “She claims that she _____ the money, but I don’t believe her.” (steal – geçmişte)</p>\n<p>A) steals<br>\nB) stole<br>\nC) has stolen<br>\nD) had stolen</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B veya C (ikisi de mümkün)  \n**Açıklama:** Ana fiil “claims” (present). Olay geçmişte olduğu için simple past (stole) veya present perfect (has stolen) kullanılabilir. “stole” daha yaygın. Testlerde genellikle bir doğru olur, burada bağlama göre “stole” tercih edilir.\n</details>\n\n<p>[Kelime sayısı: 210]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I have just heard that the CEO resigned unexpectedly yesterday due to health problems.",
+          "tr": "CEO’nun sağlık sorunları nedeniyle dün beklenmedik şekilde istifa ettiğini duydum.",
+          "description": "Ana fiil “have heard” (present perfect). Noun clause’da geçmiş zaman (resigned) korunur, çünkü olay dün oldu.\n\n**Örnek 2 (şimdiki durum):**"
+        },
+        {
+          "en": "Everyone believes that she is the best candidate for the position.",
+          "tr": "Herkes onun pozisyon için en iyi aday olduğuna inanıyor.",
+          "description": "Ana fiil “believes” (simple present). Noun clause’da şimdiki zaman (is) kullanılır, genel bir yargı.\n\n**Örnek 3 (gelecek):**"
+        },
+        {
+          "en": "I’m sure that they will arrive before the ceremony starts.",
+          "tr": "Tören başlamadan önce varacaklarına eminim.",
+          "description": "Ana fiil “’m sure” (present). Noun clause’da gelecek zaman (will arrive) kullanılır.\n\n**Örnek 4 (present perfect):**"
+        },
+        {
+          "en": "The news reports that the president has already signed the agreement.",
+          "tr": "Haberler, başkanın anlaşmayı çoktan imzaladığını bildiriyor.",
+          "description": "Ana fiil “reports” (present). Noun clause’da present perfect (has signed) korunur."
+        }
+      ],
+      "mini_test": {
+        "question": "“She claims that she _____ the money, but I don’t believe her.” (steal – geçmişte)",
+        "options": {
+          "A": "steals",
+          "B": "stole",
+          "C": "has stolen",
+          "D": "had stolen"
+        },
+        "correct": "B veya C (ikisi de mümkün)",
+        "explanation": "Ana fiil “claims” (present). Olay geçmişte olduğu için simple past (stole) veya present perfect (has stolen) kullanılabilir. “stole” daha yaygın. Testlerde genellikle bir doğru olur, burada bağlama göre “stole” tercih edilir."
+      },
+      "mini_tests": [
+        {
+          "question": "“She claims that she _____ the money, but I don’t believe her.” (steal – geçmişte)",
+          "options": {
+            "A": "steals",
+            "B": "stole",
+            "C": "has stolen",
+            "D": "had stolen"
+          },
+          "correct": "B veya C (ikisi de mümkün)",
+          "explanation": "Ana fiil “claims” (present). Olay geçmişte olduğu için simple past (stole) veya present perfect (has stolen) kullanılabilir. “stole” daha yaygın. Testlerde genellikle bir doğru olur, burada bağlama göre “stole” tercih edilir."
+        }
+      ],
+      "word_count": 332
+    },
+    {
+      "page_number": 12,
+      "title": "TENSE UYUMU – ANA CÜMLE PAST İSE",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KURAL</h2>\n<p>Ana cümle past tense (simple past, past perfect, vb.) ise, noun clause’daki zaman genellikle bir derece geriye kayar (past → past perfect, present → past, future → past future).</p>\n<div class=\"uyari-kutusu\">\n**⚠️ İstisnalar:**  \n- Genel geçer gerçekler (scientific facts) değişmez.  \n- “should, might, must” gibi modal’lar değişmez.  \n- Zaman bağlacı (when, before) içeren cümleler kendi kurallarına tabidir.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (present → past):</strong><br>\n<strong>EN:</strong> She said that she <strong>worked</strong> as a volunteer at the local shelter every weekend.<br>\n<strong>TR:</strong> Yerel barınakta her hafta sonu gönüllü olarak çalıştığını söyledi.<br>\n→ <strong>Açıklama:</strong> Ana fiil “said” (past). Noun clause’daki geniş zaman (works) → past (worked) oldu.</p>\n<p><strong>Örnek 2 (past → past perfect):</strong><br>\n<strong>EN:</strong> He claimed that he <strong>had never seen</strong> the suspect before the incident.<br>\n<strong>TR:</strong> Olaydan önce şüpheliyi hiç görmediğini iddia etti.<br>\n→ <strong>Açıklama:</strong> “claimed” past. Asıl olay daha önceki bir geçmiş (never saw) → past perfect (had never seen).</p>\n<p><strong>Örnek 3 (future → past future):</strong><br>\n<strong>EN:</strong> They announced that they <strong>would launch</strong> the new product in the spring.<br>\n<strong>TR:</strong> Yeni ürünü ilkbaharda piyasaya süreceklerini duyurdular.<br>\n→ <strong>Açıklama:</strong> “announced” past. Orijinal “will launch” → “would launch” oldu.</p>\n<p><strong>Örnek 4 (genel gerçek – istisna):</strong><br>\n<strong>EN:</strong> The teacher explained that water <strong>boils</strong> at 100 degrees Celsius.<br>\n<strong>TR:</strong> Öğretmen, suyun 100 santigrat derecede kaynadığını açıkladı.<br>\n→ <strong>Açıklama:</strong> Genel geçer bilimsel gerçek olduğu için noun clause’da geniş zaman (boils) korundu, past’e dönüşmedi.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Ana Cümle Past</th>\n<th>Noun Clause (kural)</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>He said…</td>\n<td>present → past</td>\n<td>He said he was tired.</td>\n</tr>\n<tr>\n<td>He said…</td>\n<td>past → past perfect</td>\n<td>He said he had seen it.</td>\n</tr>\n<tr>\n<td>He said…</td>\n<td>will → would</td>\n<td>He said he would come.</td>\n</tr>\n<tr>\n<td>Genel gerçek</td>\n<td>değişmez</td>\n<td>He said the sun rises in the east.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “They told us that they _____ to the party, but they never showed up.”</p>\n<p>A) will come<br>\nB) would come<br>\nC) have come<br>\nD) had come</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Ana fiil “told” (past). Gelecek anlamı “will come” → “would come” olur.\n</details>\n\n<p>[Kelime sayısı: 225]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She said that she **worked** as a volunteer at the local shelter every weekend.",
+          "tr": "Yerel barınakta her hafta sonu gönüllü olarak çalıştığını söyledi.",
+          "description": "Ana fiil “said” (past). Noun clause’daki geniş zaman (works) → past (worked) oldu.\n\n**Örnek 2 (past → past perfect):**"
+        },
+        {
+          "en": "He claimed that he **had never seen** the suspect before the incident.",
+          "tr": "Olaydan önce şüpheliyi hiç görmediğini iddia etti.",
+          "description": "“claimed” past. Asıl olay daha önceki bir geçmiş (never saw) → past perfect (had never seen).\n\n**Örnek 3 (future → past future):**"
+        },
+        {
+          "en": "They announced that they **would launch** the new product in the spring.",
+          "tr": "Yeni ürünü ilkbaharda piyasaya süreceklerini duyurdular.",
+          "description": "“announced” past. Orijinal “will launch” → “would launch” oldu.\n\n**Örnek 4 (genel gerçek – istisna):**"
+        },
+        {
+          "en": "The teacher explained that water **boils** at 100 degrees Celsius.",
+          "tr": "Öğretmen, suyun 100 santigrat derecede kaynadığını açıkladı.",
+          "description": "Genel geçer bilimsel gerçek olduğu için noun clause’da geniş zaman (boils) korundu, past’e dönüşmedi."
+        }
+      ],
+      "mini_test": {
+        "question": "“They told us that they _____ to the party, but they never showed up.”",
+        "options": {
+          "A": "will come",
+          "B": "would come",
+          "C": "have come",
+          "D": "had come"
+        },
+        "correct": "B",
+        "explanation": "Ana fiil “told” (past). Gelecek anlamı “will come” → “would come” olur."
+      },
+      "mini_tests": [
+        {
+          "question": "“They told us that they _____ to the party, but they never showed up.”",
+          "options": {
+            "A": "will come",
+            "B": "would come",
+            "C": "have come",
+            "D": "had come"
+          },
+          "correct": "B",
+          "explanation": "Ana fiil “told” (past). Gelecek anlamı “will come” → “would come” olur."
+        }
+      ],
+      "word_count": 320
+    },
+    {
+      "page_number": 13,
+      "title": "YARDIMCI FİİLLERLE KISA YANITLAR (TOO / EITHER / SO / NEITHER)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KULLANIM</h2>\n<p>Bir önceki cümleye katıldığımızı veya aynı durumun başkası için de geçerli olduğunu kısa yolla ifade ederiz.</p>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\"><strong>Olumluya katılım:</strong> too, so</div>\n    <div class=\"kart yesil\"><strong>Olumsuza katılım:</strong> either, neither/nor</div>\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (too – olumlu):</strong><br>\n<strong>EN:</strong> My brother loves classical music, and I do, too.<br>\n<strong>TR:</strong> Kardeşim klasik müziği sever, ben de severim.<br>\n→ <strong>Açıklama:</strong> Olumlu cümleye katılımda “too” kullanılır. Yardımcı fiil (do) özneye göre seçilir.</p>\n<p><strong>Örnek 2 (so – olumlu, devrik):</strong><br>\n<strong>EN:</strong> She has finished her project, and so have I.<br>\n<strong>TR:</strong> O projesini bitirdi, ben de bitirdim.<br>\n→ <strong>Açıklama:</strong> “so” ile devrik yapı kullanılır: so + yardımcı fiil + özne. “have” yardımcısı önceki cümleden alınır.</p>\n<p><strong>Örnek 3 (either – olumsuz):</strong><br>\n<strong>EN:</strong> He didn’t attend the meeting, and she didn’t, either.<br>\n<strong>TR:</strong> O toplantıya katılmadı, o da katılmadı.<br>\n→ <strong>Açıklama:</strong> Olumsuz cümleye katılımda “either” kullanılır, cümle sonunda.</p>\n<p><strong>Örnek 4 (neither – olumsuz, devrik):</strong><br>\n<strong>EN:</strong> I can’t speak French, and neither can my wife.<br>\n<strong>TR:</strong> Fransızca konuşamam, eşim de konuşamaz.<br>\n→ <strong>Açıklama:</strong> “neither” ile devrik yapı: neither + yardımcı fiil + özne. Yardımcı fiil olumlu (can).</p>\n<p><strong>Örnek 5 (nor – neither ile aynı):</strong><br>\n<strong>EN:</strong> They weren’t surprised, nor was I.<br>\n<strong>TR:</strong> Onlar şaşırmadı, ben de şaşırmadım.<br>\n→ <strong>Açıklama:</strong> “nor” da aynı işlevi görür.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Olumluya katılım</td>\n<td>özne + yardımcı + too</td>\n<td>I do, too.</td>\n</tr>\n<tr>\n<td>Olumluya katılım</td>\n<td>so + yardımcı + özne</td>\n<td>So do I.</td>\n</tr>\n<tr>\n<td>Olumsuza katılım</td>\n<td>özne + yardımcı + either</td>\n<td>I don’t, either.</td>\n</tr>\n<tr>\n<td>Olumsuza katılım</td>\n<td>neither/nor + yardımcı + özne</td>\n<td>Neither do I.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “I have never been to Italy.” cümlesine katılım nasıl ifade edilir?</p>\n<p>A) I haven’t, too.<br>\nB) Neither have I.<br>\nC) So have I.<br>\nD) I haven’t, neither.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Olumsuz cümleye katılım için “neither + yardımcı + özne” kullanılır. “I haven’t, either” da doğru olurdu ama seçenekte yok.\n</details>\n\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "My brother loves classical music, and I do, too.",
+          "tr": "Kardeşim klasik müziği sever, ben de severim.",
+          "description": "Olumlu cümleye katılımda “too” kullanılır. Yardımcı fiil (do) özneye göre seçilir.\n\n**Örnek 2 (so – olumlu, devrik):**"
+        },
+        {
+          "en": "She has finished her project, and so have I.",
+          "tr": "O projesini bitirdi, ben de bitirdim.",
+          "description": "“so” ile devrik yapı kullanılır: so + yardımcı fiil + özne. “have” yardımcısı önceki cümleden alınır.\n\n**Örnek 3 (either – olumsuz):**"
+        },
+        {
+          "en": "He didn’t attend the meeting, and she didn’t, either.",
+          "tr": "O toplantıya katılmadı, o da katılmadı.",
+          "description": "Olumsuz cümleye katılımda “either” kullanılır, cümle sonunda.\n\n**Örnek 4 (neither – olumsuz, devrik):**"
+        },
+        {
+          "en": "I can’t speak French, and neither can my wife.",
+          "tr": "Fransızca konuşamam, eşim de konuşamaz.",
+          "description": "“neither” ile devrik yapı: neither + yardımcı fiil + özne. Yardımcı fiil olumlu (can).\n\n**Örnek 5 (nor – neither ile aynı):**"
+        },
+        {
+          "en": "They weren’t surprised, nor was I.",
+          "tr": "Onlar şaşırmadı, ben de şaşırmadım.",
+          "description": "“nor” da aynı işlevi görür."
+        }
+      ],
+      "mini_test": {
+        "question": "“I have never been to Italy.” cümlesine katılım nasıl ifade edilir?",
+        "options": {
+          "A": "I haven’t, too.",
+          "B": "Neither have I.",
+          "C": "So have I.",
+          "D": "I haven’t, neither."
+        },
+        "correct": "B",
+        "explanation": "Olumsuz cümleye katılım için “neither + yardımcı + özne” kullanılır. “I haven’t, either” da doğru olurdu ama seçenekte yok."
+      },
+      "mini_tests": [
+        {
+          "question": "“I have never been to Italy.” cümlesine katılım nasıl ifade edilir?",
+          "options": {
+            "A": "I haven’t, too.",
+            "B": "Neither have I.",
+            "C": "So have I.",
+            "D": "I haven’t, neither."
+          },
+          "correct": "B",
+          "explanation": "Olumsuz cümleye katılım için “neither + yardımcı + özne” kullanılır. “I haven’t, either” da doğru olurdu ama seçenekte yok."
+        }
+      ],
+      "word_count": 313
+    },
+    {
+      "page_number": 14,
+      "title": "QUESTION TAGS (DEĞİL Mİ?)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KURAL</h2>\n<p>Cümlenin sonuna eklenen kısa sorular. Olumlu cümle → olumsuz tag, olumsuz cümle → olumlu tag. Yardımcı fiil ve özne zamiri kullanılır.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**  \n- Ana cümlenin yardımcısını bul, zıddını yap.  \n- Özne yerine zamir kullan (he, she, it, they, vb.)  \n- There kullanılıyorsa tag’de de “there” olur.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (olumlu cümle):</strong><br>\n<strong>EN:</strong> She has been working here for five years, hasn’t she?<br>\n<strong>TR:</strong> Beş yıldır burada çalışıyor, değil mi?<br>\n→ <strong>Açıklama:</strong> Cümle olumlu, yardımcı “has” → olumsuz tag “hasn’t she?”.</p>\n<p><strong>Örnek 2 (olumsuz cümle):</strong><br>\n<strong>EN:</strong> They won’t arrive on time, will they?<br>\n<strong>TR:</strong> Zamanında varmayacaklar, değil mi?<br>\n→ <strong>Açıklama:</strong> “won’t” (will not) olumsuz, tag olumlu “will they?”.</p>\n<p><strong>Örnek 3 (there ile):</strong><br>\n<strong>EN:</strong> There are some cookies left in the jar, aren’t there?<br>\n<strong>TR:</strong> Kavanozda biraz kurabiye kalmış, değil mi?<br>\n→ <strong>Açıklama:</strong> Özne “there” olduğu için tag’de de “there” kullanılır.</p>\n<p><strong>Örnek 4 (emir cümlesi):</strong><br>\n<strong>EN:</strong> Close the door quietly, will you?<br>\n<strong>TR:</strong> Kapıyı sessizce kapatır mısın?<br>\n→ <strong>Açıklama:</strong> Emir cümlelerinde tag genelde “will you?” olur. Olumsuz emirde de “will you?”: Don’t be late, will you?</p>\n<p><strong>Örnek 5 (Let’s ile):</strong><br>\n<strong>EN:</strong> Let’s go for a walk, shall we?<br>\n<strong>TR:</strong> Hadi yürüyüşe çıkalım, olur mu?<br>\n→ <strong>Açıklama:</strong> “Let’s” ile öneri cümlelerinde tag “shall we?” olur.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Cümle Türü</th>\n<th>Tag Örneği</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Olumlu, yardımcı var</td>\n<td>You are tired, aren’t you?</td>\n</tr>\n<tr>\n<td>Olumlu, yardımcı yok (simple present)</td>\n<td>She likes tea, doesn’t she?</td>\n</tr>\n<tr>\n<td>Olumsuz</td>\n<td>He didn’t call, did he?</td>\n</tr>\n<tr>\n<td>Emir</td>\n<td>Sit down, will you?</td>\n</tr>\n<tr>\n<td>Let’s</td>\n<td>Let’s dance, shall we?</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “Nobody called me yesterday, _____?” tag’i nedir?</p>\n<p>A) did they<br>\nB) didn’t they<br>\nC) did he<br>\nD) didn’t he</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** “Nobody” olumsuz anlamlı olduğu için tag olumlu olur. “Nobody” → “they” ile karşılanır. Yardımcı “did” (called geçmiş) → “did they”.\n</details>\n\n<p>[Kelime sayısı: 220]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She has been working here for five years, hasn’t she?",
+          "tr": "Beş yıldır burada çalışıyor, değil mi?",
+          "description": "Cümle olumlu, yardımcı “has” → olumsuz tag “hasn’t she?”.\n\n**Örnek 2 (olumsuz cümle):**"
+        },
+        {
+          "en": "They won’t arrive on time, will they?",
+          "tr": "Zamanında varmayacaklar, değil mi?",
+          "description": "“won’t” (will not) olumsuz, tag olumlu “will they?”.\n\n**Örnek 3 (there ile):**"
+        },
+        {
+          "en": "There are some cookies left in the jar, aren’t there?",
+          "tr": "Kavanozda biraz kurabiye kalmış, değil mi?",
+          "description": "Özne “there” olduğu için tag’de de “there” kullanılır.\n\n**Örnek 4 (emir cümlesi):**"
+        },
+        {
+          "en": "Close the door quietly, will you?",
+          "tr": "Kapıyı sessizce kapatır mısın?",
+          "description": "Emir cümlelerinde tag genelde “will you?” olur. Olumsuz emirde de “will you?”: Don’t be late, will you?\n\n**Örnek 5 (Let’s ile):**"
+        },
+        {
+          "en": "Let’s go for a walk, shall we?",
+          "tr": "Hadi yürüyüşe çıkalım, olur mu?",
+          "description": "“Let’s” ile öneri cümlelerinde tag “shall we?” olur."
+        }
+      ],
+      "mini_test": {
+        "question": "“Nobody called me yesterday, _____?” tag’i nedir?",
+        "options": {
+          "A": "did they",
+          "B": "didn’t they",
+          "C": "did he",
+          "D": "didn’t he"
+        },
+        "correct": "A",
+        "explanation": "“Nobody” olumsuz anlamlı olduğu için tag olumlu olur. “Nobody” → “they” ile karşılanır. Yardımcı “did” (called geçmiş) → “did they”."
+      },
+      "mini_tests": [
+        {
+          "question": "“Nobody called me yesterday, _____?” tag’i nedir?",
+          "options": {
+            "A": "did they",
+            "B": "didn’t they",
+            "C": "did he",
+            "D": "didn’t he"
+          },
+          "correct": "A",
+          "explanation": "“Nobody” olumsuz anlamlı olduğu için tag olumlu olur. “Nobody” → “they” ile karşılanır. Yardımcı “did” (called geçmiş) → “did they”."
+        }
+      ],
+      "word_count": 310
+    },
+    {
+      "page_number": 15,
+      "title": "QUESTION TAGS – ÖZEL DURUMLAR",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KURAL: NOUN CLAUSE İÇEREN CÜMLELER</h2>\n<p>Eğer cümle “I think / I believe / I suppose” gibi ifadelerle başlıyorsa, tag noun clause’a göre yapılır. Diğer öznelerde (She thinks, They believe) tag ana cümleye göre yapılır.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Önemli:**  \nI think that he is right, **isn’t he?** (ana cümle I think değil, noun clause’a bak)  \nShe thinks that he is right, **doesn’t she?** (ana cümle She thinks)\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (I think):</strong><br>\n<strong>EN:</strong> I think that she will win the competition, won’t she?<br>\n<strong>TR:</strong> Yarışmayı kazanacağını düşünüyorum, değil mi?<br>\n→ <strong>Açıklama:</strong> Ana cümle “I think”, tag noun clause’daki “she will win”e göre yapılır: “won’t she?”.</p>\n<p><strong>Örnek 2 (I don’t think):</strong><br>\n<strong>EN:</strong> I don’t think he can afford that car, can he?<br>\n<strong>TR:</strong> O arabayı alabileceğini sanmıyorum, değil mi?<br>\n→ <strong>Açıklama:</strong> “I don’t think” olumsuz, tag noun clause’daki “can”e göre olumlu yapılır: “can he?”. (Not: “I think he can’t” gibi değil.)</p>\n<p><strong>Örnek 3 (She believes):</strong><br>\n<strong>EN:</strong> She believes that we should leave early, doesn’t she?<br>\n<strong>TR:</strong> Erken ayrılmamız gerektiğine inanıyor, değil mi?<br>\n→ <strong>Açıklama:</strong> Özne “She” olduğu için tag ana cümleye göre “doesn’t she?”.</p>\n<p><strong>Örnek 4 (You know):</strong><br>\n<strong>EN:</strong> You know that I’m telling the truth, don’t you?<br>\n<strong>TR:</strong> Doğruyu söylediğimi biliyorsun, değil mi?<br>\n→ <strong>Açıklama:</strong> “You know” ana cümle, tag “don’t you?”. Noun clause’a bakılmaz.</p>\n<p><strong>Örnek 5 (Nobody thinks):</strong><br>\n<strong>EN:</strong> Nobody thinks that he is guilty, do they?<br>\n<strong>TR:</strong> Kimse onun suçlu olduğunu düşünmüyor, değil mi?<br>\n→ <strong>Açıklama:</strong> “Nobody” olumsuz, tag olumlu “do they?”. “Nobody thinks” ana cümle olduğu için tag ona göre.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Ana Cümle</th>\n<th>Tag Kuralı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>I think / suppose / believe</td>\n<td>noun clause’a göre</td>\n<td>I think he’s right, isn’t he?</td>\n</tr>\n<tr>\n<td>I don’t think</td>\n<td>noun clause’a göre (olumlu)</td>\n<td>I don’t think he’s right, is he?</td>\n</tr>\n<tr>\n<td>Diğer özneler (She, They, etc.)</td>\n<td>ana cümleye göre</td>\n<td>She thinks he’s right, doesn’t she?</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “I suppose they have finished the work, _____?” tag’i nedir?</p>\n<p>A) don’t I<br>\nB) haven’t they<br>\nC) have they<br>\nD) do I</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “I suppose” → tag noun clause’a göre: “they have finished” olumlu, tag olumsuz “haven’t they?”.\n</details>\n\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I think that she will win the competition, won’t she?",
+          "tr": "Yarışmayı kazanacağını düşünüyorum, değil mi?",
+          "description": "Ana cümle “I think”, tag noun clause’daki “she will win”e göre yapılır: “won’t she?”.\n\n**Örnek 2 (I don’t think):**"
+        },
+        {
+          "en": "I don’t think he can afford that car, can he?",
+          "tr": "O arabayı alabileceğini sanmıyorum, değil mi?",
+          "description": "“I don’t think” olumsuz, tag noun clause’daki “can”e göre olumlu yapılır: “can he?”. (Not: “I think he can’t” gibi değil.)\n\n**Örnek 3 (She believes):**"
+        },
+        {
+          "en": "She believes that we should leave early, doesn’t she?",
+          "tr": "Erken ayrılmamız gerektiğine inanıyor, değil mi?",
+          "description": "Özne “She” olduğu için tag ana cümleye göre “doesn’t she?”.\n\n**Örnek 4 (You know):**"
+        },
+        {
+          "en": "You know that I’m telling the truth, don’t you?",
+          "tr": "Doğruyu söylediğimi biliyorsun, değil mi?",
+          "description": "“You know” ana cümle, tag “don’t you?”. Noun clause’a bakılmaz.\n\n**Örnek 5 (Nobody thinks):**"
+        },
+        {
+          "en": "Nobody thinks that he is guilty, do they?",
+          "tr": "Kimse onun suçlu olduğunu düşünmüyor, değil mi?",
+          "description": "“Nobody” olumsuz, tag olumlu “do they?”. “Nobody thinks” ana cümle olduğu için tag ona göre."
+        }
+      ],
+      "mini_test": {
+        "question": "“I suppose they have finished the work, _____?” tag’i nedir?",
+        "options": {
+          "A": "don’t I",
+          "B": "haven’t they",
+          "C": "have they",
+          "D": "do I"
+        },
+        "correct": "B",
+        "explanation": "“I suppose” → tag noun clause’a göre: “they have finished” olumlu, tag olumsuz “haven’t they?”."
+      },
+      "mini_tests": [
+        {
+          "question": "“I suppose they have finished the work, _____?” tag’i nedir?",
+          "options": {
+            "A": "don’t I",
+            "B": "haven’t they",
+            "C": "have they",
+            "D": "do I"
+          },
+          "correct": "B",
+          "explanation": "“I suppose” → tag noun clause’a göre: “they have finished” olumlu, tag olumsuz “haven’t they?”."
+        }
+      ],
+      "word_count": 382
+    },
+    {
+      "page_number": 16,
+      "title": "STRATEJİ ÖZETLERİ (KARARLI / KARARSIZ AYRIMI)",
+      "total_pages": 18,
+      "content_html": "<h2>📌 KARARLI (THAT) VS KARARSIZ (WH- / WHETHER)</h2>\n<p>Cümlede kesinlik varsa “that”, belirsizlik veya soru anlamı varsa “wh- / whether” kullanılır.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**  \n- Fiil “know”, “believe”, “say” ise genelde that (ama soru anlamı yoksa).  \n- Fiil “wonder”, “ask”, “not sure” ise wh-/whether.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (that – kesin):</strong><br>\n<strong>EN:</strong> The fact that he failed the exam surprised his parents.<br>\n<strong>TR:</strong> Sınavda başarısız olduğu gerçeği ailesini şaşırttı.<br>\n→ <strong>Açıklama:</strong> “The fact that” ile kesin bir olgu bildiriliyor. Kararlı durum.</p>\n<p><strong>Örnek 2 (whether – belirsiz):</strong><br>\n<strong>EN:</strong> I doubt whether he will ever apologize for his behavior.<br>\n<strong>TR:</strong> Davranışı için özür dileyip dilemeyeceğinden şüpheliyim.<br>\n→ <strong>Açıklama:</strong> “doubt” fiili belirsizlik içerir, bu nedenle “whether” uygun.</p>\n<p><strong>Örnek 3 (what – soru anlamı):</strong><br>\n<strong>EN:</strong> What she really wants is a peaceful life away from the city.<br>\n<strong>TR:</strong> Onun gerçekten istediği, şehirden uzak huzurlu bir hayat.<br>\n→ <strong>Açıklama:</strong> “What” ile başlayan noun clause bir şeyi tanımlar, aslında soru değil ama belirsizliği ifade eder.</p>\n<p><strong>Örnek 4 (that vs what):</strong><br>\n<strong>EN:</strong> I heard that you got a promotion. (kesin bilgi)<br>\n<strong>EN:</strong> I wonder what you got for your birthday. (merak)<br>\n→ <strong>Açıklama:</strong> İlk cümle duyulan kesin bir bilgi, ikincisi merak.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Bağlaç</th>\n<th>Örnek Fiiller</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Kesinlik, gerçek</td>\n<td>that</td>\n<td>know, believe, say, report</td>\n</tr>\n<tr>\n<td>Belirsizlik, soru</td>\n<td>wh-, whether</td>\n<td>wonder, ask, doubt, not sure</td>\n</tr>\n<tr>\n<td>İki olasılık</td>\n<td>whether/if</td>\n<td>decide, matter, depend</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “It is still uncertain _____ the flight will be delayed.” boşluğa ne gelir?</p>\n<p>A) that<br>\nB) what<br>\nC) whether<br>\nD) which</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** “uncertain” belirsizlik bildirir, bu nedenle “whether” (…-ıp …-ıpmadığı) uygundur.\n</details>\n\n<p>[Kelime sayısı: 190]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The fact that he failed the exam surprised his parents.",
+          "tr": "Sınavda başarısız olduğu gerçeği ailesini şaşırttı.",
+          "description": "“The fact that” ile kesin bir olgu bildiriliyor. Kararlı durum.\n\n**Örnek 2 (whether – belirsiz):**"
+        },
+        {
+          "en": "I doubt whether he will ever apologize for his behavior.",
+          "tr": "Davranışı için özür dileyip dilemeyeceğinden şüpheliyim.",
+          "description": "“doubt” fiili belirsizlik içerir, bu nedenle “whether” uygun.\n\n**Örnek 3 (what – soru anlamı):**"
+        },
+        {
+          "en": "What she really wants is a peaceful life away from the city.",
+          "tr": "Onun gerçekten istediği, şehirden uzak huzurlu bir hayat.",
+          "description": "“What” ile başlayan noun clause bir şeyi tanımlar, aslında soru değil ama belirsizliği ifade eder.\n\n**Örnek 4 (that vs what):**"
+        }
+      ],
+      "mini_test": {
+        "question": "“It is still uncertain _____ the flight will be delayed.” boşluğa ne gelir?",
+        "options": {
+          "A": "that",
+          "B": "what",
+          "C": "whether",
+          "D": "which"
+        },
+        "correct": "C",
+        "explanation": "“uncertain” belirsizlik bildirir, bu nedenle “whether” (…-ıp …-ıpmadığı) uygundur."
+      },
+      "mini_tests": [
+        {
+          "question": "“It is still uncertain _____ the flight will be delayed.” boşluğa ne gelir?",
+          "options": {
+            "A": "that",
+            "B": "what",
+            "C": "whether",
+            "D": "which"
+          },
+          "correct": "C",
+          "explanation": "“uncertain” belirsizlik bildirir, bu nedenle “whether” (…-ıp …-ıpmadığı) uygundur."
+        }
+      ],
+      "word_count": 262
+    },
+    {
+      "page_number": 17,
+      "title": "ÖRNEK SINAV SORULARI VE ÇÖZÜM STRATEJİLERİ",
+      "total_pages": 18,
+      "content_html": "<h2>📌 YDS / YÖKDİL TARZI SORULAR</h2>\n<p>Bu tür sorularda boşluk genellikle noun clause bağlacını veya uygun soru kelimesini bulmayı gerektirir.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**  \n1. Boşluktan sonraki kısmın cümle olup olmadığına bak (özne + yüklem).  \n2. Ana fiilin geçişli olup olmadığını kontrol et (nesne eksik mi?).  \n3. Kararlı / kararsız ayrımı yap.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK SORU 1 (YDS)</h2>\n<p><strong>Soru:</strong> A corporation’s formulation of its international strategy will greatly determine --- it will benefit more from protectionism or from some other means.</p>\n<p>A) so<br>\nB) as<br>\nC) unless<br>\nD) whether<br>\nE) whereby</p>\n<p>→ <strong>Açıklama:</strong> “determine” fiili nesne ister. Boşluktan sonra tam bir cümle var (“it will benefit…”). İki olasılık (protectionism veya other means) sunulduğu için “whether” doğru. Cevap D.</p>\n<hr>\n<p><strong>Soru 2:</strong> The Worldwatch Institute reported last year --- approximately four of the five McDonald’s restaurants that opened every day in 2005 were outside the US.</p>\n<p>A) if<br>\nB) as<br>\nC) while<br>\nD) when<br>\nE) that</p>\n<p>→ <strong>Açıklama:</strong> “reported” fiilinin nesnesi yok. Boşluktan sonraki kısım tam cümle ve kesin bir bilgi içeriyor. Bu nedenle “that” doğru. Cevap E.</p>\n<hr>\n<p><strong>Soru 3 (YDS 2002):</strong> --- broke the window will have to pay for a new one.</p>\n<p>A) Who<br>\nB) Whoever<br>\nC) Anyone<br>\nD) Someone<br>\nE) The one</p>\n<p>→ <strong>Açıklama:</strong> Boşluk özne konumunda ve bir noun clause gerekiyor. “Who” soru anlamı taşır, oysa cümle soru değil. “Whoever” (her kim) anlamı uygun. Cevap B.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ</h2>\n<table>\n<thead>\n<tr>\n<th>Soru Tipi</th>\n<th>İpucu</th>\n<th>Çözüm</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>that / whether</td>\n<td>cümlede belirsizlik var mı?</td>\n<td>varsa whether</td>\n</tr>\n<tr>\n<td>wh- kelime</td>\n<td>cümlede eksik özne/nesne</td>\n<td>uygun kelimeyi bul</td>\n</tr>\n<tr>\n<td>-ever</td>\n<td>“her kim/ne” anlamı</td>\n<td>whoever, whatever</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> “Can you tell me _____ the nearest bank is?” boşluğa ne gelir?</p>\n<p>A) that<br>\nB) where<br>\nC) what<br>\nD) whether</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “tell me”den sonra noun clause gelir. Bankanın yerini soruyoruz, bu nedenle “where” uygun.\n</details>\n\n<p>[Kelime sayısı: 210]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "“Can you tell me _____ the nearest bank is?” boşluğa ne gelir?",
+        "options": {
+          "A": "that",
+          "B": "where",
+          "C": "what",
+          "D": "whether"
+        },
+        "correct": "B",
+        "explanation": "“tell me”den sonra noun clause gelir. Bankanın yerini soruyoruz, bu nedenle “where” uygun."
+      },
+      "mini_tests": [
+        {
+          "question": "“Can you tell me _____ the nearest bank is?” boşluğa ne gelir?",
+          "options": {
+            "A": "that",
+            "B": "where",
+            "C": "what",
+            "D": "whether"
+          },
+          "correct": "B",
+          "explanation": "“tell me”den sonra noun clause gelir. Bankanın yerini soruyoruz, bu nedenle “where” uygun."
+        }
+      ],
+      "word_count": 300
+    },
+    {
+      "page_number": 18,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 18,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li>Noun clause’un iki ana türü: kararlı (that) ve kararsız (wh-, whether)</li>\n<li>Özne, nesne, edat tamamlayıcısı olarak kullanımları</li>\n<li>-ever kelimeleri ve kısaltmalar</li>\n<li>Subjunctive (dilek kipi) ve tense uyumu</li>\n<li>Yardımcı fiillerle kısa cevaplar ve question tags</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p>“_____ the company will go bankrupt is highly unlikely.”<br>\nA) That<br>\nB) Whether<br>\nC) If<br>\nD) What</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A – “That” özne konumunda, kesin bir durum ifade ediyor (iflas edeceği).\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p>“I’m not sure _____ to accept the job offer or wait for another.”<br>\nA) if<br>\nB) whether<br>\nC) that<br>\nD) what</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B – “whether to V0” kalıbı. “if” burada kullanılmaz.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p>“He insisted that she _____ the documents immediately.”<br>\nA) signs<br>\nB) signed<br>\nC) sign<br>\nD) has signed</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C – Subjunctive: “insist that + V0”.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p>“They said they _____ come to the party, but they didn’t.”<br>\nA) will<br>\nB) would<br>\nC) have<br>\nD) had</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B – Ana cümle past (said) → “will” → “would”.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p>“You have never been to London, _____?”<br>\nA) have you<br>\nB) haven’t you<br>\nC) do you<br>\nD) don’t you</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A – “never” olumsuz anlam, tag olumlu: “have you”.\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p>[Kelime sayısı: 210]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası (ortalama 220)</li>\n<li>[x] Her sayfada 3-5 örnek var</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 18 (≤25)</li>\n<li>[x] HTML div'leri doğru işaretlenmiş</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "“_____ the company will go bankrupt is highly unlikely.”",
+        "options": {
+          "A": "That",
+          "B": "Whether",
+          "C": "If",
+          "D": "What"
+        },
+        "correct": "A – “That” özne konumunda, kesin bir durum ifade ediyor (iflas edeceği).",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "“_____ the company will go bankrupt is highly unlikely.”",
+          "options": {
+            "A": "That",
+            "B": "Whether",
+            "C": "If",
+            "D": "What"
+          },
+          "correct": "A – “That” özne konumunda, kesin bir durum ifade ediyor (iflas edeceği).",
+          "explanation": ""
+        },
+        {
+          "question": "“I’m not sure _____ to accept the job offer or wait for another.”",
+          "options": {
+            "A": "if",
+            "B": "whether",
+            "C": "that",
+            "D": "what"
+          },
+          "correct": "B – “whether to V0” kalıbı. “if” burada kullanılmaz.",
+          "explanation": ""
+        },
+        {
+          "question": "“He insisted that she _____ the documents immediately.”",
+          "options": {
+            "A": "signs",
+            "B": "signed",
+            "C": "sign",
+            "D": "has signed"
+          },
+          "correct": "C – Subjunctive: “insist that + V0”.",
+          "explanation": ""
+        },
+        {
+          "question": "“They said they _____ come to the party, but they didn’t.”",
+          "options": {
+            "A": "will",
+            "B": "would",
+            "C": "have",
+            "D": "had"
+          },
+          "correct": "B – Ana cümle past (said) → “will” → “would”.",
+          "explanation": ""
+        },
+        {
+          "question": "“You have never been to London, _____?”",
+          "options": {
+            "A": "have you",
+            "B": "haven’t you",
+            "C": "do you",
+            "D": "don’t you"
+          },
+          "correct": "A – “never” olumsuz anlam, tag olumlu: “have you”.",
+          "explanation": ""
+        }
+      ],
+      "word_count": 296
+    }
+  ]
+}

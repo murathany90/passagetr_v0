@@ -1,0 +1,17 @@
+{
+  "excel_file": "C:\\yazilim_projeler\\ingilizce_app1\\docs\\dictionary.xlsx",
+  "sheet": "Sheet1",
+  "dataset_version": "2026-03-04-v1",
+  "batch_id": "db1adf60-5fac-4b3b-9b5f-b14a75f71250",
+  "mode": "replace",
+  "source_checksum": "e1f606d276dd7b4565bf0204536ad0c0c11421e609fbae8a917d367d1e4f5b68",
+  "rows_read": 121783,
+  "rows_loaded": 121772,
+  "duplicates": 3,
+  "invalid_rows": 8,
+  "empty_meaning_rows": 0,
+  "inserted_rows": 0,
+  "updated_rows": 121772,
+  "duration_ms": 1086794,
+  "generated_at": "2026-03-03T23:53:17.049510+00:00"
+}

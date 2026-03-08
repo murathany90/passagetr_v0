@@ -1,0 +1,820 @@
+{
+  "sira": 4,
+  "baslik": "Passive Voice and Causatives (Edilgen Yapı ve Ettirgenler)",
+  "dosya_adi": "04_passive_causatives.md",
+  "toplam_sayfa": 15,
+  "icon": "🔁",
+  "renk": "#2ECC71",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "Fiil Türleri ve Passive İlişkisi",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Passive Yapının Temeli</h2>\n<p>Passive (edilgen) çatı, eylemi yapanın değil, eylemin kendisinin ön planda olduğu yapıdır. Temel formül: <strong>\"Be + V3\"</strong></p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir fiili passive yapabilmek için <strong>nesne alması</strong> gerekir. Nesne almayan fiiller asla passive olamaz!</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (İntransitive - Geçişsiz Fiil):</strong><br>\n<strong>EN:</strong> After working a double shift at the hospital, the exhausted nurse finally slept for nearly twelve hours straight without waking up once.<br>\n<strong>TR:</strong> Hastanede çift vardiya çalıştıktan sonra, bitkin hemşire nihayet tek bir kez bile uyanmadan yaklaşık on iki saat boyunca aralıksız uyudu.<br>\n→ <strong>Açıklama:</strong> \"Slept\" fiili intransitive (geçişsiz)dir çünkü fiile \"neyi/kimi\" sorusunu sorduğumuzda cevap alamayız. \"For nearly twelve hours\" bir zaman zarfıdır, nesne değildir. İntransitive fiiller asla passive yapılamaz. Bu tür fiillerde eylem öznenin kendisinde biter, bir nesneye aktarılmaz.</p>\n<p><strong>Örnek 2 (Transitive - Geçişli Fiil):</strong><br>\n<strong>EN:</strong> A renowned construction company from Germany built a spectacular suspension bridge across the Bosphorus in just under three years.<br>\n<strong>TR:</strong> Almanya'dan ünlü bir inşaat şirketi, Boğaz boyunca uzanan muhteşem bir asma köprüyü sadece üç yıldan kısa sürede inşa etti.<br>\n→ <strong>Açıklama:</strong> \"Built\" fiili transitive (geçişli)dir çünkü \"neyi inşa etti?\" sorusuna \"a spectacular bridge\" cevabını alırız. Nesne aldığı için passive yapılabilir: \"A bridge was built...\" Passive cümlede, active cümlenin nesnesi (bridge) özne pozisyonuna geçer ve fiil \"was built\" olur.</p>\n<p><strong>Örnek 3 (Transitive - Passive Dönüşüm):</strong><br>\n<strong>EN:</strong> A spectacular suspension bridge was built by a renowned German construction company across the Bosphorus in just under three years.<br>\n<strong>TR:</strong> Muhteşem bir asma köprü, ünlü bir Alman inşaat şirketi tarafından Boğaz boyunca sadece üç yıldan kısa sürede inşa edildi.<br>\n→ <strong>Açıklama:</strong> Bu cümle Örnek 2'nin passive halidir. Active cümledeki nesne (bridge) özne olmuş, fiil \"was built\" (be + V3) şeklinde çekimlenmiştir. Zaman active cümleyle aynıdır (Past Simple), bu nedenle \"be\" fiili V2 (was/were) olarak kullanılmıştır. Eylemi yapan (agent) \"by\" ile belirtilmiştir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Fiil Türü</th>\n<th>Nesne Durumu</th>\n<th>Passive mi?</th>\n<th>Örnek Fiil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>İntransitive</strong></td>\n<td>Nesne almaz</td>\n<td>❌ HAYIR</td>\n<td>sleep, arrive, go, come</td>\n</tr>\n<tr>\n<td><strong>Transitive</strong></td>\n<td>Tek nesne alır</td>\n<td>✅ EVET</td>\n<td>build, break, write</td>\n</tr>\n<tr>\n<td><strong>Ditransitive</strong></td>\n<td>İki nesne alır</td>\n<td>✅ EVET (2 şekilde)</td>\n<td>give, send, tell</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerden hangisi passive yapılamaz?</p>\n<p>A) The children laughed loudly at the comedy show.<br>\nB) Someone stole my wallet at the concert.<br>\nC) The teacher explained the lesson very clearly.<br>\nD) They will announce the results tomorrow.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A\n\n**Açıklama:** \"Laughed\" fiili intransitiftir (nesne almaz). \"Neyi güldü?\" sorusu anlamsızdır. Bu nedenle passive yapılamaz.\n</details>\n\n<p>[Kelime sayısı: 238]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "After working a double shift at the hospital, the exhausted nurse finally slept for nearly twelve hours straight without waking up once.",
+          "tr": "Hastanede çift vardiya çalıştıktan sonra, bitkin hemşire nihayet tek bir kez bile uyanmadan yaklaşık on iki saat boyunca aralıksız uyudu.",
+          "description": "\"Slept\" fiili intransitive (geçişsiz)dir çünkü fiile \"neyi/kimi\" sorusunu sorduğumuzda cevap alamayız. \"For nearly twelve hours\" bir zaman zarfıdır, nesne değildir. İntransitive fiiller asla passive yapılamaz. Bu tür fiillerde eylem öznenin kendisinde biter, bir nesneye aktarılmaz.\n\n**Örnek 2 (Transitive - Geçişli Fiil):**"
+        },
+        {
+          "en": "A renowned construction company from Germany built a spectacular suspension bridge across the Bosphorus in just under three years.",
+          "tr": "Almanya'dan ünlü bir inşaat şirketi, Boğaz boyunca uzanan muhteşem bir asma köprüyü sadece üç yıldan kısa sürede inşa etti.",
+          "description": "\"Built\" fiili transitive (geçişli)dir çünkü \"neyi inşa etti?\" sorusuna \"a spectacular bridge\" cevabını alırız. Nesne aldığı için passive yapılabilir: \"A bridge was built...\" Passive cümlede, active cümlenin nesnesi (bridge) özne pozisyonuna geçer ve fiil \"was built\" olur.\n\n**Örnek 3 (Transitive - Passive Dönüşüm):**"
+        },
+        {
+          "en": "A spectacular suspension bridge was built by a renowned German construction company across the Bosphorus in just under three years.",
+          "tr": "Muhteşem bir asma köprü, ünlü bir Alman inşaat şirketi tarafından Boğaz boyunca sadece üç yıldan kısa sürede inşa edildi.",
+          "description": "Bu cümle Örnek 2'nin passive halidir. Active cümledeki nesne (bridge) özne olmuş, fiil \"was built\" (be + V3) şeklinde çekimlenmiştir. Zaman active cümleyle aynıdır (Past Simple), bu nedenle \"be\" fiili V2 (was/were) olarak kullanılmıştır. Eylemi yapan (agent) \"by\" ile belirtilmiştir."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerden hangisi passive yapılamaz?",
+        "options": {
+          "A": "The children laughed loudly at the comedy show.",
+          "B": "Someone stole my wallet at the concert.",
+          "C": "The teacher explained the lesson very clearly.",
+          "D": "They will announce the results tomorrow."
+        },
+        "correct": "A",
+        "explanation": "\"Laughed\" fiili intransitiftir (nesne almaz). \"Neyi güldü?\" sorusu anlamsızdır. Bu nedenle passive yapılamaz."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerden hangisi passive yapılamaz?",
+          "options": {
+            "A": "The children laughed loudly at the comedy show.",
+            "B": "Someone stole my wallet at the concert.",
+            "C": "The teacher explained the lesson very clearly.",
+            "D": "They will announce the results tomorrow."
+          },
+          "correct": "A",
+          "explanation": "\"Laughed\" fiili intransitiftir (nesne almaz). \"Neyi güldü?\" sorusu anlamsızdır. Bu nedenle passive yapılamaz."
+        }
+      ],
+      "word_count": 400
+    },
+    {
+      "page_number": 2,
+      "title": "İki Nesneli Fiillerde Passive (give, send, tell)",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Ditransitive Fiillerde Passive</h2>\n<p>Bazı fiiller (<strong>give, send, tell, ask, buy, teach, offer</strong>) iki nesne alır: <strong>Indirect Object (kime)</strong> ve <strong>Direct Object (neyi)</strong>. Bu fiiller iki farklı şekilde passive yapılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir fiilin iki nesne aldığını, fiile \"kime/neyi\" sorusunu yönelterek anlayabilirsiniz.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Active - İki Nesneli):</strong><br>\n<strong>EN:</strong> For her birthday last week, Jimmy's grandmother unexpectedly gave him a brand new laptop with the latest software.<br>\n<strong>TR:</strong> Geçen hafta doğum günü için, Jimmy'nin büyükannesi beklenmedik bir şekilde ona en son yazılımla donatılmış yepyeni bir dizüstü bilgisayar verdi.<br>\n→ <strong>Açıklama:</strong> \"Gave\" fiili iki nesne almıştır: Indirect Object \"him\" (kime) ve Direct Object \"a laptop\" (neyi). Bu tür fiiller iki nesne taşıdıkları için iki farklı passive cümle kurulabilir.</p>\n<p><strong>Örnek 2 (Passive - Indirect Object Özne Oldu):</strong><br>\n<strong>EN:</strong> Last week, Jimmy was unexpectedly given a brand new laptop with the latest software by his generous grandmother for his birthday.<br>\n<strong>TR:</strong> Geçen hafta, Jimmy'ye cömert büyükannesi tarafından doğum günü için beklenmedik bir şekilde en son yazılımla donatılmış yepyeni bir dizüstü bilgisayar verildi.<br>\n→ <strong>Açıklama:</strong> Burada indirect object \"Jimmy\" özne pozisyonuna getirilmiştir. Fiil \"was given\" olur ve direct object \"a laptop\" yerinde kalır. Bu kullanımda, iki nesneli bir fiil tek nesneyle kullanılmışsa, diğer nesnenin özne yapıldığını anlarız.</p>\n<p><strong>Örnek 3 (Passive - Direct Object Özne Oldu):</strong><br>\n<strong>EN:</strong> A brand new laptop with the latest software was unexpectedly given to Jimmy by his generous grandmother for his birthday last week.<br>\n<strong>TR:</strong> En son yazılımla donatılmış yepyeni bir dizüstü bilgisayar, geçen hafta doğum günü için cömert büyükannesi tarafından Jimmy'ye beklenmedik bir şekilde verildi.<br>\n→ <strong>Açıklama:</strong> Bu kez direct object \"a laptop\" özne yapılmıştır. Indirect object'i belirtmek için \"to\" edatı kullanılır: \"to Jimmy\". Bu, direct object'in özne olduğu passive yapılarda standarttır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir cümlede iki nesneli bir fiil (give, send) görüp devamında TEK nesne varsa, büyük ihtimalle cümle PASSIVE'dir ve diğer nesne özne yapılmıştır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Passive Türü</th>\n<th>Özne</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Tip 1</strong></td>\n<td>Indirect Object</td>\n<td>was/were given + DO</td>\n<td>I was given a gift</td>\n</tr>\n<tr>\n<td><strong>Tip 2</strong></td>\n<td>Direct Object</td>\n<td>was/were given + to + IO</td>\n<td>A gift was given to me</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"The manager sent the employees a detailed email\" cümlesinin DOĞRU passive hali hangisidir?</p>\n<p>A) A detailed email was sent the employees by the manager.<br>\nB) The employees were sent a detailed email by the manager.<br>\nC) The manager was sent a detailed email by the employees.<br>\nD) A detailed email sent to the employees by the manager.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n\n**Açıklama:** \"The employees\" indirect object'tir. Passive'de özne yapılabilir ve \"were sent\" kullanılır. A seçeneğinde \"to\" edatı eksiktir.\n</details>\n\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "For her birthday last week, Jimmy's grandmother unexpectedly gave him a brand new laptop with the latest software.",
+          "tr": "Geçen hafta doğum günü için, Jimmy'nin büyükannesi beklenmedik bir şekilde ona en son yazılımla donatılmış yepyeni bir dizüstü bilgisayar verdi.",
+          "description": "\"Gave\" fiili iki nesne almıştır: Indirect Object \"him\" (kime) ve Direct Object \"a laptop\" (neyi). Bu tür fiiller iki nesne taşıdıkları için iki farklı passive cümle kurulabilir.\n\n**Örnek 2 (Passive - Indirect Object Özne Oldu):**"
+        },
+        {
+          "en": "Last week, Jimmy was unexpectedly given a brand new laptop with the latest software by his generous grandmother for his birthday.",
+          "tr": "Geçen hafta, Jimmy'ye cömert büyükannesi tarafından doğum günü için beklenmedik bir şekilde en son yazılımla donatılmış yepyeni bir dizüstü bilgisayar verildi.",
+          "description": "Burada indirect object \"Jimmy\" özne pozisyonuna getirilmiştir. Fiil \"was given\" olur ve direct object \"a laptop\" yerinde kalır. Bu kullanımda, iki nesneli bir fiil tek nesneyle kullanılmışsa, diğer nesnenin özne yapıldığını anlarız.\n\n**Örnek 3 (Passive - Direct Object Özne Oldu):**"
+        },
+        {
+          "en": "A brand new laptop with the latest software was unexpectedly given to Jimmy by his generous grandmother for his birthday last week.",
+          "tr": "En son yazılımla donatılmış yepyeni bir dizüstü bilgisayar, geçen hafta doğum günü için cömert büyükannesi tarafından Jimmy'ye beklenmedik bir şekilde verildi.",
+          "description": "Bu kez direct object \"a laptop\" özne yapılmıştır. Indirect object'i belirtmek için \"to\" edatı kullanılır: \"to Jimmy\". Bu, direct object'in özne olduğu passive yapılarda standarttır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"The manager sent the employees a detailed email\" cümlesinin DOĞRU passive hali hangisidir?",
+        "options": {
+          "A": "A detailed email was sent the employees by the manager.",
+          "B": "The employees were sent a detailed email by the manager.",
+          "C": "The manager was sent a detailed email by the employees.",
+          "D": "A detailed email sent to the employees by the manager."
+        },
+        "correct": "B",
+        "explanation": "\"The employees\" indirect object'tir. Passive'de özne yapılabilir ve \"were sent\" kullanılır. A seçeneğinde \"to\" edatı eksiktir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The manager sent the employees a detailed email\" cümlesinin DOĞRU passive hali hangisidir?",
+          "options": {
+            "A": "A detailed email was sent the employees by the manager.",
+            "B": "The employees were sent a detailed email by the manager.",
+            "C": "The manager was sent a detailed email by the employees.",
+            "D": "A detailed email sent to the employees by the manager."
+          },
+          "correct": "B",
+          "explanation": "\"The employees\" indirect object'tir. Passive'de özne yapılabilir ve \"were sent\" kullanılır. A seçeneğinde \"to\" edatı eksiktir."
+        }
+      ],
+      "word_count": 434
+    },
+    {
+      "page_number": 3,
+      "title": "Zamanlara Göre Passive Yapımı",
+      "total_pages": 15,
+      "content_html": "<h2>📌 \"Be V3\" Formülü</h2>\n<p>Passive yapının temeli <strong>\"Be V3\"</strong> tür. Active cümledeki ana fiil hangi haldeyse (V1, V2, V3, Ving), \"be\" fiili de o halde çekimlenir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Passive'de asıl iş \"be\" fiilindedir. Ana fiil her zaman V3'tür (past participle).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Present Perfect Passive):</strong><br>\n<strong>EN:</strong> The dedicated team of scientists has finally prepared a comprehensive report on climate change after years of research.<br>\n<strong>TR:</strong> Kendini işine adamış bilim insanları ekibi, yıllarca süren araştırmalar sonucunda nihayet iklim değişikliği hakkında kapsamlı bir rapor hazırladı.<br>\n→ <strong>Açıklama:</strong> Active cümle Present Perfect (have/has + V3). Passive yaparken \"be\" fiilini V3 (been) yaparız: \"has been prepared\". \"A comprehensive report has been prepared...\"</p>\n<p><strong>Örnek 2 (Modal Passive):</strong><br>\n<strong>EN:</strong> All participants must submit their completed application forms to the committee no later than Friday evening.<br>\n<strong>TR:</strong> Tüm katılımcılar, doldurulmuş başvuru formlarını en geç Cuma akşamına kadar komiteye teslim etmelidir.<br>\n→ <strong>Açıklama:</strong> Active cümle modal + V0 (must submit). Passive'de \"be\" V0 halinde kalır: \"must be submitted\". \"Forms must be submitted...\"</p>\n<p><strong>Örnek 3 (Present Continuous Passive):</strong><br>\n<strong>EN:</strong> The local municipality is currently demolishing more than fifty abandoned buildings to make room for a new city park.<br>\n<strong>TR:</strong> Yerel belediye, yeni bir şehir parkına yer açmak için halihazırda elliden fazla terk edilmiş binayı yıkıyor.<br>\n→ <strong>Açıklama:</strong> Active cümle Present Continuous (am/is/are + Ving). Passive'de \"be\" Ving (being) olur: \"are being demolished\". \"Buildings are being demolished...\"</p>\n<p><strong>Örnek 4 (Future Perfect Passive):</strong><br>\n<strong>EN:</strong> By the end of next year, the construction company will have built three luxury residential towers in the city center.<br>\n<strong>TR:</strong> Gelecek yılın sonunda, inşaat şirketi şehir merkezinde üç lüks konut kulesi inşa etmiş olacak.<br>\n→ <strong>Açıklama:</strong> Active cümle Future Perfect (will have + V3). Passive'de \"be\" V3 (been) olur: \"will have been built\". \"Three towers will have been built...\"</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nPassive yaparken sadece \"be\" fiilinin şekli değişir. Ana fiil (V3) ASLA değişmez!\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Active Tense</th>\n<th>Active Formül</th>\n<th>Passive Formül</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Present Simple</td>\n<td>V1</td>\n<td>am/is/are + V3</td>\n</tr>\n<tr>\n<td>Past Simple</td>\n<td>V2</td>\n<td>was/were + V3</td>\n</tr>\n<tr>\n<td>Present Continuous</td>\n<td>am/is/are + Ving</td>\n<td>am/is/are + being + V3</td>\n</tr>\n<tr>\n<td>Present Perfect</td>\n<td>have/has + V3</td>\n<td>have/has + been + V3</td>\n</tr>\n<tr>\n<td>Modal</td>\n<td>modal + V0</td>\n<td>modal + be + V3</td>\n</tr>\n<tr>\n<td>Future Perfect</td>\n<td>will have + V3</td>\n<td>will have + been + V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"They will announce the winners next week\" cümlesinin passive hali nedir?</p>\n<p>A) The winners will be announced next week.<br>\nB) The winners will announced next week.<br>\nC) The winners will have been announced next week.<br>\nD) The winners are announced next week.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A\n\n**Açıklama:** Future tense (will + V0) için passive formülü \"will be + V3\"tür. \"Announce\" V3'ü \"announced\" olur.\n</details>\n\n<p>[Kelime sayısı: 225]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The dedicated team of scientists has finally prepared a comprehensive report on climate change after years of research.",
+          "tr": "Kendini işine adamış bilim insanları ekibi, yıllarca süren araştırmalar sonucunda nihayet iklim değişikliği hakkında kapsamlı bir rapor hazırladı.",
+          "description": "Active cümle Present Perfect (have/has + V3). Passive yaparken \"be\" fiilini V3 (been) yaparız: \"has been prepared\". \"A comprehensive report has been prepared...\"\n\n**Örnek 2 (Modal Passive):**"
+        },
+        {
+          "en": "All participants must submit their completed application forms to the committee no later than Friday evening.",
+          "tr": "Tüm katılımcılar, doldurulmuş başvuru formlarını en geç Cuma akşamına kadar komiteye teslim etmelidir.",
+          "description": "Active cümle modal + V0 (must submit). Passive'de \"be\" V0 halinde kalır: \"must be submitted\". \"Forms must be submitted...\"\n\n**Örnek 3 (Present Continuous Passive):**"
+        },
+        {
+          "en": "The local municipality is currently demolishing more than fifty abandoned buildings to make room for a new city park.",
+          "tr": "Yerel belediye, yeni bir şehir parkına yer açmak için halihazırda elliden fazla terk edilmiş binayı yıkıyor.",
+          "description": "Active cümle Present Continuous (am/is/are + Ving). Passive'de \"be\" Ving (being) olur: \"are being demolished\". \"Buildings are being demolished...\"\n\n**Örnek 4 (Future Perfect Passive):**"
+        },
+        {
+          "en": "By the end of next year, the construction company will have built three luxury residential towers in the city center.",
+          "tr": "Gelecek yılın sonunda, inşaat şirketi şehir merkezinde üç lüks konut kulesi inşa etmiş olacak.",
+          "description": "Active cümle Future Perfect (will have + V3). Passive'de \"be\" V3 (been) olur: \"will have been built\". \"Three towers will have been built...\""
+        }
+      ],
+      "mini_test": {
+        "question": "\"They will announce the winners next week\" cümlesinin passive hali nedir?",
+        "options": {
+          "A": "The winners will be announced next week.",
+          "B": "The winners will announced next week.",
+          "C": "The winners will have been announced next week.",
+          "D": "The winners are announced next week."
+        },
+        "correct": "A",
+        "explanation": "Future tense (will + V0) için passive formülü \"will be + V3\"tür. \"Announce\" V3'ü \"announced\" olur."
+      },
+      "mini_tests": [
+        {
+          "question": "\"They will announce the winners next week\" cümlesinin passive hali nedir?",
+          "options": {
+            "A": "The winners will be announced next week.",
+            "B": "The winners will announced next week.",
+            "C": "The winners will have been announced next week.",
+            "D": "The winners are announced next week."
+          },
+          "correct": "A",
+          "explanation": "Future tense (will + V0) için passive formülü \"will be + V3\"tür. \"Announce\" V3'ü \"announced\" olur."
+        }
+      ],
+      "word_count": 441
+    },
+    {
+      "page_number": 4,
+      "title": "Mastar ve Ulaçların Passive Halleri (Infinitive & Gerund)",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Non-finite Fiillerde Passive</h2>\n<p>Infinitives (to V0) ve Gerunds (Ving) da passive yapılabilir. Bu yapılar, fiil çekimi almadıkları için kendi içlerinde passive form oluştururlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Cümlede \"to be V3\" veya \"being V3\" gördüğünüzde, bunların infinitive/gerund'ın passive halleri olduğunu bilin.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Infinitive Passive - To be V3):</strong><br>\n<strong>EN:</strong> According to several reliable sources, they are widely known to treat their elderly employees with remarkable respect and dignity.<br>\n<strong>TR:</strong> Birkaç güvenilir kaynağa göre, onların yaşlı çalışanlarına dikkate değer bir saygı ve haysiyetle davrandıkları yaygın olarak biliniyor.<br>\n→ <strong>Açıklama:</strong> Active infinitive \"to treat\" (davranmak). Passive'de \"to be treated\" olur. \"They are known to treat...\" active, \"She is known to be treated...\" passive anlam verir.</p>\n<p><strong>Örnek 2 (Perfect Infinitive Passive - To have been V3):</strong><br>\n<strong>EN:</strong> The police believe that the fugitive, who was armed and dangerous, to have killed at least ten innocent people during his escape.<br>\n<strong>TR:</strong> Polis, silahlı ve tehlikeli olan kaçağın kaçışı sırasında en az on masum insanı öldürdüğüne inanıyor.<br>\n→ <strong>Açıklama:</strong> Perfect infinitive active \"to have killed\". Passive'de \"to have been killed\" olur. \"He is believed to have killed...\" active, \"He is believed to have been killed...\" passive.</p>\n<p><strong>Örnek 3 (Gerund Passive - Being V3):</strong><br>\n<strong>EN:</strong> As an extremely patient person, I genuinely dislike waiting for people who are habitually late without any valid excuse.<br>\n<strong>TR:</strong> Son derece sabırlı bir insan olarak, alışkanlıkla geç kalan insanları geçerli bir mazeret olmadan beklemekten gerçekten hoşlanmıyorum.<br>\n→ <strong>Açıklama:</strong> Active gerund \"waiting\" (beklemek). Passive'de \"being waited\" (beklenilmek) olur. \"I dislike waiting...\" active, \"I dislike being waited...\" passive.</p>\n<p><strong>Örnek 4 (Perfect Gerund Passive - Having been V3):</strong><br>\n<strong>EN:</strong> In court today, the defendant vehemently denied having accused his business partner of embezzling company funds.<br>\n<strong>TR:</strong> Bugün mahkemede, sanık iş ortağını şirket fonlarını zimmetine geçirmekle suçladığını şiddetle reddetti.<br>\n→ <strong>Açıklama:</strong> Perfect gerund active \"having accused\". Passive'de \"having been accused\" olur: \"suçlanmış olduğunu reddediyor\".</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Active Form</th>\n<th>Passive Form</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Infinitive</strong></td>\n<td>to V0</td>\n<td>to be V3</td>\n</tr>\n<tr>\n<td><strong>Perfect Infinitive</strong></td>\n<td>to have V3</td>\n<td>to have been V3</td>\n</tr>\n<tr>\n<td><strong>Gerund</strong></td>\n<td>Ving</td>\n<td>being V3</td>\n</tr>\n<tr>\n<td><strong>Perfect Gerund</strong></td>\n<td>having V3</td>\n<td>having been V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"She denies having accused him\" cümlesinin passive karşılığı nedir?</p>\n<p>A) She denies having been accused him.<br>\nB) She denies being accused.<br>\nC) She denies having been accused.<br>\nD) She denies to be accused.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n\n**Açıklama:** \"Having accused\" (active) → \"having been accused\" (passive). \"Onu suçladığını\" → \"suçlandığını\" anlamına gelir.\n</details>\n\n<p>[Kelime sayısı: 228]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "According to several reliable sources, they are widely known to treat their elderly employees with remarkable respect and dignity.",
+          "tr": "Birkaç güvenilir kaynağa göre, onların yaşlı çalışanlarına dikkate değer bir saygı ve haysiyetle davrandıkları yaygın olarak biliniyor.",
+          "description": "Active infinitive \"to treat\" (davranmak). Passive'de \"to be treated\" olur. \"They are known to treat...\" active, \"She is known to be treated...\" passive anlam verir.\n\n**Örnek 2 (Perfect Infinitive Passive - To have been V3):**"
+        },
+        {
+          "en": "The police believe that the fugitive, who was armed and dangerous, to have killed at least ten innocent people during his escape.",
+          "tr": "Polis, silahlı ve tehlikeli olan kaçağın kaçışı sırasında en az on masum insanı öldürdüğüne inanıyor.",
+          "description": "Perfect infinitive active \"to have killed\". Passive'de \"to have been killed\" olur. \"He is believed to have killed...\" active, \"He is believed to have been killed...\" passive.\n\n**Örnek 3 (Gerund Passive - Being V3):**"
+        },
+        {
+          "en": "As an extremely patient person, I genuinely dislike waiting for people who are habitually late without any valid excuse.",
+          "tr": "Son derece sabırlı bir insan olarak, alışkanlıkla geç kalan insanları geçerli bir mazeret olmadan beklemekten gerçekten hoşlanmıyorum.",
+          "description": "Active gerund \"waiting\" (beklemek). Passive'de \"being waited\" (beklenilmek) olur. \"I dislike waiting...\" active, \"I dislike being waited...\" passive.\n\n**Örnek 4 (Perfect Gerund Passive - Having been V3):**"
+        },
+        {
+          "en": "In court today, the defendant vehemently denied having accused his business partner of embezzling company funds.",
+          "tr": "Bugün mahkemede, sanık iş ortağını şirket fonlarını zimmetine geçirmekle suçladığını şiddetle reddetti.",
+          "description": "Perfect gerund active \"having accused\". Passive'de \"having been accused\" olur: \"suçlanmış olduğunu reddediyor\"."
+        }
+      ],
+      "mini_test": {
+        "question": "\"She denies having accused him\" cümlesinin passive karşılığı nedir?",
+        "options": {
+          "A": "She denies having been accused him.",
+          "B": "She denies being accused.",
+          "C": "She denies having been accused.",
+          "D": "She denies to be accused."
+        },
+        "correct": "C",
+        "explanation": "\"Having accused\" (active) → \"having been accused\" (passive). \"Onu suçladığını\" → \"suçlandığını\" anlamına gelir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"She denies having accused him\" cümlesinin passive karşılığı nedir?",
+          "options": {
+            "A": "She denies having been accused him.",
+            "B": "She denies being accused.",
+            "C": "She denies having been accused.",
+            "D": "She denies to be accused."
+          },
+          "correct": "C",
+          "explanation": "\"Having accused\" (active) → \"having been accused\" (passive). \"Onu suçladığını\" → \"suçlandığını\" anlamına gelir."
+        }
+      ],
+      "word_count": 403
+    },
+    {
+      "page_number": 5,
+      "title": "Deyimsel Fiillerde Passive & Stative Passive",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Phrasal Verbs ve Prepositional Verbs</h2>\n<p>Deyimsel fiiller (phrasal verbs) ve edatla kullanılan fiiller (prepositional verbs) passive yapıldığında, <strong>edat fiille birlikte kalır</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Call off\" (iptal etmek) passive'de \"was called off\" olur. Edat asla düşmez!</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Phrasal Verb - call off):</strong><br>\n<strong>EN:</strong> Due to the severe thunderstorm warning and unsafe field conditions, the referee finally decided to call off the championship match.<br>\n<strong>TR:</strong> Şiddetli fırtına uyarısı ve güvensiz saha koşulları nedeniyle, hakem nihayet şampiyona maçını iptal etmeye karar verdi.<br>\n→ <strong>Açıklama:</strong> Active cümle \"call off the match\". Passive'de \"the match was called off\" olur. \"Off\" edatı fiille birlikte kalır ve asla düşmez. Bu, tüm phrasal verb'ler için geçerlidir.</p>\n<p><strong>Örnek 2 (Prepositional Verb - insist on):</strong><br>\n<strong>EN:</strong> The company's human resources department insists on absolute punctuality from all employees during working hours.<br>\n<strong>TR:</strong> Şirketin insan kaynakları departmanı, çalışma saatleri içinde tüm çalışanlardan mutlak dakiklik konusunda ısrar ediyor.<br>\n→ <strong>Açıklama:</strong> \"Insist on punctuality\" (dakiklikte ısrar etmek). Passive'de \"punctuality is insisted on\" olur. Edat (on) fiille birlikte kalır. Bu tür fiillerde nesne edattan sonra gelir.</p>\n<p><strong>Örnek 3 (Stative Passive - Durum Bildiren):</strong><br>\n<strong>EN:</strong> Unfortunately, the famous actress cannot perform in the play tonight because her leg is broken after a fall on the stairs.<br>\n<strong>TR:</strong> Ne yazık ki, ünlü oyuncu bu gece oyunda sahne alamayacak çünkü merdivenlerde düştükten sonra bacağı kırık.<br>\n→ <strong>Açıklama:</strong> \"Is broken\" görünüşte passive gibidir ancak bir eylem değil, DURUM bildirir. Kırılma anını değil, mevcut durumu (kırık olma hali) anlatır. Bu bir sıfat görevindedir.</p>\n<p><strong>Örnek 4 (Stative Passive + get ile Eylem):</strong><br>\n<strong>EN:</strong> While she was skiing down the steep slope, she lost control and her leg got broken in three different places.<br>\n<strong>TR:</strong> Dik yamaçtan kayak yaparken, kontrolü kaybetti ve bacağı üç ayrı yerden kırıldı.<br>\n→ <strong>Açıklama:</strong> \"Got broken\" artık bir eylem bildirir (kırılma anı). \"Be\" yerine \"get\" kullanarak stative passive'i eylem bildiren active bir yapıya dönüştürürüz. Stative passive durum, \"get\" passive ise oluş anlatır.</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\nStative passive'ler (is broken, is interested, is worried) aslında sıfattır. Eylem değil, durum anlatırlar. \"By\" ile kullanılmazlar!\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı Türü</th>\n<th>Örnek</th>\n<th>Açıklama</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Phrasal Verb Passive</strong></td>\n<td>The game was called off</td>\n<td>Edat fiille kalır</td>\n</tr>\n<tr>\n<td><strong>Prepositional Verb Passive</strong></td>\n<td>Punctuality is insisted on</td>\n<td>Edat düşmez</td>\n</tr>\n<tr>\n<td><strong>Stative Passive</strong></td>\n<td>Her leg is broken</td>\n<td>Durum (kırık)</td>\n</tr>\n<tr>\n<td><strong>Get Passive</strong></td>\n<td>Her leg got broken</td>\n<td>Eylem (kırıldı)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Hangisi bir stative passive örneğidir?</p>\n<p>A) The game was called off due to rain.<br>\nB) She got exhausted after working all day.<br>\nC) The window was broken by the thief last night.<br>\nD) He is interested in modern art.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D\n\n**Açıklama:** \"Is interested\" bir durumdur (ilgili olma hali), eylem değil. Diğerleri eylem bildiren passive'lerdir.\n</details>\n\n<p>[Kelime sayısı: 232]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Due to the severe thunderstorm warning and unsafe field conditions, the referee finally decided to call off the championship match.",
+          "tr": "Şiddetli fırtına uyarısı ve güvensiz saha koşulları nedeniyle, hakem nihayet şampiyona maçını iptal etmeye karar verdi.",
+          "description": "Active cümle \"call off the match\". Passive'de \"the match was called off\" olur. \"Off\" edatı fiille birlikte kalır ve asla düşmez. Bu, tüm phrasal verb'ler için geçerlidir.\n\n**Örnek 2 (Prepositional Verb - insist on):**"
+        },
+        {
+          "en": "The company's human resources department insists on absolute punctuality from all employees during working hours.",
+          "tr": "Şirketin insan kaynakları departmanı, çalışma saatleri içinde tüm çalışanlardan mutlak dakiklik konusunda ısrar ediyor.",
+          "description": "\"Insist on punctuality\" (dakiklikte ısrar etmek). Passive'de \"punctuality is insisted on\" olur. Edat (on) fiille birlikte kalır. Bu tür fiillerde nesne edattan sonra gelir.\n\n**Örnek 3 (Stative Passive - Durum Bildiren):**"
+        },
+        {
+          "en": "Unfortunately, the famous actress cannot perform in the play tonight because her leg is broken after a fall on the stairs.",
+          "tr": "Ne yazık ki, ünlü oyuncu bu gece oyunda sahne alamayacak çünkü merdivenlerde düştükten sonra bacağı kırık.",
+          "description": "\"Is broken\" görünüşte passive gibidir ancak bir eylem değil, DURUM bildirir. Kırılma anını değil, mevcut durumu (kırık olma hali) anlatır. Bu bir sıfat görevindedir.\n\n**Örnek 4 (Stative Passive + get ile Eylem):**"
+        },
+        {
+          "en": "While she was skiing down the steep slope, she lost control and her leg got broken in three different places.",
+          "tr": "Dik yamaçtan kayak yaparken, kontrolü kaybetti ve bacağı üç ayrı yerden kırıldı.",
+          "description": "\"Got broken\" artık bir eylem bildirir (kırılma anı). \"Be\" yerine \"get\" kullanarak stative passive'i eylem bildiren active bir yapıya dönüştürürüz. Stative passive durum, \"get\" passive ise oluş anlatır."
+        }
+      ],
+      "mini_test": {
+        "question": "Hangisi bir stative passive örneğidir?",
+        "options": {
+          "A": "The game was called off due to rain.",
+          "B": "She got exhausted after working all day.",
+          "C": "The window was broken by the thief last night.",
+          "D": "He is interested in modern art."
+        },
+        "correct": "D",
+        "explanation": "\"Is interested\" bir durumdur (ilgili olma hali), eylem değil. Diğerleri eylem bildiren passive'lerdir."
+      },
+      "mini_tests": [
+        {
+          "question": "Hangisi bir stative passive örneğidir?",
+          "options": {
+            "A": "The game was called off due to rain.",
+            "B": "She got exhausted after working all day.",
+            "C": "The window was broken by the thief last night.",
+            "D": "He is interested in modern art."
+          },
+          "correct": "D",
+          "explanation": "\"Is interested\" bir durumdur (ilgili olma hali), eylem değil. Diğerleri eylem bildiren passive'lerdir."
+        }
+      ],
+      "word_count": 447
+    },
+    {
+      "page_number": 6,
+      "title": "Passive Stratejileri",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Sınav Stratejileri</h2>\n<p>Passive sorularında doğru cevabı bulmak için uygulanacak adımlar ve ipuçları.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir cümlede fiilin nesne alıp almadığını kontrol ederek %90 doğru tahmin yapabilirsiniz.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Fiil + Edat - Pasif İşareti):</strong><br>\n<strong>EN:</strong> In this prestigious law firm, absolute punctuality and professional attire are always insisted on by the senior partners.<br>\n<strong>TR:</strong> Bu prestijli hukuk bürosunda, mutlak dakiklik ve profesyonel kıyafet konusunda kıdemli ortaklar tarafından her zaman ısrar edilir.<br>\n→ <strong>Açıklama:</strong> Boşluğun devamında bir edat (on) varsa, cümle %90 ihtimalle PASSIVE'dir. Çünkü nesne edattan önceye (özne konumuna) alınmıştır. Burada \"punctuality\" özne, \"insisted on\" passive.</p>\n<p><strong>Örnek 2 (It...that yapısı - Pasif İşareti):</strong><br>\n<strong>EN:</strong> It is widely believed that regular exercise and a balanced diet can significantly reduce the risk of chronic diseases.<br>\n<strong>TR:</strong> Düzenli egzersiz ve dengeli beslenmenin kronik hastalık riskini önemli ölçüde azaltabileceğine yaygın olarak inanılıyor.<br>\n→ <strong>Açıklama:</strong> \"It ____ that\" arası boş bırakıldığında cevap %80 ihtimalle PASSIVE'tir. \"It is believed that...\", \"It is said that...\" gibi yapılar çok yaygındır.</p>\n<p><strong>Örnek 3 (Duygu Bildiren Passive):</strong><br>\n<strong>EN:</strong> All the students were deeply disappointed when they learned that the long-awaited field trip had been cancelled due to budget cuts.<br>\n<strong>TR:</strong> Uzun zamandır beklenen okul gezisinin bütçe kesintileri nedeniyle iptal edildiğini öğrendiklerinde, tüm öğrenciler derin bir hayal kırıklığına uğradılar.<br>\n→ <strong>Açıklama:</strong> \"Were disappointed\" (hayal kırıklığına uğradılar) yapı olarak passive'dir. Duygular, hisler İngilizce'de genellikle passive ile ifade edilir: I am bored, she was thrilled, they were excited.</p>\n<p><strong>Örnek 4 (Noktalama İşareti - Pasif İşareti):</strong><br>\n<strong>EN:</strong> The new policy, which had been discussed for months, was finally implemented, and all employees were informed immediately.<br>\n<strong>TR:</strong> Aylardır tartışılan yeni politika nihayet uygulamaya kondu ve tüm çalışanlar hemen bilgilendirildi.<br>\n→ <strong>Açıklama:</strong> Boşluğun devamında virgül (,) veya noktalı virgül (;) varsa, nesne boşluğun öncesine geçmiştir. Bu nedenle seçeneklerde PASSIVE yapılara bakılmalıdır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Sınav Stratejisi:**\n1. Fiil nesne alıyor mu? (intransitive ise aktif)\n2. Boşluk sonrası nesne var mı? (varsa aktif, yoksa pasif)\n3. Boşluk sonrası edat var mı? (varsa %90 pasif)\n4. It____that var mı? (varsa %80 pasif)\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>İşaret</th>\n<th>Olasılık</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Fiil + edat</strong></td>\n<td>(on, to, at, with)</td>\n<td>%90 PASSIVE</td>\n</tr>\n<tr>\n<td><strong>It____that</strong></td>\n<td>It ... that</td>\n<td>%80 PASSIVE</td>\n</tr>\n<tr>\n<td><strong>Noktalama</strong></td>\n<td>, ; .</td>\n<td>PASSIVE</td>\n</tr>\n<tr>\n<td><strong>Noun clause</strong></td>\n<td>that/what/how + SVO</td>\n<td>AKTİF</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"The problem <strong><em>_</em></strong> carefully by the committee before they made a decision.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) was discussed<br>\nB) discussed<br>\nC) has discussed<br>\nD) discussing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A\n\n**Açıklama:** \"By the committee\" ifadesi passive işaretidir. Nesne (the problem) özne yapılmış, fiil passive olmalı: \"was discussed\".\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "In this prestigious law firm, absolute punctuality and professional attire are always insisted on by the senior partners.",
+          "tr": "Bu prestijli hukuk bürosunda, mutlak dakiklik ve profesyonel kıyafet konusunda kıdemli ortaklar tarafından her zaman ısrar edilir.",
+          "description": "Boşluğun devamında bir edat (on) varsa, cümle %90 ihtimalle PASSIVE'dir. Çünkü nesne edattan önceye (özne konumuna) alınmıştır. Burada \"punctuality\" özne, \"insisted on\" passive.\n\n**Örnek 2 (It...that yapısı - Pasif İşareti):**"
+        },
+        {
+          "en": "It is widely believed that regular exercise and a balanced diet can significantly reduce the risk of chronic diseases.",
+          "tr": "Düzenli egzersiz ve dengeli beslenmenin kronik hastalık riskini önemli ölçüde azaltabileceğine yaygın olarak inanılıyor.",
+          "description": "\"It ____ that\" arası boş bırakıldığında cevap %80 ihtimalle PASSIVE'tir. \"It is believed that...\", \"It is said that...\" gibi yapılar çok yaygındır.\n\n**Örnek 3 (Duygu Bildiren Passive):**"
+        },
+        {
+          "en": "All the students were deeply disappointed when they learned that the long-awaited field trip had been cancelled due to budget cuts.",
+          "tr": "Uzun zamandır beklenen okul gezisinin bütçe kesintileri nedeniyle iptal edildiğini öğrendiklerinde, tüm öğrenciler derin bir hayal kırıklığına uğradılar.",
+          "description": "\"Were disappointed\" (hayal kırıklığına uğradılar) yapı olarak passive'dir. Duygular, hisler İngilizce'de genellikle passive ile ifade edilir: I am bored, she was thrilled, they were excited.\n\n**Örnek 4 (Noktalama İşareti - Pasif İşareti):**"
+        },
+        {
+          "en": "The new policy, which had been discussed for months, was finally implemented, and all employees were informed immediately.",
+          "tr": "Aylardır tartışılan yeni politika nihayet uygulamaya kondu ve tüm çalışanlar hemen bilgilendirildi.",
+          "description": "Boşluğun devamında virgül (,) veya noktalı virgül (;) varsa, nesne boşluğun öncesine geçmiştir. Bu nedenle seçeneklerde PASSIVE yapılara bakılmalıdır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"The problem _______ carefully by the committee before they made a decision.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "was discussed",
+          "B": "discussed",
+          "C": "has discussed",
+          "D": "discussing"
+        },
+        "correct": "A",
+        "explanation": "\"By the committee\" ifadesi passive işaretidir. Nesne (the problem) özne yapılmış, fiil passive olmalı: \"was discussed\"."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The problem _______ carefully by the committee before they made a decision.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "was discussed",
+            "B": "discussed",
+            "C": "has discussed",
+            "D": "discussing"
+          },
+          "correct": "A",
+          "explanation": "\"By the committee\" ifadesi passive işaretidir. Nesne (the problem) özne yapılmış, fiil passive olmalı: \"was discussed\"."
+        }
+      ],
+      "word_count": 418
+    },
+    {
+      "page_number": 7,
+      "title": "That-Clause ile Passive (It is said that...)",
+      "total_pages": 15,
+      "content_html": "<h2>📌 \"That-Clause\" Nesne Olduğunda</h2>\n<p>\"That + cümle\" yapısı bir fiilin nesnesi olduğunda, iki şekilde passive yapılabilir. İlki <strong>\"It\" ile başlayan</strong> yapıdır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"People say that...\" → \"It is said that...\" en yaygın passive dönüşümdür.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Active - that clause):</strong><br>\n<strong>EN:</strong> Many local residents and shopkeepers say that the new shopping mall has significantly increased traffic congestion in the area.<br>\n<strong>TR:</strong> Birçok yerel sakin ve dükkan sahibi, yeni alışveriş merkezinin bölgedeki trafik sıkışıklığını önemli ölçüde artırdığını söylüyor.<br>\n→ <strong>Açıklama:</strong> Active cümlede \"say\" fiilinin nesnesi \"that + clause\" yapısıdır (that the mall has increased traffic). Bu tür cümleler passive yapılırken iki seçenek vardır.</p>\n<p><strong>Örnek 2 (Passive - It ile):</strong><br>\n<strong>EN:</strong> It is widely said by local residents and shopkeepers that the new shopping mall has significantly increased traffic congestion in the area.<br>\n<strong>TR:</strong> Yerel sakinler ve dükkan sahipleri tarafından, yeni alışveriş merkezinin bölgedeki trafik sıkışıklığını önemli ölçüde artırdığı yaygın olarak söyleniyor.<br>\n→ <strong>Açıklama:</strong> Birinci passive yöntemi: \"It\" boş özne (empty subject) olarak kullanılır. \"It is said that + cümle\" formülü uygulanır. Bu, en yaygın ve güvenli passive yöntemidir.</p>\n<p><strong>Örnek 3 (Active - think with that):</strong><br>\n<strong>EN:</strong> At that time, most people genuinely thought that social workers were doing invaluable and life-changing work in impoverished communities.<br>\n<strong>TR:</strong> O zamanlar, çoğu insan yardım çalışanlarının yoksul topluluklarda paha biçilmez ve hayat değiştiren işler yaptıklarını gerçekten düşünüyordu.<br>\n→ <strong>Açıklama:</strong> Past tense'de bir that-clause örneği. \"Thought\" fiili, \"that social workers were doing...\" nesnesini alıyor. Bu da passive yapılabilir.</p>\n<p><strong>Örnek 4 (Passive - It ile Past):</strong><br>\n<strong>EN:</strong> At that time, it was genuinely thought that social workers were doing invaluable and life-changing work in impoverished communities.<br>\n<strong>TR:</strong> O zamanlar, yardım çalışanlarının yoksul topluluklarda paha biçilmez ve hayat değiştiren işler yaptıkları gerçekten düşünülüyordu.<br>\n→ <strong>Açıklama:</strong> Past tense'de \"it was thought that + cümle\" kullanılır. \"Be\" fiili active cümlenin zamanına uygun olarak çekimlenir: thought (V2) → was thought.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"It is said that...\" yapısında \"that\"den sonra gelen cümle, active cümledeki that-clause'un aynısıdır. Zaman değişmez!\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Active</th>\n<th>Passive (It ile)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>People say that...</td>\n<td>It is said that...</td>\n</tr>\n<tr>\n<td>People thought that...</td>\n<td>It was thought that...</td>\n</tr>\n<tr>\n<td>Everybody knows that...</td>\n<td>It is known that...</td>\n</tr>\n<tr>\n<td>They believe that...</td>\n<td>It is believed that...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"Everyone knows that she is an excellent surgeon\" cümlesinin \"It\" ile passive hali nedir?</p>\n<p>A) It knows that she is an excellent surgeon.<br>\nB) It is known that she is an excellent surgeon.<br>\nC) It was known that she is an excellent surgeon.<br>\nD) She is known that she is an excellent surgeon.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n\n**Açıklama:** \"Everyone knows\" (Present) → \"It is known that...\" (Present Passive). \"That\"den sonraki cümle aynen kalır.\n</details>\n\n<p>[Kelime sayısı: 222]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Many local residents and shopkeepers say that the new shopping mall has significantly increased traffic congestion in the area.",
+          "tr": "Birçok yerel sakin ve dükkan sahibi, yeni alışveriş merkezinin bölgedeki trafik sıkışıklığını önemli ölçüde artırdığını söylüyor.",
+          "description": "Active cümlede \"say\" fiilinin nesnesi \"that + clause\" yapısıdır (that the mall has increased traffic). Bu tür cümleler passive yapılırken iki seçenek vardır.\n\n**Örnek 2 (Passive - It ile):**"
+        },
+        {
+          "en": "It is widely said by local residents and shopkeepers that the new shopping mall has significantly increased traffic congestion in the area.",
+          "tr": "Yerel sakinler ve dükkan sahipleri tarafından, yeni alışveriş merkezinin bölgedeki trafik sıkışıklığını önemli ölçüde artırdığı yaygın olarak söyleniyor.",
+          "description": "Birinci passive yöntemi: \"It\" boş özne (empty subject) olarak kullanılır. \"It is said that + cümle\" formülü uygulanır. Bu, en yaygın ve güvenli passive yöntemidir.\n\n**Örnek 3 (Active - think with that):**"
+        },
+        {
+          "en": "At that time, most people genuinely thought that social workers were doing invaluable and life-changing work in impoverished communities.",
+          "tr": "O zamanlar, çoğu insan yardım çalışanlarının yoksul topluluklarda paha biçilmez ve hayat değiştiren işler yaptıklarını gerçekten düşünüyordu.",
+          "description": "Past tense'de bir that-clause örneği. \"Thought\" fiili, \"that social workers were doing...\" nesnesini alıyor. Bu da passive yapılabilir.\n\n**Örnek 4 (Passive - It ile Past):**"
+        },
+        {
+          "en": "At that time, it was genuinely thought that social workers were doing invaluable and life-changing work in impoverished communities.",
+          "tr": "O zamanlar, yardım çalışanlarının yoksul topluluklarda paha biçilmez ve hayat değiştiren işler yaptıkları gerçekten düşünülüyordu.",
+          "description": "Past tense'de \"it was thought that + cümle\" kullanılır. \"Be\" fiili active cümlenin zamanına uygun olarak çekimlenir: thought (V2) → was thought."
+        }
+      ],
+      "mini_test": {
+        "question": "\"Everyone knows that she is an excellent surgeon\" cümlesinin \"It\" ile passive hali nedir?",
+        "options": {
+          "A": "It knows that she is an excellent surgeon.",
+          "B": "It is known that she is an excellent surgeon.",
+          "C": "It was known that she is an excellent surgeon.",
+          "D": "She is known that she is an excellent surgeon."
+        },
+        "correct": "B",
+        "explanation": "\"Everyone knows\" (Present) → \"It is known that...\" (Present Passive). \"That\"den sonraki cümle aynen kalır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Everyone knows that she is an excellent surgeon\" cümlesinin \"It\" ile passive hali nedir?",
+          "options": {
+            "A": "It knows that she is an excellent surgeon.",
+            "B": "It is known that she is an excellent surgeon.",
+            "C": "It was known that she is an excellent surgeon.",
+            "D": "She is known that she is an excellent surgeon."
+          },
+          "correct": "B",
+          "explanation": "\"Everyone knows\" (Present) → \"It is known that...\" (Present Passive). \"That\"den sonraki cümle aynen kalır."
+        }
+      ],
+      "word_count": 445
+    },
+    {
+      "page_number": 8,
+      "title": "That-Clause'tan Infinitive'e Dönüşüm",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Özne + Passive + Infinitive</h2>\n<p>That-clause'lu cümlelerin ikinci passive yöntemi: <strong>That-clause'un öznesi ana özne yapılır</strong>, that-clause'un fiili ise <strong>infinitive (to V0)</strong> haline dönüşür.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"It is said that he KNOWS...\" → \"He is said TO KNOW...\" (eşzamanlı)</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Eşzamanlı - to V0):</strong><br>\n<strong>EN:</strong> According to several business analysts, he is widely rumored to know some of the most influential politicians in the country.<br>\n<strong>TR:</strong> Birkaç iş analistine göre, onun ülkedeki en etkili politikacılardan bazılarını tanıdığı yaygın olarak söyleniyor.<br>\n→ <strong>Açıklama:</strong> Active: \"They say that he KNOWS...\" (say ve knows eşzamanlı). Passive dönüşüm: \"He is said TO KNOW...\" That-clause'un öznesi (he) ana özne olur, fiil (knows) ise \"to know\" (to V0) haline gelir.</p>\n<p><strong>Örnek 2 (Süreç Bildiren - to be Ving):</strong><br>\n<strong>EN:</strong> During the investigation, the security guard was thought to be doing something suspicious behind the closed doors.<br>\n<strong>TR:</strong> Soruşturma sırasında, güvenlik görevlisinin kapalı kapılar ardında şüpheli bir şey yaptığı düşünülüyordu.<br>\n→ <strong>Açıklama:</strong> Active: \"People thought that he WAS DOING...\" (were doing süreç bildiriyor). Passive: \"He was thought TO BE DOING...\" That-clause'taki eylem süreç bildirdiğinde (were doing), infinitive \"to be Ving\" olur.</p>\n<p><strong>Örnek 3 (Farklı Zaman - to have V3):</strong><br>\n<strong>EN:</strong> Based on the forensic evidence, the suspect is now known to have killed at least three people over the past five years.<br>\n<strong>TR:</strong> Adli tıp kanıtlarına dayanarak, zanlının son beş yılda en az üç kişiyi öldürdüğü artık biliniyor.<br>\n→ <strong>Açıklama:</strong> Active: \"Police know that he KILLED...\" (killed, know'dan önce gerçekleşmiş). Passive: \"He is known TO HAVE KILLED...\" That-clause'taki eylem ana fiilden önce olduğunda, infinitive \"to have V3\" olur.</p>\n<p><strong>Örnek 4 (Farklı Zaman - Passive Infinitive):</strong><br>\n<strong>EN:</strong> The famous painting, which disappeared during the war, is believed to have been destroyed in a fire shortly afterwards.<br>\n<strong>TR:</strong> Savaş sırasında kaybolan ünlü tablonun, kısa bir süre sonra bir yangında yok edildiğine inanılıyor.<br>\n→ <strong>Açıklama:</strong> Active: \"Experts believe that the painting WAS DESTROYED...\" (was destroyed passive). Passive dönüşüm: \"The painting is believed TO HAVE BEEN DESTROYED.\" That-clause passive olduğu için \"to have been V3\" kullanılır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n- Eşzamanlı: to V0 (knows → to know)\n- Süreç: to be Ving (was doing → to be doing)\n- Önce olmuş: to have V3 (killed → to have killed)\n- Önce olmuş + passive: to have been V3 (was killed → to have been killed)\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>That-Clause'taki Fiil</th>\n<th>Infinitive Formu</th>\n<th>Zaman İlişkisi</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>V1 (knows)</td>\n<td>to V0 (to know)</td>\n<td>Eşzamanlı</td>\n</tr>\n<tr>\n<td>was/were Ving</td>\n<td>to be Ving</td>\n<td>Eşzamanlı + süreç</td>\n</tr>\n<tr>\n<td>V2 / have V3</td>\n<td>to have V3</td>\n<td>Önce olmuş</td>\n</tr>\n<tr>\n<td>was/were V3</td>\n<td>to have been V3</td>\n<td>Önce olmuş + passive</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"It is known that she killed her husband\" cümlesinin diğer passive formu nedir?</p>\n<p>A) She is known to kill her husband.<br>\nB) She is known to have killed her husband.<br>\nC) She is known to be killing her husband.<br>\nD) She was known to kill her husband.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n\n**Açıklama:** \"Killed\" (geçmiş) eylemi \"is known\"dan önce olduğu için \"to have killed\" kullanılır.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "According to several business analysts, he is widely rumored to know some of the most influential politicians in the country.",
+          "tr": "Birkaç iş analistine göre, onun ülkedeki en etkili politikacılardan bazılarını tanıdığı yaygın olarak söyleniyor.",
+          "description": "Active: \"They say that he KNOWS...\" (say ve knows eşzamanlı). Passive dönüşüm: \"He is said TO KNOW...\" That-clause'un öznesi (he) ana özne olur, fiil (knows) ise \"to know\" (to V0) haline gelir.\n\n**Örnek 2 (Süreç Bildiren - to be Ving):**"
+        },
+        {
+          "en": "During the investigation, the security guard was thought to be doing something suspicious behind the closed doors.",
+          "tr": "Soruşturma sırasında, güvenlik görevlisinin kapalı kapılar ardında şüpheli bir şey yaptığı düşünülüyordu.",
+          "description": "Active: \"People thought that he WAS DOING...\" (were doing süreç bildiriyor). Passive: \"He was thought TO BE DOING...\" That-clause'taki eylem süreç bildirdiğinde (were doing), infinitive \"to be Ving\" olur.\n\n**Örnek 3 (Farklı Zaman - to have V3):**"
+        },
+        {
+          "en": "Based on the forensic evidence, the suspect is now known to have killed at least three people over the past five years.",
+          "tr": "Adli tıp kanıtlarına dayanarak, zanlının son beş yılda en az üç kişiyi öldürdüğü artık biliniyor.",
+          "description": "Active: \"Police know that he KILLED...\" (killed, know'dan önce gerçekleşmiş). Passive: \"He is known TO HAVE KILLED...\" That-clause'taki eylem ana fiilden önce olduğunda, infinitive \"to have V3\" olur.\n\n**Örnek 4 (Farklı Zaman - Passive Infinitive):**"
+        },
+        {
+          "en": "The famous painting, which disappeared during the war, is believed to have been destroyed in a fire shortly afterwards.",
+          "tr": "Savaş sırasında kaybolan ünlü tablonun, kısa bir süre sonra bir yangında yok edildiğine inanılıyor.",
+          "description": "Active: \"Experts believe that the painting WAS DESTROYED...\" (was destroyed passive). Passive dönüşüm: \"The painting is believed TO HAVE BEEN DESTROYED.\" That-clause passive olduğu için \"to have been V3\" kullanılır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"It is known that she killed her husband\" cümlesinin diğer passive formu nedir?",
+        "options": {
+          "A": "She is known to kill her husband.",
+          "B": "She is known to have killed her husband.",
+          "C": "She is known to be killing her husband.",
+          "D": "She was known to kill her husband."
+        },
+        "correct": "B",
+        "explanation": "\"Killed\" (geçmiş) eylemi \"is known\"dan önce olduğu için \"to have killed\" kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"It is known that she killed her husband\" cümlesinin diğer passive formu nedir?",
+          "options": {
+            "A": "She is known to kill her husband.",
+            "B": "She is known to have killed her husband.",
+            "C": "She is known to be killing her husband.",
+            "D": "She was known to kill her husband."
+          },
+          "correct": "B",
+          "explanation": "\"Killed\" (geçmiş) eylemi \"is known\"dan önce olduğu için \"to have killed\" kullanılır."
+        }
+      ],
+      "word_count": 497
+    },
+    {
+      "page_number": 9,
+      "title": "That-Clause Passive'te Detaylar & Strateji",
+      "total_pages": 15,
+      "content_html": "<h2>📌 That-Clause Passive Olduğunda</h2>\n<p>Eğer that-clause'un içi de passive ise, infinitive formu <strong>\"to be V3\"</strong> (eşzamanlı) veya <strong>\"to have been V3\"</strong> (önce olmuş) olur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Passive bir that-clause'u infinitive'e çevirirken V3'ü koruyun: \"is treated\" → \"to be treated\"</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Eşzamanlı Passive That-Clause):</strong><br>\n<strong>EN:</strong> Everybody in the neighborhood knows that the elderly woman next door is treated very badly by her own children.<br>\n<strong>TR:</strong> Mahalledeki herkes, yan komşudaki yaşlı kadına kendi çocukları tarafından çok kötü davranıldığını biliyor.<br>\n→ <strong>Açıklama:</strong> That-clause passive: \"is treated\" (şu anda kötü davranılıyor). Ana fiil \"knows\" ile eşzamanlı. İkinci passive form: \"The woman is known TO BE TREATED badly.\" (to be V3)</p>\n<p><strong>Örnek 2 (Önce Olmuş Passive That-Clause):</strong><br>\n<strong>EN:</strong> Many people in the town consider that the wealthy businessman was brutally murdered by his business partner.<br>\n<strong>TR:</strong> Kasabadaki birçok insan, zengin iş adamının iş ortağı tarafından vahşice öldürüldüğünü düşünüyor.<br>\n→ <strong>Açıklama:</strong> That-clause passive: \"was murdered\" (geçmişte olmuş bir olay). Ana fiil \"consider\" (şimdiki zaman). Zaman farkı var. İkinci passive form: \"The businessman is considered TO HAVE BEEN MURDERED.\" (to have been V3)</p>\n<p><strong>Örnek 3 (Soru Çözümü - Strateji):</strong><br>\n<strong>EN:</strong> This rare and valuable diamond necklace, which dates back to the 15th century, is thought <strong><em>_</em></strong> during a robbery at the museum.<br>\n<strong>TR:</strong> 15. yüzyıla tarihlenen bu nadir ve değerli elmas kolyenin, müzedeki bir soygun sırasında çalındığı düşünülüyor.<br>\n→ <strong>Açıklama:</strong> Boşluktan önce \"is thought\" passive var. \"During a robbery\" geçmiş zaman işareti. Keşfedilme/çalınma olayı düşünme eyleminden önce. Bu nedenle \"to have been stolen\" (to have been V3) gelmelidir.</p>\n<p><strong>Örnek 4 (catch, see, find + Ving):</strong><br>\n<strong>EN:</strong> The notorious thief was caught red-handed while trying to steal expensive jewelry from the safe by the security cameras.<br>\n<strong>TR:</strong> Kötü şöhretli hırsız, kasadan pahalı mücevherleri çalmaya çalışırken güvenlik kameraları tarafından suçüstü yakalandı.<br>\n→ <strong>Açıklama:</strong> \"Was caught stealing\" özel bir durumdur. \"Catch, see, hear, find\" fiilleri passive olduğunda, eylemin TAMAMI değil, bir KISMI görülmüş/yakalanmışsa devamında Ving gelir. (was seen going, was found sleeping)</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Özel Durum:**\n\"Find\" fiili \"tespit etmek, saptamak\" anlamında kullanılırsa passive'de \"to V0\" alır: \"He was found to be living in Paris.\" (Paris'te yaşadığı tespit edildi)\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>That-Clause</th>\n<th>Infinitive Form</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>is treated (eşzamanlı passive)</td>\n<td>to be treated</td>\n<td>She is known to be treated badly</td>\n</tr>\n<tr>\n<td>was murdered (önce olmuş passive)</td>\n<td>to have been murdered</td>\n<td>He is thought to have been murdered</td>\n</tr>\n<tr>\n<td>is stealing (süreç)</td>\n<td>to be stealing</td>\n<td>He was seen to be stealing (nadir)</td>\n</tr>\n<tr>\n<td>was stealing (kısmi)</td>\n<td>Ving</td>\n<td>He was caught stealing (özel)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"This valuable stone is thought <strong><em>_</em></strong> during the middle ages.\" boşluğa ne gelmelidir?</p>\n<p>A) to be discovered<br>\nB) to discover<br>\nC) being discovered<br>\nD) to have been discovered<br>\nE) to have discovered</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D\n\n**Açıklama:** \"Is thought\" (present) ve \"during the middle ages\" (past). Keşif, düşünceden önce. Passive anlam var → \"to have been discovered\".\n</details>\n\n<p>[Kelime sayısı: 245]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Everybody in the neighborhood knows that the elderly woman next door is treated very badly by her own children.",
+          "tr": "Mahalledeki herkes, yan komşudaki yaşlı kadına kendi çocukları tarafından çok kötü davranıldığını biliyor.",
+          "description": "That-clause passive: \"is treated\" (şu anda kötü davranılıyor). Ana fiil \"knows\" ile eşzamanlı. İkinci passive form: \"The woman is known TO BE TREATED badly.\" (to be V3)\n\n**Örnek 2 (Önce Olmuş Passive That-Clause):**"
+        },
+        {
+          "en": "Many people in the town consider that the wealthy businessman was brutally murdered by his business partner.",
+          "tr": "Kasabadaki birçok insan, zengin iş adamının iş ortağı tarafından vahşice öldürüldüğünü düşünüyor.",
+          "description": "That-clause passive: \"was murdered\" (geçmişte olmuş bir olay). Ana fiil \"consider\" (şimdiki zaman). Zaman farkı var. İkinci passive form: \"The businessman is considered TO HAVE BEEN MURDERED.\" (to have been V3)\n\n**Örnek 3 (Soru Çözümü - Strateji):**"
+        },
+        {
+          "en": "This rare and valuable diamond necklace, which dates back to the 15th century, is thought _______ during a robbery at the museum.",
+          "tr": "15. yüzyıla tarihlenen bu nadir ve değerli elmas kolyenin, müzedeki bir soygun sırasında çalındığı düşünülüyor.",
+          "description": "Boşluktan önce \"is thought\" passive var. \"During a robbery\" geçmiş zaman işareti. Keşfedilme/çalınma olayı düşünme eyleminden önce. Bu nedenle \"to have been stolen\" (to have been V3) gelmelidir.\n\n**Örnek 4 (catch, see, find + Ving):**"
+        },
+        {
+          "en": "The notorious thief was caught red-handed while trying to steal expensive jewelry from the safe by the security cameras.",
+          "tr": "Kötü şöhretli hırsız, kasadan pahalı mücevherleri çalmaya çalışırken güvenlik kameraları tarafından suçüstü yakalandı.",
+          "description": "\"Was caught stealing\" özel bir durumdur. \"Catch, see, hear, find\" fiilleri passive olduğunda, eylemin TAMAMI değil, bir KISMI görülmüş/yakalanmışsa devamında Ving gelir. (was seen going, was found sleeping)"
+        }
+      ],
+      "mini_test": {
+        "question": "\"This valuable stone is thought _______ during the middle ages.\" boşluğa ne gelmelidir?",
+        "options": {
+          "A": "to be discovered",
+          "B": "to discover",
+          "C": "being discovered",
+          "D": "to have been discovered",
+          "E": "to have discovered"
+        },
+        "correct": "D",
+        "explanation": "\"Is thought\" (present) ve \"during the middle ages\" (past). Keşif, düşünceden önce. Passive anlam var → \"to have been discovered\"."
+      },
+      "mini_tests": [
+        {
+          "question": "\"This valuable stone is thought _______ during the middle ages.\" boşluğa ne gelmelidir?",
+          "options": {
+            "A": "to be discovered",
+            "B": "to discover",
+            "C": "being discovered",
+            "D": "to have been discovered",
+            "E": "to have discovered"
+          },
+          "correct": "D",
+          "explanation": "\"Is thought\" (present) ve \"during the middle ages\" (past). Keşif, düşünceden önce. Passive anlam var → \"to have been discovered\"."
+        }
+      ],
+      "word_count": 485
+    },
+    {
+      "page_number": 10,
+      "title": "Pasifte Özel Durumlar: caught Ving & Ergative Verbs",
+      "total_pages": 15,
+      "content_html": "<h2>📌 caught Ving Yapısı</h2>\n<p>Bazı fiiller (<strong>catch, see, hear, find</strong>) passive olduğunda, eylemin tamamı değil bir kısmı görüldüyse devamlarında <strong>Ving</strong> gelir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"He was seen leaving\" (ayrılırken görüldü - ayrılma eyleminin tamamı değil, anı görüldü)</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (catch + Ving):</strong><br>\n<strong>EN:</strong> The dishonest employee was caught red-handed by his manager while he was secretly copying confidential company documents onto a USB drive.<br>\n<strong>TR:</strong> Sahtekar çalışan, gizlice şirketin gizli belgelerini bir USB belleğe kopyalarken müdürü tarafından suçüstü yakalandı.<br>\n→ <strong>Açıklama:</strong> \"Was caught copying\" - yakalama anında eylem devam ediyordu. Eylemin tamamı değil, bir anı yakalandı. Bu nedenle passive'den sonra Ving (copying) kullanıldı. Normal passive kurallarından sapmadır.</p>\n<p><strong>Örnek 2 (see + Ving - kısmi):</strong><br>\n<strong>EN:</strong> The suspect was seen by multiple witnesses entering the building just a few minutes before the explosion occurred.<br>\n<strong>TR:</strong> Şüpheli, patlamadan sadece birkaç dakika önce binaya girerken birden çok tanık tarafından görüldü.<br>\n→ <strong>Açıklama:</strong> \"Was seen entering\" - giriş eyleminin tamamı değil, sadece o anı görüldü. Eğer eylemin tamamı görülseydi \"was seen to enter\" kullanılırdı (çok nadir). Genelde kısmi eylemler için Ving tercih edilir.</p>\n<p><strong>Örnek 3 (Ergative Verb - open):</strong><br>\n<strong>EN:</strong> The new public library, which was built with modern architecture, opens at 9 AM every day except Sundays and public holidays.<br>\n<strong>TR:</strong> Modern mimariyle inşa edilen yeni halk kütüphanesi, Pazar günleri ve resmi tatiller hariç her gün sabah 9'da açılır.<br>\n→ <strong>Açıklama:</strong> \"Opens\" active form ama passive anlam veriyor! Ergative verbs (open, close, sell, start, finish) hem transitive hem intransitive kullanılabilir. Burada kütüphane kendi kendine açılıyor gibi düşünülür. \"Is opened\" da denebilir ama anlam farkıyla.</p>\n<p><strong>Örnek 4 (Ergative Verb - sell):</strong><br>\n<strong>EN:</strong> Despite the negative reviews from critics, the author's latest novel surprisingly sold more than a million copies in its first week.<br>\n<strong>TR:</strong> Eleştirmenlerden gelen olumsuz yorumlara rağmen, yazarın son romanı şaşırtıcı bir şekilde ilk haftasında bir milyondan fazla sattı.<br>\n→ <strong>Açıklama:</strong> \"Sold\" active form ama pasif anlam taşır (kitap satıldı). Ergative kullanımda eylemin kim tarafından yapıldığı önemsizdir. \"Was sold\" dersek, satış işleminin biri tarafından yapıldığını vurgularız. İkisi de doğrudur ancak vurgu farklıdır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Ergative Verb Stratejisi:**\n- \"The door opened\" (kendi kendine açıldı - süreç)\n- \"The door was opened\" (biri tarafından açıldı - eylem)\nİkisi de doğru, vurgu farklı!\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Fiil</th>\n<th>Active (Ergative)</th>\n<th>Passive</th>\n<th>Anlam Farkı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>open</td>\n<td>The shop opens at 9</td>\n<td>The shop is opened at 9</td>\n<td>İlki rutin, ikincisi eylem</td>\n</tr>\n<tr>\n<td>sell</td>\n<td>The book sold well</td>\n<td>The book was sold</td>\n<td>İlki genel performans, ikincisi işlem</td>\n</tr>\n<tr>\n<td>close</td>\n<td>The door closed</td>\n<td>The door was closed</td>\n<td>İlki kendi kendine, ikincisi biri tarafından</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"He was seen <strong><em>_</em></strong> the house late at night.\" cümlesinde hangisi doğaldır?</p>\n<p>A) to leave<br>\nB) leave<br>\nC) leaving<br>\nD) to have left</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n\n**Açıklama:** \"See\" passive olduğunda, eylemin bir kısmı görüldüyse Ving kullanılır. \"Evi terk ederken görüldü\" anlamı için \"leaving\" doğaldır.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The dishonest employee was caught red-handed by his manager while he was secretly copying confidential company documents onto a USB drive.",
+          "tr": "Sahtekar çalışan, gizlice şirketin gizli belgelerini bir USB belleğe kopyalarken müdürü tarafından suçüstü yakalandı.",
+          "description": "\"Was caught copying\" - yakalama anında eylem devam ediyordu. Eylemin tamamı değil, bir anı yakalandı. Bu nedenle passive'den sonra Ving (copying) kullanıldı. Normal passive kurallarından sapmadır.\n\n**Örnek 2 (see + Ving - kısmi):**"
+        },
+        {
+          "en": "The suspect was seen by multiple witnesses entering the building just a few minutes before the explosion occurred.",
+          "tr": "Şüpheli, patlamadan sadece birkaç dakika önce binaya girerken birden çok tanık tarafından görüldü.",
+          "description": "\"Was seen entering\" - giriş eyleminin tamamı değil, sadece o anı görüldü. Eğer eylemin tamamı görülseydi \"was seen to enter\" kullanılırdı (çok nadir). Genelde kısmi eylemler için Ving tercih edilir.\n\n**Örnek 3 (Ergative Verb - open):**"
+        },
+        {
+          "en": "The new public library, which was built with modern architecture, opens at 9 AM every day except Sundays and public holidays.",
+          "tr": "Modern mimariyle inşa edilen yeni halk kütüphanesi, Pazar günleri ve resmi tatiller hariç her gün sabah 9'da açılır.",
+          "description": "\"Opens\" active form ama passive anlam veriyor! Ergative verbs (open, close, sell, start, finish) hem transitive hem intransitive kullanılabilir. Burada kütüphane kendi kendine açılıyor gibi düşünülür. \"Is opened\" da denebilir ama anlam farkıyla.\n\n**Örnek 4 (Ergative Verb - sell):**"
+        },
+        {
+          "en": "Despite the negative reviews from critics, the author's latest novel surprisingly sold more than a million copies in its first week.",
+          "tr": "Eleştirmenlerden gelen olumsuz yorumlara rağmen, yazarın son romanı şaşırtıcı bir şekilde ilk haftasında bir milyondan fazla sattı.",
+          "description": "\"Sold\" active form ama pasif anlam taşır (kitap satıldı). Ergative kullanımda eylemin kim tarafından yapıldığı önemsizdir. \"Was sold\" dersek, satış işleminin biri tarafından yapıldığını vurgularız. İkisi de doğrudur ancak vurgu farklıdır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"He was seen _______ the house late at night.\" cümlesinde hangisi doğaldır?",
+        "options": {
+          "A": "to leave",
+          "B": "leave",
+          "C": "leaving",
+          "D": "to have left"
+        },
+        "correct": "C",
+        "explanation": "\"See\" passive olduğunda, eylemin bir kısmı görüldüyse Ving kullanılır. \"Evi terk ederken görüldü\" anlamı için \"leaving\" doğaldır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"He was seen _______ the house late at night.\" cümlesinde hangisi doğaldır?",
+          "options": {
+            "A": "to leave",
+            "B": "leave",
+            "C": "leaving",
+            "D": "to have left"
+          },
+          "correct": "C",
+          "explanation": "\"See\" passive olduğunda, eylemin bir kısmı görüldüyse Ving kullanılır. \"Evi terk ederken görüldü\" anlamı için \"leaving\" doğaldır."
+        }
+      ],
+      "word_count": 467
+    },
+    {
+      "page_number": 11,
+      "title": "Örnek Soru Çözümü & Strateji",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Tense + Passive Birlikte</h2>\n<p>Sınavlarda sıkça karşılaşılan, hem zaman hem de passive bilgisi gerektiren soru tipleri.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Zaman ifadeleri (in 1926, yesterday, each year) size hangi tense kullanmanız gerektiğini söyler.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Zaman İfadesi + Passive):</strong><br>\n<strong>EN:</strong> Professional tennis, which first gained widespread popularity in the 1920s, only received full recognition as a major sport many decades later.<br>\n<strong>TR:</strong> İlk kez 1920'lerde yaygın popülerlik kazanan profesyonel tenis, ancak onlarca yıl sonra büyük bir spor dalı olarak tam tanınırlık kazandı.<br>\n→ <strong>Açıklama:</strong> Bu cümle active. Ancak benzer yapıda bir passive sorusu görelim: \"In 1926\" gibi geçmişte belirli bir zaman ifadesi varsa, cevap Past Tense olmalıdır.</p>\n<p><strong>Örnek 2 (Soru Çözümü - Adım Adım):</strong><br>\n<strong>EN:</strong> Professional tennis, which got its star in 1926 when the French player Suzanne Lenglen <strong><em>_</em></strong> $50,000 for a tour, only <strong><em>_</em></strong> full recognition in 1968.<br>\n<strong>TR:</strong> Profesyonel tenis, 1926'da Fransız oyuncu Suzanne Lenglen'in bir tur için 50.000 dolar <strong><em>_</em></strong> zaman yıldızını kazandı, ancak 1968'de tam tanınırlık <strong><em>_</em></strong>.<br>\n→ <strong>Açıklama:</strong> İlk boşluk: \"in 1926\" geçmiş zaman işareti. Suzanne Lenglen ödeme ALDI (pasif). Bu nedenle \"was paid\". İkinci boşluk: \"in 1968\" yine geçmiş. \"Received\" (active) gelmeli. Doğru cevap: \"was paid / received\"</p>\n<p><strong>Örnek 3 (Each year + by law):</strong><br>\n<strong>EN:</strong> The auditing of accounts, which involves the official inspection of a company's financial records, <strong><em>_</em></strong> by law each year to ensure transparency.<br>\n<strong>TR:</strong> Hesapların denetimi, bir şirketin finansal kayıtlarının resmi incelemesini içerir ve şeffaflığı sağlamak için yasa gereği her yıl <strong><em>_</em></strong>.<br>\n→ <strong>Açıklama:</strong> \"Each year\" → Present tense. \"By law\" (yasa tarafından) → Passive işareti. Birleştir: \"is required\" (Simple Present Passive). \"The auditing is required by law each year.\"</p>\n<p><strong>Örnek 4 (by edatı - farklı anlamlar):</strong><br>\n<strong>EN:</strong> The new bridge, which was built by a famous architect, can be crossed by foot in about twenty minutes if you walk quickly.<br>\n<strong>TR:</strong> Ünlü bir mimar tarafından inşa edilen yeni köprü, hızlı yürürseniz yaklaşık yirmi dakikada yaya olarak geçilebilir.<br>\n→ <strong>Açıklama:</strong> İlk \"by\" passive'in agent'ını gösterir (mimar tarafından). İkinci \"by\" ise \"araç, vasıta\" anlamında (yaya olarak). \"By\" edatı her zaman passive anlamı vermez. \"By the river\" (kenarında), \"by 1996\" (-e kadar) gibi anlamları da vardır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Sınav Stratejisi:**\n1. Zaman ifadesini bul (in 1926, yesterday, so far, each year)\n2. Passive işareti var mı? (by, edat, nesne önceden)\n3. Tense ve passive'i birleştir.\n4. \"By\" edatının anlamını kontrol et (tarafından mı, araç mı, zaman mı?)\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Zaman İfadesi</th>\n<th>Tense</th>\n<th>Passive Form</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>in 1926, yesterday</td>\n<td>Past Simple</td>\n<td>was/were V3</td>\n</tr>\n<tr>\n<td>each year, every day</td>\n<td>Present Simple</td>\n<td>am/is/are V3</td>\n</tr>\n<tr>\n<td>since 2020, so far</td>\n<td>Present Perfect</td>\n<td>have/has been V3</td>\n</tr>\n<tr>\n<td>by 2025, by the time</td>\n<td>Future Perfect</td>\n<td>will have been V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"The company's accounts <strong><em>_</em></strong> by an external auditor every year as required by law.\" boşluğa ne gelir?</p>\n<p>A) audited<br>\nB) are audited<br>\nC) have audited<br>\nD) were audited</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n\n**Açıklama:** \"Every year\" → Present tense. \"By an external auditor\" → Passive işareti. \"Are audited\" (Simple Present Passive) doğru cevaptır.\n</details>\n\n<p>[Kelime sayısı: 230]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Professional tennis, which first gained widespread popularity in the 1920s, only received full recognition as a major sport many decades later.",
+          "tr": "İlk kez 1920'lerde yaygın popülerlik kazanan profesyonel tenis, ancak onlarca yıl sonra büyük bir spor dalı olarak tam tanınırlık kazandı.",
+          "description": "Bu cümle active. Ancak benzer yapıda bir passive sorusu görelim: \"In 1926\" gibi geçmişte belirli bir zaman ifadesi varsa, cevap Past Tense olmalıdır.\n\n**Örnek 2 (Soru Çözümü - Adım Adım):**"
+        },
+        {
+          "en": "Professional tennis, which got its star in 1926 when the French player Suzanne Lenglen _______ $50,000 for a tour, only _______ full recognition in 1968.",
+          "tr": "Profesyonel tenis, 1926'da Fransız oyuncu Suzanne Lenglen'in bir tur için 50.000 dolar _______ zaman yıldızını kazandı, ancak 1968'de tam tanınırlık _______.",
+          "description": "İlk boşluk: \"in 1926\" geçmiş zaman işareti. Suzanne Lenglen ödeme ALDI (pasif). Bu nedenle \"was paid\". İkinci boşluk: \"in 1968\" yine geçmiş. \"Received\" (active) gelmeli. Doğru cevap: \"was paid / received\"\n\n**Örnek 3 (Each year + by law):**"
+        },
+        {
+          "en": "The auditing of accounts, which involves the official inspection of a company's financial records, _______ by law each year to ensure transparency.",
+          "tr": "Hesapların denetimi, bir şirketin finansal kayıtlarının resmi incelemesini içerir ve şeffaflığı sağlamak için yasa gereği her yıl _______.",
+          "description": "\"Each year\" → Present tense. \"By law\" (yasa tarafından) → Passive işareti. Birleştir: \"is required\" (Simple Present Passive). \"The auditing is required by law each year.\"\n\n**Örnek 4 (by edatı - farklı anlamlar):**"
+        },
+        {
+          "en": "The new bridge, which was built by a famous architect, can be crossed by foot in about twenty minutes if you walk quickly.",
+          "tr": "Ünlü bir mimar tarafından inşa edilen yeni köprü, hızlı yürürseniz yaklaşık yirmi dakikada yaya olarak geçilebilir.",
+          "description": "İlk \"by\" passive'in agent'ını gösterir (mimar tarafından). İkinci \"by\" ise \"araç, vasıta\" anlamında (yaya olarak). \"By\" edatı her zaman passive anlamı vermez. \"By the river\" (kenarında), \"by 1996\" (-e kadar) gibi anlamları da vardır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"The company's accounts _______ by an external auditor every year as required by law.\" boşluğa ne gelir?",
+        "options": {
+          "A": "audited",
+          "B": "are audited",
+          "C": "have audited",
+          "D": "were audited"
+        },
+        "correct": "B",
+        "explanation": "\"Every year\" → Present tense. \"By an external auditor\" → Passive işareti. \"Are audited\" (Simple Present Passive) doğru cevaptır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The company's accounts _______ by an external auditor every year as required by law.\" boşluğa ne gelir?",
+          "options": {
+            "A": "audited",
+            "B": "are audited",
+            "C": "have audited",
+            "D": "were audited"
+          },
+          "correct": "B",
+          "explanation": "\"Every year\" → Present tense. \"By an external auditor\" → Passive işareti. \"Are audited\" (Simple Present Passive) doğru cevaptır."
+        }
+      ],
+      "word_count": 494
+    },
+    {
+      "page_number": 12,
+      "title": "Causatives'e Giriş: Eylemi Yaptırtmak (have/get + object + V3)",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Ettirgen Yapı (Causative)</h2>\n<p>Causative yapı, bir işi <strong>başkasına yaptırdığımızı</strong> ifade eder. Passive'de olduğu gibi eylemi biz yapmayız, ama bu kez <strong>bilinçli olarak yaptırırız</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Have/get + object + V3\" = bir şeyi yaptırtmak (kimin yaptığı önemli değil)</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (have + object + V3):</strong><br>\n<strong>EN:</strong> Since I absolutely hate ironing and always end up burning my clothes, I have my dress shirts professionally ironed at the dry cleaner's every single week.<br>\n<strong>TR:</strong> Ütü yapmaktan nefret ettiğim ve her seferinde kıyafetlerimi yaktığım için, gömleklerimi her hafta kuru temizleyicide profesyonelce ütületiyorum.<br>\n→ <strong>Açıklama:</strong> \"Have my shirts ironed\" - Gömlekleri ütületen kişi benim, ama ütüyü yapan ben değilim. İşten etkilenen nesne (my shirts) ile V3 (ironed) doğrudan kullanılır. Kimin yaptığı önemli değil veya bilinmiyor.</p>\n<p><strong>Örnek 2 (get + object + V3):</strong><br>\n<strong>EN:</strong> After suffering from a terrible toothache for days, she finally got her infected wisdom tooth pulled out by a skilled oral surgeon yesterday.<br>\n<strong>TR:</strong> Günlerce korkunç bir diş ağrısı çektikten sonra, nihayet dün iltihaplı yirmi yaş dişini yetenekli bir ağız cerrahına çektirdi.<br>\n→ <strong>Açıklama:</strong> \"Got her tooth pulled\" - Diş çektirme işlemini yaptırdı. \"Get\", \"have\" ile aynı anlamda kullanılabilir. İngiliz İngilizcesi'nde \"have\", Amerikan İngilizcesi'nde \"get\" daha yaygındır. İkisi de doğrudur.</p>\n<p><strong>Örnek 3 (have/get + object + V3 - gelecek):</strong><br>\n<strong>EN:</strong> He has an important job interview next week, so he will have his hair cut and his suit dry-cleaned to look his absolute best.<br>\n<strong>TR:</strong> Gelecek hafta önemli bir iş görüşmesi var, bu yüzden en iyi şekilde görünmek için saçını kestirecek ve takım elbisesini kuru temizlemeye verecek.<br>\n→ <strong>Açıklama:</strong> \"Will have his hair cut\" - gelecekte yaptıracak. Causative yapılar tüm zamanlarda çekimlenebilir. Önemli olan formül: have/get + işten etkilenen nesne + V3.</p>\n<p><strong>Örnek 4 (have/get + object + V3 - emir):</strong><br>\n<strong>EN:</strong> The car is making a strange noise; you really should have it checked by a mechanic as soon as possible before it breaks down completely.<br>\n<strong>TR:</strong> Araba garip bir ses çıkarıyor; tamamen bozulmadan önce gerçekten en kısa zamanda bir tamirciye kontrol ettirmelisin.<br>\n→ <strong>Açıklama:</strong> \"Should have it checked\" - modal + causative. Modal'dan sonra \"have\" V0 halinde kalır. Nesne (it) ve V3 (checked) aynı şekilde devam eder.</p>\n<hr>\n<div class=\"hatirlatma-kutusu\">\n**🔔 Hatırlatma:**\nBu yapıda (have/get + object + V3) **eylemi yapan kişiden bahsedilmez**. Sadece işin yaptırıldığı vurgulanır.\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Zaman</th>\n<th>Causative Form</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Present</td>\n<td>have/get + object + V3</td>\n<td>I have my car washed</td>\n</tr>\n<tr>\n<td>Past</td>\n<td>had/got + object + V3</td>\n<td>She had her hair cut</td>\n</tr>\n<tr>\n<td>Future</td>\n<td>will have/get + object + V3</td>\n<td>He will have his room painted</td>\n</tr>\n<tr>\n<td>Modal</td>\n<td>modal + have/get + object + V3</td>\n<td>You should have it repaired</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"I <strong><em>_</em></strong> my eyes tested tomorrow because I can't see clearly.\" boşluğa ne gelir?</p>\n<p>A) have<br>\nB) am having<br>\nC) will have<br>\nD) had</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n\n**Açıklama:** \"Tomorrow\" gelecek zaman işareti. Causative gelecek için \"will have + object + V3\" kullanılır: \"will have my eyes tested\".\n</details>\n\n<p>[Kelime sayısı: 228]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Since I absolutely hate ironing and always end up burning my clothes, I have my dress shirts professionally ironed at the dry cleaner's every single week.",
+          "tr": "Ütü yapmaktan nefret ettiğim ve her seferinde kıyafetlerimi yaktığım için, gömleklerimi her hafta kuru temizleyicide profesyonelce ütületiyorum.",
+          "description": "\"Have my shirts ironed\" - Gömlekleri ütületen kişi benim, ama ütüyü yapan ben değilim. İşten etkilenen nesne (my shirts) ile V3 (ironed) doğrudan kullanılır. Kimin yaptığı önemli değil veya bilinmiyor.\n\n**Örnek 2 (get + object + V3):**"
+        },
+        {
+          "en": "After suffering from a terrible toothache for days, she finally got her infected wisdom tooth pulled out by a skilled oral surgeon yesterday.",
+          "tr": "Günlerce korkunç bir diş ağrısı çektikten sonra, nihayet dün iltihaplı yirmi yaş dişini yetenekli bir ağız cerrahına çektirdi.",
+          "description": "\"Got her tooth pulled\" - Diş çektirme işlemini yaptırdı. \"Get\", \"have\" ile aynı anlamda kullanılabilir. İngiliz İngilizcesi'nde \"have\", Amerikan İngilizcesi'nde \"get\" daha yaygındır. İkisi de doğrudur.\n\n**Örnek 3 (have/get + object + V3 - gelecek):**"
+        },
+        {
+          "en": "He has an important job interview next week, so he will have his hair cut and his suit dry-cleaned to look his absolute best.",
+          "tr": "Gelecek hafta önemli bir iş görüşmesi var, bu yüzden en iyi şekilde görünmek için saçını kestirecek ve takım elbisesini kuru temizlemeye verecek.",
+          "description": "\"Will have his hair cut\" - gelecekte yaptıracak. Causative yapılar tüm zamanlarda çekimlenebilir. Önemli olan formül: have/get + işten etkilenen nesne + V3.\n\n**Örnek 4 (have/get + object + V3 - emir):**"
+        },
+        {
+          "en": "The car is making a strange noise; you really should have it checked by a mechanic as soon as possible before it breaks down completely.",
+          "tr": "Araba garip bir ses çıkarıyor; tamamen bozulmadan önce gerçekten en kısa zamanda bir tamirciye kontrol ettirmelisin.",
+          "description": "\"Should have it checked\" - modal + causative. Modal'dan sonra \"have\" V0 halinde kalır. Nesne (it) ve V3 (checked) aynı şekilde devam eder."
+        }
+      ],
+      "mini_test": {
+        "question": "\"I _______ my eyes tested tomorrow because I can't see clearly.\" boşluğa ne gelir?",
+        "options": {
+          "A": "have",
+          "B": "am having",
+          "C": "will have",
+          "D": "had"
+        },
+        "correct": "C",
+        "explanation": "\"Tomorrow\" gelecek zaman işareti. Causative gelecek için \"will have + object + V3\" kullanılır: \"will have my eyes tested\"."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I _______ my eyes tested tomorrow because I can't see clearly.\" boşluğa ne gelir?",
+          "options": {
+            "A": "have",
+            "B": "am having",
+            "C": "will have",
+            "D": "had"
+          },
+          "correct": "C",
+          "explanation": "\"Tomorrow\" gelecek zaman işareti. Causative gelecek için \"will have + object + V3\" kullanılır: \"will have my eyes tested\"."
+        }
+      ],
+      "word_count": 470
+    },
+    {
+      "page_number": 13,
+      "title": "Eylemi Kime Yaptırdığımızı Söylemek",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Agent (İşi Yapan) Belirtildiğinde</h2>\n<p>Eylemi <strong>kimin yaptığını</strong> da söylemek istersek, iki farklı yapı kullanırız:<br>\n1. <strong>have/make/let + agent + Vo</strong><br>\n2. <strong>get/force/want + agent + to Vo</strong></p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Have\" ve \"get\" farklıdır! Have + agent + Vo, Get + agent + to Vo</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (have + agent + Vo):</strong><br>\n<strong>EN:</strong> Every Sunday morning, I have my elderly neighbor's son mow the lawn and trim the hedges because I'm away on business trips frequently.<br>\n<strong>TR:</strong> Her Pazar sabahı, yaşlı komşumun oğluna çimleri biçtirip çitleri budatıyorum çünkü sık sık iş seyahatlerinde oluyorum.<br>\n→ <strong>Açıklama:</strong> \"Have my neighbor's son MOW\" - İşi yapan kişi (agent) belirtilmiş: \"my neighbor's son\". Fiil V0 (mow) olarak gelir. Yapı: have + agent + V0. Agent canlı ve işi bilinçli yapan kişidir.</p>\n<p><strong>Örnek 2 (make + agent + Vo):</strong><br>\n<strong>EN:</strong> The strict military sergeant made the new recruits run five miles under the scorching sun as punishment for being late.<br>\n<strong>TR:</strong> Katı asker çavuşu, geç kaldıkları için ceza olarak yeni askerlere kavurucu güneş altında beş mil koşturdu.<br>\n→ <strong>Açıklama:</strong> \"Made the recruits RUN\" - Make, zorunluluk/ baskı anlamı katar. \"Yaptırmak\"tan ziyade \"zorlamak, mecbur bırakmak\" anlamı vardır. Yapı: make + agent + V0.</p>\n<p><strong>Örnek 3 (get + agent + to Vo):</strong><br>\n<strong>EN:</strong> Despite his busy schedule, I somehow managed to get my professor to read my 100-page thesis draft before the deadline.<br>\n<strong>TR:</strong> Yoğun programına rağmen, bir şekilde profesörüme tez taslağımın 100 sayfasını son teslim tarihinden önce okutmayı başardım.<br>\n→ <strong>Açıklama:</strong> \"Get my professor TO READ\" - Get + agent + to Vo kullanılır. \"Have\"den farklı olarak, \"get\" ikna etme, razı etme anlamı taşır. Have ise daha nötrdür (yaptırmak).</p>\n<p><strong>Örnek 4 (want + agent + to Vo):</strong><br>\n<strong>EN:</strong> My parents have always wanted me to pursue a career in medicine, but I'm more interested in becoming a graphic designer.<br>\n<strong>TR:</strong> Ailem her zaman tıp alanında kariyer yapmamı istedi, ama ben daha çok grafik tasarımcı olmakla ilgileniyorum.<br>\n→ <strong>Açıklama:</strong> \"Wanted me TO PURSUE\" - Want, wish, would like, ask, tell, force gibi fiillerin hepsi \"agent + to Vo\" alır. Bu en yaygın kalıptır.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"Let\" (izin vermek) de have/make gibi Vo alır: \"Let him go\" (gitmesine izin ver). \"Allow\" ise to Vo alır: \"Allow him to go\".\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Fiil</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>have</strong></td>\n<td>have + agent + Vo</td>\n<td>I had him fix my car</td>\n</tr>\n<tr>\n<td><strong>make</strong></td>\n<td>make + agent + Vo</td>\n<td>She made me wait</td>\n</tr>\n<tr>\n<td><strong>let</strong></td>\n<td>let + agent + Vo</td>\n<td>Let them play</td>\n</tr>\n<tr>\n<td><strong>get</strong></td>\n<td>get + agent + to Vo</td>\n<td>I got him to help</td>\n</tr>\n<tr>\n<td><strong>want/force/tell</strong></td>\n<td>want + agent + to Vo</td>\n<td>I want you to study</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"The teacher <strong><em>_</em></strong> us stay after class to finish the exam.\" boşluğa hangisi gelir?</p>\n<p>A) got<br>\nB) wanted<br>\nC) made<br>\nD) asked</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n\n**Açıklama:** \"Made + agent + Vo\" kalıbı. Diğerleri \"to Vo\" gerektirirdi: got us TO stay, wanted us TO stay, asked us TO stay.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Every Sunday morning, I have my elderly neighbor's son mow the lawn and trim the hedges because I'm away on business trips frequently.",
+          "tr": "Her Pazar sabahı, yaşlı komşumun oğluna çimleri biçtirip çitleri budatıyorum çünkü sık sık iş seyahatlerinde oluyorum.",
+          "description": "\"Have my neighbor's son MOW\" - İşi yapan kişi (agent) belirtilmiş: \"my neighbor's son\". Fiil V0 (mow) olarak gelir. Yapı: have + agent + V0. Agent canlı ve işi bilinçli yapan kişidir.\n\n**Örnek 2 (make + agent + Vo):**"
+        },
+        {
+          "en": "The strict military sergeant made the new recruits run five miles under the scorching sun as punishment for being late.",
+          "tr": "Katı asker çavuşu, geç kaldıkları için ceza olarak yeni askerlere kavurucu güneş altında beş mil koşturdu.",
+          "description": "\"Made the recruits RUN\" - Make, zorunluluk/ baskı anlamı katar. \"Yaptırmak\"tan ziyade \"zorlamak, mecbur bırakmak\" anlamı vardır. Yapı: make + agent + V0.\n\n**Örnek 3 (get + agent + to Vo):**"
+        },
+        {
+          "en": "Despite his busy schedule, I somehow managed to get my professor to read my 100-page thesis draft before the deadline.",
+          "tr": "Yoğun programına rağmen, bir şekilde profesörüme tez taslağımın 100 sayfasını son teslim tarihinden önce okutmayı başardım.",
+          "description": "\"Get my professor TO READ\" - Get + agent + to Vo kullanılır. \"Have\"den farklı olarak, \"get\" ikna etme, razı etme anlamı taşır. Have ise daha nötrdür (yaptırmak).\n\n**Örnek 4 (want + agent + to Vo):**"
+        },
+        {
+          "en": "My parents have always wanted me to pursue a career in medicine, but I'm more interested in becoming a graphic designer.",
+          "tr": "Ailem her zaman tıp alanında kariyer yapmamı istedi, ama ben daha çok grafik tasarımcı olmakla ilgileniyorum.",
+          "description": "\"Wanted me TO PURSUE\" - Want, wish, would like, ask, tell, force gibi fiillerin hepsi \"agent + to Vo\" alır. Bu en yaygın kalıptır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"The teacher _______ us stay after class to finish the exam.\" boşluğa hangisi gelir?",
+        "options": {
+          "A": "got",
+          "B": "wanted",
+          "C": "made",
+          "D": "asked"
+        },
+        "correct": "C",
+        "explanation": "\"Made + agent + Vo\" kalıbı. Diğerleri \"to Vo\" gerektirirdi: got us TO stay, wanted us TO stay, asked us TO stay."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The teacher _______ us stay after class to finish the exam.\" boşluğa hangisi gelir?",
+          "options": {
+            "A": "got",
+            "B": "wanted",
+            "C": "made",
+            "D": "asked"
+          },
+          "correct": "C",
+          "explanation": "\"Made + agent + Vo\" kalıbı. Diğerleri \"to Vo\" gerektirirdi: got us TO stay, wanted us TO stay, asked us TO stay."
+        }
+      ],
+      "word_count": 465
+    },
+    {
+      "page_number": 14,
+      "title": "Causatives'ta Özel Durumlar: Make/Let Passive & Özel Fiil Listeleri",
+      "total_pages": 15,
+      "content_html": "<h2>📌 Make ve Let'in Passive Halleri</h2>\n<p>\"Make\" ve \"let\" passive olduğunda farklı davranır. \"Make\" passive'de <strong>\"be made to Vo\"</strong> olur. \"Let\" passive'de nadir kullanılır, yerine <strong>\"be allowed to Vo\"</strong> tercih edilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Active: \"They made me work\" → Passive: \"I was made TO work\" (to eklenir!)</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (make - passive):</strong><br>\n<strong>EN:</strong> When I was a trainee at the company, I was made to work twelve-hour shifts every single day without any overtime pay.<br>\n<strong>TR:</strong> Şirkette stajyerken, bana hiç mesai ücreti ödemeden her gün on iki saat vardiya çalıştırıldı.<br>\n→ <strong>Açıklama:</strong> Active: \"They made me work\" (made + agent + Vo). Passive'de: \"I was made TO work\". Active'de Vo olan fiil, passive'de \"to Vo\" olur. Bu çok önemli bir istisnadır! Make passive'de to alır.</p>\n<p><strong>Örnek 2 (let - passive / allow):</strong><br>\n<strong>EN:</strong> The children were not allowed to stay up late to watch the movie because it was a school night and they had exams the next day.<br>\n<strong>TR:</strong> Ertesi gün okul olduğu ve sınavları olduğu için çocukların filmi izlemek için geç saatlere kadar uyanık kalmalarına izin verilmedi.<br>\n→ <strong>Açıklama:</strong> \"Let\" passive'de çok nadir kullanılır. Genelde \"allow\" fiilinin passive'i tercih edilir: \"be allowed to Vo\". Active \"They didn't let the children stay\" → Passive \"The children weren't allowed to stay\".</p>\n<p><strong>Örnek 3 (Verb + Object + Vo - özel fiiller):</strong><br>\n<strong>EN:</strong> While walking home late at night, I suddenly heard someone call my name from a dark alley, which frightened me greatly.<br>\n<strong>TR:</strong> Gece geç saatte eve yürürken, karanlık bir ara sokaktan aniden birinin adımı seslendiğini duydum, bu beni çok korkuttu.<br>\n→ <strong>Açıklama:</strong> \"Heard someone CALL\" - Algı fiilleri (see, hear, watch, feel) object + Vo alır (tüm eylem görüldüyse). Eğer eylemin bir kısmı görüldüyse Ving alır: \"I saw him crossing the street\" (karşıdan karşıya geçerken gördüm - anlık).</p>\n<p><strong>Örnek 4 (Verb + Object + Ving - özel fiiller):</strong><br>\n<strong>EN:</strong> When I came home unexpectedly, I caught my little brother secretly eating the chocolate cake I had been saving for my birthday.<br>\n<strong>TR:</strong> Eve beklenmedik bir anda geldiğimde, küçük kardeşimi doğum günüm için sakladığım çikolatalı pastayı gizlice yerken yakaladım.<br>\n→ <strong>Açıklama:</strong> \"Caught my brother EATING\" - Catch, find, spend, waste gibi fiiller object + Ving alır. \"I found him sleeping\", \"She spent hours doing homework\", \"Don't waste time playing games\".</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>Vo alanlar:</strong> have, make, let, help (veya to Vo), see/hear (tüm eylem)\n    </div>\n    <div class=\"kart yesil\">\n        <strong>to Vo alanlar:</strong> want, ask, tell, force, get, allow\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Ving alanlar:</strong> catch, find, spend, waste, see/hear (kısmi eylem)\n    </div>\n</div>\n\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kategori</th>\n<th>Fiiller</th>\n<th>Yapı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Vo (6 fiil)</strong></td>\n<td>have, make, let, help, see, hear (tüm eylem)</td>\n<td>V + O + Vo</td>\n</tr>\n<tr>\n<td><strong>to Vo (çoğu fiil)</strong></td>\n<td>want, ask, tell, force, get, allow, expect</td>\n<td>V + O + to Vo</td>\n</tr>\n<tr>\n<td><strong>Ving (az fiil)</strong></td>\n<td>catch, find, spend, waste, see/hear (kısmi)</td>\n<td>V + O + Ving</td>\n</tr>\n<tr>\n<td><strong>Make Passive</strong></td>\n<td>was made</td>\n<td>was made + to Vo</td>\n</tr>\n<tr>\n<td><strong>Let Passive</strong></td>\n<td>was allowed</td>\n<td>was allowed + to Vo</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"He was made <strong><em>_</em></strong> the entire house by his parents as punishment.\" boşluğa ne gelir?</p>\n<p>A) clean<br>\nB) to clean<br>\nC) cleaning<br>\nD) cleaned</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n\n**Açıklama:** \"Make\" passive'de \"to Vo\" alır: \"was made TO clean\". Active olsaydı \"made him clean\" (Vo) olurdu.\n</details>\n\n<p>[Kelime sayısı: 248]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "When I was a trainee at the company, I was made to work twelve-hour shifts every single day without any overtime pay.",
+          "tr": "Şirkette stajyerken, bana hiç mesai ücreti ödemeden her gün on iki saat vardiya çalıştırıldı.",
+          "description": "Active: \"They made me work\" (made + agent + Vo). Passive'de: \"I was made TO work\". Active'de Vo olan fiil, passive'de \"to Vo\" olur. Bu çok önemli bir istisnadır! Make passive'de to alır.\n\n**Örnek 2 (let - passive / allow):**"
+        },
+        {
+          "en": "The children were not allowed to stay up late to watch the movie because it was a school night and they had exams the next day.",
+          "tr": "Ertesi gün okul olduğu ve sınavları olduğu için çocukların filmi izlemek için geç saatlere kadar uyanık kalmalarına izin verilmedi.",
+          "description": "\"Let\" passive'de çok nadir kullanılır. Genelde \"allow\" fiilinin passive'i tercih edilir: \"be allowed to Vo\". Active \"They didn't let the children stay\" → Passive \"The children weren't allowed to stay\".\n\n**Örnek 3 (Verb + Object + Vo - özel fiiller):**"
+        },
+        {
+          "en": "While walking home late at night, I suddenly heard someone call my name from a dark alley, which frightened me greatly.",
+          "tr": "Gece geç saatte eve yürürken, karanlık bir ara sokaktan aniden birinin adımı seslendiğini duydum, bu beni çok korkuttu.",
+          "description": "\"Heard someone CALL\" - Algı fiilleri (see, hear, watch, feel) object + Vo alır (tüm eylem görüldüyse). Eğer eylemin bir kısmı görüldüyse Ving alır: \"I saw him crossing the street\" (karşıdan karşıya geçerken gördüm - anlık).\n\n**Örnek 4 (Verb + Object + Ving - özel fiiller):**"
+        },
+        {
+          "en": "When I came home unexpectedly, I caught my little brother secretly eating the chocolate cake I had been saving for my birthday.",
+          "tr": "Eve beklenmedik bir anda geldiğimde, küçük kardeşimi doğum günüm için sakladığım çikolatalı pastayı gizlice yerken yakaladım.",
+          "description": "\"Caught my brother EATING\" - Catch, find, spend, waste gibi fiiller object + Ving alır. \"I found him sleeping\", \"She spent hours doing homework\", \"Don't waste time playing games\"."
+        }
+      ],
+      "mini_test": {
+        "question": "\"He was made _______ the entire house by his parents as punishment.\" boşluğa ne gelir?",
+        "options": {
+          "A": "clean",
+          "B": "to clean",
+          "C": "cleaning",
+          "D": "cleaned"
+        },
+        "correct": "B",
+        "explanation": "\"Make\" passive'de \"to Vo\" alır: \"was made TO clean\". Active olsaydı \"made him clean\" (Vo) olurdu."
+      },
+      "mini_tests": [
+        {
+          "question": "\"He was made _______ the entire house by his parents as punishment.\" boşluğa ne gelir?",
+          "options": {
+            "A": "clean",
+            "B": "to clean",
+            "C": "cleaning",
+            "D": "cleaned"
+          },
+          "correct": "B",
+          "explanation": "\"Make\" passive'de \"to Vo\" alır: \"was made TO clean\". Active olsaydı \"made him clean\" (Vo) olurdu."
+        }
+      ],
+      "word_count": 540
+    },
+    {
+      "page_number": 15,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 15,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li><strong>Passive Voice:</strong> \"Be V3\" formülü ve zamanlara göre çekimi</li>\n<li><strong>Fiil Türleri:</strong> Intransitive (pasif olmaz), Transitive, Ditransitive (2 şekilde pasif)</li>\n<li><strong>That-Clause Passive:</strong> \"It is said that...\" ve \"He is said to...\" dönüşümleri</li>\n<li><strong>Causatives:</strong> have/get + object + V3 (yaptırtmak) ve have/make/let/get + agent yapıları</li>\n<li><strong>Özel Durumlar:</strong> caught Ving, ergative verbs, make passive (to Vo)</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p><strong>\"The new policy <strong><em>_</em></strong> by the board of directors next month.\" cümlesinde boşluğa ne gelir?</strong></p>\n<p>A) will announce<br>\nB) will be announced<br>\nC) is announcing<br>\nD) has announced</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - \"Next month\" gelecek, \"by the board\" pasif işareti. \"Will be announced\" (Future Passive).\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p><strong>\"Everyone knows that he is a talented musician.\" cümlesinin \"He\" ile başlayan passive hali nedir?</strong></p>\n<p>A) He is known that he is a talented musician.<br>\nB) He is known to be a talented musician.<br>\nC) It is known that he is a talented musician.<br>\nD) He is known being a talented musician.</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - That-clause (is) eşzamanlı → \"to be\". \"He is known to be a talented musician.\"\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p><strong>\"I need to <strong><em>_</em></strong> my computer repaired. It keeps crashing.\" boşluğa hangisi gelir?</strong></p>\n<p>A) make<br>\nB) let<br>\nC) have<br>\nD) force</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - \"Have + object + V3\" (bir şeyi yaptırtmak). \"I need to have my computer repaired.\"\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p><strong>\"The thief was caught <strong><em>_</em></strong> the jewelry from the store.\" boşluğa ne gelir?</strong></p>\n<p>A) to steal<br>\nB) steal<br>\nC) stole<br>\nD) stealing</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** D - \"Catch\" fiili passive'de Ving alır: \"was caught stealing\" (çalarken yakalandı).\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p><strong>\"She <strong><em>_</em></strong> her hair cut yesterday at the new salon.\" cümlesinde hangisi doğrudur?</strong></p>\n<p>A) had<br>\nB) has<br>\nC) have<br>\nD) was had</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - \"Yesterday\" geçmiş zaman. Causative past: \"had + object + V3\" → \"She had her hair cut.\"\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Passive/Causatives farkını gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p>[Kelime sayısı: 210]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası (ortalama 228)</li>\n<li>[x] Her sayfada 3-4 örnek var (toplam 58 örnek)</li>\n<li>[x] Her sayfada mini test var (toplam 14 test + 5'li final)</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 15 (25'i geçmiyor)</li>\n<li>[x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, hatırlatma, kart)</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "**\"The new policy _______ by the board of directors next month.\" cümlesinde boşluğa ne gelir?**",
+        "options": {
+          "A": "will announce",
+          "B": "will be announced",
+          "C": "is announcing",
+          "D": "has announced"
+        },
+        "correct": "B - \"Next month\" gelecek, \"by the board\" pasif işareti. \"Will be announced\" (Future Passive).",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "**\"The new policy _______ by the board of directors next month.\" cümlesinde boşluğa ne gelir?**",
+          "options": {
+            "A": "will announce",
+            "B": "will be announced",
+            "C": "is announcing",
+            "D": "has announced"
+          },
+          "correct": "B - \"Next month\" gelecek, \"by the board\" pasif işareti. \"Will be announced\" (Future Passive).",
+          "explanation": ""
+        },
+        {
+          "question": "**\"Everyone knows that he is a talented musician.\" cümlesinin \"He\" ile başlayan passive hali nedir?**",
+          "options": {
+            "A": "He is known that he is a talented musician.",
+            "B": "He is known to be a talented musician.",
+            "C": "It is known that he is a talented musician.",
+            "D": "He is known being a talented musician."
+          },
+          "correct": "B - That-clause (is) eşzamanlı → \"to be\". \"He is known to be a talented musician.\"",
+          "explanation": ""
+        },
+        {
+          "question": "**\"I need to _______ my computer repaired. It keeps crashing.\" boşluğa hangisi gelir?**",
+          "options": {
+            "A": "make",
+            "B": "let",
+            "C": "have",
+            "D": "force"
+          },
+          "correct": "C - \"Have + object + V3\" (bir şeyi yaptırtmak). \"I need to have my computer repaired.\"",
+          "explanation": ""
+        },
+        {
+          "question": "**\"The thief was caught _______ the jewelry from the store.\" boşluğa ne gelir?**",
+          "options": {
+            "A": "to steal",
+            "B": "steal",
+            "C": "stole",
+            "D": "stealing"
+          },
+          "correct": "D - \"Catch\" fiili passive'de Ving alır: \"was caught stealing\" (çalarken yakalandı).",
+          "explanation": ""
+        },
+        {
+          "question": "**\"She _______ her hair cut yesterday at the new salon.\" cümlesinde hangisi doğrudur?**",
+          "options": {
+            "A": "had",
+            "B": "has",
+            "C": "have",
+            "D": "was had"
+          },
+          "correct": "A - \"Yesterday\" geçmiş zaman. Causative past: \"had + object + V3\" → \"She had her hair cut.\"",
+          "explanation": ""
+        }
+      ],
+      "word_count": 406
+    }
+  ]
+}

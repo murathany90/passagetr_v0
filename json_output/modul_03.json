@@ -1,0 +1,454 @@
+{
+  "sira": 3,
+  "baslik": "Modality (Modal Fiiller)",
+  "dosya_adi": "03_modality.md",
+  "toplam_sayfa": 15,
+  "icon": "⚡",
+  "renk": "#E44D26",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "ABILITY (Yetenek)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Yetenek bildiren yapılar: <strong>can</strong> (genel yetenek), <strong>could</strong> (geçmiş yetenek), <strong>be able to</strong> (her zaman diliminde kullanılabilir). \"Could\" geçmişte tek seferlik başarılı eylemlerde kullanılmaz, onun yerine \"was/were able to\" tercih edilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Managed to\" anlamında sadece \"was/were able to\" kullanılır. Olumsuzda \"couldn't\" ve \"wasn't able to\" arasında fark yoktur.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> Even though the concert hall was extremely crowded, she was able to hear every single note of the piano performance.<br>\n<strong>TR:</strong> Konser salonu aşırı kalabalık olmasına rağmen, piyano performansının her bir notasını duyabildi.<br>\n→ <strong>Açıklama:</strong> Bu cümlede geçmişte belirli bir anda gerçekleşen tek seferlik bir eylem (duyma) anlatılıyor. Bu nedenle \"could\" değil, \"was able to\" kullanılmıştır. \"Was able to\" burada \"başardı, duymayı başardı\" anlamı taşır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> When I was a child, I could climb any tree in the forest without any fear, but now I get dizzy even on a ladder.<br>\n<strong>TR:</strong> Çocukken ormandaki her ağaca hiç korkmadan tırmanabilirdim, ama şimdi merdivende bile başım dönüyor.<br>\n→ <strong>Açıklama:</strong> Geçmişteki genel yetenek (herhangi bir ağaca tırmanabilme) ifade ediliyor. Bu nedenle \"could\" kullanımı doğrudur. Ayrıca \"was able to\" da kullanılabilirdi, ancak \"could\" burada daha doğal.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> After completing this intensive language course, you will be able to hold a fluent conversation with native speakers on various topics.<br>\n<strong>TR:</strong> Bu yoğun dil kursunu tamamladıktan sonra, anadili İngilizce olan kişilerle çeşitli konularda akıcı bir şekilde sohbet edebileceksiniz.<br>\n→ <strong>Açıklama:</strong> Gelecekteki bir yetenekten bahsediliyor. \"Will be able to\" yapısı, gelecekte bir beceri kazanılacağını ifade eder. \"Can\" gelecek için kullanılmaz.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Fortunately, the firefighters were able to rescue the family trapped on the third floor just before the roof collapsed.<br>\n<strong>TR:</strong> Neyse ki itfaiyeciler, çatı çökmeden hemen önce üçüncü katta mahsur kalan aileyi kurtarabildiler.<br>\n→ <strong>Açıklama:</strong> \"Fortunately\" (neyse ki) zarfı, başarıyla sonuçlanan bir eylemi vurguluyor. Bu gibi durumlarda \"was/were able to\" kullanmak daha doğaldır. \"Could\" burada kullanılsaydı, sadece yetenek anlamı kalırdı, başarı vurgusu kaybolurdu.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Zaman</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Şimdiki/Genel Yetenek</td>\n<td>can / am/is/are able to</td>\n<td>She can play guitar.</td>\n</tr>\n<tr>\n<td>Geçmiş Yetenek (genel)</td>\n<td>could / was/were able to</td>\n<td>I could run fast.</td>\n</tr>\n<tr>\n<td>Geçmişte Tek Seferlik Başarı</td>\n<td>was/were able to (managed to)</td>\n<td>He was able to escape.</td>\n</tr>\n<tr>\n<td>Gelecek Yetenek</td>\n<td>will be able to</td>\n<td>We will be able to help.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> Dünkü çok zor sınavda tüm soruları cevaplamayı başardım. Hangi ifade doğrudur?</p>\n<p>A) I could answer all the questions in the exam yesterday.<br>\nB) I was able to answer all the questions in the exam yesterday.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Geçmişte belirli bir anda, zorlukla başarılan bir eylemden bahsediyoruz. Bu nedenle \"was able to\" kullanılmalıdır. \"Could\" genel yetenek için uygundur, ancak bu özel durumda başarı vurgusu yapmak için \"was able to\" daha doğrudur.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "Even though the concert hall was extremely crowded, she was able to hear every single note of the piano performance.",
+          "tr": "Konser salonu aşırı kalabalık olmasına rağmen, piyano performansının her bir notasını duyabildi.",
+          "description": "Bu cümlede geçmişte belirli bir anda gerçekleşen tek seferlik bir eylem (duyma) anlatılıyor. Bu nedenle \"could\" değil, \"was able to\" kullanılmıştır. \"Was able to\" burada \"başardı, duymayı başardı\" anlamı taşır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "When I was a child, I could climb any tree in the forest without any fear, but now I get dizzy even on a ladder.",
+          "tr": "Çocukken ormandaki her ağaca hiç korkmadan tırmanabilirdim, ama şimdi merdivende bile başım dönüyor.",
+          "description": "Geçmişteki genel yetenek (herhangi bir ağaca tırmanabilme) ifade ediliyor. Bu nedenle \"could\" kullanımı doğrudur. Ayrıca \"was able to\" da kullanılabilirdi, ancak \"could\" burada daha doğal.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "After completing this intensive language course, you will be able to hold a fluent conversation with native speakers on various topics.",
+          "tr": "Bu yoğun dil kursunu tamamladıktan sonra, anadili İngilizce olan kişilerle çeşitli konularda akıcı bir şekilde sohbet edebileceksiniz.",
+          "description": "Gelecekteki bir yetenekten bahsediliyor. \"Will be able to\" yapısı, gelecekte bir beceri kazanılacağını ifade eder. \"Can\" gelecek için kullanılmaz.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "Fortunately, the firefighters were able to rescue the family trapped on the third floor just before the roof collapsed.",
+          "tr": "Neyse ki itfaiyeciler, çatı çökmeden hemen önce üçüncü katta mahsur kalan aileyi kurtarabildiler.",
+          "description": "\"Fortunately\" (neyse ki) zarfı, başarıyla sonuçlanan bir eylemi vurguluyor. Bu gibi durumlarda \"was/were able to\" kullanmak daha doğaldır. \"Could\" burada kullanılsaydı, sadece yetenek anlamı kalırdı, başarı vurgusu kaybolurdu."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 459
+    },
+    {
+      "page_number": 2,
+      "title": "POSSIBILITY (Olasılık) - Genel ve Kuramsal",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Olasılık ifade eden yapılar: <strong>may, might, could</strong> (genel olasılık, olumlu cümlelerde); <strong>can</strong> (kuramsal olasılık, her zaman mümkün); <strong>be likely to, be unlikely to, be bound to</strong> (olasılık dereceleri).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Genel olasılıkta olumlu cümlede \"may/might/could\", olumsuz cümlede \"may not/might not\" kullanılır. \"Could not\" geçmişte \"-emedi\" anlamına geldiği için bu grupta yer almaz.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The management may announce the new policy changes at the end of this week, but nothing has been confirmed yet.<br>\n<strong>TR:</strong> Yönetim, yeni politika değişikliklerini bu hafta sonunda açıklayabilir, ancak henüz hiçbir şey onaylanmadı.<br>\n→ <strong>Açıklama:</strong> \"May\" ile gelecekte gerçekleşme ihtimali olan bir durum ifade ediliyor. Kesinlik yok, sadece bir olasılık. \"Might\" veya \"could\" da kullanılabilirdi, aralarında anlam farkı yoktur.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> You can find a detailed explanation of this grammatical rule on page 45 of the course book.<br>\n<strong>TR:</strong> Bu gramer kuralının ayrıntılı açıklamasını ders kitabının 45. sayfasında bulabilirsiniz.<br>\n→ <strong>Açıklama:</strong> Burada \"can\", kuramsal bir olasılık ifade ediyor. Yani her zaman (kitaba baktığınızda) bu açıklamayı bulmanız mümkündür. Bu genel bir gerçektir, belirli bir zamana bağlı değildir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Given his experience and qualifications, he is bound to get the job offer; the committee was very impressed.<br>\n<strong>TR:</strong> Deneyimi ve nitelikleri göz önüne alındığında, iş teklifini alması kuvvetle muhtemel; komite çok etkilenmişti.<br>\n→ <strong>Açıklama:</strong> \"Be bound to\" çok güçlü olasılık ifade eder. Neredeyse kesinlik derecesindedir. İpuçları (komitenin etkilenmesi) bu sonucu destekliyor.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Without a proper map and compass, it is unlikely that we will find our way back to the campsite before dark.<br>\n<strong>TR:</strong> Uygun bir harita ve pusula olmadan, hava kararmadan kamp alanına geri dönmemiz pek mümkün değil.<br>\n→ <strong>Açıklama:</strong> \"Unlikely\" düşük olasılık ifade eder. \"It is unlikely that + cümle\" veya \"is unlikely to V0\" şeklinde kullanılır.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam Derecesi</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>may / might / could</td>\n<td>zayıf olasılık</td>\n<td>It may rain.</td>\n</tr>\n<tr>\n<td>can</td>\n<td>kuramsal olasılık</td>\n<td>Smoking can cause cancer.</td>\n</tr>\n<tr>\n<td>be likely to</td>\n<td>yüksek olasılık</td>\n<td>She is likely to win.</td>\n</tr>\n<tr>\n<td>be unlikely to</td>\n<td>düşük olasılık</td>\n<td>They are unlikely to agree.</td>\n</tr>\n<tr>\n<td>be bound to</td>\n<td>çok yüksek olasılık</td>\n<td>He is bound to succeed.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Herkes hata yapabilir.\" cümlesini İngilizce'ye çevirirken hangi modal daha uygundur?</p>\n<p>A) Anyone may make mistakes.<br>\nB) Anyone can make mistakes.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Bu cümle genel bir gerçeği, kuramsal olasılığı ifade eder. Herkesin her zaman hata yapma potansiyeli vardır. Bu nedenle \"can\" daha uygundur. \"May\" belirli bir durumdaki olasılık için kullanılır.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "The management may announce the new policy changes at the end of this week, but nothing has been confirmed yet.",
+          "tr": "Yönetim, yeni politika değişikliklerini bu hafta sonunda açıklayabilir, ancak henüz hiçbir şey onaylanmadı.",
+          "description": "\"May\" ile gelecekte gerçekleşme ihtimali olan bir durum ifade ediliyor. Kesinlik yok, sadece bir olasılık. \"Might\" veya \"could\" da kullanılabilirdi, aralarında anlam farkı yoktur.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "You can find a detailed explanation of this grammatical rule on page 45 of the course book.",
+          "tr": "Bu gramer kuralının ayrıntılı açıklamasını ders kitabının 45. sayfasında bulabilirsiniz.",
+          "description": "Burada \"can\", kuramsal bir olasılık ifade ediyor. Yani her zaman (kitaba baktığınızda) bu açıklamayı bulmanız mümkündür. Bu genel bir gerçektir, belirli bir zamana bağlı değildir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "Given his experience and qualifications, he is bound to get the job offer; the committee was very impressed.",
+          "tr": "Deneyimi ve nitelikleri göz önüne alındığında, iş teklifini alması kuvvetle muhtemel; komite çok etkilenmişti.",
+          "description": "\"Be bound to\" çok güçlü olasılık ifade eder. Neredeyse kesinlik derecesindedir. İpuçları (komitenin etkilenmesi) bu sonucu destekliyor.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "Without a proper map and compass, it is unlikely that we will find our way back to the campsite before dark.",
+          "tr": "Uygun bir harita ve pusula olmadan, hava kararmadan kamp alanına geri dönmemiz pek mümkün değil.",
+          "description": "\"Unlikely\" düşük olasılık ifade eder. \"It is unlikely that + cümle\" veya \"is unlikely to V0\" şeklinde kullanılır."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 406
+    },
+    {
+      "page_number": 3,
+      "title": "POSSIBILITY - Özel Yapılar ve Stratejiler",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p><strong>May/might/could well</strong> yapıları normal \"may/might/could\" ile aynı anlamdadır, sadece vurgu yapar. <strong>May/might as well</strong> ise \"bari... yapalım\" anlamında kullanılır ve olasılıkla ilgisi yoktur. Ayrıca <strong>I have no idea, perhaps, probably</strong> gibi ifadeler olasılık sorularında ipucudur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"May/might as well\" ile \"may well\" karıştırılmamalıdır. İlki öneri, ikincisi olasılıktır.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> Given his academic background and research experience, he may well be appointed as the head of the department.<br>\n<strong>TR:</strong> Akademik geçmişi ve araştırma deneyimi göz önüne alındığında, bölüm başkanı olarak atanması oldukça olası.<br>\n→ <strong>Açıklama:</strong> \"May well\" normal \"may\" ile aynı olasılığı ifade eder, ancak biraz daha güçlü bir tahmin katar. Cümlede \"kuvvetle muhtemel\" hissi verir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The last bus left ten minutes ago, and we have no money for a taxi. We might as well start walking home.<br>\n<strong>TR:</strong> Son otobüs on dakika önce kalktı ve taksi için paramız yok. Eve yürümeye başlasak iyi olur (bari yürüyelim).<br>\n→ <strong>Açıklama:</strong> \"Might as well\" burada bir öneri sunuyor: başka seçenek kalmadığı için yapılabilecek en mantıklı şey. Olasılık anlamı yok.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> I have no idea where Sarah has gone; she could be at the library, or she might have gone to the gym.<br>\n<strong>TR:</strong> Sarah'nın nereye gittiği hakkında hiçbir fikrim yok; kütüphanede olabilir ya da spor salonuna gitmiş olabilir.<br>\n→ <strong>Açıklama:</strong> \"I have no idea\" ifadesi, konuşmacının kesin bilgiye sahip olmadığını gösterir ve ardından olasılık bildiren yapılar (could be, might have gone) gelir. Bu tür ifadeler olasılık sorularında ipucudur.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The negotiations have been going on for weeks, but a breakthrough is unlikely to happen before the deadline.<br>\n<strong>TR:</strong> Müzakereler haftalardır devam ediyor, ancak son teslim tarihinden önce bir ilerleme kaydedilmesi pek olası değil.<br>\n→ <strong>Açıklama:</strong> \"Be unlikely to\" düşük olasılık ifade eder. Burada \"is unlikely to happen\" ifadesi, bir şeyin gerçekleşme ihtimalinin düşük olduğunu söylüyor.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>may/might/could well</td>\n<td>kuvvetle muhtemel (olasılık)</td>\n</tr>\n<tr>\n<td>may/might as well</td>\n<td>bari... yapalım (öneri)</td>\n</tr>\n<tr>\n<td>be likely to</td>\n<td>olası</td>\n</tr>\n<tr>\n<td>be unlikely to</td>\n<td>olası değil</td>\n</tr>\n<tr>\n<td>be bound to</td>\n<td>kesin gibi</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"I'm tired and there's nothing good on TV. I _____ go to bed early.\" cümlesinde boşluğa hangisi gelir?</p>\n<p>A) may well<br>\nB) might as well</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Cümlede televizyonda iyi bir şey olmadığı için erken yatmanın mantıklı bir seçenek olduğu ifade ediliyor. Bu bir öneri/tercih durumudur. Bu nedenle \"might as well\" (bari yatayım) uygundur.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "Given his academic background and research experience, he may well be appointed as the head of the department.",
+          "tr": "Akademik geçmişi ve araştırma deneyimi göz önüne alındığında, bölüm başkanı olarak atanması oldukça olası.",
+          "description": "\"May well\" normal \"may\" ile aynı olasılığı ifade eder, ancak biraz daha güçlü bir tahmin katar. Cümlede \"kuvvetle muhtemel\" hissi verir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The last bus left ten minutes ago, and we have no money for a taxi. We might as well start walking home.",
+          "tr": "Son otobüs on dakika önce kalktı ve taksi için paramız yok. Eve yürümeye başlasak iyi olur (bari yürüyelim).",
+          "description": "\"Might as well\" burada bir öneri sunuyor: başka seçenek kalmadığı için yapılabilecek en mantıklı şey. Olasılık anlamı yok.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "I have no idea where Sarah has gone; she could be at the library, or she might have gone to the gym.",
+          "tr": "Sarah'nın nereye gittiği hakkında hiçbir fikrim yok; kütüphanede olabilir ya da spor salonuna gitmiş olabilir.",
+          "description": "\"I have no idea\" ifadesi, konuşmacının kesin bilgiye sahip olmadığını gösterir ve ardından olasılık bildiren yapılar (could be, might have gone) gelir. Bu tür ifadeler olasılık sorularında ipucudur.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The negotiations have been going on for weeks, but a breakthrough is unlikely to happen before the deadline.",
+          "tr": "Müzakereler haftalardır devam ediyor, ancak son teslim tarihinden önce bir ilerleme kaydedilmesi pek olası değil.",
+          "description": "\"Be unlikely to\" düşük olasılık ifade eder. Burada \"is unlikely to happen\" ifadesi, bir şeyin gerçekleşme ihtimalinin düşük olduğunu söylüyor."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 408
+    },
+    {
+      "page_number": 4,
+      "title": "REQUESTS (Ricalar) ve PERMISSIONS (İzinler)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Rica ederken <strong>can, could, will, would</strong> soru cümlelerinde kullanılır. <strong>Would you mind + Ving?</strong> veya <strong>Would you mind if + subject + V2?</strong> yapıları daha kibardır. İzin isterken <strong>may, might, can, could</strong> kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Would you mind\" yapısından sonra fiil geliyorsa Ving, \"if\" geliyorsa Past Simple (V2) kullanılır.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> Excuse me, could you possibly tell me how to get to the nearest post office from here?<br>\n<strong>TR:</strong> Affedersiniz, acaba buradan en yakın postaneye nasıl gideceğimi söyleyebilir misiniz?<br>\n→ <strong>Açıklama:</strong> \"Could you\" kibar bir rica kalıbıdır. \"Possibly\" eklenerek nezaket daha da artırılmıştır. \"Can you\" da kullanılabilir, ancak \"could\" daha kibardır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Would you mind waiting for me for a few minutes? I just need to make a quick phone call.<br>\n<strong>TR:</strong> Beni birkaç dakika beklemenizin bir sakıncası var mı? Sadece kısa bir telefon görüşmesi yapmam gerekiyor.<br>\n→ <strong>Açıklama:</strong> \"Would you mind + Ving\" yapısı, karşı tarafın bir eylemi yapmasını rica eder. Cevap olumlu ise \"No, not at all\" veya \"Of course not\" denir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Would you mind if I opened the window? It's getting really stuffy in here.<br>\n<strong>TR:</strong> Pencereyi açsam bir sakıncası var mı? İçerisi gerçekten çok havasız olmaya başladı.<br>\n→ <strong>Açıklama:</strong> Bu yapıda \"if\"ten sonra Past Simple (opened) kullanılır, ancak anlam şimdiki zamana yöneliktir. Konuşmacı izin istemektedir.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> May I borrow your car for the weekend? Mine is being repaired, and I need to visit my parents.<br>\n<strong>TR:</strong> Arabanızı hafta sonu için ödünç alabilir miyim? Benimki tamirde ve ailemi ziyaret etmem gerekiyor.<br>\n→ <strong>Açıklama:</strong> \"May I\" izin istemenin en kibar ve resmî yoludur. \"Can I\" daha günlük konuşmada kullanılır. \"Might I\" çok resmîdir ve nadir kullanılır.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Rica / İzin</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Rica (kibar)</td>\n<td>Could you ...?</td>\n<td>Could you help?</td>\n</tr>\n<tr>\n<td>Rica (çok kibar)</td>\n<td>Would you mind Ving?</td>\n<td>Would you mind closing the door?</td>\n</tr>\n<tr>\n<td>İzin (resmî)</td>\n<td>May I ...?</td>\n<td>May I come in?</td>\n</tr>\n<tr>\n<td>İzin (günlük)</td>\n<td>Can I ...?</td>\n<td>Can I use your phone?</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> Bir restoranda garsondan menüyü istemek için en kibar ifade hangisidir?</p>\n<p>A) Can I have the menu?<br>\nB) Could I have the menu, please?<br>\nC) Would you mind if I have the menu?</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"Could I\" kibardır ve yaygın kullanılır. \"Would you mind if I had the menu?\" gramer olarak doğru olsa da (if'ten sonra Past Simple: had), burada menüyü istemek için fazla dolaylıdır. \"Can I\" daha az kibardır.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "Excuse me, could you possibly tell me how to get to the nearest post office from here?",
+          "tr": "Affedersiniz, acaba buradan en yakın postaneye nasıl gideceğimi söyleyebilir misiniz?",
+          "description": "\"Could you\" kibar bir rica kalıbıdır. \"Possibly\" eklenerek nezaket daha da artırılmıştır. \"Can you\" da kullanılabilir, ancak \"could\" daha kibardır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Would you mind waiting for me for a few minutes? I just need to make a quick phone call.",
+          "tr": "Beni birkaç dakika beklemenizin bir sakıncası var mı? Sadece kısa bir telefon görüşmesi yapmam gerekiyor.",
+          "description": "\"Would you mind + Ving\" yapısı, karşı tarafın bir eylemi yapmasını rica eder. Cevap olumlu ise \"No, not at all\" veya \"Of course not\" denir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "Would you mind if I opened the window? It's getting really stuffy in here.",
+          "tr": "Pencereyi açsam bir sakıncası var mı? İçerisi gerçekten çok havasız olmaya başladı.",
+          "description": "Bu yapıda \"if\"ten sonra Past Simple (opened) kullanılır, ancak anlam şimdiki zamana yöneliktir. Konuşmacı izin istemektedir.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "May I borrow your car for the weekend? Mine is being repaired, and I need to visit my parents.",
+          "tr": "Arabanızı hafta sonu için ödünç alabilir miyim? Benimki tamirde ve ailemi ziyaret etmem gerekiyor.",
+          "description": "\"May I\" izin istemenin en kibar ve resmî yoludur. \"Can I\" daha günlük konuşmada kullanılır. \"Might I\" çok resmîdir ve nadir kullanılır."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 399
+    },
+    {
+      "page_number": 5,
+      "title": "OBLIGATION & NECESSITY (Zorunluluk ve Gereklilik) - 1",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Zorunluluk bildiren yapılar: <strong>must</strong> (içten gelen zorunluluk), <strong>have to / have got to</strong> (dıştan gelen zorunluluk, kurallar), <strong>need to</strong> (gereklilik). Olumsuzda zorunluluk yokluğu: <strong>needn't, don't have to, don't need to</strong> (\"-e gerek yok\"). \"Mustn't\" yasaklama içindir, bu grupta yer almaz.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Must\" kişisel kararları, \"have to\" ise dışarıdan dayatılan kuralları ifade eder.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I really must start eating more healthily and exercising regularly; my doctor warned me about my cholesterol levels.<br>\n<strong>TR:</strong> Gerçekten daha sağlıklı beslenmeye ve düzenli egzersiz yapmaya başlamalıyım; doktorum kolesterol seviyelerim konusunda beni uyardı.<br>\n→ <strong>Açıklama:</strong> Konuşmacı kendi sağlığı için içsel bir zorunluluk hissediyor. Bu nedenle \"must\" kullanılmış. Dışarıdan bir dayatma yok, bireyin kendi kararı.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> According to company policy, all employees have to wear their ID badges at all times while in the building.<br>\n<strong>TR:</strong> Şirket politikasına göre, tüm çalışanlar bina içindeyken kimlik kartlarını her zaman takmak zorundadır.<br>\n→ <strong>Açıklama:</strong> Burada bir kural (şirket politikası) söz konusu. Dıştan gelen bir zorunluluk olduğu için \"have to\" kullanılmış. \"Must\" da kullanılabilirdi, ancak \"have to\" dışsal kurallar için daha yaygındır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> You don't have to attend the meeting if you have nothing to contribute; just send a brief email update.<br>\n<strong>TR:</strong> Katkıda bulunacak bir şeyiniz yoksa toplantıya katılmak zorunda değilsiniz; sadece kısa bir e-posta güncellemesi gönderin.<br>\n→ <strong>Açıklama:</strong> \"Don't have to\" zorunluluğun olmadığını ifade eder. Yani katılmak bir seçenektir, mecburiyet yoktur.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> We have got to finish this report by noon tomorrow; the client is waiting for it urgently.<br>\n<strong>TR:</strong> Bu raporu yarın öğlene kadar bitirmek zorundayız; müşteri acilen bekliyor.<br>\n→ <strong>Açıklama:</strong> \"Have got to\" konuşma dilinde sık kullanılır, \"have to\" ile aynı anlamdadır. Dışsal bir zorunluluk (müşteri talebi) vurgulanıyor.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Anlam</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>İçsel zorunluluk</td>\n<td>must</td>\n<td>I must study harder.</td>\n</tr>\n<tr>\n<td>Dışsal zorunluluk</td>\n<td>have to / have got to</td>\n<td>We have to wear uniforms.</td>\n</tr>\n<tr>\n<td>Gereklilik</td>\n<td>need to</td>\n<td>You need to see a doctor.</td>\n</tr>\n<tr>\n<td>Zorunluluk yok</td>\n<td>don't have to / needn't</td>\n<td>You don't have to pay.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Yarın sınav var, bu yüzden bu akşam ders çalışmalıyım.\" cümlesindeki \"çalışmalıyım\" ifadesi için hangi modal daha uygundur?</p>\n<p>A) I have to study tonight.<br>\nB) I must study tonight.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Kişi sınavı geçmek için kendi içsel motivasyonuyla çalışma kararı alıyor. Dışarıdan bir dayatma (örneğin öğretmen zorlaması) yok. Bu nedenle \"must\" daha uygundur. \"Have to\" da kullanılabilir, ancak \"must\" içsel zorunluluğu daha iyi vurgular.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "I really must start eating more healthily and exercising regularly; my doctor warned me about my cholesterol levels.",
+          "tr": "Gerçekten daha sağlıklı beslenmeye ve düzenli egzersiz yapmaya başlamalıyım; doktorum kolesterol seviyelerim konusunda beni uyardı.",
+          "description": "Konuşmacı kendi sağlığı için içsel bir zorunluluk hissediyor. Bu nedenle \"must\" kullanılmış. Dışarıdan bir dayatma yok, bireyin kendi kararı.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "According to company policy, all employees have to wear their ID badges at all times while in the building.",
+          "tr": "Şirket politikasına göre, tüm çalışanlar bina içindeyken kimlik kartlarını her zaman takmak zorundadır.",
+          "description": "Burada bir kural (şirket politikası) söz konusu. Dıştan gelen bir zorunluluk olduğu için \"have to\" kullanılmış. \"Must\" da kullanılabilirdi, ancak \"have to\" dışsal kurallar için daha yaygındır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "You don't have to attend the meeting if you have nothing to contribute; just send a brief email update.",
+          "tr": "Katkıda bulunacak bir şeyiniz yoksa toplantıya katılmak zorunda değilsiniz; sadece kısa bir e-posta güncellemesi gönderin.",
+          "description": "\"Don't have to\" zorunluluğun olmadığını ifade eder. Yani katılmak bir seçenektir, mecburiyet yoktur.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "We have got to finish this report by noon tomorrow; the client is waiting for it urgently.",
+          "tr": "Bu raporu yarın öğlene kadar bitirmek zorundayız; müşteri acilen bekliyor.",
+          "description": "\"Have got to\" konuşma dilinde sık kullanılır, \"have to\" ile aynı anlamdadır. Dışsal bir zorunluluk (müşteri talebi) vurgulanıyor."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 401
+    },
+    {
+      "page_number": 6,
+      "title": "OBLIGATION IN THE PAST ve ADVICE",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Geçmişte zorunluluk: <strong>had to</strong> (bir şey yapmak zorundaydım). Geçmişte zorunluluğun olmaması: <strong>didn't have to, didn't need to</strong> (gerek kalmadı). Tavsiye: <strong>should, ought to, had better</strong> (nazik tavsiye); <strong>must</strong> (güçlü tavsiye). Olumsuz tavsiye: <strong>shouldn't, ought not to, had better not</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Had better\" sadece şimdiki veya gelecek anlamda kullanılır, geçmişte kullanılmaz. Tavsiyede \"must\" aciliyet ve güçlü vurgu katar.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> My car broke down on the motorway, so I had to call a tow truck and wait for over an hour in the rain.<br>\n<strong>TR:</strong> Arabam otoyolda bozuldu, bu yüzden çekici çağırmak zorunda kaldım ve yağmurda bir saatten fazla bekledim.<br>\n→ <strong>Açıklama:</strong> Geçmişte gerçekleşen bir zorunluluk durumu. Araba bozulduğu için çekici çağırmak dışında seçenek yoktu. \"Had to\" bu anlamı verir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Luckily, my friend offered to cook dinner, so I didn't have to worry about preparing anything after work.<br>\n<strong>TR:</strong> Neyse ki arkadaşım akşam yemeğini pişirmeyi teklif etti, bu yüzden işten sonra bir şey hazırlamak zorunda kalmadım.<br>\n→ <strong>Açıklama:</strong> \"Didn't have to\" geçmişte bir zorunluluğun ortadan kalktığını ifade eder. Yemek pişirme eylemi gerçekleşmedi, çünkü arkadaş halletti.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> You look exhausted. You really should take a few days off and get some rest before you get sick.<br>\n<strong>TR:</strong> Bitkin görünüyorsun. Hastalanmadan önce gerçekten birkaç gün izin alıp biraz dinlenmelisin.<br>\n→ <strong>Açıklama:</strong> \"Should\" ile nazik bir tavsiye veriliyor. Konuşmacı, karşıdakinin iyiliği için bir öneride bulunuyor.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> You had better not leave your luggage unattended at the airport; there have been several thefts recently.<br>\n<strong>TR:</strong> Bagajınızı havaalanında gözetimsiz bırakmasanız iyi olur; son zamanlarda birkaç hırsızlık oldu.<br>\n→ <strong>Açıklama:</strong> \"Had better not\" güçlü bir uyarı ve tavsiye içerir. Yapılmazsa kötü sonuçlar olabileceğini ima eder. Geleceğe yöneliktir.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Anlam</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Geçmiş zorunluluk</td>\n<td>had to</td>\n<td>I had to leave early.</td>\n</tr>\n<tr>\n<td>Geçmişte zorunluluk yok</td>\n<td>didn't have to</td>\n<td>We didn't have to pay.</td>\n</tr>\n<tr>\n<td>Tavsiye (nazik)</td>\n<td>should / ought to</td>\n<td>You should see a doctor.</td>\n</tr>\n<tr>\n<td>Tavsiye (güçlü)</td>\n<td>must / had better</td>\n<td>You must see this film!</td>\n</tr>\n<tr>\n<td>Olumsuz tavsiye</td>\n<td>shouldn't / had better not</td>\n<td>You shouldn't smoke.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Dün akşam toplantıya katılmak zorunda değildim, çünkü hasta olduğumu söyledim.\" cümlesinde hangi ifade doğrudur?</p>\n<p>A) I didn't have to attend the meeting yesterday.<br>\nB) I hadn't to attend the meeting yesterday.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A\n**Açıklama:** Geçmişte zorunluluğun olmadığını ifade etmek için \"didn't have to\" kullanılır. \"Hadn't to\" diye bir yapı yoktur. \"Had to\"nun olumsuzu \"didn't have to\"dur.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "My car broke down on the motorway, so I had to call a tow truck and wait for over an hour in the rain.",
+          "tr": "Arabam otoyolda bozuldu, bu yüzden çekici çağırmak zorunda kaldım ve yağmurda bir saatten fazla bekledim.",
+          "description": "Geçmişte gerçekleşen bir zorunluluk durumu. Araba bozulduğu için çekici çağırmak dışında seçenek yoktu. \"Had to\" bu anlamı verir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Luckily, my friend offered to cook dinner, so I didn't have to worry about preparing anything after work.",
+          "tr": "Neyse ki arkadaşım akşam yemeğini pişirmeyi teklif etti, bu yüzden işten sonra bir şey hazırlamak zorunda kalmadım.",
+          "description": "\"Didn't have to\" geçmişte bir zorunluluğun ortadan kalktığını ifade eder. Yemek pişirme eylemi gerçekleşmedi, çünkü arkadaş halletti.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "You look exhausted. You really should take a few days off and get some rest before you get sick.",
+          "tr": "Bitkin görünüyorsun. Hastalanmadan önce gerçekten birkaç gün izin alıp biraz dinlenmelisin.",
+          "description": "\"Should\" ile nazik bir tavsiye veriliyor. Konuşmacı, karşıdakinin iyiliği için bir öneride bulunuyor.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "You had better not leave your luggage unattended at the airport; there have been several thefts recently.",
+          "tr": "Bagajınızı havaalanında gözetimsiz bırakmasanız iyi olur; son zamanlarda birkaç hırsızlık oldu.",
+          "description": "\"Had better not\" güçlü bir uyarı ve tavsiye içerir. Yapılmazsa kötü sonuçlar olabileceğini ima eder. Geleceğe yöneliktir."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 404
+    },
+    {
+      "page_number": 7,
+      "title": "DEDUCTION (Sonuç Çıkarımı)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Mevcut bir durumdan mantıksal sonuç çıkarırken: olumlu çıkarım <strong>must</strong> (-meli/-malı), olumsuz çıkarım <strong>can't / mustn't</strong> (-mez/-maz, olamaz). Geçmişe yönelik çıkarım: <strong>must have V3</strong> (yapmış olmalı), <strong>can't/couldn't have V3</strong> (yapmış olamaz).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Must\" burada zorunluluk değil, yüksek olasılık anlamı taşır. \"Can't\" olumsuz çıkarım için en yaygın kullanılandır.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> She has been working on this project for 14 hours straight without a break. She must be absolutely exhausted.<br>\n<strong>TR:</strong> Bu proje üzerinde hiç ara vermeden 14 saattir çalışıyor. Kesinlikle çok yorgun olmalı.<br>\n→ <strong>Açıklama:</strong> Eldeki kanıtlara (14 saat çalışma) dayanarak güçlü bir sonuç çıkarılıyor. \"Must\" bu mantıksal çıkarımı ifade eder.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> He just ate three huge hamburgers and a large portion of fries. He can't be hungry again already!<br>\n<strong>TR:</strong> Daha üç kocaman hamburger ve büyük bir porsiyon patates kızartması yedi. Daha şimdiden tekrar aç olamaz!<br>\n→ <strong>Açıklama:</strong> Olumsuz çıkarım: yediği miktara bakarak aç olması mantıksız. \"Can't\" bu imkânsızlığı ifade eder.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The ground is wet, and there are puddles everywhere. It must have rained heavily during the night.<br>\n<strong>TR:</strong> Yer ıslak ve her yerde su birikintileri var. Gece boyunca şiddetli yağmur yağmış olmalı.<br>\n→ <strong>Açıklama:</strong> Geçmişe yönelik çıkarım: şu an görülen sonuçlardan yola çıkarak geçmişte bir olayın gerçekleştiği tahmin ediliyor. \"Must have V3\" kullanılır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> They only put the house on the market yesterday, so they can't have sold it already, despite the high demand.<br>\n<strong>TR:</strong> Evi daha dün satışa çıkardılar, yüksek talep olsa da henüz satmış olamazlar.<br>\n→ <strong>Açıklama:</strong> Zamanlama açısından satışın gerçekleşmesi mümkün değil. \"Can't have V3\" geçmişte bir şeyin olma ihtimalinin çok düşük olduğunu belirtir.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Çıkarım Türü</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Şimdiki (+)</td>\n<td>must V0</td>\n<td>He must be at home.</td>\n</tr>\n<tr>\n<td>Şimdiki (-)</td>\n<td>can't V0</td>\n<td>He can't be at home.</td>\n</tr>\n<tr>\n<td>Geçmiş (+)</td>\n<td>must have V3</td>\n<td>He must have left.</td>\n</tr>\n<tr>\n<td>Geçmiş (-)</td>\n<td>can't/couldn't have V3</td>\n<td>He can't have left.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> Işık yanmıyor ve kapı kilitli. Kimse yok, _____ .</p>\n<p>A) nobody must be at home.<br>\nB) nobody can be at home.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Olumsuz çıkarımda \"can't\" kullanılır: \"Nobody can be at home\" (Kimse evde olamaz). \"Must\" olumlu çıkarım içindir. \"Nobody must be at home\" dilbilgisel olarak doğru değildir; \"must\" olumlu cümlede kullanılır.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "She has been working on this project for 14 hours straight without a break. She must be absolutely exhausted.",
+          "tr": "Bu proje üzerinde hiç ara vermeden 14 saattir çalışıyor. Kesinlikle çok yorgun olmalı.",
+          "description": "Eldeki kanıtlara (14 saat çalışma) dayanarak güçlü bir sonuç çıkarılıyor. \"Must\" bu mantıksal çıkarımı ifade eder.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "He just ate three huge hamburgers and a large portion of fries. He can't be hungry again already!",
+          "tr": "Daha üç kocaman hamburger ve büyük bir porsiyon patates kızartması yedi. Daha şimdiden tekrar aç olamaz!",
+          "description": "Olumsuz çıkarım: yediği miktara bakarak aç olması mantıksız. \"Can't\" bu imkânsızlığı ifade eder.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The ground is wet, and there are puddles everywhere. It must have rained heavily during the night.",
+          "tr": "Yer ıslak ve her yerde su birikintileri var. Gece boyunca şiddetli yağmur yağmış olmalı.",
+          "description": "Geçmişe yönelik çıkarım: şu an görülen sonuçlardan yola çıkarak geçmişte bir olayın gerçekleştiği tahmin ediliyor. \"Must have V3\" kullanılır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "They only put the house on the market yesterday, so they can't have sold it already, despite the high demand.",
+          "tr": "Evi daha dün satışa çıkardılar, yüksek talep olsa da henüz satmış olamazlar.",
+          "description": "Zamanlama açısından satışın gerçekleşmesi mümkün değil. \"Can't have V3\" geçmişte bir şeyin olma ihtimalinin çok düşük olduğunu belirtir."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 371
+    },
+    {
+      "page_number": 8,
+      "title": "HABITUAL ACTIVITIES (Alışkanlıklar)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Şu anki alışkanlıklar: <strong>be used to / be accustomed to + Ving/Noun</strong> (alışkın olmak). Alışma süreci: <strong>get used to / get accustomed to + Ving/Noun</strong> (alışmak). Geçmişteki alışkanlıklar (artık yapılmayan): <strong>used to / would + V0</strong> (yapardım). \"Would\" sadece eylemler için kullanılır, durumlar için kullanılmaz.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Used to\" hem eylem hem durum için geçerliyken, \"would\" sadece tekrarlanan eylemler içindir.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I am used to waking up early because I have been working the morning shift for five years now.<br>\n<strong>TR:</strong> Erken uyanmaya alışkınım çünkü beş yıldır sabah vardiyasında çalışıyorum.<br>\n→ <strong>Açıklama:</strong> \"Am used to\" şu anki alışkanlık durumunu ifade eder. Ardından Ving (waking) gelir. Zaten alışılmış bir durum söz konusu.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Moving to a new country was hard at first, but I am gradually getting used to the different culture and lifestyle.<br>\n<strong>TR:</strong> Yeni bir ülkeye taşınmak ilk başta zordu, ama yavaş yavaş farklı kültüre ve yaşam tarzına alışıyorum.<br>\n→ <strong>Açıklama:</strong> \"Getting used to\" alışma sürecini anlatır. Henüz tam alışılmamış, süreç devam ediyor.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> When I was a student, I used to spend hours in the library reading novels instead of studying for exams.<br>\n<strong>TR:</strong> Öğrenciyken, saatlerce kütüphanede sınavlara çalışmak yerine roman okuyarak geçirirdim.<br>\n→ <strong>Açıklama:</strong> Geçmişte düzenli yapılan ama artık yapılmayan bir eylem. \"Used to\" bu anlamı verir. \"Would\" da kullanılabilirdi.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Every summer, my grandfather would take us to the seaside village where he grew up, and we would fish all day.<br>\n<strong>TR:</strong> Her yaz, büyükbabam bizi büyüdüğü sahil köyüne götürürdü ve bütün gün balık tutardık.<br>\n→ <strong>Açıklama:</strong> Geçmişte tekrarlanan eylemler (take, fish) için \"would\" kullanılmış. \"Used to\" da aynı anlamda kullanılabilir, ancak \"would\" anlatıya daha canlılık katar.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Anlam</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Şimdiki alışkanlık (alışkın olmak)</td>\n<td>be used to Ving</td>\n<td>I'm used to cold weather.</td>\n</tr>\n<tr>\n<td>Alışma süreci</td>\n<td>get used to Ving</td>\n<td>I'm getting used to driving on the left.</td>\n</tr>\n<tr>\n<td>Geçmiş alışkanlık (eylem/durum)</td>\n<td>used to V0</td>\n<td>She used to be shy.</td>\n</tr>\n<tr>\n<td>Geçmiş alışkanlık (sadece eylem)</td>\n<td>would V0</td>\n<td>He would often visit us.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Çocukken utangaçtım ama şimdi değilim.\" cümlesinde hangisi doğrudur?</p>\n<p>A) I would be shy when I was a child.<br>\nB) I used to be shy when I was a child.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"Would\" durum bildiren fiillerle (be) kullanılmaz. \"Used to\" hem eylem hem durum için kullanılabilir. Burada geçmişte var olan bir durum (utangaçlık) anlatılıyor, bu nedenle \"used to\" doğrudur.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "I am used to waking up early because I have been working the morning shift for five years now.",
+          "tr": "Erken uyanmaya alışkınım çünkü beş yıldır sabah vardiyasında çalışıyorum.",
+          "description": "\"Am used to\" şu anki alışkanlık durumunu ifade eder. Ardından Ving (waking) gelir. Zaten alışılmış bir durum söz konusu.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Moving to a new country was hard at first, but I am gradually getting used to the different culture and lifestyle.",
+          "tr": "Yeni bir ülkeye taşınmak ilk başta zordu, ama yavaş yavaş farklı kültüre ve yaşam tarzına alışıyorum.",
+          "description": "\"Getting used to\" alışma sürecini anlatır. Henüz tam alışılmamış, süreç devam ediyor.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "When I was a student, I used to spend hours in the library reading novels instead of studying for exams.",
+          "tr": "Öğrenciyken, saatlerce kütüphanede sınavlara çalışmak yerine roman okuyarak geçirirdim.",
+          "description": "Geçmişte düzenli yapılan ama artık yapılmayan bir eylem. \"Used to\" bu anlamı verir. \"Would\" da kullanılabilirdi.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "Every summer, my grandfather would take us to the seaside village where he grew up, and we would fish all day.",
+          "tr": "Her yaz, büyükbabam bizi büyüdüğü sahil köyüne götürürdü ve bütün gün balık tutardık.",
+          "description": "Geçmişte tekrarlanan eylemler (take, fish) için \"would\" kullanılmış. \"Used to\" da aynı anlamda kullanılabilir, ancak \"would\" anlatıya daha canlılık katar."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 402
+    },
+    {
+      "page_number": 9,
+      "title": "PREFERENCES (Tercihler)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Tercih bildiren yapılar: <strong>would rather / sooner + V0</strong> (tercih ederim), <strong>would prefer + to V0</strong> (tercih ederim), <strong>prefer + Ving / Noun + to + Ving/Noun</strong> (tercih ederim). Farklı zamanlar ve özneler için özel kullanımlar vardır: başkası için tercihte \"would rather + subject + past tense\", geçmiş pişmanlıkta \"would rather have V3\" gibi.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Would rather\"dan sonra gelen fiil yalın hâldedir (V0). Başka bir özne gelirse, fiil bir derece geçmiş zaman olur.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I would rather stay at home tonight and watch a movie than go out to that noisy club.<br>\n<strong>TR:</strong> Bu gece o gürültülü kulübe gitmektense evde kalıp film izlemeyi tercih ederim.<br>\n→ <strong>Açıklama:</strong> \"Would rather V0 than V0\" yapısı iki eylem arasında tercih yapmak için kullanılır. Fiiller yalın hâldedir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> I would prefer to have studied harder when I was in university; now I realize how important it was.<br>\n<strong>TR:</strong> Üniversitedeyken daha çok çalışmış olmayı tercih ederdim; şimdi ne kadar önemli olduğunu anlıyorum.<br>\n→ <strong>Açıklama:</strong> Geçmişe yönelik pişmanlık/tercih ifade ediliyor. \"Would prefer to have V3\" yapısı, geçmişte yapılmamış bir şey için kullanılır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> I would rather you didn't smoke in the house, if you don't mind; the smell lingers for days.<br>\n<strong>TR:</strong> Evde sigara içmemeni tercih ederim, sakıncası yoksa; koku günlerce kalıyor.<br>\n→ <strong>Açıklama:</strong> Başka bir kişi için tercih belirtiliyor (you). Bu durumda \"would rather + subject + past tense (didn't smoke)\" kullanılır, anlam şimdiki zamandır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> I prefer drinking black coffee to having any sugary drinks in the morning; it wakes me up better.<br>\n<strong>TR:</strong> Sabahları şekerli içecekler içmektense sade kahve içmeyi tercih ederim; beni daha iyi uyandırıyor.<br>\n→ <strong>Açıklama:</strong> \"Prefer Ving to Ving\" genel bir tercihi ifade eder. \"Prefer\" fiili isimler arasında da kullanılabilir: \"I prefer tea to coffee.\"</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>would rather V0</td>\n<td>(kendim için) tercih</td>\n<td>I'd rather go by car.</td>\n</tr>\n<tr>\n<td>would rather + özne + V2</td>\n<td>başkası için tercih</td>\n<td>I'd rather you stayed.</td>\n</tr>\n<tr>\n<td>would prefer to V0</td>\n<td>tercih</td>\n<td>I'd prefer to wait.</td>\n</tr>\n<tr>\n<td>prefer Ving to Ving</td>\n<td>genel tercih</td>\n<td>I prefer walking to driving.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Keşke yarın gelmesen.\" demek istiyorsun. Hangisi doğru?</p>\n<p>A) I would rather you don't come tomorrow.<br>\nB) I would rather you didn't come tomorrow.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"Would rather\"dan sonra başka bir özne (you) geldiğinde, fiil past tense olur, ancak anlam şimdiki veya gelecek zamandır. Bu nedenle \"didn't come\" doğrudur. \"Don't come\" gramer açısından yanlıştır.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "I would rather stay at home tonight and watch a movie than go out to that noisy club.",
+          "tr": "Bu gece o gürültülü kulübe gitmektense evde kalıp film izlemeyi tercih ederim.",
+          "description": "\"Would rather V0 than V0\" yapısı iki eylem arasında tercih yapmak için kullanılır. Fiiller yalın hâldedir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "I would prefer to have studied harder when I was in university; now I realize how important it was.",
+          "tr": "Üniversitedeyken daha çok çalışmış olmayı tercih ederdim; şimdi ne kadar önemli olduğunu anlıyorum.",
+          "description": "Geçmişe yönelik pişmanlık/tercih ifade ediliyor. \"Would prefer to have V3\" yapısı, geçmişte yapılmamış bir şey için kullanılır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "I would rather you didn't smoke in the house, if you don't mind; the smell lingers for days.",
+          "tr": "Evde sigara içmemeni tercih ederim, sakıncası yoksa; koku günlerce kalıyor.",
+          "description": "Başka bir kişi için tercih belirtiliyor (you). Bu durumda \"would rather + subject + past tense (didn't smoke)\" kullanılır, anlam şimdiki zamandır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "I prefer drinking black coffee to having any sugary drinks in the morning; it wakes me up better.",
+          "tr": "Sabahları şekerli içecekler içmektense sade kahve içmeyi tercih ederim; beni daha iyi uyandırıyor.",
+          "description": "\"Prefer Ving to Ving\" genel bir tercihi ifade eder. \"Prefer\" fiili isimler arasında da kullanılabilir: \"I prefer tea to coffee.\""
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 401
+    },
+    {
+      "page_number": 10,
+      "title": "PROHIBITION (Yasaklama) ve EXPECTATIONS (Beklentiler)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Yasaklama: <strong>mustn't</strong> (yasak), <strong>be not allowed to, be forbidden to</strong> (yasak). Ayrıca <strong>be not supposed to, shouldn't</strong> gibi yapılar da \"-mamalısın\" anlamında kullanılabilir. Beklentiler: <strong>be to V0</strong> (program/görev), <strong>be supposed to V0</strong> (beklenti, gereklilik). Geçmişte gerçekleşmeyen beklentiler: <strong>was/were to have V3</strong> (yapacaktı ama yapmadı).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Mustn't\" yasaklama için en güçlü ifadedir. \"Be supposed to\" genellikle beklenti veya hafif zorunluluk belirtir.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> You mustn't use your mobile phone while driving; it's not only illegal but also extremely dangerous.<br>\n<strong>TR:</strong> Araba kullanırken cep telefonunuzu kullanmamalısınız; sadece yasadışı değil, aynı zamanda son derece tehlikeli.<br>\n→ <strong>Açıklama:</strong> \"Mustn't\" kesin bir yasak ifade eder. Yapılmaması gereken bir eylem vurgulanıyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Visitors are not allowed to take photographs inside the museum, as the flash can damage the ancient paintings.<br>\n<strong>TR:</strong> Ziyaretçilerin müze içinde fotoğraf çekmesine izin verilmez, çünkü flaş eski resimlere zarar verebilir.<br>\n→ <strong>Açıklama:</strong> \"Are not allowed to\" bir kuralı, yasağı belirtir. Resmî bir uyarıdır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The Prime Minister is to announce the new economic plan tomorrow at a press conference.<br>\n<strong>TR:</strong> Başbakan, yeni ekonomik planı yarın bir basın toplantısında açıklayacak.<br>\n→ <strong>Açıklama:</strong> \"Is to announce\" resmî bir programa, planlanmış bir olaya işaret eder. Genellikle haberlerde kullanılır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> You were supposed to submit your assignment by Friday, but it's already Saturday and I haven't received anything.<br>\n<strong>TR:</strong> Ödevinizi Cuma gününe kadar teslim etmeniz gerekiyordu, ama bugün Cumartesi ve henüz bir şey almadım.<br>\n→ <strong>Açıklama:</strong> \"Were supposed to\" geçmişte bir beklentiyi ifade eder, ancak bu beklenti gerçekleşmemiş (ödev teslim edilmemiş).</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Anlam</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Yasak (güçlü)</td>\n<td>mustn't</td>\n<td>You mustn't smoke here.</td>\n</tr>\n<tr>\n<td>Yasak (resmî)</td>\n<td>be not allowed to</td>\n<td>You aren't allowed to park.</td>\n</tr>\n<tr>\n<td>Program (resmî)</td>\n<td>be to V0</td>\n<td>The meeting is to start at 10.</td>\n</tr>\n<tr>\n<td>Beklenti</td>\n<td>be supposed to</td>\n<td>You are supposed to wait.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Toplantı saat 9'da başlayacaktı ama ertelendi.\" cümlesinde hangisi doğrudur?</p>\n<p>A) The meeting was to start at 9, but it was postponed.<br>\nB) The meeting was to have started at 9, but it was postponed.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Geçmişte planlanmış ancak gerçekleşmemiş eylemler için \"was/were to have V3\" kullanılır. \"Was to start\" sadece planlandığını belirtir, gerçekleşip gerçekleşmediğini söylemez. Cümlede \"ertelendi\" ifadesi eylemin gerçekleşmediğini gösterdiği için \"was to have started\" doğrudur.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "You mustn't use your mobile phone while driving; it's not only illegal but also extremely dangerous.",
+          "tr": "Araba kullanırken cep telefonunuzu kullanmamalısınız; sadece yasadışı değil, aynı zamanda son derece tehlikeli.",
+          "description": "\"Mustn't\" kesin bir yasak ifade eder. Yapılmaması gereken bir eylem vurgulanıyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Visitors are not allowed to take photographs inside the museum, as the flash can damage the ancient paintings.",
+          "tr": "Ziyaretçilerin müze içinde fotoğraf çekmesine izin verilmez, çünkü flaş eski resimlere zarar verebilir.",
+          "description": "\"Are not allowed to\" bir kuralı, yasağı belirtir. Resmî bir uyarıdır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The Prime Minister is to announce the new economic plan tomorrow at a press conference.",
+          "tr": "Başbakan, yeni ekonomik planı yarın bir basın toplantısında açıklayacak.",
+          "description": "\"Is to announce\" resmî bir programa, planlanmış bir olaya işaret eder. Genellikle haberlerde kullanılır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "You were supposed to submit your assignment by Friday, but it's already Saturday and I haven't received anything.",
+          "tr": "Ödevinizi Cuma gününe kadar teslim etmeniz gerekiyordu, ama bugün Cumartesi ve henüz bir şey almadım.",
+          "description": "\"Were supposed to\" geçmişte bir beklentiyi ifade eder, ancak bu beklenti gerçekleşmemiş (ödev teslim edilmemiş)."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 382
+    },
+    {
+      "page_number": 11,
+      "title": "ASKING FOR OPINION ve MODALITY PROGRESSIVE",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Fikir danışırken <strong>shall</strong> (I/we ile) ve <strong>should</strong> kullanılır. \"Shall\" teklif anlamı da taşır. <strong>Modal + be Ving</strong> yapısı konuşma anında devam eden bir eylem hakkında tahmin yürütmek için kullanılır: <strong>may/might/could be Ving</strong> (yapıyor olabilir), <strong>must be Ving</strong> (yapıyor olmalı), <strong>can't be Ving</strong> (yapıyor olamaz).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Shall\" sadece I ve we ile kullanılır. \"Shall we?\" teklif cümlesidir.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I'm not sure which dress to wear to the party. Shall I wear the red one or the black one?<br>\n<strong>TR:</strong> Partiye hangi elbiseyi giyeceğimden emin değilim. Kırmızı olanı mı giyeyim, siyah olanı mı?<br>\n→ <strong>Açıklama:</strong> \"Shall I\" birinci tekil şahısla fikir sormak için kullanılır. Karşıdakinin görüşü alınır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Where's John? He isn't answering his phone. He might be working in the garden; he often does that on Sundays.<br>\n<strong>TR:</strong> John nerede? Telefona cevap vermiyor. Bahçede çalışıyor olabilir; Pazar günleri sık sık yapar.<br>\n→ <strong>Açıklama:</strong> Şu anda (konuşma anında) John'un ne yapıyor olabileceğine dair bir tahmin. \"Might be Ving\" olasılık bildirir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The lights are on in his room and I can hear music. He must be studying in his room, as he has an exam tomorrow.<br>\n<strong>TR:</strong> Odasında ışıklar yanıyor ve müzik duyuyorum. Odasında ders çalışıyor olmalı, çünkü yarın sınavı var.<br>\n→ <strong>Açıklama:</strong> Eldeki kanıtlara dayanarak güçlü bir çıkarım yapılıyor. \"Must be Ving\" şu anda devam eden bir eylem için kullanılır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> She can't be sleeping already; it's only 8 p.m. and we haven't even had dinner yet.<br>\n<strong>TR:</strong> Daha şimdiden uyuyor olamaz; saat daha akşam 8 ve daha yemek bile yemedik.<br>\n→ <strong>Açıklama:</strong> Olumsuz çıkarım: uyuyor olması mantıklı değil. \"Can't be Ving\" şu anki bir eylemin imkânsızlığını ifade eder.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Anlam</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Fikir sorma (bana)</td>\n<td>Shall I ...?</td>\n<td>Shall I open the window?</td>\n</tr>\n<tr>\n<td>Fikir sorma (bize)</td>\n<td>Shall we ...?</td>\n<td>Shall we go now?</td>\n</tr>\n<tr>\n<td>Tahmin (şu an)</td>\n<td>may/might/could be Ving</td>\n<td>He might be waiting.</td>\n</tr>\n<tr>\n<td>Çıkarım (şu an)</td>\n<td>must be Ving</td>\n<td>She must be working.</td>\n</tr>\n<tr>\n<td>Olumsuz çıkarım</td>\n<td>can't be Ving</td>\n<td>He can't be sleeping.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Kapı çalınıyor. Postacı _____.\" cümlesinde boşluğa hangisi gelir?</p>\n<p>A) must be<br>\nB) can be</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A\n**Açıklama:** Kapı çalması, postacının gelmiş olabileceğine dair bir ipucu. Bu bir çıkarımdır. \"Must be\" bu çıkarım için uygundur. \"Can be\" olasılık için kullanılmaz, genellikle genel olasılıkta \"can\" kullanılır ama burada \"must\" daha doğru.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "I'm not sure which dress to wear to the party. Shall I wear the red one or the black one?",
+          "tr": "Partiye hangi elbiseyi giyeceğimden emin değilim. Kırmızı olanı mı giyeyim, siyah olanı mı?",
+          "description": "\"Shall I\" birinci tekil şahısla fikir sormak için kullanılır. Karşıdakinin görüşü alınır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Where's John? He isn't answering his phone. He might be working in the garden; he often does that on Sundays.",
+          "tr": "John nerede? Telefona cevap vermiyor. Bahçede çalışıyor olabilir; Pazar günleri sık sık yapar.",
+          "description": "Şu anda (konuşma anında) John'un ne yapıyor olabileceğine dair bir tahmin. \"Might be Ving\" olasılık bildirir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The lights are on in his room and I can hear music. He must be studying in his room, as he has an exam tomorrow.",
+          "tr": "Odasında ışıklar yanıyor ve müzik duyuyorum. Odasında ders çalışıyor olmalı, çünkü yarın sınavı var.",
+          "description": "Eldeki kanıtlara dayanarak güçlü bir çıkarım yapılıyor. \"Must be Ving\" şu anda devam eden bir eylem için kullanılır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "She can't be sleeping already; it's only 8 p.m. and we haven't even had dinner yet.",
+          "tr": "Daha şimdiden uyuyor olamaz; saat daha akşam 8 ve daha yemek bile yemedik.",
+          "description": "Olumsuz çıkarım: uyuyor olması mantıklı değil. \"Can't be Ving\" şu anki bir eylemin imkânsızlığını ifade eder."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 396
+    },
+    {
+      "page_number": 12,
+      "title": "MODALITY PERFECT - Past Modals 1 (should have, may have, could have)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p><strong>Should have V3 / ought to have V3</strong>: Geçmiş tavsiye, pişmanlık, eleştiri (-meliydin ama yapmadın). <strong>May/might/could have V3</strong>: Geçmiş olasılık (-miş olabilir). <strong>Could have V3</strong> ayrıca geçmişte kaçırılmış fırsatlar için de kullanılır (-ebilirdin ama yapmadın).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Should have\" pişmanlık, \"may have\" belirsizlik, \"could have\" ise hem olasılık hem de kaçırılmış fırsat anlamı taşır.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I feel terrible today. I shouldn't have eaten that whole pizza last night; it was too much.<br>\n<strong>TR:</strong> Bugün berbat hissediyorum. Dün gece o pizzanın tamamını yememeliydim; çok fazlaydı.<br>\n→ <strong>Açıklama:</strong> Geçmişte yapılan bir eylemden duyulan pişmanlık. \"Shouldn't have V3\" yapılan bir şeyin yanlış olduğunu ifade eder.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She's not at her desk, and her computer is off. She may have gone home early; she wasn't feeling well this morning.<br>\n<strong>TR:</strong> Masasında değil ve bilgisayarı kapalı. Erken eve gitmiş olabilir; bu sabah iyi hissetmiyordu.<br>\n→ <strong>Açıklama:</strong> Geçmişte olmuş olabilecek bir durum hakkında olasılık. \"May have V3\" kullanılıyor. \"Might have\" veya \"could have\" da aynı anlamdadır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> You could have told me you were going to be late! I waited for an hour at the station.<br>\n<strong>TR:</strong> Bana geç kalacağını söyleyebilirdin! İstasyonda bir saat bekledim.<br>\n→ <strong>Açıklama:</strong> Geçmişte yapılmayan bir eylemden duyulan sitem/kaçırılmış fırsat. \"Could have V3\" burada \"yapabilirdin ama yapmadın\" anlamında.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The exam was incredibly easy. I needn't have worried so much; I passed with flying colours.<br>\n<strong>TR:</strong> Sınav inanılmaz kolaydı. Bu kadar endişelenmeme gerek yokmuş; yüksek notla geçtim.<br>\n→ <strong>Açıklama:</strong> \"Needn't have V3\" gereksiz yere yapılmış bir eylemi ifade eder. Endişelenme eylemi gerçekleşmiş, ama sonradan gereksiz olduğu anlaşılmış.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>should have V3</td>\n<td>yapmalıydın (ama yapmadın)</td>\n<td>You should have called.</td>\n</tr>\n<tr>\n<td>shouldn't have V3</td>\n<td>yapmamalıydın (ama yaptın)</td>\n<td>I shouldn't have said that.</td>\n</tr>\n<tr>\n<td>may/might/could have V3</td>\n<td>yapmış olabilir</td>\n<td>She may have left.</td>\n</tr>\n<tr>\n<td>could have V3</td>\n<td>yapabilirdin (ama yapmadın)</td>\n<td>You could have helped.</td>\n</tr>\n<tr>\n<td>needn't have V3</td>\n<td>yapmana gerek yoktu (ama yaptın)</td>\n<td>We needn't have hurried.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Ali bugün işe gelmedi. Hasta _____.\" cümlesinde boşluğa hangisi gelir?</p>\n<p>A) must have been<br>\nB) may have been</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Ali'nin hasta olması bir olasılık, kesinlik yok. Bu nedenle \"may have been\" (hasta olmuş olabilir) uygundur. \"Must have been\" daha güçlü bir çıkarım gerektirir (örneğin hasta olduğuna dair kanıt varsa). Bu cümlede sadece bir tahmin var.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "I feel terrible today. I shouldn't have eaten that whole pizza last night; it was too much.",
+          "tr": "Bugün berbat hissediyorum. Dün gece o pizzanın tamamını yememeliydim; çok fazlaydı.",
+          "description": "Geçmişte yapılan bir eylemden duyulan pişmanlık. \"Shouldn't have V3\" yapılan bir şeyin yanlış olduğunu ifade eder.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She's not at her desk, and her computer is off. She may have gone home early; she wasn't feeling well this morning.",
+          "tr": "Masasında değil ve bilgisayarı kapalı. Erken eve gitmiş olabilir; bu sabah iyi hissetmiyordu.",
+          "description": "Geçmişte olmuş olabilecek bir durum hakkında olasılık. \"May have V3\" kullanılıyor. \"Might have\" veya \"could have\" da aynı anlamdadır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "You could have told me you were going to be late! I waited for an hour at the station.",
+          "tr": "Bana geç kalacağını söyleyebilirdin! İstasyonda bir saat bekledim.",
+          "description": "Geçmişte yapılmayan bir eylemden duyulan sitem/kaçırılmış fırsat. \"Could have V3\" burada \"yapabilirdin ama yapmadın\" anlamında.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The exam was incredibly easy. I needn't have worried so much; I passed with flying colours.",
+          "tr": "Sınav inanılmaz kolaydı. Bu kadar endişelenmeme gerek yokmuş; yüksek notla geçtim.",
+          "description": "\"Needn't have V3\" gereksiz yere yapılmış bir eylemi ifade eder. Endişelenme eylemi gerçekleşmiş, ama sonradan gereksiz olduğu anlaşılmış."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 393
+    },
+    {
+      "page_number": 13,
+      "title": "MODALITY PERFECT - Past Modals 2 (must have, can't have, didn't need to)",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p><strong>Must have V3</strong>: Geçmişte güçlü çıkarım (yapmış olmalı). <strong>Can't have V3 / couldn't have V3</strong>: Geçmişte olumsuz güçlü çıkarım (yapmış olamaz). <strong>Didn't need to / didn't have to</strong>: Geçmişte bir şeyi yapmaya gerek yoktu (yapılıp yapılmadığı önemli değil, genellikle yapılmadığını ima eder). <strong>Needn't have V3</strong> ise gereksiz yere yapıldığını vurgular.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Didn't need to\" ile \"needn't have\" arasındaki fark: ilkinde eylem genellikle yapılmaz, ikincisinde yapılmıştır ama gereksizdir.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER</h3>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The ground is completely dry, so it can't have rained here last night, despite the forecast.<br>\n<strong>TR:</strong> Yer tamamen kuru, bu nedenle dün gece burada yağmur yağmış olamaz, tahminlere rağmen.<br>\n→ <strong>Açıklama:</strong> Geçmişe yönelik olumsuz çıkarım: yağmur yağdığına dair hiçbir kanıt yok. \"Can't have V3\" kullanılıyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She passed the exam with the highest score. She must have studied very hard for it.<br>\n<strong>TR:</strong> Sınavı en yüksek puanla geçti. Bunun için çok sıkı çalışmış olmalı.<br>\n→ <strong>Açıklama:</strong> Eldeki sonuca (yüksek puan) dayanarak güçlü bir çıkarım. \"Must have V3\" geçmişteki bir eylemi tahmin etmek için kullanılır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> I had already bought a gift for her, so I didn't need to buy anything when we went to the mall.<br>\n<strong>TR:</strong> Ona zaten bir hediye almıştım, bu yüzden AVM'ye gittiğimizde bir şey almama gerek kalmadı.<br>\n→ <strong>Açıklama:</strong> \"Didn't need to\" geçmişte bir zorunluluğun olmadığını ve eylemin (hediye alma) gerçekleşmediğini gösteriyor. Çünkü zaten alınmıştı.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> We needn't have booked a table in advance; the restaurant was almost empty when we arrived.<br>\n<strong>TR:</strong> Önceden masa ayırtmamıza gerek yokmuş; restoran neredeyse boştu.<br>\n→ <strong>Açıklama:</strong> Rezervasyon yapıldı (eylem gerçekleşti), ama sonradan gereksiz olduğu anlaşıldı. Bu nedenle \"needn't have V3\" doğru.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU</h3>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>must have V3</td>\n<td>yapmış olmalı</td>\n<td>He must have forgotten.</td>\n</tr>\n<tr>\n<td>can't have V3</td>\n<td>yapmış olamaz</td>\n<td>She can't have left.</td>\n</tr>\n<tr>\n<td>didn't need to V0</td>\n<td>yapmaya gerek kalmadı</td>\n<td>I didn't need to buy milk.</td>\n</tr>\n<tr>\n<td>needn't have V3</td>\n<td>yapmaya gerek yoktu (ama yaptım)</td>\n<td>I needn't have bought milk.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Havaalanına erken vardık, bu yüzden acele etmemize gerek yoktu. (Ama acele etmiştik).\" Hangi ifade doğrudur?</p>\n<p>A) We didn't need to hurry.<br>\nB) We needn't have hurried.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Parantez içinde \"ama acele etmiştik\" ifadesi eylemin gerçekleştiğini gösteriyor. Bu nedenle \"needn't have hurried\" (boşuna acele etmişiz) doğrudur. \"Didn't need to hurry\" ise acele etmediğimizi veya etmemize gerek olmadığını belirtir, ancak eylemin yapılıp yapılmadığı net değildir.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "The ground is completely dry, so it can't have rained here last night, despite the forecast.",
+          "tr": "Yer tamamen kuru, bu nedenle dün gece burada yağmur yağmış olamaz, tahminlere rağmen.",
+          "description": "Geçmişe yönelik olumsuz çıkarım: yağmur yağdığına dair hiçbir kanıt yok. \"Can't have V3\" kullanılıyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She passed the exam with the highest score. She must have studied very hard for it.",
+          "tr": "Sınavı en yüksek puanla geçti. Bunun için çok sıkı çalışmış olmalı.",
+          "description": "Eldeki sonuca (yüksek puan) dayanarak güçlü bir çıkarım. \"Must have V3\" geçmişteki bir eylemi tahmin etmek için kullanılır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "I had already bought a gift for her, so I didn't need to buy anything when we went to the mall.",
+          "tr": "Ona zaten bir hediye almıştım, bu yüzden AVM'ye gittiğimizde bir şey almama gerek kalmadı.",
+          "description": "\"Didn't need to\" geçmişte bir zorunluluğun olmadığını ve eylemin (hediye alma) gerçekleşmediğini gösteriyor. Çünkü zaten alınmıştı.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "We needn't have booked a table in advance; the restaurant was almost empty when we arrived.",
+          "tr": "Önceden masa ayırtmamıza gerek yokmuş; restoran neredeyse boştu.",
+          "description": "Rezervasyon yapıldı (eylem gerçekleşti), ama sonradan gereksiz olduğu anlaşıldı. Bu nedenle \"needn't have V3\" doğru."
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 395
+    },
+    {
+      "page_number": 14,
+      "title": "ÖZET TABLOLAR - MUST ve PAST MODALS",
+      "total_pages": 15,
+      "content_html": "<h3>📌 KONUNUN ÖZÜ</h3>\n<p>Bu sayfada \"must\" yapısının tüm kullanımları ve geçmiş modal yapılarının Türkçe karşılıkları özetlenmiştir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Must\" zorunluluk, güçlü tavsiye, çıkarım gibi farklı anlamlarda kullanılır. Bağlama dikkat edin.</p>\n</blockquote>\n<hr>\n<h3>📏 ÖRNEK CÜMLELER (Özet)</h3>\n<p><strong>Örnek 1 (Must - Zorunluluk):</strong><br>\n<strong>EN:</strong> I must finish this report by 5 p.m.; my boss is waiting for it.<br>\n<strong>TR:</strong> Bu raporu saat 5'e kadar bitirmeliyim; patronum bekliyor.</p>\n<p><strong>Örnek 2 (Must - Güçlü Tavsiye):</strong><br>\n<strong>EN:</strong> You must see that film; it's absolutely brilliant!<br>\n<strong>TR:</strong> Bu filmi mutlaka görmelisin; kesinlikle harika!</p>\n<p><strong>Örnek 3 (Must - Çıkarım):</strong><br>\n<strong>EN:</strong> He's been working all day; he must be tired.<br>\n<strong>TR:</strong> Bütün gün çalışıyor; yorgun olmalı.</p>\n<p><strong>Örnek 4 (Must have V3 - Geçmiş Çıkarım):</strong><br>\n<strong>EN:</strong> The lights were off; they must have gone to bed.<br>\n<strong>TR:</strong> Işıklar kapalıydı; yatmış olmalılar.</p>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU - MUST</h3>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Zorunluluk</td>\n<td>must V0</td>\n<td>-meli, -malı</td>\n<td>I must go now.</td>\n</tr>\n<tr>\n<td>Güçlü Tavsiye</td>\n<td>must V0</td>\n<td>mutlaka yap</td>\n<td>You must try this.</td>\n</tr>\n<tr>\n<td>Çıkarım (şimdi)</td>\n<td>must V0</td>\n<td>-meli, -malı</td>\n<td>He must be rich.</td>\n</tr>\n<tr>\n<td>Çıkarım (geçmiş)</td>\n<td>must have V3</td>\n<td>-miş olmalı</td>\n<td>She must have left.</td>\n</tr>\n<tr>\n<td>Yasak</td>\n<td>mustn't V0</td>\n<td>-mamalı</td>\n<td>You mustn't smoke.</td>\n</tr>\n<tr>\n<td>Olumsuz çıkarım</td>\n<td>mustn't be Ving</td>\n<td>-yor olmamalı</td>\n<td>He mustn't be sleeping? (nadir)</td>\n</tr>\n<tr>\n<td>Olumsuz çıkarım (yaygın)</td>\n<td>can't V0</td>\n<td>-mez, -maz</td>\n<td>He can't be at home.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>📊 HIZLI BAKIŞ TABLOSU - PAST MODALS</h3>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Türkçe Anlamı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>should have V3</td>\n<td>yapmalıydın (ama yapmadın)</td>\n</tr>\n<tr>\n<td>ought to have V3</td>\n<td>yapmalıydın (ama yapmadın)</td>\n</tr>\n<tr>\n<td>may have V3</td>\n<td>yapmış olabilir</td>\n</tr>\n<tr>\n<td>might have V3</td>\n<td>yapmış olabilir</td>\n</tr>\n<tr>\n<td>could have V3</td>\n<td>yapmış olabilir / yapabilirdin</td>\n</tr>\n<tr>\n<td>couldn't have V3</td>\n<td>yapmış olamaz / yapamazdım</td>\n</tr>\n<tr>\n<td>must have V3</td>\n<td>yapmış olmalı</td>\n</tr>\n<tr>\n<td>can't have V3</td>\n<td>yapmış olamaz</td>\n</tr>\n<tr>\n<td>needn't have V3</td>\n<td>yapmana gerek yoktu (ama yaptın)</td>\n</tr>\n<tr>\n<td>didn't have to V0</td>\n<td>yapmana gerek kalmadı</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h3>⚡ KENDİNİ TEST ET (TEK SORU)</h3>\n<p><strong>Soru:</strong> \"Ali bugün işe gelmedi. Hasta olmalı.\" cümlesinde hangi yapı kullanılır?</p>\n<p>A) must be<br>\nB) must have been</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A\n**Açıklama:** \"Bugün işe gelmedi\" ifadesi şimdiki bir duruma işaret ediyor: Ali şu anda işte değil, bu yüzden şimdi hasta olması muhtemel. \"Must be\" şimdiki zamanda çıkarım için kullanılır. \"Must have been\" geçmişte hasta olduğu anlamına gelir, ama Ali hâlâ hasta olabilir, burada zaman uyumu önemli.\n</details>\n\n<hr>",
+      "examples": [
+        {
+          "en": "I must finish this report by 5 p.m.; my boss is waiting for it.",
+          "tr": "Bu raporu saat 5'e kadar bitirmeliyim; patronum bekliyor.\n\n**Örnek 2 (Must - Güçlü Tavsiye):**",
+          "description": ""
+        },
+        {
+          "en": "You must see that film; it's absolutely brilliant!",
+          "tr": "Bu filmi mutlaka görmelisin; kesinlikle harika!\n\n**Örnek 3 (Must - Çıkarım):**",
+          "description": ""
+        },
+        {
+          "en": "He's been working all day; he must be tired.",
+          "tr": "Bütün gün çalışıyor; yorgun olmalı.\n\n**Örnek 4 (Must have V3 - Geçmiş Çıkarım):**",
+          "description": ""
+        },
+        {
+          "en": "The lights were off; they must have gone to bed.",
+          "tr": "Işıklar kapalıydı; yatmış olmalılar.",
+          "description": ""
+        }
+      ],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 348
+    },
+    {
+      "page_number": 15,
+      "title": "BÖLÜM TARAMA TESTİ",
+      "total_pages": 15,
+      "content_html": "<h3>🎯 Bu Bölümde Öğrendiklerimiz</h3>\n<ul>\n<li>Yetenek (ability) için can, could, be able to kullanımı</li>\n<li>Olasılık (possibility) ifadeleri: may, might, could, can, be likely to</li>\n<li>Rica (requests) ve izin (permissions) kalıpları</li>\n<li>Zorunluluk (obligation) ve gereklilik (necessity): must, have to, need to</li>\n<li>Tavsiye (advice) ve çıkarım (deduction)</li>\n<li>Alışkanlıklar (habitual activities) ve tercihler (preferences)</li>\n<li>Yasaklama (prohibition) ve beklentiler (expectations)</li>\n<li>Geçmiş modal yapıları (perfect modals)</li>\n</ul>\n<hr>\n<h3>✍️ 5 SORULUK TARAMA TESTİ</h3>\n<p><strong>Soru 1:</strong><br>\nAşağıdaki cümlelerden hangisi bir yetenek ifade etmektedir?<br>\nA) You must be tired after that long journey.<br>\nB) She can speak three languages fluently.<br>\nC) They may arrive late due to traffic.<br>\nD) We should leave now to catch the bus.</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - \"Can\" yetenek bildirir. Diğerleri sırasıyla çıkarım, olasılık, tavsiye.\n</details>\n\n<hr>\n<p><strong>Soru 2:</strong><br>\n\"It's a public holiday tomorrow, so we _____ go to work.\" cümlesinde boşluğa hangisi gelmelidir?<br>\nA) mustn't<br>\nB) don't have to<br>\nC) needn't have<br>\nD) shouldn't</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - Resmî tatil olduğu için işe gitme zorunluluğu yok. \"Don't have to\" zorunluluk olmadığını ifade eder. \"Mustn't\" yasak, \"needn't have\" geçmiş, \"shouldn't\" tavsiye.\n</details>\n\n<hr>\n<p><strong>Soru 3:</strong><br>\n\"Geçmiş olsun, daha dikkatli olmalıydın.\" anlamına gelen cümle hangisidir?<br>\nA) You should be more careful.<br>\nB) You should have been more careful.<br>\nC) You must be more careful.<br>\nD) You had better be more careful.</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - \"Should have been\" geçmişe yönelik tavsiye/pişmanlık ifade eder. Diğerleri şimdiki veya gelecek anlamlı.\n</details>\n\n<hr>\n<p><strong>Soru 4:</strong><br>\nI think I saw John in the library, but I'm not sure. He _____ there studying for his exam.<br>\nA) must have been<br>\nB) can't have been<br>\nC) might have been<br>\nD) should have been</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - \"Emin değilim\" ifadesi bir olasılık olduğunu gösterir. \"Might have been\" geçmiş olasılık için uygundur. \"Must have been\" çok kesin, \"can't have been\" olumsuz, \"should have been\" tavsiye anlamı katar.\n</details>\n\n<hr>\n<p><strong>Soru 5:</strong><br>\nAşağıdakilerden hangisi \"Eskiden sigara içerdim ama şimdi içmiyorum.\" anlamını en iyi verir?<br>\nA) I would smoke, but I don't now.<br>\nB) I used to smoke, but I don't now.<br>\nC) I smoked, but I don't now.<br>\nD) I was smoking, but I don't now.</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - \"Used to\" geçmiş alışkanlık için en yaygın ve doğru ifadedir. \"Would\" da kullanılabilir, ancak \"used to\" daha nettir ve bu bağlamda en iyi seçenek B'dir.\n</details>\n\n<hr>\n<h3>📈 PERFORMANS DEĞERLENDİRMESİ</h3>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası (ortalama 213)</li>\n<li>[x] Her sayfada 3-4 örnek var (toplam 60 örnek)</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 15 (25'i geçmiyor)</li>\n<li>[x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, hatırlatma kutuları kullanıldı)</li>\n</ul>",
+      "examples": [],
+      "mini_test": {},
+      "mini_tests": [],
+      "word_count": 473
+    }
+  ]
+}

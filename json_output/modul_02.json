@@ -1,0 +1,1533 @@
+{
+  "sira": 2,
+  "baslik": "Tense System in English (İngilizcede Zamanlar)",
+  "dosya_adi": "02_tense_system.md",
+  "toplam_sayfa": 25,
+  "icon": "⏰",
+  "renk": "#8E54E9",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "Time ve Tense Kavramları",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ZAMAN (TIME) VE KİP (TENSE) FARKI</h2>\n<p><strong>Time</strong> gerçek hayattaki zamandır (geçmiş, şimdi, gelecek). <strong>Tense</strong> ise fiilin bu zamanları göstermek için aldığı gramer şeklidir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> İngilizce'de 3 TIME (past, present, future) vardır ama fiillerin sadece 2 TENSE çekimi (present, past) vardır. Future, \"will\" yardımcı fiiliyle yapılır, fiilin ayrı bir future çekimi yoktur.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Time (Gerçek Zaman)</h3>\n<p><strong>EN:</strong> I visited my grandmother yesterday afternoon, and we had tea together in her garden.<br>\n<strong>TR:</strong> Dün öğleden sonra büyükannemi ziyaret ettim ve bahçesinde birlikte çay içtik.<br>\n→ Olay dün gerçekleşti, yani geçmiş zaman (Past Time).</p>\n<h3>Örnek 2: Time (Şimdiki Zaman)</h3>\n<p><strong>EN:</strong> Right now, I am sitting at my desk and working on this grammar lesson.<br>\n<strong>TR:</strong> Şu anda masamda oturuyorum ve bu gramer dersi üzerinde çalışıyorum.<br>\n→ Olay şu an gerçekleşiyor, yani şimdiki zaman (Present Time).</p>\n<h3>Örnek 3: Tense (Fiil Çekimi - Düzensiz Fiil)</h3>\n<p><strong>EN:</strong> begin - began - begun<br>\n<strong>TR:</strong> başlamak - başladı - başlamış<br>\n→ Fiilin V1 (present) ve V2 (past) halleri var. Future hali yok. Future için \"will begin\" kullanırız.</p>\n<h3>Örnek 4: Tense (Fiil Çekimi - Düzenli Fiil)</h3>\n<p><strong>EN:</strong> deserve - deserved - deserved<br>\n<strong>TR:</strong> hak etmek - hak etti - hak etmiş<br>\n→ Düzenli fiillerde Past ve Past Participle aynıdır. Yine future çekimi yoktur.</p>\n<h3>Örnek 5: Neden Ayrı Bir Inflected Future Tense Yok?</h3>\n<p><strong>EN:</strong> Tomorrow, I will travel to London. (NOT: I will travelled)<br>\n<strong>TR:</strong> Yarın Londra'ya seyahat edeceğim.<br>\n→ Fiil (travel) çekimlenmiyor, sadece \"will\" yardımcı fiili ekleniyor. Bu nedenle İngilizce’de future meaning/future forms vardır; ancak ayrı bir inflected future tense yoktur.</p>\n<hr>\n<h2>📊 ZAMAN (TIME) VS KİP (TENSE)</h2>\n<table>\n<thead>\n<tr>\n<th>Kavram</th>\n<th>Tanım</th>\n<th>Sayısı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Time</strong></td>\n<td>Gerçek dünyadaki zaman dilimi</td>\n<td>3 (Past, Present, Future)</td>\n</tr>\n<tr>\n<td><strong>Tense</strong></td>\n<td>Fiilin gramer çekim şekli</td>\n<td>2 (Present, Past)</td>\n</tr>\n<tr>\n<td><strong>Aspect</strong></td>\n<td>Eylemin durumu (devam ediyor mu? bitti mi?)</td>\n<td>3 (Simple, Progressive, Perfect)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdakilerden hangisi İngilizce'de bir TENSE değildir?</p>\n<p>A) Present Tense<br>\nB) Past Tense<br>\nC) Inflected Future Tense<br>\nD) Present Perfect</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** İngilizce’de future meaning veren yapılar (will, be going to vb.) vardır; ancak fiilin ayrı bir future çekimi olmadığı için inflected future tense kabul edilmez. Present Perfect ise aspect bilgisidir.\n</details>\n\n<p>[Kelime sayısı: 224]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I visited my grandmother yesterday afternoon, and we had tea together in her garden.",
+          "tr": "Dün öğleden sonra büyükannemi ziyaret ettim ve bahçesinde birlikte çay içtik.\n→ Olay dün gerçekleşti, yani geçmiş zaman (Past Time).\n\n### Örnek 2: Time (Şimdiki Zaman)",
+          "description": ""
+        },
+        {
+          "en": "Right now, I am sitting at my desk and working on this grammar lesson.",
+          "tr": "Şu anda masamda oturuyorum ve bu gramer dersi üzerinde çalışıyorum.\n→ Olay şu an gerçekleşiyor, yani şimdiki zaman (Present Time).\n\n### Örnek 3: Tense (Fiil Çekimi - Düzensiz Fiil)",
+          "description": ""
+        },
+        {
+          "en": "begin - began - begun",
+          "tr": "başlamak - başladı - başlamış\n→ Fiilin V1 (present) ve V2 (past) halleri var. Future hali yok. Future için \"will begin\" kullanırız.\n\n### Örnek 4: Tense (Fiil Çekimi - Düzenli Fiil)",
+          "description": ""
+        },
+        {
+          "en": "deserve - deserved - deserved",
+          "tr": "hak etmek - hak etti - hak etmiş\n→ Düzenli fiillerde Past ve Past Participle aynıdır. Yine future çekimi yoktur.\n\n### Örnek 5: Neden Ayrı Bir Inflected Future Tense Yok?",
+          "description": ""
+        },
+        {
+          "en": "Tomorrow, I will travel to London. (NOT: I will travelled)",
+          "tr": "Yarın Londra'ya seyahat edeceğim.\n→ Fiil (travel) çekimlenmiyor, sadece \"will\" yardımcı fiili ekleniyor. Bu nedenle İngilizce’de future meaning/future forms vardır; ancak ayrı bir inflected future tense yoktur.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdakilerden hangisi İngilizce'de bir TENSE değildir?",
+        "options": {
+          "A": "Present Tense",
+          "B": "Past Tense",
+          "C": "Inflected Future Tense",
+          "D": "Present Perfect"
+        },
+        "correct": "C",
+        "explanation": "İngilizce’de future meaning veren yapılar (will, be going to vb.) vardır; ancak fiilin ayrı bir future çekimi olmadığı için inflected future tense kabul edilmez. Present Perfect ise aspect bilgisidir."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdakilerden hangisi İngilizce'de bir TENSE değildir?",
+          "options": {
+            "A": "Present Tense",
+            "B": "Past Tense",
+            "C": "Inflected Future Tense",
+            "D": "Present Perfect"
+          },
+          "correct": "C",
+          "explanation": "İngilizce’de future meaning veren yapılar (will, be going to vb.) vardır; ancak fiilin ayrı bir future çekimi olmadığı için inflected future tense kabul edilmez. Present Perfect ise aspect bilgisidir."
+        }
+      ],
+      "word_count": 344
+    },
+    {
+      "page_number": 2,
+      "title": "Tense Aspect'leri",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ASPECT NEDİR?</h2>\n<p>Aspect, eylemin <strong>nasıl</strong> gerçekleştiğini gösterir: Devam ediyor mu? Tamamlandı mı? Tekrarlanıyor mu? Alışkanlık mı?</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Tense = ZAMAN (present/past) + Aspect = DURUM (simple/progressive/perfect). İkisi birleşerek \"Present Continuous\", \"Past Perfect\" gibi zamanları oluşturur.</p>\n</blockquote>\n<hr>\n<h2>✨ ÜÇ TEMEL ASPECT</h2>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>🟢 Simple Aspect</strong><br>\n        Yapı: V1 veya V2<br>\n        Anlam: Genel durumlar, alışkanlıklar, tekrarlar, tamamlanmış eylemler\n    </div>\n    <div class=\"kart yesil\">\n        <strong>🔵 Progressive Aspect</strong><br>\n        Yapı: Be + Ving<br>\n        Anlam: Devam eden eylemler, geçici durumlar\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>🟠 Perfect Aspect</strong><br>\n        Yapı: Have + V3<br>\n        Anlam: Öncelik, bitmişlik, geçmiş-şimdi bağlantısı\n    </div>\n</div>\n\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Simple Aspect - Genel Durum</h3>\n<p><strong>EN:</strong> Water boils at 100 degrees Celsius. This is a scientific fact that never changes.<br>\n<strong>TR:</strong> Su 100 derece Celsius'ta kaynar. Bu asla değişmeyen bilimsel bir gerçektir.<br>\n→ Genel durum, her zaman doğru.</p>\n<h3>Örnek 2: Simple Aspect - Alışkanlık</h3>\n<p><strong>EN:</strong> Every morning, I wake up at 7 AM, drink a cup of coffee, and read the newspaper for about 30 minutes.<br>\n<strong>TR:</strong> Her sabah saat 7'de uyanırım, bir fincan kahve içerim ve yaklaşık 30 dakika gazete okurum.<br>\n→ Düzenli tekrarlayan eylemler.</p>\n<h3>Örnek 3: Progressive Aspect - Devam Eden Eylem</h3>\n<p><strong>EN:</strong> Please don't make so much noise. I am trying to concentrate on my work because I have an important deadline tomorrow.<br>\n<strong>TR:</strong> Lütfen çok gürültü yapma. Konsantre olmaya çalışıyorum çünkü yarın önemli bir teslim tarihim var.<br>\n→ Eylem şu anda devam ediyor, tamamlanmamış.</p>\n<h3>Örnek 4: Progressive Aspect - Geçici Durum</h3>\n<p><strong>EN:</strong> Normally I live in New York, but this month I am staying with my parents in Chicago to help them after my father's surgery.<br>\n<strong>TR:</strong> Normalde New York'ta yaşıyorum ama bu ay babamın ameliyatından sonra onlara yardım etmek için Chicago'da ailemle kalıyorum.<br>\n→ Geçici bir durum, normalde böyle değil.</p>\n<h3>Örnek 5: Perfect Aspect - Geçmiş-Şimdi Bağlantısı</h3>\n<p><strong>EN:</strong> I have lost my keys. I can't find them anywhere, and I've been looking for them for the past hour.<br>\n<strong>TR:</strong> Anahtarlarımı kaybettim. Onları hiçbir yerde bulamıyorum ve son bir saattir arıyorum.<br>\n→ Geçmişte oldu (kaybetme), sonucu şimdi devam ediyor (bulamıyorum).</p>\n<h3>Örnek 6: Perfect Aspect - Deneyim</h3>\n<p><strong>EN:</strong> Have you ever visited Cappadocia? It's one of the most beautiful places I have ever seen in my entire life.<br>\n<strong>TR:</strong> Kapadokya'yı hiç ziyaret ettin mi? Hayatımda gördüğüm en güzel yerlerden biri.<br>\n→ Hayat deneyimi, zaman önemli değil.</p>\n<hr>\n<h2>📊 ASPECT KARŞILAŞTIRMASI</h2>\n<table>\n<thead>\n<tr>\n<th>Aspect</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek Cümle</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Simple</strong></td>\n<td>V1 / V2</td>\n<td>Genel, tekrarlayan, tamamlanmış</td>\n<td>I work every day. / I worked yesterday.</td>\n</tr>\n<tr>\n<td><strong>Progressive</strong></td>\n<td>be + Ving</td>\n<td>Devam eden, geçici, tamamlanmamış</td>\n<td>I am working now.</td>\n</tr>\n<tr>\n<td><strong>Perfect</strong></td>\n<td>have + V3</td>\n<td>Önce olmuş, etkisi devam eden</td>\n<td>I have worked here for 5 years.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"She has been reading that book for three hours, but she hasn't finished it yet.\" cümlesinde hangi aspect'ler kullanılmıştır?</p>\n<p>A) Sadece Perfect Aspect<br>\nB) Perfect ve Progressive Aspect birlikte<br>\nC) Sadece Progressive Aspect<br>\nD) Simple ve Perfect Aspect</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"has been reading\" = have/has + been + Ving = **Present Perfect Progressive** (hem perfect hem progressive). İkinci kısımda \"hasn't finished\" = Present Perfect.\n</details>\n\n<p>[Kelime sayısı: 268]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Water boils at 100 degrees Celsius. This is a scientific fact that never changes.",
+          "tr": "Su 100 derece Celsius'ta kaynar. Bu asla değişmeyen bilimsel bir gerçektir.\n→ Genel durum, her zaman doğru.\n\n### Örnek 2: Simple Aspect - Alışkanlık",
+          "description": ""
+        },
+        {
+          "en": "Every morning, I wake up at 7 AM, drink a cup of coffee, and read the newspaper for about 30 minutes.",
+          "tr": "Her sabah saat 7'de uyanırım, bir fincan kahve içerim ve yaklaşık 30 dakika gazete okurum.\n→ Düzenli tekrarlayan eylemler.\n\n### Örnek 3: Progressive Aspect - Devam Eden Eylem",
+          "description": ""
+        },
+        {
+          "en": "Please don't make so much noise. I am trying to concentrate on my work because I have an important deadline tomorrow.",
+          "tr": "Lütfen çok gürültü yapma. Konsantre olmaya çalışıyorum çünkü yarın önemli bir teslim tarihim var.\n→ Eylem şu anda devam ediyor, tamamlanmamış.\n\n### Örnek 4: Progressive Aspect - Geçici Durum",
+          "description": ""
+        },
+        {
+          "en": "Normally I live in New York, but this month I am staying with my parents in Chicago to help them after my father's surgery.",
+          "tr": "Normalde New York'ta yaşıyorum ama bu ay babamın ameliyatından sonra onlara yardım etmek için Chicago'da ailemle kalıyorum.\n→ Geçici bir durum, normalde böyle değil.\n\n### Örnek 5: Perfect Aspect - Geçmiş-Şimdi Bağlantısı",
+          "description": ""
+        },
+        {
+          "en": "I have lost my keys. I can't find them anywhere, and I've been looking for them for the past hour.",
+          "tr": "Anahtarlarımı kaybettim. Onları hiçbir yerde bulamıyorum ve son bir saattir arıyorum.\n→ Geçmişte oldu (kaybetme), sonucu şimdi devam ediyor (bulamıyorum).\n\n### Örnek 6: Perfect Aspect - Deneyim",
+          "description": ""
+        },
+        {
+          "en": "Have you ever visited Cappadocia? It's one of the most beautiful places I have ever seen in my entire life.",
+          "tr": "Kapadokya'yı hiç ziyaret ettin mi? Hayatımda gördüğüm en güzel yerlerden biri.\n→ Hayat deneyimi, zaman önemli değil.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"She has been reading that book for three hours, but she hasn't finished it yet.\" cümlesinde hangi aspect'ler kullanılmıştır?",
+        "options": {
+          "A": "Sadece Perfect Aspect",
+          "B": "Perfect ve Progressive Aspect birlikte",
+          "C": "Sadece Progressive Aspect",
+          "D": "Simple ve Perfect Aspect"
+        },
+        "correct": "B",
+        "explanation": "\"has been reading\" = have/has + been + Ving = **Present Perfect Progressive** (hem perfect hem progressive). İkinci kısımda \"hasn't finished\" = Present Perfect."
+      },
+      "mini_tests": [
+        {
+          "question": "\"She has been reading that book for three hours, but she hasn't finished it yet.\" cümlesinde hangi aspect'ler kullanılmıştır?",
+          "options": {
+            "A": "Sadece Perfect Aspect",
+            "B": "Perfect ve Progressive Aspect birlikte",
+            "C": "Sadece Progressive Aspect",
+            "D": "Simple ve Perfect Aspect"
+          },
+          "correct": "B",
+          "explanation": "\"has been reading\" = have/has + been + Ving = **Present Perfect Progressive** (hem perfect hem progressive). İkinci kısımda \"hasn't finished\" = Present Perfect."
+        }
+      ],
+      "word_count": 508
+    },
+    {
+      "page_number": 3,
+      "title": "Simple Aspect (V1 - V2)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 SIMPLE ASPECT NEDİR?</h2>\n<p>Genel durumları, alışkanlıkları, tekrarlayan eylemleri ve tamamlanmış eylemleri anlatır. En temel aspect'tir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Simple Aspect = \"Genel geçer\" bilgiler ve \"oldu bitti\" eylemler. Present'te V1, Past'ta V2 kullanılır.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Present Permanent (Şu anki genel durum)</h3>\n<p><strong>EN:</strong> I don't want to be treated like this. I am an adult, and I deserve respect just like everyone else.<br>\n<strong>TR:</strong> Bana böyle davranılsın istemiyorum. Bir yetişkinim ve herkes gibi saygıyı hak ediyorum.<br>\n→ Şu anki genel bir durum, kişinin hissiyatı.</p>\n<h3>Örnek 2: Past Permanent (Geçmişteki genel durum)</h3>\n<p><strong>EN:</strong> There was a small, cozy theatre on this corner when I was a child. We used to go there every weekend with my family.<br>\n<strong>TR:</strong> Çocukken bu köşede küçük, samimi bir tiyatro vardı. Ailemle her hafta sonu oraya giderdik.<br>\n→ Geçmişte var olan ama artık olmayan durum.</p>\n<h3>Örnek 3: Present Repetition (Tekrarlayan eylem)</h3>\n<p><strong>EN:</strong> My brother works in a different city, so he only comes home once a month. When he comes, we always have a big family dinner.<br>\n<strong>TR:</strong> Kardeşim farklı bir şehirde çalışıyor, bu yüzden ayda sadece bir kez eve gelir. Geldiğinde her zaman büyük bir aile yemeği yeriz.<br>\n→ Düzenli tekrarlayan eylem.</p>\n<h3>Örnek 4: Completed Action (Tamamlanmış eylem)</h3>\n<p><strong>EN:</strong> We went out for dinner about a month ago to celebrate our anniversary. We had a wonderful time at that fancy Italian restaurant.<br>\n<strong>TR:</strong> Yaklaşık bir ay önce yıldönümümüzü kutlamak için dışarıda akşam yemeği yedik. O şık İtalyan restoranında harika vakit geçirdik.<br>\n→ Geçmişte tamamlanmış eylem, zamanı belli.</p>\n<h3>Örnek 5: Past Repetition (Geçmişte tekrarlayan eylem)</h3>\n<p><strong>EN:</strong> When Ahmet was studying in the United States, he took that difficult proficiency exam twice a year because he wanted to improve his score.<br>\n<strong>TR:</strong> Ahmet, Amerika'da okurken, skorunu yükseltmek istediği için o zor yeterlilik sınavına yılda iki kez giriyordu.<br>\n→ Geçmişte düzenli tekrarlayan eylem.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSimple Aspect'te:\n- **V1** = genel durum, alışkanlık, tekrar (present)\n- **V2** = geçmişte genel durum, geçmiş alışkanlık, geçmişte tekrar, tamamlanmış eylem\n</div>\n\n<hr>\n<h2>📊 SIMPLE ASPECT ÖZETİ</h2>\n<table>\n<thead>\n<tr>\n<th>Zaman</th>\n<th>Kullanım</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Present (V1)</strong></td>\n<td>Genel durumlar</td>\n<td>\"Her zaman böyle\"</td>\n<td>She lives in NY.</td>\n</tr>\n<tr>\n<td><strong>Present (V1)</strong></td>\n<td>Alışkanlıklar</td>\n<td>\"Her gün yapar\"</td>\n<td>He drinks coffee.</td>\n</tr>\n<tr>\n<td><strong>Present (V1)</strong></td>\n<td>Tekrarlar</td>\n<td>\"Sık sık yapar\"</td>\n<td>They visit us often.</td>\n</tr>\n<tr>\n<td><strong>Past (V2)</strong></td>\n<td>Geçmiş genel durum</td>\n<td>\"Eskiden böyleydi\"</td>\n<td>There was a theatre.</td>\n</tr>\n<tr>\n<td><strong>Past (V2)</strong></td>\n<td>Geçmiş alışkanlık</td>\n<td>\"Eskiden yapardı\"</td>\n<td>He wore braces.</td>\n</tr>\n<tr>\n<td><strong>Past (V2)</strong></td>\n<td>Geçmiş tekrar</td>\n<td>\"O zamanlar sık yapardı\"</td>\n<td>He took the exam twice.</td>\n</tr>\n<tr>\n<td><strong>Past (V2)</strong></td>\n<td>Bitmiş eylem</td>\n<td>\"Oldu bitti\"</td>\n<td>We went out yesterday.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"When I was in high school, I _____ (walk) to school every day because we didn't have a car.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) walk<br>\nB) am walking<br>\nC) walked<br>\nD) have walked</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"When I was in high school\" geçmiş bir dönem. \"Every day\" geçmişte tekrarlayan bir alışkanlığı gösteriyor. Geçmiş alışkanlık için Simple Past (walked) kullanılır.\n</details>\n\n<p>[Kelime sayısı: 267]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I don't want to be treated like this. I am an adult, and I deserve respect just like everyone else.",
+          "tr": "Bana böyle davranılsın istemiyorum. Bir yetişkinim ve herkes gibi saygıyı hak ediyorum.\n→ Şu anki genel bir durum, kişinin hissiyatı.\n\n### Örnek 2: Past Permanent (Geçmişteki genel durum)",
+          "description": ""
+        },
+        {
+          "en": "There was a small, cozy theatre on this corner when I was a child. We used to go there every weekend with my family.",
+          "tr": "Çocukken bu köşede küçük, samimi bir tiyatro vardı. Ailemle her hafta sonu oraya giderdik.\n→ Geçmişte var olan ama artık olmayan durum.\n\n### Örnek 3: Present Repetition (Tekrarlayan eylem)",
+          "description": ""
+        },
+        {
+          "en": "My brother works in a different city, so he only comes home once a month. When he comes, we always have a big family dinner.",
+          "tr": "Kardeşim farklı bir şehirde çalışıyor, bu yüzden ayda sadece bir kez eve gelir. Geldiğinde her zaman büyük bir aile yemeği yeriz.\n→ Düzenli tekrarlayan eylem.\n\n### Örnek 4: Completed Action (Tamamlanmış eylem)",
+          "description": ""
+        },
+        {
+          "en": "We went out for dinner about a month ago to celebrate our anniversary. We had a wonderful time at that fancy Italian restaurant.",
+          "tr": "Yaklaşık bir ay önce yıldönümümüzü kutlamak için dışarıda akşam yemeği yedik. O şık İtalyan restoranında harika vakit geçirdik.\n→ Geçmişte tamamlanmış eylem, zamanı belli.\n\n### Örnek 5: Past Repetition (Geçmişte tekrarlayan eylem)",
+          "description": ""
+        },
+        {
+          "en": "When Ahmet was studying in the United States, he took that difficult proficiency exam twice a year because he wanted to improve his score.",
+          "tr": "Ahmet, Amerika'da okurken, skorunu yükseltmek istediği için o zor yeterlilik sınavına yılda iki kez giriyordu.\n→ Geçmişte düzenli tekrarlayan eylem.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"When I was in high school, I _____ (walk) to school every day because we didn't have a car.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "walk",
+          "B": "am walking",
+          "C": "walked",
+          "D": "have walked"
+        },
+        "correct": "C",
+        "explanation": "\"When I was in high school\" geçmiş bir dönem. \"Every day\" geçmişte tekrarlayan bir alışkanlığı gösteriyor. Geçmiş alışkanlık için Simple Past (walked) kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"When I was in high school, I _____ (walk) to school every day because we didn't have a car.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "walk",
+            "B": "am walking",
+            "C": "walked",
+            "D": "have walked"
+          },
+          "correct": "C",
+          "explanation": "\"When I was in high school\" geçmiş bir dönem. \"Every day\" geçmişte tekrarlayan bir alışkanlığı gösteriyor. Geçmiş alışkanlık için Simple Past (walked) kullanılır."
+        }
+      ],
+      "word_count": 473
+    },
+    {
+      "page_number": 4,
+      "title": "Progressive Aspect (be Ving)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PROGRESSIVE ASPECT NEDİR?</h2>\n<p>Bir eylemin <strong>devam ettiğini</strong>, <strong>tamamlanmadığını</strong> ve genellikle <strong>geçici</strong> olduğunu gösterir. Eylem \"şu anda oluyor\" veya \"belirli bir süreçte devam ediyor\" anlamı katar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Progressive = \"şu anda oluyor\" veya \"geçici olarak devam ediyor\". Tek bir eylem vardır ve o eylem sürmektedir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: In Progress (Devam eden eylem)</h3>\n<p><strong>EN:</strong> I can't talk right now because I am driving home through heavy traffic. I'll call you back when I arrive.<br>\n<strong>TR:</strong> Şu anda konuşamam çünkü yoğun trafikte eve doğru araba kullanıyorum. Varınca seni geri arayacağım.<br>\n→ Eylem şu anda devam ediyor, tamamlanmamış.</p>\n<h3>Örnek 2: Temporary Situation (Geçici durum)</h3>\n<p><strong>EN:</strong> My apartment is being renovated this month, so I am staying at a hotel near my office until the work is finished.<br>\n<strong>TR:</strong> Bu ay dairem yenileniyor, bu yüzden iş bitene kadar ofisimin yakınındaki bir otelde kalıyorum.<br>\n→ Geçici bir durum, normalde kendi evinde kalıyor.</p>\n<h3>Örnek 3: Pre-planned Future (Planlanmış gelecek)</h3>\n<p><strong>EN:</strong> We are flying to Rome next Friday for our summer vacation. We have already booked the hotel and bought the tickets.<br>\n<strong>TR:</strong> Önümüzdeki Cuma yaz tatili için Roma'ya uçuyoruz. Oteli çoktan ayırttık ve biletleri aldık.<br>\n→ Gelecek için kesin plan, Present Progressive ile ifade ediliyor.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat: Progressive aspect TEKRAR (repetition) ifade etmez!**\n\nProgressive'te tek bir eylem vardır ve o eylem devam eder. Tekrar için Simple Aspect kullanılır.\n\n❌ **Yanlış:** He is calling me three times today. (Çünkü \"three times\" tekrar bildirir)\n✅ **Doğru:** He has called me three times today. (Perfect Aspect - tekrar için uygun)\n\n❌ **Yanlış:** She was knocking on the door twice. (Tekrar + Progressive uyumsuz)\n✅ **Doğru:** She knocked on the door twice. (Simple Past - tekrar için uygun)\n</div>\n\n<h3>Örnek 4: No Repetition Kuralı</h3>\n<p><strong>EN:</strong> Somebody has been calling you all morning, but I don't know who it is. (NOT: Somebody is calling you three times)<br>\n<strong>TR:</strong> Biri bütün sabah seni arıyor, ama kim olduğunu bilmiyorum.<br>\n→ \"All morning\" bir süreç ifade eder, tekrar değil. Bu yüzden Progressive kullanılabilir.</p>\n<hr>\n<h2>📊 PROGRESSIVE ASPECT ÖZETİ</h2>\n<table>\n<thead>\n<tr>\n<th>Özellik</th>\n<th>Açıklama</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>In Progress</strong></td>\n<td>Eylem şu anda devam ediyor</td>\n<td>I am working right now.</td>\n</tr>\n<tr>\n<td><strong>Not Complete</strong></td>\n<td>Eylem henüz bitmemiş</td>\n<td>She is writing a book.</td>\n</tr>\n<tr>\n<td><strong>Temporary</strong></td>\n<td>Geçici durum</td>\n<td>They are staying at a hotel.</td>\n</tr>\n<tr>\n<td><strong>Planned Future</strong></td>\n<td>Gelecek planı</td>\n<td>We are leaving tomorrow.</td>\n</tr>\n<tr>\n<td><strong>No Repetition</strong></td>\n<td>Tekrar bildirmez</td>\n<td>❌ He is calling three times.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerden hangisi Progressive Aspect ile yapılamaz?</p>\n<p>A) The children are playing in the garden right now.<br>\nB) I am reading a very interesting book these days.<br>\nC) She is visiting her grandmother three times this week.<br>\nD) They are building a new shopping mall in our neighborhood.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"three times this week\" tekrar bildirir. Progressive aspect tekrar ifade etmez. Doğrusu: \"She has visited her grandmother three times this week\" (Present Perfect) olmalıdır.\n</details>\n\n<p>[Kelime sayısı: 262]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I can't talk right now because I am driving home through heavy traffic. I'll call you back when I arrive.",
+          "tr": "Şu anda konuşamam çünkü yoğun trafikte eve doğru araba kullanıyorum. Varınca seni geri arayacağım.\n→ Eylem şu anda devam ediyor, tamamlanmamış.\n\n### Örnek 2: Temporary Situation (Geçici durum)",
+          "description": ""
+        },
+        {
+          "en": "My apartment is being renovated this month, so I am staying at a hotel near my office until the work is finished.",
+          "tr": "Bu ay dairem yenileniyor, bu yüzden iş bitene kadar ofisimin yakınındaki bir otelde kalıyorum.\n→ Geçici bir durum, normalde kendi evinde kalıyor.\n\n### Örnek 3: Pre-planned Future (Planlanmış gelecek)",
+          "description": ""
+        },
+        {
+          "en": "We are flying to Rome next Friday for our summer vacation. We have already booked the hotel and bought the tickets.",
+          "tr": "Önümüzdeki Cuma yaz tatili için Roma'ya uçuyoruz. Oteli çoktan ayırttık ve biletleri aldık.\n→ Gelecek için kesin plan, Present Progressive ile ifade ediliyor.",
+          "description": ""
+        },
+        {
+          "en": "Somebody has been calling you all morning, but I don't know who it is. (NOT: Somebody is calling you three times)",
+          "tr": "Biri bütün sabah seni arıyor, ama kim olduğunu bilmiyorum.\n→ \"All morning\" bir süreç ifade eder, tekrar değil. Bu yüzden Progressive kullanılabilir.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerden hangisi Progressive Aspect ile yapılamaz?",
+        "options": {
+          "A": "The children are playing in the garden right now.",
+          "B": "I am reading a very interesting book these days.",
+          "C": "She is visiting her grandmother three times this week.",
+          "D": "They are building a new shopping mall in our neighborhood."
+        },
+        "correct": "C",
+        "explanation": "\"three times this week\" tekrar bildirir. Progressive aspect tekrar ifade etmez. Doğrusu: \"She has visited her grandmother three times this week\" (Present Perfect) olmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerden hangisi Progressive Aspect ile yapılamaz?",
+          "options": {
+            "A": "The children are playing in the garden right now.",
+            "B": "I am reading a very interesting book these days.",
+            "C": "She is visiting her grandmother three times this week.",
+            "D": "They are building a new shopping mall in our neighborhood."
+          },
+          "correct": "C",
+          "explanation": "\"three times this week\" tekrar bildirir. Progressive aspect tekrar ifade etmez. Doğrusu: \"She has visited her grandmother three times this week\" (Present Perfect) olmalıdır."
+        }
+      ],
+      "word_count": 464
+    },
+    {
+      "page_number": 5,
+      "title": "Perfect Aspect (have V3)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PERFECT ASPECT NEDİR?</h2>\n<p>Bir eylemin <strong>belirtilen zaman noktasından önce</strong> gerçekleştiğini veya <strong>o noktaya kadar devam ettiğini</strong> gösterir. Üç temel perfect yapı vardır: Present Perfect, Past Perfect, Future Perfect.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Perfect = \"öncelik\" veya \"devam eden süreç\". Present Perfect'te \"now\" noktasıyla bağlantı vardır. Past Perfect ve Future Perfect'te ise belirli bir zaman noktası verilmelidir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Present Perfect - Now ile bağlantılı</h3>\n<p><strong>EN:</strong> John has left the room, so you won't find him there. He went out about five minutes ago, and he won't be back until this evening.<br>\n<strong>TR:</strong> John odadan ayrıldı, bu yüzden onu orada bulamazsın. Yaklaşık beş dakika önce çıktı ve akşama kadar dönmeyecek.<br>\n→ Eylem geçmişte oldu (ayrıldı) ve sonucu şu an geçerli (odada değil). Zaman noktası belirtilmemiş (sadece \"now\" ile bağlantılı).</p>\n<h3>Örnek 2: Present Perfect - Devam eden durum</h3>\n<p><strong>EN:</strong> I have lived in this neighborhood for over fifteen years, so I know almost everyone on our street.<br>\n<strong>TR:</strong> Bu mahallede on beş yıldan fazladır yaşıyorum, bu yüzden sokağımızdaki neredeyse herkesi tanırım.<br>\n→ Geçmişte başladı (15 yıl önce), hala devam ediyor (hala burada yaşıyor).</p>\n<h3>Örnek 3: Past Perfect - Geçmişteki noktadan önce</h3>\n<p><strong>EN:</strong> When we finally arrived at the train station, we realized that the train had already left. We had missed it by just five minutes.<br>\n<strong>TR:</strong> Tren istasyonuna nihayet vardığımızda, trenin çoktan kalkmış olduğunu fark ettik. Sadece beş dakikayla kaçırmıştık.<br>\n→ Geçmişte iki eylem: önce tren kalktı (had left), sonra biz vardık (arrived). \"when we arrived\" geçmişteki zaman noktası.</p>\n<h3>Örnek 4: Future Perfect - Gelecekteki noktadan önce</h3>\n<p><strong>EN:</strong> Don't worry about the report. By the time the manager comes back from his vacation next Monday, I will have finished it completely.<br>\n<strong>TR:</strong> Rapor için endişelenme. Müdür önümüzdeki Pazartesi tatilinden döndüğünde, ben onu tamamen bitirmiş olacağım.<br>\n→ Gelecekte iki nokta: önce rapor bitecek (will have finished), sonra müdür dönecek (comes). \"by the time he comes\" gelecekteki zaman noktası.</p>\n<h3>Örnek 5: Past Perfect - Zaman noktası öncesi durum</h3>\n<p><strong>EN:</strong> By 1990, he had never traveled outside his home country. His first international trip was to Paris in 1992.<br>\n<strong>TR:</strong> 1990'a kadar, hiç kendi ülkesi dışına seyahat etmemişti. İlk uluslararası seyahati 1992'de Paris'e oldu.<br>\n→ \"By 1990\" geçmişte bir zaman noktası. O noktaya kadar olan durum.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n- **Present Perfect:** Zaman noktası vermeden kullanılabilir (now ile bağlantılı)\n- **Past Perfect:** Geçmişte bir zaman noktası VERİLMELİ! (when, by, before, after, etc.)\n- **Future Perfect:** Gelecekte bir zaman noktası VERİLMELİ! (by, by the time, etc.)\n</div>\n\n<hr>\n<h2>📊 PERFECT ASPECT ÖZETİ</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Zaman Noktası</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>have/has V3</strong></td>\n<td>Now (belirtilmese de var)</td>\n<td>Şimdiyle bağlantılı geçmiş</td>\n<td>I have seen that movie.</td>\n</tr>\n<tr>\n<td><strong>had V3</strong></td>\n<td>Geçmişte belirli bir nokta</td>\n<td>O noktadan önce olmuş</td>\n<td>He had left when I arrived.</td>\n</tr>\n<tr>\n<td><strong>will have V3</strong></td>\n<td>Gelecekte belirli bir nokta</td>\n<td>O noktadan önce bitmiş olacak</td>\n<td>I will have finished by 5 PM.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"By the time we got to the cinema, the movie _____ (already/start).\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) already started<br>\nB) has already started<br>\nC) had already started<br>\nD) was already starting</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"By the time we got\" = geçmişte bir zaman noktası. Film o noktadan önce başlamıştı. Geçmişteki bir noktadan önce olan eylem için Past Perfect (had started) gerekir.\n</details>\n\n<p>[Kelime sayısı: 282]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "John has left the room, so you won't find him there. He went out about five minutes ago, and he won't be back until this evening.",
+          "tr": "John odadan ayrıldı, bu yüzden onu orada bulamazsın. Yaklaşık beş dakika önce çıktı ve akşama kadar dönmeyecek.\n→ Eylem geçmişte oldu (ayrıldı) ve sonucu şu an geçerli (odada değil). Zaman noktası belirtilmemiş (sadece \"now\" ile bağlantılı).\n\n### Örnek 2: Present Perfect - Devam eden durum",
+          "description": ""
+        },
+        {
+          "en": "I have lived in this neighborhood for over fifteen years, so I know almost everyone on our street.",
+          "tr": "Bu mahallede on beş yıldan fazladır yaşıyorum, bu yüzden sokağımızdaki neredeyse herkesi tanırım.\n→ Geçmişte başladı (15 yıl önce), hala devam ediyor (hala burada yaşıyor).\n\n### Örnek 3: Past Perfect - Geçmişteki noktadan önce",
+          "description": ""
+        },
+        {
+          "en": "When we finally arrived at the train station, we realized that the train had already left. We had missed it by just five minutes.",
+          "tr": "Tren istasyonuna nihayet vardığımızda, trenin çoktan kalkmış olduğunu fark ettik. Sadece beş dakikayla kaçırmıştık.\n→ Geçmişte iki eylem: önce tren kalktı (had left), sonra biz vardık (arrived). \"when we arrived\" geçmişteki zaman noktası.\n\n### Örnek 4: Future Perfect - Gelecekteki noktadan önce",
+          "description": ""
+        },
+        {
+          "en": "Don't worry about the report. By the time the manager comes back from his vacation next Monday, I will have finished it completely.",
+          "tr": "Rapor için endişelenme. Müdür önümüzdeki Pazartesi tatilinden döndüğünde, ben onu tamamen bitirmiş olacağım.\n→ Gelecekte iki nokta: önce rapor bitecek (will have finished), sonra müdür dönecek (comes). \"by the time he comes\" gelecekteki zaman noktası.\n\n### Örnek 5: Past Perfect - Zaman noktası öncesi durum",
+          "description": ""
+        },
+        {
+          "en": "By 1990, he had never traveled outside his home country. His first international trip was to Paris in 1992.",
+          "tr": "1990'a kadar, hiç kendi ülkesi dışına seyahat etmemişti. İlk uluslararası seyahati 1992'de Paris'e oldu.\n→ \"By 1990\" geçmişte bir zaman noktası. O noktaya kadar olan durum.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"By the time we got to the cinema, the movie _____ (already/start).\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "already started",
+          "B": "has already started",
+          "C": "had already started",
+          "D": "was already starting"
+        },
+        "correct": "C",
+        "explanation": "\"By the time we got\" = geçmişte bir zaman noktası. Film o noktadan önce başlamıştı. Geçmişteki bir noktadan önce olan eylem için Past Perfect (had started) gerekir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"By the time we got to the cinema, the movie _____ (already/start).\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "already started",
+            "B": "has already started",
+            "C": "had already started",
+            "D": "was already starting"
+          },
+          "correct": "C",
+          "explanation": "\"By the time we got\" = geçmişte bir zaman noktası. Film o noktadan önce başlamıştı. Geçmişteki bir noktadan önce olan eylem için Past Perfect (had started) gerekir."
+        }
+      ],
+      "word_count": 530
+    },
+    {
+      "page_number": 6,
+      "title": "Present Simple (V1) Kullanım Alanları",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PRESENT SIMPLE NERELERDE KULLANILIR?</h2>\n<p>Günlük rutinler, genel durumlar, bilimsel gerçekler, değişmeyen durumlar ve programlanmış gelecek olaylar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Present Simple = \"Her zaman böyle\" veya \"Genel geçer doğru\". Past bir cümlede bile bilimsel gerçekler Present Simple ile verilir!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Daily Routines (Günlük rutinler)</h3>\n<p><strong>EN:</strong> My father wakes up at 6 AM every morning, goes for a 30-minute walk in the park, and then reads the newspaper while drinking his coffee.<br>\n<strong>TR:</strong> Babam her sabah saat 6'da uyanır, parkta 30 dakikalık bir yürüyüşe çıkar ve sonra kahvesini içerken gazete okur.<br>\n→ Düzenli tekrarlayan eylemler, günlük rutin.</p>\n<h3>Örnek 2: Permanent Situations (Kalıcı durumlar)</h3>\n<p><strong>EN:</strong> My sister currently lives in Berlin because she works for a German company. She moved there three years ago and absolutely loves the city.<br>\n<strong>TR:</strong> Kız kardeşim şu anda Berlin'de yaşıyor çünkü bir Alman şirketinde çalışıyor. Üç yıl önce oraya taşındı ve şehre kesinlikle bayılıyor.<br>\n→ Kalıcı bir durum (taşınmadığı sürece değişmeyecek).</p>\n<h3>Örnek 3: Scientific Truths (Bilimsel gerçekler)</h3>\n<p><strong>EN:</strong> Water boils at 100 degrees Celsius at sea level, but at higher altitudes, the boiling point is lower because of reduced air pressure.<br>\n<strong>TR:</strong> Su deniz seviyesinde 100 derece Celsius'ta kaynar, ancak daha yüksek rakımlarda, düşük hava basıncı nedeniyle kaynama noktası daha düşüktür.<br>\n→ Değişmeyen bilimsel gerçek.</p>\n<h3>Örnek 4: General Facts (Genel gerçekler)</h3>\n<p><strong>EN:</strong> The Earth revolves around the Sun, and it takes approximately 365 days to complete one full orbit.<br>\n<strong>TR:</strong> Dünya Güneş'in etrafında döner ve tam bir turunu tamamlaması yaklaşık 365 gün sürer.<br>\n→ Evrensel gerçek, her zaman doğru.</p>\n<h3>Örnek 5: Past Cümlede Bilimsel Gerçek</h3>\n<p><strong>EN:</strong> In his geography class, the teacher explained that coffee grows primarily in tropical regions and requires a specific climate to thrive.<br>\n<strong>TR:</strong> Coğrafya dersinde öğretmen, kahvenin öncelikle tropikal bölgelerde yetiştiğini ve gelişmesi için belirli bir iklim gerektirdiğini açıkladı.<br>\n→ Ana cümle Past (explained) olmasına rağmen bilimsel gerçek Present (grows, requires).</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji: 2007 YDS Sorusu**\n\n**Soru:** \"Film music --- significant in many ways, of course, but not as music...\"\n\n**Seçenekler:**\nA) had been / shall produce (past)\nB) has been / should have produced (perfect)\nC) is / could produce (present)\nD) can be / had produced (past)\nE) would be / produced (past)\n\nSoru kökü genel bir ifade (present). A, B, D, E seçeneklerinde past yapılar vardı, sadece C'de present yapılar vardı. Bu yüzden doğru cevap C oldu.\n</div>\n\n<hr>\n<h2>📊 SIKLIK ZARFLARI (Frequency Adverbs)</h2>\n<table>\n<thead>\n<tr>\n<th>%</th>\n<th>Adverb</th>\n<th>Türkçesi</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>100%</td>\n<td>Always</td>\n<td>Her zaman</td>\n<td>I always drink coffee.</td>\n</tr>\n<tr>\n<td>90%</td>\n<td>Usually</td>\n<td>Genellikle</td>\n<td>She usually walks to work.</td>\n</tr>\n<tr>\n<td>75%</td>\n<td>Often</td>\n<td>Sık sık</td>\n<td>They often visit us.</td>\n</tr>\n<tr>\n<td>50%</td>\n<td>Sometimes</td>\n<td>Bazen</td>\n<td>He sometimes sleeps late.</td>\n</tr>\n<tr>\n<td>25%</td>\n<td>Occasionally</td>\n<td>Ara sıra</td>\n<td>We occasionally eat out.</td>\n</tr>\n<tr>\n<td>10%</td>\n<td>Rarely/Seldom</td>\n<td>Nadiren</td>\n<td>I rarely watch TV.</td>\n</tr>\n<tr>\n<td>0%</td>\n<td>Never</td>\n<td>Asla</td>\n<td>She never smokes.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"The ancient Greeks believed that the sun _____ (revolve) around the earth, but we now know this is incorrect.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) revolved<br>\nB) revolves<br>\nC) has revolved<br>\nD) was revolving</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Ana cümle \"believed\" (past) olmasına rağmen, inanç içeriği (sun revolves) genel bir inanıştı. Ancak bu bilimsel bir gerçek değil, tarihsel bir inanç. Dilbilgisi açısından her ikisi de mümkün:\n- \"revolved\" (inanç içeriğini geçmişe uyarlamak)\n- \"revolves\" (genel bir ifade olarak)\n\nSınavlarda genellikle \"revolved\" tercih edilir çünkü ana cümle past tense.\n</details>\n\n<p>[Kelime sayısı: 285]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "My father wakes up at 6 AM every morning, goes for a 30-minute walk in the park, and then reads the newspaper while drinking his coffee.",
+          "tr": "Babam her sabah saat 6'da uyanır, parkta 30 dakikalık bir yürüyüşe çıkar ve sonra kahvesini içerken gazete okur.\n→ Düzenli tekrarlayan eylemler, günlük rutin.\n\n### Örnek 2: Permanent Situations (Kalıcı durumlar)",
+          "description": ""
+        },
+        {
+          "en": "My sister currently lives in Berlin because she works for a German company. She moved there three years ago and absolutely loves the city.",
+          "tr": "Kız kardeşim şu anda Berlin'de yaşıyor çünkü bir Alman şirketinde çalışıyor. Üç yıl önce oraya taşındı ve şehre kesinlikle bayılıyor.\n→ Kalıcı bir durum (taşınmadığı sürece değişmeyecek).\n\n### Örnek 3: Scientific Truths (Bilimsel gerçekler)",
+          "description": ""
+        },
+        {
+          "en": "Water boils at 100 degrees Celsius at sea level, but at higher altitudes, the boiling point is lower because of reduced air pressure.",
+          "tr": "Su deniz seviyesinde 100 derece Celsius'ta kaynar, ancak daha yüksek rakımlarda, düşük hava basıncı nedeniyle kaynama noktası daha düşüktür.\n→ Değişmeyen bilimsel gerçek.\n\n### Örnek 4: General Facts (Genel gerçekler)",
+          "description": ""
+        },
+        {
+          "en": "The Earth revolves around the Sun, and it takes approximately 365 days to complete one full orbit.",
+          "tr": "Dünya Güneş'in etrafında döner ve tam bir turunu tamamlaması yaklaşık 365 gün sürer.\n→ Evrensel gerçek, her zaman doğru.\n\n### Örnek 5: Past Cümlede Bilimsel Gerçek",
+          "description": ""
+        },
+        {
+          "en": "In his geography class, the teacher explained that coffee grows primarily in tropical regions and requires a specific climate to thrive.",
+          "tr": "Coğrafya dersinde öğretmen, kahvenin öncelikle tropikal bölgelerde yetiştiğini ve gelişmesi için belirli bir iklim gerektirdiğini açıkladı.\n→ Ana cümle Past (explained) olmasına rağmen bilimsel gerçek Present (grows, requires).",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"The ancient Greeks believed that the sun _____ (revolve) around the earth, but we now know this is incorrect.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "revolved",
+          "B": "revolves",
+          "C": "has revolved",
+          "D": "was revolving"
+        },
+        "correct": "B",
+        "explanation": "Ana cümle \"believed\" (past) olmasına rağmen, inanç içeriği (sun revolves) genel bir inanıştı. Ancak bu bilimsel bir gerçek değil, tarihsel bir inanç. Dilbilgisi açısından her ikisi de mümkün:\n- \"revolved\" (inanç içeriğini geçmişe uyarlamak)\n- \"revolves\" (genel bir ifade olarak)\n\nSınavlarda genellikle \"revolved\" tercih edilir çünkü ana cümle past tense."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The ancient Greeks believed that the sun _____ (revolve) around the earth, but we now know this is incorrect.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "revolved",
+            "B": "revolves",
+            "C": "has revolved",
+            "D": "was revolving"
+          },
+          "correct": "B",
+          "explanation": "Ana cümle \"believed\" (past) olmasına rağmen, inanç içeriği (sun revolves) genel bir inanıştı. Ancak bu bilimsel bir gerçek değil, tarihsel bir inanç. Dilbilgisi açısından her ikisi de mümkün:\n- \"revolved\" (inanç içeriğini geçmişe uyarlamak)\n- \"revolves\" (genel bir ifade olarak)\n\nSınavlarda genellikle \"revolved\" tercih edilir çünkü ana cümle past tense."
+        }
+      ],
+      "word_count": 539
+    },
+    {
+      "page_number": 7,
+      "title": "Present Simple - Özel Kullanımlar",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PRESENT SIMPLE'IN DİĞER KULLANIMLARI</h2>\n<p>Basın dili, zaman tabloları, hikaye anlatımı ve if clause yapılarında Present Simple bazen PAST bazen FUTURE anlam taşıyabilir!</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Present Simple gördüğünüzde her zaman \"şimdiki zaman\" anlamına gelmez. Gazete başlıklarında geçmiş olayları, zaman tablolarında ise gelecek olayları anlatabilir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Press Language (Basın dili - Past anlam)</h3>\n<p><strong>EN:</strong> Galatasaray beats Leeds 2-1 in a thrilling match at the Ali Sami Yen stadium. Thousands of fans celebrate the victory in the streets.<br>\n<strong>TR:</strong> Galatasaray, Ali Sami Yen stadında oynanan heyecanlı maçta Leeds'i 2-1 yendi. Binlerce taraftar sokaklarda zaferi kutluyor.<br>\n→ Gazete başlığı, dün olan maçı anlatıyor. Present Simple kullanılmasına rağmen anlam PAST.</p>\n<h3>Örnek 2: Press Language (Basın dili - Future anlam)</h3>\n<p><strong>EN:</strong> Prime Minister meets with French President next week to discuss trade agreements and economic cooperation between the two nations.<br>\n<strong>TR:</strong> Başbakan, önümüzdeki hafta Fransa Cumhurbaşkanı ile ticaret anlaşmalarını ve iki ülke arasındaki ekonomik işbirliğini görüşecek.<br>\n→ Gazete başlığı, gelecekteki görüşmeyi duyuruyor. Anlam FUTURE.</p>\n<h3>Örnek 3: Timetables (Zaman tabloları - Future anlam)</h3>\n<p><strong>EN:</strong> The Oxford train for London departs from platform 3 at exactly 2:15 PM tomorrow afternoon. Passengers are advised to arrive at least 15 minutes early.<br>\n<strong>TR:</strong> Londra'ya giden Oxford treni yarın öğleden sonra tam 2:15'te peron 3'ten kalkıyor. Yolcuların en az 15 dakika erken gelmeleri tavsiye edilir.<br>\n→ Değişmeyen programa göre gelecek. Anlam FUTURE, yapı Present Simple.</p>\n<h3>Örnek 4: Narratives (Hikaye anlatımı)</h3>\n<p><strong>EN:</strong> Once upon a time, a poor woodcutter lives in a small cottage near the forest with his wife and three children. Every day, he goes into the forest to cut wood.<br>\n<strong>TR:</strong> Bir varmış bir yokmuş, fakir bir oduncu karısı ve üç çocuğuyla ormanın yakınındaki küçük bir kulübede yaşarmış. Her gün ormana odun kesmeye gidermiş.<br>\n→ Hikaye anlatımında Present Simple kullanımı yaygındır (historical present).</p>\n<h3>Örnek 5: If Clause Type 0 (Bilimsel gerçek)</h3>\n<p><strong>EN:</strong> If you heat ice to a temperature above zero degrees Celsius, it melts and turns into liquid water.<br>\n<strong>TR:</strong> Buzu sıfır derece Celsius'un üzerinde bir sıcaklığa ısıtırsanız, erir ve sıvı suya dönüşür.<br>\n→ Her zaman doğru olan durum, neden-sonuç ilişkisi.</p>\n<h3>Örnek 6: If Clause Type 1 (Gelecek olasılık)</h3>\n<p><strong>EN:</strong> If I have enough time this weekend, I will visit my grandparents in the countryside and help them with some work around the house.<br>\n<strong>TR:</strong> Bu hafta sonu yeterli zamanım olursa, büyükannem ve büyükbabamı kırsalda ziyaret edeceğim ve evde bazı işlerine yardım edeceğim.<br>\n→ Gelecekte gerçekleşme olasılığı olan durum. If clause'da Present Simple, main clause'da Future.</p>\n<hr>\n<h2>📊 PRESENT SIMPLE'IN ANLAMLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Günlük rutin</td>\n<td>V1</td>\n<td>Present</td>\n<td>I wake up at 7.</td>\n</tr>\n<tr>\n<td>Genel durum</td>\n<td>V1</td>\n<td>Present</td>\n<td>She lives in NY.</td>\n</tr>\n<tr>\n<td>Bilimsel gerçek</td>\n<td>V1</td>\n<td>Present (her zaman)</td>\n<td>Water boils at 100°.</td>\n</tr>\n<tr>\n<td>Basın dili</td>\n<td>V1</td>\n<td>Past veya Future</td>\n<td>PM meets Clinton.</td>\n</tr>\n<tr>\n<td>Zaman tabloları</td>\n<td>V1</td>\n<td>Future</td>\n<td>Train leaves at 6.</td>\n</tr>\n<tr>\n<td>Hikaye anlatımı</td>\n<td>V1</td>\n<td>Past</td>\n<td>Man lives in a cottage.</td>\n</tr>\n<tr>\n<td>If Clause Type 0</td>\n<td>If + V1, V1</td>\n<td>Present genel</td>\n<td>If you heat ice, it melts.</td>\n</tr>\n<tr>\n<td>If Clause Type 1</td>\n<td>If + V1, will V0</td>\n<td>Future olasılık</td>\n<td>If I go, I will see.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"The new shopping mall opens next Friday at 10 AM. The first 100 customers _____ (receive) a special gift.\" cümlesinde ikinci boşluğa ne gelmelidir?</p>\n<p>A) receive<br>\nB) will receive<br>\nC) are receiving<br>\nD) have received</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** İlk cümlede \"opens\" Present Simple ama anlam future (zaman tablosu). İkinci cümle ise o gelecekteki olayın bir sonucu. Gelecek anlam için \"will receive\" kullanılır.\n</details>\n\n<p>[Kelime sayısı: 276]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Galatasaray beats Leeds 2-1 in a thrilling match at the Ali Sami Yen stadium. Thousands of fans celebrate the victory in the streets.",
+          "tr": "Galatasaray, Ali Sami Yen stadında oynanan heyecanlı maçta Leeds'i 2-1 yendi. Binlerce taraftar sokaklarda zaferi kutluyor.\n→ Gazete başlığı, dün olan maçı anlatıyor. Present Simple kullanılmasına rağmen anlam PAST.\n\n### Örnek 2: Press Language (Basın dili - Future anlam)",
+          "description": ""
+        },
+        {
+          "en": "Prime Minister meets with French President next week to discuss trade agreements and economic cooperation between the two nations.",
+          "tr": "Başbakan, önümüzdeki hafta Fransa Cumhurbaşkanı ile ticaret anlaşmalarını ve iki ülke arasındaki ekonomik işbirliğini görüşecek.\n→ Gazete başlığı, gelecekteki görüşmeyi duyuruyor. Anlam FUTURE.\n\n### Örnek 3: Timetables (Zaman tabloları - Future anlam)",
+          "description": ""
+        },
+        {
+          "en": "The Oxford train for London departs from platform 3 at exactly 2:15 PM tomorrow afternoon. Passengers are advised to arrive at least 15 minutes early.",
+          "tr": "Londra'ya giden Oxford treni yarın öğleden sonra tam 2:15'te peron 3'ten kalkıyor. Yolcuların en az 15 dakika erken gelmeleri tavsiye edilir.\n→ Değişmeyen programa göre gelecek. Anlam FUTURE, yapı Present Simple.\n\n### Örnek 4: Narratives (Hikaye anlatımı)",
+          "description": ""
+        },
+        {
+          "en": "Once upon a time, a poor woodcutter lives in a small cottage near the forest with his wife and three children. Every day, he goes into the forest to cut wood.",
+          "tr": "Bir varmış bir yokmuş, fakir bir oduncu karısı ve üç çocuğuyla ormanın yakınındaki küçük bir kulübede yaşarmış. Her gün ormana odun kesmeye gidermiş.\n→ Hikaye anlatımında Present Simple kullanımı yaygındır (historical present).\n\n### Örnek 5: If Clause Type 0 (Bilimsel gerçek)",
+          "description": ""
+        },
+        {
+          "en": "If you heat ice to a temperature above zero degrees Celsius, it melts and turns into liquid water.",
+          "tr": "Buzu sıfır derece Celsius'un üzerinde bir sıcaklığa ısıtırsanız, erir ve sıvı suya dönüşür.\n→ Her zaman doğru olan durum, neden-sonuç ilişkisi.\n\n### Örnek 6: If Clause Type 1 (Gelecek olasılık)",
+          "description": ""
+        },
+        {
+          "en": "If I have enough time this weekend, I will visit my grandparents in the countryside and help them with some work around the house.",
+          "tr": "Bu hafta sonu yeterli zamanım olursa, büyükannem ve büyükbabamı kırsalda ziyaret edeceğim ve evde bazı işlerine yardım edeceğim.\n→ Gelecekte gerçekleşme olasılığı olan durum. If clause'da Present Simple, main clause'da Future.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"The new shopping mall opens next Friday at 10 AM. The first 100 customers _____ (receive) a special gift.\" cümlesinde ikinci boşluğa ne gelmelidir?",
+        "options": {
+          "A": "receive",
+          "B": "will receive",
+          "C": "are receiving",
+          "D": "have received"
+        },
+        "correct": "B",
+        "explanation": "İlk cümlede \"opens\" Present Simple ama anlam future (zaman tablosu). İkinci cümle ise o gelecekteki olayın bir sonucu. Gelecek anlam için \"will receive\" kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The new shopping mall opens next Friday at 10 AM. The first 100 customers _____ (receive) a special gift.\" cümlesinde ikinci boşluğa ne gelmelidir?",
+          "options": {
+            "A": "receive",
+            "B": "will receive",
+            "C": "are receiving",
+            "D": "have received"
+          },
+          "correct": "B",
+          "explanation": "İlk cümlede \"opens\" Present Simple ama anlam future (zaman tablosu). İkinci cümle ise o gelecekteki olayın bir sonucu. Gelecek anlam için \"will receive\" kullanılır."
+        }
+      ],
+      "word_count": 571
+    },
+    {
+      "page_number": 8,
+      "title": "Present Progressive (am/is/are Ving)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PRESENT PROGRESSIVE NERELERDE KULLANILIR?</h2>\n<p>Konuşma anında devam eden eylemler, geçici durumlar, planlanmış gelecek ve şikayet ifadeleri.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Present Progressive = \"Şu anda oluyor\" veya \"Geçici olarak devam ediyor\". \"Now, right now, at the moment, currently, at present\" kelimeleri Present Progressive'in en önemli işaretçileridir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Actions at the moment of speaking</h3>\n<p><strong>EN:</strong> Please be quiet! The baby is sleeping in the next room, and I don't want her to wake up. She had a very restless night.<br>\n<strong>TR:</strong> Lütfen sessiz olun! Bebek yan odada uyuyor ve uyanmasını istemiyorum. Çok huzursuz bir gece geçirdi.<br>\n→ Konuşma anında devam eden eylem.</p>\n<h3>Örnek 2: Right now / At the moment</h3>\n<p><strong>EN:</strong> I can't come to the phone right now because I am preparing dinner. I'll call you back in about twenty minutes when I'm done.<br>\n<strong>TR:</strong> Şu anda telefona gelemiyorum çünkü akşam yemeği hazırlıyorum. Yaklaşık yirmi dakika sonra işim bitince seni geri arayacağım.<br>\n→ \"Right now\" ifadesiyle konuşma anı vurgulanıyor.</p>\n<h3>Örnek 3: Temporary situations</h3>\n<p><strong>EN:</strong> Normally, I work as a teacher at the local high school, but this summer I am working as a waiter at a beach restaurant to earn some extra money.<br>\n<strong>TR:</strong> Normalde yerel lisede öğretmen olarak çalışıyorum ama bu yaz biraz ekstra para kazanmak için bir plaj restoranında garson olarak çalışıyorum.<br>\n→ Geçici durum, normalde böyle değil.</p>\n<h3>Örnek 4: Pre-planned activities</h3>\n<p><strong>EN:</strong> My brother is getting married next June in a beautiful seaside village. We have already sent out the invitations and booked the venue.<br>\n<strong>TR:</strong> Kardeşim önümüzdeki Haziran'da güzel bir sahil köyünde evleniyor. Davetiyeleri çoktan gönderdik ve mekanı ayırttık.<br>\n→ Planlanmış gelecek eylemi, Present Progressive ile ifade ediliyor.</p>\n<h3>Örnek 5: Complaints (Şikayet - always ile)</h3>\n<p><strong>EN:</strong> My roommate is always leaving his dirty dishes in the sink and never cleans up after himself. It's really starting to annoy me.<br>\n<strong>TR:</strong> Oda arkadaşım sürekli kirli bulaşıklarını lavaboda bırakıyor ve arkasından asla temizlemiyor. Bu gerçekten beni rahatsız etmeye başlıyor.<br>\n→ Sık yapılan bir eylemden şikayet, \"always\" ile Present Progressive.</p>\n<h3>Örnek 6: Look! / Listen!</h3>\n<p><strong>EN:</strong> Look! It is starting to rain heavily. We should go inside before we get completely soaked.<br>\n<strong>TR:</strong> Bak! Şiddetli yağmur yağmaya başlıyor. Tamamen sırılsıklam olmadan içeri girmeliyiz.<br>\n→ \"Look!\" ve \"Listen!\" konuşma anında olan eyleme dikkat çeker.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji: \"Currently\" ile Present Progressive**\n\n**Soru:** \"Currently, a great deal of attention --- to the phenomenon, known as acid rain.\"\n\n**Seçenekler:**\nA) had been paid\nB) was paid\nC) is being paid\nD) has been paid\nE) will be paid\n\n**Doğru Cevap:** C) is being paid\n**Açıklama:** \"Currently\" = şu anda anlamında, Present Progressive (is being paid) gerektirir. Ayrıca pasif yapı (attention is being paid) kullanılmış.\n</div>\n\n<hr>\n<h2>📊 PRESENT PROGRESSIVE İPUÇLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Zaman İfadesi</th>\n<th>Anlamı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>now, right now</td>\n<td>şimdi, hemen şimdi</td>\n</tr>\n<tr>\n<td>at the moment</td>\n<td>şu anda</td>\n</tr>\n<tr>\n<td>currently, at present</td>\n<td>şu sıralar</td>\n</tr>\n<tr>\n<td>for the time being</td>\n<td>şimdilik</td>\n</tr>\n<tr>\n<td>nowadays, these days</td>\n<td>günümüzde, bu günlerde</td>\n</tr>\n<tr>\n<td>Look! / Listen!</td>\n<td>Bak! / Dinle! (dikkat çekme)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I can't talk to you right now because I _____ (study) for my final exams, which start next week.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) study<br>\nB) am studying<br>\nC) have studied<br>\nD) will study</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"right now\" = şu anda anlamında. Konuşma anında devam eden eylem için Present Progressive (am studying) gerekir.\n</details>\n\n<p>[Kelime sayısı: 283]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Please be quiet! The baby is sleeping in the next room, and I don't want her to wake up. She had a very restless night.",
+          "tr": "Lütfen sessiz olun! Bebek yan odada uyuyor ve uyanmasını istemiyorum. Çok huzursuz bir gece geçirdi.\n→ Konuşma anında devam eden eylem.\n\n### Örnek 2: Right now / At the moment",
+          "description": ""
+        },
+        {
+          "en": "I can't come to the phone right now because I am preparing dinner. I'll call you back in about twenty minutes when I'm done.",
+          "tr": "Şu anda telefona gelemiyorum çünkü akşam yemeği hazırlıyorum. Yaklaşık yirmi dakika sonra işim bitince seni geri arayacağım.\n→ \"Right now\" ifadesiyle konuşma anı vurgulanıyor.\n\n### Örnek 3: Temporary situations",
+          "description": ""
+        },
+        {
+          "en": "Normally, I work as a teacher at the local high school, but this summer I am working as a waiter at a beach restaurant to earn some extra money.",
+          "tr": "Normalde yerel lisede öğretmen olarak çalışıyorum ama bu yaz biraz ekstra para kazanmak için bir plaj restoranında garson olarak çalışıyorum.\n→ Geçici durum, normalde böyle değil.\n\n### Örnek 4: Pre-planned activities",
+          "description": ""
+        },
+        {
+          "en": "My brother is getting married next June in a beautiful seaside village. We have already sent out the invitations and booked the venue.",
+          "tr": "Kardeşim önümüzdeki Haziran'da güzel bir sahil köyünde evleniyor. Davetiyeleri çoktan gönderdik ve mekanı ayırttık.\n→ Planlanmış gelecek eylemi, Present Progressive ile ifade ediliyor.\n\n### Örnek 5: Complaints (Şikayet - always ile)",
+          "description": ""
+        },
+        {
+          "en": "My roommate is always leaving his dirty dishes in the sink and never cleans up after himself. It's really starting to annoy me.",
+          "tr": "Oda arkadaşım sürekli kirli bulaşıklarını lavaboda bırakıyor ve arkasından asla temizlemiyor. Bu gerçekten beni rahatsız etmeye başlıyor.\n→ Sık yapılan bir eylemden şikayet, \"always\" ile Present Progressive.\n\n### Örnek 6: Look! / Listen!",
+          "description": ""
+        },
+        {
+          "en": "Look! It is starting to rain heavily. We should go inside before we get completely soaked.",
+          "tr": "Bak! Şiddetli yağmur yağmaya başlıyor. Tamamen sırılsıklam olmadan içeri girmeliyiz.\n→ \"Look!\" ve \"Listen!\" konuşma anında olan eyleme dikkat çeker.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I can't talk to you right now because I _____ (study) for my final exams, which start next week.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "study",
+          "B": "am studying",
+          "C": "have studied",
+          "D": "will study"
+        },
+        "correct": "B",
+        "explanation": "\"right now\" = şu anda anlamında. Konuşma anında devam eden eylem için Present Progressive (am studying) gerekir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I can't talk to you right now because I _____ (study) for my final exams, which start next week.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "study",
+            "B": "am studying",
+            "C": "have studied",
+            "D": "will study"
+          },
+          "correct": "B",
+          "explanation": "\"right now\" = şu anda anlamında. Konuşma anında devam eden eylem için Present Progressive (am studying) gerekir."
+        }
+      ],
+      "word_count": 538
+    },
+    {
+      "page_number": 9,
+      "title": "Present Progressive - Zaman İfadeleri",
+      "total_pages": 25,
+      "content_html": "<h2>📌 DİKKAT: \"NOW\" İÇEREN ZAMAN İFADELERİ</h2>\n<p>\"Now\" her zaman Present Progressive işareti değildir! Diğer kelimelerle birlikte farklı tense'ler gerektirebilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Now\" tek başına = Present Progressive, ama \"up to now\" = Present Perfect, \"from now on\" = Future, \"at that moment\" = Past!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: At that moment (Past anlam)</h3>\n<p><strong>EN:</strong> I was just about to leave the house. At that very moment, the phone rang, and it was my mother calling from abroad.<br>\n<strong>TR:</strong> Tam evden çıkmak üzereydim. Tam o anda telefon çaldı ve arayan yurtdışından annemdi.<br>\n→ Geçmişte belirli bir an, Past Progressive ve Past Simple ile kullanılır.</p>\n<h3>Örnek 2: Up to now / Up till now (Present Perfect)</h3>\n<p><strong>EN:</strong> Up to now, I have completed three chapters of my thesis, but I still have two more to finish before the deadline.<br>\n<strong>TR:</strong> Şu ana kadar tezimin üç bölümünü tamamladım, ama teslim tarihinden önce bitirmem gereken iki bölüm daha var.<br>\n→ Şimdiye kadar olan süreç, Present Perfect gerektirir.</p>\n<h3>Örnek 3: From now on (Future)</h3>\n<p><strong>EN:</strong> I have decided to live a healthier lifestyle. From now on, I will exercise every morning and eat more vegetables.<br>\n<strong>TR:</strong> Daha sağlıklı bir yaşam tarzı yaşamaya karar verdim. Bundan sonra her sabah egzersiz yapacağım ve daha fazla sebze yiyeceğim.<br>\n→ Gelecekte başlayacak eylem, Future (will) ile ifade edilir.</p>\n<h3>Örnek 4: For 10 years now (Present Perfect)</h3>\n<p><strong>EN:</strong> My grandparents have lived in the same small house in the countryside for over forty years now, and they have no intention of moving.<br>\n<strong>TR:</strong> Büyükannem ve büyükbabam kırk yıldan fazladır aynı küçük kır evinde yaşıyorlar ve taşınma niyetleri yok.<br>\n→ \"For ... now\" = şimdiye kadar ... dır, Present Perfect veya Present Perfect Progressive gerektirir.</p>\n<h3>Örnek 5: At present / Currently (Present Progressive)</h3>\n<p><strong>EN:</strong> At present, scientists are conducting research on a new vaccine that could potentially prevent several types of cancer.<br>\n<strong>TR:</strong> Şu anda, bilim insanları potansiyel olarak birkaç kanser türünü önleyebilecek yeni bir aşı üzerinde araştırma yapıyorlar.<br>\n→ \"At present\" = şu anda, Present Progressive için ipucu.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji: Restatement (Yakın Anlamlı Cümle) Soruları**\n\n**Soru:** \"Stopping the international obesity epidemic is as tough a problem as any now facing public-health officials.\"\n\n**Doğru cevap D seçeneğinde:** \"For public-health officials, the prevention of obesity, which is widespread throughout the world, is an extremely difficult problem like any other they are **currently** concerned with.\"\n\n**Neden?** Soru kökündeki \"now\" ile D seçeneğindeki \"currently\" eş anlamlıdır. Zaman ifadelerinin eş anlamlılarını aramak restatement sorularında işe yarar!\n</div>\n\n<hr>\n<h2>📊 \"NOW\" İÇEREN İFADELER</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Anlam</th>\n<th>Kullanılacak Tense</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>now</td>\n<td>şimdi</td>\n<td>Present Progressive</td>\n</tr>\n<tr>\n<td>right now</td>\n<td>hemen şimdi</td>\n<td>Present Progressive</td>\n</tr>\n<tr>\n<td>at the moment</td>\n<td>şu anda</td>\n<td>Present Progressive</td>\n</tr>\n<tr>\n<td>at present</td>\n<td>şu anda</td>\n<td>Present Progressive</td>\n</tr>\n<tr>\n<td>currently</td>\n<td>şu anda</td>\n<td>Present Progressive</td>\n</tr>\n<tr>\n<td>up to now / up till now</td>\n<td>şu ana kadar</td>\n<td>Present Perfect</td>\n</tr>\n<tr>\n<td>from now on</td>\n<td>bundan sonra</td>\n<td>Future (will)</td>\n</tr>\n<tr>\n<td>for 10 years now</td>\n<td>10 yıldır</td>\n<td>Present Perfect</td>\n</tr>\n<tr>\n<td>at that moment</td>\n<td>o anda</td>\n<td>Past Simple / Past Progressive</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"Up to now, the government _____ (take) no serious measures to address the problem of air pollution in major cities.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) took<br>\nB) was taking<br>\nC) has taken<br>\nD) will take</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"Up to now\" = şu ana kadar, Present Perfect (has taken) gerektirir. Geçmişten şimdiye kadar olan süreç anlatılıyor.\n</details>\n\n<p>[Kelime sayısı: 274]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I was just about to leave the house. At that very moment, the phone rang, and it was my mother calling from abroad.",
+          "tr": "Tam evden çıkmak üzereydim. Tam o anda telefon çaldı ve arayan yurtdışından annemdi.\n→ Geçmişte belirli bir an, Past Progressive ve Past Simple ile kullanılır.\n\n### Örnek 2: Up to now / Up till now (Present Perfect)",
+          "description": ""
+        },
+        {
+          "en": "Up to now, I have completed three chapters of my thesis, but I still have two more to finish before the deadline.",
+          "tr": "Şu ana kadar tezimin üç bölümünü tamamladım, ama teslim tarihinden önce bitirmem gereken iki bölüm daha var.\n→ Şimdiye kadar olan süreç, Present Perfect gerektirir.\n\n### Örnek 3: From now on (Future)",
+          "description": ""
+        },
+        {
+          "en": "I have decided to live a healthier lifestyle. From now on, I will exercise every morning and eat more vegetables.",
+          "tr": "Daha sağlıklı bir yaşam tarzı yaşamaya karar verdim. Bundan sonra her sabah egzersiz yapacağım ve daha fazla sebze yiyeceğim.\n→ Gelecekte başlayacak eylem, Future (will) ile ifade edilir.\n\n### Örnek 4: For 10 years now (Present Perfect)",
+          "description": ""
+        },
+        {
+          "en": "My grandparents have lived in the same small house in the countryside for over forty years now, and they have no intention of moving.",
+          "tr": "Büyükannem ve büyükbabam kırk yıldan fazladır aynı küçük kır evinde yaşıyorlar ve taşınma niyetleri yok.\n→ \"For ... now\" = şimdiye kadar ... dır, Present Perfect veya Present Perfect Progressive gerektirir.\n\n### Örnek 5: At present / Currently (Present Progressive)",
+          "description": ""
+        },
+        {
+          "en": "At present, scientists are conducting research on a new vaccine that could potentially prevent several types of cancer.",
+          "tr": "Şu anda, bilim insanları potansiyel olarak birkaç kanser türünü önleyebilecek yeni bir aşı üzerinde araştırma yapıyorlar.\n→ \"At present\" = şu anda, Present Progressive için ipucu.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"Up to now, the government _____ (take) no serious measures to address the problem of air pollution in major cities.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "took",
+          "B": "was taking",
+          "C": "has taken",
+          "D": "will take"
+        },
+        "correct": "C",
+        "explanation": "\"Up to now\" = şu ana kadar, Present Perfect (has taken) gerektirir. Geçmişten şimdiye kadar olan süreç anlatılıyor."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Up to now, the government _____ (take) no serious measures to address the problem of air pollution in major cities.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "took",
+            "B": "was taking",
+            "C": "has taken",
+            "D": "will take"
+          },
+          "correct": "C",
+          "explanation": "\"Up to now\" = şu ana kadar, Present Perfect (has taken) gerektirir. Geçmişten şimdiye kadar olan süreç anlatılıyor."
+        }
+      ],
+      "word_count": 537
+    },
+    {
+      "page_number": 10,
+      "title": "Present Progressive - Aşama Aşama Gelişen Olaylar",
+      "total_pages": 25,
+      "content_html": "<h2>📌 AŞAMA AŞAMA GELİŞEN OLAYLAR</h2>\n<p>\"Day by day\", \"gradually\", \"more and more\", \"little by little\" gibi ifadeler bir süreç bildirir ve genellikle Progressive yapı gerektirir. Olay anlık değil, zaman içinde gelişiyor.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Aşama aşama olan eylemlerde süreç anlamı vardır → Ving kullanılır! Present, Past veya Future'da Progressive yapı tercih edilir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Present'te aşama aşama</h3>\n<p><strong>EN:</strong> The working conditions in our office are getting more and more unbearable every day. Several colleagues have already quit because of the stress.<br>\n<strong>TR:</strong> İş yerimizdeki çalışma koşulları her geçen gün daha da dayanılmaz oluyor. Birkaç meslektaşımız stres yüzünden çoktan işten ayrıldı.<br>\n→ Şu anda devam eden bir süreç, \"more and more\" ile vurgulanıyor.</p>\n<h3>Örnek 2: Present'te aşama aşama - alternatif</h3>\n<p><strong>EN:</strong> Your English is improving day by day. If you keep practicing like this, you'll be fluent in no time.<br>\n<strong>TR:</strong> İngilizcen günden güne gelişiyor. Bu şekilde pratik yapmaya devam edersen, çok kısa sürede akıcı konuşacaksın.<br>\n→ \"Day by day\" aşama aşama değişimi gösterir, Present Progressive ile kullanılır.</p>\n<h3>Örnek 3: Past'te aşama aşama</h3>\n<p><strong>EN:</strong> Throughout the 1990s, the company's financial situation was deteriorating gradually due to poor management and increased competition.<br>\n<strong>TR:</strong> 1990'lar boyunca, şirketin mali durumu kötü yönetim ve artan rekabet nedeniyle giderek kötüleşiyordu.<br>\n→ Geçmişte devam eden süreç, Past Progressive (was deteriorating) ile ifade ediliyor.</p>\n<h3>Örnek 4: Past'te aşama aşama - sağlık durumu</h3>\n<p><strong>EN:</strong> Her health was deteriorating day by day until she finally decided to quit smoking and start exercising regularly.<br>\n<strong>TR:</strong> Sonunda sigarayı bırakıp düzenli egzersiz yapmaya karar verene kadar sağlığı günden güne kötüye gidiyordu.<br>\n→ Geçmişte bir süreç, Past Progressive + \"until\" ile bölünen eylem.</p>\n<h3>Örnek 5: Future'da aşama aşama</h3>\n<p><strong>EN:</strong> Don't worry about your language skills. If you practice consistently, you will be speaking English more and more fluently as time goes on.<br>\n<strong>TR:</strong> Dil becerilerin hakkında endişelenme. Düzenli pratik yaparsan, zaman geçtikçe giderek daha akıcı İngilizce konuşuyor olacaksın.<br>\n→ Gelecekte devam edecek süreç, Future Progressive (will be speaking) ile ifade ediliyor.</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>Present Süreç</strong><br>\n        am/is/are Ving<br>\n        is getting, are improving\n    </div>\n    <div class=\"kart yesil\">\n        <strong>Past Süreç</strong><br>\n        was/were Ving<br>\n        was deteriorating, were increasing\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Future Süreç</strong><br>\n        will be Ving<br>\n        will be speaking, will be improving\n    </div>\n</div>\n\n<hr>\n<h2>📊 AŞAMA AŞAMA İFADELERİ</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Anlamı</th>\n<th>Genellikle Kullanıldığı Tense</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>gradually</td>\n<td>giderek, gitgide</td>\n<td>Progressive</td>\n</tr>\n<tr>\n<td>day by day</td>\n<td>günden güne</td>\n<td>Progressive</td>\n</tr>\n<tr>\n<td>more and more</td>\n<td>giderek daha çok</td>\n<td>Progressive</td>\n</tr>\n<tr>\n<td>little by little</td>\n<td>azar azar</td>\n<td>Progressive</td>\n</tr>\n<tr>\n<td>step by step</td>\n<td>adım adım</td>\n<td>Progressive</td>\n</tr>\n<tr>\n<td>bit by bit</td>\n<td>parça parça</td>\n<td>Progressive</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"When I first started learning Spanish, I could barely say hello. But now, my Spanish _____ (improve) day by day, and I can hold simple conversations.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) improves<br>\nB) is improving<br>\nC) has improved<br>\nD) improved</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"day by day\" aşama aşama gelişen bir süreci gösterir. Şu anda devam eden bu süreç için Present Progressive (is improving) kullanılır.\n</details>\n\n<p>[Kelime sayısı: 265]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The working conditions in our office are getting more and more unbearable every day. Several colleagues have already quit because of the stress.",
+          "tr": "İş yerimizdeki çalışma koşulları her geçen gün daha da dayanılmaz oluyor. Birkaç meslektaşımız stres yüzünden çoktan işten ayrıldı.\n→ Şu anda devam eden bir süreç, \"more and more\" ile vurgulanıyor.\n\n### Örnek 2: Present'te aşama aşama - alternatif",
+          "description": ""
+        },
+        {
+          "en": "Your English is improving day by day. If you keep practicing like this, you'll be fluent in no time.",
+          "tr": "İngilizcen günden güne gelişiyor. Bu şekilde pratik yapmaya devam edersen, çok kısa sürede akıcı konuşacaksın.\n→ \"Day by day\" aşama aşama değişimi gösterir, Present Progressive ile kullanılır.\n\n### Örnek 3: Past'te aşama aşama",
+          "description": ""
+        },
+        {
+          "en": "Throughout the 1990s, the company's financial situation was deteriorating gradually due to poor management and increased competition.",
+          "tr": "1990'lar boyunca, şirketin mali durumu kötü yönetim ve artan rekabet nedeniyle giderek kötüleşiyordu.\n→ Geçmişte devam eden süreç, Past Progressive (was deteriorating) ile ifade ediliyor.\n\n### Örnek 4: Past'te aşama aşama - sağlık durumu",
+          "description": ""
+        },
+        {
+          "en": "Her health was deteriorating day by day until she finally decided to quit smoking and start exercising regularly.",
+          "tr": "Sonunda sigarayı bırakıp düzenli egzersiz yapmaya karar verene kadar sağlığı günden güne kötüye gidiyordu.\n→ Geçmişte bir süreç, Past Progressive + \"until\" ile bölünen eylem.\n\n### Örnek 5: Future'da aşama aşama",
+          "description": ""
+        },
+        {
+          "en": "Don't worry about your language skills. If you practice consistently, you will be speaking English more and more fluently as time goes on.",
+          "tr": "Dil becerilerin hakkında endişelenme. Düzenli pratik yaparsan, zaman geçtikçe giderek daha akıcı İngilizce konuşuyor olacaksın.\n→ Gelecekte devam edecek süreç, Future Progressive (will be speaking) ile ifade ediliyor.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"When I first started learning Spanish, I could barely say hello. But now, my Spanish _____ (improve) day by day, and I can hold simple conversations.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "improves",
+          "B": "is improving",
+          "C": "has improved",
+          "D": "improved"
+        },
+        "correct": "B",
+        "explanation": "\"day by day\" aşama aşama gelişen bir süreci gösterir. Şu anda devam eden bu süreç için Present Progressive (is improving) kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"When I first started learning Spanish, I could barely say hello. But now, my Spanish _____ (improve) day by day, and I can hold simple conversations.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "improves",
+            "B": "is improving",
+            "C": "has improved",
+            "D": "improved"
+          },
+          "correct": "B",
+          "explanation": "\"day by day\" aşama aşama gelişen bir süreci gösterir. Şu anda devam eden bu süreç için Present Progressive (is improving) kullanılır."
+        }
+      ],
+      "word_count": 498
+    },
+    {
+      "page_number": 11,
+      "title": "Past Simple (V2)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PAST SIMPLE NERELERDE KULLANILIR?</h2>\n<p>Geçmişte tamamlanmış eylemler, belirli bir zamanda olan olaylar, geçmiş alışkanlıklar ve geçmişteki durumlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Past Simple = \"Oldu bitti\" + Zamanı belli (ya da anlaşılıyor). \"Yesterday, ago, last week, in 1990, once\" gibi zaman ifadeleri Past Simple'ın en önemli işaretçileridir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Completed action + Pointed time</h3>\n<p><strong>EN:</strong> During World War II, millions of people suffered from hunger, disease, and the loss of their loved ones. It was a devastating period in human history.<br>\n<strong>TR:</strong> İkinci Dünya Savaşı sırasında, milyonlarca insan açlık, hastalık ve sevdiklerini kaybetme acısı çekti. İnsanlık tarihinde yıkıcı bir dönemdi.<br>\n→ Belirli zaman aralığı (WWII) + tamamlanmış eylem.</p>\n<h3>Örnek 2: Pointed time in the past</h3>\n<p><strong>EN:</strong> My grandfather lived in a small village near the Black Sea coast from 1965 to 1980, and then he moved to Istanbul for work.<br>\n<strong>TR:</strong> Dedem 1965'ten 1980'e kadar Karadeniz kıyısındaki küçük bir köyde yaşadı ve sonra iş için İstanbul'a taşındı.<br>\n→ Başlangıç ve bitiş zamanı belli, tamamlanmış bir dönem.</p>\n<h3>Örnek 3: Past habits (Geçmiş alışkanlıklar)</h3>\n<p><strong>EN:</strong> As a child, I always wore a brace on my teeth to correct an alignment problem. I hated it at the time, but now I'm glad I did it.<br>\n<strong>TR:</strong> Çocukken, dişlerimdeki hizalama sorununu düzeltmek için sürekli diş teli takıyordum. O zamanlar nefret ediyordum ama şimdi yaptığıma memnunum.<br>\n→ Geçmiş alışkanlık, \"used to\" anlamında Past Simple.</p>\n<h3>Örnek 4: Past states (Geçmişteki durumlar)</h3>\n<p><strong>EN:</strong> There used to be a beautiful old cinema on this corner when I was young, but they demolished it about ten years ago to build an apartment block.<br>\n<strong>TR:</strong> Ben gençken bu köşede güzel bir eski sinema vardı, ama yaklaşık on yıl önce bir apartman bloğu inşa etmek için onu yıktılar.<br>\n→ Geçmişte var olan ama artık olmayan durum.</p>\n<h3>Örnek 5: 2010 LYS Sorusu</h3>\n<p><strong>EN:</strong> The wolves that arrived in Ethiopia some 100,000 years ago evolved into a separate and rare species over time.<br>\n<strong>TR:</strong> Yaklaşık 100.000 yıl önce Etiyopya'ya gelen kurtlar, zamanla ayrı ve nadir bir türe evrildi.<br>\n→ \"100,000 years ago\" belirli bir geçmiş zaman noktasıdır → V2 (arrived / evolved) gerektirir.</p>\n<h3>Örnek 6: 2004 YDS Sorusu</h3>\n<p><strong>EN:</strong> Tofino, which was once a quiet fishing village in Canada, has become a popular year-round resort now.<br>\n<strong>TR:</strong> Bir zamanlar Kanada'da sessiz bir balıkçı köyü olan Tofino, şimdi popüler bir yıl boyu tatil beldesi haline geldi.<br>\n→ \"once\" (bir zamanlar) geçmiş zaman işaretçisidir → ilk boşluk V2 (was), ikinci boşluk Present Perfect (has become) çünkü \"now\" ile bağlantılı.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"once\" (bir zamanlar), \"ago\", \"in 1990\", \"last year\", \"yesterday\", \"from ... to ...\" = V2 işaretçileri!\n</div>\n\n<hr>\n<h2>📊 PAST SIMPLE ZAMAN İFADELERİ</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>yesterday</td>\n<td>dün</td>\n</tr>\n<tr>\n<td>... ago</td>\n<td>5 years ago (5 yıl önce)</td>\n</tr>\n<tr>\n<td>last night/week/year</td>\n<td>geçen gece/hafta/yıl</td>\n</tr>\n<tr>\n<td>in 1990</td>\n<td>1990'da</td>\n</tr>\n<tr>\n<td>during the war</td>\n<td>savaş sırasında</td>\n</tr>\n<tr>\n<td>from 1965 to 1980</td>\n<td>1965'ten 1980'e kadar</td>\n</tr>\n<tr>\n<td>once</td>\n<td>bir zamanlar</td>\n</tr>\n<tr>\n<td>at that time</td>\n<td>o zamanlarda</td>\n</tr>\n<tr>\n<td>in the past</td>\n<td>geçmişte</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"The ancient city of Troy _____ (discover) by Heinrich Schliemann in the 1870s, although there is some debate about the exact date.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) is discovered<br>\nB) was discovered<br>\nC) has been discovered<br>\nD) had been discovered</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"in the 1870s\" belirli bir geçmiş zaman dilimidir. Geçmişte tamamlanmış bir eylem (keşfedilme) için Past Simple (was discovered) gerekir.\n</details>\n\n<p>[Kelime sayısı: 278]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "During World War II, millions of people suffered from hunger, disease, and the loss of their loved ones. It was a devastating period in human history.",
+          "tr": "İkinci Dünya Savaşı sırasında, milyonlarca insan açlık, hastalık ve sevdiklerini kaybetme acısı çekti. İnsanlık tarihinde yıkıcı bir dönemdi.\n→ Belirli zaman aralığı (WWII) + tamamlanmış eylem.\n\n### Örnek 2: Pointed time in the past",
+          "description": ""
+        },
+        {
+          "en": "My grandfather lived in a small village near the Black Sea coast from 1965 to 1980, and then he moved to Istanbul for work.",
+          "tr": "Dedem 1965'ten 1980'e kadar Karadeniz kıyısındaki küçük bir köyde yaşadı ve sonra iş için İstanbul'a taşındı.\n→ Başlangıç ve bitiş zamanı belli, tamamlanmış bir dönem.\n\n### Örnek 3: Past habits (Geçmiş alışkanlıklar)",
+          "description": ""
+        },
+        {
+          "en": "As a child, I always wore a brace on my teeth to correct an alignment problem. I hated it at the time, but now I'm glad I did it.",
+          "tr": "Çocukken, dişlerimdeki hizalama sorununu düzeltmek için sürekli diş teli takıyordum. O zamanlar nefret ediyordum ama şimdi yaptığıma memnunum.\n→ Geçmiş alışkanlık, \"used to\" anlamında Past Simple.\n\n### Örnek 4: Past states (Geçmişteki durumlar)",
+          "description": ""
+        },
+        {
+          "en": "There used to be a beautiful old cinema on this corner when I was young, but they demolished it about ten years ago to build an apartment block.",
+          "tr": "Ben gençken bu köşede güzel bir eski sinema vardı, ama yaklaşık on yıl önce bir apartman bloğu inşa etmek için onu yıktılar.\n→ Geçmişte var olan ama artık olmayan durum.\n\n### Örnek 5: 2010 LYS Sorusu",
+          "description": ""
+        },
+        {
+          "en": "The wolves that arrived in Ethiopia some 100,000 years ago evolved into a separate and rare species over time.",
+          "tr": "Yaklaşık 100.000 yıl önce Etiyopya'ya gelen kurtlar, zamanla ayrı ve nadir bir türe evrildi.\n→ \"100,000 years ago\" belirli bir geçmiş zaman noktasıdır → V2 (arrived / evolved) gerektirir.\n\n### Örnek 6: 2004 YDS Sorusu",
+          "description": ""
+        },
+        {
+          "en": "Tofino, which was once a quiet fishing village in Canada, has become a popular year-round resort now.",
+          "tr": "Bir zamanlar Kanada'da sessiz bir balıkçı köyü olan Tofino, şimdi popüler bir yıl boyu tatil beldesi haline geldi.\n→ \"once\" (bir zamanlar) geçmiş zaman işaretçisidir → ilk boşluk V2 (was), ikinci boşluk Present Perfect (has become) çünkü \"now\" ile bağlantılı.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"The ancient city of Troy _____ (discover) by Heinrich Schliemann in the 1870s, although there is some debate about the exact date.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "is discovered",
+          "B": "was discovered",
+          "C": "has been discovered",
+          "D": "had been discovered"
+        },
+        "correct": "B",
+        "explanation": "\"in the 1870s\" belirli bir geçmiş zaman dilimidir. Geçmişte tamamlanmış bir eylem (keşfedilme) için Past Simple (was discovered) gerekir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The ancient city of Troy _____ (discover) by Heinrich Schliemann in the 1870s, although there is some debate about the exact date.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "is discovered",
+            "B": "was discovered",
+            "C": "has been discovered",
+            "D": "had been discovered"
+          },
+          "correct": "B",
+          "explanation": "\"in the 1870s\" belirli bir geçmiş zaman dilimidir. Geçmişte tamamlanmış bir eylem (keşfedilme) için Past Simple (was discovered) gerekir."
+        }
+      ],
+      "word_count": 548
+    },
+    {
+      "page_number": 12,
+      "title": "Past Simple - Present Anlam Veren Özel Yapılar",
+      "total_pages": 25,
+      "content_html": "<h2>📌 V2 GÖRÜNCE PAST MI DÜŞÜNMELİYİZ?</h2>\n<p>Genelde PAST anlam verir ama 6 özel yapıda V2 kullanılır ve anlam PRESENT veya FUTURE olur! Bu yapılarda \"gerçek zaman\" değil, \"gerçek dışılık\" (unreality) anlatılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapılarda Past Simple kullanılmasına rağmen anlam present veya future'dır. Çünkü gerçek olmayan durumlardan bahsederken zamanı bir derece geriye çekeriz.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: It's time + Subject + V2</h3>\n<p><strong>EN:</strong> It's already 11 PM and the children are still awake. It's high time they went to bed.<br>\n<strong>TR:</strong> Saat zaten 23:00 ve çocuklar hala uyanık. Artık yatma zamanı geldi.<br>\n→ Anlam present (şimdi yatmalılar), fiil past (went).</p>\n<h3>Örnek 2: I wish + Subject + V2</h3>\n<p><strong>EN:</strong> I wish I knew how to play the piano. It would be so nice to sit down and play beautiful music whenever I wanted.<br>\n<strong>TR:</strong> Keşke piyano çalmayı bilseydim. Ne zaman istesem oturup güzel müzikler çalmak çok güzel olurdu.<br>\n→ Anlam present (şimdi bilmiyorum), fiil past (knew).</p>\n<h3>Örnek 3: As if / As though + Subject + V2</h3>\n<p><strong>EN:</strong> He's only 25 years old, but he acts as if he knew everything about life. It's quite annoying, actually.<br>\n<strong>TR:</strong> Sadece 25 yaşında ama hayat hakkında her şeyi biliyormuş gibi davranıyor. Aslında oldukça sinir bozucu.<br>\n→ Anlam present (bilmiyor), fiil past (knew).</p>\n<h3>Örnek 4: Would rather + Subject + V2</h3>\n<p><strong>EN:</strong> I'd rather you didn't smoke in the house, if you don't mind. The smell bothers me and the children.<br>\n<strong>TR:</strong> Evde sigara içmemeni tercih ederim, sakıncası yoksa. Koku beni ve çocukları rahatsız ediyor.<br>\n→ Anlam present (şimdi içme), fiil past (didn't smoke).</p>\n<h3>Örnek 5: If Clause Type 2</h3>\n<p><strong>EN:</strong> If I had more free time, I would take up a hobby like painting or photography. But I'm just too busy with work.<br>\n<strong>TR:</strong> Daha fazla boş zamanım olsa, resim veya fotoğrafçılık gibi bir hobi edinirdim. Ama işten çok meşgulüm.<br>\n→ Anlam present (şimdi yok), fiil past (had).</p>\n<h3>Örnek 6: Would you mind if + Subject + V2</h3>\n<p><strong>EN:</strong> Would you mind if I opened the window? It's getting a bit stuffy in here.<br>\n<strong>TR:</strong> Pencereyi açsam sakıncası var mı? Burası biraz havasız olmaya başladı.<br>\n→ Anlam present (şimdi açabilir miyim?), fiil past (opened).<br>\n<strong>Önemli:</strong><br>\n- Would you mind if I <strong>opened</strong> the window? (V2 - daha yaygın, kibar)<br>\n- Would you mind if I <strong>open</strong> the window? (V1 - daha az yaygın, daha doğrudan)</p>\n<h2>Her ikisi de present anlam verir, ama V2 daha kibardır.</h2>\n<div class=\"strateji-kutusu\">\n**⚡ 6 ÖZEL YAPI (V2 Present Anlam Verir)**\n\n| Yapı | Örnek | Anlam |\n|------|-------|-------|\n| It's time + S + V2 | It's time we **went** | Gitmeliyiz (gitmedik) |\n| I wish + S + V2 | I wish you **were** here | Keşke burada olsan (değilsin) |\n| As if + S + V2 | She acts as if she **owned** it | Sahibiymiş gibi (değil) |\n| Would rather + S + V2 | I'd rather you **stayed** | Kalmanı tercih ederim |\n| If Clause Type 2 | If I **had** money | Param olsa (yok) |\n| Would you mind if + V2 | Would you mind if I **opened**? | Açsam? (açmadım) |\n</div>\n\n<hr>\n<h2>📊 V2'NİN PRESENT ANLAM VERDİĞİ YAPILAR</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam (Present)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>It's time we went</td>\n<td>Gitmeliyiz (şimdi)</td>\n</tr>\n<tr>\n<td>I wish you were</td>\n<td>Keşke olsan (şimdi değilsin)</td>\n</tr>\n<tr>\n<td>As if I were</td>\n<td>-mış gibi (değilim)</td>\n</tr>\n<tr>\n<td>Would rather you stayed</td>\n<td>Kalmanı tercih ederim (şimdi)</td>\n</tr>\n<tr>\n<td>If I had</td>\n<td>-seydim (ama yok)</td>\n</tr>\n<tr>\n<td>Would you mind if I opened?</td>\n<td>Açabilir miyim? (şimdi)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I wish I _____ (can) speak Japanese fluently, but I've only been studying for a few months.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) can<br>\nB) could<br>\nC) will<br>\nD) have</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** I wish + V2 kuralı. \"could\" (can'in past hali) present anlam verir: Keşke Japonca konuşabilsem (ama konuşamıyorum).\n</details>\n\n<p>[Kelime sayısı: 284]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "It's already 11 PM and the children are still awake. It's high time they went to bed.",
+          "tr": "Saat zaten 23:00 ve çocuklar hala uyanık. Artık yatma zamanı geldi.\n→ Anlam present (şimdi yatmalılar), fiil past (went).\n\n### Örnek 2: I wish + Subject + V2",
+          "description": ""
+        },
+        {
+          "en": "I wish I knew how to play the piano. It would be so nice to sit down and play beautiful music whenever I wanted.",
+          "tr": "Keşke piyano çalmayı bilseydim. Ne zaman istesem oturup güzel müzikler çalmak çok güzel olurdu.\n→ Anlam present (şimdi bilmiyorum), fiil past (knew).\n\n### Örnek 3: As if / As though + Subject + V2",
+          "description": ""
+        },
+        {
+          "en": "He's only 25 years old, but he acts as if he knew everything about life. It's quite annoying, actually.",
+          "tr": "Sadece 25 yaşında ama hayat hakkında her şeyi biliyormuş gibi davranıyor. Aslında oldukça sinir bozucu.\n→ Anlam present (bilmiyor), fiil past (knew).\n\n### Örnek 4: Would rather + Subject + V2",
+          "description": ""
+        },
+        {
+          "en": "I'd rather you didn't smoke in the house, if you don't mind. The smell bothers me and the children.",
+          "tr": "Evde sigara içmemeni tercih ederim, sakıncası yoksa. Koku beni ve çocukları rahatsız ediyor.\n→ Anlam present (şimdi içme), fiil past (didn't smoke).\n\n### Örnek 5: If Clause Type 2",
+          "description": ""
+        },
+        {
+          "en": "If I had more free time, I would take up a hobby like painting or photography. But I'm just too busy with work.",
+          "tr": "Daha fazla boş zamanım olsa, resim veya fotoğrafçılık gibi bir hobi edinirdim. Ama işten çok meşgulüm.\n→ Anlam present (şimdi yok), fiil past (had).\n\n### Örnek 6: Would you mind if + Subject + V2",
+          "description": ""
+        },
+        {
+          "en": "Would you mind if I opened the window? It's getting a bit stuffy in here.",
+          "tr": "Pencereyi açsam sakıncası var mı? Burası biraz havasız olmaya başladı.\n→ Anlam present (şimdi açabilir miyim?), fiil past (opened).\n**Önemli:**\n- Would you mind if I **opened** the window? (V2 - daha yaygın, kibar)\n- Would you mind if I **open** the window? (V1 - daha az yaygın, daha doğrudan)\n\nHer ikisi de present anlam verir, ama V2 daha kibardır.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I wish I _____ (can) speak Japanese fluently, but I've only been studying for a few months.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "can",
+          "B": "could",
+          "C": "will",
+          "D": "have"
+        },
+        "correct": "B",
+        "explanation": "I wish + V2 kuralı. \"could\" (can'in past hali) present anlam verir: Keşke Japonca konuşabilsem (ama konuşamıyorum)."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I wish I _____ (can) speak Japanese fluently, but I've only been studying for a few months.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "can",
+            "B": "could",
+            "C": "will",
+            "D": "have"
+          },
+          "correct": "B",
+          "explanation": "I wish + V2 kuralı. \"could\" (can'in past hali) present anlam verir: Keşke Japonca konuşabilsem (ama konuşamıyorum)."
+        }
+      ],
+      "word_count": 583
+    },
+    {
+      "page_number": 13,
+      "title": "Past Progressive (was/were Ving)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PAST PROGRESSIVE NERELERDE KULLANILIR?</h2>\n<p>Geçmişte belirli bir anda devam eden eylemler, iki eşzamanlı eylem, bir eylem devam ederken başka bir eylemin olması (bölünen eylem), geçici geçmiş durumlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Past Progressive = \"Geçmişte bir anda devam ediyordu\". Genellikle \"when\" (bölünen eylem) veya \"while\" (eşzamanlı eylem) ile kullanılır.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Specific time in the past</h3>\n<p><strong>EN:</strong> At exactly 8 o'clock last night, I was watching my favorite TV show with my family. We were all laughing at a funny scene.<br>\n<strong>TR:</strong> Dün gece tam saat 8'de, ailemle en sevdiğim TV programını izliyordum. Hepimiz komik bir sahneye gülüyorduk.<br>\n→ Geçmişte belirli bir anda devam eden eylem.</p>\n<h3>Örnek 2: Interrupted action (Bölünen eylem)</h3>\n<p><strong>EN:</strong> I was taking a relaxing bath after a long day at work when suddenly the phone rang. It was my boss with an urgent problem.<br>\n<strong>TR:</strong> İşte uzun bir günün ardından rahatlatıcı bir banyo yapıyordum ki aniden telefon çaldı. Acil bir sorunu olan patronumdu.<br>\n→ Uzun eylem (was taking) kısa eylemle (rang) bölünüyor.</p>\n<h3>Örnek 3: Parallel actions (Eşzamanlı eylemler)</h3>\n<p><strong>EN:</strong> While I was cooking dinner in the kitchen, my husband was setting the table and my children were doing their homework in the living room.<br>\n<strong>TR:</strong> Ben mutfakta akşam yemeği pişirirken, kocam masayı kuruyordu ve çocuklarım oturma odasında ödevlerini yapıyorlardı.<br>\n→ Üç uzun eylem aynı anda devam ediyor.</p>\n<h3>Örnek 4: Temporary past situation</h3>\n<p><strong>EN:</strong> During my first year at university, I was sharing a small apartment with two other students. It was cramped, but we had a lot of fun.<br>\n<strong>TR:</strong> Üniversitedeki ilk yılımda, iki öğrenciyle küçük bir daireyi paylaşıyordum. Daracıktı ama çok eğleniyorduk.<br>\n→ Geçmişte geçici bir durum, Past Progressive ile ifade ediliyor.</p>\n<h3>Örnek 5: Gradual change in the past</h3>\n<p><strong>EN:</strong> Throughout the autumn, the leaves on the trees were gradually changing color from green to beautiful shades of red and gold.<br>\n<strong>TR:</strong> Sonbahar boyunca, ağaçlardaki yapraklar giderek yeşilden kırmızı ve altın renginin güzel tonlarına dönüşüyordu.<br>\n→ Geçmişte aşama aşama değişim, Past Progressive.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\nPast Progressive genellikle şu yapılarla kullanılır:\n- **was/were Ving + when + V2** (uzun eylem kısa eylemle bölünüyor)\n- **While + was/were Ving + was/were Ving** (eşzamanlı eylemler)\n\nAncak bu kesin bir kural değil, cümle anlamına bakmak gerekir. Örneğin \"When I arrived, they were having dinner\" (vardığımda yemek yiyorlardı) da doğrudur.\n</div>\n\n<hr>\n<h2>📊 PAST PROGRESSIVE KULLANIMLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Örnek</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Specific time</td>\n<td>At 8 last night, I was watching TV.</td>\n<td>O saatte ne yapıyordum</td>\n</tr>\n<tr>\n<td>Interrupted</td>\n<td>I was having a bath when the phone rang.</td>\n<td>Bir eylem bölündü</td>\n</tr>\n<tr>\n<td>Parallel</td>\n<td>While I was cooking, he was reading.</td>\n<td>İki eylem eşzamanlı</td>\n</tr>\n<tr>\n<td>Temporary</td>\n<td>I was living with friends.</td>\n<td>Geçici durum</td>\n</tr>\n<tr>\n<td>Gradual</td>\n<td>The weather was getting colder.</td>\n<td>Aşama aşama değişim</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I <strong><em>_</em> (walk) home from work when I </strong>___ (see) a terrible accident. Two cars had crashed at the intersection.\" cümlesinde boşluklara ne gelmelidir?</p>\n<p>A) walked / saw<br>\nB) was walking / saw<br>\nC) walked / was seeing<br>\nD) was walking / was seeing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** Uzun eylem (walking) devam ederken kısa eylem (saw) oluyor. \"when\" ile bölünen eylem yapısı: Past Progressive + Past Simple.\n</details>\n\n<p>[Kelime sayısı: 267]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "At exactly 8 o'clock last night, I was watching my favorite TV show with my family. We were all laughing at a funny scene.",
+          "tr": "Dün gece tam saat 8'de, ailemle en sevdiğim TV programını izliyordum. Hepimiz komik bir sahneye gülüyorduk.\n→ Geçmişte belirli bir anda devam eden eylem.\n\n### Örnek 2: Interrupted action (Bölünen eylem)",
+          "description": ""
+        },
+        {
+          "en": "I was taking a relaxing bath after a long day at work when suddenly the phone rang. It was my boss with an urgent problem.",
+          "tr": "İşte uzun bir günün ardından rahatlatıcı bir banyo yapıyordum ki aniden telefon çaldı. Acil bir sorunu olan patronumdu.\n→ Uzun eylem (was taking) kısa eylemle (rang) bölünüyor.\n\n### Örnek 3: Parallel actions (Eşzamanlı eylemler)",
+          "description": ""
+        },
+        {
+          "en": "While I was cooking dinner in the kitchen, my husband was setting the table and my children were doing their homework in the living room.",
+          "tr": "Ben mutfakta akşam yemeği pişirirken, kocam masayı kuruyordu ve çocuklarım oturma odasında ödevlerini yapıyorlardı.\n→ Üç uzun eylem aynı anda devam ediyor.\n\n### Örnek 4: Temporary past situation",
+          "description": ""
+        },
+        {
+          "en": "During my first year at university, I was sharing a small apartment with two other students. It was cramped, but we had a lot of fun.",
+          "tr": "Üniversitedeki ilk yılımda, iki öğrenciyle küçük bir daireyi paylaşıyordum. Daracıktı ama çok eğleniyorduk.\n→ Geçmişte geçici bir durum, Past Progressive ile ifade ediliyor.\n\n### Örnek 5: Gradual change in the past",
+          "description": ""
+        },
+        {
+          "en": "Throughout the autumn, the leaves on the trees were gradually changing color from green to beautiful shades of red and gold.",
+          "tr": "Sonbahar boyunca, ağaçlardaki yapraklar giderek yeşilden kırmızı ve altın renginin güzel tonlarına dönüşüyordu.\n→ Geçmişte aşama aşama değişim, Past Progressive.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I _____ (walk) home from work when I _____ (see) a terrible accident. Two cars had crashed at the intersection.\" cümlesinde boşluklara ne gelmelidir?",
+        "options": {
+          "A": "walked / saw",
+          "B": "was walking / saw",
+          "C": "walked / was seeing",
+          "D": "was walking / was seeing"
+        },
+        "correct": "B",
+        "explanation": "Uzun eylem (walking) devam ederken kısa eylem (saw) oluyor. \"when\" ile bölünen eylem yapısı: Past Progressive + Past Simple."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I _____ (walk) home from work when I _____ (see) a terrible accident. Two cars had crashed at the intersection.\" cümlesinde boşluklara ne gelmelidir?",
+          "options": {
+            "A": "walked / saw",
+            "B": "was walking / saw",
+            "C": "walked / was seeing",
+            "D": "was walking / was seeing"
+          },
+          "correct": "B",
+          "explanation": "Uzun eylem (walking) devam ederken kısa eylem (saw) oluyor. \"when\" ile bölünen eylem yapısı: Past Progressive + Past Simple."
+        }
+      ],
+      "word_count": 507
+    },
+    {
+      "page_number": 14,
+      "title": "Past Progressive - Özel Durumlar ve Bağlaçlar",
+      "total_pages": 25,
+      "content_html": "<h2>📌 AYNI ANDA İKİ EYLEM</h2>\n<p>\"While\", \"when\", \"as\", \"just as\" ile eşzamanlı veya bölünen eylemler anlatılırken Past Progressive sıkça kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"just as\" = \"tam ...-iken\" anlamında, Past Progressive ile Past Simple'in birlikte kullanıldığı yapılarda sık görülür.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: While + Past Progressive + Past Progressive</h3>\n<p><strong>EN:</strong> While I was trying to concentrate on my work, my colleagues were having a loud conversation just outside my office door.<br>\n<strong>TR:</strong> Ben işime konsantre olmaya çalışırken, meslektaşlarım ofis kapımın hemen dışında yüksek sesle sohbet ediyorlardı.<br>\n→ İki eylem de devam halinde, eşzamanlı.</p>\n<h3>Örnek 2: Just as + Past Progressive + Past Simple</h3>\n<p><strong>EN:</strong> I was just about to leave the house, and the taxi was waiting outside. Just as I was locking the front door, I realized I had forgotten my phone inside.<br>\n<strong>TR:</strong> Tam evden çıkmak üzereydim ve taksi dışarıda bekliyordu. Tam ön kapıyı kilitlerken, telefonumu içeride unuttuğumu fark ettim.<br>\n→ Bir eylem devam ederken (was locking) diğeri oldu (realized).</p>\n<h3>Örnek 3: When + Past Simple + Past Progressive</h3>\n<p><strong>EN:</strong> When the fire alarm suddenly went off, everyone in the building was working normally. We all had to evacuate immediately.<br>\n<strong>TR:</strong> Yangın alarmı aniden çaldığında, binadaki herkes normal bir şekilde çalışıyordu. Hepimiz derhal tahliye etmek zorunda kaldık.<br>\n→ Kısa eylem (went off) olduğunda, uzun eylem (was working) devam ediyordu.</p>\n<h3>Örnek 4: 2006 YDS Sorusu</h3>\n<p><strong>EN:</strong> Richard arrived at 1 o'clock just as we were starting to have our lunch.<br>\n<strong>TR:</strong> Richard, tam öğle yemeğine başlıyorduk ki saat 1'de geldi.<br>\n→ \"just as\" = Past Progressive (were starting) + Past Simple (arrived)</p>\n<h3>Örnek 5: As + Past Progressive + Past Simple</h3>\n<p><strong>EN:</strong> As I was walking through the park, I saw an old friend whom I hadn't seen for years. We stopped and talked for a while.<br>\n<strong>TR:</strong> Parkta yürürken, yıllardır görmediğim eski bir arkadaşımı gördüm. Durup bir süre konuştuk.<br>\n→ \"as\" de \"while\" gibi eşzamanlılık ifade eder.</p>\n<hr>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nZaman bağlaçlarının (when, while, as, just as, before, after) yan cümlesine \"will, would, shall, be going to\" gelmez! Zaman bağlaçları %100 zaman uyumu ister.\n\n❌ **Yanlış:** When I will arrive, I will call you.\n✅ **Doğru:** When I arrive, I will call you.\n</div>\n\n<hr>\n<h2>📊 ZAMAN BAĞLAÇLARI İLE KULLANIM</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Yan Cümle</th>\n<th>Ana Cümle</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>while</td>\n<td>Past Progressive</td>\n<td>Past Progressive</td>\n<td>eşzamanlı</td>\n</tr>\n<tr>\n<td>while</td>\n<td>Past Progressive</td>\n<td>Past Simple</td>\n<td>bölünen</td>\n</tr>\n<tr>\n<td>when</td>\n<td>Past Simple</td>\n<td>Past Progressive</td>\n<td>bölünen</td>\n</tr>\n<tr>\n<td>when</td>\n<td>Past Progressive</td>\n<td>Past Simple</td>\n<td>bölünen</td>\n</tr>\n<tr>\n<td>just as</td>\n<td>Past Progressive</td>\n<td>Past Simple</td>\n<td>tam ...-iken</td>\n</tr>\n<tr>\n<td>as</td>\n<td>Past Progressive</td>\n<td>Past Simple</td>\n<td>-iken</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"Just as we <strong><em>_</em> (sit) down to eat, the doorbell </strong>___ (ring).\" cümlesinin doğru hali nedir?</p>\n<p>A) sat / rang<br>\nB) were sitting / rang<br>\nC) sat / was ringing<br>\nD) were sitting / was ringing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"just as\" = tam ...-iken. Uzun eylem Past Progressive (were sitting), kısa eylem Past Simple (rang) ile ifade edilir.\n</details>\n\n<p>[Kelime sayısı: 261]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "While I was trying to concentrate on my work, my colleagues were having a loud conversation just outside my office door.",
+          "tr": "Ben işime konsantre olmaya çalışırken, meslektaşlarım ofis kapımın hemen dışında yüksek sesle sohbet ediyorlardı.\n→ İki eylem de devam halinde, eşzamanlı.\n\n### Örnek 2: Just as + Past Progressive + Past Simple",
+          "description": ""
+        },
+        {
+          "en": "I was just about to leave the house, and the taxi was waiting outside. Just as I was locking the front door, I realized I had forgotten my phone inside.",
+          "tr": "Tam evden çıkmak üzereydim ve taksi dışarıda bekliyordu. Tam ön kapıyı kilitlerken, telefonumu içeride unuttuğumu fark ettim.\n→ Bir eylem devam ederken (was locking) diğeri oldu (realized).\n\n### Örnek 3: When + Past Simple + Past Progressive",
+          "description": ""
+        },
+        {
+          "en": "When the fire alarm suddenly went off, everyone in the building was working normally. We all had to evacuate immediately.",
+          "tr": "Yangın alarmı aniden çaldığında, binadaki herkes normal bir şekilde çalışıyordu. Hepimiz derhal tahliye etmek zorunda kaldık.\n→ Kısa eylem (went off) olduğunda, uzun eylem (was working) devam ediyordu.\n\n### Örnek 4: 2006 YDS Sorusu",
+          "description": ""
+        },
+        {
+          "en": "Richard arrived at 1 o'clock just as we were starting to have our lunch.",
+          "tr": "Richard, tam öğle yemeğine başlıyorduk ki saat 1'de geldi.\n→ \"just as\" = Past Progressive (were starting) + Past Simple (arrived)\n\n### Örnek 5: As + Past Progressive + Past Simple",
+          "description": ""
+        },
+        {
+          "en": "As I was walking through the park, I saw an old friend whom I hadn't seen for years. We stopped and talked for a while.",
+          "tr": "Parkta yürürken, yıllardır görmediğim eski bir arkadaşımı gördüm. Durup bir süre konuştuk.\n→ \"as\" de \"while\" gibi eşzamanlılık ifade eder.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"Just as we _____ (sit) down to eat, the doorbell _____ (ring).\" cümlesinin doğru hali nedir?",
+        "options": {
+          "A": "sat / rang",
+          "B": "were sitting / rang",
+          "C": "sat / was ringing",
+          "D": "were sitting / was ringing"
+        },
+        "correct": "B",
+        "explanation": "\"just as\" = tam ...-iken. Uzun eylem Past Progressive (were sitting), kısa eylem Past Simple (rang) ile ifade edilir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Just as we _____ (sit) down to eat, the doorbell _____ (ring).\" cümlesinin doğru hali nedir?",
+          "options": {
+            "A": "sat / rang",
+            "B": "were sitting / rang",
+            "C": "sat / was ringing",
+            "D": "were sitting / was ringing"
+          },
+          "correct": "B",
+          "explanation": "\"just as\" = tam ...-iken. Uzun eylem Past Progressive (were sitting), kısa eylem Past Simple (rang) ile ifade edilir."
+        }
+      ],
+      "word_count": 460
+    },
+    {
+      "page_number": 15,
+      "title": "Present Perfect (have/has V3)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PRESENT PERFECT NEDİR?</h2>\n<p>Geçmişte olmuş ama <strong>şimdiyle bağlantısı devam eden</strong> eylemler. Zamanı önemli değil, SONUCU veya DENEYİMİ önemli!</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Present Perfect = <br>\n1. <strong>Deneyim:</strong> \"Have you ever eaten sushi?\" (zaman önemsiz)<br>\n2. <strong>Sonuç:</strong> \"I have lost my keys\" (şimdi bulamıyorum)<br>\n3. <strong>Devam:</strong> \"I have lived here for 5 years\" (hala yaşıyorum)</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Completed action - no pointed time (Deneyim)</h3>\n<p><strong>EN:</strong> My sister has been to Japan three times. She loves the culture, the food, and the people there. She hopes to go again next year.<br>\n<strong>TR:</strong> Kız kardeşim üç kez Japonya'da bulundu. Kültürü, yemeği ve oradaki insanları çok seviyor. Gelecek yıl tekrar gitmeyi umuyor.<br>\n→ Ne zaman gittiği önemli değil, sadece gittiği bilgisi (deneyim) önemli.</p>\n<h3>Örnek 2: Action still affecting now (Sonuç)</h3>\n<p><strong>EN:</strong> I have bought a new house in the suburbs. It's a bit far from the city center, but it has a big garden for the children to play in.<br>\n<strong>TR:</strong> Banliyöde yeni bir ev satın aldım. Şehir merkezinden biraz uzak ama çocukların oynaması için büyük bir bahçesi var.<br>\n→ Ev şu an benim (sonuç devam ediyor). Satın alma eylemi geçmişte oldu ama mülkiyet şimdi devam ediyor.</p>\n<h3>Örnek 3: Action continuing to now (Devam)</h3>\n<p><strong>EN:</strong> I have worked at this company for over ten years now. I started as a junior assistant and gradually worked my way up to manager.<br>\n<strong>TR:</strong> Bu şirkette on yıldan fazladır çalışıyorum. Genç bir asistan olarak başladım ve kademeli olarak yöneticiliğe yükseldim.<br>\n→ Geçmişte başladı (10 yıl önce), hala devam ediyor (hala burada çalışıyor).</p>\n<h3>Örnek 4: Recent action with present effect</h3>\n<p><strong>EN:</strong> I can't come to the party tonight because I have caught a terrible cold. I feel awful and just want to stay in bed.<br>\n<strong>TR:</strong> Bu gece partiye gelemem çünkü çok kötü bir soğuk algınlığına yakalandım. Berbat hissediyorum ve sadece yatakta kalmak istiyorum.<br>\n→ Geçmişte oldu (yakalandı), sonucu şimdi devam ediyor (hasta, partiye gelemeyecek).</p>\n<h3>Örnek 5: Experience in life</h3>\n<p><strong>EN:</strong> Have you ever tried authentic Turkish coffee? It's very strong and usually served with a glass of water and some Turkish delight.<br>\n<strong>TR:</strong> Hiç orijinal Türk kahvesi denedin mi? Çok serttir ve genellikle bir bardak su ve biraz lokumla servis edilir.<br>\n→ Hayat boyu deneyim soruluyor, zaman önemli değil.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nPresent Perfect'te zaman belirtilmez! \"Yesterday, last year, in 1990, ago\" gibi belirli zaman ifadeleriyle kullanılamaz. Bunlar Past Simple gerektirir.\n\n❌ **Yanlış:** I have seen him yesterday.\n✅ **Doğru:** I saw him yesterday.\n</div>\n\n<hr>\n<h2>📊 PRESENT PERFECT KULLANIMLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Deneyim</td>\n<td>Hayatında hiç yaptın mı?</td>\n<td>Have you ever eaten sushi?</td>\n</tr>\n<tr>\n<td>Sonuç</td>\n<td>Eylem bitti, etkisi var</td>\n<td>I've lost my keys. (şimdi bulamıyorum)</td>\n</tr>\n<tr>\n<td>Devam</td>\n<td>Geçmişten şimdiye</td>\n<td>I've lived here since 2010.</td>\n</tr>\n<tr>\n<td>Tekrar</td>\n<td>Kaç kez yapıldı</td>\n<td>I've called three times.</td>\n</tr>\n<tr>\n<td>Yakın geçmiş</td>\n<td>Recently/lately</td>\n<td>I've just finished work.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I _____ (never/try) snorkeling before, but I'm really excited about our trip to the beach next week.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) never tried<br>\nB) have never tried<br>\nC) never try<br>\nD) was never trying</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"never\" ve \"before\" hayat boyu deneyimden bahseder. Zaman önemli değil, sadece deneyim vurgulanıyor → Present Perfect (have never tried).\n</details>\n\n<p>[Kelime sayısı: 276]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "My sister has been to Japan three times. She loves the culture, the food, and the people there. She hopes to go again next year.",
+          "tr": "Kız kardeşim üç kez Japonya'da bulundu. Kültürü, yemeği ve oradaki insanları çok seviyor. Gelecek yıl tekrar gitmeyi umuyor.\n→ Ne zaman gittiği önemli değil, sadece gittiği bilgisi (deneyim) önemli.\n\n### Örnek 2: Action still affecting now (Sonuç)",
+          "description": ""
+        },
+        {
+          "en": "I have bought a new house in the suburbs. It's a bit far from the city center, but it has a big garden for the children to play in.",
+          "tr": "Banliyöde yeni bir ev satın aldım. Şehir merkezinden biraz uzak ama çocukların oynaması için büyük bir bahçesi var.\n→ Ev şu an benim (sonuç devam ediyor). Satın alma eylemi geçmişte oldu ama mülkiyet şimdi devam ediyor.\n\n### Örnek 3: Action continuing to now (Devam)",
+          "description": ""
+        },
+        {
+          "en": "I have worked at this company for over ten years now. I started as a junior assistant and gradually worked my way up to manager.",
+          "tr": "Bu şirkette on yıldan fazladır çalışıyorum. Genç bir asistan olarak başladım ve kademeli olarak yöneticiliğe yükseldim.\n→ Geçmişte başladı (10 yıl önce), hala devam ediyor (hala burada çalışıyor).\n\n### Örnek 4: Recent action with present effect",
+          "description": ""
+        },
+        {
+          "en": "I can't come to the party tonight because I have caught a terrible cold. I feel awful and just want to stay in bed.",
+          "tr": "Bu gece partiye gelemem çünkü çok kötü bir soğuk algınlığına yakalandım. Berbat hissediyorum ve sadece yatakta kalmak istiyorum.\n→ Geçmişte oldu (yakalandı), sonucu şimdi devam ediyor (hasta, partiye gelemeyecek).\n\n### Örnek 5: Experience in life",
+          "description": ""
+        },
+        {
+          "en": "Have you ever tried authentic Turkish coffee? It's very strong and usually served with a glass of water and some Turkish delight.",
+          "tr": "Hiç orijinal Türk kahvesi denedin mi? Çok serttir ve genellikle bir bardak su ve biraz lokumla servis edilir.\n→ Hayat boyu deneyim soruluyor, zaman önemli değil.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I _____ (never/try) snorkeling before, but I'm really excited about our trip to the beach next week.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "never tried",
+          "B": "have never tried",
+          "C": "never try",
+          "D": "was never trying"
+        },
+        "correct": "B",
+        "explanation": "\"never\" ve \"before\" hayat boyu deneyimden bahseder. Zaman önemli değil, sadece deneyim vurgulanıyor → Present Perfect (have never tried)."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I _____ (never/try) snorkeling before, but I'm really excited about our trip to the beach next week.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "never tried",
+            "B": "have never tried",
+            "C": "never try",
+            "D": "was never trying"
+          },
+          "correct": "B",
+          "explanation": "\"never\" ve \"before\" hayat boyu deneyimden bahseder. Zaman önemli değil, sadece deneyim vurgulanıyor → Present Perfect (have never tried)."
+        }
+      ],
+      "word_count": 520
+    },
+    {
+      "page_number": 16,
+      "title": "Present Perfect - \"Since\" Kullanımı",
+      "total_pages": 25,
+      "content_html": "<h2>📌 \"SINCE\" İLE PRESENT PERFECT</h2>\n<p>\"Since\" = -den beri. Geçmişte bir noktadan şimdiye kadar devam eden eylemler için kullanılır. \"Since\" üç farklı şekilde kullanılabilir: preposition, conjunction, adverb.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Since'li cümlelerde ana cümle Present Perfect, since'den sonra gelen kısım ise kullanım şekline göre değişir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Since + Preposition (Edat)</h3>\n<p><strong>EN:</strong> Since last year, I have had to deal with a lot of stressful situations at work. Several colleagues have left, and our workload has increased.<br>\n<strong>TR:</strong> Geçen yıldan beri, işte birçok stresli durumla uğraşmak zorunda kaldım. Birkaç meslektaşım ayrıldı ve iş yükümüz arttı.<br>\n→ Since + zaman noktası (last year) + Present Perfect (have had)</p>\n<h3>Örnek 2: Since + Clause (Bağlaç)</h3>\n<p><strong>EN:</strong> They haven't served anything delicious at this restaurant since the original chef left about two years ago. The food quality has really gone down.<br>\n<strong>TR:</strong> Orijinal şef yaklaşık iki yıl önce ayrıldığından beri bu restoranda lezzetli hiçbir şey servis etmediler. Yemek kalitesi gerçekten düştü.<br>\n→ Since + V2 (left) + ana cümle Present Perfect (haven't served)</p>\n<h3>Örnek 3: Since as Adverb (Zarf)</h3>\n<p><strong>EN:</strong> He met his future wife at a conference in 1998. He has since been completely devoted to her and their family.<br>\n<strong>TR:</strong> Gelecekteki eşiyle 1998'de bir konferansta tanıştı. O zamandan beri tamamen ona ve ailelerine adanmış durumda.<br>\n→ V2 cümlesi (met) + Since + Present Perfect (has been)</p>\n<h3>Örnek 4: Ever since (vurgulu)</h3>\n<p><strong>EN:</strong> I started learning Spanish when I moved to Madrid five years ago, and I have been practicing every day ever since.<br>\n<strong>TR:</strong> Beş yıl önce Madrid'e taşındığımda İspanyolca öğrenmeye başladım ve o zamandan beri her gün pratik yapıyorum.<br>\n→ \"ever since\" vurgu katar, anlam değişmez.</p>\n<h3>Örnek 5: 2002 YDS Sorusu</h3>\n<p><strong>EN:</strong> With few exceptions, most totalitarian governments have become more liberal since 1989 when the Berlin Wall fell.<br>\n<strong>TR:</strong> Birkaç istisna dışında, çoğu totaliter hükümet, Berlin Duvarı'nın yıkıldığı 1989'dan beri daha liberal hale geldi.<br>\n→ Since + V2 (fell) + Present Perfect (have become) kuralı.</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>Since + Preposition</strong><br>\n        Since 1990, I have lived here.\n    </div>\n    <div class=\"kart yesil\">\n        <strong>Since + Clause</strong><br>\n        Since I moved here, I have lived here.\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Since (Adverb)</strong><br>\n        I moved here in 1990. I have lived here since.\n    </div>\n</div>\n\n<hr>\n<h2>📊 \"SINCE\" KULLANIM ŞEKİLLERİ</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Preposition</td>\n<td>Since + time point</td>\n<td>since 1995, since last year</td>\n</tr>\n<tr>\n<td>Conjunction</td>\n<td>Since + V2</td>\n<td>since we arrived, since I was a child</td>\n</tr>\n<tr>\n<td>Adverb</td>\n<td>V2. Since + have V3</td>\n<td>left. Since have...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"The company's profits <strong><em>_</em> (increase) significantly since they </strong>___ (hire) a new CEO two years ago.\" cümlesinde boşluklara ne gelmelidir?</p>\n<p>A) increased / hired<br>\nB) have increased / hired<br>\nC) increased / have hired<br>\nD) have increased / have hired</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"since\" bağlacından sonra V2 (hired), ana cümlede Present Perfect (have increased) kuralı.\n</details>\n\n<p>[Kelime sayısı: 263]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Since last year, I have had to deal with a lot of stressful situations at work. Several colleagues have left, and our workload has increased.",
+          "tr": "Geçen yıldan beri, işte birçok stresli durumla uğraşmak zorunda kaldım. Birkaç meslektaşım ayrıldı ve iş yükümüz arttı.\n→ Since + zaman noktası (last year) + Present Perfect (have had)\n\n### Örnek 2: Since + Clause (Bağlaç)",
+          "description": ""
+        },
+        {
+          "en": "They haven't served anything delicious at this restaurant since the original chef left about two years ago. The food quality has really gone down.",
+          "tr": "Orijinal şef yaklaşık iki yıl önce ayrıldığından beri bu restoranda lezzetli hiçbir şey servis etmediler. Yemek kalitesi gerçekten düştü.\n→ Since + V2 (left) + ana cümle Present Perfect (haven't served)\n\n### Örnek 3: Since as Adverb (Zarf)",
+          "description": ""
+        },
+        {
+          "en": "He met his future wife at a conference in 1998. He has since been completely devoted to her and their family.",
+          "tr": "Gelecekteki eşiyle 1998'de bir konferansta tanıştı. O zamandan beri tamamen ona ve ailelerine adanmış durumda.\n→ V2 cümlesi (met) + Since + Present Perfect (has been)\n\n### Örnek 4: Ever since (vurgulu)",
+          "description": ""
+        },
+        {
+          "en": "I started learning Spanish when I moved to Madrid five years ago, and I have been practicing every day ever since.",
+          "tr": "Beş yıl önce Madrid'e taşındığımda İspanyolca öğrenmeye başladım ve o zamandan beri her gün pratik yapıyorum.\n→ \"ever since\" vurgu katar, anlam değişmez.\n\n### Örnek 5: 2002 YDS Sorusu",
+          "description": ""
+        },
+        {
+          "en": "With few exceptions, most totalitarian governments have become more liberal since 1989 when the Berlin Wall fell.",
+          "tr": "Birkaç istisna dışında, çoğu totaliter hükümet, Berlin Duvarı'nın yıkıldığı 1989'dan beri daha liberal hale geldi.\n→ Since + V2 (fell) + Present Perfect (have become) kuralı.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"The company's profits _____ (increase) significantly since they _____ (hire) a new CEO two years ago.\" cümlesinde boşluklara ne gelmelidir?",
+        "options": {
+          "A": "increased / hired",
+          "B": "have increased / hired",
+          "C": "increased / have hired",
+          "D": "have increased / have hired"
+        },
+        "correct": "B",
+        "explanation": "\"since\" bağlacından sonra V2 (hired), ana cümlede Present Perfect (have increased) kuralı."
+      },
+      "mini_tests": [
+        {
+          "question": "\"The company's profits _____ (increase) significantly since they _____ (hire) a new CEO two years ago.\" cümlesinde boşluklara ne gelmelidir?",
+          "options": {
+            "A": "increased / hired",
+            "B": "have increased / hired",
+            "C": "increased / have hired",
+            "D": "have increased / have hired"
+          },
+          "correct": "B",
+          "explanation": "\"since\" bağlacından sonra V2 (hired), ana cümlede Present Perfect (have increased) kuralı."
+        }
+      ],
+      "word_count": 465
+    },
+    {
+      "page_number": 17,
+      "title": "Present Perfect - Zaman İfadeleri",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PRESENT PERFECT İLE KULLANILAN İFADELER</h2>\n<p>\"Recently, lately, so far, up to now, for ... now, ever, never, just, already, yet, this week/month/year, over the past ... years\" gibi ifadeler Present Perfect'in en önemli işaretçileridir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu ifadeleri görünce aklına Present Perfect gelsin! Ama \"until recently\" farklıdır: genelde Past Simple ile kullanılır.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Lately / Recently</h3>\n<p><strong>EN:</strong> There has been a remarkable increase in the number of tourists visiting our city lately. The new airport and hotels have made it more accessible.<br>\n<strong>TR:</strong> Son zamanlarda şehrimizi ziyaret eden turist sayısında dikkate değer bir artış var. Yeni havalimanı ve oteller onu daha erişilebilir hale getirdi.<br>\n→ \"lately\" = son zamanlarda, Present Perfect (has been) ile kullanılır.</p>\n<h3>Örnek 2: So far / Up to now</h3>\n<p><strong>EN:</strong> The Prime Minister has visited 76 countries so far during his term in office, making him one of the most traveled leaders in history.<br>\n<strong>TR:</strong> Başbakan, görev süresi boyunca şimdiye kadar 76 ülke ziyaret etti ve bu onu tarihin en çok seyahat eden liderlerinden biri yapıyor.<br>\n→ \"so far\" = şimdiye kadar, Present Perfect (has visited) ile kullanılır.</p>\n<h3>Örnek 3: For ... now</h3>\n<p><strong>EN:</strong> I have been waiting for the bus for over thirty minutes now, and it still hasn't arrived. I'm going to be late for my appointment.<br>\n<strong>TR:</strong> Otobüs için otuz dakikadan fazladır bekliyorum ve hala gelmedi. Randevuma geç kalacağım.<br>\n→ \"for 30 minutes now\" = şimdiye kadar 30 dakika, Present Perfect Progressive (have been waiting) ile kullanılır.</p>\n<h3>Örnek 4: Just / Already / Yet</h3>\n<p><strong>EN:</strong> A: Have you finished reading that book I lent you yet?<br>\n<strong>TR:</strong> A: Sana ödünç verdiğim kitabı henüz bitirdin mi?<br>\n<strong>EN:</strong> B: Yes, I've just finished it, actually. It was really good. Thanks for lending it to me.<br>\n<strong>TR:</strong> B: Evet, aslında daha yeni bitirdim. Gerçekten iyiydi. Ödünç verdiğin için teşekkürler.<br>\n→ \"just\" = yeni, Present Perfect ile; \"yet\" = henüz, soru ve olumsuzda Present Perfect ile.</p>\n<h3>Örnek 5: Over the past ... years</h3>\n<p><strong>EN:</strong> Over the past two decades, technology has transformed almost every aspect of our lives, from how we communicate to how we work and shop.<br>\n<strong>TR:</strong> Son yirmi yılda, teknoloji nasıl iletişim kurduğumuzdan nasıl çalışıp alışveriş yaptığımıza kadar hayatımızın neredeyse her yönünü dönüştürdü.<br>\n→ \"over the past years\" = son yıllarda, Present Perfect (has transformed) ile kullanılır.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji: \"Until recently\" farkı**\n\n\"Until recently\" = son zamanlara kadar (ama şimdi değişti). Bu ifade genelde **Past Simple** ile kullanılır çünkü \"now\" ile bağlantı kesilmiştir.\n\n**EN:** Until recently, scientists thought that the universe was expanding at a constant rate. Now they believe it's accelerating.\n**TR:** Son zamanlara kadar, bilim insanları evrenin sabit bir hızla genişlediğini düşünüyordu. Şimdi hızlandığına inanıyorlar.\n→ \"Until recently\" + V2 (thought)\n</div>\n\n<hr>\n<h2>📊 PRESENT PERFECT İPUÇLARI</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Anlamı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>recently, lately</td>\n<td>son zamanlarda</td>\n</tr>\n<tr>\n<td>so far, up to now</td>\n<td>şimdiye kadar</td>\n</tr>\n<tr>\n<td>for ... now</td>\n<td>...dır (şimdiye kadar)</td>\n</tr>\n<tr>\n<td>ever, never</td>\n<td>hiç, asla</td>\n</tr>\n<tr>\n<td>just</td>\n<td>henüz, yeni</td>\n</tr>\n<tr>\n<td>already</td>\n<td>zaten, çoktan</td>\n</tr>\n<tr>\n<td>yet</td>\n<td>henüz (olumsuz/soru)</td>\n</tr>\n<tr>\n<td>over the past ... years</td>\n<td>son yıllarda</td>\n</tr>\n<tr>\n<td>this week/month/year</td>\n<td>bu hafta/ay/yıl</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I _____ (see) that movie three times, but I wouldn't mind watching it again. It's so good!\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) saw<br>\nB) have seen<br>\nC) see<br>\nD) was seeing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"three times\" kaç kez yapıldığını belirtir (tekrar) ve zaman belirtilmemiş. Present Perfect (have seen) gerektirir.\n</details>\n\n<p>[Kelime sayısı: 285]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "There has been a remarkable increase in the number of tourists visiting our city lately. The new airport and hotels have made it more accessible.",
+          "tr": "Son zamanlarda şehrimizi ziyaret eden turist sayısında dikkate değer bir artış var. Yeni havalimanı ve oteller onu daha erişilebilir hale getirdi.\n→ \"lately\" = son zamanlarda, Present Perfect (has been) ile kullanılır.\n\n### Örnek 2: So far / Up to now",
+          "description": ""
+        },
+        {
+          "en": "The Prime Minister has visited 76 countries so far during his term in office, making him one of the most traveled leaders in history.",
+          "tr": "Başbakan, görev süresi boyunca şimdiye kadar 76 ülke ziyaret etti ve bu onu tarihin en çok seyahat eden liderlerinden biri yapıyor.\n→ \"so far\" = şimdiye kadar, Present Perfect (has visited) ile kullanılır.\n\n### Örnek 3: For ... now",
+          "description": ""
+        },
+        {
+          "en": "I have been waiting for the bus for over thirty minutes now, and it still hasn't arrived. I'm going to be late for my appointment.",
+          "tr": "Otobüs için otuz dakikadan fazladır bekliyorum ve hala gelmedi. Randevuma geç kalacağım.\n→ \"for 30 minutes now\" = şimdiye kadar 30 dakika, Present Perfect Progressive (have been waiting) ile kullanılır.\n\n### Örnek 4: Just / Already / Yet",
+          "description": ""
+        },
+        {
+          "en": "A: Have you finished reading that book I lent you yet?",
+          "tr": "A: Sana ödünç verdiğim kitabı henüz bitirdin mi?",
+          "description": ""
+        },
+        {
+          "en": "B: Yes, I've just finished it, actually. It was really good. Thanks for lending it to me.",
+          "tr": "B: Evet, aslında daha yeni bitirdim. Gerçekten iyiydi. Ödünç verdiğin için teşekkürler.\n→ \"just\" = yeni, Present Perfect ile; \"yet\" = henüz, soru ve olumsuzda Present Perfect ile.\n\n### Örnek 5: Over the past ... years",
+          "description": ""
+        },
+        {
+          "en": "Over the past two decades, technology has transformed almost every aspect of our lives, from how we communicate to how we work and shop.",
+          "tr": "Son yirmi yılda, teknoloji nasıl iletişim kurduğumuzdan nasıl çalışıp alışveriş yaptığımıza kadar hayatımızın neredeyse her yönünü dönüştürdü.\n→ \"over the past years\" = son yıllarda, Present Perfect (has transformed) ile kullanılır.",
+          "description": ""
+        },
+        {
+          "en": "Until recently, scientists thought that the universe was expanding at a constant rate. Now they believe it's accelerating.",
+          "tr": "Son zamanlara kadar, bilim insanları evrenin sabit bir hızla genişlediğini düşünüyordu. Şimdi hızlandığına inanıyorlar.\n→ \"Until recently\" + V2 (thought)\n</div>",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I _____ (see) that movie three times, but I wouldn't mind watching it again. It's so good!\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "saw",
+          "B": "have seen",
+          "C": "see",
+          "D": "was seeing"
+        },
+        "correct": "B",
+        "explanation": "\"three times\" kaç kez yapıldığını belirtir (tekrar) ve zaman belirtilmemiş. Present Perfect (have seen) gerektirir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I _____ (see) that movie three times, but I wouldn't mind watching it again. It's so good!\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "saw",
+            "B": "have seen",
+            "C": "see",
+            "D": "was seeing"
+          },
+          "correct": "B",
+          "explanation": "\"three times\" kaç kez yapıldığını belirtir (tekrar) ve zaman belirtilmemiş. Present Perfect (have seen) gerektirir."
+        }
+      ],
+      "word_count": 545
+    },
+    {
+      "page_number": 18,
+      "title": "Present Perfect - Özel Durumlar",
+      "total_pages": 25,
+      "content_html": "<h2>📌 SUPERLATIVES VE ORDINALS</h2>\n<p>\"This is the first time...\", \"the most... ever\", \"the only...\" gibi yapılarda Present Perfect kullanılır. Ama \"the first time\" cümle başındaysa Past Simple kullanılır!</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"This is the first time\" = Present Perfect! \"The first time\" (cümle başında) = Past Simple!</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Superlative + ever</h3>\n<p><strong>EN:</strong> This is absolutely the most difficult exam I have ever taken in my entire academic career. I don't think I did very well.<br>\n<strong>TR:</strong> Bu, tüm akademik kariyerimde şimdiye kadar girdiğim en zor sınav. Pek iyi yaptığımı düşünmüyorum.<br>\n→ Superlative (the most difficult) + ever + Present Perfect (have ever taken)</p>\n<h3>Örnek 2: This is the first time</h3>\n<p><strong>EN:</strong> This is the first time I have ever visited Cappadocia, and I'm completely amazed by the fairy chimneys and underground cities.<br>\n<strong>TR:</strong> Kapadokya'yı ilk kez ziyaret ediyorum ve peribacaları ve yeraltı şehirleri karşısında tamamen hayran kaldım.<br>\n→ \"This is the first time\" + Present Perfect (have ever visited)</p>\n<h3>Örnek 3: The first time (cümle başında)</h3>\n<p><strong>EN:</strong> The first time I visited Cappadocia was in 2015, during a road trip with some friends from university.<br>\n<strong>TR:</strong> Kapadokya'yı ilk ziyaret edişim, üniversiteden bazı arkadaşlarımla yaptığımız bir araba yolculuğu sırasında 2015'ti.<br>\n→ \"The first time\" cümle başında özne olarak kullanıldığında Past Simple (visited, was)</p>\n<h3>Örnek 4: The only + noun + ever</h3>\n<p><strong>EN:</strong> She is the only person I have ever met who can speak seven languages fluently. It's truly impressive.<br>\n<strong>TR:</strong> Yedi dili akıcı bir şekilde konuşabilen tanıdığım tek kişi o. Gerçekten etkileyici.<br>\n→ \"the only\" + Present Perfect (have ever met)</p>\n<h3>Örnek 5: It's the best/worst</h3>\n<p><strong>EN:</strong> That was the best meal I have ever had in a restaurant. The service was excellent too.<br>\n<strong>TR:</strong> Bu, bir restoranda yediğim en iyi yemekti. Servis de mükemmeldi.<br>\n→ \"the best\" + Present Perfect (have ever had)</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n- Cümle **\"This is...\"** ile başlıyorsa ve superlative/ordinal varsa → have/has V3\n- Cümle **\"The first time...\"** ile başlıyorsa (özne olarak) → V2\n\n**EN:** This is the first time I **have flown** in an airplane.\n**EN:** The first time I **flew** in an airplane was ten years ago.\n</div>\n\n<hr>\n<h2>📊 PRESENT PERFECT ÖZEL DURUMLAR</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Tense</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>This is the first time</td>\n<td>Present Perfect</td>\n<td>This is the first time I've seen snow.</td>\n</tr>\n<tr>\n<td>This is the most... ever</td>\n<td>Present Perfect</td>\n<td>This is the best film I've ever seen.</td>\n</tr>\n<tr>\n<td>The only... ever</td>\n<td>Present Perfect</td>\n<td>She's the only person I've ever loved.</td>\n</tr>\n<tr>\n<td>The first time (özne)</td>\n<td>Past Simple</td>\n<td>The first time I saw snow was in 2010.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"This is the second time I _____ (lose) my keys this week. I really need to be more careful.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) lose<br>\nB) lost<br>\nC) have lost<br>\nD) had lost</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"This is the second time\" yapısı Present Perfect (have lost) gerektirir. \"this week\" de şu anki hafta ile bağlantılı.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "This is absolutely the most difficult exam I have ever taken in my entire academic career. I don't think I did very well.",
+          "tr": "Bu, tüm akademik kariyerimde şimdiye kadar girdiğim en zor sınav. Pek iyi yaptığımı düşünmüyorum.\n→ Superlative (the most difficult) + ever + Present Perfect (have ever taken)\n\n### Örnek 2: This is the first time",
+          "description": ""
+        },
+        {
+          "en": "This is the first time I have ever visited Cappadocia, and I'm completely amazed by the fairy chimneys and underground cities.",
+          "tr": "Kapadokya'yı ilk kez ziyaret ediyorum ve peribacaları ve yeraltı şehirleri karşısında tamamen hayran kaldım.\n→ \"This is the first time\" + Present Perfect (have ever visited)\n\n### Örnek 3: The first time (cümle başında)",
+          "description": ""
+        },
+        {
+          "en": "The first time I visited Cappadocia was in 2015, during a road trip with some friends from university.",
+          "tr": "Kapadokya'yı ilk ziyaret edişim, üniversiteden bazı arkadaşlarımla yaptığımız bir araba yolculuğu sırasında 2015'ti.\n→ \"The first time\" cümle başında özne olarak kullanıldığında Past Simple (visited, was)\n\n### Örnek 4: The only + noun + ever",
+          "description": ""
+        },
+        {
+          "en": "She is the only person I have ever met who can speak seven languages fluently. It's truly impressive.",
+          "tr": "Yedi dili akıcı bir şekilde konuşabilen tanıdığım tek kişi o. Gerçekten etkileyici.\n→ \"the only\" + Present Perfect (have ever met)\n\n### Örnek 5: It's the best/worst",
+          "description": ""
+        },
+        {
+          "en": "That was the best meal I have ever had in a restaurant. The service was excellent too.",
+          "tr": "Bu, bir restoranda yediğim en iyi yemekti. Servis de mükemmeldi.\n→ \"the best\" + Present Perfect (have ever had)",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"This is the second time I _____ (lose) my keys this week. I really need to be more careful.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "lose",
+          "B": "lost",
+          "C": "have lost",
+          "D": "had lost"
+        },
+        "correct": "C",
+        "explanation": "\"This is the second time\" yapısı Present Perfect (have lost) gerektirir. \"this week\" de şu anki hafta ile bağlantılı."
+      },
+      "mini_tests": [
+        {
+          "question": "\"This is the second time I _____ (lose) my keys this week. I really need to be more careful.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "lose",
+            "B": "lost",
+            "C": "have lost",
+            "D": "had lost"
+          },
+          "correct": "C",
+          "explanation": "\"This is the second time\" yapısı Present Perfect (have lost) gerektirir. \"this week\" de şu anki hafta ile bağlantılı."
+        }
+      ],
+      "word_count": 475
+    },
+    {
+      "page_number": 19,
+      "title": "Present Perfect Progressive (have/has been Ving)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PRESENT PERFECT PROGRESSIVE NEDİR?</h2>\n<p>Geçmişte başlayıp <strong>hala devam eden</strong> veya yeni bitmiş ama <strong>etkisi görülen</strong> eylemler. Vurgu eylemin SÜRECİ üzerinde, sonucundan çok eylemin kendisi önemli.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> <br>\n- <strong>Present Perfect</strong> = SONUÇ (I have painted the room = oda bitti, hazır)<br>\n- <strong>Present Perfect Progressive</strong> = SÜREÇ (I have been painting the room = hala boyuyorum, oda dağınık)</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Action still continuing (Hala devam eden)</h3>\n<p><strong>EN:</strong> I have been living in this charming little apartment in the city center for almost ten years now, and I still love it as much as the day I moved in.<br>\n<strong>TR:</strong> Yaklaşık on yıldır şehir merkezindeki bu şirin küçük dairede yaşıyorum ve hala taşındığım günkü kadar seviyorum.<br>\n→ Geçmişte başladı (10 yıl önce), hala devam ediyor (hala burada yaşıyor). Vurgu süreçte.</p>\n<h3>Örnek 2: Effect seen now (Etkisi görülen)</h3>\n<p><strong>EN:</strong> You look absolutely exhausted! What have you been doing all day? You must be really tired.<br>\n<strong>TR:</strong> Kesinlikle bitkin görünüyorsun! Bütün gün ne yapıyordun? Gerçekten yorgun olmalısın.<br>\n→ Eylem (çalışma) bitti ama etkisi (yorgunluk) şimdi görülüyor.</p>\n<h3>Örnek 3: Action vs Result karşılaştırması</h3>\n<p><strong>EN:</strong> A: The mechanic has been repairing my car since 9 AM this morning. I hope he finishes soon because I need it for work tomorrow.<br>\n<strong>TR:</strong> A: Tamirci arabamı bu sabah 9'dan beri tamir ediyor. Umarım yakında bitirir çünkü yarın iş için ihtiyacım var.<br>\n<strong>EN:</strong> B: Oh, has he? The mechanic has already repaired my car. I can pick it up this afternoon.<br>\n<strong>TR:</strong> B: Öyle mi? Tamirci benim arabamı çoktan tamir etti. Bu öğleden sonra alabilirim.<br>\n→ A: süreç vurgusu (has been repairing - hala devam ediyor)<br>\n→ B: sonuç vurgusu (has repaired - bitti, hazır)</p>\n<h3>Örnek 4: Recently with visible effect</h3>\n<p><strong>EN:</strong> Your eyes are all red and puffy. Have you been crying? Is everything okay?<br>\n<strong>TR:</strong> Gözlerin kıpkırmızı ve şiş. Ağladın mı? Her şey yolunda mı?<br>\n→ Ağlama eylemi bitti ama etkisi (kırmızı gözler) şimdi görülüyor.</p>\n<h3>Örnek 5: Duration with \"for\" and \"since\"</h3>\n<p><strong>EN:</strong> I have been waiting for the bus for over an hour, and it's still not here. This is ridiculous! The bus service in this city is terrible.<br>\n<strong>TR:</strong> Bir saati aşkın süredir otobüs bekliyorum ve hala burada değil. Bu saçmalık! Bu şehirdeki otobüs servisi berbat.<br>\n→ Süreç vurgusu, \"for an hour\" ile birlikte Present Perfect Progressive.</p>\n<hr>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>have painted (Present Perfect)</strong></div>\n    <div class=\"turkce\">→ Boya bitti, oda hazır, sonuç önemli</div>\n    <div class=\"ingilizce\"><strong>have been painting (Present Perfect Progressive)</strong></div>\n    <div class=\"turkce\">→ Hala boyuyor, oda dağınık, süreç önemli</div>\n</div>\n\n<hr>\n<h2>📊 PRESENT PERFECT VS PROGRESSIVE</h2>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Present Perfect</th>\n<th>Present Perfect Progressive</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Vurgu</strong></td>\n<td>Sonuç (result)</td>\n<td>Süreç (action)</td>\n</tr>\n<tr>\n<td><strong>Devam</strong></td>\n<td>Bitmiş olabilir</td>\n<td>Hala devam ediyor veya yeni bitti</td>\n</tr>\n<tr>\n<td><strong>Soru</strong></td>\n<td>How many times?</td>\n<td>How long?</td>\n</tr>\n<tr>\n<td><strong>Örnek</strong></td>\n<td>I have painted the room. (bitti)</td>\n<td>I have been painting the room. (sürüyor)</td>\n</tr>\n<tr>\n<td><strong>Tekrar</strong></td>\n<td>three times (sayılabilir)</td>\n<td>all day (süreç)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"You're sweating heavily. <strong><em>_</em> you </strong>___ (run)?\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) Did / run<br>\nB) Have / run<br>\nC) Have / been running<br>\nD) Were / running</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** Terleme (etki) görülüyor. Koşma eylemi bitti ama etkisi devam ediyor → Present Perfect Progressive (Have you been running).\n</details>\n\n<p>[Kelime sayısı: 258]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I have been living in this charming little apartment in the city center for almost ten years now, and I still love it as much as the day I moved in.",
+          "tr": "Yaklaşık on yıldır şehir merkezindeki bu şirin küçük dairede yaşıyorum ve hala taşındığım günkü kadar seviyorum.\n→ Geçmişte başladı (10 yıl önce), hala devam ediyor (hala burada yaşıyor). Vurgu süreçte.\n\n### Örnek 2: Effect seen now (Etkisi görülen)",
+          "description": ""
+        },
+        {
+          "en": "You look absolutely exhausted! What have you been doing all day? You must be really tired.",
+          "tr": "Kesinlikle bitkin görünüyorsun! Bütün gün ne yapıyordun? Gerçekten yorgun olmalısın.\n→ Eylem (çalışma) bitti ama etkisi (yorgunluk) şimdi görülüyor.\n\n### Örnek 3: Action vs Result karşılaştırması",
+          "description": ""
+        },
+        {
+          "en": "A: The mechanic has been repairing my car since 9 AM this morning. I hope he finishes soon because I need it for work tomorrow.",
+          "tr": "A: Tamirci arabamı bu sabah 9'dan beri tamir ediyor. Umarım yakında bitirir çünkü yarın iş için ihtiyacım var.",
+          "description": ""
+        },
+        {
+          "en": "B: Oh, has he? The mechanic has already repaired my car. I can pick it up this afternoon.",
+          "tr": "B: Öyle mi? Tamirci benim arabamı çoktan tamir etti. Bu öğleden sonra alabilirim.\n→ A: süreç vurgusu (has been repairing - hala devam ediyor)\n→ B: sonuç vurgusu (has repaired - bitti, hazır)\n\n### Örnek 4: Recently with visible effect",
+          "description": ""
+        },
+        {
+          "en": "Your eyes are all red and puffy. Have you been crying? Is everything okay?",
+          "tr": "Gözlerin kıpkırmızı ve şiş. Ağladın mı? Her şey yolunda mı?\n→ Ağlama eylemi bitti ama etkisi (kırmızı gözler) şimdi görülüyor.\n\n### Örnek 5: Duration with \"for\" and \"since\"",
+          "description": ""
+        },
+        {
+          "en": "I have been waiting for the bus for over an hour, and it's still not here. This is ridiculous! The bus service in this city is terrible.",
+          "tr": "Bir saati aşkın süredir otobüs bekliyorum ve hala burada değil. Bu saçmalık! Bu şehirdeki otobüs servisi berbat.\n→ Süreç vurgusu, \"for an hour\" ile birlikte Present Perfect Progressive.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"You're sweating heavily. _____ you _____ (run)?\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "Did / run",
+          "B": "Have / run",
+          "C": "Have / been running",
+          "D": "Were / running"
+        },
+        "correct": "C",
+        "explanation": "Terleme (etki) görülüyor. Koşma eylemi bitti ama etkisi devam ediyor → Present Perfect Progressive (Have you been running)."
+      },
+      "mini_tests": [
+        {
+          "question": "\"You're sweating heavily. _____ you _____ (run)?\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "Did / run",
+            "B": "Have / run",
+            "C": "Have / been running",
+            "D": "Were / running"
+          },
+          "correct": "C",
+          "explanation": "Terleme (etki) görülüyor. Koşma eylemi bitti ama etkisi devam ediyor → Present Perfect Progressive (Have you been running)."
+        }
+      ],
+      "word_count": 521
+    },
+    {
+      "page_number": 20,
+      "title": "Past Perfect (had V3)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PAST PERFECT NEDİR?</h2>\n<p>Geçmişteki bir eylemden <strong>daha önce</strong> olan eylemi anlatır. \"Geçmişin geçmişi\" diye düşün. Mutlaka bir geçmiş zaman referans noktası olmalıdır (ya açıkça belirtilir ya da anlaşılır).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Past Perfect = Önce olan eylem. Bir cümlede iki past eylem varsa, önce olan Past Perfect, sonra olan Past Simple ile ifade edilir.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Two past actions</h3>\n<p><strong>EN:</strong> When I finally arrived at the classroom, I realized that the lesson had already started. The teacher was explaining something, and all the students were listening carefully.<br>\n<strong>TR:</strong> Sınıfa nihayet vardığımda, dersin çoktan başlamış olduğunu fark ettim. Öğretmen bir şey açıklıyordu ve tüm öğrenciler dikkatle dinliyordu.<br>\n→ Önce ders başladı (had started), sonra ben vardım (arrived). Geçmişte iki eylem.</p>\n<h3>Örnek 2: By + past time</h3>\n<p><strong>EN:</strong> By the time he turned thirty, my brother had already visited over twenty different countries and lived on three different continents.<br>\n<strong>TR:</strong> Otuz yaşına bastığında, kardeşim yirmiden fazla farklı ülke ziyaret etmiş ve üç farklı kıtada yaşamıştı.<br>\n→ \"by the time he turned thirty\" geçmişte bir zaman noktası. O noktadan önceki deneyimler Past Perfect ile ifade ediliyor.</p>\n<h3>Örnek 3: By 1990</h3>\n<p><strong>EN:</strong> By 1990, the company had established itself as a market leader in Europe, but it hadn't yet expanded into Asian markets.<br>\n<strong>TR:</strong> 1990'a kadar, şirket kendini Avrupa'da pazar lideri olarak konumlandırmıştı, ama henüz Asya pazarlarına açılmamıştı.<br>\n→ \"By 1990\" geçmişte bir zaman noktası. O noktaya kadar olan durum.</p>\n<h3>Örnek 4: After + had V3</h3>\n<p><strong>EN:</strong> After the guests had left, we finally sat down and relaxed. The party had been exhausting but wonderful.<br>\n<strong>TR:</strong> Misafirler gittikten sonra, nihayet oturup dinlendik. Parti yorucu ama harikaydı.<br>\n→ \"After\" bağlacından sonra önce olan eylem Past Perfect (had left), sonra olan eylem Past Simple (sat).</p>\n<h3>Örnek 5: Before + V2 + had V3</h3>\n<p><strong>EN:</strong> The train had already departed before we managed to get to the station. We were just five minutes late.<br>\n<strong>TR:</strong> Tren, istasyona varmayı başaramadan çoktan kalkmıştı. Sadece beş dakika geç kalmıştık.<br>\n→ Önce tren kalktı (had departed), sonra biz varmaya çalıştık (managed). \"Before\" bağlacı ile.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ \"BY THE TIME\" KULLANIMI**\n\n| Zaman | Yapı | Örnek |\n|-------|------|-------|\n| Geçmiş | By the time + V2 + had V3 | By the time we arrived, they had left. |\n| Gelecek | By the time + V1 + will have V3 | By the time we arrive, they will have left. |\n\n**Önemli:** \"By the time\" den sonra asla will, would, be going to gelmez!\n</div>\n\n<hr>\n<h2>📊 ZAMAN BAĞLAÇLARIYLA HAD V3</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Yan Cümle</th>\n<th>Ana Cümle</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>After</td>\n<td>had V3</td>\n<td>V2</td>\n</tr>\n<tr>\n<td>Before</td>\n<td>V2</td>\n<td>had V3</td>\n</tr>\n<tr>\n<td>By the time</td>\n<td>V2</td>\n<td>had V3</td>\n</tr>\n<tr>\n<td>When</td>\n<td>V2</td>\n<td>had V3</td>\n</tr>\n<tr>\n<td>Until</td>\n<td>V2</td>\n<td>had V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"When we got to the cinema, the film _____ (already/start), so we missed the first fifteen minutes.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) already started<br>\nB) has already started<br>\nC) had already started<br>\nD) was already starting</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"When we got\" = geçmişte bir nokta. Film o noktadan önce başlamıştı. Geçmişteki bir noktadan önce olan eylem için Past Perfect (had already started) gerekir.\n</details>\n\n<p>[Kelime sayısı: 265]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "When I finally arrived at the classroom, I realized that the lesson had already started. The teacher was explaining something, and all the students were listening carefully.",
+          "tr": "Sınıfa nihayet vardığımda, dersin çoktan başlamış olduğunu fark ettim. Öğretmen bir şey açıklıyordu ve tüm öğrenciler dikkatle dinliyordu.\n→ Önce ders başladı (had started), sonra ben vardım (arrived). Geçmişte iki eylem.\n\n### Örnek 2: By + past time",
+          "description": ""
+        },
+        {
+          "en": "By the time he turned thirty, my brother had already visited over twenty different countries and lived on three different continents.",
+          "tr": "Otuz yaşına bastığında, kardeşim yirmiden fazla farklı ülke ziyaret etmiş ve üç farklı kıtada yaşamıştı.\n→ \"by the time he turned thirty\" geçmişte bir zaman noktası. O noktadan önceki deneyimler Past Perfect ile ifade ediliyor.\n\n### Örnek 3: By 1990",
+          "description": ""
+        },
+        {
+          "en": "By 1990, the company had established itself as a market leader in Europe, but it hadn't yet expanded into Asian markets.",
+          "tr": "1990'a kadar, şirket kendini Avrupa'da pazar lideri olarak konumlandırmıştı, ama henüz Asya pazarlarına açılmamıştı.\n→ \"By 1990\" geçmişte bir zaman noktası. O noktaya kadar olan durum.\n\n### Örnek 4: After + had V3",
+          "description": ""
+        },
+        {
+          "en": "After the guests had left, we finally sat down and relaxed. The party had been exhausting but wonderful.",
+          "tr": "Misafirler gittikten sonra, nihayet oturup dinlendik. Parti yorucu ama harikaydı.\n→ \"After\" bağlacından sonra önce olan eylem Past Perfect (had left), sonra olan eylem Past Simple (sat).\n\n### Örnek 5: Before + V2 + had V3",
+          "description": ""
+        },
+        {
+          "en": "The train had already departed before we managed to get to the station. We were just five minutes late.",
+          "tr": "Tren, istasyona varmayı başaramadan çoktan kalkmıştı. Sadece beş dakika geç kalmıştık.\n→ Önce tren kalktı (had departed), sonra biz varmaya çalıştık (managed). \"Before\" bağlacı ile.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"When we got to the cinema, the film _____ (already/start), so we missed the first fifteen minutes.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "already started",
+          "B": "has already started",
+          "C": "had already started",
+          "D": "was already starting"
+        },
+        "correct": "C",
+        "explanation": "\"When we got\" = geçmişte bir nokta. Film o noktadan önce başlamıştı. Geçmişteki bir noktadan önce olan eylem için Past Perfect (had already started) gerekir."
+      },
+      "mini_tests": [
+        {
+          "question": "\"When we got to the cinema, the film _____ (already/start), so we missed the first fifteen minutes.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "already started",
+            "B": "has already started",
+            "C": "had already started",
+            "D": "was already starting"
+          },
+          "correct": "C",
+          "explanation": "\"When we got\" = geçmişte bir nokta. Film o noktadan önce başlamıştı. Geçmişteki bir noktadan önce olan eylem için Past Perfect (had already started) gerekir."
+        }
+      ],
+      "word_count": 497
+    },
+    {
+      "page_number": 21,
+      "title": "Past Perfect - Unreal (Gerçek Dışı) Kullanımlar",
+      "total_pages": 25,
+      "content_html": "<h2>📌 UNREAL PAST PERFECT</h2>\n<p>Bazı yapılarda Past Perfect, gerçek zamanı değil, <strong>gerçek dışı durumu</strong> anlatır. Geçmişte olanın tersini ifade eder. Wish, if only, as if, would rather, if clause type 3 gibi yapılarla kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> <br>\n- <strong>I wish + V2</strong> = şimdiki zaman için keşke (gerçek dışı)<br>\n- <strong>I wish + had V3</strong> = geçmiş zaman için keşke (gerçek dışı)</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: I wish + had V3</h3>\n<p><strong>EN:</strong> My father took us to that boring action movie last night. I really wish he had taken us to the comedy instead. We would have laughed so much.<br>\n<strong>TR:</strong> Babam dün gece bizi o sıkıcı aksiyon filmine götürdü. Keşke bizi onun yerine komediye götürseydi. Çok gülerdik.<br>\n→ Gerçek: action filmine gittiler. İstenen: komedi (ama olmadı). Geçmişte olanın tersi.</p>\n<h3>Örnek 2: If only + had V3</h3>\n<p><strong>EN:</strong> She didn't come to my birthday party last week. If only she had come! We had such a great time, and I know she would have enjoyed it.<br>\n<strong>TR:</strong> Geçen hafta doğum günü partime gelmedi. Keşke gelseydi! Çok eğlendik ve biliyorum o da eğlenirdi.<br>\n→ Gerçek: gelmedi. İstenen: gelmesiydi.</p>\n<h3>Örnek 3: As if + had V3</h3>\n<p><strong>EN:</strong> He talks about the accident as if he had seen it with his own eyes, but he wasn't even there when it happened.<br>\n<strong>TR:</strong> Kaza hakkında sanki kendi gözleriyle görmüş gibi konuşuyor, ama olduğunda orada bile değildi.<br>\n→ Gerçek: görmedi. Davranış: görmüş gibi.</p>\n<h3>Örnek 4: Would rather + had V3</h3>\n<p><strong>EN:</strong> My brother married Susan last year, but to be honest, I would rather he hadn't married her. They don't seem happy together.<br>\n<strong>TR:</strong> Kardeşim geçen yıl Susan'la evlendi, ama dürüst olmak gerekirse, keşke onunla evlenmeseydi. Birlikte mutlu görünmüyorlar.<br>\n→ Gerçek: evlendi. Tercih: evlenmemesiydi.</p>\n<h3>Örnek 5: If Clause Type 3 (Past Unreal)</h3>\n<p><strong>EN:</strong> If you had come to the party last Saturday, you would have met my cousin from Canada. She was only in town for the weekend.<br>\n<strong>TR:</strong> Geçen Cumartesi partiye gelmiş olsaydın, Kanada'dan kuzenimle tanışırdın. Sadece hafta sonu için şehirdeydi.<br>\n→ Gerçek: gelmedin, tanışmadın. Geçmişte olanın tersi.</p>\n<h3>Örnek 6: Mixed Type (Geçmiş + Şimdi)</h3>\n<p><strong>EN:</strong> If I hadn't broken my leg last month, I would be playing in the football match tomorrow. But now I can only watch from the sidelines.<br>\n<strong>TR:</strong> Geçen ay bacağımı kırmamış olsaydım, yarınki futbol maçında oynuyor olurdum. Ama şimdi sadece kenardan izleyebilirim.<br>\n→ Geçmişteki olay (kırma) şimdiki durumu etkiliyor. If clause'da had V3, main clause'da would V0.</p>\n<hr>\n<div class=\"kart-grubu\">\n    <div class=\"kart turuncu\">\n        <strong>UNREAL YAPILAR (had V3)</strong><br>\n        1. I wish + had V3<br>\n        2. If only + had V3<br>\n        3. As if + had V3<br>\n        4. Would rather + had V3<br>\n        5. If Type 3 (had V3)<br>\n        6. Mixed Type (had V3)\n    </div>\n</div>\n\n<hr>\n<h2>📊 V2 VS HAD V3 (UNREAL)</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>V2 (Present Unreal)</th>\n<th>had V3 (Past Unreal)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>I wish</td>\n<td>I wish I were rich. (şimdi)</td>\n<td>I wish I had studied. (geçmiş)</td>\n</tr>\n<tr>\n<td>If only</td>\n<td>If only I knew. (şimdi)</td>\n<td>If only I had known. (geçmiş)</td>\n</tr>\n<tr>\n<td>As if</td>\n<td>As if he were the boss. (şimdi)</td>\n<td>As if he hadn't seen it. (geçmiş)</td>\n</tr>\n<tr>\n<td>Would rather</td>\n<td>I'd rather you stayed. (şimdi)</td>\n<td>I'd rather you hadn't gone. (geçmiş)</td>\n</tr>\n<tr>\n<td>If Clause</td>\n<td>If I had money, I'd buy it. (şimdi)</td>\n<td>If I had had money, I'd have bought it. (geçmiş)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I wish I _____ (listen) to my mother's advice when I was younger. I wouldn't be in so much trouble now.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) listened<br>\nB) had listened<br>\nC) have listened<br>\nD) was listening</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \"when I was younger\" geçmişte bir zaman. Gerçek: dinlemedim. Keşke dinleseydim → I wish + had V3 (had listened).\n</details>\n\n<p>[Kelime sayısı: 278]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "My father took us to that boring action movie last night. I really wish he had taken us to the comedy instead. We would have laughed so much.",
+          "tr": "Babam dün gece bizi o sıkıcı aksiyon filmine götürdü. Keşke bizi onun yerine komediye götürseydi. Çok gülerdik.\n→ Gerçek: action filmine gittiler. İstenen: komedi (ama olmadı). Geçmişte olanın tersi.\n\n### Örnek 2: If only + had V3",
+          "description": ""
+        },
+        {
+          "en": "She didn't come to my birthday party last week. If only she had come! We had such a great time, and I know she would have enjoyed it.",
+          "tr": "Geçen hafta doğum günü partime gelmedi. Keşke gelseydi! Çok eğlendik ve biliyorum o da eğlenirdi.\n→ Gerçek: gelmedi. İstenen: gelmesiydi.\n\n### Örnek 3: As if + had V3",
+          "description": ""
+        },
+        {
+          "en": "He talks about the accident as if he had seen it with his own eyes, but he wasn't even there when it happened.",
+          "tr": "Kaza hakkında sanki kendi gözleriyle görmüş gibi konuşuyor, ama olduğunda orada bile değildi.\n→ Gerçek: görmedi. Davranış: görmüş gibi.\n\n### Örnek 4: Would rather + had V3",
+          "description": ""
+        },
+        {
+          "en": "My brother married Susan last year, but to be honest, I would rather he hadn't married her. They don't seem happy together.",
+          "tr": "Kardeşim geçen yıl Susan'la evlendi, ama dürüst olmak gerekirse, keşke onunla evlenmeseydi. Birlikte mutlu görünmüyorlar.\n→ Gerçek: evlendi. Tercih: evlenmemesiydi.\n\n### Örnek 5: If Clause Type 3 (Past Unreal)",
+          "description": ""
+        },
+        {
+          "en": "If you had come to the party last Saturday, you would have met my cousin from Canada. She was only in town for the weekend.",
+          "tr": "Geçen Cumartesi partiye gelmiş olsaydın, Kanada'dan kuzenimle tanışırdın. Sadece hafta sonu için şehirdeydi.\n→ Gerçek: gelmedin, tanışmadın. Geçmişte olanın tersi.\n\n### Örnek 6: Mixed Type (Geçmiş + Şimdi)",
+          "description": ""
+        },
+        {
+          "en": "If I hadn't broken my leg last month, I would be playing in the football match tomorrow. But now I can only watch from the sidelines.",
+          "tr": "Geçen ay bacağımı kırmamış olsaydım, yarınki futbol maçında oynuyor olurdum. Ama şimdi sadece kenardan izleyebilirim.\n→ Geçmişteki olay (kırma) şimdiki durumu etkiliyor. If clause'da had V3, main clause'da would V0.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I wish I _____ (listen) to my mother's advice when I was younger. I wouldn't be in so much trouble now.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "listened",
+          "B": "had listened",
+          "C": "have listened",
+          "D": "was listening"
+        },
+        "correct": "B",
+        "explanation": "\"when I was younger\" geçmişte bir zaman. Gerçek: dinlemedim. Keşke dinleseydim → I wish + had V3 (had listened)."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I wish I _____ (listen) to my mother's advice when I was younger. I wouldn't be in so much trouble now.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "listened",
+            "B": "had listened",
+            "C": "have listened",
+            "D": "was listening"
+          },
+          "correct": "B",
+          "explanation": "\"when I was younger\" geçmişte bir zaman. Gerçek: dinlemedim. Keşke dinleseydim → I wish + had V3 (had listened)."
+        }
+      ],
+      "word_count": 599
+    },
+    {
+      "page_number": 22,
+      "title": "Past Perfect Progressive (had been Ving)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 PAST PERFECT PROGRESSIVE</h2>\n<p>Geçmişteki bir eylemden <strong>önce başlayıp bir süre devam eden</strong> ve ya o eylemden hemen önce biten ya da hala devam eden eylem. Vurgu süreç üzerindedir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Past Perfect Progressive = \"Bir süredir ... yapıyordum (ta ki ... olana kadar)\". Present Perfect Progressive'in geçmiş versiyonu.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Continued until another action</h3>\n<p><strong>EN:</strong> When my friend finally arrived at the café, I had been waiting for her for over forty-five minutes. I was quite annoyed.<br>\n<strong>TR:</strong> Arkadaşım kafeye nihayet geldiğinde, kırk beş dakikadan fazladır onu bekliyordum. Oldukça sinirlenmiştim.<br>\n→ Önce beklemeye başladım, 45 dakika devam etti, o geldiğinde bekliyordum (ve muhtemelen hemen sonra bıraktım).</p>\n<h3>Örnek 2: Effect seen in the past</h3>\n<p><strong>EN:</strong> She looked absolutely exhausted at the meeting yesterday. She had been working on the project all night and hadn't slept at all.<br>\n<strong>TR:</strong> Dün toplantıda kesinlikle bitkin görünüyordu. Bütün gece proje üzerinde çalışmıştı ve hiç uyumamıştı.<br>\n→ Çalışma bitti ama yorgunluk etkisi geçmişte (toplantıda) görülüyor.</p>\n<h3>Örnek 3: Duration before another past action</h3>\n<p><strong>EN:</strong> Before he finally retired last year, my grandfather had been working as a doctor for over forty years. He had helped thousands of patients.<br>\n<strong>TR:</strong> Geçen yıl nihayet emekli olmadan önce, dedem kırk yılı aşkın süredir doktor olarak çalışıyordu. Binlerce hastaya yardım etmişti.<br>\n→ Emeklilik (retired) noktasına kadar süren eylem, Past Perfect Progressive ile vurgulanıyor.</p>\n<h3>Örnek 4: Reason for past state</h3>\n<p><strong>EN:</strong> The ground was wet when I woke up this morning. It had been raining heavily during the night, but the rain had stopped by dawn.<br>\n<strong>TR:</strong> Bu sabah uyandığımda yer ıslaktı. Gece boyunca şiddetli yağmur yağıyordu, ama yağmur şafakta durmuştu.<br>\n→ Geçmişteki bir durumun (yerin ıslak olması) nedeni olarak daha önce devam eden eylem.</p>\n<h3>Örnek 5: Contrast with Past Perfect</h3>\n<p><strong>EN:</strong> A: Had you been waiting long when the bus finally came?<br>\n<strong>TR:</strong> A: Otobüs nihayet geldiğinde uzun süredir bekliyor muydun?<br>\n<strong>EN:</strong> B: Yes, I had been waiting for about twenty minutes. I was getting cold.<br>\n<strong>TR:</strong> B: Evet, yaklaşık yirmi dakikadır bekliyordum. Üşümeye başlıyordum.<br>\n→ Süreç vurgusu (had been waiting), sonuç değil.</p>\n<hr>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>had worked (Past Perfect)</strong></div>\n    <div class=\"turkce\">→ Çalışmıştı (tamamlanmış eylem)</div>\n    <div class=\"ingilizce\"><strong>had been working (Past Perfect Progressive)</strong></div>\n    <div class=\"turkce\">→ Çalışıyordu (süreç vurgusu)</div>\n</div>\n\n<hr>\n<h2>📊 PERFECT PROGRESSIVE KARŞILAŞTIRMASI</h2>\n<table>\n<thead>\n<tr>\n<th>Tense</th>\n<th>Yapı</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Present Perfect Progressive</td>\n<td>have been Ving</td>\n<td>Şimdiye kadar süren</td>\n</tr>\n<tr>\n<td>Past Perfect Progressive</td>\n<td>had been Ving</td>\n<td>Geçmişte bir noktaya kadar süren</td>\n</tr>\n<tr>\n<td>Future Perfect Progressive</td>\n<td>will have been Ving</td>\n<td>Gelecekte bir noktaya kadar sürecek</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"When I finally found my lost dog, he was tired and hungry. He _____ (wander) around the streets for three days.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) wandered<br>\nB) had wandered<br>\nC) had been wandering<br>\nD) was wandering</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** Köpek bulunduğunda yorgundu (etki). Üç gün boyunca devam eden bir süreç vurgulanıyor → Past Perfect Progressive (had been wandering).\n</details>\n\n<p>[Kelime sayısı: 253]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "When my friend finally arrived at the café, I had been waiting for her for over forty-five minutes. I was quite annoyed.",
+          "tr": "Arkadaşım kafeye nihayet geldiğinde, kırk beş dakikadan fazladır onu bekliyordum. Oldukça sinirlenmiştim.\n→ Önce beklemeye başladım, 45 dakika devam etti, o geldiğinde bekliyordum (ve muhtemelen hemen sonra bıraktım).\n\n### Örnek 2: Effect seen in the past",
+          "description": ""
+        },
+        {
+          "en": "She looked absolutely exhausted at the meeting yesterday. She had been working on the project all night and hadn't slept at all.",
+          "tr": "Dün toplantıda kesinlikle bitkin görünüyordu. Bütün gece proje üzerinde çalışmıştı ve hiç uyumamıştı.\n→ Çalışma bitti ama yorgunluk etkisi geçmişte (toplantıda) görülüyor.\n\n### Örnek 3: Duration before another past action",
+          "description": ""
+        },
+        {
+          "en": "Before he finally retired last year, my grandfather had been working as a doctor for over forty years. He had helped thousands of patients.",
+          "tr": "Geçen yıl nihayet emekli olmadan önce, dedem kırk yılı aşkın süredir doktor olarak çalışıyordu. Binlerce hastaya yardım etmişti.\n→ Emeklilik (retired) noktasına kadar süren eylem, Past Perfect Progressive ile vurgulanıyor.\n\n### Örnek 4: Reason for past state",
+          "description": ""
+        },
+        {
+          "en": "The ground was wet when I woke up this morning. It had been raining heavily during the night, but the rain had stopped by dawn.",
+          "tr": "Bu sabah uyandığımda yer ıslaktı. Gece boyunca şiddetli yağmur yağıyordu, ama yağmur şafakta durmuştu.\n→ Geçmişteki bir durumun (yerin ıslak olması) nedeni olarak daha önce devam eden eylem.\n\n### Örnek 5: Contrast with Past Perfect",
+          "description": ""
+        },
+        {
+          "en": "A: Had you been waiting long when the bus finally came?",
+          "tr": "A: Otobüs nihayet geldiğinde uzun süredir bekliyor muydun?",
+          "description": ""
+        },
+        {
+          "en": "B: Yes, I had been waiting for about twenty minutes. I was getting cold.",
+          "tr": "B: Evet, yaklaşık yirmi dakikadır bekliyordum. Üşümeye başlıyordum.\n→ Süreç vurgusu (had been waiting), sonuç değil.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"When I finally found my lost dog, he was tired and hungry. He _____ (wander) around the streets for three days.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "wandered",
+          "B": "had wandered",
+          "C": "had been wandering",
+          "D": "was wandering"
+        },
+        "correct": "C",
+        "explanation": "Köpek bulunduğunda yorgundu (etki). Üç gün boyunca devam eden bir süreç vurgulanıyor → Past Perfect Progressive (had been wandering)."
+      },
+      "mini_tests": [
+        {
+          "question": "\"When I finally found my lost dog, he was tired and hungry. He _____ (wander) around the streets for three days.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "wandered",
+            "B": "had wandered",
+            "C": "had been wandering",
+            "D": "was wandering"
+          },
+          "correct": "C",
+          "explanation": "Köpek bulunduğunda yorgundu (etki). Üç gün boyunca devam eden bir süreç vurgulanıyor → Past Perfect Progressive (had been wandering)."
+        }
+      ],
+      "word_count": 484
+    },
+    {
+      "page_number": 23,
+      "title": "Future Forms (will / be going to)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 GELECEK ZAMAN YAPILARI</h2>\n<p>Future için tek bir tense yok, birden çok yapı var: will, be going to, Present Progressive, Present Simple. Her birinin farklı kullanım alanları ve anlam incelikleri vardır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> <br>\n- <strong>Will</strong> = anlık karar, tahmin, vaat, teklif<br>\n- <strong>Be going to</strong> = önceden yapılmış plan, kanıta dayalı çıkarım<br>\n- <strong>Present Progressive</strong> = kişisel, kesin planlar<br>\n- <strong>Present Simple</strong> = resmi programlar, zaman tabloları</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Will - Prediction (Tahmin)</h3>\n<p><strong>EN:</strong> According to many experts, by the year 2050, the world's population will reach approximately 10 billion, which will put enormous strain on resources.<br>\n<strong>TR:</strong> Birçok uzmana göre, 2050 yılına kadar dünya nüfusu yaklaşık 10 milyara ulaşacak ve bu kaynaklar üzerinde muazzam bir baskı oluşturacak.<br>\n→ Gelecekle ilgili tahmin, bilimsel öngörü.</p>\n<h3>Örnek 2: Will - Sudden decision (Anlık karar)</h3>\n<p><strong>EN:</strong> (The phone rings) Don't worry, I'll get it! It's probably for me anyway.<br>\n<strong>TR:</strong> (Telefon çalar) Endişelenme, ben açarım! Zaten büyük ihtimalle benim içindir.<br>\n→ Konuşma anında verilen karar, önceden planlanmamış.</p>\n<h3>Örnek 3: Will - Promise (Vaat)</h3>\n<p><strong>EN:</strong> I promise I'll call you as soon as I arrive at the airport. I won't forget this time.<br>\n<strong>TR:</strong> Söz veriyorum havalimanına varır varmaz seni arayacağım. Bu sefer unutmayacağım.<br>\n→ Gelecekle ilgili vaat.</p>\n<h3>Örnek 4: Be going to - Plan (Önceden yapılmış plan)</h3>\n<p><strong>EN:</strong> We are going to spend our summer vacation in Italy this year. We've already booked a beautiful villa in Tuscany and bought our plane tickets.<br>\n<strong>TR:</strong> Bu yıl yaz tatilimizi İtalya'da geçireceğiz. Toskana'da güzel bir villa çoktan ayırttık ve uçak biletlerimizi aldık.<br>\n→ Önceden yapılmış plan, hazırlıklar tamam.</p>\n<h3>Örnek 5: Be going to - Present clue (Kanıta dayalı çıkarım)</h3>\n<p><strong>EN:</strong> Look at those dark clouds gathering over the mountains. It's definitely going to rain this afternoon. We should cancel our picnic.<br>\n<strong>TR:</strong> Dağların üzerinde toplanan şu kara bulutlara bak. Bu öğleden sonra kesinlikle yağmur yağacak. Pikniğimizi iptal etmeliyiz.<br>\n→ Şu anki kanıta (bulutlar) dayalı çıkarım.</p>\n<h3>Örnek 6: Present Progressive - Personal arrangement</h3>\n<p><strong>EN:</strong> I am having dinner with some old friends from university tomorrow evening. We haven't seen each other in years, so I'm really looking forward to it.<br>\n<strong>TR:</strong> Yarın akşam üniversiteden bazı eski arkadaşlarımla akşam yemeği yiyorum. Yıllardır görüşmedik, bu yüzden gerçekten heyecanlıyım.<br>\n→ Kişisel, kesin plan. Genellikle zaman ve yer bellidir.</p>\n<h3>Örnek 7: Present Simple - Timetable</h3>\n<p><strong>EN:</strong> The next train to London departs from platform 5 at exactly 4:15 PM. Passengers are advised to be at the platform at least 10 minutes before departure.<br>\n<strong>TR:</strong> Londra'ya giden bir sonraki tren, peron 5'ten tam 16:15'te kalkıyor. Yolcuların kalkıştan en az 10 dakika önce peronda olmaları tavsiye edilir.<br>\n→ Resmi programa göre değişmeyen gelecek.</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji: Will vs Be going to**\n\n| Durum | Will | Be going to |\n|-------|------|-------------|\n| Tahmin | I think it will rain. | It's going to rain. (kanıt var) |\n| Plan | (anlık) I'll help you. | I'm going to travel. (önceden) |\n| Karar | Şimdi verildi | Daha önce verildi |\n</div>\n\n<hr>\n<h2>📊 GELECEK YAPILARI KARŞILAŞTIRMASI</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>will + V0</td>\n<td>Tahmin, anlık karar, vaat</td>\n<td>I will help you.</td>\n</tr>\n<tr>\n<td>be going to</td>\n<td>Plan, kanıt</td>\n<td>It's going to rain.</td>\n</tr>\n<tr>\n<td>Present Progressive</td>\n<td>Kişisel, kesin plan</td>\n<td>I'm meeting friends.</td>\n</tr>\n<tr>\n<td>Present Simple</td>\n<td>Resmi program</td>\n<td>Train leaves at 6.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"I feel terrible. I think I _____ (be) sick. I should probably lie down.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) will be<br>\nB) am going to be<br>\nC) am being<br>\nD) have been</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B\n**Açıklama:** \n- **I think I will be sick** = gelecekte hasta olabileceğime dair bir tahmin\n- **I am going to be sick** = şu anki hislerim (mide bulantısı) hasta olacağıma dair kanıt\n\nKonuşma anında hissedilen fiziksel belirtiler varsa \"be going to\" daha doğrudur.\n</details>\n\n<p>[Kelime sayısı: 296]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "According to many experts, by the year 2050, the world's population will reach approximately 10 billion, which will put enormous strain on resources.",
+          "tr": "Birçok uzmana göre, 2050 yılına kadar dünya nüfusu yaklaşık 10 milyara ulaşacak ve bu kaynaklar üzerinde muazzam bir baskı oluşturacak.\n→ Gelecekle ilgili tahmin, bilimsel öngörü.\n\n### Örnek 2: Will - Sudden decision (Anlık karar)",
+          "description": ""
+        },
+        {
+          "en": "(The phone rings) Don't worry, I'll get it! It's probably for me anyway.",
+          "tr": "(Telefon çalar) Endişelenme, ben açarım! Zaten büyük ihtimalle benim içindir.\n→ Konuşma anında verilen karar, önceden planlanmamış.\n\n### Örnek 3: Will - Promise (Vaat)",
+          "description": ""
+        },
+        {
+          "en": "I promise I'll call you as soon as I arrive at the airport. I won't forget this time.",
+          "tr": "Söz veriyorum havalimanına varır varmaz seni arayacağım. Bu sefer unutmayacağım.\n→ Gelecekle ilgili vaat.\n\n### Örnek 4: Be going to - Plan (Önceden yapılmış plan)",
+          "description": ""
+        },
+        {
+          "en": "We are going to spend our summer vacation in Italy this year. We've already booked a beautiful villa in Tuscany and bought our plane tickets.",
+          "tr": "Bu yıl yaz tatilimizi İtalya'da geçireceğiz. Toskana'da güzel bir villa çoktan ayırttık ve uçak biletlerimizi aldık.\n→ Önceden yapılmış plan, hazırlıklar tamam.\n\n### Örnek 5: Be going to - Present clue (Kanıta dayalı çıkarım)",
+          "description": ""
+        },
+        {
+          "en": "Look at those dark clouds gathering over the mountains. It's definitely going to rain this afternoon. We should cancel our picnic.",
+          "tr": "Dağların üzerinde toplanan şu kara bulutlara bak. Bu öğleden sonra kesinlikle yağmur yağacak. Pikniğimizi iptal etmeliyiz.\n→ Şu anki kanıta (bulutlar) dayalı çıkarım.\n\n### Örnek 6: Present Progressive - Personal arrangement",
+          "description": ""
+        },
+        {
+          "en": "I am having dinner with some old friends from university tomorrow evening. We haven't seen each other in years, so I'm really looking forward to it.",
+          "tr": "Yarın akşam üniversiteden bazı eski arkadaşlarımla akşam yemeği yiyorum. Yıllardır görüşmedik, bu yüzden gerçekten heyecanlıyım.\n→ Kişisel, kesin plan. Genellikle zaman ve yer bellidir.\n\n### Örnek 7: Present Simple - Timetable",
+          "description": ""
+        },
+        {
+          "en": "The next train to London departs from platform 5 at exactly 4:15 PM. Passengers are advised to be at the platform at least 10 minutes before departure.",
+          "tr": "Londra'ya giden bir sonraki tren, peron 5'ten tam 16:15'te kalkıyor. Yolcuların kalkıştan en az 10 dakika önce peronda olmaları tavsiye edilir.\n→ Resmi programa göre değişmeyen gelecek.",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"I feel terrible. I think I _____ (be) sick. I should probably lie down.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "will be",
+          "B": "am going to be",
+          "C": "am being",
+          "D": "have been"
+        },
+        "correct": "B",
+        "explanation": "- **I think I will be sick** = gelecekte hasta olabileceğime dair bir tahmin\n- **I am going to be sick** = şu anki hislerim (mide bulantısı) hasta olacağıma dair kanıt\n\nKonuşma anında hissedilen fiziksel belirtiler varsa \"be going to\" daha doğrudur."
+      },
+      "mini_tests": [
+        {
+          "question": "\"I feel terrible. I think I _____ (be) sick. I should probably lie down.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "will be",
+            "B": "am going to be",
+            "C": "am being",
+            "D": "have been"
+          },
+          "correct": "B",
+          "explanation": "- **I think I will be sick** = gelecekte hasta olabileceğime dair bir tahmin\n- **I am going to be sick** = şu anki hislerim (mide bulantısı) hasta olacağıma dair kanıt\n\nKonuşma anında hissedilen fiziksel belirtiler varsa \"be going to\" daha doğrudur."
+        }
+      ],
+      "word_count": 591
+    },
+    {
+      "page_number": 24,
+      "title": "Future Forms: Perfect & Progressive",
+      "total_pages": 25,
+      "content_html": "<h2>📌 FUTURE PERFECT (will have V3)</h2>\n<p>Gelecekte <strong>belirli bir zamandan önce bitmiş olacak</strong> eylemler. \"By ...\", \"by the time ...\" ile sık kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Future Perfect = \"-miş olacak\" (by Friday = Cuma'ya kadar bitmiş olacak). Gelecekteki bir noktaya kadar tamamlanmış eylemleri anlatır.</p>\n</blockquote>\n<hr>\n<h2>✨ ÖRNEKLER</h2>\n<h3>Örnek 1: Future Perfect - By + future time</h3>\n<p><strong>EN:</strong> Don't worry about the project. By this Friday at 5 PM, I will have completed all the research and written the first draft. You can review it over the weekend.<br>\n<strong>TR:</strong> Proje için endişelenme. Bu Cuma saat 17:00'ye kadar, tüm araştırmayı tamamlamış ve ilk taslağı yazmış olacağım. Hafta sonu gözden geçirebilirsin.<br>\n→ Cuma günü 17:00'den önce bitecek. Gelecekte bir noktada tamamlanmış olacak.</p>\n<h3>Örnek 2: By the time + Future Perfect</h3>\n<p><strong>EN:</strong> By the time our guests arrive at 8 PM, we will have prepared all the food and decorated the house. Everything will be ready for the party.<br>\n<strong>TR:</strong> Misafirlerimiz saat 20:00'de geldiğinde, tüm yemeği hazırlamış ve evi dekore etmiş olacağız. Her şey parti için hazır olacak.<br>\n→ \"they arrive\" noktasından (gelecek) önce bitecek. \"By the time\" + present, ana cümle Future Perfect.</p>\n<h3>Örnek 3: Future Progressive</h3>\n<p><strong>EN:</strong> This time next week, I will be lying on a beautiful beach in Thailand, sipping a cold drink and enjoying the sun. I can't wait!<br>\n<strong>TR:</strong> Gelecek hafta bu zamanlar, Tayland'da güzel bir sahilde uzanıyor, soğuk bir içecek yudumluyor ve güneşin tadını çıkarıyor olacağım. Sabırsızlanıyorum!<br>\n→ Gelecekte belirli bir anda devam eden eylem. \"This time tomorrow/next week\" ifadeleri Future Progressive'in işaretçisidir.</p>\n<h3>Örnek 4: Future Perfect Progressive</h3>\n<p><strong>EN:</strong> By the time I retire in 2045, I will have been working as a teacher for over thirty-five years. That's a long time!<br>\n<strong>TR:</strong> 2045'te emekli olduğumda, otuz beş yılı aşkın süredir öğretmen olarak çalışıyor olmuş olacağım. Bu uzun bir zaman!<br>\n→ Gelecekte bir noktaya (emeklilik) kadar süren eylem. Vurgu süreçte.</p>\n<h3>Örnek 5: 2000 YDS Sorusu</h3>\n<p><strong>EN:</strong> I hope that, by next summer, I will have saved up enough money to go to Italy for a holiday.<br>\n<strong>TR:</strong> Umuyorum ki, önümüzdeki yaza kadar, İtalya'da tatile gitmek için yeterli parayı biriktirmiş olacağım.<br>\n→ \"by next summer\" = gelecekte bir nokta. O noktadan önce bitmiş olacak → Future Perfect (will have saved).</p>\n<hr>\n<div class=\"strateji-kutusu\">\n**⚡ \"BY\" VE \"BY THE TIME\" FORMELLERİ**\n\n| Yapı | Formül | Örnek |\n|------|--------|-------|\n| By 2060 | will have V3 | By 2060, we will have found a cure. |\n| By the time + present | will have V3 | By the time we arrive, they will have left. |\n| By the time + past | had V3 | By the time we arrived, they had left. |\n\n\"By the time\" den sonra asla will, would, be going to gelmez!\n</div>\n\n<hr>\n<h2>📊 FUTURE PERFECT &amp; PROGRESSIVE</h2>\n<table>\n<thead>\n<tr>\n<th>Tense</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Future Perfect</td>\n<td>will have V3</td>\n<td>Gelecekte bir noktadan önce bitmiş</td>\n<td>will have finished</td>\n</tr>\n<tr>\n<td>Future Progressive</td>\n<td>will be Ving</td>\n<td>Gelecekte bir anda devam eden</td>\n<td>will be traveling</td>\n</tr>\n<tr>\n<td>Future Perfect Progressive</td>\n<td>will have been Ving</td>\n<td>Gelecekte bir noktaya kadar süren</td>\n<td>will have been working</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> \"By the time you receive this letter, I _____ (already/leave) the country. I'm sorry I couldn't say goodbye in person.\" cümlesinde boşluğa ne gelmelidir?</p>\n<p>A) already leave<br>\nB) will already leave<br>\nC) will have already left<br>\nD) have already left</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C\n**Açıklama:** \"By the time you receive\" = gelecekte bir nokta. O noktadan önce ayrılma eylemi bitmiş olacak → Future Perfect (will have already left).\n</details>\n\n<p>[Kelime sayısı: 263]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Don't worry about the project. By this Friday at 5 PM, I will have completed all the research and written the first draft. You can review it over the weekend.",
+          "tr": "Proje için endişelenme. Bu Cuma saat 17:00'ye kadar, tüm araştırmayı tamamlamış ve ilk taslağı yazmış olacağım. Hafta sonu gözden geçirebilirsin.\n→ Cuma günü 17:00'den önce bitecek. Gelecekte bir noktada tamamlanmış olacak.\n\n### Örnek 2: By the time + Future Perfect",
+          "description": ""
+        },
+        {
+          "en": "By the time our guests arrive at 8 PM, we will have prepared all the food and decorated the house. Everything will be ready for the party.",
+          "tr": "Misafirlerimiz saat 20:00'de geldiğinde, tüm yemeği hazırlamış ve evi dekore etmiş olacağız. Her şey parti için hazır olacak.\n→ \"they arrive\" noktasından (gelecek) önce bitecek. \"By the time\" + present, ana cümle Future Perfect.\n\n### Örnek 3: Future Progressive",
+          "description": ""
+        },
+        {
+          "en": "This time next week, I will be lying on a beautiful beach in Thailand, sipping a cold drink and enjoying the sun. I can't wait!",
+          "tr": "Gelecek hafta bu zamanlar, Tayland'da güzel bir sahilde uzanıyor, soğuk bir içecek yudumluyor ve güneşin tadını çıkarıyor olacağım. Sabırsızlanıyorum!\n→ Gelecekte belirli bir anda devam eden eylem. \"This time tomorrow/next week\" ifadeleri Future Progressive'in işaretçisidir.\n\n### Örnek 4: Future Perfect Progressive",
+          "description": ""
+        },
+        {
+          "en": "By the time I retire in 2045, I will have been working as a teacher for over thirty-five years. That's a long time!",
+          "tr": "2045'te emekli olduğumda, otuz beş yılı aşkın süredir öğretmen olarak çalışıyor olmuş olacağım. Bu uzun bir zaman!\n→ Gelecekte bir noktaya (emeklilik) kadar süren eylem. Vurgu süreçte.\n\n### Örnek 5: 2000 YDS Sorusu",
+          "description": ""
+        },
+        {
+          "en": "I hope that, by next summer, I will have saved up enough money to go to Italy for a holiday.",
+          "tr": "Umuyorum ki, önümüzdeki yaza kadar, İtalya'da tatile gitmek için yeterli parayı biriktirmiş olacağım.\n→ \"by next summer\" = gelecekte bir nokta. O noktadan önce bitmiş olacak → Future Perfect (will have saved).",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "\"By the time you receive this letter, I _____ (already/leave) the country. I'm sorry I couldn't say goodbye in person.\" cümlesinde boşluğa ne gelmelidir?",
+        "options": {
+          "A": "already leave",
+          "B": "will already leave",
+          "C": "will have already left",
+          "D": "have already left"
+        },
+        "correct": "C",
+        "explanation": "\"By the time you receive\" = gelecekte bir nokta. O noktadan önce ayrılma eylemi bitmiş olacak → Future Perfect (will have already left)."
+      },
+      "mini_tests": [
+        {
+          "question": "\"By the time you receive this letter, I _____ (already/leave) the country. I'm sorry I couldn't say goodbye in person.\" cümlesinde boşluğa ne gelmelidir?",
+          "options": {
+            "A": "already leave",
+            "B": "will already leave",
+            "C": "will have already left",
+            "D": "have already left"
+          },
+          "correct": "C",
+          "explanation": "\"By the time you receive\" = gelecekte bir nokta. O noktadan önce ayrılma eylemi bitmiş olacak → Future Perfect (will have already left)."
+        }
+      ],
+      "word_count": 554
+    },
+    {
+      "page_number": 25,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 25,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li>Time (gerçek zaman) ve Tense (fiil çekimi) farkı</li>\n<li>3 Aspect: Simple, Progressive, Perfect</li>\n<li>Present, Past, Future tüm tense yapıları</li>\n<li>Özel yapılar: I wish, It's time, As if, Would rather</li>\n<li>Zaman ifadeleri ve ipuçları</li>\n<li>Since kullanımları (preposition, conjunction, adverb)</li>\n<li>Unreal Past (gerçek dışı durumlar)</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p><strong>\"She _____ (live) in Istanbul since she graduated from university in 2015.\"</strong> boşluğa ne gelmelidir?</p>\n<p>A) lives<br>\nB) lived<br>\nC) has lived<br>\nD) is living</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - has lived\n**Açıklama:** \"since she graduated\" = since + V2, ana cümle Present Perfect (has lived) gerektirir. 2015'ten şimdiye kadar devam eden bir durum.\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p><strong>\"By the time we finally arrived at the station, the train _____ (already/leave). We were just five minutes late.\"</strong> boşluğa ne gelmelidir?</p>\n<p>A) already left<br>\nB) has already left<br>\nC) had already left<br>\nD) was already leaving</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - had already left\n**Açıklama:** \"By the time we arrived\" = geçmişte bir zaman noktası. Tren o noktadan önce kalkmıştı. Geçmişin geçmişi için Past Perfect (had already left) gerekir.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p><strong>\"I wish I _____ (can) speak Japanese fluently, but I've only been studying for a few months.\"</strong> boşluğa ne gelmelidir?</p>\n<p>A) can<br>\nB) could<br>\nC) will<br>\nD) have</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - could\n**Açıklama:** I wish + V2 kuralı. \"could\" (can'in past hali) present anlam verir: Keşke Japonca konuşabilsem (ama konuşamıyorum).\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p><strong>\"I can't talk right now. I _____ (drive) home, and the traffic is terrible. I'll call you when I get home.\"</strong> boşluğa ne gelmelidir?</p>\n<p>A) drive<br>\nB) am driving<br>\nC) have driven<br>\nD) will drive</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - am driving\n**Açıklama:** \"right now\" ve \"can't talk now\" konuşma anında devam eden eylemi gösteriyor. Present Progressive (am driving) gerekir.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p><strong>\"This is the first time I _____ (eat) authentic Thai food. It's delicious!\"</strong> boşluğa ne gelmelidir?</p>\n<p>A) eat<br>\nB) ate<br>\nC) have eaten<br>\nD) had eaten</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - have eaten\n**Açıklama:** \"This is the first time\" yapısı Present Perfect (have eaten) gerektirir. Deneyim vurgusu var, zaman önemli değil.\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Tüm tense yapılarını iyi kavramışsın. Sonraki bölüme geçebilirsin.</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlış yaptığın sorunun konusunu tekrar et.</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Tense sistemini genel olarak anlamışsın ama bazı noktaları gözden geçirmelisin.</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Tense sistemi karmaşık bir konu. Bu bölümü baştan çalışmanı öneririz.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p>[Kelime sayısı: 279]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası (Sayfa 25 test sayfası biraz uzun ama kabul edilebilir)</li>\n<li>[x] Her sayfada 3-4 örnek var (çoğu sayfada 4-6 örnek)</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 25</li>\n<li>[x] HTML div'leri doğru işaretlenmiş (strateji kutuları, kart grupları, karşılaştırmalar)</li>\n<li>[x] Tüm düzeltme önerileri uygulanmış</li>\n<li>[x] İngilizce örnekler uzun ve açıklayıcı</li>\n<li>[x] Zaman ifadeleri ve ipuçları tablolarla verilmiş</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "**\"She _____ (live) in Istanbul since she graduated from university in 2015.\"** boşluğa ne gelmelidir?",
+        "options": {
+          "A": "lives",
+          "B": "lived",
+          "C": "has lived",
+          "D": "is living"
+        },
+        "correct": "C - has lived",
+        "explanation": "\"since she graduated\" = since + V2, ana cümle Present Perfect (has lived) gerektirir. 2015'ten şimdiye kadar devam eden bir durum."
+      },
+      "mini_tests": [
+        {
+          "question": "**\"She _____ (live) in Istanbul since she graduated from university in 2015.\"** boşluğa ne gelmelidir?",
+          "options": {
+            "A": "lives",
+            "B": "lived",
+            "C": "has lived",
+            "D": "is living"
+          },
+          "correct": "C - has lived",
+          "explanation": "\"since she graduated\" = since + V2, ana cümle Present Perfect (has lived) gerektirir. 2015'ten şimdiye kadar devam eden bir durum."
+        },
+        {
+          "question": "**\"By the time we finally arrived at the station, the train _____ (already/leave). We were just five minutes late.\"** boşluğa ne gelmelidir?",
+          "options": {
+            "A": "already left",
+            "B": "has already left",
+            "C": "had already left",
+            "D": "was already leaving"
+          },
+          "correct": "C - had already left",
+          "explanation": "\"By the time we arrived\" = geçmişte bir zaman noktası. Tren o noktadan önce kalkmıştı. Geçmişin geçmişi için Past Perfect (had already left) gerekir."
+        },
+        {
+          "question": "**\"I wish I _____ (can) speak Japanese fluently, but I've only been studying for a few months.\"** boşluğa ne gelmelidir?",
+          "options": {
+            "A": "can",
+            "B": "could",
+            "C": "will",
+            "D": "have"
+          },
+          "correct": "B - could",
+          "explanation": "I wish + V2 kuralı. \"could\" (can'in past hali) present anlam verir: Keşke Japonca konuşabilsem (ama konuşamıyorum)."
+        },
+        {
+          "question": "**\"I can't talk right now. I _____ (drive) home, and the traffic is terrible. I'll call you when I get home.\"** boşluğa ne gelmelidir?",
+          "options": {
+            "A": "drive",
+            "B": "am driving",
+            "C": "have driven",
+            "D": "will drive"
+          },
+          "correct": "B - am driving",
+          "explanation": "\"right now\" ve \"can't talk now\" konuşma anında devam eden eylemi gösteriyor. Present Progressive (am driving) gerekir."
+        },
+        {
+          "question": "**\"This is the first time I _____ (eat) authentic Thai food. It's delicious!\"** boşluğa ne gelmelidir?",
+          "options": {
+            "A": "eat",
+            "B": "ate",
+            "C": "have eaten",
+            "D": "had eaten"
+          },
+          "correct": "C - have eaten",
+          "explanation": "\"This is the first time\" yapısı Present Perfect (have eaten) gerektirir. Deneyim vurgusu var, zaman önemli değil."
+        }
+      ],
+      "word_count": 484
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "excel_file": "C:\\yazilim_projeler\\ingilizce_app1\\docs\\dictionary.xlsx",
+  "sheet": "Sheet1",
+  "output_db": "C:\\yazilim_projeler\\ingilizce_app1\\assets\\db\\dictionary_local.sqlite",
+  "dataset_version": "2026-03-04-v1",
+  "source_checksum": "e1f606d276dd7b4565bf0204536ad0c0c11421e609fbae8a917d367d1e4f5b68",
+  "rows_read": 121783,
+  "rows_written": 121772,
+  "duplicates": 3,
+  "invalid_rows": 8,
+  "empty_meaning_rows": 0,
+  "db_size_bytes": 36057088,
+  "db_size_mb": 34.39,
+  "duration_ms": 18129,
+  "generated_at": "2026-03-04T00:18:13.707198+00:00"
+}

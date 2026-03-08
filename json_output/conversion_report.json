@@ -1,0 +1,10 @@
+{
+  "created_at_utc": "2026-03-05T16:03:09.625953+00:00",
+  "input_dir": "docs\\gramer",
+  "output_dir": "json_output",
+  "module_count": 12,
+  "page_count": 264,
+  "example_count": 1031,
+  "test_count": 293,
+  "warnings": []
+}

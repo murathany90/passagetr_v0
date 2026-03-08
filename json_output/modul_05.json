@@ -1,0 +1,1198 @@
+{
+  "sira": 5,
+  "baslik": "Gerunds and Infinitives (İsim Fiiller ve Mastarlar)",
+  "dosya_adi": "05_gerunds_infinitives.md",
+  "toplam_sayfa": 20,
+  "icon": "📝",
+  "renk": "#F39C12",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "Gerund (Ving) Nedir?",
+      "total_pages": 20,
+      "content_html": "<h2>📌 FİİLLERİ İSİMLEŞTİRMEK</h2>\n<p>İngilizce'de fiilleri \"-ing\" takısı ekleyerek (Gerund) veya önüne \"to\" getirerek (Infinitive) isim gibi kullanabiliriz. Bu yapılar cümlede özne, nesne veya diğer görevlerde bulunabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir fiili özne olarak kullanmak istediğinde, büyük ihtimalle \"Ving\" formunu kullanacaksın!</p>\n</blockquote>\n<hr>\n<h2>📏 GERUND'UN ÖZNE OLARAK KULLANIMI</h2>\n<p>\"Ving\" yapısı cümlede özne olduğunda, fiil tekil özneye göre çekimlenir. Eğer iki Ving \"and\" ile bağlanırsa, fiil çoğul olur.</p>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> Learning a new language is one of the most rewarding challenges an adult can undertake in their lifetime.<br>\n<strong>TR:</strong> Yeni bir dil öğrenmek, bir yetişkinin hayatı boyunca girişebileceği en ödüllendirici zorluklardan biridir.<br>\n→ <strong>Açıklama:</strong> Bu cümlede \"learning\" (öğrenmek) fiili Ving yapısıyla özne pozisyonunda kullanılmıştır. Tek bir Ving olduğu için yardımcı fiil \"is\" (tekil) olarak gelmiştir. Bu yapı, eylemi bir kavram haline getirerek cümlenin konusu yapar.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> Listening to classical music while studying helps students concentrate better and retain information for longer periods.<br>\n<strong>TR:</strong> Ders çalışırken klasik müzik dinlemek, öğrencilerin daha iyi konsantre olmasına ve bilgileri daha uzun süre hatırlamasına yardımcı olur.<br>\n→ <strong>Açıklama:</strong> Burada \"listening\" Ving yapısı öznedir ve arkasında \"to classical music\" (edat tümleci) ile \"while studying\" (zarf cümleciği) gibi ek öğeler alarak genişletilmiş bir özne grubu oluşturmuştur. Fiil yine tekil (helps) gelmiştir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Reading books and listening to podcasts are two of the most effective ways to improve your vocabulary without memorizing word lists.<br>\n<strong>TR:</strong> Kitap okumak ve podcast dinlemek, kelime listeleri ezberlemeden kelime dağarcığını geliştirmenin en etkili iki yoludur.<br>\n→ <strong>Açıklama:</strong> \"Reading\" ve \"listening\" iki ayrı Ving yapısı \"and\" ile bağlanarak çoğul bir özne oluşturmuştur. Bu nedenle yardımcı fiil \"are\" (çoğul) olarak kullanılmıştır. Bu kural, iki ayrı aktiviteden bahsederken fiil uyumuna dikkat etmemiz gerektiğini gösterir.</p>\n<hr>\n<h2>📊 GERUND'UN CÜMLEDE KULLANIMI</h2>\n<table>\n<thead>\n<tr>\n<th>Kategori</th>\n<th>Örnek</th>\n<th>Açıklama</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Tekil Özne</strong></td>\n<td>Learning is important</td>\n<td>Tek Ving → tekil fiil</td>\n</tr>\n<tr>\n<td><strong>Çoğul Özne</strong></td>\n<td>Reading and writing are skills</td>\n<td>İki Ving → çoğul fiil</td>\n</tr>\n<tr>\n<td><strong>Genişletilmiş Özne</strong></td>\n<td>Going to bed early helps</td>\n<td>Ving + nesne/tümleç alabilir</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> <strong><em>_</em></strong> regularly is essential for maintaining both physical and mental health throughout your life.</p>\n<p>A) Exercise<br>\nB) To exercise<br>\nC) Exercising<br>\nD) Exercised</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) Exercising\n**Açıklama:** Cümlede fiil \"is\" (tekil) olduğu için özne pozisyonunda bir isim gereklidir. Fiil kökü \"exercise\" Ving yapısıyla isimleştirilerek özne yapılmalıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 235]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "Learning a new language is one of the most rewarding challenges an adult can undertake in their lifetime.",
+          "tr": "Yeni bir dil öğrenmek, bir yetişkinin hayatı boyunca girişebileceği en ödüllendirici zorluklardan biridir.",
+          "description": "Bu cümlede \"learning\" (öğrenmek) fiili Ving yapısıyla özne pozisyonunda kullanılmıştır. Tek bir Ving olduğu için yardımcı fiil \"is\" (tekil) olarak gelmiştir. Bu yapı, eylemi bir kavram haline getirerek cümlenin konusu yapar.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "Listening to classical music while studying helps students concentrate better and retain information for longer periods.",
+          "tr": "Ders çalışırken klasik müzik dinlemek, öğrencilerin daha iyi konsantre olmasına ve bilgileri daha uzun süre hatırlamasına yardımcı olur.",
+          "description": "Burada \"listening\" Ving yapısı öznedir ve arkasında \"to classical music\" (edat tümleci) ile \"while studying\" (zarf cümleciği) gibi ek öğeler alarak genişletilmiş bir özne grubu oluşturmuştur. Fiil yine tekil (helps) gelmiştir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "Reading books and listening to podcasts are two of the most effective ways to improve your vocabulary without memorizing word lists.",
+          "tr": "Kitap okumak ve podcast dinlemek, kelime listeleri ezberlemeden kelime dağarcığını geliştirmenin en etkili iki yoludur.",
+          "description": "\"Reading\" ve \"listening\" iki ayrı Ving yapısı \"and\" ile bağlanarak çoğul bir özne oluşturmuştur. Bu nedenle yardımcı fiil \"are\" (çoğul) olarak kullanılmıştır. Bu kural, iki ayrı aktiviteden bahsederken fiil uyumuna dikkat etmemiz gerektiğini gösterir."
+        }
+      ],
+      "mini_test": {
+        "question": "_______ regularly is essential for maintaining both physical and mental health throughout your life.",
+        "options": {
+          "A": "Exercise",
+          "B": "To exercise",
+          "C": "Exercising",
+          "D": "Exercised"
+        },
+        "correct": "C) Exercising",
+        "explanation": "Cümlede fiil \"is\" (tekil) olduğu için özne pozisyonunda bir isim gereklidir. Fiil kökü \"exercise\" Ving yapısıyla isimleştirilerek özne yapılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "_______ regularly is essential for maintaining both physical and mental health throughout your life.",
+          "options": {
+            "A": "Exercise",
+            "B": "To exercise",
+            "C": "Exercising",
+            "D": "Exercised"
+          },
+          "correct": "C) Exercising",
+          "explanation": "Cümlede fiil \"is\" (tekil) olduğu için özne pozisyonunda bir isim gereklidir. Fiil kökü \"exercise\" Ving yapısıyla isimleştirilerek özne yapılmalıdır."
+        }
+      ],
+      "word_count": 370
+    },
+    {
+      "page_number": 2,
+      "title": "Gerund: Fiil + Nesne (Ving)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 Ving'İN FİİL NESNESİ OLARAK 3 GÖREVİ</h2>\n<p>Bazı fiillerden sonra gelen Ving yapıları, 3 farklı anlama gönderme yapar: değişmeyen durumlar, geçmiş eylemler ve tavsiye/öneri.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir fiilden sonra Ving görürsen, o eylemin ya genel bir durum olduğunu ya da ana fiilden ÖNCE gerçekleştiğini düşün!</p>\n</blockquote>\n<hr>\n<h2>📏 1) GEÇMİŞTEN GELECEĞE DEĞİŞMEYEN DURUMLAR</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> My grandmother absolutely enjoys taking long walks in the park every single morning regardless of the weather conditions.<br>\n<strong>TR:</strong> Büyükannem, hava koşulları ne olursa olsun her sabah parkta uzun yürüyüşler yapmayı kesinlikle çok sever.<br>\n→ <strong>Açıklama:</strong> \"Enjoy\" fiilinden sonra gelen \"taking\" Ving yapısı, büyükannenin geçmişte de şimdi de yaptığı ve gelecekte de yapmaya devam edeceği değişmeyen bir alışkanlığı ifade eder. Bu tür fiiller (like, love, hate, enjoy, dislike) genel eğilimleri anlatır.</p>\n<h2>📏 2) GEÇMİŞE GÖNDERME YAPMA (ÖNCELİK)</h2>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The politician reluctantly admitted accepting illegal campaign funds during the previous election period.<br>\n<strong>TR:</strong> Politikacı, önceki seçim döneminde yasa dışı kampanya fonları kabul ettiğini isteksizce itiraf etti.<br>\n→ <strong>Açıklama:</strong> \"Admitted\" (itiraf etti) fiilinden sonra \"accepting\" Ving kullanılmıştır. Burada \"para kabul etme\" eylemi, \"itiraf etme\" eyleminden DAHA ÖNCE gerçekleşmiştir. Geçmişe gönderme yapan fiiller (admit, deny, regret) Ving alır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The suspect denied stealing any confidential documents from the company's secure server last night.<br>\n<strong>TR:</strong> Şüpheli, dün gece şirketin güvenli sunucusundan herhangi bir gizli belge çaldığını inkar etti.<br>\n→ <strong>Açıklama:</strong> \"Denied\" (inkar etti) fiili, geçmişte olan bir eylemi (çalma) ifade eder. \"Stealing\" Ving yapısı, inkar edilen eylemin, inkar eyleminden önce gerçekleştiğini vurgular.</p>\n<h2>📏 3) TAVSİYE, ÖNERİ, ÖĞÜT</h2>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The nutritionist suggested drinking at least eight glasses of water daily to improve digestion and skin health.<br>\n<strong>TR:</strong> Beslenme uzmanı, sindirimi ve cilt sağlığını iyileştirmek için günde en az sekiz bardak su içilmesini önerdi.<br>\n→ <strong>Açıklama:</strong> \"Suggested\" (önerdi) fiilinden sonra \"drinking\" Ving kullanılmıştır. Tavsiye, öneri bildiren fiiller (suggest, recommend, advise) kendilerinden sonra Ving alır. Burada öneri, genel bir tavsiyedir.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nDevamında Ving alan fiiller için %95 doğru çalışan mantık: Eğer nesnedeki olay ana fiilden ÖNCE olmuşsa Ving kullan. \"İntihar etmeyi düşünüyor\" değil, \"Parayı çaldığını itiraf etti\" mantığı!\n</div>\n\n<hr>\n<h2>📊 Ving ALAN FİİLLER</h2>\n<table>\n<thead>\n<tr>\n<th>Anlam</th>\n<th>Fiil Örnekleri</th>\n<th>Örnek Cümle</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Genel Durum</strong></td>\n<td>like, love, hate, enjoy</td>\n<td>I enjoy swimming.</td>\n</tr>\n<tr>\n<td><strong>Geçmişe Gönderme</strong></td>\n<td>admit, deny, regret</td>\n<td>He denied stealing.</td>\n</tr>\n<tr>\n<td><strong>Tavsiye/Öneri</strong></td>\n<td>suggest, recommend</td>\n<td>She suggested waiting.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The manager recommended <strong><em>_</em></strong> the report carefully before submitting it to the board of directors.</p>\n<p>A) to check<br>\nB) check<br>\nC) checking<br>\nD) checked</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) checking\n**Açıklama:** \"Recommended\" (tavsiye etti) fiili, öneri bildiren fiiller grubundadır ve kendisinden sonra mutlaka Ving alır.\n</details>\n\n<p><strong>[Kelime sayısı: 242]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "My grandmother absolutely enjoys taking long walks in the park every single morning regardless of the weather conditions.",
+          "tr": "Büyükannem, hava koşulları ne olursa olsun her sabah parkta uzun yürüyüşler yapmayı kesinlikle çok sever.",
+          "description": "\"Enjoy\" fiilinden sonra gelen \"taking\" Ving yapısı, büyükannenin geçmişte de şimdi de yaptığı ve gelecekte de yapmaya devam edeceği değişmeyen bir alışkanlığı ifade eder. Bu tür fiiller (like, love, hate, enjoy, dislike) genel eğilimleri anlatır."
+        },
+        {
+          "en": "The politician reluctantly admitted accepting illegal campaign funds during the previous election period.",
+          "tr": "Politikacı, önceki seçim döneminde yasa dışı kampanya fonları kabul ettiğini isteksizce itiraf etti.",
+          "description": "\"Admitted\" (itiraf etti) fiilinden sonra \"accepting\" Ving kullanılmıştır. Burada \"para kabul etme\" eylemi, \"itiraf etme\" eyleminden DAHA ÖNCE gerçekleşmiştir. Geçmişe gönderme yapan fiiller (admit, deny, regret) Ving alır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The suspect denied stealing any confidential documents from the company's secure server last night.",
+          "tr": "Şüpheli, dün gece şirketin güvenli sunucusundan herhangi bir gizli belge çaldığını inkar etti.",
+          "description": "\"Denied\" (inkar etti) fiili, geçmişte olan bir eylemi (çalma) ifade eder. \"Stealing\" Ving yapısı, inkar edilen eylemin, inkar eyleminden önce gerçekleştiğini vurgular."
+        },
+        {
+          "en": "The nutritionist suggested drinking at least eight glasses of water daily to improve digestion and skin health.",
+          "tr": "Beslenme uzmanı, sindirimi ve cilt sağlığını iyileştirmek için günde en az sekiz bardak su içilmesini önerdi.",
+          "description": "\"Suggested\" (önerdi) fiilinden sonra \"drinking\" Ving kullanılmıştır. Tavsiye, öneri bildiren fiiller (suggest, recommend, advise) kendilerinden sonra Ving alır. Burada öneri, genel bir tavsiyedir.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nDevamında Ving alan fiiller için %95 doğru çalışan mantık: Eğer nesnedeki olay ana fiilden ÖNCE olmuşsa Ving kullan. \"İntihar etmeyi düşünüyor\" değil, \"Parayı çaldığını itiraf etti\" mantığı!\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The manager recommended _______ the report carefully before submitting it to the board of directors.",
+        "options": {
+          "A": "to check",
+          "B": "check",
+          "C": "checking",
+          "D": "checked"
+        },
+        "correct": "C) checking",
+        "explanation": "\"Recommended\" (tavsiye etti) fiili, öneri bildiren fiiller grubundadır ve kendisinden sonra mutlaka Ving alır."
+      },
+      "mini_tests": [
+        {
+          "question": "The manager recommended _______ the report carefully before submitting it to the board of directors.",
+          "options": {
+            "A": "to check",
+            "B": "check",
+            "C": "checking",
+            "D": "checked"
+          },
+          "correct": "C) checking",
+          "explanation": "\"Recommended\" (tavsiye etti) fiili, öneri bildiren fiiller grubundadır ve kendisinden sonra mutlaka Ving alır."
+        }
+      ],
+      "word_count": 428
+    },
+    {
+      "page_number": 3,
+      "title": "Strateji: Ving vs to Vo Zaman Mantığı",
+      "total_pages": 20,
+      "content_html": "<h2>📌 FİİLLERİ ZAMAN ÇİZGİSİNDE DÜŞÜN</h2>\n<p>Bir fiilden sonra gelecek yapıyı belirlemenin en kolay yolu: Eylem ana fiilden ÖNCE mi, SONRA mı yoksa ZAMANSIZ (genel) mı?</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Geçmişe git → Ving, Geleceğe git → to Vo, Genel durum → Ving!</p>\n</blockquote>\n<hr>\n<h2>📏 ZAMAN MANTIĞI TABLOSU</h2>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>GEÇMİŞ + GENEL → VING</strong></div>\n    <div class=\"turkce\">like, hate, enjoy, admit, deny, suggest</div>\n</div>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>GELECEK → TO VO</strong></div>\n    <div class=\"turkce\">plan, hope, decide, want, intend</div>\n</div>\n\n<hr>\n<h2>📏 1) GENEL/GECMİŞE GÖNDERME YAPAN FİİLLER (Ving ALIR)</h2>\n<p><strong>Örnek 1: (Genel)</strong><br>\n<strong>EN:</strong> Sarah really likes going out for dinner with her colleagues on Friday evenings after a long and tiring work week.<br>\n<strong>TR:</strong> Sarah, uzun ve yorucu bir çalışma haftasından sonra Cuma akşamları iş arkadaşlarıyla dışarıda yemek yemeyi gerçekten sever.<br>\n→ <strong>Açıklama:</strong> \"Likes\" (sever) genel bir eğilim belirtir. \"Going out\" Ving'i, bu eğilimin geçmişte, şimdi ve gelecekte değişmediğini gösterir. Like, love, hate, enjoy gibi fiiller genel durumlar için Ving alır.</p>\n<p><strong>Örnek 2: (Geçmiş)</strong><br>\n<strong>EN:</strong> The witness clearly remembered seeing the suspect near the crime scene just a few minutes before the incident.<br>\n<strong>TR:</strong> Tanık, şüpheliyi olaydan sadece birkaç dakika önce suç mahallinin yakınında gördüğünü açıkça hatırladı.<br>\n→ <strong>Açıklama:</strong> \"Remembered\" (hatırladı) fiilinden sonra \"seeing\" Ving kullanılmıştır. \"Görme\" eylemi, \"hatırlama\" eyleminden DAHA ÖNCE gerçekleşmiştir. Bu yüzden Ving kullanılır.</p>\n<p><strong>Örnek 3: (Geçmiş)</strong><br>\n<strong>EN:</strong> Mark admitted breaking his mother's favorite vase while playing football in the living room yesterday afternoon.<br>\n<strong>TR:</strong> Mark, dün öğleden sonra oturma odasında futbol oynarken annesinin en sevdiği vazoyu kırdığını itiraf etti.<br>\n→ <strong>Açıklama:</strong> \"Admitted\" (itiraf etti) geçmiş bir eylemi kabul eder. Vazo kırma eylemi, itiraf etme eyleminden önce olmuştur. Admit, deny, regret gibi fiiller mutlaka Ving alır.</p>\n<h2>📏 2) GELECEĞE GÖNDERME YAPAN FİİLLER (to Vo ALIR)</h2>\n<p><strong>Örnek 4: (Gelecek)</strong><br>\n<strong>EN:</strong> After graduating from university, Emily plans to go abroad and work as a volunteer teacher in a developing country.<br>\n<strong>TR:</strong> Üniversiteden mezun olduktan sonra Emily, yurtdışına gidip gelişmekte olan bir ülkede gönüllü öğretmen olarak çalışmayı planlıyor.<br>\n→ <strong>Açıklama:</strong> \"Plans\" (planlıyor) fiili geleceğe yönelik bir niyeti ifade eder. \"To go abroad\" (yurtdışına gitmek) eylemi, planlama eyleminden SONRA gerçekleşecektir. Bu nedenle to Vo kullanılır.</p>\n<p><strong>Örnek 5: (Gelecek)</strong><br>\n<strong>EN:</strong> Michael hopes to pass the final exam with flying colors so that he can get accepted into a top university.<br>\n<strong>TR:</strong> Michael, iyi bir üniversiteye kabul edilebilmek için final sınavını çok yüksek bir puanla geçmeyi umuyor.<br>\n→ <strong>Açıklama:</strong> \"Hopes\" (umuyor) gelecekle ilgili bir beklentidir. Sınavı geçme eylemi, umma eyleminden sonra gerçekleşecektir. Hope, wish, expect gibi fiiller to Vo alır.</p>\n<p><strong>Örnek 6: (Gelecek)</strong><br>\n<strong>EN:</strong> At the last minute, Jessica decided to join her friends on their weekend trip to the coastal town.<br>\n<strong>TR:</strong> Son anda Jessica, arkadaşlarının sahil kasabasına yapacakları hafta sonu gezisine katılmaya karar verdi.<br>\n→ <strong>Açıklama:</strong> \"Decided\" (karar verdi) bir niyeti ifade eder. Katılma eylemi, karar verme eyleminden sonra gerçekleşecektir. Decide, intend, aim gibi fiiller to Vo alır.</p>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> \"Intend ______\" boşluğuna ne gelmelidir?</p>\n<p>A) to study<br>\nB) studying<br>\nC) studied<br>\nD) study</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) to study\n**Açıklama:** \"Intend\" (niyet etmek) geleceğe yönelik bir eylemi ifade eder. Niyet edilen eylem, niyet etme eyleminden sonra gerçekleşeceği için to Vo kullanılmalıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 241]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "Sarah really likes going out for dinner with her colleagues on Friday evenings after a long and tiring work week.",
+          "tr": "Sarah, uzun ve yorucu bir çalışma haftasından sonra Cuma akşamları iş arkadaşlarıyla dışarıda yemek yemeyi gerçekten sever.",
+          "description": "\"Likes\" (sever) genel bir eğilim belirtir. \"Going out\" Ving'i, bu eğilimin geçmişte, şimdi ve gelecekte değişmediğini gösterir. Like, love, hate, enjoy gibi fiiller genel durumlar için Ving alır.\n\n**Örnek 2: (Geçmiş)**"
+        },
+        {
+          "en": "The witness clearly remembered seeing the suspect near the crime scene just a few minutes before the incident.",
+          "tr": "Tanık, şüpheliyi olaydan sadece birkaç dakika önce suç mahallinin yakınında gördüğünü açıkça hatırladı.",
+          "description": "\"Remembered\" (hatırladı) fiilinden sonra \"seeing\" Ving kullanılmıştır. \"Görme\" eylemi, \"hatırlama\" eyleminden DAHA ÖNCE gerçekleşmiştir. Bu yüzden Ving kullanılır.\n\n**Örnek 3: (Geçmiş)**"
+        },
+        {
+          "en": "Mark admitted breaking his mother's favorite vase while playing football in the living room yesterday afternoon.",
+          "tr": "Mark, dün öğleden sonra oturma odasında futbol oynarken annesinin en sevdiği vazoyu kırdığını itiraf etti.",
+          "description": "\"Admitted\" (itiraf etti) geçmiş bir eylemi kabul eder. Vazo kırma eylemi, itiraf etme eyleminden önce olmuştur. Admit, deny, regret gibi fiiller mutlaka Ving alır."
+        },
+        {
+          "en": "After graduating from university, Emily plans to go abroad and work as a volunteer teacher in a developing country.",
+          "tr": "Üniversiteden mezun olduktan sonra Emily, yurtdışına gidip gelişmekte olan bir ülkede gönüllü öğretmen olarak çalışmayı planlıyor.",
+          "description": "\"Plans\" (planlıyor) fiili geleceğe yönelik bir niyeti ifade eder. \"To go abroad\" (yurtdışına gitmek) eylemi, planlama eyleminden SONRA gerçekleşecektir. Bu nedenle to Vo kullanılır.\n\n**Örnek 5: (Gelecek)**"
+        },
+        {
+          "en": "Michael hopes to pass the final exam with flying colors so that he can get accepted into a top university.",
+          "tr": "Michael, iyi bir üniversiteye kabul edilebilmek için final sınavını çok yüksek bir puanla geçmeyi umuyor.",
+          "description": "\"Hopes\" (umuyor) gelecekle ilgili bir beklentidir. Sınavı geçme eylemi, umma eyleminden sonra gerçekleşecektir. Hope, wish, expect gibi fiiller to Vo alır.\n\n**Örnek 6: (Gelecek)**"
+        },
+        {
+          "en": "At the last minute, Jessica decided to join her friends on their weekend trip to the coastal town.",
+          "tr": "Son anda Jessica, arkadaşlarının sahil kasabasına yapacakları hafta sonu gezisine katılmaya karar verdi.",
+          "description": "\"Decided\" (karar verdi) bir niyeti ifade eder. Katılma eylemi, karar verme eyleminden sonra gerçekleşecektir. Decide, intend, aim gibi fiiller to Vo alır."
+        }
+      ],
+      "mini_test": {
+        "question": "\"Intend ______\" boşluğuna ne gelmelidir?",
+        "options": {
+          "A": "to study",
+          "B": "studying",
+          "C": "studied",
+          "D": "study"
+        },
+        "correct": "A) to study",
+        "explanation": "\"Intend\" (niyet etmek) geleceğe yönelik bir eylemi ifade eder. Niyet edilen eylem, niyet etme eyleminden sonra gerçekleşeceği için to Vo kullanılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "\"Intend ______\" boşluğuna ne gelmelidir?",
+          "options": {
+            "A": "to study",
+            "B": "studying",
+            "C": "studied",
+            "D": "study"
+          },
+          "correct": "A) to study",
+          "explanation": "\"Intend\" (niyet etmek) geleceğe yönelik bir eylemi ifade eder. Niyet edilen eylem, niyet etme eyleminden sonra gerçekleşeceği için to Vo kullanılmalıdır."
+        }
+      ],
+      "word_count": 527
+    },
+    {
+      "page_number": 4,
+      "title": "Preposition + Ving (Edatlardan Sonra Ving)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KURAL: EDATTAN SONRA FİİL GELİRSE Ving OLUR</h2>\n<p>İngilizce'de bir preposition (edat) - in, on, at, for, by, without, about, etc. - hemen ardından bir fiil gelmesi gerekiyorsa, bu fiil mutlaka Ving formunda olmalıdır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"To\" gördüğünde dikkat et! Eğer \"to\" bir edatsa (be used to, look forward to gibi) arkasından Ving gelir. Eğer \"to\" mastar ekise (infinitive) arkasından Vo gelir.</p>\n</blockquote>\n<hr>\n<h2>📏 TEMEL KURAL: PREPOSITION + VING</h2>\n<p><strong>Örnek 1: (at + Ving)</strong><br>\n<strong>EN:</strong> Despite practicing every day for months, John is still not very good at playing the guitar because he has no sense of rhythm.<br>\n<strong>TR:</strong> Aylardır her gün pratik yapmasına rağmen, John hâlâ gitar çalmada çok iyi değil çünkü ritim duygusu yok.<br>\n→ <strong>Açıklama:</strong> \"At\" edatından sonra \"playing\" Ving kullanılmıştır. \"Good at\" kalıbı bir yeteneği ifade eder ve arkasından mutlaka Ving gelir. Edatlar sadece isim, zamir veya Ving alabilir.</p>\n<p><strong>Örnek 2: (on + Ving)</strong><br>\n<strong>EN:</strong> My boss insisted on finishing the entire project by Friday, even if it means working overtime every evening this week.<br>\n<strong>TR:</strong> Patronum, bu hafta her akşam fazla mesai yapmak anlamına gelse bile, tüm projenin Cuma gününe kadar bitirilmesinde ısrar etti.<br>\n→ <strong>Açıklama:</strong> \"Insisted on\" (ısrar etti) kalıbında \"on\" bir edattır ve arkasından \"finishing\" Ving gelmiştir. Edat içeren tüm fiil kalıpları (look forward to, object to, think about) bu kurala uyar.</p>\n<p><strong>Örnek 3: (for + Ving)</strong><br>\n<strong>EN:</strong> The teacher criticized the student for not doing his homework and for distracting others during the lesson.<br>\n<strong>TR:</strong> Öğretmen, öğrenciyi ödevini yapmadığı ve ders sırasında başkalarını rahatsız ettiği için eleştirdi.<br>\n→ <strong>Açıklama:</strong> \"For\" edatından sonra \"doing\" Ving kullanılmıştır. Burada \"for + Ving\" bir eylemin nedenini belirtir. Olumsuz hali \"for not doing\" şeklindedir.</p>\n<hr>\n<h2>📏 ÖZEL DURUMLAR: BY ve WITHOUT</h2>\n<p><strong>Örnek 4: (by + Ving = -erek, -arak)</strong><br>\n<strong>EN:</strong> By selling all of his old comic books and video games online, Tom managed to raise enough money to buy a new laptop.<br>\n<strong>TR:</strong> Tom, tüm eski çizgi romanlarını ve video oyunlarını çevrimiçi satarak yeni bir dizüstü bilgisayar almak için yeterli parayı toplamayı başardı.<br>\n→ <strong>Açıklama:</strong> \"By + Ving\" yapısı bir eylemin NASIL yapıldığını, yöntemini anlatır. Türkçe'de \"-erek, -arak\" ekleriyle karşılanır. Bu yapı çok yaygındır.</p>\n<p><strong>Örnek 5: (without + Ving = -meden, -meksizin)</strong><br>\n<strong>EN:</strong> It's surprising that he signed such an important and legally binding contract without even reading a single page of it.<br>\n<strong>TR:</strong> Bu kadar önemli ve yasal olarak bağlayıcı bir sözleşmeyi tek bir sayfasını bile okumadan imzalaması şaşırtıcı.<br>\n→ <strong>Açıklama:</strong> \"Without + Ving\" bir eylemi YAPMADAN bir şey yapıldığını ifade eder. Bu yapı da çok sık kullanılır ve Türkçe'de \"-meden, -meksizin\" ile karşılanır.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir preposition görürsen, hemen arkasından Ving gelmesi gerektiğini bil. Sınavlarda boşluktan önce preposition varsa, seçeneklerde Ving araya!\n</div>\n\n<hr>\n<h2>📊 YAYGIN PREPOSITION + VING KALIPLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Kalıp</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>good at</strong></td>\n<td>-de iyi</td>\n<td>good at swimming</td>\n</tr>\n<tr>\n<td><strong>insist on</strong></td>\n<td>ısrar etmek</td>\n<td>insist on coming</td>\n</tr>\n<tr>\n<td><strong>think about</strong></td>\n<td>hakkında düşünmek</td>\n<td>think about buying</td>\n</tr>\n<tr>\n<td><strong>apologize for</strong></td>\n<td>için özür dilemek</td>\n<td>apologize for being late</td>\n</tr>\n<tr>\n<td><strong>by + Ving</strong></td>\n<td>-erek/arak</td>\n<td>by working hard</td>\n</tr>\n<tr>\n<td><strong>without + Ving</strong></td>\n<td>-meden/meksizin</td>\n<td>without asking</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> She apologized <strong><em>_</em></strong> late to the meeting because of the heavy traffic.</p>\n<p>A) to be<br>\nB) for being<br>\nC) being<br>\nD) for be</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) for being\n**Açıklama:** \"Apologized\" fiilinden sonra \"for\" edatı gelir. Edattan sonra fiil kullanılacağı için \"for being\" doğru yapıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 238]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "Despite practicing every day for months, John is still not very good at playing the guitar because he has no sense of rhythm.",
+          "tr": "Aylardır her gün pratik yapmasına rağmen, John hâlâ gitar çalmada çok iyi değil çünkü ritim duygusu yok.",
+          "description": "\"At\" edatından sonra \"playing\" Ving kullanılmıştır. \"Good at\" kalıbı bir yeteneği ifade eder ve arkasından mutlaka Ving gelir. Edatlar sadece isim, zamir veya Ving alabilir.\n\n**Örnek 2: (on + Ving)**"
+        },
+        {
+          "en": "My boss insisted on finishing the entire project by Friday, even if it means working overtime every evening this week.",
+          "tr": "Patronum, bu hafta her akşam fazla mesai yapmak anlamına gelse bile, tüm projenin Cuma gününe kadar bitirilmesinde ısrar etti.",
+          "description": "\"Insisted on\" (ısrar etti) kalıbında \"on\" bir edattır ve arkasından \"finishing\" Ving gelmiştir. Edat içeren tüm fiil kalıpları (look forward to, object to, think about) bu kurala uyar.\n\n**Örnek 3: (for + Ving)**"
+        },
+        {
+          "en": "The teacher criticized the student for not doing his homework and for distracting others during the lesson.",
+          "tr": "Öğretmen, öğrenciyi ödevini yapmadığı ve ders sırasında başkalarını rahatsız ettiği için eleştirdi.",
+          "description": "\"For\" edatından sonra \"doing\" Ving kullanılmıştır. Burada \"for + Ving\" bir eylemin nedenini belirtir. Olumsuz hali \"for not doing\" şeklindedir."
+        },
+        {
+          "en": "By selling all of his old comic books and video games online, Tom managed to raise enough money to buy a new laptop.",
+          "tr": "Tom, tüm eski çizgi romanlarını ve video oyunlarını çevrimiçi satarak yeni bir dizüstü bilgisayar almak için yeterli parayı toplamayı başardı.",
+          "description": "\"By + Ving\" yapısı bir eylemin NASIL yapıldığını, yöntemini anlatır. Türkçe'de \"-erek, -arak\" ekleriyle karşılanır. Bu yapı çok yaygındır.\n\n**Örnek 5: (without + Ving = -meden, -meksizin)**"
+        },
+        {
+          "en": "It's surprising that he signed such an important and legally binding contract without even reading a single page of it.",
+          "tr": "Bu kadar önemli ve yasal olarak bağlayıcı bir sözleşmeyi tek bir sayfasını bile okumadan imzalaması şaşırtıcı.",
+          "description": "\"Without + Ving\" bir eylemi YAPMADAN bir şey yapıldığını ifade eder. Bu yapı da çok sık kullanılır ve Türkçe'de \"-meden, -meksizin\" ile karşılanır.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir preposition görürsen, hemen arkasından Ving gelmesi gerektiğini bil. Sınavlarda boşluktan önce preposition varsa, seçeneklerde Ving araya!\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "She apologized _______ late to the meeting because of the heavy traffic.",
+        "options": {
+          "A": "to be",
+          "B": "for being",
+          "C": "being",
+          "D": "for be"
+        },
+        "correct": "B) for being",
+        "explanation": "\"Apologized\" fiilinden sonra \"for\" edatı gelir. Edattan sonra fiil kullanılacağı için \"for being\" doğru yapıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "She apologized _______ late to the meeting because of the heavy traffic.",
+          "options": {
+            "A": "to be",
+            "B": "for being",
+            "C": "being",
+            "D": "for be"
+          },
+          "correct": "B) for being",
+          "explanation": "\"Apologized\" fiilinden sonra \"for\" edatı gelir. Edattan sonra fiil kullanılacağı için \"for being\" doğru yapıdır."
+        }
+      ],
+      "word_count": 536
+    },
+    {
+      "page_number": 5,
+      "title": "Deyimsel Yapılar + Ving (Idiomatic Expressions)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 ÖZEL KALIPLAR MUTLAKA Ving ALIR</h2>\n<p>İngilizce'de bazı deyimsel yapılar (idiomatic expressions) vardır ki, bunlar her zaman kendilerinden sonra Ving gerektirir. Bu kalıpların çoğu \"to\" edatı içerir.</p>\n<blockquote>\n<p>⚠️ <strong>Dikkat:</strong> Bu yapılardaki \"to\" bir edattır, mastar eki (infinitive) DEĞİLDİR! Bu yüzden arkasından Ving gelir. \"to\" gördüğünde hemen infinitive düşünme!</p>\n</blockquote>\n<hr>\n<h2>📏 EN SIK KULLANILAN 10 KALIP</h2>\n<p><strong>Örnek 1: (be used to / get used to - alışkın olmak/alışmak)</strong><br>\n<strong>EN:</strong> After living in Japan for three years, I am finally used to eating with chopsticks and sitting on the floor.<br>\n<strong>TR:</strong> Japonya'da üç yıl yaşadıktan sonra, sonunda yemek çubuklarıyla yemek yemeye ve yerde oturmaya alıştım.<br>\n→ <strong>Açıklama:</strong> \"Am used to\" kalıbında \"to\" bir edattır ve arkasından \"eating\" Ving gelmiştir. \"Be used to\" (alışkın olmak) ve \"get used to\" (alışmak) bir duruma adapte olmayı ifade eder.</p>\n<p><strong>Örnek 2: (look forward to - dört gözle beklemek)</strong><br>\n<strong>EN:</strong> All of the employees are really looking forward to working with the new manager who has an excellent reputation.<br>\n<strong>TR:</strong> Tüm çalışanlar, mükemmel bir üne sahip olan yeni müdürle çalışmayı gerçekten dört gözle bekliyorlar.<br>\n→ <strong>Açıklama:</strong> \"Looking forward to\" kalıbındaki \"to\" kesinlikle bir edattır. \"Working\" Ving'i, beklenen eylemi ifade eder. Bu kalıp en çok karıştırılanlardan biridir!</p>\n<p><strong>Örnek 3: (feel like - istemek, canı çekmek)</strong><br>\n<strong>EN:</strong> After walking in the hot sun for hours, I felt like drinking something cold and taking a long nap.<br>\n<strong>TR:</strong> Sıcak güneşte saatlerce yürüdükten sonra, soğuk bir şey içmek ve uzun bir şekerleme yapmak istedim.<br>\n→ <strong>Açıklama:</strong> \"Feel like\" (istemek) kalıbı her zaman Ving alır. Burada \"drinking\" ve \"taking\" Ving yapıları, istek duyulan eylemleri ifade eder.</p>\n<p><strong>Örnek 4: (can't help - kendini alamamak)</strong><br>\n<strong>EN:</strong> Whenever I watch that sad movie scene where the dog dies, I can't help crying like a little baby.<br>\n<strong>TR:</strong> Köpeğin öldüğü o üzücü film sahnesini her izlediğimde, küçük bir bebek gibi ağlamaktan kendimi alamıyorum.<br>\n→ <strong>Açıklama:</strong> \"Can't help\" (kendini alamamak) kalıbı, kontrol edilemeyen bir tepkiyi ifade eder ve arkasından mutlaka Ving gelir.</p>\n<p><strong>Örnek 5: (it's worth - -maya değer)</strong><br>\n<strong>EN:</strong> Although it was expensive and time-consuming, it was definitely worth taking that course because I learned so much.<br>\n<strong>TR:</strong> Pahalı ve zaman alıcı olmasına rağmen, o kursa katılmak kesinlikle değdi çünkü çok şey öğrendim.<br>\n→ <strong>Açıklama:</strong> \"It's worth\" (değer) kalıbı bir eylemin değip değmediğini sorgular ve arkasından Ving alır. \"Worth\" bir sıfattır ama kendinden sonra Ving ister.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"To\" gördüğünde hemen infinitive yapma! Şu kalıplarda \"to\" edattır ve Ving gelir:\n- look forward to\n- be/get used to\n- be accustomed to\n- object to\n- be opposed to\n</div>\n\n<hr>\n<h2>📊 Ving ALAN DEYİMSEL YAPILAR</h2>\n<table>\n<thead>\n<tr>\n<th>Kalıp</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>be used to</strong></td>\n<td>-e alışkın olmak</td>\n<td>I'm used to waking up early.</td>\n</tr>\n<tr>\n<td><strong>look forward to</strong></td>\n<td>dört gözle beklemek</td>\n<td>We look forward to meeting you.</td>\n</tr>\n<tr>\n<td><strong>feel like</strong></td>\n<td>-mek istemek</td>\n<td>I feel like going out.</td>\n</tr>\n<tr>\n<td><strong>can't help</strong></td>\n<td>-den kendini alamamak</td>\n<td>He can't help laughing.</td>\n</tr>\n<tr>\n<td><strong>it's worth</strong></td>\n<td>-meye değer</td>\n<td>It's worth seeing.</td>\n</tr>\n<tr>\n<td><strong>object to</strong></td>\n<td>-e itiraz etmek</td>\n<td>They object to paying.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> We are really looking forward <strong><em>_</em></strong> you at the conference next week.</p>\n<p>A) to see<br>\nB) seeing<br>\nC) to seeing<br>\nD) see</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) to seeing\n**Açıklama:** \"Looking forward to\" kalıbında \"to\" bir edattır. Edattan sonra Ving gelir. Bu yüzden \"to seeing\" doğru yapıdır. (Infinitive sanıp \"to see\" demek en yaygın hatadır!)\n</details>\n\n<p><strong>[Kelime sayısı: 240]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "After living in Japan for three years, I am finally used to eating with chopsticks and sitting on the floor.",
+          "tr": "Japonya'da üç yıl yaşadıktan sonra, sonunda yemek çubuklarıyla yemek yemeye ve yerde oturmaya alıştım.",
+          "description": "\"Am used to\" kalıbında \"to\" bir edattır ve arkasından \"eating\" Ving gelmiştir. \"Be used to\" (alışkın olmak) ve \"get used to\" (alışmak) bir duruma adapte olmayı ifade eder.\n\n**Örnek 2: (look forward to - dört gözle beklemek)**"
+        },
+        {
+          "en": "All of the employees are really looking forward to working with the new manager who has an excellent reputation.",
+          "tr": "Tüm çalışanlar, mükemmel bir üne sahip olan yeni müdürle çalışmayı gerçekten dört gözle bekliyorlar.",
+          "description": "\"Looking forward to\" kalıbındaki \"to\" kesinlikle bir edattır. \"Working\" Ving'i, beklenen eylemi ifade eder. Bu kalıp en çok karıştırılanlardan biridir!\n\n**Örnek 3: (feel like - istemek, canı çekmek)**"
+        },
+        {
+          "en": "After walking in the hot sun for hours, I felt like drinking something cold and taking a long nap.",
+          "tr": "Sıcak güneşte saatlerce yürüdükten sonra, soğuk bir şey içmek ve uzun bir şekerleme yapmak istedim.",
+          "description": "\"Feel like\" (istemek) kalıbı her zaman Ving alır. Burada \"drinking\" ve \"taking\" Ving yapıları, istek duyulan eylemleri ifade eder.\n\n**Örnek 4: (can't help - kendini alamamak)**"
+        },
+        {
+          "en": "Whenever I watch that sad movie scene where the dog dies, I can't help crying like a little baby.",
+          "tr": "Köpeğin öldüğü o üzücü film sahnesini her izlediğimde, küçük bir bebek gibi ağlamaktan kendimi alamıyorum.",
+          "description": "\"Can't help\" (kendini alamamak) kalıbı, kontrol edilemeyen bir tepkiyi ifade eder ve arkasından mutlaka Ving gelir.\n\n**Örnek 5: (it's worth - -maya değer)**"
+        },
+        {
+          "en": "Although it was expensive and time-consuming, it was definitely worth taking that course because I learned so much.",
+          "tr": "Pahalı ve zaman alıcı olmasına rağmen, o kursa katılmak kesinlikle değdi çünkü çok şey öğrendim.",
+          "description": "\"It's worth\" (değer) kalıbı bir eylemin değip değmediğini sorgular ve arkasından Ving alır. \"Worth\" bir sıfattır ama kendinden sonra Ving ister.\n\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"To\" gördüğünde hemen infinitive yapma! Şu kalıplarda \"to\" edattır ve Ving gelir:\n- look forward to\n- be/get used to\n- be accustomed to\n- object to\n- be opposed to\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "We are really looking forward _______ you at the conference next week.",
+        "options": {
+          "A": "to see",
+          "B": "seeing",
+          "C": "to seeing",
+          "D": "see"
+        },
+        "correct": "C) to seeing",
+        "explanation": "\"Looking forward to\" kalıbında \"to\" bir edattır. Edattan sonra Ving gelir. Bu yüzden \"to seeing\" doğru yapıdır. (Infinitive sanıp \"to see\" demek en yaygın hatadır!)"
+      },
+      "mini_tests": [
+        {
+          "question": "We are really looking forward _______ you at the conference next week.",
+          "options": {
+            "A": "to see",
+            "B": "seeing",
+            "C": "to seeing",
+            "D": "see"
+          },
+          "correct": "C) to seeing",
+          "explanation": "\"Looking forward to\" kalıbında \"to\" bir edattır. Edattan sonra Ving gelir. Bu yüzden \"to seeing\" doğru yapıdır. (Infinitive sanıp \"to see\" demek en yaygın hatadır!)"
+        }
+      ],
+      "word_count": 542
+    },
+    {
+      "page_number": 6,
+      "title": "Özel Yapılar + Ving",
+      "total_pages": 20,
+      "content_html": "<h2>📌 DİĞER Ving GEREKTİREN DURUMLAR</h2>\n<p>İngilizce'de preposition + Ving dışında, belirli fiil ve ifadelerden sonra da Ving kullanımı zorunludur. Bunlar: go + Ving, possessive + Ving, spend/waste + Ving, have difficulty + Ving, busy + Ving.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıları birer \"formül\" olarak ezberle! Her biri kendine özgü bir kullanım şekline sahip.</p>\n</blockquote>\n<hr>\n<h2>📏 1) GO + VING (Aktiviteler için)</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> Last summer, we decided to go hiking in the Swiss Alps, and we spent a week exploring the most beautiful mountain trails.<br>\n<strong>TR:</strong> Geçen yaz, İsviçre Alpleri'nde yürüyüşe gitmeye karar verdik ve bir haftayı en güzel dağ patikalarını keşfederek geçirdik.<br>\n→ <strong>Açıklama:</strong> \"Go + Ving\" yapısı genellikle spor ve eğlence amaçlı aktiviteler için kullanılır: go swimming (yüzmeye gitmek), go shopping (alışverişe gitmek), go fishing (balığa gitmek), go camping (kampa gitmek).</p>\n<hr>\n<h2>📏 2) POSSESSIVE + VING (İyelik + Ving)</h2>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> I was really surprised at my sister's deciding to quit her well-paid job and travel around the world alone.<br>\n<strong>TR:</strong> Kız kardeşimin iyi maaşlı işini bırakıp dünyayı tek başına dolaşmaya karar vermesine gerçekten şaşırdım.<br>\n→ <strong>Açıklama:</strong> Bir isimden sonra ('s) veya iyelik sıfatından (my, your, his, her, etc.) sonra fiil gelirse Ving kullanılır. Burada \"my sister's\" iyelik yapısından sonra \"deciding\" Ving gelmiştir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The whole situation was made worse by his constantly arriving late to every single meeting.<br>\n<strong>TR:</strong> Her toplantıya sürekli geç kalmasıyla tüm durum daha da kötüleşti.<br>\n→ <strong>Açıklama:</strong> \"His\" iyelik sıfatından sonra \"arriving\" Ving kullanılmıştır. Bu yapı, bir kişiye ait bir eylemi vurgular.</p>\n<hr>\n<h2>📏 3) SPEND/WASTE + VING (Zaman/para harcamak)</h2>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Instead of studying for the exam, Tom wasted his entire weekend playing video games and watching TV series.<br>\n<strong>TR:</strong> Sınava çalışmak yerine, Tom tüm hafta sonunu video oyunları oynayarak ve dizi izleyerek boşa harcadı.<br>\n→ <strong>Açıklama:</strong> \"Spend\" ve \"waste\" fiilleri, zaman veya para harcamayı anlatırken arkalarından Ving alır. \"Wasted ... playing\" (oynayarak harcadı) yapısı, eylemin nasıl harcandığını gösterir.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> She spends at least two hours every day practicing the piano because she wants to become a professional musician.<br>\n<strong>TR:</strong> Profesyonel bir müzisyen olmak istediği için her gün en az iki saatini piyano çalışarak geçiriyor.<br>\n→ <strong>Açıklama:</strong> \"Spends ... practicing\" (çalışarak geçiriyor) yapısında spend fiilinden sonra gelen Ving, zamanın nasıl geçirildiğini anlatır.</p>\n<h2>📏 4) HAVE DIFFICULTY/TROUBLE + VING</h2>\n<p><strong>Örnek 6:</strong><br>\n<strong>EN:</strong> Although she has been learning English for five years, she still has difficulty understanding native speakers when they talk fast.<br>\n<strong>TR:</strong> Beş yıldır İngilizce öğrenmesine rağmen, anadili İngilizce olan kişiler hızlı konuştuğunda onları anlamakta hâlâ zorluk çekiyor.<br>\n→ <strong>Açıklama:</strong> \"Have difficulty/trouble\" (zorluk çekmek) kalıbından sonra \"in\" edatı alabilir veya almayabilir, ancak fiil gelirse mutlaka Ving kullanılır.</p>\n<hr>\n<h2>📊 ÖZEL Ving YAPILARI TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>go + Ving</strong></td>\n<td>-meye gitmek</td>\n<td>go fishing, go shopping</td>\n</tr>\n<tr>\n<td><strong>possessive + Ving</strong></td>\n<td>onun -mesi</td>\n<td>his being late</td>\n</tr>\n<tr>\n<td><strong>spend/waste + Ving</strong></td>\n<td>-erek harcamak</td>\n<td>spend money buying</td>\n</tr>\n<tr>\n<td><strong>have difficulty + Ving</strong></td>\n<td>-mekte zorluk çekmek</td>\n<td>have difficulty finding</td>\n</tr>\n<tr>\n<td><strong>busy + Ving</strong></td>\n<td>-mekle meşgul olmak</td>\n<td>busy preparing</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> My mother spends hours <strong><em>_</em></strong> delicious meals for the whole family every Sunday.</p>\n<p>A) to prepare<br>\nB) prepare<br>\nC) preparing<br>\nD) prepared</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) preparing\n**Açıklama:** \"Spend\" fiili, zaman harcamayı anlatırken arkasından Ving alır. \"Spends hours preparing\" (saatlerce hazırlayarak geçirir) doğru yapıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 237]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "Last summer, we decided to go hiking in the Swiss Alps, and we spent a week exploring the most beautiful mountain trails.",
+          "tr": "Geçen yaz, İsviçre Alpleri'nde yürüyüşe gitmeye karar verdik ve bir haftayı en güzel dağ patikalarını keşfederek geçirdik.",
+          "description": "\"Go + Ving\" yapısı genellikle spor ve eğlence amaçlı aktiviteler için kullanılır: go swimming (yüzmeye gitmek), go shopping (alışverişe gitmek), go fishing (balığa gitmek), go camping (kampa gitmek)."
+        },
+        {
+          "en": "I was really surprised at my sister's deciding to quit her well-paid job and travel around the world alone.",
+          "tr": "Kız kardeşimin iyi maaşlı işini bırakıp dünyayı tek başına dolaşmaya karar vermesine gerçekten şaşırdım.",
+          "description": "Bir isimden sonra ('s) veya iyelik sıfatından (my, your, his, her, etc.) sonra fiil gelirse Ving kullanılır. Burada \"my sister's\" iyelik yapısından sonra \"deciding\" Ving gelmiştir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The whole situation was made worse by his constantly arriving late to every single meeting.",
+          "tr": "Her toplantıya sürekli geç kalmasıyla tüm durum daha da kötüleşti.",
+          "description": "\"His\" iyelik sıfatından sonra \"arriving\" Ving kullanılmıştır. Bu yapı, bir kişiye ait bir eylemi vurgular."
+        },
+        {
+          "en": "Instead of studying for the exam, Tom wasted his entire weekend playing video games and watching TV series.",
+          "tr": "Sınava çalışmak yerine, Tom tüm hafta sonunu video oyunları oynayarak ve dizi izleyerek boşa harcadı.",
+          "description": "\"Spend\" ve \"waste\" fiilleri, zaman veya para harcamayı anlatırken arkalarından Ving alır. \"Wasted ... playing\" (oynayarak harcadı) yapısı, eylemin nasıl harcandığını gösterir.\n\n**Örnek 5:**"
+        },
+        {
+          "en": "She spends at least two hours every day practicing the piano because she wants to become a professional musician.",
+          "tr": "Profesyonel bir müzisyen olmak istediği için her gün en az iki saatini piyano çalışarak geçiriyor.",
+          "description": "\"Spends ... practicing\" (çalışarak geçiriyor) yapısında spend fiilinden sonra gelen Ving, zamanın nasıl geçirildiğini anlatır."
+        },
+        {
+          "en": "Although she has been learning English for five years, she still has difficulty understanding native speakers when they talk fast.",
+          "tr": "Beş yıldır İngilizce öğrenmesine rağmen, anadili İngilizce olan kişiler hızlı konuştuğunda onları anlamakta hâlâ zorluk çekiyor.",
+          "description": "\"Have difficulty/trouble\" (zorluk çekmek) kalıbından sonra \"in\" edatı alabilir veya almayabilir, ancak fiil gelirse mutlaka Ving kullanılır."
+        }
+      ],
+      "mini_test": {
+        "question": "My mother spends hours _______ delicious meals for the whole family every Sunday.",
+        "options": {
+          "A": "to prepare",
+          "B": "prepare",
+          "C": "preparing",
+          "D": "prepared"
+        },
+        "correct": "C) preparing",
+        "explanation": "\"Spend\" fiili, zaman harcamayı anlatırken arkasından Ving alır. \"Spends hours preparing\" (saatlerce hazırlayarak geçirir) doğru yapıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "My mother spends hours _______ delicious meals for the whole family every Sunday.",
+          "options": {
+            "A": "to prepare",
+            "B": "prepare",
+            "C": "preparing",
+            "D": "prepared"
+          },
+          "correct": "C) preparing",
+          "explanation": "\"Spend\" fiili, zaman harcamayı anlatırken arkasından Ving alır. \"Spends hours preparing\" (saatlerce hazırlayarak geçirir) doğru yapıdır."
+        }
+      ],
+      "word_count": 522
+    },
+    {
+      "page_number": 7,
+      "title": "Algı Fiilleri: See/Hear + Ving vs Vo",
+      "total_pages": 20,
+      "content_html": "<h2>📌 EYLEMİN TAMAMI MI, PARÇASI MI?</h2>\n<p>See, hear, watch, feel gibi algı fiilleri (verbs of perception), kendilerinden sonra gelen fiilin Ving veya Vo olmasına göre anlam değişikliği yaratır. Fark: Eylemin tamamını mı gördün/duydun, yoksa sadece bir kısmını mı?</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Eylemin başından sonuna kadar tanıksan → Vo kullan. Eylemin sadece bir anına, bir kısmına tanıksan → Ving kullan!</p>\n</blockquote>\n<hr>\n<h2>📏 1) VO: EYLEMİN TAMAMI (WHOLE ACTION)</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> From my bedroom window, I watched the sun rise over the mountains, and the whole process took about twenty minutes.<br>\n<strong>TR:</strong> Yatak odamın penceresinden güneşin dağların üzerinden doğuşunu izledim ve tüm süreç yaklaşık yirmi dakika sürdü.<br>\n→ <strong>Açıklama:</strong> \"Watched\" fiilinden sonra \"rise\" Vo kullanılmıştır. Konuşmacı, güneşin doğuşunun BAŞINDAN SONUNA KADAR tüm sürecini izlemiştir. Bu nedenle Vo tercih edilir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> I heard the famous pianist play Beethoven's entire fifth symphony at the concert hall last night.<br>\n<strong>TR:</strong> Dün gece konser salonunda ünlü piyanistin Beethoven'ın beşinci senfonisinin tamamını çaldığını duydum.<br>\n→ <strong>Açıklama:</strong> \"Heard\" fiilinden sonra \"play\" Vo kullanılmıştır. Konuşmacı, senfoninin TAMAMINI duymuştur. Eylemin bütünü algılanmıştır.</p>\n<hr>\n<h2>📏 2) VING: EYLEMİN BİR KISMI (PART OF ACTION)</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> When I walked into the office this morning, I saw my colleague secretly reading a novel hidden inside a folder.<br>\n<strong>TR:</strong> Bu sabah ofise girdiğimde, meslektaşımın bir klasörün içine gizlenmiş bir romanı gizlice okuduğunu gördüm.<br>\n→ <strong>Açıklama:</strong> \"Saw\" fiilinden sonra \"reading\" Ving kullanılmıştır. Konuşmacı, meslektaşını ofise girdiği ANDA okurken görmüştür, romanı okumaya ne zaman başladığını veya ne zaman bitireceğini bilmez. Eylemin sadece bir kısmına tanıklık etmiştir.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> As I was walking home, I noticed a little girl crying on a bench in the park, so I went to ask if she was okay.<br>\n<strong>TR:</strong> Eve yürürken, parktaki bir bankta küçük bir kızın ağladığını fark ettim, bu yüzden iyi olup olmadığını sormaya gittim.<br>\n→ <strong>Açıklama:</strong> \"Noticed\" (fark ettim) fiilinden sonra \"crying\" Ving kullanılmıştır. Konuşmacı, kızı sadece o ANDA ağlarken görmüştür. Ağlamanın başını veya sonunu görmemiştir.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"See/hear\" + Ving yapısı, eylemin \"devam ettiği\" anlamını taşır. \"See/hear\" + Vo ise eylemin \"tamamlandığı\" anlamını taşır.\n- I saw him cross the street. (Karşıdan karşıya geçti - tamamlandı)\n- I saw him crossing the street. (Karşıdan karşıya geçerken - devam ediyordu)\n</div>\n\n<hr>\n<h2>📏 3) ÖZEL DURUM: CATCH/FIND + VING</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The teacher caught the student cheating on the exam by looking at his friend's paper when she walked to the board.<br>\n<strong>TR:</strong> Öğretmen, tahtaya yürüdüğü sırada öğrenciyi arkadaşının kağıdına bakarak sınavda kopya çekerken yakaladı.<br>\n→ <strong>Açıklama:</strong> \"Catch\" fiili anlam gereği zaten birini bir eylemi YAPARKEN yakalamayı ifade eder. Bu nedenle \"caught + Ving\" mutlaka Ving alır. Asla Vo almaz.</p>\n<p><strong>Örnek 6:</strong><br>\n<strong>EN:</strong> When we entered the room, we found the children sleeping peacefully on the big sofa in front of the TV.<br>\n<strong>TR:</strong> Odaya girdiğimizde, çocukları televizyonun önündeki büyük koltukta huzur içinde uyurken bulduk.<br>\n→ <strong>Açıklama:</strong> \"Find\" fiili de \"catch\" gibi, birini bir durumda/halde bulmayı ifade ettiğinde Ving alır. \"Found ... sleeping\" (uyurken bulduk) kalıbı çok yaygındır.</p>\n<hr>\n<h2>📊 ALGI FİİLLERİ KARŞILAŞTIRMA</h2>\n<table>\n<thead>\n<tr>\n<th>Fiil</th>\n<th>Yapı</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>see/watch/hear</strong></td>\n<td>+ Vo</td>\n<td>Eylemin tamamı (baştan sona)</td>\n</tr>\n<tr>\n<td><strong>see/watch/hear</strong></td>\n<td>+ Ving</td>\n<td>Eylemin bir kısmı (anlık)</td>\n</tr>\n<tr>\n<td><strong>catch/find</strong></td>\n<td>+ Ving</td>\n<td>Her zaman Ving (yaparken/ haldeyken)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> When I looked out the window, I saw some children <strong><em>_</em></strong> football in the garden.</p>\n<p>A) play<br>\nB) to play<br>\nC) played<br>\nD) playing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D) playing\n**Açıklama:** Konuşmacı çocukları pencereden baktığı ANDA futbol oynarken görmüştür. Eylemin tamamını değil, sadece bir anını gözlemlemiştir. Bu nedenle \"playing\" Ving kullanılmalıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 245]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "From my bedroom window, I watched the sun rise over the mountains, and the whole process took about twenty minutes.",
+          "tr": "Yatak odamın penceresinden güneşin dağların üzerinden doğuşunu izledim ve tüm süreç yaklaşık yirmi dakika sürdü.",
+          "description": "\"Watched\" fiilinden sonra \"rise\" Vo kullanılmıştır. Konuşmacı, güneşin doğuşunun BAŞINDAN SONUNA KADAR tüm sürecini izlemiştir. Bu nedenle Vo tercih edilir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "I heard the famous pianist play Beethoven's entire fifth symphony at the concert hall last night.",
+          "tr": "Dün gece konser salonunda ünlü piyanistin Beethoven'ın beşinci senfonisinin tamamını çaldığını duydum.",
+          "description": "\"Heard\" fiilinden sonra \"play\" Vo kullanılmıştır. Konuşmacı, senfoninin TAMAMINI duymuştur. Eylemin bütünü algılanmıştır."
+        },
+        {
+          "en": "When I walked into the office this morning, I saw my colleague secretly reading a novel hidden inside a folder.",
+          "tr": "Bu sabah ofise girdiğimde, meslektaşımın bir klasörün içine gizlenmiş bir romanı gizlice okuduğunu gördüm.",
+          "description": "\"Saw\" fiilinden sonra \"reading\" Ving kullanılmıştır. Konuşmacı, meslektaşını ofise girdiği ANDA okurken görmüştür, romanı okumaya ne zaman başladığını veya ne zaman bitireceğini bilmez. Eylemin sadece bir kısmına tanıklık etmiştir.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "As I was walking home, I noticed a little girl crying on a bench in the park, so I went to ask if she was okay.",
+          "tr": "Eve yürürken, parktaki bir bankta küçük bir kızın ağladığını fark ettim, bu yüzden iyi olup olmadığını sormaya gittim.",
+          "description": "\"Noticed\" (fark ettim) fiilinden sonra \"crying\" Ving kullanılmıştır. Konuşmacı, kızı sadece o ANDA ağlarken görmüştür. Ağlamanın başını veya sonunu görmemiştir.\n\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"See/hear\" + Ving yapısı, eylemin \"devam ettiği\" anlamını taşır. \"See/hear\" + Vo ise eylemin \"tamamlandığı\" anlamını taşır.\n- I saw him cross the street. (Karşıdan karşıya geçti - tamamlandı)\n- I saw him crossing the street. (Karşıdan karşıya geçerken - devam ediyordu)\n</div>"
+        },
+        {
+          "en": "The teacher caught the student cheating on the exam by looking at his friend's paper when she walked to the board.",
+          "tr": "Öğretmen, tahtaya yürüdüğü sırada öğrenciyi arkadaşının kağıdına bakarak sınavda kopya çekerken yakaladı.",
+          "description": "\"Catch\" fiili anlam gereği zaten birini bir eylemi YAPARKEN yakalamayı ifade eder. Bu nedenle \"caught + Ving\" mutlaka Ving alır. Asla Vo almaz.\n\n**Örnek 6:**"
+        },
+        {
+          "en": "When we entered the room, we found the children sleeping peacefully on the big sofa in front of the TV.",
+          "tr": "Odaya girdiğimizde, çocukları televizyonun önündeki büyük koltukta huzur içinde uyurken bulduk.",
+          "description": "\"Find\" fiili de \"catch\" gibi, birini bir durumda/halde bulmayı ifade ettiğinde Ving alır. \"Found ... sleeping\" (uyurken bulduk) kalıbı çok yaygındır."
+        }
+      ],
+      "mini_test": {
+        "question": "When I looked out the window, I saw some children _______ football in the garden.",
+        "options": {
+          "A": "play",
+          "B": "to play",
+          "C": "played",
+          "D": "playing"
+        },
+        "correct": "D) playing",
+        "explanation": "Konuşmacı çocukları pencereden baktığı ANDA futbol oynarken görmüştür. Eylemin tamamını değil, sadece bir anını gözlemlemiştir. Bu nedenle \"playing\" Ving kullanılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "When I looked out the window, I saw some children _______ football in the garden.",
+          "options": {
+            "A": "play",
+            "B": "to play",
+            "C": "played",
+            "D": "playing"
+          },
+          "correct": "D) playing",
+          "explanation": "Konuşmacı çocukları pencereden baktığı ANDA futbol oynarken görmüştür. Eylemin tamamını değil, sadece bir anını gözlemlemiştir. Bu nedenle \"playing\" Ving kullanılmalıdır."
+        }
+      ],
+      "word_count": 573
+    },
+    {
+      "page_number": 8,
+      "title": "Passive Gerund: Being V3",
+      "total_pages": 20,
+      "content_html": "<h2>📌 Ving'İN EDİLGEN HALİ: BEING V3</h2>\n<p>Gerund (Ving) yapılarının da tıpkı fiiller gibi edilgen (passive) bir formu vardır. Edilgen Gerund \"being V3\" şeklinde oluşturulur. Bir cümlede eylem edilgen (pasif) ise ve Ving kullanılması gerekiyorsa, \"being V3\" kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Ving gördüğünde hemen aktif mi pasif mi diye sor! Özne eylemi yapıyorsa aktif (Ving), eylem özneye yapılıyorsa pasif (being V3).</p>\n</blockquote>\n<hr>\n<h2>📏 1) NESNE POZİSYONUNDA PASSIVE GERUND</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> Most people absolutely hate being asked personal questions about their salary or relationship status by strangers.<br>\n<strong>TR:</strong> Çoğu insan, yabancılar tarafından maaşları veya ilişki durumları hakkında kişisel sorular sorulmasından kesinlikle nefret eder.<br>\n→ <strong>Açıklama:</strong> \"Hate\" fiilinden sonra Ving gelir (genel durum). Ancak burada eylem pasif: insanlar SORU SORUYOR değil, SORU SORULUYOR. Bu nedenle \"being asked\" (sorulmak) kullanılmıştır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The employee was upset about not being promoted despite working for the company for over ten years.<br>\n<strong>TR:</strong> Çalışan, on yıldan fazla bir süre şirkette çalışmasına rağmen terfi ettirilmediği için üzgündü.<br>\n→ <strong>Açıklama:</strong> \"About\" edatından sonra Ving gelir. \"Not being promoted\" (terfi ettirilmemek) pasif bir eylemdir. Çalışan terfi ETMEMİŞ, terfi ETTİRİLMEMİŞTİR.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Despite being warned several times by the management, he continued to arrive late and ignore the company rules.<br>\n<strong>TR:</strong> Yönetim tarafından birkaç kez uyarılmasına rağmen, geç gelmeye ve şirket kurallarını görmezden gelmeye devam etti.<br>\n→ <strong>Açıklama:</strong> \"Despite\" edatından sonra Ving gelir. \"Being warned\" (uyarılmak) pasif bir eylemdir. Kendisi uyarmamış, uyarılmıştır.</p>\n<hr>\n<h2>📏 2) ÖZNE POZİSYONUNDA PASSIVE GERUND</h2>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Being recognized in public by complete strangers is one of the biggest disadvantages of being a famous celebrity.<br>\n<strong>TR:</strong> Tamamen yabancılar tarafından halk içinde tanınmak, ünlü bir kişi olmanın en büyük dezavantajlarından biridir.<br>\n→ <strong>Açıklama:</strong> Özne pozisyonunda \"being recognized\" (tanınmak) passive gerund kullanılmıştır. Ünlü kişi başkalarını TANIMIYOR, başkaları tarafından TANINIYOR. Fiil \"is\" (tekil) olarak gelmiştir.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda seçeneklerde \"being V3\" görünce direkt eleme! Önce anlamın pasif olup olmadığını kontrol et. Cümlede \"birisi tarafından\" anlamı varsa veya özne eylemden etkileniyorsa, \"being V3\" doğru cevap olabilir.\n</div>\n\n<hr>\n<h2>📊 AKTİF vs PASİF GERUND</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Aktif Gerund</th>\n<th>Pasif Gerund</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Yapı</strong></td>\n<td>Ving</td>\n<td>being V3</td>\n</tr>\n<tr>\n<td><strong>Anlam</strong></td>\n<td>Özne yapıyor</td>\n<td>Özne yapılıyor</td>\n</tr>\n<tr>\n<td><strong>Örnek</strong></td>\n<td>I hate asking (sormak)</td>\n<td>I hate being asked (sorulmak)</td>\n</tr>\n<tr>\n<td><strong>Örnek</strong></td>\n<td>He admitted stealing (çalmak)</td>\n<td>He admitted being caught (yakalanmak)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> She doesn't like <strong><em>_</em></strong> in front of the class because she gets very nervous.</p>\n<p>A) speaking<br>\nB) to speak<br>\nC) being spoken<br>\nD) being asked to speak</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D) being asked to speak\n**Açıklama:** Cümlede \"sınıfın önünde konuşmaktan\" değil, \"konuşması İSTENMEKTEN\" hoşlanmadığı anlamı var. Pasif bir durum söz konusu. \"Being asked\" (istenmek) pasif gerund'dur.\n</details>\n\n<p><strong>[Kelime sayısı: 228]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "Most people absolutely hate being asked personal questions about their salary or relationship status by strangers.",
+          "tr": "Çoğu insan, yabancılar tarafından maaşları veya ilişki durumları hakkında kişisel sorular sorulmasından kesinlikle nefret eder.",
+          "description": "\"Hate\" fiilinden sonra Ving gelir (genel durum). Ancak burada eylem pasif: insanlar SORU SORUYOR değil, SORU SORULUYOR. Bu nedenle \"being asked\" (sorulmak) kullanılmıştır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The employee was upset about not being promoted despite working for the company for over ten years.",
+          "tr": "Çalışan, on yıldan fazla bir süre şirkette çalışmasına rağmen terfi ettirilmediği için üzgündü.",
+          "description": "\"About\" edatından sonra Ving gelir. \"Not being promoted\" (terfi ettirilmemek) pasif bir eylemdir. Çalışan terfi ETMEMİŞ, terfi ETTİRİLMEMİŞTİR.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "Despite being warned several times by the management, he continued to arrive late and ignore the company rules.",
+          "tr": "Yönetim tarafından birkaç kez uyarılmasına rağmen, geç gelmeye ve şirket kurallarını görmezden gelmeye devam etti.",
+          "description": "\"Despite\" edatından sonra Ving gelir. \"Being warned\" (uyarılmak) pasif bir eylemdir. Kendisi uyarmamış, uyarılmıştır."
+        },
+        {
+          "en": "Being recognized in public by complete strangers is one of the biggest disadvantages of being a famous celebrity.",
+          "tr": "Tamamen yabancılar tarafından halk içinde tanınmak, ünlü bir kişi olmanın en büyük dezavantajlarından biridir.",
+          "description": "Özne pozisyonunda \"being recognized\" (tanınmak) passive gerund kullanılmıştır. Ünlü kişi başkalarını TANIMIYOR, başkaları tarafından TANINIYOR. Fiil \"is\" (tekil) olarak gelmiştir.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda seçeneklerde \"being V3\" görünce direkt eleme! Önce anlamın pasif olup olmadığını kontrol et. Cümlede \"birisi tarafından\" anlamı varsa veya özne eylemden etkileniyorsa, \"being V3\" doğru cevap olabilir.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "She doesn't like _______ in front of the class because she gets very nervous.",
+        "options": {
+          "A": "speaking",
+          "B": "to speak",
+          "C": "being spoken",
+          "D": "being asked to speak"
+        },
+        "correct": "D) being asked to speak",
+        "explanation": "Cümlede \"sınıfın önünde konuşmaktan\" değil, \"konuşması İSTENMEKTEN\" hoşlanmadığı anlamı var. Pasif bir durum söz konusu. \"Being asked\" (istenmek) pasif gerund'dur."
+      },
+      "mini_tests": [
+        {
+          "question": "She doesn't like _______ in front of the class because she gets very nervous.",
+          "options": {
+            "A": "speaking",
+            "B": "to speak",
+            "C": "being spoken",
+            "D": "being asked to speak"
+          },
+          "correct": "D) being asked to speak",
+          "explanation": "Cümlede \"sınıfın önünde konuşmaktan\" değil, \"konuşması İSTENMEKTEN\" hoşlanmadığı anlamı var. Pasif bir durum söz konusu. \"Being asked\" (istenmek) pasif gerund'dur."
+        }
+      ],
+      "word_count": 430
+    },
+    {
+      "page_number": 9,
+      "title": "Perfect Gerund: Having V3",
+      "total_pages": 20,
+      "content_html": "<h2>📌 GEÇMİŞTE ÖNCELİK VURGUSU: HAVING V3</h2>\n<p>Bazen Ving kullanılan bir yerde, Ving ile ifade edilen eylemin, ana fiilden DAHA ÖNCE gerçekleştiğini özellikle vurgulamak isteriz. İşte bu durumda \"Perfect Gerund\" kullanırız: <strong>having V3</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Admit, deny, regret\" gibi geçmişe gönderme yapan fiiller normalde Ving alır. Ama önceliği iyice vurgulamak istersen \"having V3\" kullanabilirsin. Bu, \"daha önce olmuşluğu\" pekiştirir.</p>\n</blockquote>\n<hr>\n<h2>📏 1) PERFECT GERUND KULLANIMI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The suspect finally admitted having taken the confidential documents from the safe, but claimed he was forced to do so.<br>\n<strong>TR:</strong> Şüpheli sonunda gizli belgeleri kasadan aldığını itiraf etti, ancak buna zorlandığını iddia etti.<br>\n→ <strong>Açıklama:</strong> \"Admitted\" (itiraf etti) fiili zaten geçmişe gönderme yapar. Ancak burada \"having taken\" (almış olduğunu) kullanılarak, \"alma\" eyleminin \"itiraf\" eyleminden kesinlikle önce olduğu vurgulanmıştır. Normalde \"taking\" de kullanılabilirdi, \"having taken\" daha güçlü bir öncelik vurgusu yapar.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> They denied having participated in any illegal activities related to the terrorist organization.<br>\n<strong>TR:</strong> Terör örgütüyle ilgili herhangi bir yasa dışı faaliyete katılmış olduklarını inkar ettiler.<br>\n→ <strong>Açıklama:</strong> \"Denied\" (inkar etti) fiili geçmişe gönderme yapar. \"Having participated\" (katılmış olmak) perfect gerund'u, inkar edilen eylemin, inkar eyleminden önce gerçekleştiğini pekiştirir.</p>\n<hr>\n<h2>📏 2) PERFECT GERUND'UN PASİF HALİ: HAVING BEEN V3</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The journalist concealed having been arrested for fraud many years ago when he was a young man.<br>\n<strong>TR:</strong> Gazeteci, yıllar önce genç bir adamken dolandırıcılıktan tutuklanmış olduğunu gizledi.<br>\n→ <strong>Açıklama:</strong> \"Concealed\" (gizledi) fiilinden sonra Ving gelir. Ancak burada eylem pasif: gazeteci tutuklanmamış, TUTUKLANMIŞ. Ve bu tutuklanma olayı, gizleme eyleminden önce. Bu nedenle \"having been arrested\" (tutuklanmış olmak) perfect passive gerund kullanılır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> She regrets having been treated so badly by her former business partner, but she has now moved on.<br>\n<strong>TR:</strong> Eski iş ortağı tarafından çok kötü muamele görmüş olduğu için pişmanlık duyuyor, ama artık hayatına devam etti.<br>\n→ <strong>Açıklama:</strong> \"Regrets\" (pişmanlık duyar) fiili geçmişe gönderme yapar. \"Having been treated\" (muamele görmüş olmak) perfect passive gerund'dur. Muamele görme eylemi, pişmanlık duyma eyleminden önce gerçekleşmiştir.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nPerfect Gerund (having V3) kullanmak zorunda değilsin. Çoğu durumda normal Ving de aynı anlamı verir. Ancak sınavlarda \"having V3\" gördüğünde, bunun \"öncelik\" vurgusu yaptığını bil ve anlamın buna uyup uymadığını kontrol et.\n</div>\n\n<hr>\n<h2>📊 GERUND FORMLARI KARŞILAŞTIRMA</h2>\n<table>\n<thead>\n<tr>\n<th>Form</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Zaman</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Simple Active</strong></td>\n<td>Ving</td>\n<td>yapmak</td>\n<td>Genel veya eş zamanlı</td>\n</tr>\n<tr>\n<td><strong>Simple Passive</strong></td>\n<td>being V3</td>\n<td>yapılmak</td>\n<td>Genel veya eş zamanlı (pasif)</td>\n</tr>\n<tr>\n<td><strong>Perfect Active</strong></td>\n<td>having V3</td>\n<td>yapmış olmak</td>\n<td>Ana fiilden ÖNCE (aktif)</td>\n</tr>\n<tr>\n<td><strong>Perfect Passive</strong></td>\n<td>having been V3</td>\n<td>yapılmış olmak</td>\n<td>Ana fiilden ÖNCE (pasif)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The politician denied <strong><em>_</em></strong> illegal funds during his election campaign.</p>\n<p>A) accept<br>\nB) accepting<br>\nC) having accepted<br>\nD) to accept</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) having accepted\n**Açıklama:** \"Denied\" fiilinden sonra Ving gelir. Ancak bu cümlede \"kabul etme\" eylemi, \"inkar etme\" eyleminden önce gerçekleşmiştir. Perfect Gerund \"having accepted\" bu önceliği vurgular ve en doğru seçenektir. (B) şıkkı \"accepting\" de gramer olarak doğru olsa da, \"having accepted\" daha güçlü bir öncelik vurgusu yapar.)\n</details>\n\n<p><strong>[Kelime sayısı: 235]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "The suspect finally admitted having taken the confidential documents from the safe, but claimed he was forced to do so.",
+          "tr": "Şüpheli sonunda gizli belgeleri kasadan aldığını itiraf etti, ancak buna zorlandığını iddia etti.",
+          "description": "\"Admitted\" (itiraf etti) fiili zaten geçmişe gönderme yapar. Ancak burada \"having taken\" (almış olduğunu) kullanılarak, \"alma\" eyleminin \"itiraf\" eyleminden kesinlikle önce olduğu vurgulanmıştır. Normalde \"taking\" de kullanılabilirdi, \"having taken\" daha güçlü bir öncelik vurgusu yapar.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "They denied having participated in any illegal activities related to the terrorist organization.",
+          "tr": "Terör örgütüyle ilgili herhangi bir yasa dışı faaliyete katılmış olduklarını inkar ettiler.",
+          "description": "\"Denied\" (inkar etti) fiili geçmişe gönderme yapar. \"Having participated\" (katılmış olmak) perfect gerund'u, inkar edilen eylemin, inkar eyleminden önce gerçekleştiğini pekiştirir."
+        },
+        {
+          "en": "The journalist concealed having been arrested for fraud many years ago when he was a young man.",
+          "tr": "Gazeteci, yıllar önce genç bir adamken dolandırıcılıktan tutuklanmış olduğunu gizledi.",
+          "description": "\"Concealed\" (gizledi) fiilinden sonra Ving gelir. Ancak burada eylem pasif: gazeteci tutuklanmamış, TUTUKLANMIŞ. Ve bu tutuklanma olayı, gizleme eyleminden önce. Bu nedenle \"having been arrested\" (tutuklanmış olmak) perfect passive gerund kullanılır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "She regrets having been treated so badly by her former business partner, but she has now moved on.",
+          "tr": "Eski iş ortağı tarafından çok kötü muamele görmüş olduğu için pişmanlık duyuyor, ama artık hayatına devam etti.",
+          "description": "\"Regrets\" (pişmanlık duyar) fiili geçmişe gönderme yapar. \"Having been treated\" (muamele görmüş olmak) perfect passive gerund'dur. Muamele görme eylemi, pişmanlık duyma eyleminden önce gerçekleşmiştir.\n\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nPerfect Gerund (having V3) kullanmak zorunda değilsin. Çoğu durumda normal Ving de aynı anlamı verir. Ancak sınavlarda \"having V3\" gördüğünde, bunun \"öncelik\" vurgusu yaptığını bil ve anlamın buna uyup uymadığını kontrol et.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The politician denied _______ illegal funds during his election campaign.",
+        "options": {
+          "A": "accept",
+          "B": "accepting",
+          "C": "having accepted",
+          "D": "to accept"
+        },
+        "correct": "C) having accepted",
+        "explanation": "\"Denied\" fiilinden sonra Ving gelir. Ancak bu cümlede \"kabul etme\" eylemi, \"inkar etme\" eyleminden önce gerçekleşmiştir. Perfect Gerund \"having accepted\" bu önceliği vurgular ve en doğru seçenektir. (B) şıkkı \"accepting\" de gramer olarak doğru olsa da, \"having accepted\" daha güçlü bir öncelik vurgusu yapar.)"
+      },
+      "mini_tests": [
+        {
+          "question": "The politician denied _______ illegal funds during his election campaign.",
+          "options": {
+            "A": "accept",
+            "B": "accepting",
+            "C": "having accepted",
+            "D": "to accept"
+          },
+          "correct": "C) having accepted",
+          "explanation": "\"Denied\" fiilinden sonra Ving gelir. Ancak bu cümlede \"kabul etme\" eylemi, \"inkar etme\" eyleminden önce gerçekleşmiştir. Perfect Gerund \"having accepted\" bu önceliği vurgular ve en doğru seçenektir. (B) şıkkı \"accepting\" de gramer olarak doğru olsa da, \"having accepted\" daha güçlü bir öncelik vurgusu yapar.)"
+        }
+      ],
+      "word_count": 487
+    },
+    {
+      "page_number": 10,
+      "title": "Infinitive (to Vo) - Giriş",
+      "total_pages": 20,
+      "content_html": "<h2>📌 INFINITIVE (TO VO) NEDİR?</h2>\n<p>Infinitive, fiilin önüne \"to\" getirilerek yapılan isimleştirilmiş fiil formudur. Tıpkı Gerund (Ving) gibi, Infinitive de cümlede özne, nesne veya özne tamamlayıcısı olarak kullanılabilir. Ancak Infinitive genellikle geleceğe yönelik eylemleri ifade eder.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Infinitive'i \"gelecek zaman kipine\" benzetebilirsin. Plan, hedef, niyet, istek gibi gelecekle ilgili kavramlarla birlikte gelir.</p>\n</blockquote>\n<hr>\n<h2>📏 1) ÖZNE POZİSYONUNDA TO VO</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> To become a successful surgeon requires at least ten years of intensive education and countless hours of practice.<br>\n<strong>TR:</strong> Başarılı bir cerrah olmak, en az on yıl yoğun eğitim ve sayısız saat pratik gerektirir.<br>\n→ <strong>Açıklama:</strong> \"To become\" (olmak) infinitive'i cümlede özne olarak kullanılmıştır. Özne olduğu için fiil tekil (requires) gelmiştir. Ancak modern İngilizce'de özne pozisyonunda Ving daha yaygındır (Becoming a surgeon...).</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> To study medicine at a prestigious university was her childhood dream, and she finally achieved it.<br>\n<strong>TR:</strong> Prestijli bir üniversitede tıp okumak, onun çocukluk hayaliydi ve sonunda bunu başardı.<br>\n→ <strong>Açıklama:</strong> \"To study\" (okumak) infinitive'i özne pozisyonundadır. Fiil \"was\" (tekil) olarak gelmiştir. Burada bir hedeften, hayalden bahsediliyor.</p>\n<hr>\n<h2>📏 2) NESNE POZİSYONUNDA TO VO (GELECEK VURGUSU)</h2>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> After working as an engineer for five years, Michael would like to start his own construction company.<br>\n<strong>TR:</strong> Beş yıl mühendis olarak çalıştıktan sonra, Michael kendi inşaat şirketini kurmak istiyor.<br>\n→ <strong>Açıklama:</strong> \"Would like\" (istemek) fiilinden sonra \"to start\" (kurmak) infinitive'i gelmiştir. Şirket kurma eylemi, isteme eyleminden SONRA gerçekleşecektir. Geleceğe yönelik bir niyet.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The government plans to build a new hospital and three schools in the region by the end of next year.<br>\n<strong>TR:</strong> Hükümet, gelecek yılın sonuna kadar bölgeye yeni bir hastane ve üç okul inşa etmeyi planlıyor.<br>\n→ <strong>Açıklama:</strong> \"Plans\" (planlıyor) fiilinden sonra \"to build\" (inşa etmek) infinitive'i gelmiştir. Planlanan eylem, planlama eyleminden sonra gerçekleşecektir.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> I didn't expect to see you here at this hour; what are you doing in this part of town?<br>\n<strong>TR:</strong> Seni bu saatte burada görmeyi beklemiyordum; şehrin bu bölgesinde ne yapıyorsun?<br>\n→ <strong>Açıklama:</strong> \"Expect\" (beklemek) fiili gelecekle ilgili bir beklentiyi ifade eder. \"To see\" (görmek) infinitive'i, bekleme eyleminden sonra gerçekleşebilecek bir eylemi anlatır.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir fiilden sonra \"to Vo\" görürsen, o eylemin ana fiilden SONRA gerçekleşeceğini düşün. Plan, umut, karar, istek, niyet hep geleceğe bakar.\n</div>\n\n<hr>\n<h2>📊 ÖZNE vs NESNE KARŞILAŞTIRMA</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Yapı</th>\n<th>Örnek</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Özne</strong></td>\n<td>To Vo + fiil</td>\n<td>To learn is important.</td>\n<td>Genel kavram</td>\n</tr>\n<tr>\n<td><strong>Özne (Ving)</strong></td>\n<td>Ving + fiil</td>\n<td>Learning is important.</td>\n<td>Daha yaygın kullanım</td>\n</tr>\n<tr>\n<td><strong>Nesne</strong></td>\n<td>Fiil + to Vo</td>\n<td>I want to learn.</td>\n<td>Gelecek niyeti</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> <strong><em>_</em></strong> a foreign language fluently takes years of dedicated practice and exposure.</p>\n<p>A) To learn<br>\nB) Learn<br>\nC) Learned<br>\nD) For learn</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) To learn\n**Açıklama:** Cümlede fiil \"takes\" olduğu için özne pozisyonunda bir isimleştirilmiş fiil gereklidir. \"To learn\" infinitive'i özne olarak kullanılabilir. (Not: \"Learning\" de doğru olurdu, ancak seçeneklerde yok.)\n</details>\n\n<p><strong>[Kelime sayısı: 236]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "To become a successful surgeon requires at least ten years of intensive education and countless hours of practice.",
+          "tr": "Başarılı bir cerrah olmak, en az on yıl yoğun eğitim ve sayısız saat pratik gerektirir.",
+          "description": "\"To become\" (olmak) infinitive'i cümlede özne olarak kullanılmıştır. Özne olduğu için fiil tekil (requires) gelmiştir. Ancak modern İngilizce'de özne pozisyonunda Ving daha yaygındır (Becoming a surgeon...).\n\n**Örnek 2:**"
+        },
+        {
+          "en": "To study medicine at a prestigious university was her childhood dream, and she finally achieved it.",
+          "tr": "Prestijli bir üniversitede tıp okumak, onun çocukluk hayaliydi ve sonunda bunu başardı.",
+          "description": "\"To study\" (okumak) infinitive'i özne pozisyonundadır. Fiil \"was\" (tekil) olarak gelmiştir. Burada bir hedeften, hayalden bahsediliyor."
+        },
+        {
+          "en": "After working as an engineer for five years, Michael would like to start his own construction company.",
+          "tr": "Beş yıl mühendis olarak çalıştıktan sonra, Michael kendi inşaat şirketini kurmak istiyor.",
+          "description": "\"Would like\" (istemek) fiilinden sonra \"to start\" (kurmak) infinitive'i gelmiştir. Şirket kurma eylemi, isteme eyleminden SONRA gerçekleşecektir. Geleceğe yönelik bir niyet.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The government plans to build a new hospital and three schools in the region by the end of next year.",
+          "tr": "Hükümet, gelecek yılın sonuna kadar bölgeye yeni bir hastane ve üç okul inşa etmeyi planlıyor.",
+          "description": "\"Plans\" (planlıyor) fiilinden sonra \"to build\" (inşa etmek) infinitive'i gelmiştir. Planlanan eylem, planlama eyleminden sonra gerçekleşecektir.\n\n**Örnek 5:**"
+        },
+        {
+          "en": "I didn't expect to see you here at this hour; what are you doing in this part of town?",
+          "tr": "Seni bu saatte burada görmeyi beklemiyordum; şehrin bu bölgesinde ne yapıyorsun?",
+          "description": "\"Expect\" (beklemek) fiili gelecekle ilgili bir beklentiyi ifade eder. \"To see\" (görmek) infinitive'i, bekleme eyleminden sonra gerçekleşebilecek bir eylemi anlatır.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nBir fiilden sonra \"to Vo\" görürsen, o eylemin ana fiilden SONRA gerçekleşeceğini düşün. Plan, umut, karar, istek, niyet hep geleceğe bakar.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "_______ a foreign language fluently takes years of dedicated practice and exposure.",
+        "options": {
+          "A": "To learn",
+          "B": "Learn",
+          "C": "Learned",
+          "D": "For learn"
+        },
+        "correct": "A) To learn",
+        "explanation": "Cümlede fiil \"takes\" olduğu için özne pozisyonunda bir isimleştirilmiş fiil gereklidir. \"To learn\" infinitive'i özne olarak kullanılabilir. (Not: \"Learning\" de doğru olurdu, ancak seçeneklerde yok.)"
+      },
+      "mini_tests": [
+        {
+          "question": "_______ a foreign language fluently takes years of dedicated practice and exposure.",
+          "options": {
+            "A": "To learn",
+            "B": "Learn",
+            "C": "Learned",
+            "D": "For learn"
+          },
+          "correct": "A) To learn",
+          "explanation": "Cümlede fiil \"takes\" olduğu için özne pozisyonunda bir isimleştirilmiş fiil gereklidir. \"To learn\" infinitive'i özne olarak kullanılabilir. (Not: \"Learning\" de doğru olurdu, ancak seçeneklerde yok.)"
+        }
+      ],
+      "word_count": 474
+    },
+    {
+      "page_number": 11,
+      "title": "Sıfatlardan Sonra Infinitive (Adj + to Vo)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KURAL: SIFATTAN SONRA FİİL GELİRSE TO VO</h2>\n<p>İngilizce'de sıfatlardan (adjectives) sonra bir fiil getirileceği zaman, büyük çoğunlukla \"to Vo\" kullanılır. \"Busy\" gibi bazı istisnalar olsa da, genel kural budur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"It is + sıfat + to Vo\" kalıbını ezberle! Bu, İngilizce'nin en yaygın yapılarından biridir.</p>\n</blockquote>\n<hr>\n<h2>📏 1) TEMEL SIFAT + TO VO KULLANIMI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> It is absolutely essential to back up your important files regularly to prevent data loss in case of a computer crash.<br>\n<strong>TR:</strong> Bilgisayar çökmesi durumunda veri kaybını önlemek için önemli dosyalarınızı düzenli olarak yedeklemek kesinlikle gereklidir.<br>\n→ <strong>Açıklama:</strong> \"Essential\" (gerekli) sıfatından sonra \"to back up\" (yedeklemek) infinitive'i gelmiştir. \"It is + adjective + to Vo\" kalıbı çok yaygındır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The manager was very willing to listen to the employees' suggestions and implement the best ones immediately.<br>\n<strong>TR:</strong> Müdür, çalışanların önerilerini dinlemeye ve en iyilerini hemen uygulamaya çok istekliydi.<br>\n→ <strong>Açıklama:</strong> \"Willing\" (istekli) sıfatından sonra \"to listen\" (dinlemek) infinitive'i gelmiştir. Bir kişinin bir şeyi yapmaya istekli, hazır, mutlu olduğunu ifade ederken sıfattan sonra to Vo kullanılır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> I'm really sorry to hear that you lost your job, but I'm sure you'll find a better one soon.<br>\n<strong>TR:</strong> İşini kaybettiğini duyduğuma gerçekten üzgünüm, ama eminim yakında daha iyisini bulacaksın.<br>\n→ <strong>Açıklama:</strong> \"Sorry\" (üzgün) sıfatından sonra \"to hear\" (duymak) infinitive'i gelmiştir. Duygusal tepkiler (happy, glad, sad, sorry) genellikle to Vo ile kullanılır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The instructions were too complicated to understand, so I had to ask for help from my colleague.<br>\n<strong>TR:</strong> Talimatlar anlaşılamayacak kadar karmaşıktı, bu yüzden meslektaşımdan yardım istemek zorunda kaldım.<br>\n→ <strong>Açıklama:</strong> \"Too + adjective + to Vo\" yapısı olumsuz anlam taşır. \"Too complicated to understand\" (anlaşılamayacak kadar karmaşık) kalıbında sıfattan sonra to Vo gelmiştir.</p>\n<hr>\n<h2>📏 2) İSTİSNA: \"BUSY\" SIFATI + VING</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The CEO is currently busy preparing for the annual shareholders' meeting scheduled for next Monday.<br>\n<strong>TR:</strong> CEO şu anda önümüzdeki Pazartesi günü planlanan yıllık hissedarlar toplantısına hazırlanmakla meşgul.<br>\n→ <strong>Açıklama:</strong> \"Busy\" (meşgul) sıfatı, diğer sıfatların aksine kendinden sonra Ving alır. \"Busy preparing\" (hazırlanmakla meşgul) doğru kullanımdır. \"Busy to prepare\" YANLIŞTIR!</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nSınavlarda \"adj + to Vo\" çok sık sorulur. Özellikle \"possible, important, essential, necessary, difficult, easy, hard\" gibi sıfatlardan sonra direkt to Vo aramalısın.\n</div>\n\n<hr>\n<h2>📊 YAYGIN SIFAT + TO VO KALIPLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Sıfat</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>important</strong></td>\n<td>önemli</td>\n<td>It's important to study.</td>\n</tr>\n<tr>\n<td><strong>necessary</strong></td>\n<td>gerekli</td>\n<td>It's necessary to wait.</td>\n</tr>\n<tr>\n<td><strong>difficult</strong></td>\n<td>zor</td>\n<td>It's difficult to understand.</td>\n</tr>\n<tr>\n<td><strong>easy</strong></td>\n<td>kolay</td>\n<td>It's easy to use.</td>\n</tr>\n<tr>\n<td><strong>happy/glad</strong></td>\n<td>mutlu</td>\n<td>I'm happy to see you.</td>\n</tr>\n<tr>\n<td><strong>sorry</strong></td>\n<td>üzgün</td>\n<td>I'm sorry to hear that.</td>\n</tr>\n<tr>\n<td><strong>willing</strong></td>\n<td>istekli</td>\n<td>She's willing to help.</td>\n</tr>\n<tr>\n<td><strong>able/unable</strong></td>\n<td>-ebilmek</td>\n<td>He's unable to come.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> It was very kind <strong><em>_</em></strong> me with my homework when I was struggling.</p>\n<p>A) of you to help<br>\nB) for you helping<br>\nC) of you helping<br>\nD) for you to help</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) of you to help\n**Açıklama:** \"Kind\" gibi karakter özelliği belirten sıfatlardan sonra \"of + pronoun + to Vo\" kalıbı kullanılır. \"It was kind of you to help\" (Yardım etmen çok nazikçeydi) doğru yapıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 242]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "It is absolutely essential to back up your important files regularly to prevent data loss in case of a computer crash.",
+          "tr": "Bilgisayar çökmesi durumunda veri kaybını önlemek için önemli dosyalarınızı düzenli olarak yedeklemek kesinlikle gereklidir.",
+          "description": "\"Essential\" (gerekli) sıfatından sonra \"to back up\" (yedeklemek) infinitive'i gelmiştir. \"It is + adjective + to Vo\" kalıbı çok yaygındır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The manager was very willing to listen to the employees' suggestions and implement the best ones immediately.",
+          "tr": "Müdür, çalışanların önerilerini dinlemeye ve en iyilerini hemen uygulamaya çok istekliydi.",
+          "description": "\"Willing\" (istekli) sıfatından sonra \"to listen\" (dinlemek) infinitive'i gelmiştir. Bir kişinin bir şeyi yapmaya istekli, hazır, mutlu olduğunu ifade ederken sıfattan sonra to Vo kullanılır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "I'm really sorry to hear that you lost your job, but I'm sure you'll find a better one soon.",
+          "tr": "İşini kaybettiğini duyduğuma gerçekten üzgünüm, ama eminim yakında daha iyisini bulacaksın.",
+          "description": "\"Sorry\" (üzgün) sıfatından sonra \"to hear\" (duymak) infinitive'i gelmiştir. Duygusal tepkiler (happy, glad, sad, sorry) genellikle to Vo ile kullanılır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The instructions were too complicated to understand, so I had to ask for help from my colleague.",
+          "tr": "Talimatlar anlaşılamayacak kadar karmaşıktı, bu yüzden meslektaşımdan yardım istemek zorunda kaldım.",
+          "description": "\"Too + adjective + to Vo\" yapısı olumsuz anlam taşır. \"Too complicated to understand\" (anlaşılamayacak kadar karmaşık) kalıbında sıfattan sonra to Vo gelmiştir."
+        },
+        {
+          "en": "The CEO is currently busy preparing for the annual shareholders' meeting scheduled for next Monday.",
+          "tr": "CEO şu anda önümüzdeki Pazartesi günü planlanan yıllık hissedarlar toplantısına hazırlanmakla meşgul.",
+          "description": "\"Busy\" (meşgul) sıfatı, diğer sıfatların aksine kendinden sonra Ving alır. \"Busy preparing\" (hazırlanmakla meşgul) doğru kullanımdır. \"Busy to prepare\" YANLIŞTIR!\n\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nSınavlarda \"adj + to Vo\" çok sık sorulur. Özellikle \"possible, important, essential, necessary, difficult, easy, hard\" gibi sıfatlardan sonra direkt to Vo aramalısın.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "It was very kind _______ me with my homework when I was struggling.",
+        "options": {
+          "A": "of you to help",
+          "B": "for you helping",
+          "C": "of you helping",
+          "D": "for you to help"
+        },
+        "correct": "A) of you to help",
+        "explanation": "\"Kind\" gibi karakter özelliği belirten sıfatlardan sonra \"of + pronoun + to Vo\" kalıbı kullanılır. \"It was kind of you to help\" (Yardım etmen çok nazikçeydi) doğru yapıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "It was very kind _______ me with my homework when I was struggling.",
+          "options": {
+            "A": "of you to help",
+            "B": "for you helping",
+            "C": "of you helping",
+            "D": "for you to help"
+          },
+          "correct": "A) of you to help",
+          "explanation": "\"Kind\" gibi karakter özelliği belirten sıfatlardan sonra \"of + pronoun + to Vo\" kalıbı kullanılır. \"It was kind of you to help\" (Yardım etmen çok nazikçeydi) doğru yapıdır."
+        }
+      ],
+      "word_count": 498
+    },
+    {
+      "page_number": 12,
+      "title": "İsimlerden Sonra Infinitive (Noun + to Vo)",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KURAL: SOYUT İSİMLERDEN SONRA TO VO</h2>\n<p>İngilizce'de birçok isim, özellikle fiilden türetilmiş soyut isimler (ability, decision, plan, etc.), kendilerinden sonra bir fiil aldıklarında \"to Vo\" ile devam ederler. Bu isimler genellikle bir yetenek, niyet, plan veya potansiyeli ifade eder.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> İsimden sonra \"to Vo\" görürsen, o ismin bir eylemle tamamlandığını düşün. \"Ability to do something\" (bir şey yapma yeteneği), \"decision to do something\" (bir şey yapma kararı) gibi.</p>\n</blockquote>\n<hr>\n<h2>📏 1) YETENEK/İSTEK/POTANSİYEL BİLDİREN İSİMLER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> His remarkable ability to learn new languages quickly helped him become a successful diplomat in various countries.<br>\n<strong>TR:</strong> Yeni dilleri hızla öğrenme konusundaki olağanüstü yeteneği, onun çeşitli ülkelerde başarılı bir diplomat olmasına yardımcı oldu.<br>\n→ <strong>Açıklama:</strong> \"Ability\" (yetenek) isminden sonra \"to learn\" (öğrenmek) infinitive'i gelmiştir. Bir yeteneğin ne olduğunu açıklamak için to Vo kullanılır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The company's decision to invest in renewable energy sources was praised by environmental activists.<br>\n<strong>TR:</strong> Şirketin yenilenebilir enerji kaynaklarına yatırım yapma kararı, çevre aktivistleri tarafından övüldü.<br>\n→ <strong>Açıklama:</strong> \"Decision\" (karar) isminden sonra \"to invest\" (yatırım yapmak) infinitive'i gelmiştir. Kararın içeriğini açıklamak için to Vo kullanılır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> She has a strong desire to travel the world and experience different cultures before settling down.<br>\n<strong>TR:</strong> Yerleşmeden önce dünyayı dolaşma ve farklı kültürleri deneyimleme konusunda güçlü bir arzusu var.<br>\n→ <strong>Açıklama:</strong> \"Desire\" (arzu) isminden sonra \"to travel\" (dolaşmak) infinitive'i gelmiştir. Arzunun yöneldiği eylemi belirtir.</p>\n<hr>\n<h2>📏 2) PLAN/HEDEF/AMAÇ BİLDİREN İSİMLER</h2>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Their plan to build a new shopping mall in the city center faced strong opposition from local residents.<br>\n<strong>TR:</strong> Şehir merkezine yeni bir alışveriş merkezi inşa etme planları, yerel sakinlerden güçlü bir muhalefetle karşılaştı.<br>\n→ <strong>Açıklama:</strong> \"Plan\" isminden sonra \"to build\" (inşa etmek) infinitive'i gelmiştir. Planın içeriğini açıklar.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The athlete's dream to compete in the Olympic Games finally came true after years of intense training.<br>\n<strong>TR:</strong> Sporcunun Olimpiyat Oyunları'nda yarışma hayali, yıllarca süren yoğun antrenmandan sonra nihayet gerçek oldu.<br>\n→ <strong>Açıklama:</strong> \"Dream\" (hayal) isminden sonra \"to compete\" (yarışmak) infinitive'i gelmiştir. Hayalin ne olduğunu belirtir.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda boşluktan önce \"ability, decision, plan, desire, attempt, effort, failure, opportunity\" gibi soyut bir isim görürsen, hemen \"to Vo\" aramalısın. Bu isimlerin neredeyse tamamı to Vo ile tamamlanır.\n</div>\n\n<hr>\n<h2>📊 İSİM + TO VO LİSTESİ</h2>\n<table>\n<thead>\n<tr>\n<th>İsim</th>\n<th>Anlamı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>ability</strong></td>\n<td>yetenek</td>\n<td>ability to solve problems</td>\n</tr>\n<tr>\n<td><strong>decision</strong></td>\n<td>karar</td>\n<td>decision to leave</td>\n</tr>\n<tr>\n<td><strong>plan</strong></td>\n<td>plan</td>\n<td>plan to build</td>\n</tr>\n<tr>\n<td><strong>desire</strong></td>\n<td>arzu</td>\n<td>desire to succeed</td>\n</tr>\n<tr>\n<td><strong>attempt</strong></td>\n<td>girişim</td>\n<td>attempt to escape</td>\n</tr>\n<tr>\n<td><strong>effort</strong></td>\n<td>çaba</td>\n<td>effort to improve</td>\n</tr>\n<tr>\n<td><strong>opportunity</strong></td>\n<td>fırsat</td>\n<td>opportunity to study</td>\n</tr>\n<tr>\n<td><strong>failure</strong></td>\n<td>başarısızlık</td>\n<td>failure to comply</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> His <strong><em>_</em></strong> to become a pilot was influenced by his father, who was an Air Force officer.</p>\n<p>A) decide<br>\nB) deciding<br>\nC) decision<br>\nD) to decide</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) decision\n**Açıklama:** Boşluktan sonra \"to become\" infinitive'i var. Bu yapıyla kullanılabilecek uygun bir isim gereklidir. \"His decision to become\" (onun pilot olma kararı) anlamlı ve doğru bir yapıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 236]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "His remarkable ability to learn new languages quickly helped him become a successful diplomat in various countries.",
+          "tr": "Yeni dilleri hızla öğrenme konusundaki olağanüstü yeteneği, onun çeşitli ülkelerde başarılı bir diplomat olmasına yardımcı oldu.",
+          "description": "\"Ability\" (yetenek) isminden sonra \"to learn\" (öğrenmek) infinitive'i gelmiştir. Bir yeteneğin ne olduğunu açıklamak için to Vo kullanılır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The company's decision to invest in renewable energy sources was praised by environmental activists.",
+          "tr": "Şirketin yenilenebilir enerji kaynaklarına yatırım yapma kararı, çevre aktivistleri tarafından övüldü.",
+          "description": "\"Decision\" (karar) isminden sonra \"to invest\" (yatırım yapmak) infinitive'i gelmiştir. Kararın içeriğini açıklamak için to Vo kullanılır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "She has a strong desire to travel the world and experience different cultures before settling down.",
+          "tr": "Yerleşmeden önce dünyayı dolaşma ve farklı kültürleri deneyimleme konusunda güçlü bir arzusu var.",
+          "description": "\"Desire\" (arzu) isminden sonra \"to travel\" (dolaşmak) infinitive'i gelmiştir. Arzunun yöneldiği eylemi belirtir."
+        },
+        {
+          "en": "Their plan to build a new shopping mall in the city center faced strong opposition from local residents.",
+          "tr": "Şehir merkezine yeni bir alışveriş merkezi inşa etme planları, yerel sakinlerden güçlü bir muhalefetle karşılaştı.",
+          "description": "\"Plan\" isminden sonra \"to build\" (inşa etmek) infinitive'i gelmiştir. Planın içeriğini açıklar.\n\n**Örnek 5:**"
+        },
+        {
+          "en": "The athlete's dream to compete in the Olympic Games finally came true after years of intense training.",
+          "tr": "Sporcunun Olimpiyat Oyunları'nda yarışma hayali, yıllarca süren yoğun antrenmandan sonra nihayet gerçek oldu.",
+          "description": "\"Dream\" (hayal) isminden sonra \"to compete\" (yarışmak) infinitive'i gelmiştir. Hayalin ne olduğunu belirtir.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda boşluktan önce \"ability, decision, plan, desire, attempt, effort, failure, opportunity\" gibi soyut bir isim görürsen, hemen \"to Vo\" aramalısın. Bu isimlerin neredeyse tamamı to Vo ile tamamlanır.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "His _______ to become a pilot was influenced by his father, who was an Air Force officer.",
+        "options": {
+          "A": "decide",
+          "B": "deciding",
+          "C": "decision",
+          "D": "to decide"
+        },
+        "correct": "C) decision",
+        "explanation": "Boşluktan sonra \"to become\" infinitive'i var. Bu yapıyla kullanılabilecek uygun bir isim gereklidir. \"His decision to become\" (onun pilot olma kararı) anlamlı ve doğru bir yapıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "His _______ to become a pilot was influenced by his father, who was an Air Force officer.",
+          "options": {
+            "A": "decide",
+            "B": "deciding",
+            "C": "decision",
+            "D": "to decide"
+          },
+          "correct": "C) decision",
+          "explanation": "Boşluktan sonra \"to become\" infinitive'i var. Bu yapıyla kullanılabilecek uygun bir isim gereklidir. \"His decision to become\" (onun pilot olma kararı) anlamlı ve doğru bir yapıdır."
+        }
+      ],
+      "word_count": 481
+    },
+    {
+      "page_number": 13,
+      "title": "Özel Infinitive Yapıları",
+      "total_pages": 20,
+      "content_html": "<h2>📌 TOO / ENOUGH / QUESTION WORD + TO VO</h2>\n<p>Infinitive (to Vo), bazı özel kalıplarla birlikte çok sık kullanılır. Bunlar: \"too + adjective/adverb + to Vo\", \"adjective/adverb + enough + to Vo\", \"enough + noun + to Vo\" ve \"question word + to Vo\" yapılarıdır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu kalıpları formül gibi ezberle! Her biri belirli bir anlamı ifade eder ve hepsi to Vo ile biter.</p>\n</blockquote>\n<hr>\n<h2>📏 1) TOO ... TO VO (OLUMSUZ ANLAM)</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The coffee was too hot to drink immediately, so I decided to wait a few minutes before taking a sip.<br>\n<strong>TR:</strong> Kahve hemen içilemeyecek kadar sıcaktı, bu yüzden bir yudum almadan önce birkaç dakika beklemeye karar verdim.<br>\n→ <strong>Açıklama:</strong> \"Too hot to drink\" (içilemeyecek kadar sıcak) yapısı olumsuz anlam taşır. \"Too + adjective + to Vo\" bir şeyin yapılamayacağını ifade eder.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She was speaking too quietly to hear clearly, so I had to ask her to repeat what she said.<br>\n<strong>TR:</strong> Net duyulamayacak kadar sessiz konuşuyordu, bu yüzden söylediklerini tekrarlamasını istemek zorunda kaldım.<br>\n→ <strong>Açıklama:</strong> \"Too quietly to hear\" (duyulamayacak kadar sessiz) yapısında \"too\" bir zarfı (quietly) nitelemiştir. Sonuç yine olumsuzdur: duyulamaz.</p>\n<hr>\n<h2>📏 2) ENOUGH + TO VO (YETERLİLİK)</h2>\n<p><strong>Örnek 3: (Adj/Adv + enough + to Vo)</strong><br>\n<strong>EN:</strong> The manager felt that the candidate was experienced enough to handle the complex projects independently.<br>\n<strong>TR:</strong> Müdür, adayın karmaşık projeleri bağımsız olarak yönetebilecek kadar deneyimli olduğunu düşündü.<br>\n→ <strong>Açıklama:</strong> \"Experienced enough to handle\" (yönetebilecek kadar deneyimli) yapısı yeterlilik ifade eder. Sıfat veya zarftan sonra \"enough\" gelir, ardından to Vo.</p>\n<p><strong>Örnek 4: (Enough + noun + to Vo)</strong><br>\n<strong>EN:</strong> We didn't have enough time to visit all the museums in Paris, so we had to choose the most important ones.<br>\n<strong>TR:</strong> Paris'teki tüm müzeleri ziyaret etmek için yeterli zamanımız yoktu, bu yüzden en önemlilerini seçmek zorunda kaldık.<br>\n→ <strong>Açıklama:</strong> \"Enough time to visit\" (ziyaret etmek için yeterli zaman) yapısında \"enough\" isimden (time) ÖNCE gelir, ardından to Vo gelir.</p>\n<hr>\n<h2>📏 3) QUESTION WORD + TO VO (SORU KELİMESİ + TO VO)</h2>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> I have no idea how to answer this difficult question; it's completely beyond my knowledge.<br>\n<strong>TR:</strong> Bu zor soruyu nasıl cevaplayacağım hakkında hiçbir fikrim yok; tamamen bilgimin ötesinde.<br>\n→ <strong>Açıklama:</strong> \"How to answer\" (nasıl cevaplayacağım) yapısı, bir soru kelimesi (how) ile to Vo'nun birleşimidir. Bu yapı bir noun clause (isim cümleciği) kısaltmasıdır.</p>\n<p><strong>Örnek 6:</strong><br>\n<strong>EN:</strong> She couldn't decide what to wear to the party, so she tried on at least five different outfits.<br>\n<strong>TR:</strong> Partiye ne giyeceğine karar veremedi, bu yüzden en az beş farklı kıyafet denedi.<br>\n→ <strong>Açıklama:</strong> \"What to wear\" (ne giyeceği) yapısı \"what\" soru kelimesi ile to Vo'nun birleşimidir. \"Decide\" fiilinin nesnesi olarak kullanılmıştır.</p>\n<div class=\"kart-grubu\">\n    <div class=\"kart mavi\">\n        <strong>Too + adj + to Vo:</strong> (yapılamayacak kadar)\n    </div>\n    <div class=\"kart yesil\">\n        <strong>Adj + enough + to Vo:</strong> (yapabilecek kadar)\n    </div>\n    <div class=\"kart turuncu\">\n        <strong>Wh- + to Vo:</strong> (nasıl/ne/nere/ne zaman yapacağı)\n    </div>\n</div>\n\n<hr>\n<h2>📊 ÖZEL INFINITIVE YAPILARI</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>too + adj + to Vo</strong></td>\n<td>-emeyecek kadar</td>\n<td>too young to drive</td>\n</tr>\n<tr>\n<td><strong>adj + enough + to Vo</strong></td>\n<td>-ebilecek kadar</td>\n<td>smart enough to understand</td>\n</tr>\n<tr>\n<td><strong>enough + noun + to Vo</strong></td>\n<td>için yeterli</td>\n<td>enough money to buy</td>\n</tr>\n<tr>\n<td><strong>wh- + to Vo</strong></td>\n<td>nasıl/ne yapacağı</td>\n<td>how to do it</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The box was <strong><em>_</em></strong> for the child to carry, so his mother helped him.</p>\n<p>A) too heavy<br>\nB) so heavy<br>\nC) heavy enough<br>\nD) very heavy</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) too heavy\n**Açıklama:** Cümlede \"for the child to carry\" (çocuğun taşıması için) ifadesi var. Bu, bir şeyin taşınamayacak kadar ağır olduğunu gösterir. \"Too heavy to carry\" (taşınamayacak kadar ağır) anlamı verir.\n</details>\n\n<p><strong>[Kelime sayısı: 240]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "The coffee was too hot to drink immediately, so I decided to wait a few minutes before taking a sip.",
+          "tr": "Kahve hemen içilemeyecek kadar sıcaktı, bu yüzden bir yudum almadan önce birkaç dakika beklemeye karar verdim.",
+          "description": "\"Too hot to drink\" (içilemeyecek kadar sıcak) yapısı olumsuz anlam taşır. \"Too + adjective + to Vo\" bir şeyin yapılamayacağını ifade eder.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She was speaking too quietly to hear clearly, so I had to ask her to repeat what she said.",
+          "tr": "Net duyulamayacak kadar sessiz konuşuyordu, bu yüzden söylediklerini tekrarlamasını istemek zorunda kaldım.",
+          "description": "\"Too quietly to hear\" (duyulamayacak kadar sessiz) yapısında \"too\" bir zarfı (quietly) nitelemiştir. Sonuç yine olumsuzdur: duyulamaz."
+        },
+        {
+          "en": "The manager felt that the candidate was experienced enough to handle the complex projects independently.",
+          "tr": "Müdür, adayın karmaşık projeleri bağımsız olarak yönetebilecek kadar deneyimli olduğunu düşündü.",
+          "description": "\"Experienced enough to handle\" (yönetebilecek kadar deneyimli) yapısı yeterlilik ifade eder. Sıfat veya zarftan sonra \"enough\" gelir, ardından to Vo.\n\n**Örnek 4: (Enough + noun + to Vo)**"
+        },
+        {
+          "en": "We didn't have enough time to visit all the museums in Paris, so we had to choose the most important ones.",
+          "tr": "Paris'teki tüm müzeleri ziyaret etmek için yeterli zamanımız yoktu, bu yüzden en önemlilerini seçmek zorunda kaldık.",
+          "description": "\"Enough time to visit\" (ziyaret etmek için yeterli zaman) yapısında \"enough\" isimden (time) ÖNCE gelir, ardından to Vo gelir."
+        },
+        {
+          "en": "I have no idea how to answer this difficult question; it's completely beyond my knowledge.",
+          "tr": "Bu zor soruyu nasıl cevaplayacağım hakkında hiçbir fikrim yok; tamamen bilgimin ötesinde.",
+          "description": "\"How to answer\" (nasıl cevaplayacağım) yapısı, bir soru kelimesi (how) ile to Vo'nun birleşimidir. Bu yapı bir noun clause (isim cümleciği) kısaltmasıdır.\n\n**Örnek 6:**"
+        },
+        {
+          "en": "She couldn't decide what to wear to the party, so she tried on at least five different outfits.",
+          "tr": "Partiye ne giyeceğine karar veremedi, bu yüzden en az beş farklı kıyafet denedi.",
+          "description": "\"What to wear\" (ne giyeceği) yapısı \"what\" soru kelimesi ile to Vo'nun birleşimidir. \"Decide\" fiilinin nesnesi olarak kullanılmıştır.\n\n<div class=\"kart-grubu\">\n <div class=\"kart mavi\">\n <strong>Too + adj + to Vo:</strong> (yapılamayacak kadar)\n </div>\n <div class=\"kart yesil\">\n <strong>Adj + enough + to Vo:</strong> (yapabilecek kadar)\n </div>\n <div class=\"kart turuncu\">\n <strong>Wh- + to Vo:</strong> (nasıl/ne/nere/ne zaman yapacağı)\n </div>\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The box was _______ for the child to carry, so his mother helped him.",
+        "options": {
+          "A": "too heavy",
+          "B": "so heavy",
+          "C": "heavy enough",
+          "D": "very heavy"
+        },
+        "correct": "A) too heavy",
+        "explanation": "Cümlede \"for the child to carry\" (çocuğun taşıması için) ifadesi var. Bu, bir şeyin taşınamayacak kadar ağır olduğunu gösterir. \"Too heavy to carry\" (taşınamayacak kadar ağır) anlamı verir."
+      },
+      "mini_tests": [
+        {
+          "question": "The box was _______ for the child to carry, so his mother helped him.",
+          "options": {
+            "A": "too heavy",
+            "B": "so heavy",
+            "C": "heavy enough",
+            "D": "very heavy"
+          },
+          "correct": "A) too heavy",
+          "explanation": "Cümlede \"for the child to carry\" (çocuğun taşıması için) ifadesi var. Bu, bir şeyin taşınamayacak kadar ağır olduğunu gösterir. \"Too heavy to carry\" (taşınamayacak kadar ağır) anlamı verir."
+        }
+      ],
+      "word_count": 586
+    },
+    {
+      "page_number": 14,
+      "title": "Amaç Bildiren Infinitive",
+      "total_pages": 20,
+      "content_html": "<h2>📌 PURPOSIVE INFINITIVE: AMAÇ BİLDİREN TO VO</h2>\n<p>İngilizce'de bir eylemin amacını belirtmek için \"to Vo\" kullanılır. Bu kullanımda to Vo, \"için, -mek için, -mek amacıyla\" anlamı taşır. Aynı anlamı vermek için \"in order to\" veya \"so as to\" da kullanılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bir cümlede \"Neden? Hangi amaçla?\" sorusuna cevap veren bir yapı görürsen, büyük ihtimalle amaç bildiren infinitive'dir.</p>\n</blockquote>\n<hr>\n<h2>📏 1) AMAÇ BİLDİREN TO VO KULLANIMI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> She went to the library early in the morning to find a quiet place to study for her final exams.<br>\n<strong>TR:</strong> Final sınavlarına çalışmak için sessiz bir yer bulmak amacıyla sabah erken saatlerde kütüphaneye gitti.<br>\n→ <strong>Açıklama:</strong> \"To find\" (bulmak için) amaç bildiren infinitive'dir. Kütüphaneye gitme eyleminin amacını açıklar. \"Neden kütüphaneye gitti?\" → Çalışacak yer BULMAK İÇİN.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> He exercises every day to stay healthy and to reduce the risk of heart disease in the future.<br>\n<strong>TR:</strong> Sağlıklı kalmak ve gelecekte kalp hastalığı riskini azaltmak için her gün egzersiz yapıyor.<br>\n→ <strong>Açıklama:</strong> \"To stay\" (kalmak için) ve \"to reduce\" (azaltmak için) amaç bildiren infinitive'lerdir. Egzersiz yapmanın iki amacını sıralar.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The company invested heavily in new technology to increase productivity and gain a competitive advantage.<br>\n<strong>TR:</strong> Şirket, verimliliği artırmak ve rekabet avantajı elde etmek için yeni teknolojiye büyük yatırım yaptı.<br>\n→ <strong>Açıklama:</strong> \"To increase\" (artırmak için) ve \"to gain\" (elde etmek için) amaç bildirir. Yatırım yapmanın amacını açıklar.</p>\n<hr>\n<h2>📏 2) IN ORDER TO ve SO AS TO KULLANIMI</h2>\n<p><strong>Örnek 4: (in order to)</strong><br>\n<strong>EN:</strong> In order to be considered for the position, you must submit your application and resume by Friday.<br>\n<strong>TR:</strong> Pozisyon için değerlendirilmek amacıyla, başvurunuzu ve özgeçmişinizi Cuma gününe kadar teslim etmelisiniz.<br>\n→ <strong>Açıklama:</strong> \"In order to\" (amacıyla, -mek için) yapısı \"to\"dan daha resmidir ve cümle başında sık kullanılır. Amaç vurgusunu biraz daha belirginleştirir.</p>\n<p><strong>Örnek 5: (so as to)</strong><br>\n<strong>EN:</strong> He spoke very slowly and clearly so as to make sure everyone in the audience could understand him.<br>\n<strong>TR:</strong> Dinleyiciler arasındaki herkesin onu anlayabildiğinden emin olmak için çok yavaş ve net konuştu.<br>\n→ <strong>Açıklama:</strong> \"So as to\" (için, amacıyla) yapısı da \"in order to\" gibi amaç bildirir. Genellikle daha kibar veya vurgulu bir anlam taşır.</p>\n<p><strong>Örnek 6: (olumsuz amaç: so as not to / in order not to)</strong><br>\n<strong>EN:</strong> She tiptoed into the room so as not to wake the sleeping baby.<br>\n<strong>TR:</strong> Uyuyan bebeği uyandırmamak için parmak uçlarında odaya girdi.<br>\n→ <strong>Açıklama:</strong> Olumsuz amaç bildirirken \"so as not to\" veya \"in order not to\" kullanılır. \"Not to\" (yapmamak için) şeklinde değil, \"so as not to\" şeklinde kullanılır.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda \"to Vo\" gördüğünde, bunun bir amaç olup olmadığını kontrol et. Eğer cümlede \"için, amacıyla\" anlamı varsa, seçeneklerde \"to\" aramalısın. \"in order to\" ve \"so as to\" da aynı anlamı verir.\n</div>\n\n<hr>\n<h2>📊 AMAÇ BİLDİREN YAPILAR</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>to Vo</strong></td>\n<td>-mek için</td>\n<td>I came to see you.</td>\n</tr>\n<tr>\n<td><strong>in order to Vo</strong></td>\n<td>amacıyla</td>\n<td>In order to succeed...</td>\n</tr>\n<tr>\n<td><strong>so as to Vo</strong></td>\n<td>-mek için</td>\n<td>He left early so as to arrive on time.</td>\n</tr>\n<tr>\n<td><strong>so as not to Vo</strong></td>\n<td>-memek için</td>\n<td>She whispered so as not to disturb.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The government raised taxes <strong><em>_</em></strong> public services such as healthcare and education.</p>\n<p>A) to improve<br>\nB) improving<br>\nC) for improve<br>\nD) so that improve</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A) to improve\n**Açıklama:** Cümlede vergilerin artırılma amacı belirtiliyor. \"Kamu hizmetlerini iyileştirmek İÇİN\" anlamı var. Bu nedenle amaç bildiren infinitive \"to improve\" kullanılmalıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 238]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "She went to the library early in the morning to find a quiet place to study for her final exams.",
+          "tr": "Final sınavlarına çalışmak için sessiz bir yer bulmak amacıyla sabah erken saatlerde kütüphaneye gitti.",
+          "description": "\"To find\" (bulmak için) amaç bildiren infinitive'dir. Kütüphaneye gitme eyleminin amacını açıklar. \"Neden kütüphaneye gitti?\" → Çalışacak yer BULMAK İÇİN.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "He exercises every day to stay healthy and to reduce the risk of heart disease in the future.",
+          "tr": "Sağlıklı kalmak ve gelecekte kalp hastalığı riskini azaltmak için her gün egzersiz yapıyor.",
+          "description": "\"To stay\" (kalmak için) ve \"to reduce\" (azaltmak için) amaç bildiren infinitive'lerdir. Egzersiz yapmanın iki amacını sıralar.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The company invested heavily in new technology to increase productivity and gain a competitive advantage.",
+          "tr": "Şirket, verimliliği artırmak ve rekabet avantajı elde etmek için yeni teknolojiye büyük yatırım yaptı.",
+          "description": "\"To increase\" (artırmak için) ve \"to gain\" (elde etmek için) amaç bildirir. Yatırım yapmanın amacını açıklar."
+        },
+        {
+          "en": "In order to be considered for the position, you must submit your application and resume by Friday.",
+          "tr": "Pozisyon için değerlendirilmek amacıyla, başvurunuzu ve özgeçmişinizi Cuma gününe kadar teslim etmelisiniz.",
+          "description": "\"In order to\" (amacıyla, -mek için) yapısı \"to\"dan daha resmidir ve cümle başında sık kullanılır. Amaç vurgusunu biraz daha belirginleştirir.\n\n**Örnek 5: (so as to)**"
+        },
+        {
+          "en": "He spoke very slowly and clearly so as to make sure everyone in the audience could understand him.",
+          "tr": "Dinleyiciler arasındaki herkesin onu anlayabildiğinden emin olmak için çok yavaş ve net konuştu.",
+          "description": "\"So as to\" (için, amacıyla) yapısı da \"in order to\" gibi amaç bildirir. Genellikle daha kibar veya vurgulu bir anlam taşır.\n\n**Örnek 6: (olumsuz amaç: so as not to / in order not to)**"
+        },
+        {
+          "en": "She tiptoed into the room so as not to wake the sleeping baby.",
+          "tr": "Uyuyan bebeği uyandırmamak için parmak uçlarında odaya girdi.",
+          "description": "Olumsuz amaç bildirirken \"so as not to\" veya \"in order not to\" kullanılır. \"Not to\" (yapmamak için) şeklinde değil, \"so as not to\" şeklinde kullanılır.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nSınavlarda \"to Vo\" gördüğünde, bunun bir amaç olup olmadığını kontrol et. Eğer cümlede \"için, amacıyla\" anlamı varsa, seçeneklerde \"to\" aramalısın. \"in order to\" ve \"so as to\" da aynı anlamı verir.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The government raised taxes _______ public services such as healthcare and education.",
+        "options": {
+          "A": "to improve",
+          "B": "improving",
+          "C": "for improve",
+          "D": "so that improve"
+        },
+        "correct": "A) to improve",
+        "explanation": "Cümlede vergilerin artırılma amacı belirtiliyor. \"Kamu hizmetlerini iyileştirmek İÇİN\" anlamı var. Bu nedenle amaç bildiren infinitive \"to improve\" kullanılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "The government raised taxes _______ public services such as healthcare and education.",
+          "options": {
+            "A": "to improve",
+            "B": "improving",
+            "C": "for improve",
+            "D": "so that improve"
+          },
+          "correct": "A) to improve",
+          "explanation": "Cümlede vergilerin artırılma amacı belirtiliyor. \"Kamu hizmetlerini iyileştirmek İÇİN\" anlamı var. Bu nedenle amaç bildiren infinitive \"to improve\" kullanılmalıdır."
+        }
+      ],
+      "word_count": 564
+    },
+    {
+      "page_number": 15,
+      "title": "Pasif Infinitive: to be V3",
+      "total_pages": 20,
+      "content_html": "<h2>📌 INFINITIVE'İN EDİLGEN HALİ: TO BE V3</h2>\n<p>Tıpkı Gerund gibi, Infinitive'in de edilgen (passive) bir formu vardır. Edilgen Infinitive \"to be V3\" şeklinde oluşturulur. Bir cümlede eylem edilgen ise ve infinitive kullanılması gerekiyorsa, \"to be V3\" kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"To be V3\" gördüğünde, bunun \"birisi tarafından yapılmak\" anlamı taşıdığını bil. Özne eylemi yapmıyor, eylem özneye yapılıyor.</p>\n</blockquote>\n<hr>\n<h2>📏 1) TEMEL PASIF INFINITIVE KULLANIMI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The company's new CEO is expected to be announced at the board meeting scheduled for tomorrow morning.<br>\n<strong>TR:</strong> Şirketin yeni CEO'sunun, yarın sabah planlanan yönetim kurulu toplantısında açıklanması bekleniyor.<br>\n→ <strong>Açıklama:</strong> \"Is expected\" (bekleniyor) pasif yapısından sonra \"to be announced\" (açıklanmak) pasif infinitive kullanılmıştır. CEO açıklanacak, kendisi açıklamıyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She hopes to be accepted into the university's prestigious medical program, but the competition is fierce.<br>\n<strong>TR:</strong> Üniversitenin prestijli tıp programına kabul edilmeyi umuyor, ancak rekabet çok çetin.<br>\n→ <strong>Açıklama:</strong> \"Hopes\" (umuyor) fiilinden sonra infinitive gelir. Ancak burada eylem pasif: \"to be accepted\" (kabul edilmek). Kendisi kabul ETMİYOR, kabul EDİLİYOR.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The painting was too damaged to be restored, so the museum decided to keep it in storage.<br>\n<strong>TR:</strong> Tablo restore edilemeyecek kadar hasarlıydı, bu yüzden müze onu depoda tutmaya karar verdi.<br>\n→ <strong>Açıklama:</strong> \"Too damaged to be restored\" (restore edilemeyecek kadar hasarlı) yapısında \"to be restored\" pasif infinitive kullanılmıştır. Tablo restore ETMİYOR, restore EDİLİYOR.</p>\n<hr>\n<h2>📏 2) PASIF INFINITIVE ile AKTIF INFINITIVE KARŞILAŞTIRMASI</h2>\n<p><strong>Örnek 4: (Aktif vs Pasif Karşılaştırma)</strong><br>\n<strong>EN:</strong> I want to inform you about the changes. (Seni bilgilendirmek istiyorum - aktif)<br>\n<strong>EN:</strong> I want to be informed about the changes. (Değişiklikler hakkında bilgilendirilmek istiyorum - pasif)<br>\n→ <strong>Açıklama:</strong> İlk cümlede özne (I) bilgiyi VERİYOR. İkinci cümlede özne (I) bilgiyi ALIYOR. Aynı fiil (want) farklı anlamlar için aktif veya pasif infinitive ile kullanılabilir.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> The students asked to see the exam results immediately after the test.<br>\n<strong>TR:</strong> Öğrenciler sınavdan hemen sonra sonuçları görmek istediler. (Aktif - kendileri görecek)<br>\n<strong>EN:</strong> The students asked to be shown the exam results immediately after the test.<br>\n<strong>TR:</strong> Öğrenciler sınavdan hemen sonra sonuçların kendilerine gösterilmesini istediler. (Pasif - başkası gösterecek)<br>\n→ <strong>Açıklama:</strong> \"To see\" aktif, öğrencilerin kendileri göreceğini ifade eder. \"To be shown\" pasif, bir başkasının onlara göstereceğini ifade eder.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nSınavlarda \"to be V3\" gördüğünde direkt eleme! Önce anlam kontrolü yap. Cümlede \"birisi tarafından yapılmak\" anlamı varsa, \"to be V3\" doğru cevap olabilir. Aktif anlam varsa \"to Vo\" kullanılır.\n</div>\n\n<hr>\n<h2>📊 AKTİF vs PASİF INFINITIVE</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Aktif Infinitive</th>\n<th>Pasif Infinitive</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Yapı</strong></td>\n<td>to Vo</td>\n<td>to be V3</td>\n</tr>\n<tr>\n<td><strong>Anlam</strong></td>\n<td>-mek (kendisi yapar)</td>\n<td>-ilmek (başkası yapar)</td>\n</tr>\n<tr>\n<td><strong>Örnek</strong></td>\n<td>I want to see (görmek)</td>\n<td>I want to be seen (görülmek)</td>\n</tr>\n<tr>\n<td><strong>Örnek</strong></td>\n<td>He expects to invite (davet etmek)</td>\n<td>He expects to be invited (davet edilmek)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The documents need <strong><em>_</em></strong> before the meeting tomorrow morning.</p>\n<p>A) to sign<br>\nB) signing<br>\nC) to be signed<br>\nD) signed</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) to be signed\n**Açıklama:** Belgeler imzalanacak, kendileri imzalamıyor. Pasif bir anlam var. \"Need\" fiilinden sonra pasif anlam için \"to be V3\" (to be signed) veya Ving (signing) kullanılabilir. Seçeneklerde \"signing\" yok, \"to be signed\" doğru cevap.\n</details>\n\n<p><strong>[Kelime sayısı: 239]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "The company's new CEO is expected to be announced at the board meeting scheduled for tomorrow morning.",
+          "tr": "Şirketin yeni CEO'sunun, yarın sabah planlanan yönetim kurulu toplantısında açıklanması bekleniyor.",
+          "description": "\"Is expected\" (bekleniyor) pasif yapısından sonra \"to be announced\" (açıklanmak) pasif infinitive kullanılmıştır. CEO açıklanacak, kendisi açıklamıyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She hopes to be accepted into the university's prestigious medical program, but the competition is fierce.",
+          "tr": "Üniversitenin prestijli tıp programına kabul edilmeyi umuyor, ancak rekabet çok çetin.",
+          "description": "\"Hopes\" (umuyor) fiilinden sonra infinitive gelir. Ancak burada eylem pasif: \"to be accepted\" (kabul edilmek). Kendisi kabul ETMİYOR, kabul EDİLİYOR.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The painting was too damaged to be restored, so the museum decided to keep it in storage.",
+          "tr": "Tablo restore edilemeyecek kadar hasarlıydı, bu yüzden müze onu depoda tutmaya karar verdi.",
+          "description": "\"Too damaged to be restored\" (restore edilemeyecek kadar hasarlı) yapısında \"to be restored\" pasif infinitive kullanılmıştır. Tablo restore ETMİYOR, restore EDİLİYOR."
+        },
+        {
+          "en": "I want to inform you about the changes. (Seni bilgilendirmek istiyorum - aktif)\n**EN:** I want to be informed about the changes. (Değişiklikler hakkında bilgilendirilmek istiyorum - pasif)\n→ **Açıklama:** İlk cümlede özne (I) bilgiyi VERİYOR. İkinci cümlede özne (I) bilgiyi ALIYOR. Aynı fiil (want) farklı anlamlar için aktif veya pasif infinitive ile kullanılabilir.\n\n**Örnek 5:**\n**EN:** The students asked to see the exam results immediately after the test.",
+          "tr": "Öğrenciler sınavdan hemen sonra sonuçları görmek istediler. (Aktif - kendileri görecek)",
+          "description": ""
+        },
+        {
+          "en": "The students asked to be shown the exam results immediately after the test.",
+          "tr": "Öğrenciler sınavdan hemen sonra sonuçların kendilerine gösterilmesini istediler. (Pasif - başkası gösterecek)",
+          "description": "\"To see\" aktif, öğrencilerin kendileri göreceğini ifade eder. \"To be shown\" pasif, bir başkasının onlara göstereceğini ifade eder.\n\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\nSınavlarda \"to be V3\" gördüğünde direkt eleme! Önce anlam kontrolü yap. Cümlede \"birisi tarafından yapılmak\" anlamı varsa, \"to be V3\" doğru cevap olabilir. Aktif anlam varsa \"to Vo\" kullanılır.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The documents need _______ before the meeting tomorrow morning.",
+        "options": {
+          "A": "to sign",
+          "B": "signing",
+          "C": "to be signed",
+          "D": "signed"
+        },
+        "correct": "C) to be signed",
+        "explanation": "Belgeler imzalanacak, kendileri imzalamıyor. Pasif bir anlam var. \"Need\" fiilinden sonra pasif anlam için \"to be V3\" (to be signed) veya Ving (signing) kullanılabilir. Seçeneklerde \"signing\" yok, \"to be signed\" doğru cevap."
+      },
+      "mini_tests": [
+        {
+          "question": "The documents need _______ before the meeting tomorrow morning.",
+          "options": {
+            "A": "to sign",
+            "B": "signing",
+            "C": "to be signed",
+            "D": "signed"
+          },
+          "correct": "C) to be signed",
+          "explanation": "Belgeler imzalanacak, kendileri imzalamıyor. Pasif bir anlam var. \"Need\" fiilinden sonra pasif anlam için \"to be V3\" (to be signed) veya Ving (signing) kullanılabilir. Seçeneklerde \"signing\" yok, \"to be signed\" doğru cevap."
+        }
+      ],
+      "word_count": 510
+    },
+    {
+      "page_number": 16,
+      "title": "Perfect Infinitive: to have V3",
+      "total_pages": 20,
+      "content_html": "<h2>📌 GEÇMİŞTE ÖNCELİK VURGUSU: TO HAVE V3</h2>\n<p>Bazen infinitive kullanılan bir yerde, infinitive ile ifade edilen eylemin, ana fiilden DAHA ÖNCE gerçekleştiğini özellikle vurgulamak isteriz. İşte bu durumda \"Perfect Infinitive\" kullanırız: <strong>to have V3</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"To have V3\" gördüğünde, bunun \"geçmişte olmuş bir eylem\" olduğunu anla. Genellikle \"believed, thought, said, reported\" gibi fiillerle birlikte kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 1) PERFECT INFINITIVE KULLANIMI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The ancient ruins are believed to have been built around 500 BC by a mysterious civilization.<br>\n<strong>TR:</strong> Antik kalıntıların, gizemli bir uygarlık tarafından MÖ 500 civarında inşa edildiğine inanılıyor.<br>\n→ <strong>Açıklama:</strong> \"Are believed\" (inanılıyor) pasif yapısından sonra \"to have been built\" (inşa edilmiş olmak) perfect passive infinitive kullanılmıştır. İnşa etme eylemi, inanma eyleminden ÖNCE gerçekleşmiştir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She claims to have seen a UFO last night, but nobody believes her story.<br>\n<strong>TR:</strong> Dün gece bir UFO gördüğünü iddia ediyor, ama kimse onun hikayesine inanmıyor.<br>\n→ <strong>Açıklama:</strong> \"Claims\" (iddia ediyor) fiilinden sonra \"to have seen\" (görmüş olmak) perfect infinitive kullanılmıştır. Görme eylemi, iddia etme eyleminden ÖNCE gerçekleşmiştir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The suspect is thought to have escaped to a country with no extradition treaty.<br>\n<strong>TR:</strong> Şüphelinin, iade anlaşması olmayan bir ülkeye kaçmış olduğu düşünülüyor.<br>\n→ <strong>Açıklama:</strong> \"Is thought\" (düşünülüyor) pasif yapısından sonra \"to have escaped\" (kaçmış olmak) perfect infinitive kullanılmıştır. Kaçış eylemi, düşünme eyleminden önce gerçekleşmiştir.</p>\n<hr>\n<h2>📏 2) PERFECT INFINITIVE'İN PASİF HALİ: TO HAVE BEEN V3</h2>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The famous painting is reported to have been stolen from the museum last night.<br>\n<strong>TR:</strong> Ünlü tablonun dün gece müzeden çalınmış olduğu rapor ediliyor.<br>\n→ <strong>Açıklama:</strong> \"Is reported\" (rapor ediliyor) pasif yapısından sonra \"to have been stolen\" (çalınmış olmak) perfect passive infinitive kullanılmıştır. Çalınma eylemi, rapor etme eyleminden ÖNCE gerçekleşmiştir ve pasiftir.</p>\n<p><strong>Örnek 5:</strong><br>\n<strong>EN:</strong> He appears to have been given the wrong directions, which is why he got lost.<br>\n<strong>TR:</strong> Kendisine yanlış tarifler verilmiş gibi görünüyor, bu yüzden kayboldu.<br>\n→ <strong>Açıklama:</strong> \"Appears\" (görünüyor) fiilinden sonra \"to have been given\" (verilmiş olmak) perfect passive infinitive kullanılmıştır. Tariflerin verilmesi eylemi, görünme eyleminden önce gerçekleşmiştir.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"İnanılıyor ki...\", \"düşünülüyor ki...\", \"söyleniyor ki...\" gibi ifadelerde, ana fiilden önce olan eylemler için \"to have V3\" veya \"to have been V3\" kullanılır. Bu yapıyı gördüğünde \"geçmişte olmuş\" anlamını ara.\n</div>\n\n<hr>\n<h2>📊 INFINITIVE FORMLARI KARŞILAŞTIRMA</h2>\n<table>\n<thead>\n<tr>\n<th>Form</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Zaman</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Simple Active</strong></td>\n<td>to Vo</td>\n<td>yapmak</td>\n<td>Genel veya gelecek</td>\n</tr>\n<tr>\n<td><strong>Simple Passive</strong></td>\n<td>to be V3</td>\n<td>yapılmak</td>\n<td>Genel veya gelecek (pasif)</td>\n</tr>\n<tr>\n<td><strong>Perfect Active</strong></td>\n<td>to have V3</td>\n<td>yapmış olmak</td>\n<td>Ana fiilden ÖNCE (aktif)</td>\n</tr>\n<tr>\n<td><strong>Perfect Passive</strong></td>\n<td>to have been V3</td>\n<td>yapılmış olmak</td>\n<td>Ana fiilden ÖNCE (pasif)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The ancient city is believed <strong><em>_</em></strong> by a massive earthquake around 1000 AD.</p>\n<p>A) to destroy<br>\nB) to be destroyed<br>\nC) to have been destroyed<br>\nD) to have destroyed</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) to have been destroyed\n**Açıklama:** Antik şehir YOK edilmiş. Pasif bir eylem. Ve yok etme eylemi, inanma eyleminden ÖNCE gerçekleşmiş. Bu nedenle perfect passive infinitive \"to have been destroyed\" (yok edilmiş olmak) doğru cevaptır.\n</details>\n\n<p><strong>[Kelime sayısı: 234]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "The ancient ruins are believed to have been built around 500 BC by a mysterious civilization.",
+          "tr": "Antik kalıntıların, gizemli bir uygarlık tarafından MÖ 500 civarında inşa edildiğine inanılıyor.",
+          "description": "\"Are believed\" (inanılıyor) pasif yapısından sonra \"to have been built\" (inşa edilmiş olmak) perfect passive infinitive kullanılmıştır. İnşa etme eylemi, inanma eyleminden ÖNCE gerçekleşmiştir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She claims to have seen a UFO last night, but nobody believes her story.",
+          "tr": "Dün gece bir UFO gördüğünü iddia ediyor, ama kimse onun hikayesine inanmıyor.",
+          "description": "\"Claims\" (iddia ediyor) fiilinden sonra \"to have seen\" (görmüş olmak) perfect infinitive kullanılmıştır. Görme eylemi, iddia etme eyleminden ÖNCE gerçekleşmiştir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The suspect is thought to have escaped to a country with no extradition treaty.",
+          "tr": "Şüphelinin, iade anlaşması olmayan bir ülkeye kaçmış olduğu düşünülüyor.",
+          "description": "\"Is thought\" (düşünülüyor) pasif yapısından sonra \"to have escaped\" (kaçmış olmak) perfect infinitive kullanılmıştır. Kaçış eylemi, düşünme eyleminden önce gerçekleşmiştir."
+        },
+        {
+          "en": "The famous painting is reported to have been stolen from the museum last night.",
+          "tr": "Ünlü tablonun dün gece müzeden çalınmış olduğu rapor ediliyor.",
+          "description": "\"Is reported\" (rapor ediliyor) pasif yapısından sonra \"to have been stolen\" (çalınmış olmak) perfect passive infinitive kullanılmıştır. Çalınma eylemi, rapor etme eyleminden ÖNCE gerçekleşmiştir ve pasiftir.\n\n**Örnek 5:**"
+        },
+        {
+          "en": "He appears to have been given the wrong directions, which is why he got lost.",
+          "tr": "Kendisine yanlış tarifler verilmiş gibi görünüyor, bu yüzden kayboldu.",
+          "description": "\"Appears\" (görünüyor) fiilinden sonra \"to have been given\" (verilmiş olmak) perfect passive infinitive kullanılmıştır. Tariflerin verilmesi eylemi, görünme eyleminden önce gerçekleşmiştir.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\n\"İnanılıyor ki...\", \"düşünülüyor ki...\", \"söyleniyor ki...\" gibi ifadelerde, ana fiilden önce olan eylemler için \"to have V3\" veya \"to have been V3\" kullanılır. Bu yapıyı gördüğünde \"geçmişte olmuş\" anlamını ara.\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The ancient city is believed _______ by a massive earthquake around 1000 AD.",
+        "options": {
+          "A": "to destroy",
+          "B": "to be destroyed",
+          "C": "to have been destroyed",
+          "D": "to have destroyed"
+        },
+        "correct": "C) to have been destroyed",
+        "explanation": "Antik şehir YOK edilmiş. Pasif bir eylem. Ve yok etme eylemi, inanma eyleminden ÖNCE gerçekleşmiş. Bu nedenle perfect passive infinitive \"to have been destroyed\" (yok edilmiş olmak) doğru cevaptır."
+      },
+      "mini_tests": [
+        {
+          "question": "The ancient city is believed _______ by a massive earthquake around 1000 AD.",
+          "options": {
+            "A": "to destroy",
+            "B": "to be destroyed",
+            "C": "to have been destroyed",
+            "D": "to have destroyed"
+          },
+          "correct": "C) to have been destroyed",
+          "explanation": "Antik şehir YOK edilmiş. Pasif bir eylem. Ve yok etme eylemi, inanma eyleminden ÖNCE gerçekleşmiş. Bu nedenle perfect passive infinitive \"to have been destroyed\" (yok edilmiş olmak) doğru cevaptır."
+        }
+      ],
+      "word_count": 492
+    },
+    {
+      "page_number": 17,
+      "title": "Verb + Object + To Vo Yapısı",
+      "total_pages": 20,
+      "content_html": "<h2>📌 KURAL: BAZI FİİLLER NESNE + TO VO İSTER</h2>\n<p>İngilizce'de bazı fiiller, kendilerinden sonra direkt to Vo almazlar. Önce bir nesne (noun/pronoun) alır, sonra to Vo ile devam ederler. Bu fiiller genellikle \"birine bir şey yaptırmak, birini bir şey yapmaya zorlamak/teşvik etmek\" anlamı taşır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Verb + somebody + to do something\" kalıbını ezberle! \"Allow, tell, ask, advise, encourage, force\" gibi fiiller bu şekilde kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 1) VERB + OBJECT + TO VO KALIBI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The professor encouraged his students to participate actively in class discussions and ask questions.<br>\n<strong>TR:</strong> Profesör, öğrencilerini sınıf tartışmalarına aktif olarak katılmaya ve soru sormaya teşvik etti.<br>\n→ <strong>Açıklama:</strong> \"Encouraged\" (teşvik etti) fiilinden sonra önce nesne \"his students\" (öğrencilerini) gelmiş, ardından \"to participate\" (katılmaya) infinitive'i gelmiştir. Öğrenciler katılacak.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The company's strict policy forbids employees to use their personal phones during working hours.<br>\n<strong>TR:</strong> Şirketin katı politikası, çalışanların çalışma saatleri içinde kişisel telefonlarını kullanmalarını yasaklar.<br>\n→ <strong>Açıklama:</strong> \"Forbids\" (yasaklar) fiilinden sonra nesne \"employees\" (çalışanları) ve ardından \"to use\" (kullanmayı) infinitive'i gelmiştir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> I advised my sister to apply for the scholarship because she had excellent grades.<br>\n<strong>TR:</strong> Kız kardeşime bursa başvurmasını tavsiye ettim çünkü notları mükemmeldi.<br>\n→ <strong>Açıklama:</strong> \"Advised\" (tavsiye etti) fiilinden sonra nesne \"my sister\" (kız kardeşime) ve ardından \"to apply\" (başvurmasını) infinitive'i gelmiştir.</p>\n<hr>\n<h2>📏 2) İSTİSNA: MAKER/LET/HAD BİLDİREN FİİLLER</h2>\n<p><strong>Örnek 4: (Make + object + Vo - to'suz infinitive)</strong><br>\n<strong>EN:</strong> His parents made him apologize for his rude behavior towards the guests.<br>\n<strong>TR:</strong> Ailesi, misafirlere karşı kaba davranışı için onu özür dilemeye zorladı.<br>\n→ <strong>Açıklama:</strong> \"Make\" (zorlamak, yaptırmak) fiili, \"verb + object + Vo\" (to'suz infinitive) alır. \"Made him apologize\" (onu özür dilemeye zorladı) doğru kullanımdır. \"Made him to apologize\" YANLIŞTIR.</p>\n<p><strong>Örnek 5: (Let + object + Vo - to'suz infinitive)</strong><br>\n<strong>EN:</strong> The teacher let the students leave early because the class was cancelled.<br>\n<strong>TR:</strong> Ders iptal edildiği için öğretmen öğrencilerin erken çıkmasına izin verdi.<br>\n→ <strong>Açıklama:</strong> \"Let\" (izin vermek) fiili de to'suz infinitive alır. \"Let them leave\" (çıkmalarına izin verdi) doğru, \"let them to leave\" YANLIŞTIR.</p>\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"Make\" ve \"let\" fiilleri istisnadır! Bunlar to'suz infinitive (bare infinitive) alır. Ancak pasif yapıda \"make\" to'lu infinitive alır: \"He was made to apologize.\" (Özür dilemek zorunda bırakıldı.)\n</div>\n\n<hr>\n<h2>📊 VERB + OBJECT + INFINITIVE LİSTESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Fiil</th>\n<th>Anlamı</th>\n<th>Örnek (Verb + Object + to Vo)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>advise</strong></td>\n<td>tavsiye etmek</td>\n<td>advise him to wait</td>\n</tr>\n<tr>\n<td><strong>allow</strong></td>\n<td>izin vermek</td>\n<td>allow them to enter</td>\n</tr>\n<tr>\n<td><strong>ask</strong></td>\n<td>rica etmek/istemek</td>\n<td>ask her to help</td>\n</tr>\n<tr>\n<td><strong>encourage</strong></td>\n<td>teşvik etmek</td>\n<td>encourage us to try</td>\n</tr>\n<tr>\n<td><strong>expect</strong></td>\n<td>beklemek</td>\n<td>expect you to arrive</td>\n</tr>\n<tr>\n<td><strong>forbid</strong></td>\n<td>yasaklamak</td>\n<td>forbid children to play</td>\n</tr>\n<tr>\n<td><strong>force</strong></td>\n<td>zorlamak</td>\n<td>force him to confess</td>\n</tr>\n<tr>\n<td><strong>invite</strong></td>\n<td>davet etmek</td>\n<td>invite them to join</td>\n</tr>\n<tr>\n<td><strong>tell</strong></td>\n<td>söylemek</td>\n<td>tell me to come</td>\n</tr>\n<tr>\n<td><strong>want</strong></td>\n<td>istemek</td>\n<td>want you to stay</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The manager allowed the employees <strong><em>_</em></strong> early on Friday because of the holiday.</p>\n<p>A) leave<br>\nB) to leave<br>\nC) leaving<br>\nD) to leaving</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) to leave\n**Açıklama:** \"Allow\" fiili \"verb + object + to Vo\" kalıbıyla kullanılır. \"Allowed the employees to leave\" (çalışanların çıkmasına izin verdi) doğru yapıdır.\n</details>\n\n<p><strong>[Kelime sayısı: 236]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "The professor encouraged his students to participate actively in class discussions and ask questions.",
+          "tr": "Profesör, öğrencilerini sınıf tartışmalarına aktif olarak katılmaya ve soru sormaya teşvik etti.",
+          "description": "\"Encouraged\" (teşvik etti) fiilinden sonra önce nesne \"his students\" (öğrencilerini) gelmiş, ardından \"to participate\" (katılmaya) infinitive'i gelmiştir. Öğrenciler katılacak.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The company's strict policy forbids employees to use their personal phones during working hours.",
+          "tr": "Şirketin katı politikası, çalışanların çalışma saatleri içinde kişisel telefonlarını kullanmalarını yasaklar.",
+          "description": "\"Forbids\" (yasaklar) fiilinden sonra nesne \"employees\" (çalışanları) ve ardından \"to use\" (kullanmayı) infinitive'i gelmiştir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "I advised my sister to apply for the scholarship because she had excellent grades.",
+          "tr": "Kız kardeşime bursa başvurmasını tavsiye ettim çünkü notları mükemmeldi.",
+          "description": "\"Advised\" (tavsiye etti) fiilinden sonra nesne \"my sister\" (kız kardeşime) ve ardından \"to apply\" (başvurmasını) infinitive'i gelmiştir."
+        },
+        {
+          "en": "His parents made him apologize for his rude behavior towards the guests.",
+          "tr": "Ailesi, misafirlere karşı kaba davranışı için onu özür dilemeye zorladı.",
+          "description": "\"Make\" (zorlamak, yaptırmak) fiili, \"verb + object + Vo\" (to'suz infinitive) alır. \"Made him apologize\" (onu özür dilemeye zorladı) doğru kullanımdır. \"Made him to apologize\" YANLIŞTIR.\n\n**Örnek 5: (Let + object + Vo - to'suz infinitive)**"
+        },
+        {
+          "en": "The teacher let the students leave early because the class was cancelled.",
+          "tr": "Ders iptal edildiği için öğretmen öğrencilerin erken çıkmasına izin verdi.",
+          "description": "\"Let\" (izin vermek) fiili de to'suz infinitive alır. \"Let them leave\" (çıkmalarına izin verdi) doğru, \"let them to leave\" YANLIŞTIR.\n\n<div class=\"uyari-kutusu\">\n**⚠️ Dikkat:**\n\"Make\" ve \"let\" fiilleri istisnadır! Bunlar to'suz infinitive (bare infinitive) alır. Ancak pasif yapıda \"make\" to'lu infinitive alır: \"He was made to apologize.\" (Özür dilemek zorunda bırakıldı.)\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The manager allowed the employees _______ early on Friday because of the holiday.",
+        "options": {
+          "A": "leave",
+          "B": "to leave",
+          "C": "leaving",
+          "D": "to leaving"
+        },
+        "correct": "B) to leave",
+        "explanation": "\"Allow\" fiili \"verb + object + to Vo\" kalıbıyla kullanılır. \"Allowed the employees to leave\" (çalışanların çıkmasına izin verdi) doğru yapıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "The manager allowed the employees _______ early on Friday because of the holiday.",
+          "options": {
+            "A": "leave",
+            "B": "to leave",
+            "C": "leaving",
+            "D": "to leaving"
+          },
+          "correct": "B) to leave",
+          "explanation": "\"Allow\" fiili \"verb + object + to Vo\" kalıbıyla kullanılır. \"Allowed the employees to leave\" (çalışanların çıkmasına izin verdi) doğru yapıdır."
+        }
+      ],
+      "word_count": 495
+    },
+    {
+      "page_number": 18,
+      "title": "Pasif Yapı + Infinitive",
+      "total_pages": 20,
+      "content_html": "<h2>📌 PASİF CÜMLELERDE INFINITIVE KULLANIMI</h2>\n<p>İngilizce'de pasif (edilgen) cümlelerden sonra sıklıkla infinitive kullanılır. Özellikle \"is said, is believed, is thought, is reported, is known\" gibi pasif yapılar, arkalarından infinitive alır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"It is said that...\" veya \"He is said to...\" kalıplarını duyduğunda, arkasından infinitive geleceğini bil. Bu, İngilizce'nin çok yaygın bir yapısıdır.</p>\n</blockquote>\n<hr>\n<h2>📏 1) PASİF YAPI + INFINITIVE KULLANIMI</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The former president is said to be writing his memoirs in a secret location somewhere in Europe.<br>\n<strong>TR:</strong> Eski başkanın, Avrupa'nın bir yerinde gizli bir konumda anılarını yazmakta olduğu söyleniyor.<br>\n→ <strong>Açıklama:</strong> \"Is said\" (söyleniyor) pasif yapısından sonra \"to be writing\" (yazmakta olmak) infinitive'i gelmiştir. Burada şimdiki zaman anlamı vardır.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The stolen paintings are believed to have been smuggled out of the country immediately after the theft.<br>\n<strong>TR:</strong> Çalınan tabloların, hırsızlıktan hemen sonra ülke dışına kaçırılmış olduğuna inanılıyor.<br>\n→ <strong>Açıklama:</strong> \"Are believed\" (inanılıyor) pasif yapısından sonra \"to have been smuggled\" (kaçırılmış olmak) perfect passive infinitive gelmiştir. Kaçırma eylemi, inanma eyleminden önce olmuş ve pasiftir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Two people are reported to have been injured in the accident, but their injuries are not serious.<br>\n<strong>TR:</strong> İki kişinin kazada yaralanmış olduğu rapor ediliyor, ancak yaraları ciddi değil.<br>\n→ <strong>Açıklama:</strong> \"Are reported\" (rapor ediliyor) pasif yapısından sonra \"to have been injured\" (yaralanmış olmak) perfect passive infinitive gelmiştir.</p>\n<hr>\n<h2>📏 2) İSTİSNA FİİLLER: CATCH/FIND + VING</h2>\n<p><strong>Örnek 4: (catch + Ving)</strong><br>\n<strong>EN:</strong> The thief was caught trying to break into a car in the parking lot.<br>\n<strong>TR:</strong> Hırsız, otoparkta bir arabaya zorla girmeye çalışırken yakalandı.<br>\n→ <strong>Açıklama:</strong> \"Was caught\" (yakalandı) pasif yapısından sonra normalde infinitive beklenirken, burada \"trying\" Ving gelmiştir. \"Catch\" fiili istisnadır ve her zaman Ving alır.</p>\n<p><strong>Örnek 5: (find + Ving)</strong><br>\n<strong>EN:</strong> The missing children were found sleeping in an abandoned house on the edge of town.<br>\n<strong>TR:</strong> Kayıp çocuklar, şehrin kenarındaki terk edilmiş bir evde uyurken bulundu.<br>\n→ <strong>Açıklama:</strong> \"Were found\" (bulundu) pasif yapısından sonra \"sleeping\" Ving gelmiştir. \"Find\" fiili de \"bulmak\" anlamında kullanıldığında Ving alır.</p>\n<p><strong>Örnek 6: (find + to Vo - tespit etmek anlamında)</strong><br>\n<strong>EN:</strong> The new drug has been found to be effective against various types of cancer.<br>\n<strong>TR:</strong> Yeni ilacın, çeşitli kanser türlerine karşı etkili olduğu tespit edildi.<br>\n→ <strong>Açıklama:</strong> \"Has been found\" (tespit edildi) pasif yapısından sonra bu kez \"to be\" infinitive gelmiştir. \"Find\" fiili \"tespit etmek\" anlamında kullanıldığında to Vo alır.</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nPasif bir yapıdan sonra boşluk varsa, öncelikle infinitive (to Vo) düşün. Ama \"catch, find, smell\" gibi istisna fiiller varsa, bunların Ving alabileceğini unutma!\n</div>\n\n<hr>\n<h2>📊 PASİF YAPI + INFINITIVE KULLANIMLARI</h2>\n<table>\n<thead>\n<tr>\n<th>Pasif Yapı</th>\n<th>Anlamı</th>\n<th>Arkasından Gelen</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>is said</strong></td>\n<td>söyleniyor ki</td>\n<td>to Vo / to be V3 / to have V3</td>\n</tr>\n<tr>\n<td><strong>is believed</strong></td>\n<td>inanılıyor ki</td>\n<td>to Vo / to be V3 / to have V3</td>\n</tr>\n<tr>\n<td><strong>is thought</strong></td>\n<td>düşünülüyor ki</td>\n<td>to Vo / to be V3 / to have V3</td>\n</tr>\n<tr>\n<td><strong>is reported</strong></td>\n<td>rapor ediliyor ki</td>\n<td>to Vo / to be V3 / to have V3</td>\n</tr>\n<tr>\n<td><strong>is known</strong></td>\n<td>biliniyor ki</td>\n<td>to Vo / to be V3 / to have V3</td>\n</tr>\n<tr>\n<td><strong>was caught</strong></td>\n<td>yakalandı</td>\n<td>Ving (istisna!)</td>\n</tr>\n<tr>\n<td><strong>was found</strong></td>\n<td>bulundu</td>\n<td>Ving (bulmak) / to Vo (tespit etmek)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> The ancient manuscript is believed <strong><em>_</em></strong> in the 12th century by a famous monk.</p>\n<p>A) to write<br>\nB) to be written<br>\nC) to have been written<br>\nD) writing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C) to have been written\n**Açıklama:** \"Is believed\" (inanılıyor) pasif yapısından sonra infinitive gelir. Yazma eylemi pasif (yazılmak) ve inanma eyleminden önce gerçekleşmiş. Bu nedenle perfect passive infinitive \"to have been written\" doğru cevaptır.\n</details>\n\n<p><strong>[Kelime sayısı: 240]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "The former president is said to be writing his memoirs in a secret location somewhere in Europe.",
+          "tr": "Eski başkanın, Avrupa'nın bir yerinde gizli bir konumda anılarını yazmakta olduğu söyleniyor.",
+          "description": "\"Is said\" (söyleniyor) pasif yapısından sonra \"to be writing\" (yazmakta olmak) infinitive'i gelmiştir. Burada şimdiki zaman anlamı vardır.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The stolen paintings are believed to have been smuggled out of the country immediately after the theft.",
+          "tr": "Çalınan tabloların, hırsızlıktan hemen sonra ülke dışına kaçırılmış olduğuna inanılıyor.",
+          "description": "\"Are believed\" (inanılıyor) pasif yapısından sonra \"to have been smuggled\" (kaçırılmış olmak) perfect passive infinitive gelmiştir. Kaçırma eylemi, inanma eyleminden önce olmuş ve pasiftir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "Two people are reported to have been injured in the accident, but their injuries are not serious.",
+          "tr": "İki kişinin kazada yaralanmış olduğu rapor ediliyor, ancak yaraları ciddi değil.",
+          "description": "\"Are reported\" (rapor ediliyor) pasif yapısından sonra \"to have been injured\" (yaralanmış olmak) perfect passive infinitive gelmiştir."
+        },
+        {
+          "en": "The thief was caught trying to break into a car in the parking lot.",
+          "tr": "Hırsız, otoparkta bir arabaya zorla girmeye çalışırken yakalandı.",
+          "description": "\"Was caught\" (yakalandı) pasif yapısından sonra normalde infinitive beklenirken, burada \"trying\" Ving gelmiştir. \"Catch\" fiili istisnadır ve her zaman Ving alır.\n\n**Örnek 5: (find + Ving)**"
+        },
+        {
+          "en": "The missing children were found sleeping in an abandoned house on the edge of town.",
+          "tr": "Kayıp çocuklar, şehrin kenarındaki terk edilmiş bir evde uyurken bulundu.",
+          "description": "\"Were found\" (bulundu) pasif yapısından sonra \"sleeping\" Ving gelmiştir. \"Find\" fiili de \"bulmak\" anlamında kullanıldığında Ving alır.\n\n**Örnek 6: (find + to Vo - tespit etmek anlamında)**"
+        },
+        {
+          "en": "The new drug has been found to be effective against various types of cancer.",
+          "tr": "Yeni ilacın, çeşitli kanser türlerine karşı etkili olduğu tespit edildi.",
+          "description": "\"Has been found\" (tespit edildi) pasif yapısından sonra bu kez \"to be\" infinitive gelmiştir. \"Find\" fiili \"tespit etmek\" anlamında kullanıldığında to Vo alır.\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:**\nPasif bir yapıdan sonra boşluk varsa, öncelikle infinitive (to Vo) düşün. Ama \"catch, find, smell\" gibi istisna fiiller varsa, bunların Ving alabileceğini unutma!\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "The ancient manuscript is believed _______ in the 12th century by a famous monk.",
+        "options": {
+          "A": "to write",
+          "B": "to be written",
+          "C": "to have been written",
+          "D": "writing"
+        },
+        "correct": "C) to have been written",
+        "explanation": "\"Is believed\" (inanılıyor) pasif yapısından sonra infinitive gelir. Yazma eylemi pasif (yazılmak) ve inanma eyleminden önce gerçekleşmiş. Bu nedenle perfect passive infinitive \"to have been written\" doğru cevaptır."
+      },
+      "mini_tests": [
+        {
+          "question": "The ancient manuscript is believed _______ in the 12th century by a famous monk.",
+          "options": {
+            "A": "to write",
+            "B": "to be written",
+            "C": "to have been written",
+            "D": "writing"
+          },
+          "correct": "C) to have been written",
+          "explanation": "\"Is believed\" (inanılıyor) pasif yapısından sonra infinitive gelir. Yazma eylemi pasif (yazılmak) ve inanma eyleminden önce gerçekleşmiş. Bu nedenle perfect passive infinitive \"to have been written\" doğru cevaptır."
+        }
+      ],
+      "word_count": 569
+    },
+    {
+      "page_number": 19,
+      "title": "İki Anlamlı Fiiller: Ving vs to Vo",
+      "total_pages": 20,
+      "content_html": "<h2>📌 AYNI FİİL, FARKLI ANLAMLAR</h2>\n<p>İngilizce'de bazı fiiller vardır ki, kendilerinden sonra Ving veya to Vo almalarına göre anlamları tamamen değişir. Bu fiilleri ve anlam farklarını bilmek, hem sınavlar hem de doğru iletişim için çok önemlidir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu fiilleri \"anlam değiştiren fiiller\" olarak ezberle. Her birinin Ving'li ve to Vo'lu hallerini ayrı ayrı öğren!</p>\n</blockquote>\n<hr>\n<h2>📏 1) MEAN: Ving vs to Vo</h2>\n<p><strong>Örnek 1: (Mean + Ving = anlamına gelmek)</strong><br>\n<strong>EN:</strong> Being a manager means taking responsibility for your team's successes and failures, not just giving orders.<br>\n<strong>TR:</strong> Yönetici olmak, sadece emir vermek değil, ekibinizin başarıları ve başarısızlıkları için sorumluluk almak anlamına gelir.<br>\n→ <strong>Açıklama:</strong> \"Means\" burada \"anlamına gelir\" demektir. \"Mean + Ving\" bir sonucu veya zorunluluğu ifade eder.</p>\n<p><strong>Örnek 2: (Mean + to Vo = niyet etmek, kastetmek)</strong><br>\n<strong>EN:</strong> I'm really sorry; I didn't mean to hurt your feelings with my careless comment.<br>\n<strong>TR:</strong> Gerçekten üzgünüm; dikkatsiz yorumumla duygularını incitmek istememiştim.<br>\n→ <strong>Açıklama:</strong> \"Mean + to Vo\" bir niyeti, kastı ifade eder. \"Niyet etmek, demek istemek\" anlamındadır.</p>\n<h2>📏 2) TRY: Ving vs to Vo</h2>\n<p><strong>Örnek 3: (Try + Ving = denemek)</strong><br>\n<strong>EN:</strong> If you can't sleep, try drinking a cup of herbal tea before bed; it might help you relax.<br>\n<strong>TR:</strong> Uyuyamıyorsan, yatmadan önce bir bardak bitki çayı içmeyi dene; rahatlamana yardımcı olabilir.<br>\n→ <strong>Açıklama:</strong> \"Try + Ving\" bir şeyi denemek, test etmek anlamındadır. Çözüm olarak bir şeyi deneriz.</p>\n<p><strong>Örnek 4: (Try + to Vo = çabalamak, uğraşmak)</strong><br>\n<strong>EN:</strong> The exercises are difficult, but you must try to do them if you want to improve your skills.<br>\n<strong>TR:</strong> Egzersizler zor, ama becerilerini geliştirmek istiyorsan onları yapmaya çalışmalısın.<br>\n→ <strong>Açıklama:</strong> \"Try + to Vo\" bir şeyi yapmak için çaba göstermek, uğraşmak anlamındadır.</p>\n<h2>📏 3) STOP: Ving vs to Vo</h2>\n<p><strong>Örnek 5: (Stop + Ving = yapmayı bırakmak)</strong><br>\n<strong>EN:</strong> The doctor told him to stop smoking immediately if he wanted to avoid serious health problems.<br>\n<strong>TR:</strong> Doktor, ciddi sağlık sorunlarından kaçınmak istiyorsa hemen sigara içmeyi bırakmasını söyledi.<br>\n→ <strong>Açıklama:</strong> \"Stop + Ving\" devam etmekte olan bir eylemi sonlandırmak anlamındadır.</p>\n<p><strong>Örnek 6: (Stop + to Vo = yapmak için durmak)</strong><br>\n<strong>EN:</strong> While driving across the country, we stopped to admire the beautiful sunset over the Grand Canyon.<br>\n<strong>TR:</strong> Ülke çapında seyahat ederken, Büyük Kanyon üzerindeki güzel gün batımını hayranlıkla izlemek için durduk.<br>\n→ <strong>Açıklama:</strong> \"Stop + to Vo\" bir eylemi (araba sürmeyi) durdurup BAŞKA bir eylemi (izlemeyi) yapmak anlamındadır.</p>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>Forget + Ving:</strong> I forgot locking the door. (Kapıyı kilitlediğimi unuttum - yaptım, unuttum)</div>\n    <div class=\"turkce\">→ Geçmişte yapılan eylemi unutmak</div>\n</div>\n<div class=\"karsilastirma\">\n    <div class=\"ingilizce\"><strong>Forget + to Vo:</strong> I forgot to lock the door. (Kapıyı kilitlemeyi unuttum - yapmadım)</div>\n    <div class=\"turkce\">→ Yapılması gereken eylemi unutmak</div>\n</div>\n\n<hr>\n<h2>📊 İKİ ANLAMLI FİİLLER TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Fiil</th>\n<th>Ving ile Anlamı</th>\n<th>to Vo ile Anlamı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>mean</strong></td>\n<td>anlamına gelmek</td>\n<td>niyet etmek</td>\n</tr>\n<tr>\n<td><strong>try</strong></td>\n<td>denemek (test etmek)</td>\n<td>çabalamak, uğraşmak</td>\n</tr>\n<tr>\n<td><strong>stop</strong></td>\n<td>yapmayı bırakmak</td>\n<td>yapmak için durmak</td>\n</tr>\n<tr>\n<td><strong>forget</strong></td>\n<td>yaptığını unutmak</td>\n<td>yapacağını unutmak</td>\n</tr>\n<tr>\n<td><strong>remember</strong></td>\n<td>yaptığını hatırlamak</td>\n<td>yapacağını hatırlamak</td>\n</tr>\n<tr>\n<td><strong>regret</strong></td>\n<td>yaptığına pişman olmak</td>\n<td>üzülerek söylemek</td>\n</tr>\n<tr>\n<td><strong>go on</strong></td>\n<td>aynı şeye devam etmek</td>\n<td>sonraki şeye geçmek</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> I'll never forget <strong><em>_</em></strong> the Eiffel Tower for the first time; it was a magical moment.</p>\n<p>A) to see<br>\nB) seeing<br>\nC) see<br>\nD) to seeing</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B) seeing\n**Açıklama:** Cümlede \"ilk kez görmeyi\" değil, \"görmüş olduğu anı\" unutmayacağını söylüyor. Geçmişte yaşanmış bir deneyimden bahsediliyor. Bu nedenle \"forget + Ving\" (yaptığını unutmak) kullanılır.\n</details>\n\n<p><strong>[Kelime sayısı: 245]</strong></p>\n<hr>",
+      "examples": [
+        {
+          "en": "Being a manager means taking responsibility for your team's successes and failures, not just giving orders.",
+          "tr": "Yönetici olmak, sadece emir vermek değil, ekibinizin başarıları ve başarısızlıkları için sorumluluk almak anlamına gelir.",
+          "description": "\"Means\" burada \"anlamına gelir\" demektir. \"Mean + Ving\" bir sonucu veya zorunluluğu ifade eder.\n\n**Örnek 2: (Mean + to Vo = niyet etmek, kastetmek)**"
+        },
+        {
+          "en": "I'm really sorry; I didn't mean to hurt your feelings with my careless comment.",
+          "tr": "Gerçekten üzgünüm; dikkatsiz yorumumla duygularını incitmek istememiştim.",
+          "description": "\"Mean + to Vo\" bir niyeti, kastı ifade eder. \"Niyet etmek, demek istemek\" anlamındadır."
+        },
+        {
+          "en": "If you can't sleep, try drinking a cup of herbal tea before bed; it might help you relax.",
+          "tr": "Uyuyamıyorsan, yatmadan önce bir bardak bitki çayı içmeyi dene; rahatlamana yardımcı olabilir.",
+          "description": "\"Try + Ving\" bir şeyi denemek, test etmek anlamındadır. Çözüm olarak bir şeyi deneriz.\n\n**Örnek 4: (Try + to Vo = çabalamak, uğraşmak)**"
+        },
+        {
+          "en": "The exercises are difficult, but you must try to do them if you want to improve your skills.",
+          "tr": "Egzersizler zor, ama becerilerini geliştirmek istiyorsan onları yapmaya çalışmalısın.",
+          "description": "\"Try + to Vo\" bir şeyi yapmak için çaba göstermek, uğraşmak anlamındadır."
+        },
+        {
+          "en": "The doctor told him to stop smoking immediately if he wanted to avoid serious health problems.",
+          "tr": "Doktor, ciddi sağlık sorunlarından kaçınmak istiyorsa hemen sigara içmeyi bırakmasını söyledi.",
+          "description": "\"Stop + Ving\" devam etmekte olan bir eylemi sonlandırmak anlamındadır.\n\n**Örnek 6: (Stop + to Vo = yapmak için durmak)**"
+        },
+        {
+          "en": "While driving across the country, we stopped to admire the beautiful sunset over the Grand Canyon.",
+          "tr": "Ülke çapında seyahat ederken, Büyük Kanyon üzerindeki güzel gün batımını hayranlıkla izlemek için durduk.",
+          "description": "\"Stop + to Vo\" bir eylemi (araba sürmeyi) durdurup BAŞKA bir eylemi (izlemeyi) yapmak anlamındadır.\n\n<div class=\"karsilastirma\">\n <div class=\"ingilizce\"><strong>Forget + Ving:</strong> I forgot locking the door. (Kapıyı kilitlediğimi unuttum - yaptım, unuttum)</div>\n <div class=\"turkce\">→ Geçmişte yapılan eylemi unutmak</div>\n</div>\n<div class=\"karsilastirma\">\n <div class=\"ingilizce\"><strong>Forget + to Vo:</strong> I forgot to lock the door. (Kapıyı kilitlemeyi unuttum - yapmadım)</div>\n <div class=\"turkce\">→ Yapılması gereken eylemi unutmak</div>\n</div>"
+        }
+      ],
+      "mini_test": {
+        "question": "I'll never forget _______ the Eiffel Tower for the first time; it was a magical moment.",
+        "options": {
+          "A": "to see",
+          "B": "seeing",
+          "C": "see",
+          "D": "to seeing"
+        },
+        "correct": "B) seeing",
+        "explanation": "Cümlede \"ilk kez görmeyi\" değil, \"görmüş olduğu anı\" unutmayacağını söylüyor. Geçmişte yaşanmış bir deneyimden bahsediliyor. Bu nedenle \"forget + Ving\" (yaptığını unutmak) kullanılır."
+      },
+      "mini_tests": [
+        {
+          "question": "I'll never forget _______ the Eiffel Tower for the first time; it was a magical moment.",
+          "options": {
+            "A": "to see",
+            "B": "seeing",
+            "C": "see",
+            "D": "to seeing"
+          },
+          "correct": "B) seeing",
+          "explanation": "Cümlede \"ilk kez görmeyi\" değil, \"görmüş olduğu anı\" unutmayacağını söylüyor. Geçmişte yaşanmış bir deneyimden bahsediliyor. Bu nedenle \"forget + Ving\" (yaptığını unutmak) kullanılır."
+        }
+      ],
+      "word_count": 550
+    },
+    {
+      "page_number": 20,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 20,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li><strong>Gerund (Ving)</strong> : Özne, nesne ve edatlardan sonra kullanımı</li>\n<li><strong>Infinitive (to Vo)</strong> : Gelecek, amaç, sıfat ve isimlerden sonra kullanımı</li>\n<li><strong>Passive Forms</strong> : being V3, to be V3, having been V3, to have been V3</li>\n<li><strong>İki Anlamlı Fiiller</strong> : mean, try, stop, forget, remember, regret</li>\n<li><strong>Özel Yapılar</strong> : too/enough, question word + to Vo, verb + object + to Vo</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p><strong><strong><em>_</em></strong> a new language requires patience, dedication, and regular practice.</strong></p>\n<p>A) To learn<br>\nB) Learning<br>\nC) For learning<br>\nD) Learn</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B) Learning - Özne pozisyonunda Ving kullanımı en doğal ve yaygın olandır. \"To learn\" de gramer olarak doğru olsa da, özne olarak Ving daha sık kullanılır.\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p><strong>The manager recommended <strong><em>_</em></strong> the report carefully before submitting it.</strong></p>\n<p>A) to check<br>\nB) checking<br>\nC) check<br>\nD) checked</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B) checking - \"Recommend\" fiili, tavsiye/öneri bildiren fiiller grubundadır ve kendisinden sonra mutlaka Ving alır.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p><strong>I'm really looking forward <strong><em>_</em></strong> you at the conference next week.</strong></p>\n<p>A) to see<br>\nB) seeing<br>\nC) to seeing<br>\nD) see</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C) to seeing - \"Look forward to\" kalıbında \"to\" bir edattır. Edattan sonra Ving gelir. \"To seeing\" doğru yapıdır.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p><strong>The ancient ruins are believed <strong><em>_</em></strong> around 500 BC.</strong></p>\n<p>A) to build<br>\nB) to be built<br>\nC) to have been built<br>\nD) building</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C) to have been built - \"Are believed\" pasif yapısından sonra infinitive gelir. İnşa etme eylemi pasif (inşa edilmek) ve inanma eyleminden önce gerçekleşmiş. Perfect passive infinitive gereklidir.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p><strong>I'll never forget <strong><em>_</em></strong> the pyramids in Egypt; it was an unforgettable experience.</strong></p>\n<p>A) to see<br>\nB) seeing<br>\nC) see<br>\nD) to seeing</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B) seeing - Geçmişte yaşanmış bir deneyimden bahsediliyor. \"Forget + Ving\" (yaptığını unutmak) kullanılır.\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Gerund &amp; Infinitive konusunu tamamen kavradın!</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlış yaptığın sorunun konusunu tekrar et.</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir, özellikle perfect formlara dikkat et.</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz. Özellikle Ving ve to Vo arasındaki zaman mantığını anlamaya odaklan.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p><strong>[Kelime sayısı: 248]</strong></p>",
+      "examples": [],
+      "mini_test": {
+        "question": "**_______ a new language requires patience, dedication, and regular practice.**",
+        "options": {
+          "A": "To learn",
+          "B": "Learning",
+          "C": "For learning",
+          "D": "Learn"
+        },
+        "correct": "B) Learning - Özne pozisyonunda Ving kullanımı en doğal ve yaygın olandır. \"To learn\" de gramer olarak doğru olsa da, özne olarak Ving daha sık kullanılır.",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "**_______ a new language requires patience, dedication, and regular practice.**",
+          "options": {
+            "A": "To learn",
+            "B": "Learning",
+            "C": "For learning",
+            "D": "Learn"
+          },
+          "correct": "B) Learning - Özne pozisyonunda Ving kullanımı en doğal ve yaygın olandır. \"To learn\" de gramer olarak doğru olsa da, özne olarak Ving daha sık kullanılır.",
+          "explanation": ""
+        },
+        {
+          "question": "**The manager recommended _______ the report carefully before submitting it.**",
+          "options": {
+            "A": "to check",
+            "B": "checking",
+            "C": "check",
+            "D": "checked"
+          },
+          "correct": "B) checking - \"Recommend\" fiili, tavsiye/öneri bildiren fiiller grubundadır ve kendisinden sonra mutlaka Ving alır.",
+          "explanation": ""
+        },
+        {
+          "question": "**I'm really looking forward _______ you at the conference next week.**",
+          "options": {
+            "A": "to see",
+            "B": "seeing",
+            "C": "to seeing",
+            "D": "see"
+          },
+          "correct": "C) to seeing - \"Look forward to\" kalıbında \"to\" bir edattır. Edattan sonra Ving gelir. \"To seeing\" doğru yapıdır.",
+          "explanation": ""
+        },
+        {
+          "question": "**The ancient ruins are believed _______ around 500 BC.**",
+          "options": {
+            "A": "to build",
+            "B": "to be built",
+            "C": "to have been built",
+            "D": "building"
+          },
+          "correct": "C) to have been built - \"Are believed\" pasif yapısından sonra infinitive gelir. İnşa etme eylemi pasif (inşa edilmek) ve inanma eyleminden önce gerçekleşmiş. Perfect passive infinitive gereklidir.",
+          "explanation": ""
+        },
+        {
+          "question": "**I'll never forget _______ the pyramids in Egypt; it was an unforgettable experience.**",
+          "options": {
+            "A": "to see",
+            "B": "seeing",
+            "C": "see",
+            "D": "to seeing"
+          },
+          "correct": "B) seeing - Geçmişte yaşanmış bir deneyimden bahsediliyor. \"Forget + Ving\" (yaptığını unutmak) kullanılır.",
+          "explanation": ""
+        }
+      ],
+      "word_count": 360
+    }
+  ]
+}

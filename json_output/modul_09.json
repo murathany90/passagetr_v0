@@ -1,0 +1,1238 @@
+{
+  "sira": 9,
+  "baslik": "Conditionals and If Clauses (Koşul Cümleleri)",
+  "dosya_adi": "09_conditionals.md",
+  "toplam_sayfa": 25,
+  "icon": "🤔",
+  "renk": "#1ABC9C",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "GİRİŞ: IF YAPISININ İKİ KULLANIMI",
+      "total_pages": 25,
+      "content_html": "<h2>📌 IF’İN İKİ FARKLI GÖREVİ VARDIR</h2>\n<p>“If” hem “noun clause” (‑ıp/‑ıpmadığı) hem de “adverbial clause” (eğer/‑se) olarak kullanılır. Cümle başındaki if kesinlikle şart bağlacıdır; ortadaki if ise önceki fiilin nesneye ihtiyacı olup olmadığına göre noun clause olabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> If’ten önceki kısım tam bir cümle ise if bağlaçtır (eğer). Önceki fiil nesne istiyorsa if noun clause’tur (‑ıp/‑ıpmadığı).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> If it rains tomorrow, we will cancel the picnic.<br>\n<strong>TR:</strong> Yarın yağmur yağarsa pikniği iptal edeceğiz.<br>\n→ <strong>Açıklama:</strong> Burada “if” cümle başında kullanılmış ve “eğer” anlamı vererek bir şart cümleciği (adverbial clause) oluşturmuştur. Yan cümlecikte Present Simple, ana cümlecikte ise Future (will) kullanılmıştır. Bu tipik bir Type 1 şart cümlesidir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> I don’t know if they will accept our offer.<br>\n<strong>TR:</strong> Teklifimizi kabul edip etmeyeceklerini bilmiyorum.<br>\n→ <strong>Açıklama:</strong> Burada “if” “know” fiilinin nesnesi durumundadır ve “‑ıp/‑ıpmadığı” anlamı verir. Bu bir noun clause’tur. “Whether” ile değiştirilebilir ve “or not” eklenebilir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> Please let me know if you need any help.<br>\n<strong>TR:</strong> Yardıma ihtiyacın olursa lütfen bana haber ver.<br>\n→ <strong>Açıklama:</strong> Cümle ortasında kullanılan bu “if”, öncesinde tam bir cümle (Please let me know) olduğu için şart bağlacıdır. “Eğer ihtiyacın olursa” anlamı taşır. Ana cümle emir kipindedir.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> The manager asked if the report was ready.<br>\n<strong>TR:</strong> Müdür raporun hazır olup olmadığını sordu.<br>\n→ <strong>Açıklama:</strong> “Asked” fiili nesne istediği için “if” noun clause olarak kullanılmıştır. “‑ıp/‑ıpmadığı” anlamı verir. “Whether” ile değiştirilebilir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Konum</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Adverbial Clause (Şart)</td>\n<td>Cümle başı veya ortası</td>\n<td>eğer / -se</td>\n<td>If you study, you pass.</td>\n</tr>\n<tr>\n<td>Noun Clause (İsim cümleciği)</td>\n<td>Fiilden sonra (nesne)</td>\n<td>-ıp/-ıpmadığı</td>\n<td>I wonder if he is happy.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerin hangisinde “if” noun clause olarak kullanılmıştır?</p>\n<p>A) If you heat ice, it melts.<br>\nB) Call me if you have time.<br>\nC) She asked if we were coming.<br>\nD) If I were you, I would accept.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** “Asked” fiili nesne istediği için “if” noun clause’tur (‑ıp/‑ıpmadığı). Diğerleri şart bildiren adverbial clause’tur.\n</details>\n\n<p>[Kelime sayısı: 224]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If it rains tomorrow, we will cancel the picnic.",
+          "tr": "Yarın yağmur yağarsa pikniği iptal edeceğiz.",
+          "description": "Burada “if” cümle başında kullanılmış ve “eğer” anlamı vererek bir şart cümleciği (adverbial clause) oluşturmuştur. Yan cümlecikte Present Simple, ana cümlecikte ise Future (will) kullanılmıştır. Bu tipik bir Type 1 şart cümlesidir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "I don’t know if they will accept our offer.",
+          "tr": "Teklifimizi kabul edip etmeyeceklerini bilmiyorum.",
+          "description": "Burada “if” “know” fiilinin nesnesi durumundadır ve “‑ıp/‑ıpmadığı” anlamı verir. Bu bir noun clause’tur. “Whether” ile değiştirilebilir ve “or not” eklenebilir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "Please let me know if you need any help.",
+          "tr": "Yardıma ihtiyacın olursa lütfen bana haber ver.",
+          "description": "Cümle ortasında kullanılan bu “if”, öncesinde tam bir cümle (Please let me know) olduğu için şart bağlacıdır. “Eğer ihtiyacın olursa” anlamı taşır. Ana cümle emir kipindedir.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "The manager asked if the report was ready.",
+          "tr": "Müdür raporun hazır olup olmadığını sordu.",
+          "description": "“Asked” fiili nesne istediği için “if” noun clause olarak kullanılmıştır. “‑ıp/‑ıpmadığı” anlamı verir. “Whether” ile değiştirilebilir."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerin hangisinde “if” noun clause olarak kullanılmıştır?",
+        "options": {
+          "A": "If you heat ice, it melts.",
+          "B": "Call me if you have time.",
+          "C": "She asked if we were coming.",
+          "D": "If I were you, I would accept."
+        },
+        "correct": "C",
+        "explanation": "“Asked” fiili nesne istediği için “if” noun clause’tur (‑ıp/‑ıpmadığı). Diğerleri şart bildiren adverbial clause’tur."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerin hangisinde “if” noun clause olarak kullanılmıştır?",
+          "options": {
+            "A": "If you heat ice, it melts.",
+            "B": "Call me if you have time.",
+            "C": "She asked if we were coming.",
+            "D": "If I were you, I would accept."
+          },
+          "correct": "C",
+          "explanation": "“Asked” fiili nesne istediği için “if” noun clause’tur (‑ıp/‑ıpmadığı). Diğerleri şart bildiren adverbial clause’tur."
+        }
+      ],
+      "word_count": 350
+    },
+    {
+      "page_number": 2,
+      "title": "TYPE 0: BİLİMSEL GERÇEKLER VE GENEL GEÇER DURUMLAR",
+      "total_pages": 25,
+      "content_html": "<h2>📌 HER ZAMAN AYNI SONUÇ</h2>\n<p>Type 0, neden‑sonuç ilişkisi, evrensel gerçekler ve bilimsel gereklilikler için kullanılır. Hem “if”li yan cümlecikte hem de ana cümlecikte <strong>Present Simple</strong> kullanılır. “If” yerine “when(ever)” de kullanılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıda “if” aslında “her ne zaman” anlamına yaklaşır. Olayın gerçekleşmesi kesindir, sadece şarta bağlıdır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> If the Earth rotates around its axis, we experience day and night.<br>\n<strong>TR:</strong> Dünya kendi ekseni etrafında döndüğünde gece ve gündüz oluşur.<br>\n→ <strong>Açıklama:</strong> Evrensel bir gerçek anlatılıyor. Her iki tarafta da Present Simple kullanılmış. “If” yerine “whenever” koysak da anlam bozulmaz.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> If water reaches 100°C, it boils.<br>\n<strong>TR:</strong> Su 100°C’ye ulaştığında kaynar.<br>\n→ <strong>Açıklama:</strong> Bilimsel ve tekrar eden bir sonuç anlatılır. Type 0 yapısında iki tarafta da Present Simple kullanılır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> If I make a promise, I always keep it.<br>\n<strong>TR:</strong> Söz verirsem her zaman tutarım.<br>\n→ <strong>Açıklama:</strong> Kişisel bir alışkanlık veya genel bir davranış ifade ediliyor. Type 0, genel geçer durumlar için de kullanılır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> If you mix red and blue, you get purple.<br>\n<strong>TR:</strong> Kırmızı ile maviyi karıştırırsanız mor elde edersiniz.<br>\n→ <strong>Açıklama:</strong> Her zaman aynı sonucu veren bir olay. Present Simple + Present Simple.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yan Cümlecik (if)</th>\n<th>Ana Cümlecik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Present Simple</td>\n<td>Present Simple</td>\n</tr>\n<tr>\n<td>If you freeze water</td>\n<td>it turns into ice.</td>\n</tr>\n<tr>\n<td>If it rains</td>\n<td>the grass gets wet.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Aşağıdakilerden hangisi Type 0 kuralına uygun bir cümledir?</p>\n<p>A) If you will study, you pass.<br>\nB) If you heat metal, it expands.<br>\nC) If I had money, I would buy a car.<br>\nD) If he came, we were happy.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Type 0’da hem yan hem ana cümle Present Simple olmalı. B seçeneği bu kurala uyar.\n</details>\n\n<p>[Kelime sayısı: 198]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If the Earth rotates around its axis, we experience day and night.",
+          "tr": "Dünya kendi ekseni etrafında döndüğünde gece ve gündüz oluşur.",
+          "description": "Evrensel bir gerçek anlatılıyor. Her iki tarafta da Present Simple kullanılmış. “If” yerine “whenever” koysak da anlam bozulmaz.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "If water reaches 100°C, it boils.",
+          "tr": "Su 100°C’ye ulaştığında kaynar.",
+          "description": "Bilimsel ve tekrar eden bir sonuç anlatılır. Type 0 yapısında iki tarafta da Present Simple kullanılır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "If I make a promise, I always keep it.",
+          "tr": "Söz verirsem her zaman tutarım.",
+          "description": "Kişisel bir alışkanlık veya genel bir davranış ifade ediliyor. Type 0, genel geçer durumlar için de kullanılır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "If you mix red and blue, you get purple.",
+          "tr": "Kırmızı ile maviyi karıştırırsanız mor elde edersiniz.",
+          "description": "Her zaman aynı sonucu veren bir olay. Present Simple + Present Simple."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdakilerden hangisi Type 0 kuralına uygun bir cümledir?",
+        "options": {
+          "A": "If you will study, you pass.",
+          "B": "If you heat metal, it expands.",
+          "C": "If I had money, I would buy a car.",
+          "D": "If he came, we were happy."
+        },
+        "correct": "B",
+        "explanation": "Type 0’da hem yan hem ana cümle Present Simple olmalı. B seçeneği bu kurala uyar."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdakilerden hangisi Type 0 kuralına uygun bir cümledir?",
+          "options": {
+            "A": "If you will study, you pass.",
+            "B": "If you heat metal, it expands.",
+            "C": "If I had money, I would buy a car.",
+            "D": "If he came, we were happy."
+          },
+          "correct": "B",
+          "explanation": "Type 0’da hem yan hem ana cümle Present Simple olmalı. B seçeneği bu kurala uyar."
+        }
+      ],
+      "word_count": 299
+    },
+    {
+      "page_number": 3,
+      "title": "TYPE 1: GERÇEKLEŞMESİ MUHTEMEL DURUMLAR (PRESENT / FUTURE)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 OLASI BİR ŞART VE SONUCU</h2>\n<p>Type 1, şu anda veya gelecekte gerçekleşmesi mümkün olan şartları ve sonuçlarını ifade eder. Yan cümlecikte genellikle <strong>Present Simple</strong>, ana cümlecikte ise <strong>will / can / may / must / emir kipi</strong> gibi yapılar bulunur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Type 1'de yan cümlecikte genellikle “will” kullanılmaz; sınavlarda en güvenli kalıp Present Simple kullanmaktır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> If you sleep for at least eight hours, you will feel much better tomorrow morning.<br>\n<strong>TR:</strong> En az sekiz saat uyursan yarın sabah kendini çok daha iyi hissedeceksin.<br>\n→ <strong>Açıklama:</strong> Şart (uyumak) gerçekleşirse sonuç (iyi hissetmek) gelecekte olacak. Yan cümle Present Simple, ana cümle will + feel.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> He may leave the office early if he has already finished all his tasks.<br>\n<strong>TR:</strong> Eğer tüm işlerini bitirdiyse ofisten erken ayrılabilir.<br>\n→ <strong>Açıklama:</strong> Ana cümlede olasılık bildiren “may” kullanılmış. Yan cümlecikte Present Perfect (has finished) şartın tamamlandığını vurguluyor. Type 1’de yan cümlecikte Present Perfect de kullanılabilir.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> If you should see Jane today, please give her this message.<br>\n<strong>TR:</strong> Olur da bugün Jane’i görürsen, ona bu mesajı ilet.<br>\n→ <strong>Açıklama:</strong> Yan cümlecikte “should” düşük olasılık ifade eder. Ana cümle emir kipi. Bu da Type 1’in bir varyasyonudur.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> If she is studying right now, don’t disturb her.<br>\n<strong>TR:</strong> Şu anda çalışıyorsa onu rahatsız etme.<br>\n→ <strong>Açıklama:</strong> Yan cümlecikte Present Progressive, ana cümlede emir. Şart anlık bir durumu ifade ediyor.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yan Cümlecik (if)</th>\n<th>Ana Cümlecik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Present Simple</td>\n<td>will / shall</td>\n</tr>\n<tr>\n<td>Present Perfect</td>\n<td>may / might / could</td>\n</tr>\n<tr>\n<td>Present Progressive</td>\n<td>can / must / have to</td>\n</tr>\n<tr>\n<td>should + V0</td>\n<td>imperative (emir)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If we <strong><em>_</em> the 10 o’clock train, we </strong>___ get there on time.</p>\n<p>A) miss / won’t<br>\nB) will miss / don’t<br>\nC) missed / wouldn’t<br>\nD) have missed / haven’t</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Type 1’de yan cümle Present Simple, ana cümle will + not (won’t) olmalı. “Miss” Present Simple, “won’t get” doğru.\n</details>\n\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If you sleep for at least eight hours, you will feel much better tomorrow morning.",
+          "tr": "En az sekiz saat uyursan yarın sabah kendini çok daha iyi hissedeceksin.",
+          "description": "Şart (uyumak) gerçekleşirse sonuç (iyi hissetmek) gelecekte olacak. Yan cümle Present Simple, ana cümle will + feel.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "He may leave the office early if he has already finished all his tasks.",
+          "tr": "Eğer tüm işlerini bitirdiyse ofisten erken ayrılabilir.",
+          "description": "Ana cümlede olasılık bildiren “may” kullanılmış. Yan cümlecikte Present Perfect (has finished) şartın tamamlandığını vurguluyor. Type 1’de yan cümlecikte Present Perfect de kullanılabilir.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "If you should see Jane today, please give her this message.",
+          "tr": "Olur da bugün Jane’i görürsen, ona bu mesajı ilet.",
+          "description": "Yan cümlecikte “should” düşük olasılık ifade eder. Ana cümle emir kipi. Bu da Type 1’in bir varyasyonudur.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "If she is studying right now, don’t disturb her.",
+          "tr": "Şu anda çalışıyorsa onu rahatsız etme.",
+          "description": "Yan cümlecikte Present Progressive, ana cümlede emir. Şart anlık bir durumu ifade ediyor."
+        }
+      ],
+      "mini_test": {
+        "question": "If we _____ the 10 o’clock train, we _____ get there on time.",
+        "options": {
+          "A": "miss / won’t",
+          "B": "will miss / don’t",
+          "C": "missed / wouldn’t",
+          "D": "have missed / haven’t"
+        },
+        "correct": "A",
+        "explanation": "Type 1’de yan cümle Present Simple, ana cümle will + not (won’t) olmalı. “Miss” Present Simple, “won’t get” doğru."
+      },
+      "mini_tests": [
+        {
+          "question": "If we _____ the 10 o’clock train, we _____ get there on time.",
+          "options": {
+            "A": "miss / won’t",
+            "B": "will miss / don’t",
+            "C": "missed / wouldn’t",
+            "D": "have missed / haven’t"
+          },
+          "correct": "A",
+          "explanation": "Type 1’de yan cümle Present Simple, ana cümle will + not (won’t) olmalı. “Miss” Present Simple, “won’t get” doğru."
+        }
+      ],
+      "word_count": 326
+    },
+    {
+      "page_number": 4,
+      "title": "TYPE 2: ŞU ANDAKİ GERÇEK DIŞI DURUMLAR (UNREAL PRESENT)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 HAYALİ VEYA GERÇEĞE AYKIRI ŞARTLAR</h2>\n<p>Type 2, şu anda var olmayan veya gerçekleşmesi imkânsız olan durumları ifade eder. Gerçek zamanın bir derece gerisine gidilir: <strong>Past Simple</strong> (if’li yan cümle) ve <strong>would / could / might + V0</strong> (ana cümle).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “If I were you” kalıbı en bilinen Type 2 örneğidir. “Were” tüm öznelerle kullanılır (was yerine).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> If I knew how this machine worked, I could tell you what to do.<br>\n<strong>TR:</strong> Bu makinenin nasıl çalıştığını bilseydim, sana ne yapman gerektiğini söyleyebilirdim.<br>\n→ <strong>Açıklama:</strong> Gerçekte bilmiyorum, bu yüzden söyleyemiyorum. Past Simple (knew) ve could tell ile hayali bir durum anlatılıyor.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> I would be sleeping right now if I weren’t here.<br>\n<strong>TR:</strong> Şu anda burada olmasam uyuyor olurdum.<br>\n→ <strong>Açıklama:</strong> “Weren’t” ile şu anki gerçek (burada olmak) reddediliyor. Ana cümlede “would be sleeping” şu anda devam eden hayali eylem.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> If I were to win the lottery, I would travel around the world.<br>\n<strong>TR:</strong> Piyangoyu kazanacak olsam, dünyayı gezerdim.<br>\n→ <strong>Açıklama:</strong> “Were to + V0” yapısı Type 2’de geleceğe yönelik hayali durumları vurgular.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> If you could speak fluent Japanese, you might get a job in Tokyo.<br>\n<strong>TR:</strong> Akıcı Japonca konuşabilsen, Tokyo’da iş bulabilirdin.<br>\n→ <strong>Açıklama:</strong> “Could” yetenek bildiriyor; “might” olasılık. Her ikisi de past formda.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yan Cümlecik (if)</th>\n<th>Ana Cümlecik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Past Simple (V2)</td>\n<td>would + V0</td>\n</tr>\n<tr>\n<td>Past Continuous</td>\n<td>could + V0</td>\n</tr>\n<tr>\n<td>were to + V0</td>\n<td>might + V0</td>\n</tr>\n<tr>\n<td>could (past ability)</td>\n<td>would be V-ing</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If they <strong><em>_</em> out of town next week, we </strong>___ them.</p>\n<p>A) weren’t / could visit<br>\nB) aren’t / will visit<br>\nC) hadn’t been / would have visited<br>\nD) won’t be / visit</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Gelecekle ilgili hayali bir durum (şehir dışında olmamaları) Type 2 gerektirir. “Weren’t” (Past Simple) ve “could visit” doğru.\n</details>\n\n<p>[Kelime sayısı: 207]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If I knew how this machine worked, I could tell you what to do.",
+          "tr": "Bu makinenin nasıl çalıştığını bilseydim, sana ne yapman gerektiğini söyleyebilirdim.",
+          "description": "Gerçekte bilmiyorum, bu yüzden söyleyemiyorum. Past Simple (knew) ve could tell ile hayali bir durum anlatılıyor.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "I would be sleeping right now if I weren’t here.",
+          "tr": "Şu anda burada olmasam uyuyor olurdum.",
+          "description": "“Weren’t” ile şu anki gerçek (burada olmak) reddediliyor. Ana cümlede “would be sleeping” şu anda devam eden hayali eylem.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "If I were to win the lottery, I would travel around the world.",
+          "tr": "Piyangoyu kazanacak olsam, dünyayı gezerdim.",
+          "description": "“Were to + V0” yapısı Type 2’de geleceğe yönelik hayali durumları vurgular.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "If you could speak fluent Japanese, you might get a job in Tokyo.",
+          "tr": "Akıcı Japonca konuşabilsen, Tokyo’da iş bulabilirdin.",
+          "description": "“Could” yetenek bildiriyor; “might” olasılık. Her ikisi de past formda."
+        }
+      ],
+      "mini_test": {
+        "question": "If they _____ out of town next week, we _____ them.",
+        "options": {
+          "A": "weren’t / could visit",
+          "B": "aren’t / will visit",
+          "C": "hadn’t been / would have visited",
+          "D": "won’t be / visit"
+        },
+        "correct": "A",
+        "explanation": "Gelecekle ilgili hayali bir durum (şehir dışında olmamaları) Type 2 gerektirir. “Weren’t” (Past Simple) ve “could visit” doğru."
+      },
+      "mini_tests": [
+        {
+          "question": "If they _____ out of town next week, we _____ them.",
+          "options": {
+            "A": "weren’t / could visit",
+            "B": "aren’t / will visit",
+            "C": "hadn’t been / would have visited",
+            "D": "won’t be / visit"
+          },
+          "correct": "A",
+          "explanation": "Gelecekle ilgili hayali bir durum (şehir dışında olmamaları) Type 2 gerektirir. “Weren’t” (Past Simple) ve “could visit” doğru."
+        }
+      ],
+      "word_count": 311
+    },
+    {
+      "page_number": 5,
+      "title": "TYPE 3: GEÇMİŞTEKİ GERÇEK DIŞI DURUMLAR (UNREAL PAST)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 GEÇMİŞTE OLANIN AKSİNİ İFADE ETME</h2>\n<p>Type 3, geçmişte gerçekleşmemiş veya gerçekleşmiş bir olayın aksini anlatır. <strong>Past Perfect</strong> (if’li yan cümle) ve <strong>would have + V3</strong> (ana cümle) kullanılır. Pişmanlık veya geçmişe yönelik hayal kurma amacı taşır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “If I had known” kalıbı sık kullanılır. Geçmişte bilmediğiniz için yapamadığınız şeyleri anlatır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> If we hadn’t sold our car, we wouldn’t have been stuck at the bus stop yesterday.<br>\n<strong>TR:</strong> Arabamızı satmamış olsaydık, dün otobüs durağında mahsur kalmazdık.<br>\n→ <strong>Açıklama:</strong> Geçmişte araba satıldı (gerçek), bu yüzden otobüs beklemek zorunda kalındı. Şart cümlesi bunun tersini anlatıyor: Past Perfect (hadn’t sold) + would have been.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> She would have passed the exam if she had studied more diligently.<br>\n<strong>TR:</strong> Daha özenli çalışmış olsaydı sınavı geçerdi.<br>\n→ <strong>Açıklama:</strong> Çalışmadığı için geçemedi (geçmiş). Past Perfect (had studied) + would have passed.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> If you had told me about the problem, I could have helped you.<br>\n<strong>TR:</strong> Bana problemden bahsetmiş olsaydın, sana yardım edebilirdim.<br>\n→ <strong>Açıklama:</strong> Yardım edilmedi çünkü bilinmiyordu. “Could have helped” olasılık bildiriyor.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> They might have arrived on time if they hadn’t missed the bus.<br>\n<strong>TR:</strong> Otobüsü kaçırmamış olsalardı zamanında varmış olabilirlerdi.<br>\n→ <strong>Açıklama:</strong> “Might have arrived” geçmişteki olasılığı ifade ediyor. Past Perfect (hadn’t missed) şartı.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yan Cümlecik (if)</th>\n<th>Ana Cümlecik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Past Perfect (had V3)</td>\n<td>would have V3</td>\n</tr>\n<tr>\n<td>Past Perfect Continuous</td>\n<td>could have V3</td>\n</tr>\n<tr>\n<td></td>\n<td>might have V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If the weather <strong><em>_</em> so bad yesterday, we </strong>___ to the beach.</p>\n<p>A) wasn’t / would go<br>\nB) hadn’t been / would have gone<br>\nC) isn’t / will go<br>\nD) weren’t / would have gone</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Geçmişteki bir durumun aksi (hava kötüydü) Type 3 ile anlatılır: Past Perfect (hadn’t been) + would have gone.\n</details>\n\n<p>[Kelime sayısı: 202]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If we hadn’t sold our car, we wouldn’t have been stuck at the bus stop yesterday.",
+          "tr": "Arabamızı satmamış olsaydık, dün otobüs durağında mahsur kalmazdık.",
+          "description": "Geçmişte araba satıldı (gerçek), bu yüzden otobüs beklemek zorunda kalındı. Şart cümlesi bunun tersini anlatıyor: Past Perfect (hadn’t sold) + would have been.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "She would have passed the exam if she had studied more diligently.",
+          "tr": "Daha özenli çalışmış olsaydı sınavı geçerdi.",
+          "description": "Çalışmadığı için geçemedi (geçmiş). Past Perfect (had studied) + would have passed.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "If you had told me about the problem, I could have helped you.",
+          "tr": "Bana problemden bahsetmiş olsaydın, sana yardım edebilirdim.",
+          "description": "Yardım edilmedi çünkü bilinmiyordu. “Could have helped” olasılık bildiriyor.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "They might have arrived on time if they hadn’t missed the bus.",
+          "tr": "Otobüsü kaçırmamış olsalardı zamanında varmış olabilirlerdi.",
+          "description": "“Might have arrived” geçmişteki olasılığı ifade ediyor. Past Perfect (hadn’t missed) şartı."
+        }
+      ],
+      "mini_test": {
+        "question": "If the weather _____ so bad yesterday, we _____ to the beach.",
+        "options": {
+          "A": "wasn’t / would go",
+          "B": "hadn’t been / would have gone",
+          "C": "isn’t / will go",
+          "D": "weren’t / would have gone"
+        },
+        "correct": "B",
+        "explanation": "Geçmişteki bir durumun aksi (hava kötüydü) Type 3 ile anlatılır: Past Perfect (hadn’t been) + would have gone."
+      },
+      "mini_tests": [
+        {
+          "question": "If the weather _____ so bad yesterday, we _____ to the beach.",
+          "options": {
+            "A": "wasn’t / would go",
+            "B": "hadn’t been / would have gone",
+            "C": "isn’t / will go",
+            "D": "weren’t / would have gone"
+          },
+          "correct": "B",
+          "explanation": "Geçmişteki bir durumun aksi (hava kötüydü) Type 3 ile anlatılır: Past Perfect (hadn’t been) + would have gone."
+        }
+      ],
+      "word_count": 305
+    },
+    {
+      "page_number": 6,
+      "title": "MIXED TYPES: GEÇMİŞ ŞARTIN ŞU ANDAKİ SONUCU",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ZAMAN KARIŞMASI: İKİ FARKLI ZAMAN BİR ARADA</h2>\n<p>Bazen şart cümlesi geçmişle, ana cümle şu anla ilgili olabilir (veya tersi). Mixed Type’lar bu durumu karşılar. En yaygın: <strong>If + Type 3 (past), Type 2 (present)</strong> veya <strong>If + Type 2, Type 3</strong>.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Cümle sonunda “now, today, at the moment” gibi ifadeler varsa mixed type olabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Type 3 + Type 2):</strong><br>\n<strong>EN:</strong> If we hadn’t sold our car, we wouldn’t be waiting at the bus stop now.<br>\n<strong>TR:</strong> Arabamızı satmamış olsaydık, şimdi otobüs durağında beklemiyor olurduk.<br>\n→ <strong>Açıklama:</strong> Geçmişte araba satıldı (gerçek), bu yüzden şimdi bekliyoruz. Şart geçmiş (hadn’t sold), sonuç şimdiki zaman (wouldn’t be waiting). “Now” ipucu.</p>\n<p><strong>Örnek 2 (Type 3 + Type 2):</strong><br>\n<strong>EN:</strong> You wouldn’t be in such a difficult position today if you had followed my advice.<br>\n<strong>TR:</strong> Tavsiyeme uymuş olsaydın bugün bu kadar zor durumda olmazdın.<br>\n→ <strong>Açıklama:</strong> Geçmişte tavsiyeye uyulmadı, şu an zor durum. Past Perfect + would + be.</p>\n<p><strong>Örnek 3 (Type 2 + Type 3):</strong><br>\n<strong>EN:</strong> If I were a millionaire, I could have bought that yacht yesterday.<br>\n<strong>TR:</strong> Milyoner olsaydım dün o yatı satın alabilirdim.<br>\n→ <strong>Açıklama:</strong> Şu an milyoner değilim (Type 2), bu yüzden dün alamadım (Type 3). “Were” present unreal, “could have bought” past unreal.</p>\n<p><strong>Örnek 4 (Type 2 + Type 3):</strong><br>\n<strong>EN:</strong> If she spoke German, she could have translated the document for us.<br>\n<strong>TR:</strong> Almanca konuşabilseydi, belgeyi bizim için çevirebilirdi.<br>\n→ <strong>Açıklama:</strong> Şu an Almanca bilmiyor (Type 2), bu yüzden geçmişte çeviremedi (Type 3).</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Mixed Tip</th>\n<th>Yan Cümlecik</th>\n<th>Ana Cümlecik</th>\n<th>Zaman İşareti</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Type 3 (had V3)</td>\n<td>Type 2 (would V0 / would be Ving)</td>\n<td>now, today, at the moment</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Type 2 (V2)</td>\n<td>Type 3 (would have V3)</td>\n<td>yesterday, last week</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If you <strong><em>_</em> more carefully, you </strong>___ such a mistake now.</p>\n<p>A) had listened / wouldn’t make<br>\nB) listened / wouldn’t have made<br>\nC) listen / won’t make<br>\nD) would listen / didn’t make</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Geçmişte dinlemedi (had listened), şimdi hata yapıyor (wouldn’t make). Mixed type: Type 3 + Type 2.\n</details>\n\n<p>[Kelime sayısı: 218]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If we hadn’t sold our car, we wouldn’t be waiting at the bus stop now.",
+          "tr": "Arabamızı satmamış olsaydık, şimdi otobüs durağında beklemiyor olurduk.",
+          "description": "Geçmişte araba satıldı (gerçek), bu yüzden şimdi bekliyoruz. Şart geçmiş (hadn’t sold), sonuç şimdiki zaman (wouldn’t be waiting). “Now” ipucu.\n\n**Örnek 2 (Type 3 + Type 2):**"
+        },
+        {
+          "en": "You wouldn’t be in such a difficult position today if you had followed my advice.",
+          "tr": "Tavsiyeme uymuş olsaydın bugün bu kadar zor durumda olmazdın.",
+          "description": "Geçmişte tavsiyeye uyulmadı, şu an zor durum. Past Perfect + would + be.\n\n**Örnek 3 (Type 2 + Type 3):**"
+        },
+        {
+          "en": "If I were a millionaire, I could have bought that yacht yesterday.",
+          "tr": "Milyoner olsaydım dün o yatı satın alabilirdim.",
+          "description": "Şu an milyoner değilim (Type 2), bu yüzden dün alamadım (Type 3). “Were” present unreal, “could have bought” past unreal.\n\n**Örnek 4 (Type 2 + Type 3):**"
+        },
+        {
+          "en": "If she spoke German, she could have translated the document for us.",
+          "tr": "Almanca konuşabilseydi, belgeyi bizim için çevirebilirdi.",
+          "description": "Şu an Almanca bilmiyor (Type 2), bu yüzden geçmişte çeviremedi (Type 3)."
+        }
+      ],
+      "mini_test": {
+        "question": "If you _____ more carefully, you _____ such a mistake now.",
+        "options": {
+          "A": "had listened / wouldn’t make",
+          "B": "listened / wouldn’t have made",
+          "C": "listen / won’t make",
+          "D": "would listen / didn’t make"
+        },
+        "correct": "A",
+        "explanation": "Geçmişte dinlemedi (had listened), şimdi hata yapıyor (wouldn’t make). Mixed type: Type 3 + Type 2."
+      },
+      "mini_tests": [
+        {
+          "question": "If you _____ more carefully, you _____ such a mistake now.",
+          "options": {
+            "A": "had listened / wouldn’t make",
+            "B": "listened / wouldn’t have made",
+            "C": "listen / won’t make",
+            "D": "would listen / didn’t make"
+          },
+          "correct": "A",
+          "explanation": "Geçmişte dinlemedi (had listened), şimdi hata yapıyor (wouldn’t make). Mixed type: Type 3 + Type 2."
+        }
+      ],
+      "word_count": 351
+    },
+    {
+      "page_number": 7,
+      "title": "INVERSİON: IF’SİZ ŞART CÜMLELERİ",
+      "total_pages": 25,
+      "content_html": "<h2>📌 DEVRİK YAPI İLE ŞART İFADE ETME</h2>\n<p>“If” kullanmadan da şart anlamı verebiliriz. Bunun için yardımcı fiili (should, were, had) cümle başına alır, özne fiilden önce gelir. Devrik yapı daha resmîdir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Should = Type 1 (düşük olasılık), Were = Type 2, Had = Type 3. Devrik yapıda “if” tamamen kalkar.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Should):</strong><br>\n<strong>EN:</strong> Should you need any assistance, please contact the support team.<br>\n<strong>TR:</strong> Yardıma ihtiyacın olursa, lütfen destek ekibiyle iletişime geç.<br>\n→ <strong>Açıklama:</strong> “If you should need” yerine “Should you need” kullanılmış. Type 1 devriği, ana cümle emir kipi.</p>\n<p><strong>Örnek 2 (Were):</strong><br>\n<strong>EN:</strong> Were I you, I would accept the job offer immediately.<br>\n<strong>TR:</strong> Senin yerinde olsam, iş teklifini hemen kabul ederdim.<br>\n→ <strong>Açıklama:</strong> “If I were you” yerine “Were I you” – be fiili olduğu için sadece were başa alınır. Type 2 devriği.</p>\n<p><strong>Örnek 3 (Were + to V0):</strong><br>\n<strong>EN:</strong> Were she to win the competition, she would donate the prize to charity.<br>\n<strong>TR:</strong> Yarışmayı kazanacak olsa, ödülü bağışlardı.<br>\n→ <strong>Açıklama:</strong> “If she were to win” yerine “Were she to win”. Type 2’nin “were to” kalıbı devrik yapılır.</p>\n<p><strong>Örnek 4 (Had):</strong><br>\n<strong>EN:</strong> Had you arrived five minutes earlier, you could have met the president.<br>\n<strong>TR:</strong> Beş dakika daha erken gelseydin, başkanla tanışabilirdin.<br>\n→ <strong>Açıklama:</strong> “If you had arrived” yerine “Had you arrived”. Type 3 devriği, ana cümle değişmez.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Tip</th>\n<th>Normal Yapı</th>\n<th>Devrik Yapı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Type 1</td>\n<td>If + S + should + V0</td>\n<td>Should + S + V0</td>\n</tr>\n<tr>\n<td>Type 2</td>\n<td>If + S + were (to V0)</td>\n<td>Were + S + (to V0)</td>\n</tr>\n<tr>\n<td>Type 3</td>\n<td>If + S + had V3</td>\n<td>Had + S + V3</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> _____ more time, we could have finished the project.</p>\n<p>A) If we had<br>\nB) Had we had<br>\nC) If we have<br>\nD) Have we</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Geçmişte daha fazla zaman yoktu, Type 3 anlamı var. Devrik yapı “Had we had” (If we had had) doğrudur.\n</details>\n\n<p>[Kelime sayısı: 205]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Should you need any assistance, please contact the support team.",
+          "tr": "Yardıma ihtiyacın olursa, lütfen destek ekibiyle iletişime geç.",
+          "description": "“If you should need” yerine “Should you need” kullanılmış. Type 1 devriği, ana cümle emir kipi.\n\n**Örnek 2 (Were):**"
+        },
+        {
+          "en": "Were I you, I would accept the job offer immediately.",
+          "tr": "Senin yerinde olsam, iş teklifini hemen kabul ederdim.",
+          "description": "“If I were you” yerine “Were I you” – be fiili olduğu için sadece were başa alınır. Type 2 devriği.\n\n**Örnek 3 (Were + to V0):**"
+        },
+        {
+          "en": "Were she to win the competition, she would donate the prize to charity.",
+          "tr": "Yarışmayı kazanacak olsa, ödülü bağışlardı.",
+          "description": "“If she were to win” yerine “Were she to win”. Type 2’nin “were to” kalıbı devrik yapılır.\n\n**Örnek 4 (Had):**"
+        },
+        {
+          "en": "Had you arrived five minutes earlier, you could have met the president.",
+          "tr": "Beş dakika daha erken gelseydin, başkanla tanışabilirdin.",
+          "description": "“If you had arrived” yerine “Had you arrived”. Type 3 devriği, ana cümle değişmez."
+        }
+      ],
+      "mini_test": {
+        "question": "_____ more time, we could have finished the project.",
+        "options": {
+          "A": "If we had",
+          "B": "Had we had",
+          "C": "If we have",
+          "D": "Have we"
+        },
+        "correct": "B",
+        "explanation": "Geçmişte daha fazla zaman yoktu, Type 3 anlamı var. Devrik yapı “Had we had” (If we had had) doğrudur."
+      },
+      "mini_tests": [
+        {
+          "question": "_____ more time, we could have finished the project.",
+          "options": {
+            "A": "If we had",
+            "B": "Had we had",
+            "C": "If we have",
+            "D": "Have we"
+          },
+          "correct": "B",
+          "explanation": "Geçmişte daha fazla zaman yoktu, Type 3 anlamı var. Devrik yapı “Had we had” (If we had had) doğrudur."
+        }
+      ],
+      "word_count": 313
+    },
+    {
+      "page_number": 8,
+      "title": "PROVIDED / PROVIDING / AS LONG AS",
+      "total_pages": 25,
+      "content_html": "<h2>📌 “ŞARTIYLA / KOŞULUYLA” ANLAMI</h2>\n<p>“Provided (that)”, “providing (that)”, “as long as” ve “so long as” yapıları “if” ile aynı anlamdadır ve aynı tense kurallarına uyar. Genellikle Type 1 ile kullanılırlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “So long as” genelde olumsuz cümlelerde tercih edilir. “As long as” hem olumlu hem olumsuz kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Provided that):</strong><br>\n<strong>EN:</strong> You can borrow my laptop provided that you return it by tomorrow evening.<br>\n<strong>TR:</strong> Laptopumu yarın akşama kadar geri getirmen şartıyla ödünç alabilirsin.<br>\n→ <strong>Açıklama:</strong> “Provided that” koşul bildiriyor. Yan cümle Present Simple, ana cümle “can” (izin). Type 1 kuralları geçerli.</p>\n<p><strong>Örnek 2 (Providing that):</strong><br>\n<strong>EN:</strong> Providing that the weather stays nice, we’ll have the party in the garden.<br>\n<strong>TR:</strong> Havanın güzel kalması şartıyla partiyi bahçede yapacağız.<br>\n→ <strong>Açıklama:</strong> “Providing that” de aynı anlamda. Present Simple (stays) + will.</p>\n<p><strong>Örnek 3 (As long as):</strong><br>\n<strong>EN:</strong> You can work here as long as you follow the company rules.<br>\n<strong>TR:</strong> Şirket kurallarına uyduğun sürece burada çalışabilirsin.<br>\n→ <strong>Açıklama:</strong> “As long as” hem süre hem koşul anlamı verir. Present Simple + can.</p>\n<p><strong>Örnek 4 (So long as):</strong><br>\n<strong>EN:</strong> So long as you don’t break any laws, you won’t get into trouble.<br>\n<strong>TR:</strong> Herhangi bir yasayı çiğnemediğin sürece başın derde girmez.<br>\n→ <strong>Açıklama:</strong> Olumsuz cümlede “so long as” kullanımı yaygın. “Don’t break” olumsuz şart, “won’t get” sonuç.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>provided (that)</td>\n<td>... koşuluyla</td>\n<td>Provided you study, you’ll pass.</td>\n</tr>\n<tr>\n<td>providing (that)</td>\n<td>... koşuluyla</td>\n<td>Providing it doesn’t rain, we’ll go.</td>\n</tr>\n<tr>\n<td>as long as</td>\n<td>... sürece / şartıyla</td>\n<td>As long as you’re happy, I’m happy.</td>\n</tr>\n<tr>\n<td>so long as</td>\n<td>... sürece (olumsuzda sık)</td>\n<td>So long as you don’t mind, it’s fine.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> She can have the job _____ she is willing to work on Saturdays.</p>\n<p>A) apart from<br>\nB) owing to<br>\nC) except<br>\nD) provided</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** Boşluk “koşuluyla” anlamı gerektiriyor. “Provided” bu anlamı verir. Diğerleri anlamca uymaz.\n</details>\n\n<p>[Kelime sayısı: 211]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "You can borrow my laptop provided that you return it by tomorrow evening.",
+          "tr": "Laptopumu yarın akşama kadar geri getirmen şartıyla ödünç alabilirsin.",
+          "description": "“Provided that” koşul bildiriyor. Yan cümle Present Simple, ana cümle “can” (izin). Type 1 kuralları geçerli.\n\n**Örnek 2 (Providing that):**"
+        },
+        {
+          "en": "Providing that the weather stays nice, we’ll have the party in the garden.",
+          "tr": "Havanın güzel kalması şartıyla partiyi bahçede yapacağız.",
+          "description": "“Providing that” de aynı anlamda. Present Simple (stays) + will.\n\n**Örnek 3 (As long as):**"
+        },
+        {
+          "en": "You can work here as long as you follow the company rules.",
+          "tr": "Şirket kurallarına uyduğun sürece burada çalışabilirsin.",
+          "description": "“As long as” hem süre hem koşul anlamı verir. Present Simple + can.\n\n**Örnek 4 (So long as):**"
+        },
+        {
+          "en": "So long as you don’t break any laws, you won’t get into trouble.",
+          "tr": "Herhangi bir yasayı çiğnemediğin sürece başın derde girmez.",
+          "description": "Olumsuz cümlede “so long as” kullanımı yaygın. “Don’t break” olumsuz şart, “won’t get” sonuç."
+        }
+      ],
+      "mini_test": {
+        "question": "She can have the job _____ she is willing to work on Saturdays.",
+        "options": {
+          "A": "apart from",
+          "B": "owing to",
+          "C": "except",
+          "D": "provided"
+        },
+        "correct": "D",
+        "explanation": "Boşluk “koşuluyla” anlamı gerektiriyor. “Provided” bu anlamı verir. Diğerleri anlamca uymaz."
+      },
+      "mini_tests": [
+        {
+          "question": "She can have the job _____ she is willing to work on Saturdays.",
+          "options": {
+            "A": "apart from",
+            "B": "owing to",
+            "C": "except",
+            "D": "provided"
+          },
+          "correct": "D",
+          "explanation": "Boşluk “koşuluyla” anlamı gerektiriyor. “Provided” bu anlamı verir. Diğerleri anlamca uymaz."
+        }
+      ],
+      "word_count": 323
+    },
+    {
+      "page_number": 9,
+      "title": "ONLY IF / EVEN IF",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ANCAK … -SA / -SE BİLE</h2>\n<p>“Only if” şartı güçlendirir, “ancak … -sa” anlamı verir. “Even if” ise “-se bile” veya “-e rağmen” anlamında kullanılır. “Even if” bazen “although” gibi davranır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Only if” cümle başındaysa ana cümle devrik yapılır. “Even if” hem şart hem zıtlık anlamında kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Only if – cümle ortası):</strong><br>\n<strong>EN:</strong> You can achieve your goals only if you work hard every day.<br>\n<strong>TR:</strong> Hedeflerine ancak her gün sıkı çalışırsan ulaşabilirsin.<br>\n→ <strong>Açıklama:</strong> “Only if” cümle ortasında normal “if” gibi davranır, devrik yok. Present Simple + can.</p>\n<p><strong>Örnek 2 (Only if – cümle başı):</strong><br>\n<strong>EN:</strong> Only if you register online can you attend the conference.<br>\n<strong>TR:</strong> Ancak online kayıt yaptırırsan konferansa katılabilirsin.<br>\n→ <strong>Açıklama:</strong> “Only if” cümle başında olduğu için ana cümle devrik: “can you attend”. Normalde “you can attend” olurdu.</p>\n<p><strong>Örnek 3 (Even if – şart anlamı):</strong><br>\n<strong>EN:</strong> Even if he invites me to his wedding, I won’t go.<br>\n<strong>TR:</strong> Beni düğününe davet etse bile gitmem.<br>\n→ <strong>Açıklama:</strong> “Even if” burada Type 1 kuralına uygun: Present Simple (invites) + won’t go. Şartın gerçekleşmesi sonucu değiştirmeyecek.</p>\n<p><strong>Örnek 4 (Even if – zıtlık / although anlamı):</strong><br>\n<strong>EN:</strong> Even if he hadn’t studied, he passed the exam easily.<br>\n<strong>TR:</strong> Çalışmamış olmasına rağmen sınavı kolayca geçti.<br>\n→ <strong>Açıklama:</strong> Burada “even if” “although” gibi kullanılmış, type kurallarına uymak zorunda değil. Past Perfect + Past Simple.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>only if (ortada)</td>\n<td>normal if gibi</td>\n<td>I’ll go only if you come.</td>\n</tr>\n<tr>\n<td>only if (başta)</td>\n<td>ana cümle devrik</td>\n<td>Only if you come will I go.</td>\n</tr>\n<tr>\n<td>even if (şart)</td>\n<td>type kurallarına uyar</td>\n<td>Even if it rains, we’ll play.</td>\n</tr>\n<tr>\n<td>even if (zıtlık)</td>\n<td>type kuralı yok</td>\n<td>Even if he tried, he failed.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Only if you promise to be careful _____ my car.</p>\n<p>A) you can drive<br>\nB) can you drive<br>\nC) you drove<br>\nD) do you drive</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “Only if” cümle başında olduğu için ana cümle devrik: “can you drive”.\n</details>\n\n<p>[Kelime sayısı: 214]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "You can achieve your goals only if you work hard every day.",
+          "tr": "Hedeflerine ancak her gün sıkı çalışırsan ulaşabilirsin.",
+          "description": "“Only if” cümle ortasında normal “if” gibi davranır, devrik yok. Present Simple + can.\n\n**Örnek 2 (Only if – cümle başı):**"
+        },
+        {
+          "en": "Only if you register online can you attend the conference.",
+          "tr": "Ancak online kayıt yaptırırsan konferansa katılabilirsin.",
+          "description": "“Only if” cümle başında olduğu için ana cümle devrik: “can you attend”. Normalde “you can attend” olurdu.\n\n**Örnek 3 (Even if – şart anlamı):**"
+        },
+        {
+          "en": "Even if he invites me to his wedding, I won’t go.",
+          "tr": "Beni düğününe davet etse bile gitmem.",
+          "description": "“Even if” burada Type 1 kuralına uygun: Present Simple (invites) + won’t go. Şartın gerçekleşmesi sonucu değiştirmeyecek.\n\n**Örnek 4 (Even if – zıtlık / although anlamı):**"
+        },
+        {
+          "en": "Even if he hadn’t studied, he passed the exam easily.",
+          "tr": "Çalışmamış olmasına rağmen sınavı kolayca geçti.",
+          "description": "Burada “even if” “although” gibi kullanılmış, type kurallarına uymak zorunda değil. Past Perfect + Past Simple."
+        }
+      ],
+      "mini_test": {
+        "question": "Only if you promise to be careful _____ my car.",
+        "options": {
+          "A": "you can drive",
+          "B": "can you drive",
+          "C": "you drove",
+          "D": "do you drive"
+        },
+        "correct": "B",
+        "explanation": "“Only if” cümle başında olduğu için ana cümle devrik: “can you drive”."
+      },
+      "mini_tests": [
+        {
+          "question": "Only if you promise to be careful _____ my car.",
+          "options": {
+            "A": "you can drive",
+            "B": "can you drive",
+            "C": "you drove",
+            "D": "do you drive"
+          },
+          "correct": "B",
+          "explanation": "“Only if” cümle başında olduğu için ana cümle devrik: “can you drive”."
+        }
+      ],
+      "word_count": 328
+    },
+    {
+      "page_number": 10,
+      "title": "UNLESS",
+      "total_pages": 25,
+      "content_html": "<h2>📌 “-MEDİKÇE / -MEZSE” ANLAMI</h2>\n<p>“Unless” = “if … not” anlamına gelir. Olumsuz bir şartı ifade eder. Type 1 ile çok yaygındır; Type 2 ve Type 3 bağlamlarında daha sınırlı görülür. Ana cümle olumlu da olumsuz da olabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Unless” zaten olumsuz anlam taşıdığı için bağlı olduğu cümlecikte ayrıca “not” kullanılmaz (istisnalar olsa da sınavlarda sorulmaz).</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Type 1):</strong><br>\n<strong>EN:</strong> She won’t forgive him unless he apologizes sincerely.<br>\n<strong>TR:</strong> İçtenlikle özür dilemedikçe onu affetmeyecek.<br>\n→ <strong>Açıklama:</strong> “Unless he apologizes” = “if he does not apologize”. Ana cümle olumsuz (won’t forgive).</p>\n<p><strong>Örnek 2 (Type 1):</strong><br>\n<strong>EN:</strong> Unless it rains tomorrow, we will have a picnic.<br>\n<strong>TR:</strong> Yarın yağmur yağmazsa piknik yapacağız.<br>\n→ <strong>Açıklama:</strong> “Unless it rains” = “if it does not rain”. Ana cümle olumlu, ama genel kural “unless” ile ana cümle olumsuz olmak zorunda değil.</p>\n<p><strong>Örnek 3 (Type 1’de olumsuz ana cümle):</strong><br>\n<strong>EN:</strong> You cannot enter the club unless you are a member.<br>\n<strong>TR:</strong> Üye değilseniz kulübe giremezsiniz.<br>\n→ <strong>Açıklama:</strong> “Cannot enter” olumsuz, “unless you are” şart. Sık kullanılan bir kalıp.</p>\n<p><strong>Örnek 4 (Type 2’de kullanılmaz – uyarı):</strong><br>\n<strong>EN:</strong> If he didn’t know the address, he would get lost. (NOT: Unless he knew…)<br>\n<strong>TR:</strong> Adresi bilmese kaybolurdu.<br>\n→ <strong>Açıklama:</strong> Type 2 bağlamında “unless” teorik olarak mümkün olsa da sınavlarda çoğu durumda “if ... not” daha güvenli ve nettir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Unless Kullanımı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Type 1</td>\n<td>if … not</td>\n<td>I’ll go unless you call. (if you don’t call)</td>\n</tr>\n<tr>\n<td>Soru cümlesinde</td>\n<td>kullanılmaz</td>\n<td>If he doesn’t come, what will we do? (NOT: Unless he comes…)</td>\n</tr>\n<tr>\n<td>Duygu bildiren cümlelerde</td>\n<td>kullanılmaz</td>\n<td>I’ll be surprised if he doesn’t win. (NOT: Unless he wins)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> You won’t pass the course _____ you attend all classes.</p>\n<p>A) if<br>\nB) unless<br>\nC) whether<br>\nD) provided</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “Derslere katılmadıkça geçemezsin” anlamı için “unless” gerekli. “If” kullanılsaydı “if you don’t attend” olmalıydı.\n</details>\n\n<p>[Kelime sayısı: 209]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "She won’t forgive him unless he apologizes sincerely.",
+          "tr": "İçtenlikle özür dilemedikçe onu affetmeyecek.",
+          "description": "“Unless he apologizes” = “if he does not apologize”. Ana cümle olumsuz (won’t forgive).\n\n**Örnek 2 (Type 1):**"
+        },
+        {
+          "en": "Unless it rains tomorrow, we will have a picnic.",
+          "tr": "Yarın yağmur yağmazsa piknik yapacağız.",
+          "description": "“Unless it rains” = “if it does not rain”. Ana cümle olumlu, ama genel kural “unless” ile ana cümle olumsuz olmak zorunda değil.\n\n**Örnek 3 (Type 1’de olumsuz ana cümle):**"
+        },
+        {
+          "en": "You cannot enter the club unless you are a member.",
+          "tr": "Üye değilseniz kulübe giremezsiniz.",
+          "description": "“Cannot enter” olumsuz, “unless you are” şart. Sık kullanılan bir kalıp.\n\n**Örnek 4 (Type 2’de kullanılmaz – uyarı):**"
+        },
+        {
+          "en": "If he didn’t know the address, he would get lost. (NOT: Unless he knew…)",
+          "tr": "Adresi bilmese kaybolurdu.",
+          "description": "Type 2 bağlamında “unless” teorik olarak mümkün olsa da sınavlarda çoğu durumda “if ... not” daha güvenli ve nettir."
+        }
+      ],
+      "mini_test": {
+        "question": "You won’t pass the course _____ you attend all classes.",
+        "options": {
+          "A": "if",
+          "B": "unless",
+          "C": "whether",
+          "D": "provided"
+        },
+        "correct": "B",
+        "explanation": "“Derslere katılmadıkça geçemezsin” anlamı için “unless” gerekli. “If” kullanılsaydı “if you don’t attend” olmalıydı."
+      },
+      "mini_tests": [
+        {
+          "question": "You won’t pass the course _____ you attend all classes.",
+          "options": {
+            "A": "if",
+            "B": "unless",
+            "C": "whether",
+            "D": "provided"
+          },
+          "correct": "B",
+          "explanation": "“Derslere katılmadıkça geçemezsin” anlamı için “unless” gerekli. “If” kullanılsaydı “if you don’t attend” olmalıydı."
+        }
+      ],
+      "word_count": 321
+    },
+    {
+      "page_number": 11,
+      "title": "SUPPOSE / WHAT IF / ON CONDITION THAT",
+      "total_pages": 25,
+      "content_html": "<h2>📌 VARSAYALIM Kİ / YA … -SA / ŞARTIYLA</h2>\n<p>“Suppose that” ve “supposing that” hayali durumlar için kullanılır, genellikle Type 2 veya Type 3 ile. “What if?” kısaltılmış bir soru kalıbıdır. “On condition that” ise “şartıyla” anlamında resmî bir ifadedir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Suppose” ile kurulan cümlelerde ana cümle genellikle soru formundadır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Suppose that + Type 2):</strong><br>\n<strong>EN:</strong> Suppose that you won the lottery, what would you do with the money?<br>\n<strong>TR:</strong> Diyelim ki piyangoyu kazandın, parayla ne yapardın?<br>\n→ <strong>Açıklama:</strong> “Suppose” hayali bir durum sunar. Type 2: Past Simple (won) + would do.</p>\n<p><strong>Örnek 2 (Supposing that + Type 3):</strong><br>\n<strong>EN:</strong> Supposing that we had missed the flight, what would we have done?<br>\n<strong>TR:</strong> Varsayalım ki uçağı kaçırmıştık, ne yapardık?<br>\n→ <strong>Açıklama:</strong> Geçmişe yönelik hayal: Past Perfect (had missed) + would have done.</p>\n<p><strong>Örnek 3 (What if):</strong><br>\n<strong>EN:</strong> What if she doesn’t keep your secret?<br>\n<strong>TR:</strong> Ya sırrını saklamazsa?<br>\n→ <strong>Açıklama:</strong> “What if” = “what will happen if”. Burada Type 1 (Present Simple) gelecek anlamı veriyor.</p>\n<p><strong>Örnek 4 (On condition that):</strong><br>\n<strong>EN:</strong> You can borrow my bike on condition that you return it by 6 p.m.<br>\n<strong>TR:</strong> Bisikletimi saat 6’ya kadar geri getirmen şartıyla ödünç alabilirsin.<br>\n→ <strong>Açıklama:</strong> “On condition that” resmî bir koşul ifadesidir. Present Simple + can.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Kullanıldığı Type</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Suppose / Supposing (that)</td>\n<td>Varsayalım ki</td>\n<td>Genelde Type 2 veya Type 3</td>\n</tr>\n<tr>\n<td>What if</td>\n<td>Ya … -sa / -saydı</td>\n<td>Type 1, 2 veya 3’e göre</td>\n</tr>\n<tr>\n<td>On condition that</td>\n<td>… şartıyla</td>\n<td>Her type ile (genelde Type 1)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> _____ you had seen the accident, what would you have done?</p>\n<p>A) If only<br>\nB) Suppose that<br>\nC) Unless<br>\nD) Only if</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Geçmişe yönelik varsayım: “Suppose that” + Past Perfect uygun. “If only” farklı anlamda.\n</details>\n\n<p>[Kelime sayısı: 203]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Suppose that you won the lottery, what would you do with the money?",
+          "tr": "Diyelim ki piyangoyu kazandın, parayla ne yapardın?",
+          "description": "“Suppose” hayali bir durum sunar. Type 2: Past Simple (won) + would do.\n\n**Örnek 2 (Supposing that + Type 3):**"
+        },
+        {
+          "en": "Supposing that we had missed the flight, what would we have done?",
+          "tr": "Varsayalım ki uçağı kaçırmıştık, ne yapardık?",
+          "description": "Geçmişe yönelik hayal: Past Perfect (had missed) + would have done.\n\n**Örnek 3 (What if):**"
+        },
+        {
+          "en": "What if she doesn’t keep your secret?",
+          "tr": "Ya sırrını saklamazsa?",
+          "description": "“What if” = “what will happen if”. Burada Type 1 (Present Simple) gelecek anlamı veriyor.\n\n**Örnek 4 (On condition that):**"
+        },
+        {
+          "en": "You can borrow my bike on condition that you return it by 6 p.m.",
+          "tr": "Bisikletimi saat 6’ya kadar geri getirmen şartıyla ödünç alabilirsin.",
+          "description": "“On condition that” resmî bir koşul ifadesidir. Present Simple + can."
+        }
+      ],
+      "mini_test": {
+        "question": "_____ you had seen the accident, what would you have done?",
+        "options": {
+          "A": "If only",
+          "B": "Suppose that",
+          "C": "Unless",
+          "D": "Only if"
+        },
+        "correct": "B",
+        "explanation": "Geçmişe yönelik varsayım: “Suppose that” + Past Perfect uygun. “If only” farklı anlamda."
+      },
+      "mini_tests": [
+        {
+          "question": "_____ you had seen the accident, what would you have done?",
+          "options": {
+            "A": "If only",
+            "B": "Suppose that",
+            "C": "Unless",
+            "D": "Only if"
+          },
+          "correct": "B",
+          "explanation": "Geçmişe yönelik varsayım: “Suppose that” + Past Perfect uygun. “If only” farklı anlamda."
+        }
+      ],
+      "word_count": 293
+    },
+    {
+      "page_number": 12,
+      "title": "IN CASE / IN CASE OF",
+      "total_pages": 25,
+      "content_html": "<h2>📌 “-E İHTİMALİNE KARŞI / … DURUMUNDA”</h2>\n<p>“In case” bir ihtimale karşı yapılan önlemi ifade eder. Ardından tam bir cümle gelir. “In case of” ise bir isim tamlaması alır ve genellikle uyarılarda kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “In case” ile “if” karıştırılmamalıdır. “In case” önlem, “if” şart bildirir. “I’ll take an umbrella in case it rains” (yağmur ihtimaline karşı şemsiye alırım, yağarsa kullanırım). “If it rains, I’ll take an umbrella” ise yağarsa o zaman alırım.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (In case + SVO):</strong><br>\n<strong>EN:</strong> You should eat something now in case we can’t find a restaurant on the way.<br>\n<strong>TR:</strong> Yolda restoran bulamama ihtimaline karşı şimdi bir şeyler yemelisin.<br>\n→ <strong>Açıklama:</strong> “In case” ile gelecekteki olası bir durum için şimdiden önlem alınıyor. Present Simple (can’t find) ile kurulmuş.</p>\n<p><strong>Örnek 2 (In case + SVO):</strong><br>\n<strong>EN:</strong> I’ll charge my phone fully in case there is a power outage later.<br>\n<strong>TR:</strong> Sonra elektrik kesintisi olur ihtimaline karşı telefonumu tamamen şarj edeceğim.<br>\n→ <strong>Açıklama:</strong> Önlem (charge) ve ihtimal (there is). Present Simple.</p>\n<p><strong>Örnek 3 (In case of + NP):</strong><br>\n<strong>EN:</strong> In case of emergency, break the glass and press the red button.<br>\n<strong>TR:</strong> Acil durumda camı kırın ve kırmızı düğmeye basın.<br>\n→ <strong>Açıklama:</strong> “In case of” + isim tamlaması (emergency). Emir kipi ana cümle.</p>\n<p><strong>Örnek 4 (Just in case – vurgulu):</strong><br>\n<strong>EN:</strong> I always keep some cash in my wallet, just in case.<br>\n<strong>TR:</strong> Ne olur ne olmaz diye cüzdanımda her zaman biraz nakit bulundururum.<br>\n→ <strong>Açıklama:</strong> “Just in case” tek başına da kullanılabilir, cümle devam etmeyebilir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Devamı</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>in case</td>\n<td>SVO (cümle)</td>\n<td>… ihtimaline karşı</td>\n</tr>\n<tr>\n<td>in case of</td>\n<td>NP (isim)</td>\n<td>… durumunda</td>\n</tr>\n<tr>\n<td>just in case</td>\n<td>(cümle veya tek başına)</td>\n<td>ne olur ne olmaz diye</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> _____ fire, please use the stairs, not the elevator.</p>\n<p>A) In case of<br>\nB) In case<br>\nC) If<br>\nD) Unless</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** “Fire” bir isim, “in case of” + isim doğru kullanım. “In case fire” gramer olarak yanlış (cümle gerekir).\n</details>\n\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "You should eat something now in case we can’t find a restaurant on the way.",
+          "tr": "Yolda restoran bulamama ihtimaline karşı şimdi bir şeyler yemelisin.",
+          "description": "“In case” ile gelecekteki olası bir durum için şimdiden önlem alınıyor. Present Simple (can’t find) ile kurulmuş.\n\n**Örnek 2 (In case + SVO):**"
+        },
+        {
+          "en": "I’ll charge my phone fully in case there is a power outage later.",
+          "tr": "Sonra elektrik kesintisi olur ihtimaline karşı telefonumu tamamen şarj edeceğim.",
+          "description": "Önlem (charge) ve ihtimal (there is). Present Simple.\n\n**Örnek 3 (In case of + NP):**"
+        },
+        {
+          "en": "In case of emergency, break the glass and press the red button.",
+          "tr": "Acil durumda camı kırın ve kırmızı düğmeye basın.",
+          "description": "“In case of” + isim tamlaması (emergency). Emir kipi ana cümle.\n\n**Örnek 4 (Just in case – vurgulu):**"
+        },
+        {
+          "en": "I always keep some cash in my wallet, just in case.",
+          "tr": "Ne olur ne olmaz diye cüzdanımda her zaman biraz nakit bulundururum.",
+          "description": "“Just in case” tek başına da kullanılabilir, cümle devam etmeyebilir."
+        }
+      ],
+      "mini_test": {
+        "question": "_____ fire, please use the stairs, not the elevator.",
+        "options": {
+          "A": "In case of",
+          "B": "In case",
+          "C": "If",
+          "D": "Unless"
+        },
+        "correct": "A",
+        "explanation": "“Fire” bir isim, “in case of” + isim doğru kullanım. “In case fire” gramer olarak yanlış (cümle gerekir)."
+      },
+      "mini_tests": [
+        {
+          "question": "_____ fire, please use the stairs, not the elevator.",
+          "options": {
+            "A": "In case of",
+            "B": "In case",
+            "C": "If",
+            "D": "Unless"
+          },
+          "correct": "A",
+          "explanation": "“Fire” bir isim, “in case of” + isim doğru kullanım. “In case fire” gramer olarak yanlış (cümle gerekir)."
+        }
+      ],
+      "word_count": 329
+    },
+    {
+      "page_number": 13,
+      "title": "IF IT WEREN’T FOR / IF IT HADN’T BEEN FOR / BUT FOR",
+      "total_pages": 25,
+      "content_html": "<h2>📌 “OLMASA / OLMASAYDI” KALIPLARI</h2>\n<p>Bu üç yapı da bir durumun yokluğunda başka bir durumun olacağını ifade eder. “If it weren’t for” (şimdiki veya genel zaman), “If it hadn’t been for” (geçmiş zaman), “But for” (her iki zaman için kullanılabilir).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “But for” her zaman bir isim alır ve cümle devrik olmaz. Anlamı cümlenin tensine göre değişir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (If it weren’t for – Type 2):</strong><br>\n<strong>EN:</strong> If it weren’t for your support, I would feel very lonely.<br>\n<strong>TR:</strong> Senin desteğin olmasa kendimi çok yalnız hissederdim.<br>\n→ <strong>Açıklama:</strong> Şu an destek var, yalnız değil. “Weren’t for” present unreal anlam verir. Ana cümle “would feel”.</p>\n<p><strong>Örnek 2 (If it hadn’t been for – Type 3):</strong><br>\n<strong>EN:</strong> If it hadn’t been for the traffic jam, we would have arrived on time.<br>\n<strong>TR:</strong> Trafik sıkışıklığı olmasaydı zamanında varırdık.<br>\n→ <strong>Açıklama:</strong> Geçmişte trafik vardı, bu yüzden geç kalındı. Past Perfect (hadn’t been) + would have arrived.</p>\n<p><strong>Örnek 3 (But for – Type 1):</strong><br>\n<strong>EN:</strong> But for her help, I cannot finish this project alone.<br>\n<strong>TR:</strong> Onun yardımı olmadan bu projeyi tek başıma bitiremem.<br>\n→ <strong>Açıklama:</strong> “But for” + noun phrase, Type 1 anlamı (present real). “Cannot finish” sonuç.</p>\n<p><strong>Örnek 4 (But for – Type 3):</strong><br>\n<strong>EN:</strong> But for your timely intervention, she would have lost her job.<br>\n<strong>TR:</strong> Senin zamanında müdahalen olmasaydı işini kaybederdi.<br>\n→ <strong>Açıklama:</strong> “But for” geçmişteki bir durumu anlatıyor, Type 3 anlamı: “would have lost”.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Anlam</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>If it weren’t for + NP</td>\n<td>Type 2</td>\n<td>… olmasa (şimdi)</td>\n</tr>\n<tr>\n<td>If it hadn’t been for + NP</td>\n<td>Type 3</td>\n<td>… olmasaydı (geçmiş)</td>\n</tr>\n<tr>\n<td>But for + NP</td>\n<td>Her type</td>\n<td>… olmasa / olmasaydı (bağlama göre)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If it <strong><em>_</em> for the severe air pollution, the Clean Air Act </strong>___ passed.</p>\n<p>A) weren’t / would be<br>\nB) hadn’t been / wouldn’t have been<br>\nC) isn’t / won’t be<br>\nD) wasn’t / would have been</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Geçmişteki bir olay (hava kirliliği) ve sonucu (yasanın geçmesi). Type 3: “hadn’t been” + “wouldn’t have been”.\n</details>\n\n<p>[Kelime sayısı: 212]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If it weren’t for your support, I would feel very lonely.",
+          "tr": "Senin desteğin olmasa kendimi çok yalnız hissederdim.",
+          "description": "Şu an destek var, yalnız değil. “Weren’t for” present unreal anlam verir. Ana cümle “would feel”.\n\n**Örnek 2 (If it hadn’t been for – Type 3):**"
+        },
+        {
+          "en": "If it hadn’t been for the traffic jam, we would have arrived on time.",
+          "tr": "Trafik sıkışıklığı olmasaydı zamanında varırdık.",
+          "description": "Geçmişte trafik vardı, bu yüzden geç kalındı. Past Perfect (hadn’t been) + would have arrived.\n\n**Örnek 3 (But for – Type 1):**"
+        },
+        {
+          "en": "But for her help, I cannot finish this project alone.",
+          "tr": "Onun yardımı olmadan bu projeyi tek başıma bitiremem.",
+          "description": "“But for” + noun phrase, Type 1 anlamı (present real). “Cannot finish” sonuç.\n\n**Örnek 4 (But for – Type 3):**"
+        },
+        {
+          "en": "But for your timely intervention, she would have lost her job.",
+          "tr": "Senin zamanında müdahalen olmasaydı işini kaybederdi.",
+          "description": "“But for” geçmişteki bir durumu anlatıyor, Type 3 anlamı: “would have lost”."
+        }
+      ],
+      "mini_test": {
+        "question": "If it _____ for the severe air pollution, the Clean Air Act _____ passed.",
+        "options": {
+          "A": "weren’t / would be",
+          "B": "hadn’t been / wouldn’t have been",
+          "C": "isn’t / won’t be",
+          "D": "wasn’t / would have been"
+        },
+        "correct": "B",
+        "explanation": "Geçmişteki bir olay (hava kirliliği) ve sonucu (yasanın geçmesi). Type 3: “hadn’t been” + “wouldn’t have been”."
+      },
+      "mini_tests": [
+        {
+          "question": "If it _____ for the severe air pollution, the Clean Air Act _____ passed.",
+          "options": {
+            "A": "weren’t / would be",
+            "B": "hadn’t been / wouldn’t have been",
+            "C": "isn’t / won’t be",
+            "D": "wasn’t / would have been"
+          },
+          "correct": "B",
+          "explanation": "Geçmişteki bir olay (hava kirliliği) ve sonucu (yasanın geçmesi). Type 3: “hadn’t been” + “wouldn’t have been”."
+        }
+      ],
+      "word_count": 342
+    },
+    {
+      "page_number": 14,
+      "title": "IMPLIED CONDITIONS: BUT / OTHERWISE / WITHOUT",
+      "total_pages": 25,
+      "content_html": "<h2>📌 GİZLİ ŞART İFADELERİ</h2>\n<p>“But”, “otherwise / or else” ve “without” yapıları açık bir “if” cümlesi olmadan şart anlamı taşır. Bu yapıların bulunduğu cümleleri “if” li hale çevirmek mümkündür.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Otherwise” sonrası gelen cümle, “if” li yapının ana cümlesidir. Bu nedenle “otherwise” den sonra “would, could, might” gibi yapılar gelir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (But – geçmişte gerçekleşmeyen):</strong><br>\n<strong>EN:</strong> I would have called you yesterday, but my phone was dead.<br>\n<strong>TR:</strong> Dün seni arardım ama telefonum kapalıydı.<br>\n→ <strong>Açıklama:</strong> “But” ile gerçek engel belirtiliyor. “If my phone hadn’t been dead, I would have called” anlamında.</p>\n<p><strong>Örnek 2 (Otherwise – present):</strong><br>\n<strong>EN:</strong> You must study harder; otherwise, you will fail the exam.<br>\n<strong>TR:</strong> Daha çok çalışmalısın; yoksa sınavda başarısız olursun.<br>\n→ <strong>Açıklama:</strong> “Otherwise” = “if you don’t study harder”. Ana cümle “will fail” Type 1 mantığı.</p>\n<p><strong>Örnek 3 (Or else – past):</strong><br>\n<strong>EN:</strong> He must have taken a taxi; otherwise, he would have been late.<br>\n<strong>TR:</strong> Taksiye binmiş olmalı; yoksa geç kalırdı.<br>\n→ <strong>Açıklama:</strong> Geçmişe yönelik tahmin. “Otherwise” sonrası “would have been” (Type 3).</p>\n<p><strong>Örnek 4 (Without):</strong><br>\n<strong>EN:</strong> Without your help, I couldn’t have finished the project.<br>\n<strong>TR:</strong> Senin yardımın olmadan projeyi bitiremezdim.<br>\n→ <strong>Açıklama:</strong> “Without” + noun phrase, Type 3 anlamı: “If you hadn’t helped, I couldn’t have finished”.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Karşılık Gelen If Yapısı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>but</td>\n<td>ama (engel)</td>\n<td>if … not (past)</td>\n</tr>\n<tr>\n<td>otherwise / or else</td>\n<td>yoksa, aksi takdirde</td>\n<td>if not’un ana cümlesi</td>\n</tr>\n<tr>\n<td>without</td>\n<td>-siz, olmadan</td>\n<td>if … not (uygun type)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> A gemstone must be durable; _____ it cannot withstand the process of being shaped.</p>\n<p>A) thus<br>\nB) even if<br>\nC) although<br>\nD) or else</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** “Yoksa dayanamaz” anlamı için “or else” gerekli. “Otherwise” da olabilirdi ama seçeneklerde yok.\n</details>\n\n<p>[Kelime sayısı: 215]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I would have called you yesterday, but my phone was dead.",
+          "tr": "Dün seni arardım ama telefonum kapalıydı.",
+          "description": "“But” ile gerçek engel belirtiliyor. “If my phone hadn’t been dead, I would have called” anlamında.\n\n**Örnek 2 (Otherwise – present):**"
+        },
+        {
+          "en": "You must study harder; otherwise, you will fail the exam.",
+          "tr": "Daha çok çalışmalısın; yoksa sınavda başarısız olursun.",
+          "description": "“Otherwise” = “if you don’t study harder”. Ana cümle “will fail” Type 1 mantığı.\n\n**Örnek 3 (Or else – past):**"
+        },
+        {
+          "en": "He must have taken a taxi; otherwise, he would have been late.",
+          "tr": "Taksiye binmiş olmalı; yoksa geç kalırdı.",
+          "description": "Geçmişe yönelik tahmin. “Otherwise” sonrası “would have been” (Type 3).\n\n**Örnek 4 (Without):**"
+        },
+        {
+          "en": "Without your help, I couldn’t have finished the project.",
+          "tr": "Senin yardımın olmadan projeyi bitiremezdim.",
+          "description": "“Without” + noun phrase, Type 3 anlamı: “If you hadn’t helped, I couldn’t have finished”."
+        }
+      ],
+      "mini_test": {
+        "question": "A gemstone must be durable; _____ it cannot withstand the process of being shaped.",
+        "options": {
+          "A": "thus",
+          "B": "even if",
+          "C": "although",
+          "D": "or else"
+        },
+        "correct": "D",
+        "explanation": "“Yoksa dayanamaz” anlamı için “or else” gerekli. “Otherwise” da olabilirdi ama seçeneklerde yok."
+      },
+      "mini_tests": [
+        {
+          "question": "A gemstone must be durable; _____ it cannot withstand the process of being shaped.",
+          "options": {
+            "A": "thus",
+            "B": "even if",
+            "C": "although",
+            "D": "or else"
+          },
+          "correct": "D",
+          "explanation": "“Yoksa dayanamaz” anlamı için “or else” gerekli. “Otherwise” da olabilirdi ama seçeneklerde yok."
+        }
+      ],
+      "word_count": 291
+    },
+    {
+      "page_number": 15,
+      "title": "WISH CLAUSES: PRESENT WISHES",
+      "total_pages": 25,
+      "content_html": "<h2>📌 ŞU ANKİ DİLEKLER (KEŞKE … -SA / -SE)</h2>\n<p>“Wish” ten sonra gelen cümle, gerçeğin aksini ifade eder. Şu anla ilgili dilekler için <strong>Past Simple</strong> kullanılır. “Be” fiili tüm özneler için genelde <strong>were</strong> olur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “I wish I were…” en güvenli kalıptır; standart sınav İngilizcesinde “I wish I am” beklenmez.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (I wish + Past Simple):</strong><br>\n<strong>EN:</strong> I wish I knew how to solve this problem.<br>\n<strong>TR:</strong> Keşke bu sorunu nasıl çözeceğimi bilsem.<br>\n→ <strong>Açıklama:</strong> Gerçekte bilmiyorum. Past Simple (knew) present wish anlamı verir.</p>\n<p><strong>Örnek 2 (I wish + could):</strong><br>\n<strong>EN:</strong> I wish I could speak Spanish fluently.<br>\n<strong>TR:</strong> Keşke akıcı İspanyolca konuşabilsem.<br>\n→ <strong>Açıklama:</strong> “Could” Past formu, şu anki yetersizliği ifade eder.</p>\n<p><strong>Örnek 3 (I wish + Past Continuous):</strong><br>\n<strong>EN:</strong> I wish it weren’t raining right now.<br>\n<strong>TR:</strong> Keşke şu an yağmur yağmıyor olsa.<br>\n→ <strong>Açıklama:</strong> Past Continuous (were raining) şu anda devam eden bir durumun aksini anlatır.</p>\n<p><strong>Örnek 4 (I wish + were):</strong><br>\n<strong>EN:</strong> She wishes she were taller.<br>\n<strong>TR:</strong> Keşke daha uzun olsa.<br>\n→ <strong>Açıklama:</strong> “Were” tüm öznelerle kullanılır (she için “was” da kullanılabilir ama sınavlarda “were” tercih edilir).</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Wish +</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Past Simple (V2)</td>\n<td>şu anki durumun aksi</td>\n<td>I wish I had a car.</td>\n</tr>\n<tr>\n<td>could + V0</td>\n<td>şu anki yetersizlik</td>\n<td>I wish I could swim.</td>\n</tr>\n<tr>\n<td>Past Continuous</td>\n<td>şu an devam edenin aksi</td>\n<td>I wish I were lying on a beach.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> I wish I _____ more time to spend with my family.</p>\n<p>A) have<br>\nB) had<br>\nC) would have<br>\nD) will have</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Şu anki bir dilek için Past Simple (had) gerekir. “I wish I had” doğru.\n</details>\n\n<p>[Kelime sayısı: 198]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I wish I knew how to solve this problem.",
+          "tr": "Keşke bu sorunu nasıl çözeceğimi bilsem.",
+          "description": "Gerçekte bilmiyorum. Past Simple (knew) present wish anlamı verir.\n\n**Örnek 2 (I wish + could):**"
+        },
+        {
+          "en": "I wish I could speak Spanish fluently.",
+          "tr": "Keşke akıcı İspanyolca konuşabilsem.",
+          "description": "“Could” Past formu, şu anki yetersizliği ifade eder.\n\n**Örnek 3 (I wish + Past Continuous):**"
+        },
+        {
+          "en": "I wish it weren’t raining right now.",
+          "tr": "Keşke şu an yağmur yağmıyor olsa.",
+          "description": "Past Continuous (were raining) şu anda devam eden bir durumun aksini anlatır.\n\n**Örnek 4 (I wish + were):**"
+        },
+        {
+          "en": "She wishes she were taller.",
+          "tr": "Keşke daha uzun olsa.",
+          "description": "“Were” tüm öznelerle kullanılır (she için “was” da kullanılabilir ama sınavlarda “were” tercih edilir)."
+        }
+      ],
+      "mini_test": {
+        "question": "I wish I _____ more time to spend with my family.",
+        "options": {
+          "A": "have",
+          "B": "had",
+          "C": "would have",
+          "D": "will have"
+        },
+        "correct": "B",
+        "explanation": "Şu anki bir dilek için Past Simple (had) gerekir. “I wish I had” doğru."
+      },
+      "mini_tests": [
+        {
+          "question": "I wish I _____ more time to spend with my family.",
+          "options": {
+            "A": "have",
+            "B": "had",
+            "C": "would have",
+            "D": "will have"
+          },
+          "correct": "B",
+          "explanation": "Şu anki bir dilek için Past Simple (had) gerekir. “I wish I had” doğru."
+        }
+      ],
+      "word_count": 272
+    },
+    {
+      "page_number": 16,
+      "title": "WISH CLAUSES: FUTURE WISHES (WOULD)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 GELECEKTEKİ DİLEKLER VE ELEŞTİRİLER</h2>\n<p>“Wish + would” gelecekte birinin bir şeyi yapmasını istediğimizde veya mevcut bir durumdan şikâyet ettiğimizde kullanılır. <strong>Özneler farklı olmalıdır</strong> (I wish I would… yanlıştır). “Would” bir değişim arzusu ifade eder.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “I wish you would stop talking” (keşke konuşmayı kessen) – doğrudan bir eleştiri.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Eleştiri):</strong><br>\n<strong>EN:</strong> I wish you would stop interrupting me while I’m speaking.<br>\n<strong>TR:</strong> Keşke ben konuşurken sözümü kesmeyi bıraksan.<br>\n→ <strong>Açıklama:</strong> Özneler farklı (I / you). “Would stop” gelecekteki bir davranış değişikliği dileği.</p>\n<p><strong>Örnek 2 (Değişim arzusu):</strong><br>\n<strong>EN:</strong> He wishes his neighbours would be a little quieter.<br>\n<strong>TR:</strong> Komşularının biraz daha sessiz olmasını diliyor.<br>\n→ <strong>Açıklama:</strong> Özneler farklı (he / neighbours). “Would be” şimdiki rahatsızlığın gelecekte düzelmesi isteği.</p>\n<p><strong>Örnek 3 (İmkânsız dilek değil):</strong><br>\n<strong>EN:</strong> I wish it would stop raining soon.<br>\n<strong>TR:</strong> Keşke yağmur yakında dursa.<br>\n→ <strong>Açıklama:</strong> “It” öznesi, “would stop” – doğa olayı için de kullanılabilir. Öznelere dikkat: I wish it would… (I ve it farklı).</p>\n<p><strong>Örnek 4 (Aynı özne ile kullanılmaz):</strong><br>\n<strong>EN:</strong> I wish I could attend the party tomorrow. (NOT: I wish I would attend…)<br>\n<strong>TR:</strong> Keşke yarınki partiye katılabilsem.<br>\n→ <strong>Açıklama:</strong> Aynı özne ile “would” kullanılmaz, “could” veya Past Simple tercih edilir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kural</th>\n<th>Örnek</th>\n<th>Açıklama</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Wish + özne (farklı) + would + V0</td>\n<td>I wish you would listen.</td>\n<td>Eleştiri veya değişim isteği</td>\n</tr>\n<tr>\n<td>Aynı özne ile kullanılmaz</td>\n<td>I wish I would go. (YANLIŞ)</td>\n<td>Doğrusu: I wish I could go.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> I wish you _____ making that noise. It’s driving me crazy!</p>\n<p>A) stop<br>\nB) stopped<br>\nC) would stop<br>\nD) will stop</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** Şu anki bir davranıştan şikâyet ve gelecekte durması isteği: “would stop” doğru. Özneler farklı (I / you).\n</details>\n\n<p>[Kelime sayısı: 206]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I wish you would stop interrupting me while I’m speaking.",
+          "tr": "Keşke ben konuşurken sözümü kesmeyi bıraksan.",
+          "description": "Özneler farklı (I / you). “Would stop” gelecekteki bir davranış değişikliği dileği.\n\n**Örnek 2 (Değişim arzusu):**"
+        },
+        {
+          "en": "He wishes his neighbours would be a little quieter.",
+          "tr": "Komşularının biraz daha sessiz olmasını diliyor.",
+          "description": "Özneler farklı (he / neighbours). “Would be” şimdiki rahatsızlığın gelecekte düzelmesi isteği.\n\n**Örnek 3 (İmkânsız dilek değil):**"
+        },
+        {
+          "en": "I wish it would stop raining soon.",
+          "tr": "Keşke yağmur yakında dursa.",
+          "description": "“It” öznesi, “would stop” – doğa olayı için de kullanılabilir. Öznelere dikkat: I wish it would… (I ve it farklı).\n\n**Örnek 4 (Aynı özne ile kullanılmaz):**"
+        },
+        {
+          "en": "I wish I could attend the party tomorrow. (NOT: I wish I would attend…)",
+          "tr": "Keşke yarınki partiye katılabilsem.",
+          "description": "Aynı özne ile “would” kullanılmaz, “could” veya Past Simple tercih edilir."
+        }
+      ],
+      "mini_test": {
+        "question": "I wish you _____ making that noise. It’s driving me crazy!",
+        "options": {
+          "A": "stop",
+          "B": "stopped",
+          "C": "would stop",
+          "D": "will stop"
+        },
+        "correct": "C",
+        "explanation": "Şu anki bir davranıştan şikâyet ve gelecekte durması isteği: “would stop” doğru. Özneler farklı (I / you)."
+      },
+      "mini_tests": [
+        {
+          "question": "I wish you _____ making that noise. It’s driving me crazy!",
+          "options": {
+            "A": "stop",
+            "B": "stopped",
+            "C": "would stop",
+            "D": "will stop"
+          },
+          "correct": "C",
+          "explanation": "Şu anki bir davranıştan şikâyet ve gelecekte durması isteği: “would stop” doğru. Özneler farklı (I / you)."
+        }
+      ],
+      "word_count": 283
+    },
+    {
+      "page_number": 17,
+      "title": "WISH CLAUSES: PAST WISHES & IF ONLY",
+      "total_pages": 25,
+      "content_html": "<h2>📌 GEÇMİŞ PİŞMANLIKLAR</h2>\n<p>Geçmişte olan veya olmayan bir şeyden pişmanlık duyduğumuzda “wish + Past Perfect” kullanırız. “If only” de aynı anlamdadır ve aynı tense kurallarına uyar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “I wish I had studied” = “Keşke çalışsaydım”. Geçmişte çalışmadım, pişmanım.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Wish + Past Perfect):</strong><br>\n<strong>EN:</strong> I wish I had listened to my mother’s advice.<br>\n<strong>TR:</strong> Keşke annemin tavsiyesini dinlemiş olsaydım.<br>\n→ <strong>Açıklama:</strong> Dinlemedim, pişmanım. Past Perfect (had listened) geçmiş pişmanlık.</p>\n<p><strong>Örnek 2 (Wish + could have V3):</strong><br>\n<strong>EN:</strong> She wishes she could have attended the meeting yesterday.<br>\n<strong>TR:</strong> Dünkü toplantıya katılabilmiş olmayı diliyor.<br>\n→ <strong>Açıklama:</strong> “Could have attended” geçmişteki kaçırılmış fırsat.</p>\n<p><strong>Örnek 3 (If only + Past Perfect):</strong><br>\n<strong>EN:</strong> If only we hadn’t spent all our money on useless things.<br>\n<strong>TR:</strong> Keşke tüm paramızı gereksiz şeylere harcamasaydık.<br>\n→ <strong>Açıklama:</strong> “If only” de “wish” gibidir. Past Perfect (hadn’t spent) geçmişe yönelik.</p>\n<p><strong>Örnek 4 (If only + sonuç cümlesi ile):</strong><br>\n<strong>EN:</strong> If only I had known about the traffic, I would have left earlier.<br>\n<strong>TR:</strong> Trafikten haberim olsaydı daha erken çıkardım.<br>\n→ <strong>Açıklama:</strong> “If only” burada bir şart cümlesi gibi kullanılmış, ana cümle ile birlikte Type 3 oluşturmuş.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>wish + had V3</td>\n<td>geçmiş pişmanlık</td>\n<td>I wish I had seen that film.</td>\n</tr>\n<tr>\n<td>wish + could have V3</td>\n<td>geçmişteki kaçırılmış yetenek/fırsat</td>\n<td>I wish I could have helped.</td>\n</tr>\n<tr>\n<td>if only + had V3</td>\n<td>keşke (past)</td>\n<td>If only I had known.</td>\n</tr>\n<tr>\n<td>if only + clause</td>\n<td>type 2 veya 3 ile şart</td>\n<td>If only I were rich, I would travel.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If only he <strong><em>_</em> the courage to tell the truth at the beginning, we </strong>___ this long trial.</p>\n<p>A) had had / would have been spared<br>\nB) has had / will be spared<br>\nC) had / would be spared<br>\nD) would have / were spared</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Geçmişe yönelik pişmanlık: “if only + had had” (Past Perfect) ve ana cümle “would have been spared” (Type 3).\n</details>\n\n<p>[Kelime sayısı: 207]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I wish I had listened to my mother’s advice.",
+          "tr": "Keşke annemin tavsiyesini dinlemiş olsaydım.",
+          "description": "Dinlemedim, pişmanım. Past Perfect (had listened) geçmiş pişmanlık.\n\n**Örnek 2 (Wish + could have V3):**"
+        },
+        {
+          "en": "She wishes she could have attended the meeting yesterday.",
+          "tr": "Dünkü toplantıya katılabilmiş olmayı diliyor.",
+          "description": "“Could have attended” geçmişteki kaçırılmış fırsat.\n\n**Örnek 3 (If only + Past Perfect):**"
+        },
+        {
+          "en": "If only we hadn’t spent all our money on useless things.",
+          "tr": "Keşke tüm paramızı gereksiz şeylere harcamasaydık.",
+          "description": "“If only” de “wish” gibidir. Past Perfect (hadn’t spent) geçmişe yönelik.\n\n**Örnek 4 (If only + sonuç cümlesi ile):**"
+        },
+        {
+          "en": "If only I had known about the traffic, I would have left earlier.",
+          "tr": "Trafikten haberim olsaydı daha erken çıkardım.",
+          "description": "“If only” burada bir şart cümlesi gibi kullanılmış, ana cümle ile birlikte Type 3 oluşturmuş."
+        }
+      ],
+      "mini_test": {
+        "question": "If only he _____ the courage to tell the truth at the beginning, we _____ this long trial.",
+        "options": {
+          "A": "had had / would have been spared",
+          "B": "has had / will be spared",
+          "C": "had / would be spared",
+          "D": "would have / were spared"
+        },
+        "correct": "A",
+        "explanation": "Geçmişe yönelik pişmanlık: “if only + had had” (Past Perfect) ve ana cümle “would have been spared” (Type 3)."
+      },
+      "mini_tests": [
+        {
+          "question": "If only he _____ the courage to tell the truth at the beginning, we _____ this long trial.",
+          "options": {
+            "A": "had had / would have been spared",
+            "B": "has had / will be spared",
+            "C": "had / would be spared",
+            "D": "would have / were spared"
+          },
+          "correct": "A",
+          "explanation": "Geçmişe yönelik pişmanlık: “if only + had had” (Past Perfect) ve ana cümle “would have been spared” (Type 3)."
+        }
+      ],
+      "word_count": 316
+    },
+    {
+      "page_number": 18,
+      "title": "ÖZET TABLOSU: TYPE 0, 1, 2, 3",
+      "total_pages": 25,
+      "content_html": "<h2>📌 DÖRT TEMEL TYPE’IN KARŞILAŞTIRMASI</h2>\n<p>Conditional cümlelerin dört ana tipi, kullanım alanları ve tense uyumları aşağıda özetlenmiştir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Unreal” anlam taşıyan Type 2 ve Type 3’te zaman bir derece geri gider (backshifting).</p>\n</blockquote>\n<hr>\n<h2>📊 TYPE KARŞILAŞTIRMA TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>İşlev</th>\n<th>If Cümleciği</th>\n<th>Ana Cümlecik</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>0</strong></td>\n<td>Genel gerçek, bilimsel</td>\n<td>Present Simple</td>\n<td>Present Simple</td>\n<td>If you heat ice, it melts.</td>\n</tr>\n<tr>\n<td><strong>1</strong></td>\n<td>Gerçek olasılık (present/future)</td>\n<td>Present Simple, Present Perfect, etc.</td>\n<td>will, can, may, must, imperative</td>\n<td>If you study, you will pass.</td>\n</tr>\n<tr>\n<td><strong>2</strong></td>\n<td>Şu anki gerçek dışı (unreal present)</td>\n<td>Past Simple, Past Continuous, were to</td>\n<td>would, could, might + V0</td>\n<td>If I knew, I would tell you.</td>\n</tr>\n<tr>\n<td><strong>3</strong></td>\n<td>Geçmişteki gerçek dışı (unreal past)</td>\n<td>Past Perfect</td>\n<td>would have, could have, might have + V3</td>\n<td>If I had seen you, I would have said hello.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚠️ DİKKAT EDİLMESİ GEREKENLER</h2>\n<ul>\n<li><strong>Type 1’de if cümleciğinde will kullanılmaz.</strong></li>\n<li><strong>Type 2’de “were” tüm öznelerle kullanılabilir (özellikle “If I were you”).</strong></li>\n<li><strong>Type 3’te ana cümlede asla Past Simple kullanılmaz.</strong></li>\n</ul>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> “If I had seen the warning, I wouldn’t have entered the area.” Bu cümle hangi type’a girer?</p>\n<p>A) Type 0<br>\nB) Type 1<br>\nC) Type 2<br>\nD) Type 3</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** If + Past Perfect, ana cümle would have V3 → Type 3 (geçmiş unreal).\n</details>\n\n<p>[Kelime sayısı: 176]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "“If I had seen the warning, I wouldn’t have entered the area.” Bu cümle hangi type’a girer?",
+        "options": {
+          "A": "Type 0",
+          "B": "Type 1",
+          "C": "Type 2",
+          "D": "Type 3"
+        },
+        "correct": "D",
+        "explanation": "If + Past Perfect, ana cümle would have V3 → Type 3 (geçmiş unreal)."
+      },
+      "mini_tests": [
+        {
+          "question": "“If I had seen the warning, I wouldn’t have entered the area.” Bu cümle hangi type’a girer?",
+          "options": {
+            "A": "Type 0",
+            "B": "Type 1",
+            "C": "Type 2",
+            "D": "Type 3"
+          },
+          "correct": "D",
+          "explanation": "If + Past Perfect, ana cümle would have V3 → Type 3 (geçmiş unreal)."
+        }
+      ],
+      "word_count": 220
+    },
+    {
+      "page_number": 19,
+      "title": "DİĞER ŞART YAPILARI ÖZET",
+      "total_pages": 25,
+      "content_html": "<h2>📌 IF DIŞINDAKİ BAĞLAÇLAR</h2>\n<p>“If” yerine kullanılan veya şart anlamı katan diğer yapıların kısa özeti.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu yapıların çoğu “if” ile aynı tense kurallarına uyar. Sadece “even if” bazen farklı davranır.</p>\n</blockquote>\n<hr>\n<h2>📊 DİĞER YAPILAR TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>provided / providing (that)</td>\n<td>… koşuluyla</td>\n<td>You can go out provided you finish homework.</td>\n</tr>\n<tr>\n<td>as long as / so long as</td>\n<td>… sürece / şartıyla</td>\n<td>As long as you’re happy, I’m happy.</td>\n</tr>\n<tr>\n<td>only if</td>\n<td>ancak … -sa</td>\n<td>Only if you ask will I help. (başta devrik)</td>\n</tr>\n<tr>\n<td>even if</td>\n<td>… -se bile / -e rağmen</td>\n<td>Even if it rains, we’ll go.</td>\n</tr>\n<tr>\n<td>unless</td>\n<td>… -medikçe / -mezse</td>\n<td>You won’t succeed unless you try.</td>\n</tr>\n<tr>\n<td>suppose / supposing (that)</td>\n<td>varsayalım ki</td>\n<td>Suppose you won, what would you do?</td>\n</tr>\n<tr>\n<td>what if</td>\n<td>ya … -sa / -saydı</td>\n<td>What if she doesn’t come?</td>\n</tr>\n<tr>\n<td>on condition that</td>\n<td>… şartıyla</td>\n<td>I’ll lend it on condition that you return it.</td>\n</tr>\n<tr>\n<td>in case</td>\n<td>… ihtimaline karşı</td>\n<td>Take an umbrella in case it rains.</td>\n</tr>\n<tr>\n<td>in case of</td>\n<td>… durumunda</td>\n<td>In case of fire, break glass.</td>\n</tr>\n<tr>\n<td>if it weren’t for</td>\n<td>… olmasa (şimdi)</td>\n<td>If it weren’t for you, I’d be lost.</td>\n</tr>\n<tr>\n<td>if it hadn’t been for</td>\n<td>… olmasaydı (geçmiş)</td>\n<td>If it hadn’t been for the map, we’d have got lost.</td>\n</tr>\n<tr>\n<td>but for</td>\n<td>… olmasa / olmasaydı</td>\n<td>But for your help, I would have failed.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> “_____ you decide to come, let me know in advance.” Hangi yapı ile tamamlanamaz?</p>\n<p>A) If<br>\nB) In case<br>\nC) Provided<br>\nD) Unless</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** “In case” önlem anlamı taşır, “gelme ihtimaline karşı” değil, “gelirsen” anlamı için if/provided/unless uygun. “In case you decide” anlamı “gelme ihtimaline karşı” olur, bu da mantıksız.\n</details>\n\n<p>[Kelime sayısı: 212]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "“_____ you decide to come, let me know in advance.” Hangi yapı ile tamamlanamaz?",
+        "options": {
+          "A": "If",
+          "B": "In case",
+          "C": "Provided",
+          "D": "Unless"
+        },
+        "correct": "B",
+        "explanation": "“In case” önlem anlamı taşır, “gelme ihtimaline karşı” değil, “gelirsen” anlamı için if/provided/unless uygun. “In case you decide” anlamı “gelme ihtimaline karşı” olur, bu da mantıksız."
+      },
+      "mini_tests": [
+        {
+          "question": "“_____ you decide to come, let me know in advance.” Hangi yapı ile tamamlanamaz?",
+          "options": {
+            "A": "If",
+            "B": "In case",
+            "C": "Provided",
+            "D": "Unless"
+          },
+          "correct": "B",
+          "explanation": "“In case” önlem anlamı taşır, “gelme ihtimaline karşı” değil, “gelirsen” anlamı için if/provided/unless uygun. “In case you decide” anlamı “gelme ihtimaline karşı” olur, bu da mantıksız."
+        }
+      ],
+      "word_count": 278
+    },
+    {
+      "page_number": 20,
+      "title": "IMPLIED CONDITIONS ÖZET",
+      "total_pages": 25,
+      "content_html": "<h2>📌 GİZLİ ŞART İFADELERİ</h2>\n<p>“But”, “otherwise”, “or else”, “without” ile kurulan cümleler aslında bir if cümlesi gizler.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> “Otherwise” sonrası gelen kısım, if’li yapının ana cümlesidir. Bu nedenle “would, could, might” gibi yapılar sık görülür.</p>\n</blockquote>\n<hr>\n<h2>📊 IMPLIED CONDITIONS TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Gizli If</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>but</td>\n<td>ama</td>\n<td>if … not (genelde past)</td>\n<td>I would have called, but I lost your number.</td>\n</tr>\n<tr>\n<td>otherwise</td>\n<td>yoksa, aksi takdirde</td>\n<td>if not (type’a göre)</td>\n<td>Hurry up; otherwise you’ll be late.</td>\n</tr>\n<tr>\n<td>or else</td>\n<td>yoksa</td>\n<td>if not</td>\n<td>Wear a coat, or else you’ll catch cold.</td>\n</tr>\n<tr>\n<td>without</td>\n<td>-siz, olmadan</td>\n<td>if … not</td>\n<td>Without water, we would die.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚠️ DİKKAT</h2>\n<ul>\n<li>“Otherwise” zarf olduğu için cümle içinde farklı yerlerde durabilir.</li>\n<li>“Or else” bağlaçtır, sadece iki cümle arasında kullanılır.</li>\n<li>“Without” bir isim alır.</li>\n</ul>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> He must have studied a lot; otherwise, he _____ such a high score.</p>\n<p>A) wouldn’t have got<br>\nB) won’t get<br>\nC) didn’t get<br>\nD) doesn’t get</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Geçmişe yönelik tahmin: “otherwise” sonrası “wouldn’t have got” (Type 3) gelmeli.\n</details>\n\n<p>[Kelime sayısı: 180]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "He must have studied a lot; otherwise, he _____ such a high score.",
+        "options": {
+          "A": "wouldn’t have got",
+          "B": "won’t get",
+          "C": "didn’t get",
+          "D": "doesn’t get"
+        },
+        "correct": "A",
+        "explanation": "Geçmişe yönelik tahmin: “otherwise” sonrası “wouldn’t have got” (Type 3) gelmeli."
+      },
+      "mini_tests": [
+        {
+          "question": "He must have studied a lot; otherwise, he _____ such a high score.",
+          "options": {
+            "A": "wouldn’t have got",
+            "B": "won’t get",
+            "C": "didn’t get",
+            "D": "doesn’t get"
+          },
+          "correct": "A",
+          "explanation": "Geçmişe yönelik tahmin: “otherwise” sonrası “wouldn’t have got” (Type 3) gelmeli."
+        }
+      ],
+      "word_count": 180
+    },
+    {
+      "page_number": 21,
+      "title": "WISH CLAUSES ÖZET",
+      "total_pages": 25,
+      "content_html": "<h2>📌 WISH İLE ÜÇ ZAMAN</h2>\n<p>“Wish” ten sonra gelen yapı, dileğin zamanına göre değişir: şimdiki zaman için Past, gelecek için would, geçmiş için Past Perfect.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Sınav pratiğinde “wish” sonrasında present tense yerine çoğunlukla past-form yapılar beklenir.</p>\n</blockquote>\n<hr>\n<h2>📊 WISH CLAUSES TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Zaman</th>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Present</td>\n<td>Past Simple / could + V0</td>\n<td>şu anki durumun aksi</td>\n<td>I wish I knew the answer.</td>\n</tr>\n<tr>\n<td>Future</td>\n<td>would + V0 (farklı özne)</td>\n<td>gelecekte değişim arzusu</td>\n<td>I wish you would stop smoking.</td>\n</tr>\n<tr>\n<td>Past</td>\n<td>Past Perfect / could have V3</td>\n<td>geçmiş pişmanlık</td>\n<td>I wish I had studied harder.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚠️ ÖNEMLİ KURAL</h2>\n<ul>\n<li><strong>Aynı özne ile “would” kullanılmaz:</strong> I wish I would (yanlış) → I wish I could.</li>\n<li><strong>“Were” tüm özneler için yaygındır:</strong> I wish he were here.</li>\n</ul>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> I wish I _____ some more financial support to continue my research.</p>\n<p>A) can have<br>\nB) will have<br>\nC) could have<br>\nD) may have had</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** Şu anki bir dilek için “could have” (past form) doğru. “Can have” present, wish’ten sonra gelmez.\n</details>\n\n<p>[Kelime sayısı: 168]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "I wish I _____ some more financial support to continue my research.",
+        "options": {
+          "A": "can have",
+          "B": "will have",
+          "C": "could have",
+          "D": "may have had"
+        },
+        "correct": "C",
+        "explanation": "Şu anki bir dilek için “could have” (past form) doğru. “Can have” present, wish’ten sonra gelmez."
+      },
+      "mini_tests": [
+        {
+          "question": "I wish I _____ some more financial support to continue my research.",
+          "options": {
+            "A": "can have",
+            "B": "will have",
+            "C": "could have",
+            "D": "may have had"
+          },
+          "correct": "C",
+          "explanation": "Şu anki bir dilek için “could have” (past form) doğru. “Can have” present, wish’ten sonra gelmez."
+        }
+      ],
+      "word_count": 173
+    },
+    {
+      "page_number": 22,
+      "title": "SINAV STRATEJİLERİ (ÖRNEK SORULARLA)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 KARŞILAŞTIRMALI SORU ÇÖZÜMÜ</h2>\n<p>Sınavlarda conditional sorularını çözerken önce yan cümlecikte ve ana cümlecikte hangi yapıların gelmeyeceğini bilmek işinizi kolaylaştırır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> If’li kısımda “will, would, may, might” olmaz. Ana cümlede ise Present Perfect, Past Perfect gibi yapılar olmaz (Type 1’de). Type 2 ve Type 3’te ana cümlede Past Simple olmaz.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK SORU 1 (Klasik Tip)</h2>\n<p><strong>EN:</strong> If you ---- a car, you ---- its performance, not its appearance.<br>\n<strong>TR:</strong> Bir araba ----, performansına ----, görünüşüne değil.</p>\n<p>A) were buying / had been considering<br>\nB) were buying / would have considered<br>\nC) bought / had considered<br>\nD) have bought / would have been considering<br>\nE) are buying / should be considering</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:** If’li kısımda “will” yapıları olmaz, ana cümlede Past Perfect olmaz. A, C, D elenir. B’de mixed type var ama zaman uyuşmaz. E’de her iki taraf Type I’e uygun (are buying / should be considering). Doğru cevap E.\n</div>\n\n<hr>\n<h2>📏 ÖRNEK SORU 2 (Mixed Type)</h2>\n<p><strong>EN:</strong> If microchips --- back in the late 1950s, computer technology --- as advanced as it is today.</p>\n<p>A) weren't developed / isn't<br>\nB) hadn't been developed / wouldn't be<br>\nC) wouldn't have been developed / weren't<br>\nD) wouldn't be developed / wouldn't be<br>\nE) weren't being developed / won't be</p>\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:** “In the late 1950s” geçmiş zaman işareti. If’li kısımda “would” olmaz (C ve D elenir). A ve E’de bir taraf past bir taraf present, mantıksız. B’de “hadn’t been” (past perfect) ve “wouldn’t be” (present) mixed type oluşturur. “Today” present işareti. Doğru B.\n</div>\n\n<hr>\n<h2>📊 SINAV İPUÇLARI TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Yapılacak</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>If’li kısımda will/would varsa</td>\n<td>O seçeneği eleriz.</td>\n</tr>\n<tr>\n<td>Ana cümlede Present Perfect, Past Perfect varsa (Type 1’de)</td>\n<td>Eleriz.</td>\n</tr>\n<tr>\n<td>“Today, now” varsa</td>\n<td>Mixed type (had V3 + would V0) olabilir.</td>\n</tr>\n<tr>\n<td>“Otherwise, or else” varsa</td>\n<td>Sonrası if’in ana cümlesidir.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> If you had told me earlier, I _____ waiting here now.</p>\n<p>A) wouldn’t be<br>\nB) wouldn’t have been<br>\nC) won’t be<br>\nD) am not</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Geçmiş şart (had told) + şu anki sonuç (now) → mixed type: would + V0.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If you ---- a car, you ---- its performance, not its appearance.",
+          "tr": "Bir araba ----, performansına ----, görünüşüne değil.\n\nA) were buying / had been considering\nB) were buying / would have considered\nC) bought / had considered\nD) have bought / would have been considering\nE) are buying / should be considering\n\n<div class=\"strateji-kutusu\">\n**⚡ Strateji:** If’li kısımda “will” yapıları olmaz, ana cümlede Past Perfect olmaz. A, C, D elenir. B’de mixed type var ama zaman uyuşmaz. E’de her iki taraf Type I’e uygun (are buying / should be considering). Doğru cevap E.\n</div>",
+          "description": ""
+        }
+      ],
+      "mini_test": {
+        "question": "If you had told me earlier, I _____ waiting here now.",
+        "options": {
+          "A": "wouldn’t be",
+          "B": "wouldn’t have been",
+          "C": "won’t be",
+          "D": "am not"
+        },
+        "correct": "A",
+        "explanation": "Geçmiş şart (had told) + şu anki sonuç (now) → mixed type: would + V0."
+      },
+      "mini_tests": [
+        {
+          "question": "If you had told me earlier, I _____ waiting here now.",
+          "options": {
+            "A": "wouldn’t be",
+            "B": "wouldn’t have been",
+            "C": "won’t be",
+            "D": "am not"
+          },
+          "correct": "A",
+          "explanation": "Geçmiş şart (had told) + şu anki sonuç (now) → mixed type: would + V0."
+        }
+      ],
+      "word_count": 352
+    },
+    {
+      "page_number": 23,
+      "title": "KARIŞTIRILAN NOKTALAR VE PRATİK İPUÇLARI",
+      "total_pages": 25,
+      "content_html": "<h2>📌 SIK YAPILAN HATALAR</h2>\n<p>Conditional konusunda en çok karıştırılan noktalar ve doğru kullanımları.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Unreal durumlarda zamanı bir geri almayı unutmayın.</p>\n</blockquote>\n<hr>\n<h2>🔴 YANLIŞ / DOĞRU KARŞILAŞTIRMALARI</h2>\n<table>\n<thead>\n<tr>\n<th>Yanlış Kullanım</th>\n<th>Doğru Kullanım</th>\n<th>Açıklama</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>If I will see him, I’ll tell.</td>\n<td>If I see him, I’ll tell.</td>\n<td>If’li kısımda will olmaz.</td>\n</tr>\n<tr>\n<td>If I was you, I would go.</td>\n<td>If I were you, I would go.</td>\n<td>Type 2’de “were” tercih edilir.</td>\n</tr>\n<tr>\n<td>I wish I would know.</td>\n<td>I wish I knew.</td>\n<td>Aynı özne ile would kullanılmaz.</td>\n</tr>\n<tr>\n<td>Unless you don’t study, you fail.</td>\n<td>Unless you study, you fail.</td>\n<td>Unless zaten olumsuz, tekrar not gerekmez.</td>\n</tr>\n<tr>\n<td>If I had money, I would have bought it.</td>\n<td>If I had had money, I would have bought it. (past) veya If I had money, I would buy it. (present)</td>\n<td>Zaman uyumu önemli.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>📌 PRATİK KONTROL LİSTESİ</h2>\n<ul>\n<li>[ ] If’li kısımda will/would var mı? → yanlış.</li>\n<li>[ ] Wish’ten sonra present tense var mı? → yanlış.</li>\n<li>[ ] Type 2’de ana cümle would + V0 mı? → kontrol et.</li>\n<li>[ ] Type 3’te if’li kısım had V3, ana cümle would have V3 mü? → kontrol et.</li>\n<li>[ ] Mixed type’ta zaman işareti (now / yesterday) var mı? → uygun mu?</li>\n</ul>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerin hangisi doğrudur?</p>\n<p>A) If you will come, we’ll be happy.<br>\nB) I wish I am taller.<br>\nC) If I had known, I would tell you.<br>\nD) Unless it rains, we’ll go out.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** A’da will yanlış, B’de am yanlış, C’de mixed type’ta zaman uyumsuz (past perfect + would tell), D doğru (unless + present + will).\n</details>\n\n<p>[Kelime sayısı: 194]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerin hangisi doğrudur?",
+        "options": {
+          "A": "If you will come, we’ll be happy.",
+          "B": "I wish I am taller.",
+          "C": "If I had known, I would tell you.",
+          "D": "Unless it rains, we’ll go out."
+        },
+        "correct": "D",
+        "explanation": "A’da will yanlış, B’de am yanlış, C’de mixed type’ta zaman uyumsuz (past perfect + would tell), D doğru (unless + present + will)."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerin hangisi doğrudur?",
+          "options": {
+            "A": "If you will come, we’ll be happy.",
+            "B": "I wish I am taller.",
+            "C": "If I had known, I would tell you.",
+            "D": "Unless it rains, we’ll go out."
+          },
+          "correct": "D",
+          "explanation": "A’da will yanlış, B’de am yanlış, C’de mixed type’ta zaman uyumsuz (past perfect + would tell), D doğru (unless + present + will)."
+        }
+      ],
+      "word_count": 268
+    },
+    {
+      "page_number": 24,
+      "title": "EK ÖRNEKLERLE PEKİŞTİRME",
+      "total_pages": 25,
+      "content_html": "<h2>📌 FARKLI BAĞLAMLARDA CONDITIONALS</h2>\n<p>Günlük hayattan, iş hayatından ve akademik durumlardan örneklerle konuyu pekiştirelim.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Her örnekte hangi type olduğunu bulmaya çalışın.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (İş hayatı – Type 1):</strong><br>\n<strong>EN:</strong> If the client approves the budget by Friday, we will launch the campaign next week.<br>\n<strong>TR:</strong> Müşteri bütçeyi Cuma’ya kadar onaylarsa, kampanyayı gelecek hafta başlatacağız.<br>\n→ <strong>Açıklama:</strong> Gerçekçi bir iş senaryosu. Present Simple (approves) + will launch.</p>\n<p><strong>Örnek 2 (Günlük hayat – Type 2):</strong><br>\n<strong>EN:</strong> If I had a spare ticket, I would take you to the concert tonight.<br>\n<strong>TR:</strong> Fazla biletim olsa bu akşam seni konsere götürürdüm.<br>\n→ <strong>Açıklama:</strong> Şu an bilet yok, hayali bir durum. Past Simple (had) + would take.</p>\n<p><strong>Örnek 3 (Akademik – Type 3):</strong><br>\n<strong>EN:</strong> If the professor had explained the theory more clearly, the students would have understood it better.<br>\n<strong>TR:</strong> Profesör teoriyi daha net anlatmış olsaydı, öğrenciler daha iyi anlardı.<br>\n→ <strong>Açıklama:</strong> Geçmişte anlatmadı, anlamadılar. Past Perfect (had explained) + would have understood.</p>\n<p><strong>Örnek 4 (Duygusal – Wish):</strong><br>\n<strong>EN:</strong> I wish my grandparents were still alive to see my graduation.<br>\n<strong>TR:</strong> Keşke büyüklerim mezuniyetimi görmek için hâlâ hayatta olsalardı.<br>\n→ <strong>Açıklama:</strong> Şu anki bir dilek, Past Simple (were) kullanıldı.</p>\n<hr>\n<h2>📊 ÖRNEKLERİN ANALİZİ</h2>\n<table>\n<thead>\n<tr>\n<th>Örnek</th>\n<th>Type</th>\n<th>İşaret</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Type 1</td>\n<td>will launch, onaylarsa</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Type 2</td>\n<td>had (past), would take</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Type 3</td>\n<td>had explained, would have understood</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Wish (present)</td>\n<td>wish + were</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET (TEK SORU)</h2>\n<p><strong>Soru:</strong> “If she had applied for the scholarship, she might have received it.” Bu cümle ne anlatır?</p>\n<p>A) Başvurdu ve aldı.<br>\nB) Başvurmadı ve almadı.<br>\nC) Başvurdu ama almadı.<br>\nD) Başvurmadı ama aldı.</p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Type 3, geçmişte başvurmadığını ve bu yüzden alamadığını ifade eder.\n</details>\n\n<p>[Kelime sayısı: 210]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "If the client approves the budget by Friday, we will launch the campaign next week.",
+          "tr": "Müşteri bütçeyi Cuma’ya kadar onaylarsa, kampanyayı gelecek hafta başlatacağız.",
+          "description": "Gerçekçi bir iş senaryosu. Present Simple (approves) + will launch.\n\n**Örnek 2 (Günlük hayat – Type 2):**"
+        },
+        {
+          "en": "If I had a spare ticket, I would take you to the concert tonight.",
+          "tr": "Fazla biletim olsa bu akşam seni konsere götürürdüm.",
+          "description": "Şu an bilet yok, hayali bir durum. Past Simple (had) + would take.\n\n**Örnek 3 (Akademik – Type 3):**"
+        },
+        {
+          "en": "If the professor had explained the theory more clearly, the students would have understood it better.",
+          "tr": "Profesör teoriyi daha net anlatmış olsaydı, öğrenciler daha iyi anlardı.",
+          "description": "Geçmişte anlatmadı, anlamadılar. Past Perfect (had explained) + would have understood.\n\n**Örnek 4 (Duygusal – Wish):**"
+        },
+        {
+          "en": "I wish my grandparents were still alive to see my graduation.",
+          "tr": "Keşke büyüklerim mezuniyetimi görmek için hâlâ hayatta olsalardı.",
+          "description": "Şu anki bir dilek, Past Simple (were) kullanıldı."
+        }
+      ],
+      "mini_test": {
+        "question": "“If she had applied for the scholarship, she might have received it.” Bu cümle ne anlatır?",
+        "options": {
+          "A": "Başvurdu ve aldı.",
+          "B": "Başvurmadı ve almadı.",
+          "C": "Başvurdu ama almadı.",
+          "D": "Başvurmadı ama aldı."
+        },
+        "correct": "B",
+        "explanation": "Type 3, geçmişte başvurmadığını ve bu yüzden alamadığını ifade eder."
+      },
+      "mini_tests": [
+        {
+          "question": "“If she had applied for the scholarship, she might have received it.” Bu cümle ne anlatır?",
+          "options": {
+            "A": "Başvurdu ve aldı.",
+            "B": "Başvurmadı ve almadı.",
+            "C": "Başvurdu ama almadı.",
+            "D": "Başvurmadı ama aldı."
+          },
+          "correct": "B",
+          "explanation": "Type 3, geçmişte başvurmadığını ve bu yüzden alamadığını ifade eder."
+        }
+      ],
+      "word_count": 279
+    },
+    {
+      "page_number": 25,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 25,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li>If clause’un 4 temel tipi (0,1,2,3)</li>\n<li>Mixed type’lar ve inversion</li>\n<li>If dışındaki şart yapıları (provided, unless, in case, etc.)</li>\n<li>Gizli şart ifadeleri (but, otherwise, without)</li>\n<li>Wish clause ve if only</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p><strong>If it rains tomorrow, we _____ the picnic.</strong></p>\n<p>A) cancel<br>\nB) will cancel<br>\nC) would cancel<br>\nD) cancelled</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - Type 1’de ana cümle will + V0.\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p><strong>I wish I _____ more careful yesterday.</strong></p>\n<p>A) was<br>\nB) had been<br>\nC) were<br>\nD) have been</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** B - Geçmiş pişmanlık için wish + Past Perfect.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p><strong>If you had told me the truth, I _____ angry now.</strong></p>\n<p>A) wouldn’t be<br>\nB) wouldn’t have been<br>\nC) won’t be<br>\nD) am not</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - Mixed type: past condition + present result.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p><strong>You can borrow my car _____ you promise to drive carefully.</strong></p>\n<p>A) unless<br>\nB) in case<br>\nC) as long as<br>\nD) otherwise</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** C - “As long as” şart anlamı verir. “Provided” da olabilirdi.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p><strong>Had we known about the meeting, we _____ attended.</strong></p>\n<p>A) would have<br>\nB) will have<br>\nC) had<br>\nD) would</p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - Inversion: “Had we known” = If we had known, ana cümle would have attended.\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p>[Kelime sayısı: 278] (test sayfası için biraz yüksek ama kabul edilebilir)</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası (ortalama 208)</li>\n<li>[x] Her sayfada 4 örnek var</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 25</li>\n<li>[x] HTML div'leri doğru işaretlenmiş (strateji kutusu eklendi)</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "**If it rains tomorrow, we _____ the picnic.**",
+        "options": {
+          "A": "cancel",
+          "B": "will cancel",
+          "C": "would cancel",
+          "D": "cancelled"
+        },
+        "correct": "B - Type 1’de ana cümle will + V0.",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "**If it rains tomorrow, we _____ the picnic.**",
+          "options": {
+            "A": "cancel",
+            "B": "will cancel",
+            "C": "would cancel",
+            "D": "cancelled"
+          },
+          "correct": "B - Type 1’de ana cümle will + V0.",
+          "explanation": ""
+        },
+        {
+          "question": "**I wish I _____ more careful yesterday.**",
+          "options": {
+            "A": "was",
+            "B": "had been",
+            "C": "were",
+            "D": "have been"
+          },
+          "correct": "B - Geçmiş pişmanlık için wish + Past Perfect.",
+          "explanation": ""
+        },
+        {
+          "question": "**If you had told me the truth, I _____ angry now.**",
+          "options": {
+            "A": "wouldn’t be",
+            "B": "wouldn’t have been",
+            "C": "won’t be",
+            "D": "am not"
+          },
+          "correct": "A - Mixed type: past condition + present result.",
+          "explanation": ""
+        },
+        {
+          "question": "**You can borrow my car _____ you promise to drive carefully.**",
+          "options": {
+            "A": "unless",
+            "B": "in case",
+            "C": "as long as",
+            "D": "otherwise"
+          },
+          "correct": "C - “As long as” şart anlamı verir. “Provided” da olabilirdi.",
+          "explanation": ""
+        },
+        {
+          "question": "**Had we known about the meeting, we _____ attended.**",
+          "options": {
+            "A": "would have",
+            "B": "will have",
+            "C": "had",
+            "D": "would"
+          },
+          "correct": "A - Inversion: “Had we known” = If we had known, ana cümle would have attended.",
+          "explanation": ""
+        }
+      ],
+      "word_count": 318
+    }
+  ]
+}

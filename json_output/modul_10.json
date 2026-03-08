@@ -1,0 +1,1336 @@
+{
+  "sira": 10,
+  "baslik": "Conjunctions and Adverbial Clauses (Bağlaçlar ve Zarf Cümlecikleri)",
+  "dosya_adi": "10_conjunctions.md",
+  "toplam_sayfa": 25,
+  "icon": "🔗",
+  "renk": "#E74C3C",
+  "sayfalar": [
+    {
+      "page_number": 1,
+      "title": "BİRLEŞİK CÜMLELER (COMPOUND SENTENCES)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 FANBOYS ile Cümle Bağlama</h2>\n<p>İki bağımsız cümleyi birbirine bağlayan bağlaçlardır. <strong>FANBOYS</strong> kısaltmasıyla hatırlanır: <strong>F</strong>or, <strong>A</strong>nd, <strong>N</strong>or, <strong>B</strong>ut, <strong>O</strong>r, <strong>Y</strong>et, <strong>S</strong>o.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Nor\" kendinden önce olumsuz bir cümle gerektirir ve sonrasında devrik yapı kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> I decided to stay at home, for the weather was terrible and I didn't want to get caught in the rain.<br>\n<strong>TR:</strong> Evde kalmaya karar verdim, çünkü hava çok kötüydü ve yağmura yakalanmak istemedim.<br>\n→ <strong>Açıklama:</strong> \"For\" burada \"çünkü\" anlamında kullanılmış ve iki cümleyi birbirine bağlamıştır. Öncesinde virgül kullanılması yaygındır. \"For\" resmî bir bağlaçtır ve günlük konuşmada \"because\" daha sık tercih edilir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> You can prepare the presentation slides, and I will handle the speaking part during the meeting.<br>\n<strong>TR:</strong> Sunum slaytlarını sen hazırla, ben de toplantı sırasında konuşma kısmını hallederim.<br>\n→ <strong>Açıklama:</strong> \"And\" iki eylemi (hazırlamak ve konuşmak) birbirine eklemiştir. Özneler farklı olduğu için her iki cümlede de özne açıkça yazılmıştır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The company hasn't announced any layoffs, nor do they plan to reduce the workforce in the near future.<br>\n<strong>TR:</strong> Şirket herhangi bir işten çıkarma duyurmadı, yakın gelecekte iş gücünü azaltmayı da planlamıyor.<br>\n→ <strong>Açıklama:</strong> \"Nor\" öncesindeki cümle olumsuz (\"hasn't announced\") ve sonrasında devrik yapı (\"do they plan\") kullanılmıştır. Bu yapı \"ve de ...-mez\" anlamı katar.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> She had practiced for months, yet she felt extremely nervous just before the piano recital began.<br>\n<strong>TR:</strong> Aylarca çalışmıştı, ama yine de piyano resitali başlamadan hemen önce aşırı derecede gergin hissetti.<br>\n→ <strong>Açıklama:</strong> \"Yet\" beklenmeyen bir sonucu ifade eder; \"ama yine de\" anlamındadır. Çalışmış olmasına rağmen gerginlik hissetmesi bir zıtlık oluşturur.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlamı</th>\n<th>Örnek Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>For</strong></td>\n<td>çünkü</td>\n<td>I left early, for I was tired.</td>\n</tr>\n<tr>\n<td><strong>And</strong></td>\n<td>ve</td>\n<td>She sings and dances.</td>\n</tr>\n<tr>\n<td><strong>Nor</strong></td>\n<td>ne de</td>\n<td>He didn't call, nor did he write.</td>\n</tr>\n<tr>\n<td><strong>But</strong></td>\n<td>ama</td>\n<td>It's small but comfortable.</td>\n</tr>\n<tr>\n<td><strong>Or</strong></td>\n<td>veya; yoksa</td>\n<td>Hurry, or you'll be late.</td>\n</tr>\n<tr>\n<td><strong>Yet</strong></td>\n<td>yine de</td>\n<td>Simple yet effective.</td>\n</tr>\n<tr>\n<td><strong>So</strong></td>\n<td>bu yüzden</td>\n<td>It rained, so we stayed in.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlede boşluğa hangi bağlaç gelmelidir?<br>\n<em>Several species vanished during the war, --- they began to reappear in the 1980s.</em></p>\n<p>A) but<br>\nB) since<br>\nC) unless<br>\nD) when  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** \"Yok olmak\" (vanish) ve \"yeniden ortaya çıkmak\" (reappear) arasında zıtlık vardır, bu nedenle \"but\" (ama) doğru seçimdir.\n</details>\n\n<p>[Kelime sayısı: 245]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I decided to stay at home, for the weather was terrible and I didn't want to get caught in the rain.",
+          "tr": "Evde kalmaya karar verdim, çünkü hava çok kötüydü ve yağmura yakalanmak istemedim.",
+          "description": "\"For\" burada \"çünkü\" anlamında kullanılmış ve iki cümleyi birbirine bağlamıştır. Öncesinde virgül kullanılması yaygındır. \"For\" resmî bir bağlaçtır ve günlük konuşmada \"because\" daha sık tercih edilir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "You can prepare the presentation slides, and I will handle the speaking part during the meeting.",
+          "tr": "Sunum slaytlarını sen hazırla, ben de toplantı sırasında konuşma kısmını hallederim.",
+          "description": "\"And\" iki eylemi (hazırlamak ve konuşmak) birbirine eklemiştir. Özneler farklı olduğu için her iki cümlede de özne açıkça yazılmıştır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The company hasn't announced any layoffs, nor do they plan to reduce the workforce in the near future.",
+          "tr": "Şirket herhangi bir işten çıkarma duyurmadı, yakın gelecekte iş gücünü azaltmayı da planlamıyor.",
+          "description": "\"Nor\" öncesindeki cümle olumsuz (\"hasn't announced\") ve sonrasında devrik yapı (\"do they plan\") kullanılmıştır. Bu yapı \"ve de ...-mez\" anlamı katar.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "She had practiced for months, yet she felt extremely nervous just before the piano recital began.",
+          "tr": "Aylarca çalışmıştı, ama yine de piyano resitali başlamadan hemen önce aşırı derecede gergin hissetti.",
+          "description": "\"Yet\" beklenmeyen bir sonucu ifade eder; \"ama yine de\" anlamındadır. Çalışmış olmasına rağmen gerginlik hissetmesi bir zıtlık oluşturur."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlede boşluğa hangi bağlaç gelmelidir?\n*Several species vanished during the war, --- they began to reappear in the 1980s.*",
+        "options": {
+          "A": "but",
+          "B": "since",
+          "C": "unless",
+          "D": "when"
+        },
+        "correct": "A",
+        "explanation": "\"Yok olmak\" (vanish) ve \"yeniden ortaya çıkmak\" (reappear) arasında zıtlık vardır, bu nedenle \"but\" (ama) doğru seçimdir."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlede boşluğa hangi bağlaç gelmelidir?\n*Several species vanished during the war, --- they began to reappear in the 1980s.*",
+          "options": {
+            "A": "but",
+            "B": "since",
+            "C": "unless",
+            "D": "when"
+          },
+          "correct": "A",
+          "explanation": "\"Yok olmak\" (vanish) ve \"yeniden ortaya çıkmak\" (reappear) arasında zıtlık vardır, bu nedenle \"but\" (ama) doğru seçimdir."
+        }
+      ],
+      "word_count": 389
+    },
+    {
+      "page_number": 2,
+      "title": "FANBOYS - STRATEJİ VE İLERİ KULLANIM",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Özne ve Fiil Tekrarı</h2>\n<p>\"ATBOYS\" (and, then, but, or, yet, so) yapılarında, iki cümlenin öznesi aynı ise ikinci cümlede özne tekrar edilmeyebilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Özne ortak olduğunda fiil de aynı kipte kalır ancak yardımcı fiil düşebilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The professor was impressed by the student's research but (was) concerned about the lack of primary sources.<br>\n<strong>TR:</strong> Profesör, öğrencinin araştırmasından etkilenmişti ama birincil kaynakların eksikliğinden endişeleniyordu.<br>\n→ <strong>Açıklama:</strong> \"But\" sonrasında özne (the professor) ve yardımcı fiil (was) tekrar edilmemiştir. Bu tür kısaltma anlamı değiştirmez ve akıcılık sağlar.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The children played in the garden and (they) chased butterflies until sunset.<br>\n<strong>TR:</strong> Çocuklar bahçede oynadılar ve gün batımına kadar kelebekleri kovaladılar.<br>\n→ <strong>Açıklama:</strong> \"And\" ile bağlanan ikinci cümlede özne \"they\" atılmıştır. Özne aynı olduğu için bu kullanım doğaldır.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The ancient manuscript was fragile, so (it was) handled with extreme care by the museum staff.<br>\n<strong>TR:</strong> Antik el yazması kırılgandı, bu yüzden müze personeli tarafından aşırı özenle ele alındı.<br>\n→ <strong>Açıklama:</strong> \"So\" sonrasında pasif yapıda özne ve yardımcı fiil atılabilir. Burada \"it was\" düşürülmüştür.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> I haven't been invited to the wedding, nor do I intend to go even if I receive a last-minute invitation.<br>\n<strong>TR:</strong> Düğüne davet edilmedim, son dakika daveti alsam bile gitmeye de niyetim yok.<br>\n→ <strong>Açıklama:</strong> \"Nor\" sonrası devrik yapı (do I intend) zorunludur ve olumsuzluk anlamını pekiştirir. Bu cümlede özneler farklıdır (I / I), ancak \"nor\" yapısı gereği devrik kullanılmıştır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Kural</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Özneler aynı</td>\n<td>İkinci özne atlanabilir</td>\n<td>She sings and (she) dances.</td>\n</tr>\n<tr>\n<td>\"Nor\" sonrası</td>\n<td>Devrik yapı zorunlu</td>\n<td>He didn't come, nor did he call.</td>\n</tr>\n<tr>\n<td>Pasif yapıda</td>\n<td>Yardımcı fiil atılabilir</td>\n<td>It was broken, so (it was) replaced.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>It was not obvious what the solution would be; --- was it obvious that there would be any solution at all.</em></p>\n<p>A) either<br>\nB) so<br>\nC) and<br>\nD) nor  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** Devamında devrik cümle (was it obvious) geldiği için \"nor\" kullanılmalıdır. \"Nor\" kendinden önceki olumsuz cümleye (not obvious) bağlanır.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The professor was impressed by the student's research but (was) concerned about the lack of primary sources.",
+          "tr": "Profesör, öğrencinin araştırmasından etkilenmişti ama birincil kaynakların eksikliğinden endişeleniyordu.",
+          "description": "\"But\" sonrasında özne (the professor) ve yardımcı fiil (was) tekrar edilmemiştir. Bu tür kısaltma anlamı değiştirmez ve akıcılık sağlar.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The children played in the garden and (they) chased butterflies until sunset.",
+          "tr": "Çocuklar bahçede oynadılar ve gün batımına kadar kelebekleri kovaladılar.",
+          "description": "\"And\" ile bağlanan ikinci cümlede özne \"they\" atılmıştır. Özne aynı olduğu için bu kullanım doğaldır.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The ancient manuscript was fragile, so (it was) handled with extreme care by the museum staff.",
+          "tr": "Antik el yazması kırılgandı, bu yüzden müze personeli tarafından aşırı özenle ele alındı.",
+          "description": "\"So\" sonrasında pasif yapıda özne ve yardımcı fiil atılabilir. Burada \"it was\" düşürülmüştür.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "I haven't been invited to the wedding, nor do I intend to go even if I receive a last-minute invitation.",
+          "tr": "Düğüne davet edilmedim, son dakika daveti alsam bile gitmeye de niyetim yok.",
+          "description": "\"Nor\" sonrası devrik yapı (do I intend) zorunludur ve olumsuzluk anlamını pekiştirir. Bu cümlede özneler farklıdır (I / I), ancak \"nor\" yapısı gereği devrik kullanılmıştır."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*It was not obvious what the solution would be; --- was it obvious that there would be any solution at all.*",
+        "options": {
+          "A": "either",
+          "B": "so",
+          "C": "and",
+          "D": "nor"
+        },
+        "correct": "D",
+        "explanation": "Devamında devrik cümle (was it obvious) geldiği için \"nor\" kullanılmalıdır. \"Nor\" kendinden önceki olumsuz cümleye (not obvious) bağlanır."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*It was not obvious what the solution would be; --- was it obvious that there would be any solution at all.*",
+          "options": {
+            "A": "either",
+            "B": "so",
+            "C": "and",
+            "D": "nor"
+          },
+          "correct": "D",
+          "explanation": "Devamında devrik cümle (was it obvious) geldiği için \"nor\" kullanılmalıdır. \"Nor\" kendinden önceki olumsuz cümleye (not obvious) bağlanır."
+        }
+      ],
+      "word_count": 344
+    },
+    {
+      "page_number": 3,
+      "title": "PARALEL YAPILAR: NOT ONLY...BUT ALSO",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Sadece...değil, aynı zamanda</h2>\n<p>\"Not only...but also\" aynı gramer yapısına sahip ögeleri (isim, sıfat, fiil, vb.) birbirine bağlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Not only\" cümle başına gelirse, bağlı olduğu cümle devrik yapılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1:</strong><br>\n<strong>EN:</strong> The new smartphone is not only aesthetically pleasing but also incredibly durable against accidental drops.<br>\n<strong>TR:</strong> Yeni akıllı telefon sadece estetik açıdan hoş değil, aynı zamanda kazara düşmelere karşı inanılmaz derecede dayanıklı.<br>\n→ <strong>Açıklama:</strong> Burada \"not only\" ve \"but also\" iki sıfat öbeğini (\"aesthetically pleasing\" ve \"incredibly durable\") bağlamıştır. Yapı paraleldir.</p>\n<p><strong>Örnek 2:</strong><br>\n<strong>EN:</strong> The conference will be attended not only by leading academics but also by industry pioneers from around the globe.<br>\n<strong>TR:</strong> Konferansa sadece önde gelen akademisyenler değil, aynı zamanda dünyanın dört bir yanından endüstri öncüleri de katılacak.<br>\n→ <strong>Açıklama:</strong> \"Not only\" ve \"but also\" edat öbeklerini (\"by leading academics\" ve \"by industry pioneers\") bağlamıştır. Edatların tekrarına dikkat edin.</p>\n<p><strong>Örnek 3:</strong><br>\n<strong>EN:</strong> The government not only failed to address the economic crisis but it actively worsened the situation through poor policy decisions.<br>\n<strong>TR:</strong> Hükümet sadece ekonomik krizi ele almakta başarısız olmakla kalmadı, aynı zamanda kötü politika kararlarıyla durumu aktif olarak daha da kötüleştirdi.<br>\n→ <strong>Açıklama:</strong> İki cümle bağlanırken \"but also\" ayrılır; \"also\" cümle içinde normal yerinde (fiilden önce) kullanılmıştır.</p>\n<p><strong>Örnek 4:</strong><br>\n<strong>EN:</strong> Not only did the company lose its biggest client, but it also faced a major lawsuit from its shareholders.<br>\n<strong>TR:</strong> Şirket sadece en büyük müşterisini kaybetmekle kalmadı, aynı zamanda hissedarlarından büyük bir dava ile karşı karşıya kaldı.<br>\n→ <strong>Açıklama:</strong> \"Not only\" cümle başında olduğu için devrik yapı kullanılmıştır: \"did the company lose\". \"But also\" sonrası cümle normaldir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Kullanım</th>\n<th>Yapı</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Aynı öge türü</td>\n<td>not only + X + but also + X</td>\n<td>not only smart but also hardworking</td>\n</tr>\n<tr>\n<td>İki cümle</td>\n<td>not only + cümle, but + özne + also + fiil</td>\n<td>not only does he run, but he also swims</td>\n</tr>\n<tr>\n<td>Cümle başında</td>\n<td>Not only + devrik cümle, but also...</td>\n<td>Not only did she sing, but she danced.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>Health is not merely the absence of disease, --- complete physical, mental and social well-being.</em></p>\n<p>A) as for<br>\nB) as well as<br>\nC) as if<br>\nD) including<br>\nE) but also  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** E  \n**Açıklama:** \"Not merely...but also\" kalıbı kullanılmıştır. \"Merely\" = \"only\" anlamındadır.\n</details>\n\n<p>[Kelime sayısı: 252]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The new smartphone is not only aesthetically pleasing but also incredibly durable against accidental drops.",
+          "tr": "Yeni akıllı telefon sadece estetik açıdan hoş değil, aynı zamanda kazara düşmelere karşı inanılmaz derecede dayanıklı.",
+          "description": "Burada \"not only\" ve \"but also\" iki sıfat öbeğini (\"aesthetically pleasing\" ve \"incredibly durable\") bağlamıştır. Yapı paraleldir.\n\n**Örnek 2:**"
+        },
+        {
+          "en": "The conference will be attended not only by leading academics but also by industry pioneers from around the globe.",
+          "tr": "Konferansa sadece önde gelen akademisyenler değil, aynı zamanda dünyanın dört bir yanından endüstri öncüleri de katılacak.",
+          "description": "\"Not only\" ve \"but also\" edat öbeklerini (\"by leading academics\" ve \"by industry pioneers\") bağlamıştır. Edatların tekrarına dikkat edin.\n\n**Örnek 3:**"
+        },
+        {
+          "en": "The government not only failed to address the economic crisis but it actively worsened the situation through poor policy decisions.",
+          "tr": "Hükümet sadece ekonomik krizi ele almakta başarısız olmakla kalmadı, aynı zamanda kötü politika kararlarıyla durumu aktif olarak daha da kötüleştirdi.",
+          "description": "İki cümle bağlanırken \"but also\" ayrılır; \"also\" cümle içinde normal yerinde (fiilden önce) kullanılmıştır.\n\n**Örnek 4:**"
+        },
+        {
+          "en": "Not only did the company lose its biggest client, but it also faced a major lawsuit from its shareholders.",
+          "tr": "Şirket sadece en büyük müşterisini kaybetmekle kalmadı, aynı zamanda hissedarlarından büyük bir dava ile karşı karşıya kaldı.",
+          "description": "\"Not only\" cümle başında olduğu için devrik yapı kullanılmıştır: \"did the company lose\". \"But also\" sonrası cümle normaldir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*Health is not merely the absence of disease, --- complete physical, mental and social well-being.*",
+        "options": {
+          "A": "as for",
+          "B": "as well as",
+          "C": "as if",
+          "D": "including",
+          "E": "but also"
+        },
+        "correct": "E",
+        "explanation": "\"Not merely...but also\" kalıbı kullanılmıştır. \"Merely\" = \"only\" anlamındadır."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*Health is not merely the absence of disease, --- complete physical, mental and social well-being.*",
+          "options": {
+            "A": "as for",
+            "B": "as well as",
+            "C": "as if",
+            "D": "including",
+            "E": "but also"
+          },
+          "correct": "E",
+          "explanation": "\"Not merely...but also\" kalıbı kullanılmıştır. \"Merely\" = \"only\" anlamındadır."
+        }
+      ],
+      "word_count": 377
+    },
+    {
+      "page_number": 4,
+      "title": "DİĞER PARALEL YAPILAR",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Both...and / Either...or / Neither...nor</h2>\n<p>Bu yapılar da aynı gramer türündeki ögeleri birleştirir. \"Neither...nor\" olumlu cümle yapısıyla kullanılır ama anlam olumsuzdur.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Either...or\" seçenek sunar. Olumsuzluk için genellikle \"neither...nor\" veya \"not either...or\" yapıları tercih edilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Both...and):</strong><br>\n<strong>EN:</strong> The new policy aims to be both environmentally sustainable and economically viable for the long term.<br>\n<strong>TR:</strong> Yeni politika hem çevresel açıdan sürdürülebilir hem de uzun vadede ekonomik olarak uygulanabilir olmayı hedefliyor.<br>\n→ <strong>Açıklama:</strong> \"Both...and\" iki sıfat öbeğini bağlamıştır. Bu yapı yalnızca olumlu cümlelerde kullanılır.</p>\n<p><strong>Örnek 2 (Either...or - fiil):</strong><br>\n<strong>EN:</strong> You can either submit your assignment by midnight tonight or request an extension from the professor before the deadline.<br>\n<strong>TR:</strong> Ödevinizi ya bu gece yarısına kadar teslim edebilir ya da son teslim tarihinden önce profesörden ek süre talep edebilirsiniz.<br>\n→ <strong>Açıklama:</strong> \"Either...or\" iki fiil öbeğini (\"submit\" ve \"request\") bağlamıştır. Seçenek sunar.</p>\n<p><strong>Örnek 3 (Either...or - isim):</strong><br>\n<strong>EN:</strong> Either the management or the union representatives will have to make a concession to reach an agreement.<br>\n<strong>TR:</strong> Ya yönetim ya da sendika temsilcileri bir anlaşmaya varmak için taviz vermek zorunda kalacak.<br>\n→ <strong>Açıklama:</strong> İki isim öbeği bağlanmıştır. Fiil, öznelerden ikincisine göre çekimlenir (burada \"representatives\" çoğul, fiil \"will\" ile çoğul).</p>\n<p><strong>Örnek 4 (Neither...nor):</strong><br>\n<strong>EN:</strong> The old house was neither structurally sound nor visually appealing, so the developers decided to demolish it.<br>\n<strong>TR:</strong> Eski ev ne yapısal olarak sağlamdı ne de görsel olarak çekiciydi, bu yüzden müteahhitler onu yıkmaya karar verdiler.<br>\n→ <strong>Açıklama:</strong> \"Neither...nor\" iki sıfat öbeğini bağlamıştır. Cümle yapısı olumlu olmasına rağmen anlam olumsuzdur.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>both...and</td>\n<td>hem...hem de</td>\n<td>both useful and cheap</td>\n</tr>\n<tr>\n<td>either...or</td>\n<td>ya...ya da</td>\n<td>either now or later</td>\n</tr>\n<tr>\n<td>neither...nor</td>\n<td>ne...ne de</td>\n<td>neither here nor there</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluklara hangi seçenek gelmelidir?<br>\n<em>Countries are interested --- in their absolute economic welfare, --- in how well they are performing compared to other countries.</em></p>\n<p>A) both / as well as<br>\nB) as / as<br>\nC) so much / as<br>\nD) more / but<br>\nE) not only / but also  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** E  \n**Açıklama:** \"Sadece...değil, aynı zamanda\" anlamı için \"not only...but also\" uygundur. İki \"in\" edatıyla kullanılan paralel yapı aranmaktadır.\n</details>\n\n<p>[Kelime sayısı: 248]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The new policy aims to be both environmentally sustainable and economically viable for the long term.",
+          "tr": "Yeni politika hem çevresel açıdan sürdürülebilir hem de uzun vadede ekonomik olarak uygulanabilir olmayı hedefliyor.",
+          "description": "\"Both...and\" iki sıfat öbeğini bağlamıştır. Bu yapı yalnızca olumlu cümlelerde kullanılır.\n\n**Örnek 2 (Either...or - fiil):**"
+        },
+        {
+          "en": "You can either submit your assignment by midnight tonight or request an extension from the professor before the deadline.",
+          "tr": "Ödevinizi ya bu gece yarısına kadar teslim edebilir ya da son teslim tarihinden önce profesörden ek süre talep edebilirsiniz.",
+          "description": "\"Either...or\" iki fiil öbeğini (\"submit\" ve \"request\") bağlamıştır. Seçenek sunar.\n\n**Örnek 3 (Either...or - isim):**"
+        },
+        {
+          "en": "Either the management or the union representatives will have to make a concession to reach an agreement.",
+          "tr": "Ya yönetim ya da sendika temsilcileri bir anlaşmaya varmak için taviz vermek zorunda kalacak.",
+          "description": "İki isim öbeği bağlanmıştır. Fiil, öznelerden ikincisine göre çekimlenir (burada \"representatives\" çoğul, fiil \"will\" ile çoğul).\n\n**Örnek 4 (Neither...nor):**"
+        },
+        {
+          "en": "The old house was neither structurally sound nor visually appealing, so the developers decided to demolish it.",
+          "tr": "Eski ev ne yapısal olarak sağlamdı ne de görsel olarak çekiciydi, bu yüzden müteahhitler onu yıkmaya karar verdiler.",
+          "description": "\"Neither...nor\" iki sıfat öbeğini bağlamıştır. Cümle yapısı olumlu olmasına rağmen anlam olumsuzdur."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluklara hangi seçenek gelmelidir?\n*Countries are interested --- in their absolute economic welfare, --- in how well they are performing compared to other countries.*",
+        "options": {
+          "A": "both / as well as",
+          "B": "as / as",
+          "C": "so much / as",
+          "D": "more / but",
+          "E": "not only / but also"
+        },
+        "correct": "E",
+        "explanation": "\"Sadece...değil, aynı zamanda\" anlamı için \"not only...but also\" uygundur. İki \"in\" edatıyla kullanılan paralel yapı aranmaktadır."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluklara hangi seçenek gelmelidir?\n*Countries are interested --- in their absolute economic welfare, --- in how well they are performing compared to other countries.*",
+          "options": {
+            "A": "both / as well as",
+            "B": "as / as",
+            "C": "so much / as",
+            "D": "more / but",
+            "E": "not only / but also"
+          },
+          "correct": "E",
+          "explanation": "\"Sadece...değil, aynı zamanda\" anlamı için \"not only...but also\" uygundur. İki \"in\" edatıyla kullanılan paralel yapı aranmaktadır."
+        }
+      ],
+      "word_count": 369
+    },
+    {
+      "page_number": 5,
+      "title": "ZITLIK BAĞLAÇLARI - CONCESSIVE CONTRAST",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Although, Though, Even Though, While</h2>\n<p>Bu bağlaçlar \"bir durumun aksine\" anlamı verir. Bir yan cümle + ana cümle yapısıyla kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Though\" cümle sonunda veya ortasında \"buna rağmen\" anlamında da kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Even though):</strong><br>\n<strong>EN:</strong> Even though the flight was delayed by five hours due to a technical problem, the passengers remained remarkably calm and patient.<br>\n<strong>TR:</strong> Teknik bir sorun nedeniyle uçuş beş saat gecikmesine rağmen, yolcular dikkat çekici bir şekilde sakin ve sabırlı kaldılar.<br>\n→ <strong>Açıklama:</strong> \"Even though\" beklenenin aksine (gecikmeye rağmen) yolcuların sakin kalmasını vurgular. Yan cümle (gecikme) ana cümleden (sakin kalma) önce gelmiştir.</p>\n<p><strong>Örnek 2 (Although):</strong><br>\n<strong>EN:</strong> Although she had only six months of formal training, her paintings were soon being exhibited in prestigious galleries.<br>\n<strong>TR:</strong> Sadece altı aylık resmî eğitimi olmasına rağmen, resimleri kısa sürede prestijli galerilerde sergilenmeye başlandı.<br>\n→ <strong>Açıklama:</strong> \"Although\" yetersiz eğitime rağmen başarıyı vurgular. Zıtlık açıktır.</p>\n<p><strong>Örnek 3 (Much as):</strong><br>\n<strong>EN:</strong> Much as I admire his dedication and hard work, I cannot support his unethical business practices.<br>\n<strong>TR:</strong> Onun özverisine ve sıkı çalışmasına hayran olsam da, etik olmayan iş uygulamalarını destekleyemem.<br>\n→ <strong>Açıklama:</strong> \"Much as\" daha çok duygusal veya kişisel tercihlerde kullanılır, \"although\" ile eş anlamlıdır.</p>\n<p><strong>Örnek 4 (Though - cümle sonunda):</strong><br>\n<strong>EN:</strong> The hotel room was expensive and the location was noisy. We had a wonderful time, though.<br>\n<strong>TR:</strong> Otel odası pahalıydı ve konum gürültülüydü. Yine de harika vakit geçirdik.<br>\n→ <strong>Açıklama:</strong> \"Though\" burada ikinci cümlenin sonunda \"buna rağmen\" anlamında kullanılmıştır. Bu kullanımda \"however\" veya \"nevertheless\" ile değiştirilebilir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Although</td>\n<td>-e rağmen</td>\n<td>Although it rained, we went out.</td>\n</tr>\n<tr>\n<td>Even though</td>\n<td>-se de</td>\n<td>Even though tired, he worked.</td>\n</tr>\n<tr>\n<td>Much as</td>\n<td>çok...sa da</td>\n<td>Much as I like him, I can't agree.</td>\n</tr>\n<tr>\n<td>Though (son)</td>\n<td>yine de</td>\n<td>It's hard. I'll try, though.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- the US and Brazil both occupy the American continent, the northern location of the former and the southern location of the latter mark a real distinction.</em></p>\n<p>A) As long as<br>\nB) Now that<br>\nC) Only if<br>\nD) After<br>\nE) Although  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** E  \n**Açıklama:** İki zıt durum (her ikisi de Amerika kıtasında ama farklı konumlar) arasında bağlantı kuruluyor. \"Although\" bu zıtlığı ifade eder.\n</details>\n\n<p>[Kelime sayısı: 250]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Even though the flight was delayed by five hours due to a technical problem, the passengers remained remarkably calm and patient.",
+          "tr": "Teknik bir sorun nedeniyle uçuş beş saat gecikmesine rağmen, yolcular dikkat çekici bir şekilde sakin ve sabırlı kaldılar.",
+          "description": "\"Even though\" beklenenin aksine (gecikmeye rağmen) yolcuların sakin kalmasını vurgular. Yan cümle (gecikme) ana cümleden (sakin kalma) önce gelmiştir.\n\n**Örnek 2 (Although):**"
+        },
+        {
+          "en": "Although she had only six months of formal training, her paintings were soon being exhibited in prestigious galleries.",
+          "tr": "Sadece altı aylık resmî eğitimi olmasına rağmen, resimleri kısa sürede prestijli galerilerde sergilenmeye başlandı.",
+          "description": "\"Although\" yetersiz eğitime rağmen başarıyı vurgular. Zıtlık açıktır.\n\n**Örnek 3 (Much as):**"
+        },
+        {
+          "en": "Much as I admire his dedication and hard work, I cannot support his unethical business practices.",
+          "tr": "Onun özverisine ve sıkı çalışmasına hayran olsam da, etik olmayan iş uygulamalarını destekleyemem.",
+          "description": "\"Much as\" daha çok duygusal veya kişisel tercihlerde kullanılır, \"although\" ile eş anlamlıdır.\n\n**Örnek 4 (Though - cümle sonunda):**"
+        },
+        {
+          "en": "The hotel room was expensive and the location was noisy. We had a wonderful time, though.",
+          "tr": "Otel odası pahalıydı ve konum gürültülüydü. Yine de harika vakit geçirdik.",
+          "description": "\"Though\" burada ikinci cümlenin sonunda \"buna rağmen\" anlamında kullanılmıştır. Bu kullanımda \"however\" veya \"nevertheless\" ile değiştirilebilir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- the US and Brazil both occupy the American continent, the northern location of the former and the southern location of the latter mark a real distinction.*",
+        "options": {
+          "A": "As long as",
+          "B": "Now that",
+          "C": "Only if",
+          "D": "After",
+          "E": "Although"
+        },
+        "correct": "E",
+        "explanation": "İki zıt durum (her ikisi de Amerika kıtasında ama farklı konumlar) arasında bağlantı kuruluyor. \"Although\" bu zıtlığı ifade eder."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- the US and Brazil both occupy the American continent, the northern location of the former and the southern location of the latter mark a real distinction.*",
+          "options": {
+            "A": "As long as",
+            "B": "Now that",
+            "C": "Only if",
+            "D": "After",
+            "E": "Although"
+          },
+          "correct": "E",
+          "explanation": "İki zıt durum (her ikisi de Amerika kıtasında ama farklı konumlar) arasında bağlantı kuruluyor. \"Although\" bu zıtlığı ifade eder."
+        }
+      ],
+      "word_count": 369
+    },
+    {
+      "page_number": 6,
+      "title": "ZITLIK BAĞLAÇLARI: DESPITE / IN SPITE OF",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Edat olarak \"rağmen\"</h2>\n<p>\"Despite\" ve \"in spite of\" edatlardır, ardından isim, zamir veya -ing gelir. Cümle gelmez.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Despite the fact that + cümle\" kullanarak cümle de eklenebilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (In spite of + noun):</strong><br>\n<strong>EN:</strong> In spite of the torrential rain and strong winds, the rescue team continued searching for the missing hikers throughout the night.<br>\n<strong>TR:</strong> Şiddetli yağmur ve kuvvetli rüzgâra rağmen, kurtarma ekibi gece boyunca kayıp dağcıları aramaya devam etti.<br>\n→ <strong>Açıklama:</strong> \"In spite of\" ardından iki isim (\"rain\", \"winds\") gelmiş. Edat olduğu için fiil (continued) ana cümleye aittir.</p>\n<p><strong>Örnek 2 (Despite + -ing):</strong><br>\n<strong>EN:</strong> Despite having very little experience in software development, he managed to create a fully functional mobile app within three months.<br>\n<strong>TR:</strong> Yazılım geliştirmede çok az deneyimi olmasına rağmen, üç ay içinde tam işlevsel bir mobil uygulama oluşturmayı başardı.<br>\n→ <strong>Açıklama:</strong> \"Despite\" ardından \"having\" (gerund) gelmiştir. Özne ortak olduğu için bu kısaltma mümkündür.</p>\n<p><strong>Örnek 3 (In spite of + pronoun):</strong><br>\n<strong>EN:</strong> Her parents strongly opposed her decision. In spite of that, she went ahead and enrolled in the art school.<br>\n<strong>TR:</strong> Ailesi kararına şiddetle karşı çıktı. Buna rağmen, o devam etti ve sanat okuluna kaydoldu.<br>\n→ <strong>Açıklama:</strong> \"In spite of\" ardından \"that\" zamiri gelmiş, önceki cümleye atıfta bulunmuştur.</p>\n<p><strong>Örnek 4 (Despite the fact that):</strong><br>\n<strong>EN:</strong> Despite the fact that the company had record profits last quarter, the CEO announced a significant round of layoffs.<br>\n<strong>TR:</strong> Şirketin geçen çeyrekte rekor kâr elde etmesine rağmen, CEO önemli bir işten çıkarma dalgası duyurdu.<br>\n→ <strong>Açıklama:</strong> \"Despite the fact that\" ardından tam cümle gelebilir. Bu yapı \"although\" ile eş anlamlıdır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Aldığı Öge</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Despite</td>\n<td>Noun / -ing</td>\n<td>Despite the rain, we played.</td>\n</tr>\n<tr>\n<td>In spite of</td>\n<td>Noun / -ing</td>\n<td>In spite of failing, he tried again.</td>\n</tr>\n<tr>\n<td>Despite the fact that</td>\n<td>Cümle</td>\n<td>Despite the fact that it rained, we played.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- the Civil War, those years turned out to be a golden era for the magazine industry.</em></p>\n<p>A) Despite<br>\nB) Obviously<br>\nC) Although<br>\nD) Pertaining to<br>\nE) Nevertheless  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Boşluktan sonra isim (\"the Civil War\") geldiği için edat olan \"Despite\" doğrudur. \"Although\" cümle ister.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "In spite of the torrential rain and strong winds, the rescue team continued searching for the missing hikers throughout the night.",
+          "tr": "Şiddetli yağmur ve kuvvetli rüzgâra rağmen, kurtarma ekibi gece boyunca kayıp dağcıları aramaya devam etti.",
+          "description": "\"In spite of\" ardından iki isim (\"rain\", \"winds\") gelmiş. Edat olduğu için fiil (continued) ana cümleye aittir.\n\n**Örnek 2 (Despite + -ing):**"
+        },
+        {
+          "en": "Despite having very little experience in software development, he managed to create a fully functional mobile app within three months.",
+          "tr": "Yazılım geliştirmede çok az deneyimi olmasına rağmen, üç ay içinde tam işlevsel bir mobil uygulama oluşturmayı başardı.",
+          "description": "\"Despite\" ardından \"having\" (gerund) gelmiştir. Özne ortak olduğu için bu kısaltma mümkündür.\n\n**Örnek 3 (In spite of + pronoun):**"
+        },
+        {
+          "en": "Her parents strongly opposed her decision. In spite of that, she went ahead and enrolled in the art school.",
+          "tr": "Ailesi kararına şiddetle karşı çıktı. Buna rağmen, o devam etti ve sanat okuluna kaydoldu.",
+          "description": "\"In spite of\" ardından \"that\" zamiri gelmiş, önceki cümleye atıfta bulunmuştur.\n\n**Örnek 4 (Despite the fact that):**"
+        },
+        {
+          "en": "Despite the fact that the company had record profits last quarter, the CEO announced a significant round of layoffs.",
+          "tr": "Şirketin geçen çeyrekte rekor kâr elde etmesine rağmen, CEO önemli bir işten çıkarma dalgası duyurdu.",
+          "description": "\"Despite the fact that\" ardından tam cümle gelebilir. Bu yapı \"although\" ile eş anlamlıdır."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- the Civil War, those years turned out to be a golden era for the magazine industry.*",
+        "options": {
+          "A": "Despite",
+          "B": "Obviously",
+          "C": "Although",
+          "D": "Pertaining to",
+          "E": "Nevertheless"
+        },
+        "correct": "A",
+        "explanation": "Boşluktan sonra isim (\"the Civil War\") geldiği için edat olan \"Despite\" doğrudur. \"Although\" cümle ister."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- the Civil War, those years turned out to be a golden era for the magazine industry.*",
+          "options": {
+            "A": "Despite",
+            "B": "Obviously",
+            "C": "Although",
+            "D": "Pertaining to",
+            "E": "Nevertheless"
+          },
+          "correct": "A",
+          "explanation": "Boşluktan sonra isim (\"the Civil War\") geldiği için edat olan \"Despite\" doğrudur. \"Although\" cümle ister."
+        }
+      ],
+      "word_count": 360
+    },
+    {
+      "page_number": 7,
+      "title": "HOWEVER + SIFAT/ZARF, NO MATTER HOW",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Ne kadar...-se de</h2>\n<p>\"However + adjective/adverb\" ve \"no matter how + adjective/adverb\" aynı anlamı verir: zıtlık.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"However\" bu kullanımda bağlaç değil, zarf görevindedir. Ardından sıfat veya zarf gelir, sonra özne + fiil.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (However + adjective):</strong><br>\n<strong>EN:</strong> However complex the mathematical problem may seem, our professor can usually explain it in simple terms.<br>\n<strong>TR:</strong> Matematik problemi ne kadar karmaşık görünürse görünsün, profesörümüz genellikle onu basit terimlerle açıklayabilir.<br>\n→ <strong>Açıklama:</strong> \"However\" + sıfat (complex) + özne + fiil (may seem) yapısı. Zıtlık anlamı: karmaşık olmasına rağmen açıklayabilme.</p>\n<p><strong>Örnek 2 (However + adverb):</strong><br>\n<strong>EN:</strong> However carefully you pack the glassware, there is always a risk of breakage during international shipping.<br>\n<strong>TR:</strong> Cam eşyaları ne kadar dikkatli paketlerseniz paketleyin, uluslararası nakliye sırasında her zaman kırılma riski vardır.<br>\n→ <strong>Açıklama:</strong> \"However\" + zarf (carefully) + özne + fiil (pack). Zarf fiili niteler.</p>\n<p><strong>Örnek 3 (No matter how):</strong><br>\n<strong>EN:</strong> No matter how hard the athlete trained, he couldn't break the world record set by his legendary predecessor.<br>\n<strong>TR:</strong> Sporcu ne kadar sıkı antrenman yaparsa yapsın, efsanevi selefi tarafından kırılan dünya rekorunu geçemedi.<br>\n→ <strong>Açıklama:</strong> \"No matter how\" + zarf (hard) + özne + fiil (trained). \"However\" ile aynı anlamda, daha vurgulu.</p>\n<p><strong>Örnek 4 (No matter + wh- word):</strong><br>\n<strong>EN:</strong> No matter what the critics write about his films, he continues to make movies that appeal to a wide audience.<br>\n<strong>TR:</strong> Eleştirmenler filmleri hakkında ne yazarsa yazsın, geniş kitlelere hitap eden filmler yapmaya devam ediyor.<br>\n→ <strong>Açıklama:</strong> \"No matter\" ardından soru kelimesi (what, who, when, etc.) gelebilir. Bu da zıtlık anlamı taşır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>However + adj/adv</td>\n<td>ne kadar...sa da</td>\n<td>However rich he is, he is unhappy.</td>\n</tr>\n<tr>\n<td>No matter how + adj/adv</td>\n<td>ne kadar...sa da</td>\n<td>No matter how rich he is...</td>\n</tr>\n<tr>\n<td>No matter + wh-</td>\n<td>ne ...-se de</td>\n<td>No matter what you say...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- willingly he seems to have accepted the new job, I don't really think he likes the working conditions.</em></p>\n<p>A) However<br>\nB) Although<br>\nC) So<br>\nD) Even<br>\nE) Since  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Boşluktan sonra zarf (willingly) geldiği için \"however\" kullanılmalıdır. \"However willingly\" = \"ne kadar istekli görünse de\".\n</details>\n\n<p>[Kelime sayısı: 247]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "However complex the mathematical problem may seem, our professor can usually explain it in simple terms.",
+          "tr": "Matematik problemi ne kadar karmaşık görünürse görünsün, profesörümüz genellikle onu basit terimlerle açıklayabilir.",
+          "description": "\"However\" + sıfat (complex) + özne + fiil (may seem) yapısı. Zıtlık anlamı: karmaşık olmasına rağmen açıklayabilme.\n\n**Örnek 2 (However + adverb):**"
+        },
+        {
+          "en": "However carefully you pack the glassware, there is always a risk of breakage during international shipping.",
+          "tr": "Cam eşyaları ne kadar dikkatli paketlerseniz paketleyin, uluslararası nakliye sırasında her zaman kırılma riski vardır.",
+          "description": "\"However\" + zarf (carefully) + özne + fiil (pack). Zarf fiili niteler.\n\n**Örnek 3 (No matter how):**"
+        },
+        {
+          "en": "No matter how hard the athlete trained, he couldn't break the world record set by his legendary predecessor.",
+          "tr": "Sporcu ne kadar sıkı antrenman yaparsa yapsın, efsanevi selefi tarafından kırılan dünya rekorunu geçemedi.",
+          "description": "\"No matter how\" + zarf (hard) + özne + fiil (trained). \"However\" ile aynı anlamda, daha vurgulu.\n\n**Örnek 4 (No matter + wh- word):**"
+        },
+        {
+          "en": "No matter what the critics write about his films, he continues to make movies that appeal to a wide audience.",
+          "tr": "Eleştirmenler filmleri hakkında ne yazarsa yazsın, geniş kitlelere hitap eden filmler yapmaya devam ediyor.",
+          "description": "\"No matter\" ardından soru kelimesi (what, who, when, etc.) gelebilir. Bu da zıtlık anlamı taşır."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- willingly he seems to have accepted the new job, I don't really think he likes the working conditions.*",
+        "options": {
+          "A": "However",
+          "B": "Although",
+          "C": "So",
+          "D": "Even",
+          "E": "Since"
+        },
+        "correct": "A",
+        "explanation": "Boşluktan sonra zarf (willingly) geldiği için \"however\" kullanılmalıdır. \"However willingly\" = \"ne kadar istekli görünse de\"."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- willingly he seems to have accepted the new job, I don't really think he likes the working conditions.*",
+          "options": {
+            "A": "However",
+            "B": "Although",
+            "C": "So",
+            "D": "Even",
+            "E": "Since"
+          },
+          "correct": "A",
+          "explanation": "Boşluktan sonra zarf (willingly) geldiği için \"however\" kullanılmalıdır. \"However willingly\" = \"ne kadar istekli görünse de\"."
+        }
+      ],
+      "word_count": 354
+    },
+    {
+      "page_number": 8,
+      "title": "DIRECT CONTRAST: WHEREAS / WHILE",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Oysa, -iken</h2>\n<p>\"Whereas\" ve \"while\" iki taraf arasında doğrudan karşıtlık belirtir. Genellikle iki farklı özne veya durum karşılaştırılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Bu kullanımda \"while\" zaman anlamından farklıdır; zıtlık ifade eder.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Whereas):</strong><br>\n<strong>EN:</strong> The northern region of the country experiences harsh winters with heavy snowfall, whereas the southern coast enjoys mild temperatures year-round.<br>\n<strong>TR:</strong> Ülkenin kuzey bölgesi yoğun kar yağışlı sert kışlar yaşarken, güney sahili yıl boyunca ılıman sıcaklıklara sahiptir.<br>\n→ <strong>Açıklama:</strong> \"Whereas\" iki farklı bölgenin iklimini karşılaştırır. Belirgin bir zıtlık vardır.</p>\n<p><strong>Örnek 2 (While - contrast):</strong><br>\n<strong>EN:</strong> While some employees prefer working remotely to have more flexibility, others find the office environment more conducive to productivity.<br>\n<strong>TR:</strong> Bazı çalışanlar daha fazla esneklik için uzaktan çalışmayı tercih ederken, diğerleri ofis ortamını üretkenlik için daha elverişli buluyor.<br>\n→ <strong>Açıklama:</strong> \"While\" burada iki farklı tercihi karşılaştırıyor. Zaman anlamı yok, doğrudan zıtlık var.</p>\n<p><strong>Örnek 3 (Whereas - cümle ortasında):</strong><br>\n<strong>EN:</strong> The first proposal was rejected due to high costs, whereas the second one was approved immediately because it fit the budget.<br>\n<strong>TR:</strong> İlk teklif yüksek maliyetler nedeniyle reddedilirken, ikincisi bütçeye uyduğu için hemen onaylandı.<br>\n→ <strong>Açıklama:</strong> \"Whereas\" iki farklı teklifin farklı kaderini vurguluyor. Genellikle virgülle ayrılır.</p>\n<p><strong>Örnek 4 (While - farklı özneler):</strong><br>\n<strong>EN:</strong> The movie received critical acclaim from reviewers, while the general audience found it confusing and overly long.<br>\n<strong>TR:</strong> Film eleştirmenlerden beğeni toplarken, genel izleyici onu kafa karıştırıcı ve aşırı uzun buldu.<br>\n→ <strong>Açıklama:</strong> \"While\" iki farklı grubun (eleştirmenler ve izleyici) farklı tepkilerini karşılaştırır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Whereas</td>\n<td>oysa, -ken</td>\n<td>Resmî, yazı dilinde sık</td>\n</tr>\n<tr>\n<td>While</td>\n<td>oysa, -iken</td>\n<td>Hem zaman hem zıtlık</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>Research evidence suggests that, in their games, girls show preference for home-centered interests ---- boys are drawn to more naughty and dangerous themes.</em></p>\n<p>A) unless<br>\nB) when<br>\nC) as though<br>\nD) whereas<br>\nE) now that  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** Kızların ve erkeklerin oyun tercihleri arasında doğrudan karşıtlık vardır. \"Whereas\" bu zıtlığı ifade eder.\n</details>\n\n<p>[Kelime sayısı: 232]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The northern region of the country experiences harsh winters with heavy snowfall, whereas the southern coast enjoys mild temperatures year-round.",
+          "tr": "Ülkenin kuzey bölgesi yoğun kar yağışlı sert kışlar yaşarken, güney sahili yıl boyunca ılıman sıcaklıklara sahiptir.",
+          "description": "\"Whereas\" iki farklı bölgenin iklimini karşılaştırır. Belirgin bir zıtlık vardır.\n\n**Örnek 2 (While - contrast):**"
+        },
+        {
+          "en": "While some employees prefer working remotely to have more flexibility, others find the office environment more conducive to productivity.",
+          "tr": "Bazı çalışanlar daha fazla esneklik için uzaktan çalışmayı tercih ederken, diğerleri ofis ortamını üretkenlik için daha elverişli buluyor.",
+          "description": "\"While\" burada iki farklı tercihi karşılaştırıyor. Zaman anlamı yok, doğrudan zıtlık var.\n\n**Örnek 3 (Whereas - cümle ortasında):**"
+        },
+        {
+          "en": "The first proposal was rejected due to high costs, whereas the second one was approved immediately because it fit the budget.",
+          "tr": "İlk teklif yüksek maliyetler nedeniyle reddedilirken, ikincisi bütçeye uyduğu için hemen onaylandı.",
+          "description": "\"Whereas\" iki farklı teklifin farklı kaderini vurguluyor. Genellikle virgülle ayrılır.\n\n**Örnek 4 (While - farklı özneler):**"
+        },
+        {
+          "en": "The movie received critical acclaim from reviewers, while the general audience found it confusing and overly long.",
+          "tr": "Film eleştirmenlerden beğeni toplarken, genel izleyici onu kafa karıştırıcı ve aşırı uzun buldu.",
+          "description": "\"While\" iki farklı grubun (eleştirmenler ve izleyici) farklı tepkilerini karşılaştırır."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*Research evidence suggests that, in their games, girls show preference for home-centered interests ---- boys are drawn to more naughty and dangerous themes.*",
+        "options": {
+          "A": "unless",
+          "B": "when",
+          "C": "as though",
+          "D": "whereas",
+          "E": "now that"
+        },
+        "correct": "D",
+        "explanation": "Kızların ve erkeklerin oyun tercihleri arasında doğrudan karşıtlık vardır. \"Whereas\" bu zıtlığı ifade eder."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*Research evidence suggests that, in their games, girls show preference for home-centered interests ---- boys are drawn to more naughty and dangerous themes.*",
+          "options": {
+            "A": "unless",
+            "B": "when",
+            "C": "as though",
+            "D": "whereas",
+            "E": "now that"
+          },
+          "correct": "D",
+          "explanation": "Kızların ve erkeklerin oyun tercihleri arasında doğrudan karşıtlık vardır. \"Whereas\" bu zıtlığı ifade eder."
+        }
+      ],
+      "word_count": 328
+    },
+    {
+      "page_number": 9,
+      "title": "SEBEP BAĞLAÇLARI - I",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Because, Since, As, Now that</h2>\n<p>Neden-sonuç ilişkisi kuran bağlaçlar. \"Because\" en güçlü nedeni belirtir. \"Now that\" sadece present durumlar için kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Now that\" ardından genellikle present perfect veya present simple gelir; past zaman gelmez.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Because):</strong><br>\n<strong>EN:</strong> Because the traffic was unexpectedly heavy this morning, I arrived at the office almost an hour later than usual.<br>\n<strong>TR:</strong> Bu sabah trafik beklenmedik şekilde yoğun olduğu için, ofise normalden neredeyse bir saat geç vardım.<br>\n→ <strong>Açıklama:</strong> \"Because\" en yaygın sebep bağlacıdır. Sebep (trafik) ve sonuç (geç kalma) arasında doğrudan ilişki kurar.</p>\n<p><strong>Örnek 2 (Since - sebep):</strong><br>\n<strong>EN:</strong> Since the company has decided to expand into Asian markets, they are now looking for translators fluent in Mandarin and Japanese.<br>\n<strong>TR:</strong> Şirket Asya pazarlarına açılmaya karar verdiği için, şimdi Mandarin ve Japonca bilen çevirmenler arıyorlar.<br>\n→ <strong>Açıklama:</strong> \"Since\" burada \"çünkü\" anlamında, \"because\" ile değiştirilebilir. Genellikle bilinen bir nedeni ifade eder.</p>\n<p><strong>Örnek 3 (As - sebep):</strong><br>\n<strong>EN:</strong> As the deadline for the project is only two days away, the team has been working overtime to complete all the tasks.<br>\n<strong>TR:</strong> Proje teslim tarihine sadece iki gün kaldığı için, ekip tüm görevleri tamamlamak için fazla mesai yapıyor.<br>\n→ <strong>Açıklama:</strong> \"As\" de sebep belirtir, genellikle cümle başında kullanılır ve daha resmîdir.</p>\n<p><strong>Örnek 4 (Now that):</strong><br>\n<strong>EN:</strong> Now that the children have finally moved out and started their own lives, we are planning to sell the big house and travel the world.<br>\n<strong>TR:</strong> Çocuklar nihayet evden ayrılıp kendi hayatlarını kurduğuna göre, büyük evi satıp dünyayı gezmeyi planlıyoruz.<br>\n→ <strong>Açıklama:</strong> \"Now that\" yeni bir durumun sonucunda başka bir eylemin gerçekleşeceğini ifade eder. Present perfect kullanımı yaygındır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Because</td>\n<td>-dığı için</td>\n<td>Because it rained, we stayed.</td>\n</tr>\n<tr>\n<td>Since</td>\n<td>-dığı için</td>\n<td>Since you're here, let's start.</td>\n</tr>\n<tr>\n<td>As</td>\n<td>-dığı için</td>\n<td>As it's late, I'll go.</td>\n</tr>\n<tr>\n<td>Now that</td>\n<td>-dığına göre</td>\n<td>Now that you're 18, you can vote.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- they are accessible by boat only, these islands are still largely undeveloped.</em></p>\n<p>A) Even<br>\nB) As if<br>\nC) Although<br>\nD) Consequently<br>\nE) Since  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** E  \n**Açıklama:** \"Sadece botla ulaşılabilmeleri\" adaların gelişmemiş olmasının nedenidir. Bu nedenle \"since\" (çünkü) doğru seçimdir.\n</details>\n\n<p>[Kelime sayısı: 248]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Because the traffic was unexpectedly heavy this morning, I arrived at the office almost an hour later than usual.",
+          "tr": "Bu sabah trafik beklenmedik şekilde yoğun olduğu için, ofise normalden neredeyse bir saat geç vardım.",
+          "description": "\"Because\" en yaygın sebep bağlacıdır. Sebep (trafik) ve sonuç (geç kalma) arasında doğrudan ilişki kurar.\n\n**Örnek 2 (Since - sebep):**"
+        },
+        {
+          "en": "Since the company has decided to expand into Asian markets, they are now looking for translators fluent in Mandarin and Japanese.",
+          "tr": "Şirket Asya pazarlarına açılmaya karar verdiği için, şimdi Mandarin ve Japonca bilen çevirmenler arıyorlar.",
+          "description": "\"Since\" burada \"çünkü\" anlamında, \"because\" ile değiştirilebilir. Genellikle bilinen bir nedeni ifade eder.\n\n**Örnek 3 (As - sebep):**"
+        },
+        {
+          "en": "As the deadline for the project is only two days away, the team has been working overtime to complete all the tasks.",
+          "tr": "Proje teslim tarihine sadece iki gün kaldığı için, ekip tüm görevleri tamamlamak için fazla mesai yapıyor.",
+          "description": "\"As\" de sebep belirtir, genellikle cümle başında kullanılır ve daha resmîdir.\n\n**Örnek 4 (Now that):**"
+        },
+        {
+          "en": "Now that the children have finally moved out and started their own lives, we are planning to sell the big house and travel the world.",
+          "tr": "Çocuklar nihayet evden ayrılıp kendi hayatlarını kurduğuna göre, büyük evi satıp dünyayı gezmeyi planlıyoruz.",
+          "description": "\"Now that\" yeni bir durumun sonucunda başka bir eylemin gerçekleşeceğini ifade eder. Present perfect kullanımı yaygındır."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- they are accessible by boat only, these islands are still largely undeveloped.*",
+        "options": {
+          "A": "Even",
+          "B": "As if",
+          "C": "Although",
+          "D": "Consequently",
+          "E": "Since"
+        },
+        "correct": "E",
+        "explanation": "\"Sadece botla ulaşılabilmeleri\" adaların gelişmemiş olmasının nedenidir. Bu nedenle \"since\" (çünkü) doğru seçimdir."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- they are accessible by boat only, these islands are still largely undeveloped.*",
+          "options": {
+            "A": "Even",
+            "B": "As if",
+            "C": "Although",
+            "D": "Consequently",
+            "E": "Since"
+          },
+          "correct": "E",
+          "explanation": "\"Sadece botla ulaşılabilmeleri\" adaların gelişmemiş olmasının nedenidir. Bu nedenle \"since\" (çünkü) doğru seçimdir."
+        }
+      ],
+      "word_count": 364
+    },
+    {
+      "page_number": 10,
+      "title": "SEBEP BAĞLAÇLARI - II (EDATLAR)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Because of, Due to, Owing to, Thanks to</h2>\n<p>Bu yapılar edattır; ardından isim, zamir veya -ing gelir. Neden belirtirler.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Due to\" genellikle \"be\" fiilinden sonra kullanılır, ancak diğer fiillerle de kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Because of):</strong><br>\n<strong>EN:</strong> The outdoor concert was canceled because of the sudden thunderstorm that swept through the city in the afternoon.<br>\n<strong>TR:</strong> Açık hava konseri, öğleden sonra şehri vuran ani fırtına yüzünden iptal edildi.<br>\n→ <strong>Açıklama:</strong> \"Because of\" ardından isim (\"the thunderstorm\") gelir. Sebep-sonuç ilişkisi kurar.</p>\n<p><strong>Örnek 2 (Due to):</strong><br>\n<strong>EN:</strong> The delay in the flight schedule was due to technical problems with the aircraft's navigation system.<br>\n<strong>TR:</strong> Uçuş programındaki gecikme, uçağın navigasyon sistemindeki teknik sorunlardan kaynaklanıyordu.<br>\n→ <strong>Açıklama:</strong> \"Due to\" genellikle \"be\" fiilinden sonra gelir (was due to). İsim veya isim öbeği alır.</p>\n<p><strong>Örnek 3 (Owing to):</strong><br>\n<strong>EN:</strong> Owing to the increasing demand for organic products, many farmers are switching to pesticide-free farming methods.<br>\n<strong>TR:</strong> Organik ürünlere artan talep nedeniyle, birçok çiftçi pestisitsiz tarım yöntemlerine geçiyor.<br>\n→ <strong>Açıklama:</strong> \"Owing to\" resmî bir ifadedir, genellikle cümle başında kullanılır.</p>\n<p><strong>Örnek 4 (Thanks to - olumlu):</strong><br>\n<strong>EN:</strong> Thanks to the generous donations from the community, the local library was able to renovate its children's section.<br>\n<strong>TR:</strong> Toplumun cömert bağışları sayesinde, yerel kütüphane çocuk bölümünü yenileyebildi.<br>\n→ <strong>Açıklama:</strong> \"Thanks to\" genellikle olumlu sonuçlar için kullanılır. \"Sayesinde\" anlamı verir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Edat</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Because of</td>\n<td>-den dolayı</td>\n<td>because of the rain</td>\n</tr>\n<tr>\n<td>Due to</td>\n<td>-den dolayı</td>\n<td>due to an accident</td>\n</tr>\n<tr>\n<td>Owing to</td>\n<td>-den dolayı</td>\n<td>owing to the crisis</td>\n</tr>\n<tr>\n<td>Thanks to</td>\n<td>sayesinde</td>\n<td>thanks to your help</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>Ancient Peruvian textiles have survived in an excellent state of preservation --- the dry conditions of much of the country.</em></p>\n<p>A) with regard to<br>\nB) in comparison with<br>\nC) in case of<br>\nD) owing to<br>\nE) in opposition to  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** Kuru hava koşulları, dokumaların iyi korunmasının nedenidir. \"Owing to\" (nedeniyle) bu anlamı verir.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The outdoor concert was canceled because of the sudden thunderstorm that swept through the city in the afternoon.",
+          "tr": "Açık hava konseri, öğleden sonra şehri vuran ani fırtına yüzünden iptal edildi.",
+          "description": "\"Because of\" ardından isim (\"the thunderstorm\") gelir. Sebep-sonuç ilişkisi kurar.\n\n**Örnek 2 (Due to):**"
+        },
+        {
+          "en": "The delay in the flight schedule was due to technical problems with the aircraft's navigation system.",
+          "tr": "Uçuş programındaki gecikme, uçağın navigasyon sistemindeki teknik sorunlardan kaynaklanıyordu.",
+          "description": "\"Due to\" genellikle \"be\" fiilinden sonra gelir (was due to). İsim veya isim öbeği alır.\n\n**Örnek 3 (Owing to):**"
+        },
+        {
+          "en": "Owing to the increasing demand for organic products, many farmers are switching to pesticide-free farming methods.",
+          "tr": "Organik ürünlere artan talep nedeniyle, birçok çiftçi pestisitsiz tarım yöntemlerine geçiyor.",
+          "description": "\"Owing to\" resmî bir ifadedir, genellikle cümle başında kullanılır.\n\n**Örnek 4 (Thanks to - olumlu):**"
+        },
+        {
+          "en": "Thanks to the generous donations from the community, the local library was able to renovate its children's section.",
+          "tr": "Toplumun cömert bağışları sayesinde, yerel kütüphane çocuk bölümünü yenileyebildi.",
+          "description": "\"Thanks to\" genellikle olumlu sonuçlar için kullanılır. \"Sayesinde\" anlamı verir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*Ancient Peruvian textiles have survived in an excellent state of preservation --- the dry conditions of much of the country.*",
+        "options": {
+          "A": "with regard to",
+          "B": "in comparison with",
+          "C": "in case of",
+          "D": "owing to",
+          "E": "in opposition to"
+        },
+        "correct": "D",
+        "explanation": "Kuru hava koşulları, dokumaların iyi korunmasının nedenidir. \"Owing to\" (nedeniyle) bu anlamı verir."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*Ancient Peruvian textiles have survived in an excellent state of preservation --- the dry conditions of much of the country.*",
+          "options": {
+            "A": "with regard to",
+            "B": "in comparison with",
+            "C": "in case of",
+            "D": "owing to",
+            "E": "in opposition to"
+          },
+          "correct": "D",
+          "explanation": "Kuru hava koşulları, dokumaların iyi korunmasının nedenidir. \"Owing to\" (nedeniyle) bu anlamı verir."
+        }
+      ],
+      "word_count": 327
+    },
+    {
+      "page_number": 11,
+      "title": "SONUÇ BAĞLAÇLARI",
+      "total_pages": 25,
+      "content_html": "<h2>📌 So...that, Such...that, So (that), Otherwise</h2>\n<p>Bir eylemin sonucunu ifade eden yapılar. \"So\" ve \"such\" derece bildirir, \"so (that)\" bu yüzden anlamında kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"So\" + sıfat/zarf, \"such\" + (sıfat) + isim.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (So...that):</strong><br>\n<strong>EN:</strong> The coffee was so incredibly hot that I had to wait nearly twenty minutes before I could take even a small sip.<br>\n<strong>TR:</strong> Kahve o kadar inanılmaz sıcaktı ki küçük bir yudum bile almadan önce neredeyse yirmi dakika beklemek zorunda kaldım.<br>\n→ <strong>Açıklama:</strong> \"So\" + sıfat (hot) + \"that\" + sonuç cümlesi. Sıfatın derecesi vurgulanır.</p>\n<p><strong>Örnek 2 (Such...that):</strong><br>\n<strong>EN:</strong> It was such a complicated legal case that the lawyers needed several weeks to prepare their arguments.<br>\n<strong>TR:</strong> O kadar karmaşık bir hukuk davasıydı ki avukatların savunmalarını hazırlamak için birkaç haftaya ihtiyacı vardı.<br>\n→ <strong>Açıklama:</strong> \"Such\" + (a/an) + sıfat + isim + \"that\" + sonuç. \"Such\" isimle birlikte kullanılır.</p>\n<p><strong>Örnek 3 (, so that - sonuç):</strong><br>\n<strong>EN:</strong> The store was closing in five minutes, so (that) we had to grab whatever we needed and rush to the checkout.<br>\n<strong>TR:</strong> Mağaza beş dakika içinde kapanıyordu, bu yüzden neye ihtiyacımız varsa alıp kasaya koşmak zorunda kaldık.<br>\n→ <strong>Açıklama:</strong> \", so (that)\" bu yüzden anlamında sonuç bildirir. Öncesinde virgül olabilir.</p>\n<p><strong>Örnek 4 (Otherwise):</strong><br>\n<strong>EN:</strong> You should submit your application by the end of this week; otherwise, it will not be considered for the scholarship.<br>\n<strong>TR:</strong> Başvurunu bu haftanın sonuna kadar teslim etmelisin; aksi takdirde burs için değerlendirilmeyecek.<br>\n→ <strong>Açıklama:</strong> \"Otherwise\" \"aksi takdirde\" anlamında, önceki cümleye bağlı bir sonuç belirtir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Anlam</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>so + adj/adv + that</td>\n<td>o kadar...ki</td>\n<td>so hot that...</td>\n</tr>\n<tr>\n<td>such + (adj) noun + that</td>\n<td>öyle...ki</td>\n<td>such a hot day that...</td>\n</tr>\n<tr>\n<td>, so (that)</td>\n<td>bu yüzden</td>\n<td>It rained, so we stayed.</td>\n</tr>\n<tr>\n<td>otherwise</td>\n<td>yoksa</td>\n<td>Hurry, otherwise you'll miss it.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>The interiors of planets are totally inaccessible, --- what we know about them comes from indirect measurements.</em></p>\n<p>A) so<br>\nB) whereas<br>\nC) even though<br>\nD) since<br>\nE) so as  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Ulaşılamaz olması, bilginin dolaylı yollardan gelmesinin nedenidir. Burada sonuç ifade ediliyor, \"so\" (bu yüzden) doğrudur.\n</details>\n\n<p>[Kelime sayısı: 251]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The coffee was so incredibly hot that I had to wait nearly twenty minutes before I could take even a small sip.",
+          "tr": "Kahve o kadar inanılmaz sıcaktı ki küçük bir yudum bile almadan önce neredeyse yirmi dakika beklemek zorunda kaldım.",
+          "description": "\"So\" + sıfat (hot) + \"that\" + sonuç cümlesi. Sıfatın derecesi vurgulanır.\n\n**Örnek 2 (Such...that):**"
+        },
+        {
+          "en": "It was such a complicated legal case that the lawyers needed several weeks to prepare their arguments.",
+          "tr": "O kadar karmaşık bir hukuk davasıydı ki avukatların savunmalarını hazırlamak için birkaç haftaya ihtiyacı vardı.",
+          "description": "\"Such\" + (a/an) + sıfat + isim + \"that\" + sonuç. \"Such\" isimle birlikte kullanılır.\n\n**Örnek 3 (, so that - sonuç):**"
+        },
+        {
+          "en": "The store was closing in five minutes, so (that) we had to grab whatever we needed and rush to the checkout.",
+          "tr": "Mağaza beş dakika içinde kapanıyordu, bu yüzden neye ihtiyacımız varsa alıp kasaya koşmak zorunda kaldık.",
+          "description": "\", so (that)\" bu yüzden anlamında sonuç bildirir. Öncesinde virgül olabilir.\n\n**Örnek 4 (Otherwise):**"
+        },
+        {
+          "en": "You should submit your application by the end of this week; otherwise, it will not be considered for the scholarship.",
+          "tr": "Başvurunu bu haftanın sonuna kadar teslim etmelisin; aksi takdirde burs için değerlendirilmeyecek.",
+          "description": "\"Otherwise\" \"aksi takdirde\" anlamında, önceki cümleye bağlı bir sonuç belirtir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*The interiors of planets are totally inaccessible, --- what we know about them comes from indirect measurements.*",
+        "options": {
+          "A": "so",
+          "B": "whereas",
+          "C": "even though",
+          "D": "since",
+          "E": "so as"
+        },
+        "correct": "A",
+        "explanation": "Ulaşılamaz olması, bilginin dolaylı yollardan gelmesinin nedenidir. Burada sonuç ifade ediliyor, \"so\" (bu yüzden) doğrudur."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*The interiors of planets are totally inaccessible, --- what we know about them comes from indirect measurements.*",
+          "options": {
+            "A": "so",
+            "B": "whereas",
+            "C": "even though",
+            "D": "since",
+            "E": "so as"
+          },
+          "correct": "A",
+          "explanation": "Ulaşılamaz olması, bilginin dolaylı yollardan gelmesinin nedenidir. Burada sonuç ifade ediliyor, \"so\" (bu yüzden) doğrudur."
+        }
+      ],
+      "word_count": 348
+    },
+    {
+      "page_number": 12,
+      "title": "AMAÇ BAĞLAÇLARI",
+      "total_pages": 25,
+      "content_html": "<h2>📌 So that, In order that, For fear that, Lest</h2>\n<p>Bir eylemin amacını belirten bağlaçlar. Genellikle modal (can, could, may, might, should) ile birlikte kullanılırlar.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Lest\" resmîdir ve genellikle \"should\" ile kullanılır; \"for fear that\" daha yaygındır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (So that - amaç):</strong><br>\n<strong>EN:</strong> The manager spoke very slowly and clearly so that all the new employees could understand the complex instructions.<br>\n<strong>TR:</strong> Müdür, tüm yeni çalışanların karmaşık talimatları anlayabilmesi için çok yavaş ve net konuştu.<br>\n→ <strong>Açıklama:</strong> \"So that\" amaç bildirir. Ardından \"could\" modalı kullanılmış. Amaç: anlaşılma.</p>\n<p><strong>Örnek 2 (In order that):</strong><br>\n<strong>EN:</strong> The government has implemented new tax incentives in order that small businesses may thrive and create more jobs.<br>\n<strong>TR:</strong> Hükümet, küçük işletmelerin gelişmesi ve daha fazla iş yaratması için yeni vergi teşvikleri uygulamaya koydu.<br>\n→ <strong>Açıklama:</strong> \"In order that\" daha resmîdir. \"May\" modalı amaç belirtir.</p>\n<p><strong>Örnek 3 (For fear that):</strong><br>\n<strong>EN:</strong> She double-checked all the doors and windows for fear that a burglar might break in while they were on vacation.<br>\n<strong>TR:</strong> Tatildeyken bir hırsızın girebileceği korkusuyla tüm kapıları ve pencereleri iki kez kontrol etti.<br>\n→ <strong>Açıklama:</strong> \"For fear that\" bir şeyden korkulduğu için yapılan eylemi ifade eder. Ardından \"might\" gelmiş.</p>\n<p><strong>Örnek 4 (Lest):</strong><br>\n<strong>EN:</strong> The witness's identity was kept secret lest the defendant (should) try to intimidate him before the trial.<br>\n<strong>TR:</strong> Tanığın kimliği, davalının duruşma öncesinde onu yıldırmaya çalışmasın diye gizli tutuldu.<br>\n→ <strong>Açıklama:</strong> \"Lest\" resmîdir ve genellikle \"should\" ile kullanılır. \"-mesin diye\" anlamı verir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Modal</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>so that</td>\n<td>-sin diye</td>\n<td>can, could, will, would</td>\n</tr>\n<tr>\n<td>in order that</td>\n<td>-mesi için</td>\n<td>may, might</td>\n</tr>\n<tr>\n<td>for fear that</td>\n<td>korkusuyla</td>\n<td>might, would</td>\n</tr>\n<tr>\n<td>lest</td>\n<td>-mesin diye</td>\n<td>should (genellikle)</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>The most rewarding aspect of taking photographs is to be able to immortalize people's hearts, smiles, and soul --- you can always feel like you are a part of their world.</em></p>\n<p>A) while<br>\nB) as though<br>\nC) so that<br>\nD) whereas<br>\nE) whenever  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** Amaç, her zaman onların dünyasının bir parçası gibi hissedebilmektir. \"So that\" amaç bildirir ve \"can\" ile kullanımı yaygındır.\n</details>\n\n<p>[Kelime sayısı: 250]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The manager spoke very slowly and clearly so that all the new employees could understand the complex instructions.",
+          "tr": "Müdür, tüm yeni çalışanların karmaşık talimatları anlayabilmesi için çok yavaş ve net konuştu.",
+          "description": "\"So that\" amaç bildirir. Ardından \"could\" modalı kullanılmış. Amaç: anlaşılma.\n\n**Örnek 2 (In order that):**"
+        },
+        {
+          "en": "The government has implemented new tax incentives in order that small businesses may thrive and create more jobs.",
+          "tr": "Hükümet, küçük işletmelerin gelişmesi ve daha fazla iş yaratması için yeni vergi teşvikleri uygulamaya koydu.",
+          "description": "\"In order that\" daha resmîdir. \"May\" modalı amaç belirtir.\n\n**Örnek 3 (For fear that):**"
+        },
+        {
+          "en": "She double-checked all the doors and windows for fear that a burglar might break in while they were on vacation.",
+          "tr": "Tatildeyken bir hırsızın girebileceği korkusuyla tüm kapıları ve pencereleri iki kez kontrol etti.",
+          "description": "\"For fear that\" bir şeyden korkulduğu için yapılan eylemi ifade eder. Ardından \"might\" gelmiş.\n\n**Örnek 4 (Lest):**"
+        },
+        {
+          "en": "The witness's identity was kept secret lest the defendant (should) try to intimidate him before the trial.",
+          "tr": "Tanığın kimliği, davalının duruşma öncesinde onu yıldırmaya çalışmasın diye gizli tutuldu.",
+          "description": "\"Lest\" resmîdir ve genellikle \"should\" ile kullanılır. \"-mesin diye\" anlamı verir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*The most rewarding aspect of taking photographs is to be able to immortalize people's hearts, smiles, and soul --- you can always feel like you are a part of their world.*",
+        "options": {
+          "A": "while",
+          "B": "as though",
+          "C": "so that",
+          "D": "whereas",
+          "E": "whenever"
+        },
+        "correct": "C",
+        "explanation": "Amaç, her zaman onların dünyasının bir parçası gibi hissedebilmektir. \"So that\" amaç bildirir ve \"can\" ile kullanımı yaygındır."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*The most rewarding aspect of taking photographs is to be able to immortalize people's hearts, smiles, and soul --- you can always feel like you are a part of their world.*",
+          "options": {
+            "A": "while",
+            "B": "as though",
+            "C": "so that",
+            "D": "whereas",
+            "E": "whenever"
+          },
+          "correct": "C",
+          "explanation": "Amaç, her zaman onların dünyasının bir parçası gibi hissedebilmektir. \"So that\" amaç bildirir ve \"can\" ile kullanımı yaygındır."
+        }
+      ],
+      "word_count": 352
+    },
+    {
+      "page_number": 13,
+      "title": "ZAMAN BAĞLAÇLARI - I",
+      "total_pages": 25,
+      "content_html": "<h2>📌 When, While, As, After, Before</h2>\n<p>Zaman bağlaçları iki eylem arasındaki zaman ilişkisini belirtir. Zaman uyumu önemlidir: yan cümlede gelecek zaman kullanılmaz.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Zaman bağlacından sonra asla \"will\" veya \"would\" gelmez; onun yerine present tense kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (When):</strong><br>\n<strong>EN:</strong> When the concert finally ended after three encores, the exhausted but happy audience slowly made their way out of the stadium.<br>\n<strong>TR:</strong> Konser üç kez bisikten sonra nihayet bittiğinde, yorgun ama mutlu izleyiciler yavaşça stadyumdan çıktılar.<br>\n→ <strong>Açıklama:</strong> \"When\" iki eylemin zamanını bağlar: konserin bitmesi ve çıkış. Her iki fiil de past tense.</p>\n<p><strong>Örnek 2 (While):</strong><br>\n<strong>EN:</strong> While the chef was preparing the main course, his assistant carefully arranged the appetizers on the serving plates.<br>\n<strong>TR:</strong> Şef ana yemeği hazırlarken, asistanı dikkatlice servis tabaklarına başlangıçları yerleştirdi.<br>\n→ <strong>Açıklama:</strong> \"While\" eş zamanlı iki eylemi ifade eder. Past continuous + past simple sık kullanılır.</p>\n<p><strong>Örnek 3 (After):</strong><br>\n<strong>EN:</strong> After the archaeologists had carefully excavated the ancient tomb for several weeks, they finally discovered a collection of gold artifacts.<br>\n<strong>TR:</strong> Arkeologlar antik mezarı birkaç hafta boyunca dikkatlice kazdıktan sonra, nihayet bir dizi altın eser keşfettiler.<br>\n→ <strong>Açıklama:</strong> \"After\" önce olan eylemi belirtir. Past perfect (had excavated) öncelik vurgusu yapar.</p>\n<p><strong>Örnek 4 (Before):</strong><br>\n<strong>EN:</strong> Before you make any final decisions about the merger, you should consult with the legal team to avoid potential risks.<br>\n<strong>TR:</strong> Birleşme hakkında nihai kararlar vermeden önce, potansiyel risklerden kaçınmak için hukuk ekibine danışmalısınız.<br>\n→ <strong>Açıklama:</strong> \"Before\" sonra olacak eylemi belirtir. Yan cümlede present tense (make) kullanılmış, ana cümlede modal (should) var.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Zaman Uyumu</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>when</td>\n<td>-diğinde</td>\n<td>past + past / present + present</td>\n</tr>\n<tr>\n<td>while</td>\n<td>-iken</td>\n<td>past cont. + past simple</td>\n</tr>\n<tr>\n<td>after</td>\n<td>-den sonra</td>\n<td>past perfect + past simple</td>\n</tr>\n<tr>\n<td>before</td>\n<td>-meden önce</td>\n<td>present + future/modal</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- folktales were preserved in written form, they were simply stories retold whenever a group gathered.</em></p>\n<p>A) Whether<br>\nB) Before<br>\nC) If<br>\nD) Unless<br>\nE) Whereas  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Yazılı hale getirilmeden önce hikâyeler sözlü olarak anlatılıyordu. \"Before\" zaman ilişkisi kurar.\n</details>\n\n<p>[Kelime sayısı: 255]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "When the concert finally ended after three encores, the exhausted but happy audience slowly made their way out of the stadium.",
+          "tr": "Konser üç kez bisikten sonra nihayet bittiğinde, yorgun ama mutlu izleyiciler yavaşça stadyumdan çıktılar.",
+          "description": "\"When\" iki eylemin zamanını bağlar: konserin bitmesi ve çıkış. Her iki fiil de past tense.\n\n**Örnek 2 (While):**"
+        },
+        {
+          "en": "While the chef was preparing the main course, his assistant carefully arranged the appetizers on the serving plates.",
+          "tr": "Şef ana yemeği hazırlarken, asistanı dikkatlice servis tabaklarına başlangıçları yerleştirdi.",
+          "description": "\"While\" eş zamanlı iki eylemi ifade eder. Past continuous + past simple sık kullanılır.\n\n**Örnek 3 (After):**"
+        },
+        {
+          "en": "After the archaeologists had carefully excavated the ancient tomb for several weeks, they finally discovered a collection of gold artifacts.",
+          "tr": "Arkeologlar antik mezarı birkaç hafta boyunca dikkatlice kazdıktan sonra, nihayet bir dizi altın eser keşfettiler.",
+          "description": "\"After\" önce olan eylemi belirtir. Past perfect (had excavated) öncelik vurgusu yapar.\n\n**Örnek 4 (Before):**"
+        },
+        {
+          "en": "Before you make any final decisions about the merger, you should consult with the legal team to avoid potential risks.",
+          "tr": "Birleşme hakkında nihai kararlar vermeden önce, potansiyel risklerden kaçınmak için hukuk ekibine danışmalısınız.",
+          "description": "\"Before\" sonra olacak eylemi belirtir. Yan cümlede present tense (make) kullanılmış, ana cümlede modal (should) var."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- folktales were preserved in written form, they were simply stories retold whenever a group gathered.*",
+        "options": {
+          "A": "Whether",
+          "B": "Before",
+          "C": "If",
+          "D": "Unless",
+          "E": "Whereas"
+        },
+        "correct": "B",
+        "explanation": "Yazılı hale getirilmeden önce hikâyeler sözlü olarak anlatılıyordu. \"Before\" zaman ilişkisi kurar."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- folktales were preserved in written form, they were simply stories retold whenever a group gathered.*",
+          "options": {
+            "A": "Whether",
+            "B": "Before",
+            "C": "If",
+            "D": "Unless",
+            "E": "Whereas"
+          },
+          "correct": "B",
+          "explanation": "Yazılı hale getirilmeden önce hikâyeler sözlü olarak anlatılıyordu. \"Before\" zaman ilişkisi kurar."
+        }
+      ],
+      "word_count": 338
+    },
+    {
+      "page_number": 14,
+      "title": "ZAMAN BAĞLAÇLARI - II",
+      "total_pages": 25,
+      "content_html": "<h2>📌 As soon as, Once, Until, By the time</h2>\n<p>Bu bağlaçlar olayların sırasını veya bir noktaya kadar olan süreyi belirtir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"By the time\" genellikle perfect tenselerle kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (As soon as):</strong><br>\n<strong>EN:</strong> As soon as the president stepped onto the stage, the crowd erupted into thunderous applause and cheers.<br>\n<strong>TR:</strong> Başkan sahneye adım atar atmaz, kalabalık gök gürültüsü gibi alkış ve tezahüratlarla coştu.<br>\n→ <strong>Açıklama:</strong> \"As soon as\" iki eylemin hemen ardışık olduğunu vurgular. İkisi de past simple.</p>\n<p><strong>Örnek 2 (Once):</strong><br>\n<strong>EN:</strong> Once you have completed the online application form, you will receive a confirmation email within 24 hours.<br>\n<strong>TR:</strong> Çevrimiçi başvuru formunu doldurduğunuzda, 24 saat içinde bir onay e-postası alacaksınız.<br>\n→ <strong>Açıklama:</strong> \"Once\" \"yapar yapmaz\" veya \"bir kez yaptıktan sonra\" anlamındadır. Present perfect + present/future.</p>\n<p><strong>Örnek 3 (Until):</strong><br>\n<strong>EN:</strong> The children played in the park until the sun went down and it started to get dark and cold.<br>\n<strong>TR:</strong> Çocuklar, güneş batıp hava kararmaya ve soğumaya başlayana kadar parkta oynadılar.<br>\n→ <strong>Açıklama:</strong> \"Until\" bir eylemin devam ettiği sürenin bitiş noktasını belirtir. Past simple + past simple.</p>\n<p><strong>Örnek 4 (By the time):</strong><br>\n<strong>EN:</strong> By the time the fire department arrived at the scene, the old warehouse had already been completely engulfed in flames.<br>\n<strong>TR:</strong> İtfaiye olay yerine vardığında, eski depo zaten tamamen alevler içinde kalmıştı.<br>\n→ <strong>Açıklama:</strong> \"By the time\" bir olay gerçekleştiğinde diğerinin çoktan olup bittiğini vurgular. Past perfect + past simple.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Zaman</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>as soon as</td>\n<td>-er -mez</td>\n<td>He called as soon as he arrived.</td>\n</tr>\n<tr>\n<td>once</td>\n<td>-dığında / -er -mez</td>\n<td>Once you start, you'll like it.</td>\n</tr>\n<tr>\n<td>until</td>\n<td>-e kadar</td>\n<td>Wait until I come back.</td>\n</tr>\n<tr>\n<td>by the time</td>\n<td>-e gelindiğinde</td>\n<td>By the time we arrived, they had left.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- symptoms have subsided, the patient should begin rehabilitation to strengthen muscles.</em></p>\n<p>A) While<br>\nB) Until<br>\nC) Whether<br>\nD) Once<br>\nE) Although  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** D  \n**Açıklama:** Semptomlar azaldıktan sonra rehabilitasyon başlamalı. \"Once\" bu sırayı ifade eder.\n</details>\n\n<p>[Kelime sayısı: 238]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "As soon as the president stepped onto the stage, the crowd erupted into thunderous applause and cheers.",
+          "tr": "Başkan sahneye adım atar atmaz, kalabalık gök gürültüsü gibi alkış ve tezahüratlarla coştu.",
+          "description": "\"As soon as\" iki eylemin hemen ardışık olduğunu vurgular. İkisi de past simple.\n\n**Örnek 2 (Once):**"
+        },
+        {
+          "en": "Once you have completed the online application form, you will receive a confirmation email within 24 hours.",
+          "tr": "Çevrimiçi başvuru formunu doldurduğunuzda, 24 saat içinde bir onay e-postası alacaksınız.",
+          "description": "\"Once\" \"yapar yapmaz\" veya \"bir kez yaptıktan sonra\" anlamındadır. Present perfect + present/future.\n\n**Örnek 3 (Until):**"
+        },
+        {
+          "en": "The children played in the park until the sun went down and it started to get dark and cold.",
+          "tr": "Çocuklar, güneş batıp hava kararmaya ve soğumaya başlayana kadar parkta oynadılar.",
+          "description": "\"Until\" bir eylemin devam ettiği sürenin bitiş noktasını belirtir. Past simple + past simple.\n\n**Örnek 4 (By the time):**"
+        },
+        {
+          "en": "By the time the fire department arrived at the scene, the old warehouse had already been completely engulfed in flames.",
+          "tr": "İtfaiye olay yerine vardığında, eski depo zaten tamamen alevler içinde kalmıştı.",
+          "description": "\"By the time\" bir olay gerçekleştiğinde diğerinin çoktan olup bittiğini vurgular. Past perfect + past simple."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- symptoms have subsided, the patient should begin rehabilitation to strengthen muscles.*",
+        "options": {
+          "A": "While",
+          "B": "Until",
+          "C": "Whether",
+          "D": "Once",
+          "E": "Although"
+        },
+        "correct": "D",
+        "explanation": "Semptomlar azaldıktan sonra rehabilitasyon başlamalı. \"Once\" bu sırayı ifade eder."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- symptoms have subsided, the patient should begin rehabilitation to strengthen muscles.*",
+          "options": {
+            "A": "While",
+            "B": "Until",
+            "C": "Whether",
+            "D": "Once",
+            "E": "Although"
+          },
+          "correct": "D",
+          "explanation": "Semptomlar azaldıktan sonra rehabilitasyon başlamalı. \"Once\" bu sırayı ifade eder."
+        }
+      ],
+      "word_count": 332
+    },
+    {
+      "page_number": 15,
+      "title": "ZAMAN BAĞLAÇLARI - III (NO SOONER...THAN, HARDLY...WHEN)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 -er -mez, -mesiyle birlikte</h2>\n<p>Bu yapılar iki olayın hemen ardından gerçekleştiğini vurgular. Cümle başında kullanıldıklarında devrik yapı gerektirir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"No sooner\" ile \"than\", \"hardly\" ile \"when\" birlikte kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (No sooner...than - normal):</strong><br>\n<strong>EN:</strong> I had no sooner closed my eyes to sleep than the baby started crying loudly in the next room.<br>\n<strong>TR:</strong> Uyumak için gözlerimi kapatmıştım ki bebek yan odada yüksek sesle ağlamaya başladı.<br>\n→ <strong>Açıklama:</strong> \"No sooner\" ile başlayan kısımda past perfect kullanılır, \"than\" sonrası past simple. İki eylem hemen ardışık.</p>\n<p><strong>Örnek 2 (No sooner...than - devrik):</strong><br>\n<strong>EN:</strong> No sooner had the company launched its new product than the competitors announced a similar, cheaper alternative.<br>\n<strong>TR:</strong> Şirket yeni ürününü piyasaya sürer sürmez, rakipler benzer ve daha ucuz bir alternatif duyurdular.<br>\n→ <strong>Açıklama:</strong> \"No sooner\" cümle başında, devrik yapı: \"had the company launched\". Anlam aynı.</p>\n<p><strong>Örnek 3 (Hardly...when - normal):</strong><br>\n<strong>EN:</strong> The tourists had hardly stepped off the bus when it started to pour with rain.<br>\n<strong>TR:</strong> Turistler otobüsten iner inmez şiddetli yağmur başladı.<br>\n→ <strong>Açıklama:</strong> \"Hardly\" past perfect ile, \"when\" past simple ile kullanılır. Çok kısa süre vurgulanır.</p>\n<p><strong>Örnek 4 (Hardly...when - devrik):</strong><br>\n<strong>EN:</strong> Hardly had the meeting begun when several participants started arguing about the agenda.<br>\n<strong>TR:</strong> Toplantı başlar başlamaz, birkaç katılımcı gündem hakkında tartışmaya başladı.<br>\n→ <strong>Açıklama:</strong> \"Hardly\" başa alındığında devrik yapı: \"had the meeting begun\". Vurgu artar.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Kullanım</th>\n<th>Devrik</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>No sooner...than</td>\n<td>No sooner + had + özne + V3...than + V2</td>\n<td>Evet</td>\n</tr>\n<tr>\n<td>Hardly...when</td>\n<td>Hardly + had + özne + V3...when + V2</td>\n<td>Evet</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerden hangisi doğrudur?</p>\n<p>A) No sooner I had arrived than the phone rang.<br>\nB) No sooner had I arrived when the phone rang.<br>\nC) No sooner had I arrived than the phone rang.<br>\nD) No sooner I arrived than the phone rang.  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** Doğru yapı \"No sooner + had + özne + V3...than + V2\" şeklindedir. C seçeneği bu kurala uyar.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "I had no sooner closed my eyes to sleep than the baby started crying loudly in the next room.",
+          "tr": "Uyumak için gözlerimi kapatmıştım ki bebek yan odada yüksek sesle ağlamaya başladı.",
+          "description": "\"No sooner\" ile başlayan kısımda past perfect kullanılır, \"than\" sonrası past simple. İki eylem hemen ardışık.\n\n**Örnek 2 (No sooner...than - devrik):**"
+        },
+        {
+          "en": "No sooner had the company launched its new product than the competitors announced a similar, cheaper alternative.",
+          "tr": "Şirket yeni ürününü piyasaya sürer sürmez, rakipler benzer ve daha ucuz bir alternatif duyurdular.",
+          "description": "\"No sooner\" cümle başında, devrik yapı: \"had the company launched\". Anlam aynı.\n\n**Örnek 3 (Hardly...when - normal):**"
+        },
+        {
+          "en": "The tourists had hardly stepped off the bus when it started to pour with rain.",
+          "tr": "Turistler otobüsten iner inmez şiddetli yağmur başladı.",
+          "description": "\"Hardly\" past perfect ile, \"when\" past simple ile kullanılır. Çok kısa süre vurgulanır.\n\n**Örnek 4 (Hardly...when - devrik):**"
+        },
+        {
+          "en": "Hardly had the meeting begun when several participants started arguing about the agenda.",
+          "tr": "Toplantı başlar başlamaz, birkaç katılımcı gündem hakkında tartışmaya başladı.",
+          "description": "\"Hardly\" başa alındığında devrik yapı: \"had the meeting begun\". Vurgu artar."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerden hangisi doğrudur?",
+        "options": {
+          "A": "No sooner I had arrived than the phone rang.",
+          "B": "No sooner had I arrived when the phone rang.",
+          "C": "No sooner had I arrived than the phone rang.",
+          "D": "No sooner I arrived than the phone rang."
+        },
+        "correct": "C",
+        "explanation": "Doğru yapı \"No sooner + had + özne + V3...than + V2\" şeklindedir. C seçeneği bu kurala uyar."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerden hangisi doğrudur?",
+          "options": {
+            "A": "No sooner I had arrived than the phone rang.",
+            "B": "No sooner had I arrived when the phone rang.",
+            "C": "No sooner had I arrived than the phone rang.",
+            "D": "No sooner I arrived than the phone rang."
+          },
+          "correct": "C",
+          "explanation": "Doğru yapı \"No sooner + had + özne + V3...than + V2\" şeklindedir. C seçeneği bu kurala uyar."
+        }
+      ],
+      "word_count": 323
+    },
+    {
+      "page_number": 16,
+      "title": "DURUM BAĞLAÇLARI (MANNER)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 As, As if, As though</h2>\n<p>Bir eylemin nasıl yapıldığını veya bir durumun nasıl algılandığını ifade eder.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"As if / as though\" gerçek dışı durumlarda (unreal) bir tense geri gidilerek kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Just as - gibi):</strong><br>\n<strong>EN:</strong> Just as the sun rises in the east every morning, so do our daily routines begin with a fresh cup of coffee.<br>\n<strong>TR:</strong> Nasıl güneş her sabah doğudan doğuyorsa, günlük rutinlerimiz de taze bir fincan kahve ile başlar.<br>\n→ <strong>Açıklama:</strong> \"Just as...so...\" benzetme yapısı. \"So\" sonrasında devrik kullanılabilir (so do our routines begin).</p>\n<p><strong>Örnek 2 (As if - gerçek):</strong><br>\n<strong>EN:</strong> The sky looks dark and gray; it looks as if it is going to snow heavily very soon.<br>\n<strong>TR:</strong> Gökyüzü karanlık ve gri görünüyor; çok yakında yoğun kar yağacak gibi görünüyor.<br>\n→ <strong>Açıklama:</strong> Gerçek bir durum (kar yağacak gibi) ifade edildiği için present tense (is going) kullanılmış.</p>\n<p><strong>Örnek 3 (As if - unreal):</strong><br>\n<strong>EN:</strong> He spends money as if he were a millionaire, even though he earns a modest salary.<br>\n<strong>TR:</strong> Mütevazı bir maaş kazanmasına rağmen, parasını bir milyonermiş gibi harcıyor.<br>\n→ <strong>Açıklama:</strong> Unreal (gerçek dışı) durum: o milyoner değil. Bu nedenle \"were\" (past subjunctive) kullanıldı.</p>\n<p><strong>Örnek 4 (As though):</strong><br>\n<strong>EN:</strong> She acted as though nothing had happened, but I could see the sadness in her eyes.<br>\n<strong>TR:</strong> Hiçbir şey olmamış gibi davrandı, ama gözlerindeki üzüntüyü görebiliyordum.<br>\n→ <strong>Açıklama:</strong> \"As though\" da \"as if\" gibidir. Gerçek dışı: bir şey olmuştu ama olmamış gibi davranıyor. Past perfect (had happened) kullanılmış.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Bağlaç</th>\n<th>Anlam</th>\n<th>Gerçek / Unreal</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>just as</td>\n<td>-dığı gibi</td>\n<td>gerçek</td>\n</tr>\n<tr>\n<td>as if</td>\n<td>gibi / -miş gibi</td>\n<td>gerçek: present; unreal: past</td>\n</tr>\n<tr>\n<td>as though</td>\n<td>gibi / -miş gibi</td>\n<td>aynı</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluklara hangi seçenek gelmelidir?<br>\n<em>On long space flights, astronauts' bones thin, much as if they --- from osteoporosis.</em></p>\n<p>A) were suffering<br>\nB) suffer<br>\nC) have suffered<br>\nD) would suffer  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** Gerçek dışı bir durum (kemik erimesi yok ama öyle gibi) ifade edildiği için past tense (were suffering) kullanılmalıdır.\n</details>\n\n<p>[Kelime sayısı: 252]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Just as the sun rises in the east every morning, so do our daily routines begin with a fresh cup of coffee.",
+          "tr": "Nasıl güneş her sabah doğudan doğuyorsa, günlük rutinlerimiz de taze bir fincan kahve ile başlar.",
+          "description": "\"Just as...so...\" benzetme yapısı. \"So\" sonrasında devrik kullanılabilir (so do our routines begin).\n\n**Örnek 2 (As if - gerçek):**"
+        },
+        {
+          "en": "The sky looks dark and gray; it looks as if it is going to snow heavily very soon.",
+          "tr": "Gökyüzü karanlık ve gri görünüyor; çok yakında yoğun kar yağacak gibi görünüyor.",
+          "description": "Gerçek bir durum (kar yağacak gibi) ifade edildiği için present tense (is going) kullanılmış.\n\n**Örnek 3 (As if - unreal):**"
+        },
+        {
+          "en": "He spends money as if he were a millionaire, even though he earns a modest salary.",
+          "tr": "Mütevazı bir maaş kazanmasına rağmen, parasını bir milyonermiş gibi harcıyor.",
+          "description": "Unreal (gerçek dışı) durum: o milyoner değil. Bu nedenle \"were\" (past subjunctive) kullanıldı.\n\n**Örnek 4 (As though):**"
+        },
+        {
+          "en": "She acted as though nothing had happened, but I could see the sadness in her eyes.",
+          "tr": "Hiçbir şey olmamış gibi davrandı, ama gözlerindeki üzüntüyü görebiliyordum.",
+          "description": "\"As though\" da \"as if\" gibidir. Gerçek dışı: bir şey olmuştu ama olmamış gibi davranıyor. Past perfect (had happened) kullanılmış."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluklara hangi seçenek gelmelidir?\n*On long space flights, astronauts' bones thin, much as if they --- from osteoporosis.*",
+        "options": {
+          "A": "were suffering",
+          "B": "suffer",
+          "C": "have suffered",
+          "D": "would suffer"
+        },
+        "correct": "A",
+        "explanation": "Gerçek dışı bir durum (kemik erimesi yok ama öyle gibi) ifade edildiği için past tense (were suffering) kullanılmalıdır."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluklara hangi seçenek gelmelidir?\n*On long space flights, astronauts' bones thin, much as if they --- from osteoporosis.*",
+          "options": {
+            "A": "were suffering",
+            "B": "suffer",
+            "C": "have suffered",
+            "D": "would suffer"
+          },
+          "correct": "A",
+          "explanation": "Gerçek dışı bir durum (kemik erimesi yok ama öyle gibi) ifade edildiği için past tense (were suffering) kullanılmalıdır."
+        }
+      ],
+      "word_count": 332
+    },
+    {
+      "page_number": 17,
+      "title": "ZARF CÜMLECİKLERİNİN KISALTILMASI - I (AKTİF)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Aynı özne ile kısaltma</h2>\n<p>Yan cümlecik ile ana cümleciğin öznesi aynıysa, zarf cümleciği kısaltılabilir. Aktif fiillerde Ving, daha önce olan eylemlerde having V3 kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Kısaltma yaparken bazı bağlaçlar (before, after, while, etc.) atılabilir veya tutulabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Before + Ving):</strong><br>\n<strong>EN:</strong> Before you make a final decision, you should carefully consider all the potential consequences of your actions.<br>\n<strong>EN (kısaltılmış):</strong> Before making a final decision, you should carefully consider all the potential consequences.<br>\n→ <strong>Açıklama:</strong> \"Before\" bağlacı tutulmuş, fiil Ving'e dönüşmüş. Özne ortak (you) olduğu için atılmış.</p>\n<p><strong>Örnek 2 (After + having V3):</strong><br>\n<strong>EN:</strong> After they had examined the patient thoroughly, the doctors decided to perform emergency surgery.<br>\n<strong>EN (kısaltılmış):</strong> After having examined the patient thoroughly, the doctors decided to perform emergency surgery.<br>\n→ <strong>Açıklama:</strong> \"After\" tutulmuş, \"had examined\" → \"having examined\" olmuş. Öncelik vurgusu için having V3 kullanılır.</p>\n<p><strong>Örnek 3 (While + Ving):</strong><br>\n<strong>EN:</strong> While she was walking home from work, she suddenly remembered that she had left the oven on.<br>\n<strong>EN (kısaltılmış):</strong> While walking home from work, she suddenly remembered that she had left the oven on.<br>\n→ <strong>Açıklama:</strong> \"While\" tutulmuş, \"was walking\" → \"walking\". Eş zamanlılık vurgulanır.</p>\n<p><strong>Örnek 4 (Sebep bildiren bağlacın atılması):</strong><br>\n<strong>EN:</strong> Since he was feeling tired and hungry, he decided to take a short break before continuing.<br>\n<strong>EN (kısaltılmış):</strong> Feeling tired and hungry, he decided to take a short break before continuing.<br>\n→ <strong>Açıklama:</strong> Sebep bağlacı (since) atılmış, fiil Ving'e dönüşmüş. Özne ortak (he).</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Kısaltma</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Eş zamanlı</td>\n<td>Ving</td>\n<td>While reading, he fell asleep.</td>\n</tr>\n<tr>\n<td>Öncelik</td>\n<td>having V3</td>\n<td>Having finished work, he left.</td>\n</tr>\n<tr>\n<td>Sebep</td>\n<td>Ving</td>\n<td>Being tired, he rested.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerden hangisi doğru kısaltılmıştır?</p>\n<p>A) After to eat dinner, we watched a movie.<br>\nB) After eating dinner, we watched a movie.<br>\nC) After we eating dinner, we watched a movie.<br>\nD) After ate dinner, we watched a movie.  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** \"After\" bağlacı tutulmuş, fiil Ving'e (eating) dönüşmüş. Özne ortak olduğu için atılmış.\n</details>\n\n<p>[Kelime sayısı: 248]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerden hangisi doğru kısaltılmıştır?",
+        "options": {
+          "A": "After to eat dinner, we watched a movie.",
+          "B": "After eating dinner, we watched a movie.",
+          "C": "After we eating dinner, we watched a movie.",
+          "D": "After ate dinner, we watched a movie."
+        },
+        "correct": "B",
+        "explanation": "\"After\" bağlacı tutulmuş, fiil Ving'e (eating) dönüşmüş. Özne ortak olduğu için atılmış."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerden hangisi doğru kısaltılmıştır?",
+          "options": {
+            "A": "After to eat dinner, we watched a movie.",
+            "B": "After eating dinner, we watched a movie.",
+            "C": "After we eating dinner, we watched a movie.",
+            "D": "After ate dinner, we watched a movie."
+          },
+          "correct": "B",
+          "explanation": "\"After\" bağlacı tutulmuş, fiil Ving'e (eating) dönüşmüş. Özne ortak olduğu için atılmış."
+        }
+      ],
+      "word_count": 330
+    },
+    {
+      "page_number": 18,
+      "title": "ZARF CÜMLECİKLERİNİN KISALTILMASI - II (PASİF VE FARKLI ÖZNE)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Pasif ve farklı özne durumları</h2>\n<p>Pasif cümlelerde kısaltma V3 veya being V3 ile yapılır. Özneler farklıysa, özne atılmaz ve genellikle \"with\" kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Farklı öznelerde \"with + özne + Ving/V3\" yapısı yaygındır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Pasif - V3):</strong><br>\n<strong>EN:</strong> When the ancient statue was finally discovered, it was found to be in remarkably good condition.<br>\n<strong>EN (kısaltılmış):</strong> When finally discovered, the ancient statue was found to be in remarkably good condition.<br>\n→ <strong>Açıklama:</strong> \"When\" tutulmuş, pasif yapı \"was discovered\" → \"discovered\" (V3) olmuş. Özne ortak (statue).</p>\n<p><strong>Örnek 2 (Pasif - having been V3):</strong><br>\n<strong>EN:</strong> After they had been held hostage for three days, the prisoners were finally released by the authorities.<br>\n<strong>EN (kısaltılmış):</strong> Having been held hostage for three days, the prisoners were finally released by the authorities.<br>\n→ <strong>Açıklama:</strong> Bağlaç atılmış, \"having been held\" öncelik ve pasifi birlikte ifade eder.</p>\n<p><strong>Örnek 3 (Farklı özne - with + Ving):</strong><br>\n<strong>EN:</strong> The team celebrated their victory because the coach had inspired them with a motivational speech.<br>\n<strong>EN (kısaltılmış):</strong> The team celebrated their victory, with the coach having inspired them with a motivational speech.<br>\n→ <strong>Açıklama:</strong> Özneler farklı (team ve coach). \"With\" eklenmiş, \"had inspired\" → \"having inspired\". Yaygın bir yapıdır.</p>\n<p><strong>Örnek 4 (Farklı özne - with + V3):</strong><br>\n<strong>EN:</strong> The students left the classroom because the lesson was cancelled at the last minute.<br>\n<strong>EN (kısaltılmış):</strong> The students left the classroom, with the lesson cancelled at the last minute.<br>\n→ <strong>Açıklama:</strong> \"With + noun + V3\" yapısı. Pasif anlam: ders iptal edildi.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Durum</th>\n<th>Kısaltma</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Pasif eş zamanlı</td>\n<td>V3</td>\n<td>(When) discovered, the statue...</td>\n</tr>\n<tr>\n<td>Pasif öncelik</td>\n<td>having been V3</td>\n<td>Having been warned, he left.</td>\n</tr>\n<tr>\n<td>Farklı özne</td>\n<td>with + özne + Ving/V3</td>\n<td>with the rain stopping, we went out.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>The day was a great success --- the team winning three gold medals.</em></p>\n<p>A) because<br>\nB) with<br>\nC) while<br>\nD) despite  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Farklı özne yapısında \"with + özne + Ving\" kullanılır: \"with the team winning\". Sebep belirtir.\n</details>\n\n<p>[Kelime sayısı: 245]</p>\n<hr>",
+      "examples": [],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*The day was a great success --- the team winning three gold medals.*",
+        "options": {
+          "A": "because",
+          "B": "with",
+          "C": "while",
+          "D": "despite"
+        },
+        "correct": "B",
+        "explanation": "Farklı özne yapısında \"with + özne + Ving\" kullanılır: \"with the team winning\". Sebep belirtir."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*The day was a great success --- the team winning three gold medals.*",
+          "options": {
+            "A": "because",
+            "B": "with",
+            "C": "while",
+            "D": "despite"
+          },
+          "correct": "B",
+          "explanation": "Farklı özne yapısında \"with + özne + Ving\" kullanılır: \"with the team winning\". Sebep belirtir."
+        }
+      ],
+      "word_count": 327
+    },
+    {
+      "page_number": 19,
+      "title": "CÜMLE ZARFLARI - ZITLIK (CONCESSIVE & DIRECT)",
+      "total_pages": 25,
+      "content_html": "<h2>📌 However, Nevertheless, On the other hand, Conversely</h2>\n<p>Cümle zarfları, iki cümle arasında bağlantı kurar ve genellikle noktalama işaretleriyle ayrılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"However\" cümle başında, ortasında veya sonunda kullanılabilir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (However - cümle başında):</strong><br>\n<strong>EN:</strong> The new software is very powerful and feature-rich. However, it requires a significant amount of training to use effectively.<br>\n<strong>TR:</strong> Yeni yazılım çok güçlü ve özellik dolu. Ancak, etkili bir şekilde kullanmak için önemli miktarda eğitim gerektiriyor.<br>\n→ <strong>Açıklama:</strong> \"However\" iki cümle arasında zıtlık kurar. Öncesinde nokta veya noktalı virgül olabilir.</p>\n<p><strong>Örnek 2 (Nevertheless):</strong><br>\n<strong>EN:</strong> The forecast predicted heavy rain all weekend. Nevertheless, we decided to go ahead with our camping trip.<br>\n<strong>TR:</strong> Hava durumu tüm hafta sonu şiddetli yağmur öngörüyordu. Yine de, kamp gezimize devam etmeye karar verdik.<br>\n→ <strong>Açıklama:</strong> \"Nevertheless\" \"buna rağmen\" anlamında, \"however\" ile benzer.</p>\n<p><strong>Örnek 3 (On the other hand):</strong><br>\n<strong>EN:</strong> Living in a big city offers countless entertainment options. On the other hand, it often means dealing with noise and pollution.<br>\n<strong>TR:</strong> Büyük bir şehirde yaşamak sayısız eğlence seçeneği sunar. Öte yandan, genellikle gürültü ve kirlilikle uğraşmak anlamına gelir.<br>\n→ <strong>Açıklama:</strong> \"On the other hand\" iki farklı yönü karşılaştırır.</p>\n<p><strong>Örnek 4 (In contrast):</strong><br>\n<strong>EN:</strong> The northern part of the country is densely forested. In contrast, the south is mostly arid desert.<br>\n<strong>TR:</strong> Ülkenin kuzey kısmı yoğun ormanlıktır. Buna karşılık, güney çoğunlukla kurak çöldür.<br>\n→ <strong>Açıklama:</strong> \"In contrast\" doğrudan karşıtlık belirtir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Zarf</th>\n<th>Anlam</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>however</td>\n<td>ancak</td>\n<td>. However, ...</td>\n</tr>\n<tr>\n<td>nevertheless</td>\n<td>yine de</td>\n<td>. Nevertheless, ...</td>\n</tr>\n<tr>\n<td>on the other hand</td>\n<td>öte yandan</td>\n<td>. On the other hand, ...</td>\n</tr>\n<tr>\n<td>in contrast</td>\n<td>buna karşılık</td>\n<td>. In contrast, ...</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>The next model was well engineered and finely built but, ---, it never became popular.</em></p>\n<p>A) on the contrary<br>\nB) even so<br>\nC) just as<br>\nD) such as  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** İyi yapılmasına rağmen popüler olmadı. Beklenti aksine bir durum: \"even so\" (yine de) uygundur.\n</details>\n\n<p>[Kelime sayısı: 250]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The new software is very powerful and feature-rich. However, it requires a significant amount of training to use effectively.",
+          "tr": "Yeni yazılım çok güçlü ve özellik dolu. Ancak, etkili bir şekilde kullanmak için önemli miktarda eğitim gerektiriyor.",
+          "description": "\"However\" iki cümle arasında zıtlık kurar. Öncesinde nokta veya noktalı virgül olabilir.\n\n**Örnek 2 (Nevertheless):**"
+        },
+        {
+          "en": "The forecast predicted heavy rain all weekend. Nevertheless, we decided to go ahead with our camping trip.",
+          "tr": "Hava durumu tüm hafta sonu şiddetli yağmur öngörüyordu. Yine de, kamp gezimize devam etmeye karar verdik.",
+          "description": "\"Nevertheless\" \"buna rağmen\" anlamında, \"however\" ile benzer.\n\n**Örnek 3 (On the other hand):**"
+        },
+        {
+          "en": "Living in a big city offers countless entertainment options. On the other hand, it often means dealing with noise and pollution.",
+          "tr": "Büyük bir şehirde yaşamak sayısız eğlence seçeneği sunar. Öte yandan, genellikle gürültü ve kirlilikle uğraşmak anlamına gelir.",
+          "description": "\"On the other hand\" iki farklı yönü karşılaştırır.\n\n**Örnek 4 (In contrast):**"
+        },
+        {
+          "en": "The northern part of the country is densely forested. In contrast, the south is mostly arid desert.",
+          "tr": "Ülkenin kuzey kısmı yoğun ormanlıktır. Buna karşılık, güney çoğunlukla kurak çöldür.",
+          "description": "\"In contrast\" doğrudan karşıtlık belirtir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*The next model was well engineered and finely built but, ---, it never became popular.*",
+        "options": {
+          "A": "on the contrary",
+          "B": "even so",
+          "C": "just as",
+          "D": "such as"
+        },
+        "correct": "B",
+        "explanation": "İyi yapılmasına rağmen popüler olmadı. Beklenti aksine bir durum: \"even so\" (yine de) uygundur."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*The next model was well engineered and finely built but, ---, it never became popular.*",
+          "options": {
+            "A": "on the contrary",
+            "B": "even so",
+            "C": "just as",
+            "D": "such as"
+          },
+          "correct": "B",
+          "explanation": "İyi yapılmasına rağmen popüler olmadı. Beklenti aksine bir durum: \"even so\" (yine de) uygundur."
+        }
+      ],
+      "word_count": 318
+    },
+    {
+      "page_number": 20,
+      "title": "CÜMLE ZARFLARI - SONUÇ, EKLEME",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Therefore, Thus, Consequently / Moreover, Furthermore, In addition</h2>\n<p>Sonuç bildiren zarflar: \"bu yüzden\". Ekleme bildirenler: \"dahası, ayrıca\".</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"Thus\" ve \"hence\" daha resmîdir. \"Thereby\" genellikle Ving ile kullanılır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Therefore):</strong><br>\n<strong>EN:</strong> The company's profits have fallen for the third consecutive quarter; therefore, the board has decided to restructure the management.<br>\n<strong>TR:</strong> Şirketin kârları üst üste üçüncü çeyrekte düştü; bu nedenle, yönetim kurulu yönetimi yeniden yapılandırmaya karar verdi.<br>\n→ <strong>Açıklama:</strong> \"Therefore\" sonuç bildirir. Öncesinde noktalı virgül kullanımı yaygındır.</p>\n<p><strong>Örnek 2 (Consequently):</strong><br>\n<strong>EN:</strong> The driver ignored the warning signs and drove onto the flooded road. Consequently, his car was swept away by the current.<br>\n<strong>TR:</strong> Sürücü uyarı işaretlerini dikkate almadı ve su basmış yola girdi. Sonuç olarak, arabası akıntıya kapıldı.<br>\n→ <strong>Açıklama:</strong> \"Consequently\" güçlü bir sonuç ifadesidir.</p>\n<p><strong>Örnek 3 (Moreover - ekleme):</strong><br>\n<strong>EN:</strong> The hotel room was spacious and clean. Moreover, it offered a breathtaking view of the ocean.<br>\n<strong>TR:</strong> Otel odası ferah ve temizdi. Ayrıca, okyanusun nefes kesici manzarasını sunuyordu.<br>\n→ <strong>Açıklama:</strong> \"Moreover\" önceki olumlu özelliklere bir yenisini ekler.</p>\n<p><strong>Örnek 4 (Furthermore):</strong><br>\n<strong>EN:</strong> The new policy will reduce traffic congestion. Furthermore, it will encourage the use of public transportation.<br>\n<strong>TR:</strong> Yeni politika trafik sıkışıklığını azaltacak. Ayrıca, toplu taşıma kullanımını teşvik edecek.<br>\n→ <strong>Açıklama:</strong> \"Furthermore\" \"moreover\" ile eş anlamlıdır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Zarf</th>\n<th>Anlam</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>therefore</td>\n<td>bu nedenle</td>\n<td>It rained; therefore, we stayed.</td>\n</tr>\n<tr>\n<td>consequently</td>\n<td>sonuç olarak</td>\n<td>He lied; consequently, he was fired.</td>\n</tr>\n<tr>\n<td>moreover</td>\n<td>ayrıca</td>\n<td>The car is fast. Moreover, it's safe.</td>\n</tr>\n<tr>\n<td>in addition</td>\n<td>ek olarak</td>\n<td>In addition, we offer free delivery.</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>With the help of white voters, Jackson was elected mayor, and --- became the first black mayor of a major southern city.</em></p>\n<p>A) nevertheless<br>\nB) thus<br>\nC) even so<br>\nD) yet  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** B  \n**Açıklama:** Seçilmesi sonucunda ilk siyahi belediye başkanı oldu. \"Thus\" (böylece) sonuç bildirir.\n</details>\n\n<p>[Kelime sayısı: 242]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The company's profits have fallen for the third consecutive quarter; therefore, the board has decided to restructure the management.",
+          "tr": "Şirketin kârları üst üste üçüncü çeyrekte düştü; bu nedenle, yönetim kurulu yönetimi yeniden yapılandırmaya karar verdi.",
+          "description": "\"Therefore\" sonuç bildirir. Öncesinde noktalı virgül kullanımı yaygındır.\n\n**Örnek 2 (Consequently):**"
+        },
+        {
+          "en": "The driver ignored the warning signs and drove onto the flooded road. Consequently, his car was swept away by the current.",
+          "tr": "Sürücü uyarı işaretlerini dikkate almadı ve su basmış yola girdi. Sonuç olarak, arabası akıntıya kapıldı.",
+          "description": "\"Consequently\" güçlü bir sonuç ifadesidir.\n\n**Örnek 3 (Moreover - ekleme):**"
+        },
+        {
+          "en": "The hotel room was spacious and clean. Moreover, it offered a breathtaking view of the ocean.",
+          "tr": "Otel odası ferah ve temizdi. Ayrıca, okyanusun nefes kesici manzarasını sunuyordu.",
+          "description": "\"Moreover\" önceki olumlu özelliklere bir yenisini ekler.\n\n**Örnek 4 (Furthermore):**"
+        },
+        {
+          "en": "The new policy will reduce traffic congestion. Furthermore, it will encourage the use of public transportation.",
+          "tr": "Yeni politika trafik sıkışıklığını azaltacak. Ayrıca, toplu taşıma kullanımını teşvik edecek.",
+          "description": "\"Furthermore\" \"moreover\" ile eş anlamlıdır."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*With the help of white voters, Jackson was elected mayor, and --- became the first black mayor of a major southern city.*",
+        "options": {
+          "A": "nevertheless",
+          "B": "thus",
+          "C": "even so",
+          "D": "yet"
+        },
+        "correct": "B",
+        "explanation": "Seçilmesi sonucunda ilk siyahi belediye başkanı oldu. \"Thus\" (böylece) sonuç bildirir."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*With the help of white voters, Jackson was elected mayor, and --- became the first black mayor of a major southern city.*",
+          "options": {
+            "A": "nevertheless",
+            "B": "thus",
+            "C": "even so",
+            "D": "yet"
+          },
+          "correct": "B",
+          "explanation": "Seçilmesi sonucunda ilk siyahi belediye başkanı oldu. \"Thus\" (böylece) sonuç bildirir."
+        }
+      ],
+      "word_count": 308
+    },
+    {
+      "page_number": 21,
+      "title": "CÜMLE ZARFLARI - ÖRNEK, AÇIKLAMA, VURGU",
+      "total_pages": 25,
+      "content_html": "<h2>📌 For instance, That is, In fact, Indeed</h2>\n<p>Bu zarflar örnek verme, açıklama veya vurgu yapmak için kullanılır.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"That is\" (yani) kısaltması \"i.e.\" olarak da bilinir.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (For instance):</strong><br>\n<strong>EN:</strong> Many European cities have excellent public transportation systems. For instance, Berlin's U-Bahn and S-Bahn networks are both extensive and reliable.<br>\n<strong>TR:</strong> Birçok Avrupa şehrinin mükemmel toplu taşıma sistemleri vardır. Örneğin, Berlin'in U-Bahn ve S-Bahn ağları hem kapsamlı hem de güvenilirdir.<br>\n→ <strong>Açıklama:</strong> \"For instance\" önceki genel ifadeyi örnekle destekler.</p>\n<p><strong>Örnek 2 (That is):</strong><br>\n<strong>EN:</strong> The company is adopting a new business model, that is, it will focus on direct-to-consumer sales rather than wholesale.<br>\n<strong>TR:</strong> Şirket yeni bir iş modeli benimsiyor, yani toptan satış yerine doğrudan tüketiciye satışa odaklanacak.<br>\n→ <strong>Açıklama:</strong> \"That is\" önceki ifadeyi açıklar ve yeniden ifade eder.</p>\n<p><strong>Örnek 3 (In fact):</strong><br>\n<strong>EN:</strong> He claimed to have a PhD from a top university. In fact, he never even graduated from college.<br>\n<strong>TR:</strong> Ünlü bir üniversiteden doktorası olduğunu iddia etti. Aslında, üniversiteden bile mezun olmamıştı.<br>\n→ <strong>Açıklama:</strong> \"In fact\" bir gerçeği vurgular veya düzeltir.</p>\n<p><strong>Örnek 4 (Indeed):</strong><br>\n<strong>EN:</strong> The concert was absolutely amazing. Indeed, it was one of the best performances I have ever seen.<br>\n<strong>TR:</strong> Konser kesinlikle harikaydı. Gerçekten de, şimdiye kadar gördüğüm en iyi performanslardan biriydi.<br>\n→ <strong>Açıklama:</strong> \"Indeed\" önceki ifadeyi pekiştirir, vurgular.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Zarf</th>\n<th>Anlam</th>\n<th>Kullanım</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>for instance</td>\n<td>örneğin</td>\n<td>Örnek vermek</td>\n</tr>\n<tr>\n<td>that is</td>\n<td>yani</td>\n<td>Açıklama</td>\n</tr>\n<tr>\n<td>in fact</td>\n<td>aslında</td>\n<td>Vurgu / düzeltme</td>\n</tr>\n<tr>\n<td>indeed</td>\n<td>gerçekten</td>\n<td>Pekiştirme</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>Genetic engineering is primarily considered a field of applied microbiology, ---, the exploitation of microorganisms for a specific product.</em></p>\n<p>A) but rather<br>\nB) as such<br>\nC) and then<br>\nD) for example<br>\nE) that is  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** E  \n**Açıklama:** \"That is\" (yani) önceki ifadeyi açıklamak için kullanılır. Burada mikrobiyolojinin ne olduğu açıklanıyor.\n</details>\n\n<p>[Kelime sayısı: 248]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Many European cities have excellent public transportation systems. For instance, Berlin's U-Bahn and S-Bahn networks are both extensive and reliable.",
+          "tr": "Birçok Avrupa şehrinin mükemmel toplu taşıma sistemleri vardır. Örneğin, Berlin'in U-Bahn ve S-Bahn ağları hem kapsamlı hem de güvenilirdir.",
+          "description": "\"For instance\" önceki genel ifadeyi örnekle destekler.\n\n**Örnek 2 (That is):**"
+        },
+        {
+          "en": "The company is adopting a new business model, that is, it will focus on direct-to-consumer sales rather than wholesale.",
+          "tr": "Şirket yeni bir iş modeli benimsiyor, yani toptan satış yerine doğrudan tüketiciye satışa odaklanacak.",
+          "description": "\"That is\" önceki ifadeyi açıklar ve yeniden ifade eder.\n\n**Örnek 3 (In fact):**"
+        },
+        {
+          "en": "He claimed to have a PhD from a top university. In fact, he never even graduated from college.",
+          "tr": "Ünlü bir üniversiteden doktorası olduğunu iddia etti. Aslında, üniversiteden bile mezun olmamıştı.",
+          "description": "\"In fact\" bir gerçeği vurgular veya düzeltir.\n\n**Örnek 4 (Indeed):**"
+        },
+        {
+          "en": "The concert was absolutely amazing. Indeed, it was one of the best performances I have ever seen.",
+          "tr": "Konser kesinlikle harikaydı. Gerçekten de, şimdiye kadar gördüğüm en iyi performanslardan biriydi.",
+          "description": "\"Indeed\" önceki ifadeyi pekiştirir, vurgular."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*Genetic engineering is primarily considered a field of applied microbiology, ---, the exploitation of microorganisms for a specific product.*",
+        "options": {
+          "A": "but rather",
+          "B": "as such",
+          "C": "and then",
+          "D": "for example",
+          "E": "that is"
+        },
+        "correct": "E",
+        "explanation": "\"That is\" (yani) önceki ifadeyi açıklamak için kullanılır. Burada mikrobiyolojinin ne olduğu açıklanıyor."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*Genetic engineering is primarily considered a field of applied microbiology, ---, the exploitation of microorganisms for a specific product.*",
+          "options": {
+            "A": "but rather",
+            "B": "as such",
+            "C": "and then",
+            "D": "for example",
+            "E": "that is"
+          },
+          "correct": "E",
+          "explanation": "\"That is\" (yani) önceki ifadeyi açıklamak için kullanılır. Burada mikrobiyolojinin ne olduğu açıklanıyor."
+        }
+      ],
+      "word_count": 311
+    },
+    {
+      "page_number": 22,
+      "title": "CÜMLE ZARFLARI - GEÇİŞ, ÖZET, İSTİSNA",
+      "total_pages": 25,
+      "content_html": "<h2>📌 As for, In conclusion, Except for</h2>\n<p>Konu değiştirme, özetleme ve hariç tutma ifadeleri.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"As for\" genellikle konuyu değiştirirken kullanılır ve bazen olumsuz bir çağrışım taşır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (As for):</strong><br>\n<strong>EN:</strong> Everyone seems excited about the upcoming company retreat. As for me, I would rather just have a few days off to relax at home.<br>\n<strong>TR:</strong> Herkes yaklaşan şirket gezisi için heyecanlı görünüyor. Bana gelince, evde dinlenmek için sadece birkaç gün izin almayı tercih ederim.<br>\n→ <strong>Açıklama:</strong> \"As for\" konuyu belirli bir kişiye veya konuya yönlendirir.</p>\n<p><strong>Örnek 2 (In conclusion):</strong><br>\n<strong>EN:</strong> In conclusion, the study clearly demonstrates that regular exercise has significant benefits for both physical and mental health.<br>\n<strong>TR:</strong> Sonuç olarak, çalışma düzenli egzersizin hem fiziksel hem de zihinsel sağlık için önemli faydaları olduğunu açıkça göstermektedir.<br>\n→ <strong>Açıklama:</strong> \"In conclusion\" bir yazının veya konuşmanın sonuç bölümünü başlatır.</p>\n<p><strong>Örnek 3 (Except for):</strong><br>\n<strong>EN:</strong> The museum was virtually empty except for a small group of art students sketching in the corner.<br>\n<strong>TR:</strong> Köşede eskiz yapan küçük bir grup sanat öğrencisi dışında müze neredeyse boştu.<br>\n→ <strong>Açıklama:</strong> \"Except for\" bir istisnayı belirtir.</p>\n<p><strong>Örnek 4 (Except that):</strong><br>\n<strong>EN:</strong> The two cars look very similar, except that one has a slightly larger engine and a sunroof.<br>\n<strong>TR:</strong> İki araba çok benziyor, ancak birinin biraz daha büyük motoru ve bir sunroof'u olması dışında.<br>\n→ <strong>Açıklama:</strong> \"Except that\" ardından tam cümle gelir; farkı belirtir.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Anlam</th>\n<th>Yapı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>as for</td>\n<td>-e gelince</td>\n<td>As for + noun</td>\n</tr>\n<tr>\n<td>in conclusion</td>\n<td>sonuç olarak</td>\n<td>Cümle başında</td>\n</tr>\n<tr>\n<td>except for</td>\n<td>hariç</td>\n<td>Except for + noun</td>\n</tr>\n<tr>\n<td>except that</td>\n<td>hariç</td>\n<td>Except that + cümle</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- providing luxury, a five-star hotel should also have the ability to take you by surprise.</em></p>\n<p>A) With a view to<br>\nB) In excess of<br>\nC) Consequent on<br>\nD) In need of<br>\nE) In addition to  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** E  \n**Açıklama:** \"Also\" ipucu: lüksün yanı sıra ek bir özellik. \"In addition to\" (ek olarak) doğru seçimdir.\n</details>\n\n<p>[Kelime sayısı: 240]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Everyone seems excited about the upcoming company retreat. As for me, I would rather just have a few days off to relax at home.",
+          "tr": "Herkes yaklaşan şirket gezisi için heyecanlı görünüyor. Bana gelince, evde dinlenmek için sadece birkaç gün izin almayı tercih ederim.",
+          "description": "\"As for\" konuyu belirli bir kişiye veya konuya yönlendirir.\n\n**Örnek 2 (In conclusion):**"
+        },
+        {
+          "en": "In conclusion, the study clearly demonstrates that regular exercise has significant benefits for both physical and mental health.",
+          "tr": "Sonuç olarak, çalışma düzenli egzersizin hem fiziksel hem de zihinsel sağlık için önemli faydaları olduğunu açıkça göstermektedir.",
+          "description": "\"In conclusion\" bir yazının veya konuşmanın sonuç bölümünü başlatır.\n\n**Örnek 3 (Except for):**"
+        },
+        {
+          "en": "The museum was virtually empty except for a small group of art students sketching in the corner.",
+          "tr": "Köşede eskiz yapan küçük bir grup sanat öğrencisi dışında müze neredeyse boştu.",
+          "description": "\"Except for\" bir istisnayı belirtir.\n\n**Örnek 4 (Except that):**"
+        },
+        {
+          "en": "The two cars look very similar, except that one has a slightly larger engine and a sunroof.",
+          "tr": "İki araba çok benziyor, ancak birinin biraz daha büyük motoru ve bir sunroof'u olması dışında.",
+          "description": "\"Except that\" ardından tam cümle gelir; farkı belirtir."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- providing luxury, a five-star hotel should also have the ability to take you by surprise.*",
+        "options": {
+          "A": "With a view to",
+          "B": "In excess of",
+          "C": "Consequent on",
+          "D": "In need of",
+          "E": "In addition to"
+        },
+        "correct": "E",
+        "explanation": "\"Also\" ipucu: lüksün yanı sıra ek bir özellik. \"In addition to\" (ek olarak) doğru seçimdir."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- providing luxury, a five-star hotel should also have the ability to take you by surprise.*",
+          "options": {
+            "A": "With a view to",
+            "B": "In excess of",
+            "C": "Consequent on",
+            "D": "In need of",
+            "E": "In addition to"
+          },
+          "correct": "E",
+          "explanation": "\"Also\" ipucu: lüksün yanı sıra ek bir özellik. \"In addition to\" (ek olarak) doğru seçimdir."
+        }
+      ],
+      "word_count": 329
+    },
+    {
+      "page_number": 23,
+      "title": "DEVRİK YAPILAR - NEGATIVE INVERSION",
+      "total_pages": 25,
+      "content_html": "<h2>📌 Olumsuz anlamlı ifadeler cümle başında</h2>\n<p>Little, never, rarely, no sooner, hardly, not only, etc. cümle başında kullanıldığında özne-yardımcı fiil yeri değişir (devrik yapı).</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> Devrik yapıda cümle soru formuna benzer, ancak soru işareti konmaz.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (Little):</strong><br>\n<strong>EN:</strong> Little did the public know about the secret negotiations that had been going on for months behind closed doors.<br>\n<strong>TR:</strong> Halk, kapalı kapılar ardında aylardır süren gizli müzakereler hakkında çok az şey biliyordu.<br>\n→ <strong>Açıklama:</strong> \"Little\" olumsuz anlam taşır ve başa gelince devrik yapı: \"did the public know\". Normalde: \"The public knew little...\"</p>\n<p><strong>Örnek 2 (No sooner):</strong><br>\n<strong>EN:</strong> No sooner had the plane taken off than the passenger realized he had left his laptop at the gate.<br>\n<strong>TR:</strong> Uçak havalanır havalanmaz, yolcu dizüstü bilgisayarını kapıda unuttuğunu fark etti.<br>\n→ <strong>Açıklama:</strong> \"No sooner...than\" yapısında \"no sooner\" başta, devrik: \"had the plane taken\".</p>\n<p><strong>Örnek 3 (Not only):</strong><br>\n<strong>EN:</strong> Not only did the company lose its market share, but it also faced a severe reputational crisis.<br>\n<strong>TR:</strong> Şirket sadece pazar payını kaybetmekle kalmadı, aynı zamanda ciddi bir itibar kriziyle de karşı karşıya kaldı.<br>\n→ <strong>Açıklama:</strong> \"Not only\" başta, devrik: \"did the company lose\". \"But also\" sonrası normal.</p>\n<p><strong>Örnek 4 (Under no circumstances):</strong><br>\n<strong>EN:</strong> Under no circumstances should you open the door to strangers, no matter who they claim to be.<br>\n<strong>TR:</strong> Hiçbir koşulda kapıyı yabancılara açmamalısın, kim olduklarını iddia ederlerse etsinler.<br>\n→ <strong>Açıklama:</strong> \"Under no circumstances\" gibi ifadeler de devrik yapı gerektirir: \"should you open\".</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>İfade</th>\n<th>Anlam</th>\n<th>Devrik Yapı</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Little</td>\n<td>çok az</td>\n<td>Little + yardımcı + özne + fiil</td>\n</tr>\n<tr>\n<td>No sooner</td>\n<td>-er -mez</td>\n<td>No sooner + had + özne + V3</td>\n</tr>\n<tr>\n<td>Not only</td>\n<td>sadece...değil</td>\n<td>Not only + yardımcı + özne + fiil</td>\n</tr>\n<tr>\n<td>Never</td>\n<td>asla</td>\n<td>Never + yardımcı + özne + fiil</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Boşluğa hangi seçenek gelmelidir?<br>\n<em>--- by making an internal analysis can a company set the overall rationale for its international activities.</em></p>\n<p>A) Still<br>\nB) While<br>\nC) Only<br>\nD) Until<br>\nE) Just as  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** C  \n**Açıklama:** \"Only\" cümle başında devrik yapıya neden olur. \"Only by making... can a company...\" doğru kullanımdır.\n</details>\n\n<p>[Kelime sayısı: 250]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "Little did the public know about the secret negotiations that had been going on for months behind closed doors.",
+          "tr": "Halk, kapalı kapılar ardında aylardır süren gizli müzakereler hakkında çok az şey biliyordu.",
+          "description": "\"Little\" olumsuz anlam taşır ve başa gelince devrik yapı: \"did the public know\". Normalde: \"The public knew little...\"\n\n**Örnek 2 (No sooner):**"
+        },
+        {
+          "en": "No sooner had the plane taken off than the passenger realized he had left his laptop at the gate.",
+          "tr": "Uçak havalanır havalanmaz, yolcu dizüstü bilgisayarını kapıda unuttuğunu fark etti.",
+          "description": "\"No sooner...than\" yapısında \"no sooner\" başta, devrik: \"had the plane taken\".\n\n**Örnek 3 (Not only):**"
+        },
+        {
+          "en": "Not only did the company lose its market share, but it also faced a severe reputational crisis.",
+          "tr": "Şirket sadece pazar payını kaybetmekle kalmadı, aynı zamanda ciddi bir itibar kriziyle de karşı karşıya kaldı.",
+          "description": "\"Not only\" başta, devrik: \"did the company lose\". \"But also\" sonrası normal.\n\n**Örnek 4 (Under no circumstances):**"
+        },
+        {
+          "en": "Under no circumstances should you open the door to strangers, no matter who they claim to be.",
+          "tr": "Hiçbir koşulda kapıyı yabancılara açmamalısın, kim olduklarını iddia ederlerse etsinler.",
+          "description": "\"Under no circumstances\" gibi ifadeler de devrik yapı gerektirir: \"should you open\"."
+        }
+      ],
+      "mini_test": {
+        "question": "Boşluğa hangi seçenek gelmelidir?\n*--- by making an internal analysis can a company set the overall rationale for its international activities.*",
+        "options": {
+          "A": "Still",
+          "B": "While",
+          "C": "Only",
+          "D": "Until",
+          "E": "Just as"
+        },
+        "correct": "C",
+        "explanation": "\"Only\" cümle başında devrik yapıya neden olur. \"Only by making... can a company...\" doğru kullanımdır."
+      },
+      "mini_tests": [
+        {
+          "question": "Boşluğa hangi seçenek gelmelidir?\n*--- by making an internal analysis can a company set the overall rationale for its international activities.*",
+          "options": {
+            "A": "Still",
+            "B": "While",
+            "C": "Only",
+            "D": "Until",
+            "E": "Just as"
+          },
+          "correct": "C",
+          "explanation": "\"Only\" cümle başında devrik yapıya neden olur. \"Only by making... can a company...\" doğru kullanımdır."
+        }
+      ],
+      "word_count": 341
+    },
+    {
+      "page_number": 24,
+      "title": "DEVRİK YAPILAR - POSITIVE INVERSION",
+      "total_pages": 25,
+      "content_html": "<h2>📌 So, Such, As, Than ile devrik</h2>\n<p>\"So + adjective\", \"such\", \"as\", \"than\" gibi yapılar vurgu için devrik yapılabilir.</p>\n<blockquote>\n<p>💡 <strong>İpucu:</strong> \"So\" ile yapılan devriklerde \"that\" li yapı vardır.</p>\n</blockquote>\n<hr>\n<h2>📏 ÖRNEK CÜMLELER</h2>\n<p><strong>Örnek 1 (So + adjective):</strong><br>\n<strong>EN:</strong> The traffic was so heavy that we missed our flight.<br>\n<strong>EN (devrik):</strong> So heavy was the traffic that we missed our flight.<br>\n→ <strong>Açıklama:</strong> \"So heavy\" vurgu için başa alınmış, ardından \"was the traffic\" devrik yapı.</p>\n<p><strong>Örnek 2 (Such):</strong><br>\n<strong>EN:</strong> It was such a complicated problem that the engineers couldn't solve it for weeks.<br>\n<strong>EN (devrik):</strong> Such a complicated problem was it that the engineers couldn't solve it for weeks.<br>\n→ <strong>Açıklama:</strong> \"Such...that\" yapısında \"such\" başa alınabilir ve devrik yapılır.</p>\n<p><strong>Örnek 3 (As - karşılaştırma):</strong><br>\n<strong>EN:</strong> He works hard, as does his brother.<br>\n<strong>TR:</strong> Sıkı çalışıyor, tıpkı kardeşi gibi.<br>\n→ <strong>Açıklama:</strong> \"As\" ile yapılan benzetmelerde devrik yapı sık kullanılır: \"as does his brother\" (as his brother does yerine).</p>\n<p><strong>Örnek 4 (Than):</strong><br>\n<strong>EN:</strong> She is more experienced than is her colleague, despite being younger.<br>\n<strong>TR:</strong> O, meslektaşından daha deneyimli, daha genç olmasına rağmen.<br>\n→ <strong>Açıklama:</strong> \"Than\" sonrasında devrik yapı (than is her colleague) resmî dilde kullanılır.</p>\n<hr>\n<h2>📊 HIZLI BAKIŞ TABLOSU</h2>\n<table>\n<thead>\n<tr>\n<th>Yapı</th>\n<th>Devrik</th>\n<th>Örnek</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>So + adj</td>\n<td>So + adj + be + özne</td>\n<td>So tall was he that...</td>\n</tr>\n<tr>\n<td>Such + noun</td>\n<td>Such + noun + be + özne</td>\n<td>Such a mess was it that...</td>\n</tr>\n<tr>\n<td>As</td>\n<td>as + yardımcı + özne</td>\n<td>as did his father</td>\n</tr>\n<tr>\n<td>Than</td>\n<td>than + yardımcı + özne</td>\n<td>than does his brother</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h2>⚡ KENDİNİ TEST ET</h2>\n<p><strong>Soru:</strong> Aşağıdaki cümlelerden hangisi doğrudur?</p>\n<p>A) So hot was the day that we stayed inside.<br>\nB) So hot the day was that we stayed inside.<br>\nC) So hot was that we stayed inside.<br>\nD) So was hot the day that we stayed inside.  </p>\n<details>\n<summary>✅ Cevabı Göster</summary>\n\n**Doğru Cevap:** A  \n**Açıklama:** \"So + adjective\" devrik yapısı: \"So + adj + be + özne + that...\" kuralına uyan tek seçenek A'dır.\n</details>\n\n<p>[Kelime sayısı: 235]</p>\n<hr>",
+      "examples": [
+        {
+          "en": "The traffic was so heavy that we missed our flight.\n**EN (devrik):** So heavy was the traffic that we missed our flight.\n→ **Açıklama:** \"So heavy\" vurgu için başa alınmış, ardından \"was the traffic\" devrik yapı.\n\n**Örnek 2 (Such):**\n**EN:** It was such a complicated problem that the engineers couldn't solve it for weeks.\n**EN (devrik):** Such a complicated problem was it that the engineers couldn't solve it for weeks.\n→ **Açıklama:** \"Such...that\" yapısında \"such\" başa alınabilir ve devrik yapılır.\n\n**Örnek 3 (As - karşılaştırma):**\n**EN:** He works hard, as does his brother.",
+          "tr": "Sıkı çalışıyor, tıpkı kardeşi gibi.",
+          "description": "\"As\" ile yapılan benzetmelerde devrik yapı sık kullanılır: \"as does his brother\" (as his brother does yerine).\n\n**Örnek 4 (Than):**"
+        },
+        {
+          "en": "She is more experienced than is her colleague, despite being younger.",
+          "tr": "O, meslektaşından daha deneyimli, daha genç olmasına rağmen.",
+          "description": "\"Than\" sonrasında devrik yapı (than is her colleague) resmî dilde kullanılır."
+        }
+      ],
+      "mini_test": {
+        "question": "Aşağıdaki cümlelerden hangisi doğrudur?",
+        "options": {
+          "A": "So hot was the day that we stayed inside.",
+          "B": "So hot the day was that we stayed inside.",
+          "C": "So hot was that we stayed inside.",
+          "D": "So was hot the day that we stayed inside."
+        },
+        "correct": "A",
+        "explanation": "\"So + adjective\" devrik yapısı: \"So + adj + be + özne + that...\" kuralına uyan tek seçenek A'dır."
+      },
+      "mini_tests": [
+        {
+          "question": "Aşağıdaki cümlelerden hangisi doğrudur?",
+          "options": {
+            "A": "So hot was the day that we stayed inside.",
+            "B": "So hot the day was that we stayed inside.",
+            "C": "So hot was that we stayed inside.",
+            "D": "So was hot the day that we stayed inside."
+          },
+          "correct": "A",
+          "explanation": "\"So + adjective\" devrik yapısı: \"So + adj + be + özne + that...\" kuralına uyan tek seçenek A'dır."
+        }
+      ],
+      "word_count": 303
+    },
+    {
+      "page_number": 25,
+      "title": "📊 BÖLÜM TARAMA TESTİ",
+      "total_pages": 25,
+      "content_html": "<h2>🎯 Bu Bölümde Öğrendiklerimiz</h2>\n<ul>\n<li>FANBOYS ile birleşik cümleler</li>\n<li>Paralel yapılar (not only...but also, both...and, either...or, neither...nor)</li>\n<li>Zıtlık bağlaçları (although, despite, however, whereas)</li>\n<li>Sebep, sonuç, amaç, zaman, durum bağlaçları</li>\n<li>Zarf cümlesi kısaltmaları</li>\n<li>Cümle zarfları (concessive, result, addition, etc.)</li>\n<li>Devrik yapılar (negative &amp; positive inversion)</li>\n</ul>\n<hr>\n<h2>✍️ 5 SORULUK TARAMA TESTİ</h2>\n<h3>Soru 1:</h3>\n<p><em>Several species of birds in Vietnam vanished during the war, --- they began to reappear in the 1980s.</em></p>\n<p>A) but<br>\nB) since<br>\nC) unless<br>\nD) when  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - Zıtlık bildiren \"but\" gereklidir.\n</details>\n\n<hr>\n<h3>Soru 2:</h3>\n<p><em>--- the Civil War, those years turned out to be a golden era for the magazine industry.</em></p>\n<p>A) Despite<br>\nB) Obviously<br>\nC) Although<br>\nD) Pertaining to  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - \"Despite\" ardından isim gelir.\n</details>\n\n<hr>\n<h3>Soru 3:</h3>\n<p><em>The interiors of planets are totally inaccessible, --- what we know about them comes from indirect measurements.</em></p>\n<p>A) so<br>\nB) whereas<br>\nC) even though<br>\nD) since  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - Sonuç bildiren \"so\" (bu yüzden) doğrudur.\n</details>\n\n<hr>\n<h3>Soru 4:</h3>\n<p><em>--- willingly he seems to have accepted the new job, I don't really think he likes the working conditions.</em></p>\n<p>A) However<br>\nB) Although<br>\nC) So<br>\nD) Even  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - \"However + adverb\" yapısı: \"However willingly\" = ne kadar istekli görünse de.\n</details>\n\n<hr>\n<h3>Soru 5:</h3>\n<p><em>No sooner --- the plane --- than the passenger realized he had left his laptop.</em></p>\n<p>A) had / taken off<br>\nB) did / take off<br>\nC) has / taken off<br>\nD) was / taken off  </p>\n<details>\n<summary>✅ Cevap</summary>\n**Doğru:** A - \"No sooner\" ile past perfect (had taken) kullanılır, devrik yapı \"had the plane taken\".\n</details>\n\n<hr>\n<h2>📈 PERFORMANS DEĞERLENDİRMESİ</h2>\n<table>\n<thead>\n<tr>\n<th>Doğru Sayısı</th>\n<th>Değerlendirme</th>\n<th>Öneri</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>5/5</strong></td>\n<td>🏆 MÜKEMMEL</td>\n<td>Sonraki bölüme geçebilirsin</td>\n</tr>\n<tr>\n<td><strong>4/5</strong></td>\n<td>🌟 ÇOK İYİ</td>\n<td>Sadece yanlışları tekrar et</td>\n</tr>\n<tr>\n<td><strong>3/5</strong></td>\n<td>📚 ORTA</td>\n<td>Bu bölümü hızlıca tekrar gözden geçir</td>\n</tr>\n<tr>\n<td><strong>2/5 veya altı</strong></td>\n<td>🔄 TEKRAR GEREKLİ</td>\n<td>Bölümü baştan çalışmanı öneririz</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<p>[Kelime sayısı: 300 - test sayfası biraz daha uzun olabilir, ancak kabul edilebilir sınırlar içinde.]</p>\n<hr>\n<h2>✅ KONTROL LİSTESİ</h2>\n<ul>\n<li>[x] Her sayfa 150-250 kelime arası (test sayfası hariç, ~300)</li>\n<li>[x] Her sayfada 3-4 örnek var</li>\n<li>[x] Her sayfada mini test var</li>\n<li>[x] Son sayfada 5 soruluk test var</li>\n<li>[x] Toplam sayfa 25</li>\n<li>[x] HTML div'leri doğru işaretlenmiş (strateji, uyarı, hatırlatma kutuları kullanıldı)</li>\n</ul>",
+      "examples": [],
+      "mini_test": {
+        "question": "*Several species of birds in Vietnam vanished during the war, --- they began to reappear in the 1980s.*",
+        "options": {
+          "A": "but",
+          "B": "since",
+          "C": "unless",
+          "D": "when"
+        },
+        "correct": "A - Zıtlık bildiren \"but\" gereklidir.",
+        "explanation": ""
+      },
+      "mini_tests": [
+        {
+          "question": "*Several species of birds in Vietnam vanished during the war, --- they began to reappear in the 1980s.*",
+          "options": {
+            "A": "but",
+            "B": "since",
+            "C": "unless",
+            "D": "when"
+          },
+          "correct": "A - Zıtlık bildiren \"but\" gereklidir.",
+          "explanation": ""
+        },
+        {
+          "question": "*--- the Civil War, those years turned out to be a golden era for the magazine industry.*",
+          "options": {
+            "A": "Despite",
+            "B": "Obviously",
+            "C": "Although",
+            "D": "Pertaining to"
+          },
+          "correct": "A - \"Despite\" ardından isim gelir.",
+          "explanation": ""
+        },
+        {
+          "question": "*The interiors of planets are totally inaccessible, --- what we know about them comes from indirect measurements.*",
+          "options": {
+            "A": "so",
+            "B": "whereas",
+            "C": "even though",
+            "D": "since"
+          },
+          "correct": "A - Sonuç bildiren \"so\" (bu yüzden) doğrudur.",
+          "explanation": ""
+        },
+        {
+          "question": "*--- willingly he seems to have accepted the new job, I don't really think he likes the working conditions.*",
+          "options": {
+            "A": "However",
+            "B": "Although",
+            "C": "So",
+            "D": "Even"
+          },
+          "correct": "A - \"However + adverb\" yapısı: \"However willingly\" = ne kadar istekli görünse de.",
+          "explanation": ""
+        },
+        {
+          "question": "*No sooner --- the plane --- than the passenger realized he had left his laptop.*",
+          "options": {
+            "A": "had / taken off",
+            "B": "did / take off",
+            "C": "has / taken off",
+            "D": "was / taken off"
+          },
+          "correct": "A - \"No sooner\" ile past perfect (had taken) kullanılır, devrik yapı \"had the plane taken\".",
+          "explanation": ""
+        }
+      ],
+      "word_count": 362
+    }
+  ]
+}

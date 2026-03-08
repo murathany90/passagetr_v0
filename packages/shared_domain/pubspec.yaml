@@ -1,0 +1,19 @@
+﻿name: shared_domain
+description: PASSAGETR v2 shared domain package
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.11.0
+  flutter: '>=3.41.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_core:
+    path: ../shared_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
