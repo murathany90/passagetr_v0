@@ -9,7 +9,7 @@ This project deploys its Flutter web build to Firebase Hosting on the Spark plan
 2. Log in.
    - `firebase login`
 3. Point the repo to your Firebase project.
-   - Replace `replace-with-your-firebase-project-id` in [.firebaserc](/c:/yazilim_projeler/ingilizce_app1/.firebaserc)
+   - Replace `replace-with-your-firebase-project-id` in [.firebaserc](../.firebaserc)
    - Or run `firebase use --add` and keep the generated `.firebaserc`
 4. Initialize Hosting once if this machine has never used Firebase in this repo.
    - `firebase init hosting`
@@ -20,7 +20,7 @@ This project deploys its Flutter web build to Firebase Hosting on the Spark plan
      - GitHub deploy setup: `No`
      - overwrite `build/web/index.html`: `No`
 5. Prepare the production env file.
-   - Copy [app.web.prod.json.example](/c:/yazilim_projeler/ingilizce_app1/env/app.web.prod.json.example) to `env/app.web.prod.json`
+   - Copy [app.web.prod.json.example](../env/app.web.prod.json.example) to `env/app.web.prod.json`
    - Fill `SUPABASE_URL` and `SUPABASE_ANON_KEY`
    - Keep `TRANSLATE_PROVIDER` as `deepl`
    - Keep `USE_LOCAL_STATIC_CONTENT` as `false`

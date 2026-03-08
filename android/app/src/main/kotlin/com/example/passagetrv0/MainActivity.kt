@@ -1,4 +1,4 @@
-package com.example.ingilizce_app1
+package com.example.passagetrv0
 
 import io.flutter.embedding.android.FlutterActivity
 

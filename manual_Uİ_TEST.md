@@ -1,6 +1,6 @@
 # Gemini Agent Manuel Web UI Test Talimati
 
-Bu dokumanin amaci, Gemini agent'in web surumunu gercek tarayici uzerinde ayrintili olarak test etmesini ve sonuclari [manual_Uİ_TEST_sonuç.md](/c:/yazilim_projeler/ingilizce_app1/manual_Uİ_TEST_sonuç.md) dosyasina islemesini saglamaktir.
+Bu dokumanin amaci, Gemini agent'in web surumunu gercek tarayici uzerinde ayrintili olarak test etmesini ve sonuclari [manual_Uİ_TEST_sonuç.md](manual_Uİ_TEST_sonuç.md) dosyasina islemesini saglamaktir.
 
 ## Rol
 - Tarayici kullanan bir manuel UI test agent'i gibi davran.
@@ -30,7 +30,7 @@ Bu dokumanin amaci, Gemini agent'in web surumunu gercek tarayici uzerinde ayrint
 - Hizli ekran goruntusu alip yanlis negatif uretme. Ozellikle gramer ve kelime ekranlarinda bunu dikkate al.
 
 ## Sonuc Yazim Zorunlulugu
-- Tum sonuclari [manual_Uİ_TEST_sonuç.md](/c:/yazilim_projeler/ingilizce_app1/manual_Uİ_TEST_sonuç.md) dosyasina yaz.
+- Tum sonuclari [manual_Uİ_TEST_sonuç.md](manual_Uİ_TEST_sonuç.md) dosyasina yaz.
 - Bu dosyada:
   - test tarihi
   - kullanilan browser
@@ -254,7 +254,7 @@ Her ekran sonunda su sorulara cevap ver:
   - `Performans`
 
 ## Son Cikti Kurali
-- Tum test bittikten sonra [manual_Uİ_TEST_sonuç.md](/c:/yazilim_projeler/ingilizce_app1/manual_Uİ_TEST_sonuç.md) dosyasini doldur.
+- Tum test bittikten sonra [manual_Uİ_TEST_sonuç.md](manual_Uİ_TEST_sonuç.md) dosyasini doldur.
 - Son satirda su uc yargiyi ver:
   - `Genel Teknik Durum`
   - `Genel UX Durumu`

@@ -96,7 +96,7 @@ lib/
 
 ```bash
 git clone <REPO_URL>
-cd PASSAGETR
+cd <repo-folder>
 flutter pub get
 ```
 
@@ -434,9 +434,8 @@ Beklenen cikti:
 - Uygulama adı tüm platformlarda `PASSAGETR` olarak güncellendi.
 - Uygulama sloganı: `Reading is Power.`
 - Flutter package adı: `passagetr`
-- Android/iOS/macOS bundle ID ve applicationId bu turda bilinçli olarak **değiştirilmedi**:
-  - `com.example.ingilizce_app1`
-  - `com.example.ingilizceApp1`
+- Android/iOS/macOS/Linux uygulama kimliği bu turda güncellendi:
+  - `com.example.passagetrv0`
 
 ### İkon Kaynağı ve Üretim
 
@@ -709,11 +708,11 @@ Bu repoda web calisma yolu, Firebase Hosting yayini ve masaustu duzeni aktif ola
 
 ### 2. Firebase Hosting release akisi
 
-- Hosting config: [firebase.json](/c:/yazilim_projeler/ingilizce_app1/firebase.json)
-- Release guide: [firebase_hosting_release.md](/c:/yazilim_projeler/ingilizce_app1/docs/firebase_hosting_release.md)
-- Build script: [build_web_firebase.ps1](/c:/yazilim_projeler/ingilizce_app1/scripts/build_web_firebase.ps1)
-- Deploy script: [deploy_web_firebase.ps1](/c:/yazilim_projeler/ingilizce_app1/scripts/deploy_web_firebase.ps1)
-- Preflight script: [check_firebase_hosting_ready.ps1](/c:/yazilim_projeler/ingilizce_app1/scripts/check_firebase_hosting_ready.ps1)
+- Hosting config: [firebase.json](firebase.json)
+- Release guide: [firebase_hosting_release.md](docs/firebase_hosting_release.md)
+- Build script: [build_web_firebase.ps1](scripts/build_web_firebase.ps1)
+- Deploy script: [deploy_web_firebase.ps1](scripts/deploy_web_firebase.ps1)
+- Preflight script: [check_firebase_hosting_ready.ps1](scripts/check_firebase_hosting_ready.ps1)
 
 Varsayilan production deploy yolu:
 
@@ -731,9 +730,9 @@ Not:
 
 Eklenen ana responsive altyapi:
 
-- [app_breakpoints.dart](/c:/yazilim_projeler/ingilizce_app1/lib/core/layout/app_breakpoints.dart)
-- [app_page_container.dart](/c:/yazilim_projeler/ingilizce_app1/lib/core/layout/app_page_container.dart)
-- [responsive_shell_scaffold.dart](/c:/yazilim_projeler/ingilizce_app1/lib/core/layout/responsive_shell_scaffold.dart)
+- [app_breakpoints.dart](lib/core/layout/app_breakpoints.dart)
+- [app_page_container.dart](lib/core/layout/app_page_container.dart)
+- [responsive_shell_scaffold.dart](lib/core/layout/responsive_shell_scaffold.dart)
 
 Aktif davranis:
 
@@ -754,15 +753,15 @@ Desktop'ta:
 
 Canli Firebase ortami icin temiz Chrome oturumunda alinmis ekran goruntuleri:
 
-- [01-home.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/01-home.png)
-- [02-kelime.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/02-kelime.png)
-- [03-okuma.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/03-okuma.png)
-- [04-gramer.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/04-gramer.png)
-- [05-profil.png](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke/05-profil.png)
+- [01-home.png](artifacts/live_smoke/01-home.png)
+- [02-kelime.png](artifacts/live_smoke/02-kelime.png)
+- [03-okuma.png](artifacts/live_smoke/03-okuma.png)
+- [04-gramer.png](artifacts/live_smoke/04-gramer.png)
+- [05-profil.png](artifacts/live_smoke/05-profil.png)
 
 Bu smoke seti su script ile tekrar alinabilir:
 
-- [live_smoke_playwright.js](/c:/yazilim_projeler/ingilizce_app1/scripts/live_smoke_playwright.js)
+- [live_smoke_playwright.js](scripts/live_smoke_playwright.js)
 
 Ornek kullanim:
 
@@ -774,13 +773,13 @@ node .\scripts\live_smoke_playwright.js https://passagetr-fef48.web.app artifact
 
 ### 5. Responsive test kapsaminda eklenenler
 
-- [main_shell_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/shell/main_shell_page_test.dart)
-- [word_home_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/words/word_home_page_test.dart)
-- [reading_home_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/readings/reading_home_page_test.dart)
-- [reading_detail_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/readings/reading_detail_page_test.dart)
-- [home_dashboard_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/home/home_dashboard_page_test.dart)
-- [profile_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/profile/profile_page_test.dart)
-- [grammar_home_page_test.dart](/c:/yazilim_projeler/ingilizce_app1/test/features/grammar/grammar_home_page_test.dart)
+- [main_shell_page_test.dart](test/features/shell/main_shell_page_test.dart)
+- [word_home_page_test.dart](test/features/words/word_home_page_test.dart)
+- [reading_home_page_test.dart](test/features/readings/reading_home_page_test.dart)
+- [reading_detail_page_test.dart](test/features/readings/reading_detail_page_test.dart)
+- [home_dashboard_page_test.dart](test/features/home/home_dashboard_page_test.dart)
+- [profile_page_test.dart](test/features/profile/profile_page_test.dart)
+- [grammar_home_page_test.dart](test/features/grammar/grammar_home_page_test.dart)
 
 ## Web Performans Analizi (Mart 2026)
 
@@ -850,4 +849,4 @@ Bu turda buyuk gecici klasorler ve loglar temizlendi:
 - `.firebase/`
 - `__pycache__/`
 
-Kalici smoke ciktisi artik [artifacts/live_smoke](/c:/yazilim_projeler/ingilizce_app1/artifacts/live_smoke) altinda tutulur.
+Kalici smoke ciktisi artik [artifacts/live_smoke](artifacts/live_smoke) altinda tutulur.
