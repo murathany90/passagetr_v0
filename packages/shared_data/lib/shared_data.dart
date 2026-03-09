@@ -1,5 +1,19 @@
-﻿library shared_data;
-
-class DataPlaceholder {
-  const DataPlaceholder();
-}
+export 'src/auth/foundation_auth_repository.dart';
+export 'src/local/drift/app_database.dart';
+export 'src/bootstrap/supabase_bootstrap.dart';
+export 'src/local/drift/app_database_contract.dart';
+export 'src/local/drift/database_executor_factory.dart';
+export 'src/local/drift/local_sync_models.dart';
+export 'src/local/drift/local_sync_store.dart';
+export 'src/repositories/foundation_admin_content_repository.dart';
+export 'src/repositories/foundation_grammar_repository.dart';
+export 'src/repositories/foundation_pack_repository.dart';
+export 'src/repositories/foundation_progress_repository.dart';
+export 'src/repositories/foundation_reading_repository.dart';
+export 'src/repositories/foundation_word_repository.dart';
+export 'src/sync/foundation_sync_repository.dart';
+export 'src/sync/outbox_conflict_resolver.dart';
+export 'src/sync/platform_sync_connectivity_monitor.dart';
+export 'src/sync/supabase_sync_remote_client.dart';
+export 'src/sync/sync_connectivity_monitor.dart';
+export 'src/sync/sync_remote_client.dart';

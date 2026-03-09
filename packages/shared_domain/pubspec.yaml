@@ -1,7 +1,8 @@
-﻿name: shared_domain
+name: shared_domain
 description: PASSAGETR v2 shared domain package
 publish_to: none
 version: 0.1.0
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

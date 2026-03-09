@@ -14,13 +14,22 @@ $extensions = @(
 $utf8Strict = New-Object System.Text.UTF8Encoding($false, $true)
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $legacyEncoding = [System.Text.Encoding]::GetEncoding(1254)
+$e2Euro = [string]::Concat([char]0x00E2, [char]0x20AC)
 $mojibakeTokens = @(
   [string][char]0xFFFD,
   ([char]0x00C2).ToString(),
   ([char]0x00C3).ToString(),
   ([char]0x00C4).ToString(),
   ([char]0x00C5).ToString(),
-  ([char]0x00E2).ToString() + ([char]0x20AC).ToString()
+  $e2Euro,
+  [string]::Concat($e2Euro, [char]0x0153),
+  [string]::Concat($e2Euro, [char]0x009D),
+  [string]::Concat($e2Euro, [char]0x009C),
+  [string]::Concat($e2Euro, [char]0x0094),
+  [string]::Concat($e2Euro, [char]0x0093),
+  [string]::Concat($e2Euro, [char]0x00A6),
+  [string]::Concat($e2Euro, [char]0x00A2),
+  [string]::Concat($e2Euro, [char]0x00A0)
 )
 $ignoredPathFragments = @(
   '\.agent\',

@@ -1,0 +1,50 @@
+﻿[
+    {
+        "key":  "free",
+        "email":  "phase1.free@passagetr.dev",
+        "user_id":  "caa8d143-3b26-4fdd-afaa-8cf59fae3ac6",
+        "expected_role":  "user",
+        "expected_plan":  "free",
+        "resolved_role":  "user",
+        "resolved_plan":  "free",
+        "can_read_pro":  false,
+        "visible_profiles":  1,
+        "password_hint":  "PassageTR#2026!"
+    },
+    {
+        "key":  "pro",
+        "email":  "phase1.pro@passagetr.dev",
+        "user_id":  "b85ec77a-82da-4301-926e-3d4365f5cdbe",
+        "expected_role":  "user",
+        "expected_plan":  "pro",
+        "resolved_role":  "user",
+        "resolved_plan":  "pro",
+        "can_read_pro":  true,
+        "visible_profiles":  1,
+        "password_hint":  "PassageTR#2026!"
+    },
+    {
+        "key":  "admin",
+        "email":  "phase1.admin@passagetr.dev",
+        "user_id":  "047e1346-d4f7-4cf9-9bc9-f148e7e62c29",
+        "expected_role":  "admin",
+        "expected_plan":  "free",
+        "resolved_role":  "admin",
+        "resolved_plan":  "free",
+        "can_read_pro":  true,
+        "visible_profiles":  5,
+        "password_hint":  "PassageTR#2026!"
+    },
+    {
+        "key":  "developer",
+        "email":  "phase1.developer@passagetr.dev",
+        "user_id":  "f8553e18-e225-4352-8050-4f5234c2a565",
+        "expected_role":  "developer",
+        "expected_plan":  "free",
+        "resolved_role":  "developer",
+        "resolved_plan":  "free",
+        "can_read_pro":  true,
+        "visible_profiles":  5,
+        "password_hint":  "PassageTR#2026!"
+    }
+]

@@ -1,5 +1,7 @@
 param(
-  [string]$EnvironmentFile = "env/app.web.prod.json",
+  [ValidateSet("student_app", "admin_console")]
+  [string]$AppName = "student_app",
+  [string]$EnvironmentFile = "env/app.web.json",
   [switch]$SkipAnalyze,
   [switch]$SkipTests
 )
@@ -10,21 +12,10 @@ $ProgressPreference = "SilentlyContinue"
 
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
-$buildRoot = Join-Path $repoRoot "build\\web"
+$appRoot = Join-Path $repoRoot "apps\$AppName"
+$appBuildRoot = Join-Path $appRoot "build\web"
+$hostingBuildRoot = Join-Path $repoRoot "build\web"
 $envFilePath = Join-Path $repoRoot $EnvironmentFile
-
-$testTargets = @(
-  "test\\state\\content_hydration_provider_test.dart",
-  "test\\features\\shell\\main_shell_page_test.dart",
-  "test\\features\\home\\home_dashboard_page_test.dart",
-  "test\\features\\profile\\profile_page_test.dart",
-  "test\\features\\words\\word_home_page_test.dart",
-  "test\\features\\words\\word_level_hub_page_test.dart",
-  "test\\features\\readings\\reading_home_page_test.dart",
-  "test\\features\\readings\\reading_detail_page_test.dart",
-  "test\\features\\grammar\\grammar_home_page_test.dart",
-  "test\\features\\grammar\\grammar_reader_page_test.dart"
-)
 
 $requiredFiles = @(
   "index.html",
@@ -83,7 +74,7 @@ function Remove-PathIfPresent {
 function Invoke-ProductionPrune {
   param([string]$Root)
 
-  $databaseDirectory = Join-Path $Root "assets\\assets\\db"
+  $databaseDirectory = Join-Path $Root "assets\assets\db"
   Remove-PathIfPresent -Path $databaseDirectory
 
   foreach ($relativePath in $blockedFiles) {
@@ -101,7 +92,7 @@ function Assert-BuildOutput {
     }
   }
 
-  $dbDirectory = Join-Path $Root "assets\\assets\\db"
+  $dbDirectory = Join-Path $Root "assets\assets\db"
   if (Test-Path $dbDirectory) {
     throw "Production web bundle still contains local db assets: $dbDirectory"
   }
@@ -112,6 +103,21 @@ function Assert-BuildOutput {
       throw "Production web bundle still contains blocked artifact: $relativePath"
     }
   }
+}
+
+function Copy-BuildToHostingRoot {
+  param(
+    [string]$SourceRoot,
+    [string]$DestinationRoot
+  )
+
+  Remove-PathIfPresent -Path $DestinationRoot
+  New-Item -ItemType Directory -Path $DestinationRoot | Out-Null
+  Copy-Item -Path (Join-Path $SourceRoot "*") -Destination $DestinationRoot -Recurse -Force
+}
+
+if (-not (Test-Path $appRoot)) {
+  throw "Application path not found: $appRoot"
 }
 
 if (-not (Test-Path $envFilePath)) {
@@ -128,22 +134,30 @@ try {
   }
 
   if (-not $SkipTests) {
-    Write-Host "Running targeted widget tests..."
-    & $flutter test @testTargets
+    Write-Host "Running app tests for $AppName..."
+    & $flutter test "apps/$AppName"
   }
 
-  Write-Host "Building production web bundle..."
-  & $flutter build web --release "--dart-define-from-file=$envFilePath"
+  Write-Host "Building production web bundle for $AppName..."
+  Push-Location $appRoot
+  try {
+    & $flutter build web --release "--dart-define-from-file=$envFilePath"
+  } finally {
+    Pop-Location
+  }
 
-  $sizeBeforePruneMb = Get-DirectorySizeMb -Path $buildRoot
-  Write-Host "Build size before prune: $sizeBeforePruneMb MB"
+  $sizeBeforePruneMb = Get-DirectorySizeMb -Path $appBuildRoot
+  Write-Host "App build size before prune: $sizeBeforePruneMb MB"
 
-  Invoke-ProductionPrune -Root $buildRoot
-  Assert-BuildOutput -Root $buildRoot
+  Invoke-ProductionPrune -Root $appBuildRoot
+  Assert-BuildOutput -Root $appBuildRoot
 
-  $sizeAfterPruneMb = Get-DirectorySizeMb -Path $buildRoot
-  Write-Host "Build size after prune: $sizeAfterPruneMb MB"
-  Write-Host "Firebase web bundle is ready at $buildRoot"
+  Copy-BuildToHostingRoot -SourceRoot $appBuildRoot -DestinationRoot $hostingBuildRoot
+  Assert-BuildOutput -Root $hostingBuildRoot
+
+  $sizeAfterPruneMb = Get-DirectorySizeMb -Path $hostingBuildRoot
+  Write-Host "Hosting bundle size after prune: $sizeAfterPruneMb MB"
+  Write-Host "Firebase web bundle is ready at $hostingBuildRoot"
 } finally {
   Pop-Location
 }

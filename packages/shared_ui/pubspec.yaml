@@ -1,7 +1,8 @@
-﻿name: shared_ui
+name: shared_ui
 description: PASSAGETR v2 shared ui package
 publish_to: none
 version: 0.1.0
+resolution: workspace
 
 environment:
   sdk: ^3.11.0
@@ -10,8 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^6.3.1
   shared_core:
     path: ../shared_core
+  shared_domain:
+    path: ../shared_domain
 
 dev_dependencies:
   flutter_test:

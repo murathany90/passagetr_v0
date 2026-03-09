@@ -1,5 +1,7 @@
 param(
-  [string]$EnvironmentFile = "env/app.web.prod.json",
+  [ValidateSet("student_app", "admin_console")]
+  [string]$AppName = "student_app",
+  [string]$EnvironmentFile = "env/app.web.json",
   [switch]$SkipAnalyze,
   [switch]$SkipTests,
   [switch]$SkipSmoke,
@@ -14,7 +16,7 @@ $ProgressPreference = "SilentlyContinue"
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
 $buildScript = Join-Path $scriptRoot "build_web_firebase.ps1"
-$buildRoot = Join-Path $repoRoot "build\\web"
+$buildRoot = Join-Path $repoRoot "build\web"
 
 function Resolve-ToolPath {
   param([string]$ToolName)
@@ -106,7 +108,7 @@ function Invoke-LocalSmoke {
     @{ Path = "/main.dart.js"; Contains = "" },
     @{ Path = "/flutter_bootstrap.js"; Contains = "" },
     @{ Path = "/version.json"; Contains = "" },
-    @{ Path = "/readings/example"; Contains = "flutter_bootstrap.js" }
+    @{ Path = "/profile"; Contains = "flutter_bootstrap.js" }
   )
 
   foreach ($check in $checks) {
@@ -131,6 +133,7 @@ try {
   $buildArgs = @(
     "-ExecutionPolicy", "Bypass",
     "-File", $buildScript,
+    "-AppName", $AppName,
     "-EnvironmentFile", $EnvironmentFile
   )
   if ($SkipAnalyze) {

@@ -1,19 +1,26 @@
-﻿name: shared_data
+name: shared_data
 description: PASSAGETR v2 shared data package
 publish_to: none
 version: 0.1.0
+resolution: workspace
 
 environment:
   sdk: ^3.11.0
   flutter: '>=3.41.0'
 
 dependencies:
+  connectivity_plus: ^7.0.0
+  drift: ^2.28.1
   flutter:
     sdk: flutter
+  path: ^1.9.1
+  path_provider: ^2.1.5
   shared_core:
     path: ../shared_core
   shared_domain:
     path: ../shared_domain
+  sqlite3_flutter_libs: ^0.5.39
+  supabase_flutter: ^2.10.3
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 param(
-  [string]$EnvironmentFile = "env/app.web.prod.json"
+  [ValidateSet("student_app", "admin_console")]
+  [string]$AppName = "student_app",
+  [string]$EnvironmentFile = "env/app.web.json"
 )
 
 Set-StrictMode -Version Latest
@@ -13,6 +15,8 @@ $firebasercPath = Join-Path $repoRoot ".firebaserc"
 $firebaseJsonPath = Join-Path $repoRoot "firebase.json"
 $buildScriptPath = Join-Path $scriptRoot "build_web_firebase.ps1"
 $deployScriptPath = Join-Path $scriptRoot "deploy_web_firebase.ps1"
+$smokeScriptPath = Join-Path $scriptRoot "smoke_web_auth.ps1"
+$appRoot = Join-Path $repoRoot "apps\$AppName"
 
 $errors = [System.Collections.Generic.List[string]]::new()
 
@@ -46,6 +50,13 @@ if ($null -eq $firebasePath) {
   Add-CheckResult -Label "Firebase CLI" -Success $true -Detail $firebasePath
 }
 
+if (-not (Test-Path $appRoot)) {
+  $errors.Add("Application path is missing: apps/$AppName")
+  Add-CheckResult -Label "App path" -Success $false -Detail "apps/$AppName"
+} else {
+  Add-CheckResult -Label "App path" -Success $true -Detail "apps/$AppName"
+}
+
 if (-not (Test-Path $firebaseJsonPath)) {
   $errors.Add("firebase.json is missing.")
   Add-CheckResult -Label "firebase.json" -Success $false -Detail "Missing"
@@ -70,21 +81,36 @@ if (-not (Test-Path $envFilePath)) {
   $errors.Add("Environment file is missing: $EnvironmentFile")
   Add-CheckResult -Label "Environment file" -Success $false -Detail $EnvironmentFile
 } else {
-  Add-CheckResult -Label "Environment file" -Success $true -Detail $EnvironmentFile
+  try {
+    $envJson = Get-Content $envFilePath -Raw | ConvertFrom-Json
+    $supabaseUrl = [string]$envJson.SUPABASE_URL
+    $supabaseAnonKey = [string]$envJson.SUPABASE_ANON_KEY
+    $hasUrl = -not [string]::IsNullOrWhiteSpace($supabaseUrl)
+    $hasKey = -not [string]::IsNullOrWhiteSpace($supabaseAnonKey)
+    $hasPlaceholder = $supabaseUrl -match "YOUR_PROJECT_REF" -or $supabaseAnonKey -match "sb_publishable_xxx"
+    if (-not $hasUrl -or -not $hasKey -or $hasPlaceholder) {
+      $errors.Add("Environment file does not contain real Supabase publishable credentials.")
+      Add-CheckResult -Label "Environment file" -Success $false -Detail "SUPABASE_URL / SUPABASE_ANON_KEY kontrol edin"
+    } else {
+      Add-CheckResult -Label "Environment file" -Success $true -Detail $EnvironmentFile
+    }
+  } catch {
+    $errors.Add("Environment file is not valid JSON: $EnvironmentFile")
+    Add-CheckResult -Label "Environment file" -Success $false -Detail "JSON parse hatasi"
+  }
 }
 
-if (-not (Test-Path $buildScriptPath)) {
-  $errors.Add("Build script is missing.")
-  Add-CheckResult -Label "build_web_firebase.ps1" -Success $false -Detail "Missing"
-} else {
-  Add-CheckResult -Label "build_web_firebase.ps1" -Success $true -Detail "Found"
-}
-
-if (-not (Test-Path $deployScriptPath)) {
-  $errors.Add("Deploy script is missing.")
-  Add-CheckResult -Label "deploy_web_firebase.ps1" -Success $false -Detail "Missing"
-} else {
-  Add-CheckResult -Label "deploy_web_firebase.ps1" -Success $true -Detail "Found"
+foreach ($scriptInfo in @(
+  @{ Path = $buildScriptPath; Label = "build_web_firebase.ps1" },
+  @{ Path = $deployScriptPath; Label = "deploy_web_firebase.ps1" },
+  @{ Path = $smokeScriptPath; Label = "smoke_web_auth.ps1" }
+)) {
+  if (-not (Test-Path $scriptInfo.Path)) {
+    $errors.Add("$($scriptInfo.Label) is missing.")
+    Add-CheckResult -Label $scriptInfo.Label -Success $false -Detail "Missing"
+  } else {
+    Add-CheckResult -Label $scriptInfo.Label -Success $true -Detail "Found"
+  }
 }
 
 if ($null -ne $firebasePath) {

@@ -1,0 +1,25 @@
+name: quality-gates
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+jobs:
+  flutter-quality:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter pub get
+        shell: pwsh
+        run: flutter pub get
+
+      - name: Run quality gate
+        shell: pwsh
+        run: .\scripts\quality_gate.ps1 -EnvironmentFile env/app.web.json -SkipRlsSmoke

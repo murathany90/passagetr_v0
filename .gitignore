@@ -11,12 +11,18 @@ build/
 
 # Local env
 .env
+.env.figma.local
 env/*.json
 !env/*.example
 
 # Generated reports
 artifacts/
 test-results/
+temp/
+.firebase/
+supabase/.temp/
+*.log
+flutter_*.log
 
 # Python cache
 __pycache__/

@@ -1,5 +1,18 @@
-﻿library shared_domain;
-
-class DomainPlaceholder {
-  const DomainPlaceholder();
-}
+export 'src/entities/content_pack.dart';
+export 'src/entities/grammar_progress.dart';
+export 'src/entities/grammar_module.dart';
+export 'src/entities/reading_passage.dart';
+export 'src/entities/user_profile.dart';
+export 'src/entities/word_entry.dart';
+export 'src/entities/word_progress.dart';
+export 'src/entities/reading_progress.dart';
+export 'src/repositories/admin_content_repository.dart';
+export 'src/repositories/auth_repository.dart';
+export 'src/repositories/grammar_repository.dart';
+export 'src/repositories/pack_repository.dart';
+export 'src/repositories/progress_repository.dart';
+export 'src/repositories/reading_repository.dart';
+export 'src/repositories/sync_repository.dart';
+export 'src/repositories/word_repository.dart';
+export 'src/value_objects/outbox_event.dart';
+export 'src/value_objects/sync_scope.dart';
