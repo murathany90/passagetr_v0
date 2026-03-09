@@ -25,6 +25,7 @@ Ayri `admin_console` uygulamasinda temel CMS modullerini calisir hale getirmek.
 - [x] Publish/unpublish aksiyonlarini admin repository'ye bagla
 - [x] Audit gorunumunu `/settings` icinde ekle
 - [x] Admin dashboard quick action'larini ilgili route'lara bagla
+- [x] `student_app` icindeki admin launcher'i gercek `admin_console` web adresine bagla
 
 ### UI Parity Checklist
 | Taslak | Route | Hedef Widget Agaci | Veri Kaynagi | Kabul Kriteri |
@@ -73,6 +74,7 @@ Ayri `admin_console` uygulamasinda temel CMS modullerini calisir hale getirmek.
 - Kullanici yonetimi ekraninda rol/plan filtreleme, developer korumasi ve remote role/plan guncelleme akisi acildi
 - Icerik ekranlarinda publish/unpublish aksiyonlari remote admin repository ve audit log akisina baglandi
 - Ayarlar ekraninda env ozeti + audit paneli acildi; dashboard quick action butonlari ilgili route'lara baglandi
+- `student_app` icindeki `/admin` launcher'i `AppConfig.adminConsoleUrl` uzerinden `admin_console` web girisine yonlenir hale getirildi
 - Faz 5 kapanis dogrulamasi:
   - `supabase db push`
   - `flutter analyze`

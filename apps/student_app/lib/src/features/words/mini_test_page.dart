@@ -11,7 +11,9 @@ import '../common/page_parts.dart';
 import 'flashcards_page.dart';
 
 class StudentMiniTestPage extends ConsumerStatefulWidget {
-  const StudentMiniTestPage({super.key});
+  const StudentMiniTestPage({super.key, this.packId});
+
+  final String? packId;
 
   @override
   ConsumerState<StudentMiniTestPage> createState() =>
@@ -44,18 +46,31 @@ class _StudentMiniTestPageState extends ConsumerState<StudentMiniTestPage> {
       accessContext: accessContext,
       header: WordsStudyHeader(
         title: 'Mini Test',
-        subtitle: 'Kısa çoktan seçmeli tur ile kelime bilginı ölç.',
-        onBack: () => context.go('/words'),
+        subtitle: widget.packId == null
+            ? 'Kısa çoktan seçmeli tur ile kelime bilgisini ölç.'
+            : 'Seçili pakette kısa çoktan seçmeli tur ile kelimeleri ölç.',
+        onBack: () => context.go(
+          widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
+        ),
       ),
       body: words.when(
         data: (items) {
           final progressMap =
               progress.valueOrNull ?? const <String, WordProgress>{};
-          final questions = _buildQuestions(items, progressMap);
+          final scopedItems = widget.packId == null
+              ? items
+              : items
+                    .where((item) => item.packId == widget.packId)
+                    .toList(growable: false);
+          final questions = _buildQuestions(scopedItems, progressMap);
 
           if (questions.isEmpty) {
-            return const StudentSurfaceCard(
-              child: Text('Mini test için yeterli kelime bulunamadı.'),
+            return StudentSurfaceCard(
+              child: Text(
+                widget.packId == null
+                    ? 'Mini test için yeterli kelime bulunamadı.'
+                    : 'Seçili pakette mini test için yeterli kelime bulunamadı.',
+              ),
             );
           }
 
@@ -75,7 +90,9 @@ class _StudentMiniTestPageState extends ConsumerState<StudentMiniTestPage> {
                   _attemptRecorded = false;
                 });
               },
-              onBack: () => context.go('/words'),
+              onBack: () => context.go(
+                widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
+              ),
             );
           }
 

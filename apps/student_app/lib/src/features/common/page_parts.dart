@@ -352,6 +352,7 @@ class StudentPackCard extends StatelessWidget {
       onTap: onTap,
       minHeight: 190,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -390,7 +391,7 @@ class StudentPackCard extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
+          const SizedBox(height: 24),
           Text(title, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 18),
           Text(
@@ -484,6 +485,81 @@ class PremiumPreviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: Center(child: Text('Premium preview alanı')));
+  }
+}
+
+class AdminConsoleLauncherPage extends StatelessWidget {
+  const AdminConsoleLauncherPage({
+    super.key,
+    required this.adminConsoleUrl,
+    required this.onOpenAdminConsole,
+  });
+
+  final String adminConsoleUrl;
+  final Future<bool> Function() onOpenAdminConsole;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasUrl = adminConsoleUrl.trim().isNotEmpty;
+
+    Future<void> handleOpenAdminConsole() async {
+      final opened = await onOpenAdminConsole();
+      if (!context.mounted || opened) {
+        return;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Admin console adresi acilamadi.')),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Admin launcher')),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 480),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: StudentSurfaceCard(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Gercek admin paneli ayri web uygulamasinda acilir.',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    hasUrl
+                        ? 'Asagidaki adres yeni sekmede acilacak:'
+                        : 'Admin console adresi tanimli degil.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  if (hasUrl) ...[
+                    const SizedBox(height: 12),
+                    SelectableText(
+                      adminConsoleUrl,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: hasUrl ? handleOpenAdminConsole : null,
+                      child: const Text('Admin console uygulamasini ac'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

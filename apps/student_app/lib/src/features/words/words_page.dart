@@ -161,6 +161,8 @@ class _StudentWordsPageState extends ConsumerState<StudentWordsPage> {
                             progressPercent:
                                 packProgress[filtered[index].id] ?? 0,
                             accentColor: _packAccentColor(context, index),
+                            onTap: () =>
+                                context.go('/words/packs/${filtered[index].id}'),
                           ),
                         ),
                     ],

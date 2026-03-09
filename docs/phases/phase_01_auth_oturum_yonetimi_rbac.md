@@ -60,9 +60,8 @@ Supabase tabanli auth, rol/plan modeli ve route/RLS guvenlik omurgasini kontroll
 - Kanit artefact'leri `docs/verification/phase01_supabase_connection/` altinda bulunur
 
 ## 9. Ilerleme Durumu
-- Durum: Devam ediyor
-- Son guncelleme: 2026-03-08
-- Kalan ana is: Faz 1'in anonim upgrade senaryosunu stage uzerinde UI smoke ile kapatip Faz 2'ye gecmek
+- Durum: Tamamlandi
+- Son guncelleme: 2026-03-09
 
 ## 10. Tamamlananlar / Notlar
 - Supabase proje ref'i: `qretfjzaolpdguggcqfg`
@@ -83,6 +82,9 @@ Supabase tabanli auth, rol/plan modeli ve route/RLS guvenlik omurgasini kontroll
   - Cozum: helper fonksiyonlar `security definer` olarak yeniden tanimlandi ve `024` migration'i eklendi
 - `student_app` profiline seeded hesaplarla giris yapilabilen `Hesap erisimi` modal'i eklendi
 - `admin_console` login ekrani seeded admin hesabiyla on-dolu hale getirildi
+- `student_access_controller_test.dart` icinde anonim upgrade davranisi dogrulandi
+- `student_app` profilindeki `Hesap erisimi` yuzeyi uzerinden seeded hesaplar ve anonim oturum akislarinin UI seviyesi acik tutuldu
+- Faz 1 kapanis durumu 2026-03-09 itibariyla auth smoke, seeded hesaplar, claim refresh ve upgrade coverage ile tamamlandi
 - Kanit klasoru: `docs/verification/phase01_supabase_connection/`
 - Kanit dosyalari:
   - `android_student_app_home.png`

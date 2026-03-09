@@ -14,6 +14,7 @@ void main() {
             platformMode: PlatformMode.mobile,
             supabaseUrl: '',
             supabaseAnonKey: '',
+            adminConsoleUrl: '',
             adminPreviewEnabled: false,
           ),
           fallbackAccessContext: AccessContext.preview(
@@ -42,6 +43,7 @@ void main() {
             platformMode: PlatformMode.mobile,
             supabaseUrl: '',
             supabaseAnonKey: '',
+            adminConsoleUrl: '',
             adminPreviewEnabled: false,
           ),
           fallbackAccessContext: AccessContext.anonymous(),
@@ -67,6 +69,7 @@ void main() {
             platformMode: PlatformMode.mobile,
             supabaseUrl: '',
             supabaseAnonKey: '',
+            adminConsoleUrl: '',
             adminPreviewEnabled: false,
           ),
           fallbackAccessContext: AccessContext.preview(

@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "passagetr-fef48"
+  },
+  "targets": {
+    "passagetr-fef48": {
+      "hosting": {
+        "student_app": [
+          "passagetr-fef48"
+        ],
+        "admin_console": [
+          "passagetr-admin"
+        ]
+      }
+    }
   }
 }

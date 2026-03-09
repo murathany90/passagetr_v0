@@ -9,7 +9,9 @@ import '../../core/student_word_progress_controller.dart';
 import '../common/page_parts.dart';
 
 class StudentFlashcardsPage extends ConsumerStatefulWidget {
-  const StudentFlashcardsPage({super.key});
+  const StudentFlashcardsPage({super.key, this.packId});
+
+  final String? packId;
 
   @override
   ConsumerState<StudentFlashcardsPage> createState() =>
@@ -33,15 +35,26 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
       destination: StudentDestination.words,
       accessContext: accessContext,
       header: WordsStudyHeader(
-        title: 'Flashcard Çalışması',
-        subtitle: 'Zayıf kelimelerden başlayarak hızlı tekrar yap.',
-        onBack: () => context.go('/words'),
+        title: widget.packId == null
+            ? 'Flashcard Çalışması'
+            : 'Paket Flashcard Çalışması',
+        subtitle: widget.packId == null
+            ? 'Zayıf kelimelerden başlayarak hızlı tekrar yap.'
+            : 'Seçili paketteki kelimelerle hızlı tekrar yap.',
+        onBack: () => context.go(
+          widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
+        ),
       ),
       body: words.when(
         data: (items) {
           final progressMap =
               progress.valueOrNull ?? const <String, WordProgress>{};
-          final orderedWords = [...items]
+          final scopedWords = widget.packId == null
+              ? items
+              : items
+                    .where((item) => item.packId == widget.packId)
+                    .toList(growable: false);
+          final orderedWords = [...scopedWords]
             ..sort((left, right) {
               final leftMastery = progressMap[left.id]?.mastery ?? 0;
               final rightMastery = progressMap[right.id]?.mastery ?? 0;
@@ -49,8 +62,12 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
             });
 
           if (orderedWords.isEmpty) {
-            return const StudentSurfaceCard(
-              child: Text('Çalışılacak kelime bulunamadı.'),
+            return StudentSurfaceCard(
+              child: Text(
+                widget.packId == null
+                    ? 'Çalışılacak kelime bulunamadı.'
+                    : 'Seçili pakette çalışılacak kelime bulunamadı.',
+              ),
             );
           }
 
@@ -69,7 +86,9 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                   _unknownCount = 0;
                 });
               },
-              onBack: () => context.go('/words'),
+              onBack: () => context.go(
+                widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
+              ),
             );
           }
 
@@ -105,7 +124,7 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                   final buttons = [
                     _AnswerButton(
                       label: 'Bilmiyorum',
-                      subtitle: 'Tekrar kuyruğuna ekle',
+                      subtitle: 'Tekrar kuyruguna ekle',
                       color: AppThemeTokens.of(context).pink,
                       onPressed: () => _recordAnswer(
                         word: word,
@@ -340,6 +359,7 @@ class _FlashcardCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(28),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -348,7 +368,7 @@ class _FlashcardCard extends StatelessWidget {
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
               ),
-              const Spacer(),
+              const SizedBox(height: 28),
               Text(
                 showMeaning ? word.trMeaning : word.enWord,
                 style: Theme.of(context).textTheme.displaySmall,
@@ -360,7 +380,7 @@ class _FlashcardCard extends StatelessWidget {
                   context,
                 ).textTheme.titleLarge?.copyWith(color: tokens.secondaryText),
               ),
-              const Spacer(),
+              const SizedBox(height: 28),
               Row(
                 children: [
                   Container(

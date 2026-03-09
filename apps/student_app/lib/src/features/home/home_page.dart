@@ -285,7 +285,7 @@ class _ContinueReadingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'KALDIĞIN YERDEN DEVAM ET',
+                      'KALDI?IN YERDEN DEVAM ET',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: tokens.accent,
                         fontWeight: FontWeight.w900,

@@ -22,6 +22,7 @@ Migration, RLS, offline/online ve release kalite kapilarini sertlestirmek.
 - [x] Yerel kalite kapisi scriptini ekle
 - [x] CI workflow dosyasini ekle
 - [x] Faz 8 test raporunu kaydet
+- [x] Student app kritik UI davranislarini widget test ile kilitle
 
 ## 5. Teknik Kararlar
 - Test kapilari gecmeden release cikmaz
@@ -50,3 +51,6 @@ Migration, RLS, offline/online ve release kalite kapilarini sertlestirmek.
 - `verify_supabase_rls.ps1` ve `quality_gate.ps1` ile yerel kalite kapisi olusturuldu
 - `.github/workflows/quality-gates.yml` CI workflow'u eklendi
 - Kalite kapisi analyze + test + web build + Android debug build + RLS smoke ile gecti
+- 2026-03-09 kalite kapamasi:
+  - `apps/student_app/test/features/student_ui_behavior_test.dart` eklendi
+  - Kelime paketi tiklama ve okuma cevirisi davranislari regression test kapsaminda sabitlendi

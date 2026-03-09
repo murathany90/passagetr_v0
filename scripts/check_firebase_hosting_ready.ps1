@@ -73,7 +73,21 @@ if (-not (Test-Path $firebasercPath)) {
     $errors.Add(".firebaserc still contains the placeholder Firebase project id.")
     Add-CheckResult -Label ".firebaserc" -Success $false -Detail "Replace the placeholder project id"
   } else {
-    Add-CheckResult -Label ".firebaserc" -Success $true -Detail "Project id configured"
+    try {
+      $firebasercJson = $firebasercContent | ConvertFrom-Json
+      $projectId = [string]$firebasercJson.projects.default
+      $hostingTargets = $firebasercJson.targets.$projectId.hosting
+      $hasHostingTarget = $null -ne $hostingTargets -and $null -ne $hostingTargets.$AppName
+      if (-not $hasHostingTarget) {
+        $errors.Add(".firebaserc does not define hosting target '$AppName'.")
+        Add-CheckResult -Label ".firebaserc" -Success $false -Detail "Hosting target '$AppName' missing"
+      } else {
+        Add-CheckResult -Label ".firebaserc" -Success $true -Detail "Project id and hosting target configured"
+      }
+    } catch {
+      $errors.Add(".firebaserc could not be parsed as JSON.")
+      Add-CheckResult -Label ".firebaserc" -Success $false -Detail "JSON parse hatasi"
+    }
   }
 }
 

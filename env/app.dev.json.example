@@ -1,5 +1,6 @@
 {
-  "SUPABASE_URL": "https://YOUR_PROJECT_REF.supabase.co",
-  "SUPABASE_ANON_KEY": "sb_publishable_xxx",
+  "SUPABASE_URL": "https://qretfjzaolpdguggcqfg.supabase.co",
+  "SUPABASE_ANON_KEY": "sb_publishable_z7CWfkxJjv0kHtG59wLgBA_X5VmZ2Ag",
+  "ADMIN_CONSOLE_URL": "https://passagetr-admin.web.app,
   "TRANSLATE_PROVIDER": "deepl"
 }

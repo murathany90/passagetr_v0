@@ -25,6 +25,9 @@ Okuma, cumle cevirisi ve gramer modullerini controlled rewrite mimarisine tasima
 - [x] Grammar reader ilerlemesini `user_grammar_progress` outbox event'lerine bagla
 - [x] Translation cache akisini bagla
 - [x] Grammar repository ve progress'i ac
+- [x] Reading detail bolum cevirisi gorunurlugunu ve fallback akislarini duzelt
+- [x] Okuma ve gramer ekranlarindaki bozuk Turkce UI metinlerini normalize et
+- [x] Reading detail ceviri davranisini widget test ile dogrula
 
 ### UI Parity Checklist
 | Taslak | Route | Hedef Widget Agaci | Veri Kaynagi | Kabul Kriteri |
@@ -83,3 +86,7 @@ Okuma, cumle cevirisi ve gramer modullerini controlled rewrite mimarisine tasima
   - `flutter test packages/shared_data`
   - `flutter build apk --debug --dart-define-from-file=..\\..\\env\\app.web.json`
   - `flutter build web --release --dart-define-from-file=..\\..\\env\\app.web.json`
+- 2026-03-09 regresyon kapamasi:
+  - `/readings/:id` ekranindaki ceviri ac/gizle akisi duzeltildi
+  - Reading translation seed ve reading detail UI metinleri normalize edildi
+  - `apps/student_app/test/features/student_ui_behavior_test.dart` ile ceviri davranisi widget test seviyesinde kilitlendi

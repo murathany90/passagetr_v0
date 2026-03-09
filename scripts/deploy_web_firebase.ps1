@@ -17,6 +17,7 @@ $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
 $buildScript = Join-Path $scriptRoot "build_web_firebase.ps1"
 $buildRoot = Join-Path $repoRoot "build\web"
+$hostingTarget = $AppName
 
 function Resolve-ToolPath {
   param([string]$ToolName)
@@ -95,8 +96,43 @@ function Start-StaticWebServer {
     }
   }
 
-  Start-Sleep -Seconds 2
   return $job
+}
+
+function Wait-StaticWebServer {
+  param(
+    [System.Management.Automation.Job]$Job,
+    [int]$Port,
+    [int]$TimeoutSeconds = 15
+  )
+
+  $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+  while ((Get-Date) -lt $deadline) {
+    if ($Job.State -in @("Failed", "Completed", "Stopped")) {
+      $jobOutput = (Receive-Job $Job -Keep 2>&1 | Out-String).Trim()
+      if ([string]::IsNullOrWhiteSpace($jobOutput)) {
+        $jobOutput = "No job output captured."
+      }
+
+      throw "Static web server stopped before becoming ready. $jobOutput"
+    }
+
+    try {
+      $probe = Invoke-WebRequest -UseBasicParsing "http://127.0.0.1:$Port/index.html" -TimeoutSec 2
+      if ($probe.StatusCode -eq 200) {
+        return
+      }
+    } catch {
+      Start-Sleep -Milliseconds 500
+    }
+  }
+
+  $jobOutput = (Receive-Job $Job -Keep 2>&1 | Out-String).Trim()
+  if ([string]::IsNullOrWhiteSpace($jobOutput)) {
+    $jobOutput = "No job output captured."
+  }
+
+  throw "Static web server did not become ready on port $Port. $jobOutput"
 }
 
 function Invoke-LocalSmoke {
@@ -144,10 +180,14 @@ try {
   }
 
   & powershell.exe @buildArgs
+  if ($LASTEXITCODE -ne 0) {
+    throw "Web build pipeline failed with exit code $LASTEXITCODE."
+  }
 
   if (-not $SkipSmoke) {
     $job = Start-StaticWebServer -Root $buildRoot -Port $SmokePort
     try {
+      Wait-StaticWebServer -Job $job -Port $SmokePort
       Write-Host "Running local web smoke checks on http://127.0.0.1:$SmokePort ..."
       Invoke-LocalSmoke -Port $SmokePort
     } finally {
@@ -162,8 +202,11 @@ try {
   }
 
   $firebase = Resolve-ToolPath -ToolName "firebase"
-  Write-Host "Deploying Firebase Hosting..."
-  & $firebase deploy --only hosting
+  Write-Host "Deploying Firebase Hosting target '$hostingTarget'..."
+  & $firebase deploy --only "hosting:$hostingTarget"
+  if ($LASTEXITCODE -ne 0) {
+    throw "Firebase deploy failed with exit code $LASTEXITCODE."
+  }
 } finally {
   Pop-Location
 }
