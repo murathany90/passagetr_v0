@@ -125,7 +125,36 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
     BuildContext context,
     AdminUserRecord updatedUser,
   ) async {
-    final messenger = ScaffoldMessenger.of(context);
+    final currentUsers = await ref.read(adminUsersProvider.future);
+    if (!context.mounted) {
+      return;
+    }
+
+    AdminUserRecord? currentUser;
+    for (final item in currentUsers) {
+      if (item.id == updatedUser.id) {
+        currentUser = item;
+        break;
+      }
+    }
+    if (currentUser == null) {
+      return;
+    }
+
+    if (currentUser.role == updatedUser.role &&
+        currentUser.plan == updatedUser.plan) {
+      return;
+    }
+
+    final confirmed = await _confirmUserAccessChange(
+      context,
+      currentUser: currentUser,
+      updatedUser: updatedUser,
+    );
+    if (!confirmed || !context.mounted) {
+      return;
+    }
+
     final result = await ref
         .read(adminUserAccessServiceProvider)
         .setUserAccess(
@@ -133,6 +162,10 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
           role: updatedUser.role,
           plan: updatedUser.plan,
         );
+    if (!context.mounted) {
+      return;
+    }
+    final messenger = ScaffoldMessenger.of(context);
 
     if (result case AppFailure<void>()) {
       messenger.showSnackBar(SnackBar(content: Text(result.message)));
@@ -154,6 +187,64 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
     messenger.showSnackBar(
       const SnackBar(content: Text('Kullanici erisimi guncellendi.')),
     );
+  }
+
+  Future<bool> _confirmUserAccessChange(
+    BuildContext context, {
+    required AdminUserRecord currentUser,
+    required AdminUserRecord updatedUser,
+  }) async {
+    final roleChanged = currentUser.role != updatedUser.role;
+    final baseDescription =
+        '${updatedUser.email} icin ${roleChanged ? 'rol' : 'plan'} degisikligi oturum yenileme veya yeniden login gerektirebilir.';
+
+    final firstPass = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Erisim degisikligini onayla'),
+        content: Text(
+          '$baseDescription\n\nMevcut: role=${formatRoleLabel(currentUser.role)}, plan=${currentUser.plan.value}\nYeni: role=${formatRoleLabel(updatedUser.role)}, plan=${updatedUser.plan.value}',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Vazgec'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Devam Et'),
+          ),
+        ],
+      ),
+    );
+
+    if (firstPass != true || updatedUser.role != AppRole.developer) {
+      return firstPass ?? false;
+    }
+    if (!context.mounted) {
+      return false;
+    }
+
+    final secondPass = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Developer rolunu tekrar onayla'),
+        content: const Text(
+          'Developer rolu yuksek yetkili bir roldur. Bu hesap admin panelinde kritik mutasyonlar yapabilir.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Vazgec'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Developer Olarak Ata'),
+          ),
+        ],
+      ),
+    );
+    return secondPass ?? false;
   }
 }
 

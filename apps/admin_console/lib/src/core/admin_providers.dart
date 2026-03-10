@@ -52,6 +52,10 @@ final adminUserAccessServiceProvider = Provider<AdminUserAccessService>(
   (ref) => AdminUserAccessService(config: ref.watch(adminAppConfigProvider)),
 );
 
+final _previewPackRepositoryProvider = Provider<PackRepository>(
+  (ref) => FoundationPackRepository(config: ref.watch(adminAppConfigProvider)),
+);
+
 final _previewWordRepositoryProvider = Provider<WordRepository>(
   (ref) => FoundationWordRepository(config: ref.watch(adminAppConfigProvider)),
 );
@@ -66,31 +70,132 @@ final _previewGrammarRepositoryProvider = Provider<GrammarRepository>(
       FoundationGrammarRepository(config: ref.watch(adminAppConfigProvider)),
 );
 
-final adminWordEntriesProvider = FutureProvider<List<AdminWordRecord>>((
+final adminPackChangesProvider =
+    StateNotifierProvider<
+      AdminCollectionController<AdminPackRecord>,
+      AdminCollectionState<AdminPackRecord>
+    >(
+      (ref) =>
+          AdminCollectionController<AdminPackRecord>(idOf: (item) => item.id),
+    );
+
+final adminWordChangesProvider =
+    StateNotifierProvider<
+      AdminCollectionController<AdminWordRecord>,
+      AdminCollectionState<AdminWordRecord>
+    >(
+      (ref) =>
+          AdminCollectionController<AdminWordRecord>(idOf: (item) => item.id),
+    );
+
+final adminReadingChangesProvider =
+    StateNotifierProvider<
+      AdminCollectionController<AdminReadingRecord>,
+      AdminCollectionState<AdminReadingRecord>
+    >(
+      (ref) => AdminCollectionController<AdminReadingRecord>(
+        idOf: (item) => item.id,
+      ),
+    );
+
+final adminGrammarChangesProvider =
+    StateNotifierProvider<
+      AdminCollectionController<AdminGrammarRecord>,
+      AdminCollectionState<AdminGrammarRecord>
+    >(
+      (ref) => AdminCollectionController<AdminGrammarRecord>(
+        idOf: (item) => item.id.toString(),
+      ),
+    );
+
+final _adminPacksBaseProvider = FutureProvider<List<AdminPackRecord>>((ref) {
+  return _loadAdminPacks(
+    ref.watch(adminAppConfigProvider),
+    previewRepository: ref.watch(_previewPackRepositoryProvider),
+  );
+});
+
+final _adminWordEntriesBaseProvider = FutureProvider<List<AdminWordRecord>>((
   ref,
-) async {
+) {
   return _loadAdminWords(
     ref.watch(adminAppConfigProvider),
     previewRepository: ref.watch(_previewWordRepositoryProvider),
   );
 });
 
-final adminReadingsProvider = FutureProvider<List<AdminReadingRecord>>((
+final _adminReadingsBaseProvider = FutureProvider<List<AdminReadingRecord>>((
   ref,
-) async {
+) {
   return _loadAdminReadings(
     ref.watch(adminAppConfigProvider),
     previewRepository: ref.watch(_previewReadingRepositoryProvider),
   );
 });
 
+final _adminGrammarModulesBaseProvider =
+    FutureProvider<List<AdminGrammarRecord>>((ref) {
+      return _loadAdminGrammarModules(
+        ref.watch(adminAppConfigProvider),
+        previewRepository: ref.watch(_previewGrammarRepositoryProvider),
+      );
+    });
+
+final adminWordEntriesProvider = FutureProvider<List<AdminWordRecord>>((
+  ref,
+) async {
+  final changes = ref.watch(adminWordChangesProvider);
+  final items = await ref.watch(_adminWordEntriesBaseProvider.future);
+  final merged = _mergeCollection(items, changes, idOf: (item) => item.id)
+    ..sort((left, right) => left.enWord.compareTo(right.enWord));
+  return merged;
+});
+
+final adminPacksProvider = FutureProvider<List<AdminPackRecord>>((ref) async {
+  final changes = ref.watch(adminPackChangesProvider);
+  final baseItems = await ref.watch(_adminPacksBaseProvider.future);
+  final words = await ref.watch(adminWordEntriesProvider.future);
+  final wordCounts = <String, int>{};
+  for (final item in words) {
+    wordCounts.update(item.packId, (value) => value + 1, ifAbsent: () => 1);
+  }
+
+  final merged =
+      _mergeCollection(baseItems, changes, idOf: (item) => item.id)
+          .map((item) {
+            return item.copyWith(wordCount: wordCounts[item.id] ?? 0);
+          })
+          .toList(growable: false)
+        ..sort((left, right) => left.name.compareTo(right.name));
+
+  return merged;
+});
+
+final adminReadingsProvider = FutureProvider<List<AdminReadingRecord>>((
+  ref,
+) async {
+  final changes = ref.watch(adminReadingChangesProvider);
+  final items = await ref.watch(_adminReadingsBaseProvider.future);
+  final merged = _mergeCollection(items, changes, idOf: (item) => item.id)
+    ..sort((left, right) => left.title.compareTo(right.title));
+  return merged;
+});
+
 final adminGrammarModulesProvider = FutureProvider<List<AdminGrammarRecord>>((
   ref,
 ) async {
-  return _loadAdminGrammarModules(
-    ref.watch(adminAppConfigProvider),
-    previewRepository: ref.watch(_previewGrammarRepositoryProvider),
-  );
+  final changes = ref.watch(adminGrammarChangesProvider);
+  final items = await ref.watch(_adminGrammarModulesBaseProvider.future);
+  final merged =
+      _mergeCollection(items, changes, idOf: (item) => item.id.toString())
+        ..sort((left, right) {
+          final byOrder = left.sortOrder.compareTo(right.sortOrder);
+          if (byOrder != 0) {
+            return byOrder;
+          }
+          return left.id.compareTo(right.id);
+        });
+  return merged;
 });
 
 final adminUserOverridesProvider =
@@ -166,7 +271,7 @@ Future<List<AdminUserRecord>> _loadAdminUsers(AppConfig config) async {
         (await Supabase.instance.client.rpc<dynamic>('admin_list_users'))
             as List<dynamic>;
 
-    final users = rows
+    return rows
         .whereType<Map<String, dynamic>>()
         .map(
           (row) => AdminUserRecord(
@@ -182,11 +287,51 @@ Future<List<AdminUserRecord>> _loadAdminUsers(AppConfig config) async {
         )
         .where((item) => item.id.isNotEmpty)
         .toList(growable: false);
-
-    return users.isEmpty ? _fallbackAdminUsers : users;
   } catch (_) {
     return _fallbackAdminUsers;
   }
+}
+
+Future<List<AdminPackRecord>> _loadAdminPacks(
+  AppConfig config, {
+  required PackRepository previewRepository,
+}) async {
+  if (config.supabaseEnabled) {
+    await SupabaseBootstrap.initialize(config);
+    if (Supabase.instance.client.auth.currentSession != null) {
+      try {
+        final rows =
+            (await Supabase.instance.client.rpc<dynamic>('admin_list_packs'))
+                as List<dynamic>;
+        return rows
+            .whereType<Map<String, dynamic>>()
+            .map(
+              (row) => AdminPackRecord(
+                id: row['id']?.toString() ?? '',
+                name: row['name']?.toString() ?? '',
+                wordCount: 0,
+                isPublished: row['is_published'] as bool? ?? false,
+                updatedAtLabel: _formatLastSeen(row['updated_at']),
+              ),
+            )
+            .where((item) => item.id.isNotEmpty)
+            .toList(growable: false);
+      } catch (_) {}
+    }
+  }
+
+  final packs = await previewRepository.fetchPacks();
+  return packs
+      .map(
+        (item) => AdminPackRecord(
+          id: item.id,
+          name: item.name,
+          wordCount: item.wordCount,
+          isPublished: true,
+          updatedAtLabel: 'preview',
+        ),
+      )
+      .toList(growable: false);
 }
 
 Future<List<AdminWordRecord>> _loadAdminWords(
@@ -200,7 +345,7 @@ Future<List<AdminWordRecord>> _loadAdminWords(
         final rows =
             (await Supabase.instance.client.rpc<dynamic>('admin_list_words'))
                 as List<dynamic>;
-        final words = rows
+        return rows
             .whereType<Map<String, dynamic>>()
             .map(
               (row) => AdminWordRecord(
@@ -209,14 +354,16 @@ Future<List<AdminWordRecord>> _loadAdminWords(
                 enWord: row['en_word']?.toString() ?? '',
                 trMeaning: row['tr_meaning']?.toString() ?? '',
                 pos: row['pos']?.toString() ?? '',
+                exampleEn: row['example_en']?.toString() ?? '',
+                exampleTr: row['example_tr']?.toString(),
+                level: row['level']?.toString(),
+                notes: row['notes']?.toString(),
                 isPublished: row['is_published'] as bool? ?? false,
+                updatedAtLabel: _formatLastSeen(row['updated_at']),
               ),
             )
             .where((item) => item.id.isNotEmpty)
             .toList(growable: false);
-        if (words.isNotEmpty) {
-          return words;
-        }
       } catch (_) {}
     }
   }
@@ -230,7 +377,12 @@ Future<List<AdminWordRecord>> _loadAdminWords(
           enWord: item.enWord,
           trMeaning: item.trMeaning,
           pos: item.pos,
+          exampleEn: '${item.enWord} example',
+          exampleTr: null,
+          level: null,
+          notes: null,
           isPublished: true,
+          updatedAtLabel: 'preview',
         ),
       )
       .toList(growable: false);
@@ -249,22 +401,23 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
                   'admin_list_reading_passages',
                 ))
                 as List<dynamic>;
-        final readings = rows
+        return rows
             .whereType<Map<String, dynamic>>()
             .map(
               (row) => AdminReadingRecord(
                 id: row['id']?.toString() ?? '',
+                packId: row['pack_id']?.toString(),
+                packName: row['pack_name']?.toString(),
                 title: row['title']?.toString() ?? '',
                 level: row['level']?.toString(),
                 category: row['category']?.toString(),
+                tagsRaw: row['tags_raw']?.toString(),
                 isPublished: row['is_published'] as bool? ?? false,
+                updatedAtLabel: _formatLastSeen(row['updated_at']),
               ),
             )
             .where((item) => item.id.isNotEmpty)
             .toList(growable: false);
-        if (readings.isNotEmpty) {
-          return readings;
-        }
       } catch (_) {}
     }
   }
@@ -274,10 +427,14 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
       .map(
         (item) => AdminReadingRecord(
           id: item.id,
+          packId: null,
+          packName: null,
           title: item.title,
           level: item.level,
           category: item.category,
+          tagsRaw: null,
           isPublished: true,
+          updatedAtLabel: 'preview',
         ),
       )
       .toList(growable: false);
@@ -296,21 +453,23 @@ Future<List<AdminGrammarRecord>> _loadAdminGrammarModules(
                   'admin_list_grammar_modules',
                 ))
                 as List<dynamic>;
-        final modules = rows
+        return rows
             .whereType<Map<String, dynamic>>()
             .map(
               (row) => AdminGrammarRecord(
                 id: (row['id'] as num?)?.toInt() ?? 0,
+                sortOrder: (row['sira'] as num?)?.toInt() ?? 0,
                 title: row['baslik']?.toString() ?? '',
+                fileName: row['dosya_adi']?.toString() ?? '',
                 pageCount: (row['toplam_sayfa'] as num?)?.toInt() ?? 0,
+                icon: row['icon']?.toString() ?? '📘',
+                color: row['renk']?.toString() ?? '#4776E6',
                 isPublished: row['is_published'] as bool? ?? false,
+                updatedAtLabel: _formatLastSeen(row['updated_at']),
               ),
             )
             .where((item) => item.id > 0)
             .toList(growable: false);
-        if (modules.isNotEmpty) {
-          return modules;
-        }
       } catch (_) {}
     }
   }
@@ -320,9 +479,14 @@ Future<List<AdminGrammarRecord>> _loadAdminGrammarModules(
       .map(
         (item) => AdminGrammarRecord(
           id: item.id,
+          sortOrder: item.id,
           title: item.title,
+          fileName: 'module-${item.id}',
           pageCount: item.pageCount,
+          icon: '📘',
+          color: '#4776E6',
           isPublished: true,
+          updatedAtLabel: 'preview',
         ),
       )
       .toList(growable: false);
@@ -363,6 +527,30 @@ Future<List<AdminAuditRecord>> _loadAdminAuditLogs(AppConfig config) async {
   } catch (_) {
     return const <AdminAuditRecord>[];
   }
+}
+
+List<T> _mergeCollection<T>(
+  List<T> baseItems,
+  AdminCollectionState<T> changes, {
+  required String Function(T item) idOf,
+}) {
+  final merged = <String, T>{};
+  for (final item in baseItems) {
+    final id = idOf(item);
+    if (changes.deletedIds.contains(id)) {
+      continue;
+    }
+    merged[id] = item;
+  }
+
+  for (final entry in changes.upserts.entries) {
+    if (changes.deletedIds.contains(entry.key)) {
+      continue;
+    }
+    merged[entry.key] = entry.value;
+  }
+
+  return merged.values.toList(growable: false);
 }
 
 AppRole _parseRole(String? value) {

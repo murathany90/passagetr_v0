@@ -5,6 +5,51 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'admin_console_models.dart';
 
+class AdminCollectionState<T> {
+  AdminCollectionState({Map<String, T>? upserts, Set<String>? deletedIds})
+    : upserts = upserts ?? <String, T>{},
+      deletedIds = deletedIds ?? <String>{};
+
+  final Map<String, T> upserts;
+  final Set<String> deletedIds;
+
+  AdminCollectionState<T> copyWith({
+    Map<String, T>? upserts,
+    Set<String>? deletedIds,
+  }) {
+    return AdminCollectionState<T>(
+      upserts: upserts ?? this.upserts,
+      deletedIds: deletedIds ?? this.deletedIds,
+    );
+  }
+}
+
+class AdminCollectionController<T>
+    extends StateNotifier<AdminCollectionState<T>> {
+  AdminCollectionController({required String Function(T item) idOf})
+    : _idOf = idOf,
+      super(AdminCollectionState<T>());
+
+  final String Function(T item) _idOf;
+
+  void upsert(T item) {
+    final id = _idOf(item);
+    final nextUpserts = <String, T>{...state.upserts, id: item};
+    final nextDeleted = Set<String>.from(state.deletedIds)..remove(id);
+    state = state.copyWith(upserts: nextUpserts, deletedIds: nextDeleted);
+  }
+
+  void remove(String id) {
+    final nextUpserts = <String, T>{...state.upserts}..remove(id);
+    final nextDeleted = Set<String>.from(state.deletedIds)..add(id);
+    state = state.copyWith(upserts: nextUpserts, deletedIds: nextDeleted);
+  }
+
+  void clear() {
+    state = AdminCollectionState<T>();
+  }
+}
+
 class AdminUserOverridesController
     extends StateNotifier<Map<String, AdminUserRecord>> {
   AdminUserOverridesController() : super(const <String, AdminUserRecord>{});

@@ -46,6 +46,7 @@ void main() {
       '202603090026_progress_event_rpcs.sql',
       '202603090027_admin_console_management_rpcs.sql',
       '202603090028_user_daily_stats_analytics_helpers.sql',
+      '202603100029_admin_console_crud_rpcs.sql',
     ];
 
     final fileNames = migrationDir
@@ -88,5 +89,19 @@ void main() {
     expect(sql, contains('admin_set_user_access'));
     expect(sql, contains('admin_set_content_publish_state'));
     expect(sql, contains('write_audit_log'));
+  });
+
+  test('phase 5 admin CRUD migration contains pack and content RPCs', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603100029_admin_console_crud_rpcs.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_list_packs'));
+    expect(sql, contains('admin_upsert_pack'));
+    expect(sql, contains('admin_import_words'));
+    expect(sql, contains('admin_upsert_reading_passage'));
+    expect(sql, contains('admin_upsert_grammar_module'));
+    expect(sql, contains('admin_reorder_grammar_modules'));
   });
 }
