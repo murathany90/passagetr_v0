@@ -132,6 +132,7 @@ final studentWordProgressProvider =
     >(
       (ref) => StudentWordProgressController(
         progressRepository: ref.watch(studentProgressRepositoryProvider),
+        accessContext: ref.watch(studentAccessProvider),
       ),
     );
 
@@ -224,14 +225,38 @@ final studentReviewWordCountProvider = Provider<int>((ref) {
   return progress.values.where((item) => item.mastery < 60).length;
 });
 
-final studentContinueProgressProvider = Provider<int>((ref) {
+final studentContinueReadingIdProvider = Provider<String?>((ref) {
+  final readings = ref.watch(studentReadingsProvider).valueOrNull;
   final progress = ref.watch(studentReadingProgressProvider).valueOrNull;
-  final current = progress?['reading-silent-ocean'];
-  if (current == null) {
-    return 65;
+  if (readings == null || readings.isEmpty) {
+    return null;
   }
 
-  final percent = (current.lastIndex * 4).clamp(12, 100);
+  if (progress != null && progress.isNotEmpty) {
+    for (final reading in readings) {
+      final p = progress[reading.id];
+      if (p != null && !p.completed) {
+        return reading.id;
+      }
+    }
+  }
+
+  return readings.first.id;
+});
+
+final studentContinueProgressProvider = Provider<int>((ref) {
+  final readingId = ref.watch(studentContinueReadingIdProvider);
+  if (readingId == null) {
+    return 0;
+  }
+
+  final progress = ref.watch(studentReadingProgressProvider).valueOrNull;
+  final current = progress?[readingId];
+  if (current == null) {
+    return 0;
+  }
+
+  final percent = (current.lastIndex * 4).clamp(0, 100);
   return current.completed ? 100 : percent;
 });
 
@@ -278,14 +303,7 @@ final studentCompletedGoalDaysProvider = Provider<int>((ref) {
       );
 });
 
-const _fallbackPackProgress = <String, int>{
-  'pack-yds-001': 24,
-  'pack-business': 20,
-  'pack-academic': 0,
-  'pack-travel': 100,
-  'pack-daily-speaking': 5,
-  'pack-phrasal-verbs': 0,
-};
+const _fallbackPackProgress = <String, int>{};
 
 final studentPackProgressProvider = Provider<Map<String, int>>((ref) {
   final words = ref.watch(studentWordsProvider).valueOrNull;
@@ -300,7 +318,7 @@ final studentPackProgressProvider = Provider<Map<String, int>>((ref) {
     groupedMasteries[word.packId]!.add(progress[word.id]?.mastery ?? 0);
   }
 
-  final resolved = <String, int>{..._fallbackPackProgress};
+  final resolved = <String, int>{};
   for (final entry in groupedMasteries.entries) {
     if (entry.value.isEmpty) {
       continue;

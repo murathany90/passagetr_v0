@@ -1,7 +1,10 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_core/shared_core.dart';
 import 'package:student_app/src/app/student_app.dart';
 import 'package:student_app/src/app/student_router.dart';
+import 'package:student_app/src/core/student_providers.dart';
 
 Future<void> _pumpUntilFound(
   WidgetTester tester,
@@ -16,6 +19,13 @@ Future<void> _pumpUntilFound(
   }
 }
 
+Finder _titleFinder(String value) {
+  return find.byWidgetPredicate(
+    (widget) => widget is Title && widget.title == value,
+    description: value,
+  );
+}
+
 Future<void> _navigateTo(
   WidgetTester tester,
   ProviderContainer container,
@@ -28,7 +38,9 @@ Future<void> _navigateTo(
 }
 
 void main() {
-  testWidgets('student foundation shell renders', (tester) async {
+  testWidgets('student routes render unique content and browser titles', (
+    tester,
+  ) async {
     final container = ProviderContainer();
     addTearDown(container.dispose);
 
@@ -38,10 +50,10 @@ void main() {
         child: const StudentApp(),
       ),
     );
-    await _pumpUntilFound(tester, find.textContaining('Hoş geldin, Ahmet!'));
+    await _pumpUntilFound(tester, find.textContaining('Hoş geldin'));
 
-    expect(find.textContaining('Hoş geldin, Ahmet!'), findsOneWidget);
-    expect(find.textContaining('Gün'), findsWidgets);
+    expect(find.textContaining('Hoş geldin'), findsOneWidget);
+    expect(_titleFinder('PASSAGETR | Ana Sayfa'), findsWidgets);
 
     await _navigateTo(
       tester,
@@ -50,10 +62,25 @@ void main() {
       find.text('Kelime Paketleri'),
     );
     expect(find.text('Kelime Paketleri'), findsOneWidget);
-    expect(
-      find.textContaining('Kelime havuzunda veya sözlükte ara'),
-      findsOneWidget,
+    expect(_titleFinder('PASSAGETR | Kelimeler'), findsWidgets);
+
+    await _navigateTo(
+      tester,
+      container,
+      '/readings',
+      find.textContaining('Okuma'),
     );
+    expect(find.textContaining('Okuma'), findsWidgets);
+    expect(_titleFinder('PASSAGETR | Okuma Odası'), findsWidgets);
+
+    await _navigateTo(
+      tester,
+      container,
+      '/grammar',
+      find.textContaining('Gramer'),
+    );
+    expect(find.textContaining('Gramer'), findsWidgets);
+    expect(_titleFinder('PASSAGETR | Gramer Modülleri'), findsWidgets);
 
     await _navigateTo(
       tester,
@@ -63,11 +90,48 @@ void main() {
     );
     expect(find.text('PASSAGETR PRO'), findsOneWidget);
     expect(find.text('UYGULAMA AYARLARI'), findsOneWidget);
-    await tester.ensureVisible(find.text('Giriş Yap').first);
-    expect(find.text('Giriş Yap'), findsOneWidget);
-    await tester.tap(find.text('Giriş Yap').first);
-    await _pumpUntilFound(tester, find.text('Hesap erişimi'));
-    expect(find.text('Hesap erişimi'), findsOneWidget);
+    expect(find.text('Hesap erişimi'), findsNothing);
+    expect(find.text('Free'), findsNothing);
+    expect(_titleFinder('PASSAGETR | Profil'), findsWidgets);
+  });
+
+  testWidgets('dev access route is locked for users and open for admins', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: const StudentApp(),
+      ),
+    );
+    await _pumpUntilFound(tester, find.textContaining('Hoş geldin'));
+
+    await _navigateTo(
+      tester,
+      container,
+      '/dev-access',
+      find.textContaining('yalnızca admin veya developer'),
+    );
+    expect(
+      find.textContaining('yalnızca admin veya developer'),
+      findsOneWidget,
+    );
+
+    container.read(studentAccessProvider.notifier).setRole(AppRole.admin);
+    await tester.pump();
+
+    await _navigateTo(
+      tester,
+      container,
+      '/dev-access',
+      find.text('Geliştirici erişimi'),
+    );
+    expect(find.text('Geliştirici erişimi'), findsOneWidget);
+    expect(find.text('DEV ACCESS PANEL'), findsOneWidget);
     expect(find.text('Admin'), findsOneWidget);
+    expect(_titleFinder('PASSAGETR | Dev Access'), findsWidgets);
   });
 }

@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "student_app",
-      "public": "build/web",
+      "public": "build/hosting/student_app",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -70,7 +70,7 @@
     },
     {
       "target": "admin_console",
-      "public": "build/web",
+      "public": "build/hosting/admin_console",
       "ignore": [
         "firebase.json",
         "**/.*",

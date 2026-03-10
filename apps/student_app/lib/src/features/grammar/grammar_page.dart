@@ -192,7 +192,9 @@ class _GrammarModuleCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      seed.description,
+                      module.description.isNotEmpty
+                          ? module.description
+                          : seed.description,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(

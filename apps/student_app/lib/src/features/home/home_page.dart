@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_core/shared_core.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -27,18 +28,21 @@ class StudentHomePage extends ConsumerWidget {
     final continueReading = readings.maybeWhen(
       data: _selectContinueReading,
       orElse: () => const ReadingPassage(
-        id: 'reading-silent-ocean',
-        title: 'The Silent Ocean',
-        level: 'Zor',
-        category: 'Bilim',
+        id: 'reading-placeholder',
+        title: 'Okuma Yüklenemedi',
+        level: '-',
+        category: '-',
       ),
     );
 
+    final displayName = _displayNameFor(accessContext);
+
     return StudentShellFrame(
       destination: StudentDestination.home,
-      title: 'Hoş geldin, Ahmet!',
+      title: 'Hoş geldin, $displayName!',
       subtitle: 'Bugün yeni bir şeyler öğrenmeye hazır mısın?',
       accessContext: accessContext,
+      browserTitle: 'Ana Sayfa',
       headerAction: _ProPill(
         isPremium: accessContext.canViewPremium,
         onPressed: () => context.go('/premium'),
@@ -110,13 +114,35 @@ class StudentHomePage extends ConsumerWidget {
   }
 
   static ReadingPassage _selectContinueReading(List<ReadingPassage> items) {
-    for (final item in items) {
-      if (item.id == 'reading-silent-ocean') {
-        return item;
-      }
+    if (items.isEmpty) {
+      return const ReadingPassage(
+        id: 'reading-placeholder',
+        title: 'Okuma Yüklenemedi',
+        level: '-',
+        category: '-',
+      );
     }
 
     return items.first;
+  }
+
+  static String _displayNameFor(AccessContext accessContext) {
+    final rawDisplayName = accessContext.session.user?.displayName?.trim();
+    if (rawDisplayName != null && rawDisplayName.isNotEmpty) {
+      return rawDisplayName;
+    }
+
+    final email = accessContext.email?.trim();
+    if (email != null && email.contains('@')) {
+      final localPart = email.split('@').first.replaceAll('.', ' ');
+      return localPart
+          .split(' ')
+          .where((part) => part.isNotEmpty)
+          .map((part) => '${part[0].toUpperCase()}${part.substring(1)}')
+          .join(' ');
+    }
+
+    return 'Öğrenci';
   }
 }
 
@@ -285,7 +311,7 @@ class _ContinueReadingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'KALDI?IN YERDEN DEVAM ET',
+                      'KALDIĞIN YERDEN DEVAM ET',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: tokens.accent,
                         fontWeight: FontWeight.w900,
@@ -540,6 +566,7 @@ class _WeeklyProgressCard extends StatelessWidget {
           const SizedBox(height: 16),
           const Row(
             children: [
+              _WeekLabel('Pzt'),
               _WeekLabel('Sal'),
               _WeekLabel('Çar'),
               _WeekLabel('Per'),

@@ -16,7 +16,7 @@ $ProgressPreference = "SilentlyContinue"
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
 $buildScript = Join-Path $scriptRoot "build_web_firebase.ps1"
-$buildRoot = Join-Path $repoRoot "build\web"
+$buildRoot = Join-Path $repoRoot "build\hosting\$AppName"
 $hostingTarget = $AppName
 
 function Resolve-ToolPath {

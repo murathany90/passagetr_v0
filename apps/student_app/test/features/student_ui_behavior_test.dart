@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
 import 'package:shared_ui/shared_ui.dart';
 import 'package:student_app/src/core/student_providers.dart';
@@ -31,7 +32,7 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text('Admin console uygulamasini ac'));
+    await tester.tap(find.text('Admin console uygulamasını aç'));
     await tester.pumpAndSettle();
 
     expect(callCount, 1);
@@ -73,7 +74,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Kelime Paketleri'), findsOneWidget);
-    final packTitleFinder = find.text('YDS Ilk 1000');
+    final packTitleFinder = find.text('YDS İlk 1000');
     await tester.ensureVisible(packTitleFinder);
     await tester.tap(packTitleFinder);
     await tester.pumpAndSettle();
@@ -139,7 +140,18 @@ Future<void> _pumpStudentBehaviorApp(
   required String initialLocation,
   required List<RouteBase> routes,
 }) async {
-  final router = GoRouter(initialLocation: initialLocation, routes: routes);
+  final router = GoRouter(
+    initialLocation: initialLocation,
+    routes: [
+      ShellRoute(
+        builder: (context, state, child) => StudentAppShell(
+          state: state,
+          child: child,
+        ),
+        routes: routes,
+      ),
+    ],
+  );
   addTearDown(router.dispose);
 
   await tester.pumpWidget(

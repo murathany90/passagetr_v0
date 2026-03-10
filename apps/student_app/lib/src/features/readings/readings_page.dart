@@ -126,8 +126,10 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
     final filtered = items
         .where((item) {
           final seed = readingSeedFor(item.id);
+          final displaySummary =
+              (item.summary?.isNotEmpty ?? false) ? item.summary : seed.summary;
           final haystack =
-              '${item.title} ${item.category ?? ''} ${item.level ?? ''} ${seed.summary}'
+              '${item.title} ${item.category ?? ''} ${item.level ?? ''} $displaySummary'
                   .toLowerCase();
           return haystack.contains(normalizedQuery);
         })
@@ -250,7 +252,9 @@ class _ReadingCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  seed.summary,
+                  (reading.summary?.isNotEmpty ?? false)
+                      ? reading.summary!
+                      : seed.summary,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(

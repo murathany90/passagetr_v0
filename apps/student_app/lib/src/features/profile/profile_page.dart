@@ -23,10 +23,8 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController(
-      text: _kProfileTestAccounts.first.email,
-    );
-    _passwordController = TextEditingController(text: _kPhase1TestPassword);
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
   }
 
   @override
@@ -49,6 +47,7 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
       subtitle:
           'Hesabını, görünüm tercihlerini ve üyelik ayarlarını buradan yönet.',
       accessContext: accessContext,
+      browserTitle: 'Profil',
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -118,16 +117,6 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
                   }
                 : null,
           ),
-          if (_showDevAccessPanel(accessContext)) ...[
-            const SizedBox(height: 18),
-            _DevAccessPanel(
-              accessContext: accessContext,
-              config: config,
-              controller: controller,
-              emailController: _emailController,
-              passwordController: _passwordController,
-            ),
-          ],
         ],
       ),
     );
@@ -155,7 +144,6 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
             config: config,
             emailController: _emailController,
             passwordController: _passwordController,
-            onPresetSelected: _prefillTestAccount,
             onAnonymousPressed: () => _runAuthSessionAction(
               sheetContext: sheetContext,
               action: controller.signInAnonymously,
@@ -214,16 +202,6 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
     if (result is AppSuccess<AuthSession> && sheetContext.mounted) {
       Navigator.of(sheetContext).pop();
     }
-  }
-
-  bool _showDevAccessPanel(AccessContext accessContext) {
-    return accessContext.role == AppRole.admin ||
-        accessContext.role == AppRole.developer;
-  }
-
-  void _prefillTestAccount(_TestAccountPreset preset) {
-    _emailController.text = preset.email;
-    _passwordController.text = preset.password;
   }
 
   String _displayNameFor(AccessContext accessContext) {
@@ -428,17 +406,20 @@ class _AppSettingsCard extends StatelessWidget {
           const SizedBox(height: 18),
           Text('Tema', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 12),
-          SegmentedButton<ThemeMode>(
-            showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(value: ThemeMode.light, label: Text('Açık')),
-              ButtonSegment(value: ThemeMode.dark, label: Text('Koyu')),
-              ButtonSegment(value: ThemeMode.system, label: Text('Sistem')),
-            ],
-            selected: <ThemeMode>{themeMode},
-            onSelectionChanged: (selection) {
-              onThemeChanged(selection.first);
-            },
+          SizedBox(
+            width: double.infinity,
+            child: SegmentedButton<ThemeMode>(
+              showSelectedIcon: false,
+              segments: const [
+                ButtonSegment(value: ThemeMode.light, label: Text('Açık')),
+                ButtonSegment(value: ThemeMode.dark, label: Text('Koyu')),
+                ButtonSegment(value: ThemeMode.system, label: Text('Sistem')),
+              ],
+              selected: <ThemeMode>{themeMode},
+              onSelectionChanged: (selection) {
+                onThemeChanged(selection.first);
+              },
+            ),
           ),
           const SizedBox(height: 20),
           Text('Dil', style: Theme.of(context).textTheme.titleLarge),
@@ -502,7 +483,7 @@ class _AccountManagementCard extends StatelessWidget {
           _AccountActionRow(
             title: 'Hesap Erişimi',
             subtitle: accessContext.isAnonymous
-                ? 'Anonim oturumdasın. E-posta ile giriş yapabilir veya hazır test hesabı seçebilirsin.'
+                ? 'Anonim oturumdasın. E-posta ile giriş yapabilir veya yeni hesap oluşturabilirsin.'
                 : 'Aktif hesap: ${accessContext.email ?? 'Kayıtlı kullanıcı'}',
             trailing: FilledButton.icon(
               onPressed: onAccessPressed,
@@ -515,9 +496,8 @@ class _AccountManagementCard extends StatelessWidget {
           if (accessContext.isAuthenticated) ...[
             const SizedBox(height: 14),
             _AccountActionRow(
-              title: 'Rol ve Oturum',
-              subtitle:
-                  'Rol: ${accessContext.role.value} • Plan: ${accessContext.plan.value}',
+              title: 'Oturum Durumu',
+              subtitle: 'Bu cihazdaki etkin oturumu yenile veya doğrula.',
               trailing: FilledButton.tonal(
                 onPressed: onRefreshPressed,
                 child: const Text('Yenile'),
@@ -610,7 +590,6 @@ class _AuthAccessSheet extends StatelessWidget {
     required this.config,
     required this.emailController,
     required this.passwordController,
-    required this.onPresetSelected,
     required this.onAnonymousPressed,
     required this.onRefreshPressed,
     required this.onSignInPressed,
@@ -622,7 +601,6 @@ class _AuthAccessSheet extends StatelessWidget {
   final AppConfig config;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final ValueChanged<_TestAccountPreset> onPresetSelected;
   final VoidCallback onAnonymousPressed;
   final VoidCallback? onRefreshPressed;
   final VoidCallback onSignInPressed;
@@ -656,32 +634,11 @@ class _AuthAccessSheet extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               config.supabaseEnabled
-                  ? 'Supabase bağlantısı aktif. Hazır test hesaplarından birini seçebilir veya kendi e-posta adresinle giriş yapabilirsin.'
+                  ? 'Supabase bağlantısı aktif. E-posta ile giriş yapabilir, kayıt olabilir veya anonim oturum başlatabilirsin.'
                   : 'Supabase bağlantısı tanımlı değil. Bu build yalnız preview auth yüzeyi gösterir.',
               style: Theme.of(
                 context,
               ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
-            ),
-            const SizedBox(height: 18),
-            Text(
-              'HAZIR TEST HESAPLARI',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: tokens.secondaryText,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: _kProfileTestAccounts
-                  .map(
-                    (preset) => ActionChip(
-                      label: Text(preset.label),
-                      onPressed: () => onPresetSelected(preset),
-                    ),
-                  )
-                  .toList(),
             ),
             const SizedBox(height: 18),
             TextField(
@@ -741,231 +698,6 @@ class _AuthAccessSheet extends StatelessWidget {
   }
 }
 
-class _DevAccessPanel extends StatelessWidget {
-  const _DevAccessPanel({
-    required this.accessContext,
-    required this.config,
-    required this.controller,
-    required this.emailController,
-    required this.passwordController,
-  });
-
-  final AccessContext accessContext;
-  final AppConfig config;
-  final StudentAccessController controller;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-
-  @override
-  Widget build(BuildContext context) {
-    return StudentSurfaceCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'DEV ACCESS PANEL',
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w900),
-          ),
-          const SizedBox(height: 14),
-          Text(
-            config.supabaseEnabled
-                ? 'Supabase ortam değişkenleri bulundu. Gerçek auth istekleri aktif.'
-                : 'Supabase ortam değişkenleri tanımlı değil. Anonim preview ve lokal RBAC shell aktif.',
-          ),
-          const SizedBox(height: 16),
-          _RoleSelector(
-            value: accessContext.role,
-            onChanged: controller.setRole,
-          ),
-          const SizedBox(height: 16),
-          _PlanSelector(
-            value: accessContext.plan,
-            onChanged: controller.setPlan,
-          ),
-          const SizedBox(height: 16),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            value: accessContext.isAnonymous,
-            onChanged: controller.setAnonymous,
-            title: const Text('Anonim oturum'),
-            subtitle: const Text('Faz 1 yükselme akışı için preview toggle'),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: emailController,
-            decoration: const InputDecoration(labelText: 'E-posta'),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: passwordController,
-            obscureText: true,
-            decoration: const InputDecoration(labelText: 'Şifre'),
-          ),
-          const SizedBox(height: 16),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              FilledButton(
-                onPressed: () async {
-                  final result = await controller.signInAnonymously();
-                  if (!context.mounted) {
-                    return;
-                  }
-                  _showAuthSessionResult(
-                    context,
-                    result,
-                    'Anonim oturum başlatıldı.',
-                  );
-                },
-                child: const Text('Anonim Başlat'),
-              ),
-              FilledButton.tonal(
-                onPressed: accessContext.isAuthenticated
-                    ? () async {
-                        final result = await controller.refreshSession();
-                        if (!context.mounted) {
-                          return;
-                        }
-                        _showAuthSessionResult(
-                          context,
-                          result,
-                          'Oturum ve claimler yenilendi.',
-                        );
-                      }
-                    : null,
-                child: const Text('Oturumu Yenile'),
-              ),
-              FilledButton.tonal(
-                onPressed: () async {
-                  final result = await controller.signInWithEmail(
-                    email: emailController.text.trim(),
-                    password: passwordController.text,
-                  );
-                  if (!context.mounted) {
-                    return;
-                  }
-                  _showAuthSessionResult(context, result, 'Giriş başarılı.');
-                },
-                child: const Text('Giriş Yap'),
-              ),
-              FilledButton.tonal(
-                onPressed: () async {
-                  final result = await controller.signUpWithEmail(
-                    email: emailController.text.trim(),
-                    password: passwordController.text,
-                  );
-                  if (!context.mounted) {
-                    return;
-                  }
-                  _showAuthSessionResult(
-                    context,
-                    result,
-                    'Kayıt isteği gönderildi.',
-                  );
-                },
-                child: const Text('Kayıt Ol'),
-              ),
-              OutlinedButton(
-                onPressed: accessContext.isAnonymous
-                    ? () async {
-                        final result = await controller
-                            .upgradeAnonymousWithEmail(
-                              email: emailController.text.trim(),
-                              password: passwordController.text,
-                            );
-                        if (!context.mounted) {
-                          return;
-                        }
-                        _showAuthSessionResult(
-                          context,
-                          result,
-                          'Anonim hesap yükseltildi.',
-                        );
-                      }
-                    : null,
-                child: const Text('Anonim Hesabı Yükselt'),
-              ),
-              OutlinedButton(
-                onPressed: () async {
-                  final result = await controller.signOut();
-                  if (!context.mounted) {
-                    return;
-                  }
-                  final message = switch (result) {
-                    AppSuccess<void>() => 'Oturum kapatıldı.',
-                    AppFailure<void>() => result.message,
-                  };
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text(message)));
-                },
-                child: const Text('Çıkış Yap'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _RoleSelector extends StatelessWidget {
-  const _RoleSelector({required this.value, required this.onChanged});
-
-  final AppRole value;
-  final ValueChanged<AppRole> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField<AppRole>(
-      initialValue: value,
-      decoration: const InputDecoration(labelText: 'Rol preview'),
-      items: AppRole.values
-          .map(
-            (role) =>
-                DropdownMenuItem<AppRole>(value: role, child: Text(role.value)),
-          )
-          .toList(),
-      onChanged: (role) {
-        if (role != null) {
-          onChanged(role);
-        }
-      },
-    );
-  }
-}
-
-class _PlanSelector extends StatelessWidget {
-  const _PlanSelector({required this.value, required this.onChanged});
-
-  final EntitlementPlan value;
-  final ValueChanged<EntitlementPlan> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField<EntitlementPlan>(
-      initialValue: value,
-      decoration: const InputDecoration(labelText: 'Plan preview'),
-      items: EntitlementPlan.values
-          .map(
-            (plan) => DropdownMenuItem<EntitlementPlan>(
-              value: plan,
-              child: Text(plan.value),
-            ),
-          )
-          .toList(),
-      onChanged: (plan) {
-        if (plan != null) {
-          onChanged(plan);
-        }
-      },
-    );
-  }
-}
-
 void _showAuthSessionResult(
   BuildContext context,
   AppResult<AuthSession> result,
@@ -978,23 +710,3 @@ void _showAuthSessionResult(
 
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
-
-class _TestAccountPreset {
-  const _TestAccountPreset({required this.label, required this.email});
-
-  final String label;
-  final String email;
-
-  String get password => _kPhase1TestPassword;
-}
-
-const String _kPhase1TestPassword = 'PassageTR#2026!';
-const List<_TestAccountPreset> _kProfileTestAccounts = <_TestAccountPreset>[
-  _TestAccountPreset(label: 'Free', email: 'phase1.free@passagetr.dev'),
-  _TestAccountPreset(label: 'PRO', email: 'phase1.pro@passagetr.dev'),
-  _TestAccountPreset(label: 'Admin', email: 'phase1.admin@passagetr.dev'),
-  _TestAccountPreset(
-    label: 'Developer',
-    email: 'phase1.developer@passagetr.dev',
-  ),
-];

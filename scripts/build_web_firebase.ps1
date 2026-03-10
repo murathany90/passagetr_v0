@@ -14,7 +14,7 @@ $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
 $appRoot = Join-Path $repoRoot "apps\$AppName"
 $appBuildRoot = Join-Path $appRoot "build\web"
-$hostingBuildRoot = Join-Path $repoRoot "build\web"
+$hostingBuildRoot = Join-Path $repoRoot "build\hosting\$AppName"
 $envFilePath = Join-Path $repoRoot $EnvironmentFile
 
 $requiredFiles = @(

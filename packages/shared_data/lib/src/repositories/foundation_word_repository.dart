@@ -36,14 +36,14 @@ class FoundationWordRepository implements WordRepository {
         id: 'word-a',
         packId: 'pack-yds-001',
         enWord: 'a great deal of',
-        trMeaning: 'cok miktarda',
+        trMeaning: 'çok miktarda',
         pos: 'prep.',
       ),
       WordEntry(
         id: 'word-b',
         packId: 'pack-business',
         enWord: 'benchmark',
-        trMeaning: 'olcut',
+        trMeaning: 'ölçüt',
         pos: 'n.',
       ),
       WordEntry(
@@ -71,7 +71,7 @@ class FoundationWordRepository implements WordRepository {
         id: 'word-f',
         packId: 'pack-travel',
         enWord: 'itinerary',
-        trMeaning: 'seyahat plani',
+        trMeaning: 'seyahat planı',
         pos: 'n.',
       ),
       WordEntry(

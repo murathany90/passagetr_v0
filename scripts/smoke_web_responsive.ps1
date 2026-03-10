@@ -14,7 +14,7 @@ $ProgressPreference = "SilentlyContinue"
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
 $appRoot = Join-Path $repoRoot "apps\$AppName"
-$appBuildRoot = Join-Path $appRoot "build\web"
+$hostingBuildRoot = Join-Path $repoRoot "build\hosting\$AppName"
 $envFilePath = Join-Path $repoRoot $EnvironmentFile
 $serveScript = Join-Path $scriptRoot "serve_static_web.ps1"
 $smokeScript = Join-Path $scriptRoot "local_responsive_smoke_playwright.js"
@@ -50,7 +50,7 @@ if (-not $SkipBuild) {
 $job = Start-Job -ScriptBlock {
   param($serveScriptPath, $root, $port)
   & powershell -ExecutionPolicy Bypass -File $serveScriptPath -Root $root -Port $port
-} -ArgumentList $serveScript, "apps/$AppName/build/web", $Port
+} -ArgumentList $serveScript, "build/hosting/$AppName", $Port
 
 try {
   New-Item -ItemType Directory -Path $runnerRoot -Force | Out-Null

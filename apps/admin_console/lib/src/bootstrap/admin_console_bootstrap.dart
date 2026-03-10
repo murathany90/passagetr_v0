@@ -10,15 +10,10 @@ class AdminConsoleBootstrap extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bootstrap = ref.watch(adminBootstrapProvider);
+    if (bootstrap.hasError) {
+      debugPrint('admin_bootstrap_error:${bootstrap.error}');
+    }
 
-    return bootstrap.when(
-      data: (_) => const AdminConsoleApp(),
-      loading: () => const MaterialApp(
-        home: Scaffold(body: Center(child: CircularProgressIndicator())),
-      ),
-      error: (error, stackTrace) => MaterialApp(
-        home: Scaffold(body: Center(child: Text(error.toString()))),
-      ),
-    );
+    return const AdminConsoleApp();
   }
 }

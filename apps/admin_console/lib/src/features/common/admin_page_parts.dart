@@ -127,7 +127,7 @@ class _AdminSidebar extends ConsumerWidget {
           ),
           (
             destination: AdminDestination.users,
-            label: 'Kullanicilar',
+            label: 'Kullanıcılar',
             icon: Icons.group_outlined,
             route: '/users',
           ),
@@ -221,7 +221,7 @@ class _AdminSidebar extends ConsumerWidget {
               await ref.read(adminAccessProvider.notifier).signOut();
             },
             icon: const Icon(Icons.logout_rounded),
-            label: const Text('Cikis Yap'),
+            label: const Text('Çıkış Yap'),
           ),
         ],
       ),
@@ -458,7 +458,7 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'Kullanicilar, icerik operasyonlari ve audit gorunumu tek web konsolunda.',
+                        'Kullanıcılar, içerik operasyonları ve audit görünümü tek web konsolunda.',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Colors.white.withValues(alpha: 0.92),
                         ),
@@ -470,14 +470,14 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
               const SizedBox(width: 24),
               Expanded(
                 child: AdminPanelCard(
-                  title: 'Yonetici Girisi',
+                  title: 'Yönetici Girişi',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         config.supabaseEnabled
-                            ? 'Supabase baglantisi aktif. Admin claim olan kullanici ile giris yap.'
-                            : 'Supabase env eksik. Preview admin shell kullanilacak.',
+                            ? 'Supabase bağlantısı aktif. Admin claim olan kullanıcı ile giriş yap.'
+                            : 'Supabase env eksik. Preview admin shell kullanılacak.',
                       ),
                       const SizedBox(height: 18),
                       TextField(
@@ -488,7 +488,7 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
                       TextField(
                         controller: _passwordController,
                         obscureText: true,
-                        decoration: const InputDecoration(labelText: 'Sifre'),
+                        decoration: const InputDecoration(labelText: 'Şifre'),
                       ),
                       const SizedBox(height: 20),
                       Wrap(
@@ -507,14 +507,14 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
                               }
                               final message = switch (result) {
                                 AppSuccess<AuthSession>() =>
-                                  'Giris tamamlandi. Admin claim varsa dashboard acilir.',
+                                  'Giriş tamamlandı. Admin claim varsa dashboard açılır.',
                                 AppFailure<AuthSession>() => result.message,
                               };
                               messenger.showSnackBar(
                                 SnackBar(content: Text(message)),
                               );
                             },
-                            child: const Text('Admin Girisi'),
+                            child: const Text('Admin Girişi'),
                           ),
                           FilledButton.tonal(
                             onPressed: () async {

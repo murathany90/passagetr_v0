@@ -1,3 +1,5 @@
+import 'dart:ui' show lerpDouble;
+
 import 'package:flutter/material.dart';
 
 @immutable
@@ -150,8 +152,4 @@ class AppThemeTokens extends ThemeExtension<AppThemeTokens> {
       railWidth: lerpDouble(railWidth, other.railWidth, t)!,
     );
   }
-}
-
-double? lerpDouble(double a, double b, double t) {
-  return a + (b - a) * t;
 }

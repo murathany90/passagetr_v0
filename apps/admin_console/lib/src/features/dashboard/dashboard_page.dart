@@ -18,12 +18,12 @@ class AdminDashboardPage extends ConsumerWidget {
     return AdminShellFrame(
       destination: AdminDestination.dashboard,
       title: 'PASSAGETR Dashboard',
-      subtitle: 'Kullanici, icerik ve audit akislarini tek ekrandan yonet.',
+      subtitle: 'Kullanıcı, içerik ve audit akışlarını tek ekrandan yönet.',
       accessContext: accessContext,
       headerAction: FilledButton.icon(
         onPressed: () => context.go('/content/readings'),
         icon: const Icon(Icons.add_rounded),
-        label: const Text('Icerige Git'),
+        label: const Text('İçeriğe Git'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,34 +43,34 @@ class AdminDashboardPage extends ConsumerWidget {
                     columns;
                 final cards = <AdminSummaryCard>[
                   AdminSummaryCard(
-                    title: 'Toplam Kullanici',
+                    title: 'Toplam Kullanıcı',
                     subtitle: 'Aktif ve seeded hesaplar',
                     value: '${data.userCount}',
                   ),
                   AdminSummaryCard(
-                    title: 'Pro Kullanici',
-                    subtitle: 'Premium erisimi acik hesaplar',
+                    title: 'Pro Kullanıcı',
+                    subtitle: 'Premium erişimi açık hesaplar',
                     value: '${data.proUserCount}',
                   ),
                   AdminSummaryCard(
-                    title: 'Toplam Icerik',
+                    title: 'Toplam İçerik',
                     subtitle: 'Kelime + okuma + gramer toplami',
                     value:
                         '${data.wordCount + data.readingCount + data.grammarCount}',
                   ),
                   AdminSummaryCard(
                     title: 'Kelime Havuzu',
-                    subtitle: 'Yayinlanan ve taslak kelimeler',
+                    subtitle: 'Yayınlanan ve taslak kelimeler',
                     value: '${data.wordCount}',
                   ),
                   AdminSummaryCard(
-                    title: 'Okuma Kutuphanesi',
-                    subtitle: 'Parcalar ve detay modulleri',
+                    title: 'Okuma Kütüphanesi',
+                    subtitle: 'Parçalar ve detay modülleri',
                     value: '${data.readingCount}',
                   ),
                   AdminSummaryCard(
-                    title: 'Audit Kayitlari',
-                    subtitle: 'Son yonetim aksiyonlari',
+                    title: 'Audit Kayıtları',
+                    subtitle: 'Son yönetim aksiyonları',
                     value: '${data.auditCount}',
                   ),
                 ];
@@ -93,14 +93,14 @@ class AdminDashboardPage extends ConsumerWidget {
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= AppBreakpoints.desktopWide;
               final quickActions = AdminPanelCard(
-                title: 'Hizli Aksiyonlar',
+                title: 'Hızlı Aksiyonlar',
                 child: Wrap(
                   spacing: 12,
                   runSpacing: 12,
                   children: [
                     FilledButton(
                       onPressed: () => context.go('/users'),
-                      child: const Text('Kullanicilari Yonet'),
+                      child: const Text('Kullanıcıları Yönet'),
                     ),
                     FilledButton.tonal(
                       onPressed: () => context.go('/content/words'),
@@ -119,7 +119,7 @@ class AdminDashboardPage extends ConsumerWidget {
               );
 
               final auditPanel = AdminPanelCard(
-                title: 'Son Audit Kayitlari',
+                title: 'Son Audit Kayıtları',
                 child: audits.when(
                   data: (items) => Column(
                     children: [

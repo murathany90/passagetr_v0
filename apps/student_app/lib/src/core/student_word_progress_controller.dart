@@ -28,14 +28,17 @@ class StudentWordProgressController
     extends StateNotifier<AsyncValue<Map<String, WordProgress>>> {
   StudentWordProgressController({
     required ProgressRepository progressRepository,
+    required AccessContext accessContext,
     DateTime Function()? now,
   }) : _progressRepository = progressRepository,
+       _accessContext = accessContext,
        _now = now ?? _defaultNow,
        super(const AsyncValue.loading()) {
     unawaited(load());
   }
 
   final ProgressRepository _progressRepository;
+  final AccessContext _accessContext;
   final DateTime Function() _now;
 
   Future<void> load() async {
@@ -55,6 +58,12 @@ class StudentWordProgressController
     required WordStudyAnswer answer,
   }) async {
     _applyOptimisticWordProgress(word: word, answer: answer);
+
+    // Anonymous users see optimistic UI but data is not persisted
+    if (!_accessContext.isAuthenticated || _accessContext.isAnonymous) {
+      return const AppSuccess<void>(null);
+    }
+
     return _progressRepository.enqueue(
       OutboxEvent(
         eventId: 'word-${word.id}-${_now().microsecondsSinceEpoch}',
@@ -92,6 +101,11 @@ class StudentWordProgressController
     required int wrongCount,
     required Map<String, dynamic> payload,
   }) {
+    // Anonymous users cannot persist test attempts
+    if (!_accessContext.isAuthenticated || _accessContext.isAnonymous) {
+      return Future<AppResult<void>>.value(const AppSuccess<void>(null));
+    }
+
     return _progressRepository.enqueue(
       OutboxEvent(
         eventId: 'test-$sourceId-${_now().microsecondsSinceEpoch}',

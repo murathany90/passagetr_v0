@@ -16,7 +16,7 @@ $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..")).Path
 $buildScript = Join-Path $scriptRoot "build_web_firebase.ps1"
 $smokeScript = Join-Path $scriptRoot "web_auth_smoke_playwright.js"
-$buildRoot = Join-Path $repoRoot "build\web"
+$buildRoot = Join-Path $repoRoot "build\hosting\$AppName"
 $runnerRoot = Join-Path $repoRoot "temp\playwright-web-auth"
 
 function Start-StaticWebServer {

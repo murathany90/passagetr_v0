@@ -1,81 +1,48 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/student_providers.dart';
+
 enum StudentDestination { home, words, readings, grammar, profile, admin }
 
-class StudentShellFrame extends StatelessWidget {
-  const StudentShellFrame({
-    super.key,
-    required this.destination,
-    required this.title,
-    required this.subtitle,
-    required this.accessContext,
-    required this.body,
-    this.headerAction,
-  });
+class StudentAppShell extends ConsumerWidget {
+  const StudentAppShell({super.key, required this.child, required this.state});
 
-  final StudentDestination destination;
-  final String title;
-  final String subtitle;
-  final AccessContext accessContext;
-  final Widget body;
-  final Widget? headerAction;
+  final Widget child;
+  final GoRouterState state;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accessContext = ref.watch(studentAccessProvider);
     final tokens = AppThemeTokens.of(context);
+
+    final path = state.uri.path;
+    final StudentDestination destination;
+
+    if (path.startsWith('/words')) {
+      destination = StudentDestination.words;
+    } else if (path.startsWith('/readings')) {
+      destination = StudentDestination.readings;
+    } else if (path.startsWith('/grammar')) {
+      destination = StudentDestination.grammar;
+    } else if (path.startsWith('/profile') ||
+        path.startsWith('/premium') ||
+        path.startsWith('/dev-access')) {
+      destination = StudentDestination.profile;
+    } else if (path.startsWith('/admin')) {
+      destination = StudentDestination.admin;
+    } else {
+      destination = StudentDestination.home;
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth >= AppBreakpoints.shellWide;
-
-        final content = Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(
-              isWide ? 36 : 20,
-              24,
-              isWide ? 36 : 20,
-              isWide ? 36 : 112,
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: isWide ? tokens.contentMaxWidth : double.infinity,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (headerAction != null && isWide)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 18),
-                        child: headerAction,
-                      ),
-                    ),
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    subtitle,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: tokens.secondaryText,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  body,
-                ],
-              ),
-            ),
-          ),
-        );
-
         return Scaffold(
           backgroundColor: tokens.appBackground,
           body: SafeArea(
@@ -87,10 +54,10 @@ class StudentShellFrame extends StatelessWidget {
                         destination: destination,
                         accessContext: accessContext,
                       ),
-                      Expanded(child: content),
+                      Expanded(child: child),
                     ],
                   )
-                : content,
+                : child,
           ),
           bottomNavigationBar: isWide
               ? null
@@ -104,6 +71,91 @@ class StudentShellFrame extends StatelessWidget {
   }
 }
 
+class StudentShellFrame extends StatelessWidget {
+  const StudentShellFrame({
+    super.key,
+    required this.destination,
+    required this.title,
+    required this.subtitle,
+    required this.accessContext,
+    required this.body,
+    this.headerAction,
+    this.browserTitle,
+  });
+
+  final StudentDestination destination;
+  final String title;
+  final String subtitle;
+  final AccessContext accessContext;
+  final Widget body;
+  final Widget? headerAction;
+  final String? browserTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    final resolvedBrowserTitle = browserTitle ?? title;
+
+    return Title(
+      title: 'PASSAGETR | $resolvedBrowserTitle',
+      color: tokens.accent,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isWide = constraints.maxWidth >= AppBreakpoints.shellWide;
+
+          final content = Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(
+                isWide ? 36 : 20,
+                24,
+                isWide ? 36 : 20,
+                isWide ? 36 : 112,
+              ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: isWide ? tokens.contentMaxWidth : double.infinity,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (headerAction != null && isWide)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 18),
+                          child: headerAction,
+                        ),
+                      ),
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      subtitle,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: tokens.secondaryText,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    body,
+                  ],
+                ),
+              ),
+            ),
+          );
+
+          return SafeArea(
+            bottom: !isWide,
+            child: content,
+          );
+        },
+      ),
+    );
+  }
+}
+
 class StudentDetailFrame extends StatelessWidget {
   const StudentDetailFrame({
     super.key,
@@ -112,6 +164,7 @@ class StudentDetailFrame extends StatelessWidget {
     required this.header,
     required this.body,
     this.maxWidth = AppBreakpoints.studentDetailMaxWidth,
+    this.browserTitle,
   });
 
   final StudentDestination destination;
@@ -119,60 +172,48 @@ class StudentDetailFrame extends StatelessWidget {
   final Widget header;
   final Widget body;
   final double maxWidth;
+  final String? browserTitle;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
+    final resolvedBrowserTitle =
+        browserTitle ?? _browserTitleForDestination(destination);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isWide = constraints.maxWidth >= AppBreakpoints.shellWide;
+    return Title(
+      title: 'PASSAGETR | $resolvedBrowserTitle',
+      color: tokens.accent,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isWide = constraints.maxWidth >= AppBreakpoints.shellWide;
 
-        final content = Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(
-              isWide ? 32 : 16,
-              isWide ? 24 : 12,
-              isWide ? 32 : 16,
-              isWide ? 36 : 112,
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: isWide ? maxWidth : double.infinity,
+          final content = Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(
+                isWide ? 32 : 16,
+                isWide ? 24 : 12,
+                isWide ? 32 : 16,
+                isWide ? 36 : 112,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [header, const SizedBox(height: 20), body],
-              ),
-            ),
-          ),
-        );
-
-        return Scaffold(
-          backgroundColor: tokens.appBackground,
-          body: SafeArea(
-            bottom: !isWide,
-            child: isWide
-                ? Row(
-                    children: [
-                      _StudentSidebar(
-                        destination: destination,
-                        accessContext: accessContext,
-                      ),
-                      Expanded(child: content),
-                    ],
-                  )
-                : content,
-          ),
-          bottomNavigationBar: isWide
-              ? null
-              : _StudentBottomNavigationBar(
-                  destination: destination,
-                  accessContext: accessContext,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: isWide ? maxWidth : double.infinity,
                 ),
-        );
-      },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [header, const SizedBox(height: 20), body],
+                ),
+              ),
+            ),
+          );
+
+          return SafeArea(
+            bottom: !isWide,
+            child: content,
+          );
+        },
+      ),
     );
   }
 }
@@ -467,12 +508,18 @@ class LockedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Text(message, textAlign: TextAlign.center),
+    final tokens = AppThemeTokens.of(context);
+
+    return Title(
+      title: 'PASSAGETR | $title',
+      color: tokens.accent,
+      child: Scaffold(
+        appBar: AppBar(title: Text(title)),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Text(message, textAlign: TextAlign.center),
+          ),
         ),
       ),
     );
@@ -501,6 +548,7 @@ class AdminConsoleLauncherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasUrl = adminConsoleUrl.trim().isNotEmpty;
+    final tokens = AppThemeTokens.of(context);
 
     Future<void> handleOpenAdminConsole() async {
       final opened = await onOpenAdminConsole();
@@ -513,47 +561,51 @@ class AdminConsoleLauncherPage extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Admin launcher')),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: StudentSurfaceCard(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gercek admin paneli ayri web uygulamasinda acilir.',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    hasUrl
-                        ? 'Asagidaki adres yeni sekmede acilacak:'
-                        : 'Admin console adresi tanimli degil.',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  if (hasUrl) ...[
+    return Title(
+      title: 'PASSAGETR | Admin Launcher',
+      color: tokens.accent,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Admin launcher')),
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: StudentSurfaceCard(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Gerçek admin paneli ayrı web uygulamasında açılır.',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                     const SizedBox(height: 12),
-                    SelectableText(
-                      adminConsoleUrl,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
+                    Text(
+                      hasUrl
+                          ? 'Aşağıdaki adres yeni sekmede açılacak:'
+                          : 'Admin console adresi tanımlı değil.',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    if (hasUrl) ...[
+                      const SizedBox(height: 12),
+                      SelectableText(
+                        adminConsoleUrl,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: hasUrl ? handleOpenAdminConsole : null,
+                        child: const Text('Admin console uygulamasını aç'),
                       ),
                     ),
                   ],
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: hasUrl ? handleOpenAdminConsole : null,
-                      child: const Text('Admin console uygulamasini ac'),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
@@ -905,4 +957,15 @@ void _navigate(BuildContext context, StudentDestination destination) {
   };
 
   context.go(route);
+}
+
+String _browserTitleForDestination(StudentDestination destination) {
+  return switch (destination) {
+    StudentDestination.home => 'Ana Sayfa',
+    StudentDestination.words => 'Kelimeler',
+    StudentDestination.readings => 'Okuma',
+    StudentDestination.grammar => 'Gramer',
+    StudentDestination.profile => 'Profil',
+    StudentDestination.admin => 'Admin Launcher',
+  };
 }

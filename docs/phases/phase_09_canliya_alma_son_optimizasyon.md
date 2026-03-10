@@ -50,3 +50,4 @@ Production migration freeze, yayin ve son performans/operasyon optimizasyonlarin
 - `student_app` v2, `env/app.web.prod.json` kullanilarak 2026-03-09 tarihinde `https://passagetr-fef48.web.app` production Hosting kanalina canli olarak deploy edildi; v1 production bundle bu yayin ile degisti
 - `admin_console`, ayni gun `https://passagetr-admin.web.app` adresine ayri Firebase Hosting target'i (`admin_console`) uzerinden deploy edildi
 - Canli smoke sonucu `https://passagetr-fef48.web.app/`, `/profile`, `https://passagetr-admin.web.app/` ve `/login` `HTTP 200` verdi
+- Production route/render, profile/dev split ve smoke sertlestirme takibi Faz 10 altinda devam ettirilir; Faz 09 yeniden acilmaz

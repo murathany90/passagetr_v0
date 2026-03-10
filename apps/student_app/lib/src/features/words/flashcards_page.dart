@@ -374,11 +374,15 @@ class _FlashcardCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               const SizedBox(height: 12),
-              Text(
-                showMeaning ? word.enWord : word.trMeaning,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(color: tokens.secondaryText),
+              AnimatedOpacity(
+                opacity: showMeaning ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 200),
+                child: Text(
+                  showMeaning ? word.enWord : '',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(color: tokens.secondaryText),
+                ),
               ),
               const SizedBox(height: 28),
               Row(

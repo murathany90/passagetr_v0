@@ -32,8 +32,12 @@ class FoundationPackRepository implements PackRepository {
     }
 
     return const <ContentPack>[
-      ContentPack(id: 'pack-yds-001', name: 'YDS Ilk 1000', wordCount: 1000),
-      ContentPack(id: 'pack-business', name: 'Is Ingilizcesi', wordCount: 250),
+      ContentPack(id: 'pack-yds-001', name: 'YDS İlk 1000', wordCount: 1000),
+      ContentPack(
+        id: 'pack-business',
+        name: 'İş İngilizcesi',
+        wordCount: 250,
+      ),
       ContentPack(
         id: 'pack-academic',
         name: 'Akademik Kelimeler',
@@ -42,7 +46,7 @@ class FoundationPackRepository implements PackRepository {
       ContentPack(id: 'pack-travel', name: 'Seyahat', wordCount: 120),
       ContentPack(
         id: 'pack-daily-speaking',
-        name: 'Gunluk Konusma',
+        name: 'Günlük Konuşma',
         wordCount: 300,
       ),
       ContentPack(
@@ -87,7 +91,7 @@ class FoundationPackRepository implements PackRepository {
           final id = payload['id']?.toString() ?? record.entityId;
           return ContentPack(
             id: id,
-            name: payload['name']?.toString() ?? 'Isimsiz Paket',
+            name: payload['name']?.toString() ?? 'İsimsiz Paket',
             wordCount: wordCounts[id] ?? 0,
           );
         })
@@ -110,7 +114,7 @@ class FoundationPackRepository implements PackRepository {
         .map(
           (row) => ContentPack(
             id: row['id']?.toString() ?? '',
-            name: row['name']?.toString() ?? 'Isimsiz Paket',
+            name: row['name']?.toString() ?? 'İsimsiz Paket',
             wordCount: (row['word_count'] as num?)?.toInt() ?? 0,
           ),
         )

@@ -54,7 +54,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         },
       ),
       body: AdminPanelCard(
-        title: 'Icerik Listesi',
+        title: 'İçerik Listesi',
         trailing: SizedBox(
           width: 280,
           child: TextField(
@@ -78,15 +78,15 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     AdminDestination.readings => 'Okuma CMS',
     AdminDestination.words => 'Kelime CMS',
     AdminDestination.grammar => 'Gramer CMS',
-    _ => 'Icerik CMS',
+    _ => 'İçerik CMS',
   };
 
   String _subtitleFor(AdminDestination destination) => switch (destination) {
     AdminDestination.readings =>
-      'Parcalar, seviyeler ve yayin durumlarini yonet.',
-    AdminDestination.words => 'Kelime havuzu ve pack iliskilerini denetle.',
-    AdminDestination.grammar => 'Modul, sayfa ve quiz yuzeylerini organize et.',
-    _ => 'Icerik operasyonlari.',
+      'Parçalar, seviyeler ve yayın durumlarını yönet.',
+    AdminDestination.words => 'Kelime havuzu ve pack ilişkilerini denetle.',
+    AdminDestination.grammar => 'Modül, sayfa ve quiz yüzeylerini organize et.',
+    _ => 'İçerik operasyonları.',
   };
 }
 
@@ -261,7 +261,7 @@ class _ContentRows<T> extends ConsumerWidget {
                                       ? 'content.published'
                                       : 'content.unpublished',
                                   subtitle: '$entityType / $entityId',
-                                  timestampLabel: 'az once',
+                                  timestampLabel: 'az önce',
                                 ),
                               );
                         },
@@ -272,7 +272,7 @@ class _ContentRows<T> extends ConsumerWidget {
                               publishOverrides: publishOverrides,
                               item: item,
                             )
-                            ? 'Yayinda'
+                            ? 'Yayında'
                             : 'Taslak',
                       ),
                     ],

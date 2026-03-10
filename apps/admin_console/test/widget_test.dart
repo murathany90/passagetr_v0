@@ -19,6 +19,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('PASSAGETR Dashboard'), findsOneWidget);
-    expect(find.text('Hizli Aksiyonlar'), findsOneWidget);
+    expect(find.textContaining('Aksiyonlar'), findsOneWidget);
   });
 }

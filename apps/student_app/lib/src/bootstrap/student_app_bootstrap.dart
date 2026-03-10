@@ -38,15 +38,11 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
       });
     }
 
-    return bootstrap.when(
-      data: (_) => const StudentApp(),
-      loading: () => const MaterialApp(
-        home: Scaffold(body: Center(child: CircularProgressIndicator())),
-      ),
-      error: (error, stackTrace) => MaterialApp(
-        home: Scaffold(body: Center(child: Text(error.toString()))),
-      ),
-    );
+    if (bootstrap.hasError) {
+      debugPrint('student_bootstrap_error:${bootstrap.error}');
+    }
+
+    return const StudentApp();
   }
 
   @override
