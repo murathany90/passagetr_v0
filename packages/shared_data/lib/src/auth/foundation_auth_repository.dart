@@ -110,12 +110,17 @@ class FoundationAuthRepository implements AuthRepository {
         email: email,
         password: password,
       );
-      await _emitResolvedContext(
-        response.session ?? Supabase.instance.client.auth.currentSession,
-      );
-      return AppSuccess<AuthSession>(_current.session);
+      final resolvedSession =
+          response.session ?? Supabase.instance.client.auth.currentSession;
+      if (resolvedSession != null) {
+        await _emitResolvedContext(resolvedSession);
+        return AppSuccess<AuthSession>(_current.session);
+      }
+
+      _emit(AccessContext.anonymous());
+      return AppSuccess<AuthSession>(AccessContext.anonymous().session);
     } catch (error) {
-      return AppFailure<AuthSession>('Sign-up failed.', cause: error);
+      return AppFailure<AuthSession>(_signUpFailureMessage(error), cause: error);
     }
   }
 
@@ -142,7 +147,81 @@ class FoundationAuthRepository implements AuthRepository {
       );
       return AppSuccess<AuthSession>(_current.session);
     } catch (error) {
-      return AppFailure<AuthSession>('Sign-in failed.', cause: error);
+      return AppFailure<AuthSession>(_signInFailureMessage(error), cause: error);
+    }
+  }
+
+  @override
+  Future<AppResult<void>> resendSignUpConfirmation({
+    required String email,
+  }) async {
+    final normalizedEmail = email.trim();
+    if (normalizedEmail.isEmpty) {
+      return const AppFailure<void>('E-posta zorunlu.');
+    }
+
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<void>(
+        'Supabase environment variables are not configured yet.',
+      );
+    }
+
+    try {
+      await _ensureSupabaseReady();
+      await Supabase.instance.client.auth.resend(
+        email: normalizedEmail,
+        type: OtpType.signup,
+      );
+      return const AppSuccess<void>(null);
+    } catch (error) {
+      return AppFailure<void>(
+        _resendConfirmationFailureMessage(error),
+        cause: error,
+      );
+    }
+  }
+
+  @override
+  Future<AppResult<AuthSession>> updateDisplayName({
+    required String displayName,
+  }) async {
+    final normalizedDisplayName = displayName.trim();
+    if (normalizedDisplayName.isEmpty) {
+      return const AppFailure<AuthSession>('Display name is required.');
+    }
+
+    final currentUser = _current.session.user;
+    if (currentUser == null || currentUser.isAnonymous) {
+      return const AppFailure<AuthSession>(
+        'Display name update requires a registered session.',
+      );
+    }
+
+    if (!_config.supabaseEnabled) {
+      final updatedSession = _sessionWithDisplayName(
+        _current.session,
+        normalizedDisplayName,
+      );
+      _emit(AccessContext.fromSession(updatedSession));
+      return AppSuccess<AuthSession>(_current.session);
+    }
+
+    try {
+      await _ensureSupabaseReady();
+      _ensureAuthSubscription();
+
+      await Supabase.instance.client.auth.updateUser(
+        UserAttributes(
+          data: <String, dynamic>{'display_name': normalizedDisplayName},
+        ),
+      );
+
+      return refreshSession();
+    } catch (error) {
+      return AppFailure<AuthSession>(
+        'Display name update failed.',
+        cause: error,
+      );
     }
   }
 
@@ -221,6 +300,26 @@ class FoundationAuthRepository implements AuthRepository {
   void _emit(AccessContext context) {
     _current = context;
     _controller.add(_current);
+  }
+
+  AuthSession _sessionWithDisplayName(AuthSession session, String displayName) {
+    final user = session.user;
+    if (user == null) {
+      return session;
+    }
+
+    return AuthSession(
+      user: AuthUser(
+        id: user.id,
+        email: user.email,
+        isAnonymous: user.isAnonymous,
+        displayName: displayName,
+      ),
+      claims: Map<String, String>.from(session.claims),
+      accessToken: session.accessToken,
+      refreshToken: session.refreshToken,
+      expiresAt: session.expiresAt,
+    );
   }
 
   Future<AccessContext> _contextFromSupabaseSession(Session? session) async {
@@ -302,5 +401,61 @@ class FoundationAuthRepository implements AuthRepository {
 
     final normalized = value.toString().trim();
     return normalized.isEmpty ? null : normalized;
+  }
+
+  String _signInFailureMessage(Object error) {
+    if (_isNetworkError(error)) {
+      return 'Sunucuya ulasilamadi. Internet baglantini kontrol edip tekrar dene.';
+    }
+    if (error is AuthApiException || error is AuthException) {
+      final message = error.toString().toLowerCase();
+      final code = error is AuthException ? error.code?.toLowerCase() : null;
+      if (message.contains('email not confirmed') ||
+          code == 'email_not_confirmed') {
+        return 'E-posta adresin henuz dogrulanmamis. Mail kutundaki linke tiklayip tekrar giris yap.';
+      }
+      if (message.contains('invalid login credentials') ||
+          code == 'invalid_credentials') {
+        return 'E-posta veya sifre hatali.';
+      }
+    }
+    return 'Giris yapilamadi. Bilgilerini kontrol edip tekrar dene.';
+  }
+
+  String _signUpFailureMessage(Object error) {
+    if (_isNetworkError(error)) {
+      return 'Kayit islemi icin sunucuya ulasilamadi. Internet baglantini kontrol et.';
+    }
+    if (error is AuthApiException || error is AuthException) {
+      final message = error.toString().toLowerCase();
+      final code = error is AuthException ? error.code?.toLowerCase() : null;
+      if (message.contains('user already registered') ||
+          code == 'user_already_exists') {
+        return 'Bu e-posta zaten kayitli. Giris yapmayi dene.';
+      }
+      if (message.contains('password should be at least')) {
+        return 'Sifre en az 8 karakter olmali.';
+      }
+    }
+    return 'Kayit olusturulamadi. Bilgilerini kontrol edip tekrar dene.';
+  }
+
+  String _resendConfirmationFailureMessage(Object error) {
+    if (_isNetworkError(error)) {
+      return 'Dogrulama maili gonderilemedi. Internet baglantini kontrol et.';
+    }
+    return 'Dogrulama maili yeniden gonderilemedi.';
+  }
+
+  bool _isNetworkError(Object error) {
+    if (error is AuthRetryableFetchException) {
+      return true;
+    }
+
+    final message = error.toString().toLowerCase();
+    return message.contains('failed host lookup') ||
+        message.contains('socketexception') ||
+        message.contains('network') ||
+        message.contains('connection');
   }
 }

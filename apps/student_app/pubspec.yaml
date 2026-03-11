@@ -1,7 +1,7 @@
 name: student_app
 description: PASSAGETR v2 student application
 publish_to: none
-version: 0.1.0+1
+version: 2.0.4+4
 resolution: workspace
 
 environment:
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.6.1
+  flutter_widget_from_html_core: ^0.16.0
   go_router: ^16.2.1
   supabase_flutter: ^2.10.3
   url_launcher: ^6.3.2
@@ -35,3 +36,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/readings/
+    - assets/db/dictionary_local.sqlite

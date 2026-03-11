@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_domain/shared_domain.dart';
+
+const fallbackReadingSummaryPlaceholder =
+    'Bu okuma icin ozet ve ceviri destegi yakinda genisletilecek.';
 
 class ReadingSectionSeed {
   const ReadingSectionSeed({required this.heading, required this.body});
@@ -48,7 +52,7 @@ const readingSeedData = <String, ReadingSeedData>{
   'reading-silent-ocean': ReadingSeedData(
     id: 'reading-silent-ocean',
     summary:
-        'Derin deniz keşiflerinin bilinmeyen dünyası ve okyanusun karanlık sırları üzerine büyüleyici bir araştırma.',
+        'Derin deniz kesiflerinin bilinmeyen dunyasi ve okyanusun karanlik sirlari uzerine buyuleyici bir arastirma.',
     author: 'Jane Doe',
     durationMinutes: 15,
     progressPercent: 45,
@@ -73,20 +77,20 @@ const readingSeedData = <String, ReadingSeedData>{
       ),
     ],
     focusWords: <ReadingFocusWordSeed>[
-      ReadingFocusWordSeed(word: 'Territory', meaning: 'Bölge, alan'),
-      ReadingFocusWordSeed(word: 'Mystery', meaning: 'Gizem, sır'),
-      ReadingFocusWordSeed(word: 'Abyss', meaning: 'Uçurum, derinlik'),
+      ReadingFocusWordSeed(word: 'Territory', meaning: 'Bolge, alan'),
+      ReadingFocusWordSeed(word: 'Mystery', meaning: 'Gizem, sir'),
+      ReadingFocusWordSeed(word: 'Abyss', meaning: 'Ucurum, derinlik'),
       ReadingFocusWordSeed(
         word: 'Adaptations',
         meaning: 'Adaptasyonlar, uyumlar',
       ),
-      ReadingFocusWordSeed(word: 'Captivate', meaning: 'Cezbetmek, büyülemek'),
+      ReadingFocusWordSeed(word: 'Captivate', meaning: 'Cezbetmek, buyulemek'),
     ],
   ),
   'reading-brief-history': ReadingSeedData(
     id: 'reading-brief-history',
     summary:
-        "Stephen Hawking'in ünlü eserinden alınmış kısa bir özet parçası. Evrenin başlangıcı ve sonu.",
+        "Stephen Hawking'in unlu eserinden alinmis kisa bir ozet parcasi. Evrenin baslangici ve sonu.",
     author: 'Stephen Hawking',
     durationMinutes: 10,
     progressPercent: 0,
@@ -113,14 +117,14 @@ const readingSeedData = <String, ReadingSeedData>{
     focusWords: <ReadingFocusWordSeed>[
       ReadingFocusWordSeed(word: 'Cosmology', meaning: 'Kozmoloji'),
       ReadingFocusWordSeed(word: 'Galaxy', meaning: 'Galaksi'),
-      ReadingFocusWordSeed(word: 'Radiation', meaning: 'Işınım, radyasyon'),
-      ReadingFocusWordSeed(word: 'Expansion', meaning: 'Genişleme'),
+      ReadingFocusWordSeed(word: 'Radiation', meaning: 'Isinim, radyasyon'),
+      ReadingFocusWordSeed(word: 'Expansion', meaning: 'Genisleme'),
     ],
   ),
   'reading-coffee-shops': ReadingSeedData(
     id: 'reading-coffee-shops',
     summary:
-        'Bir kafede kahve sipariş ederken ve sohbet ederken kullanılan günlük İngilizce kalıpları.',
+        'Bir kafede kahve siparis ederken ve sohbet ederken kullanilan gunluk Ingilizce kaliplari.',
     author: 'PASSAGETR Team',
     durationMinutes: 5,
     progressPercent: 100,
@@ -145,12 +149,12 @@ const readingSeedData = <String, ReadingSeedData>{
       ),
     ],
     focusWords: <ReadingFocusWordSeed>[
-      ReadingFocusWordSeed(word: 'Barista', meaning: 'Kahve görevlisi'),
-      ReadingFocusWordSeed(word: 'Receipt', meaning: 'Fiş, makbuz'),
+      ReadingFocusWordSeed(word: 'Barista', meaning: 'Kahve gorevlisi'),
+      ReadingFocusWordSeed(word: 'Receipt', meaning: 'Fis, makbuz'),
       ReadingFocusWordSeed(word: 'Takeaway', meaning: 'Paket servis'),
       ReadingFocusWordSeed(
         word: 'Confidently',
-        meaning: 'Kendinden emin şekilde',
+        meaning: 'Kendinden emin sekilde',
       ),
     ],
   ),
@@ -158,4 +162,88 @@ const readingSeedData = <String, ReadingSeedData>{
 
 ReadingSeedData readingSeedFor(String readingId) {
   return readingSeedData[readingId] ?? readingSeedData.values.first;
+}
+
+ReadingSeedData readingSeedForPassage(ReadingPassage passage) {
+  final seeded = readingSeedData[passage.id];
+  if (seeded != null) {
+    return seeded;
+  }
+
+  return _fallbackReadingSeedForPassage(passage);
+}
+
+bool isFallbackReadingSummary(String? summary) {
+  return (summary ?? '').trim() == fallbackReadingSummaryPlaceholder;
+}
+
+ReadingSeedData _fallbackReadingSeedForPassage(ReadingPassage passage) {
+  const palettes = <List<Color>>[
+    <Color>[Color(0xFF1D4ED8), Color(0xFF0F172A), Color(0xFF38BDF8)],
+    <Color>[Color(0xFF059669), Color(0xFF064E3B), Color(0xFFFDE68A)],
+    <Color>[Color(0xFF7C3AED), Color(0xFF312E81), Color(0xFFF472B6)],
+    <Color>[Color(0xFFDC2626), Color(0xFF7F1D1D), Color(0xFFF97316)],
+  ];
+  final seedIndex =
+      (passage.category ?? passage.level ?? passage.id).hashCode.abs() %
+      palettes.length;
+  final summary = (passage.summary?.trim().isNotEmpty ?? false)
+      ? passage.summary!.trim()
+      : fallbackReadingSummaryPlaceholder;
+
+  return ReadingSeedData(
+    id: passage.id,
+    summary: summary,
+    author: 'PASSAGETR',
+    durationMinutes: _estimateReadingDuration(summary),
+    progressPercent: 0,
+    levelBadgeColor: _fallbackLevelColor(passage.level),
+    artworkColors: palettes[seedIndex],
+    artworkIcon: _fallbackArtworkIcon(passage.category),
+    sections: <ReadingSectionSeed>[
+      ReadingSectionSeed(heading: '', body: summary),
+    ],
+    focusWords: const <ReadingFocusWordSeed>[],
+  );
+}
+
+int _estimateReadingDuration(String summary) {
+  final wordCount = summary
+      .split(RegExp(r'\s+'))
+      .where((item) => item.isNotEmpty)
+      .length;
+  return wordCount <= 18 ? 4 : 6;
+}
+
+Color _fallbackLevelColor(String? level) {
+  switch ((level ?? '').toUpperCase()) {
+    case 'A1':
+    case 'A2':
+      return const Color(0xFF10B981);
+    case 'B1':
+    case 'B2':
+      return const Color(0xFFF59E0B);
+    case 'C1':
+    case 'C2':
+      return const Color(0xFF8B5CF6);
+    default:
+      return const Color(0xFF38BDF8);
+  }
+}
+
+IconData _fallbackArtworkIcon(String? category) {
+  final normalized = (category ?? '').toLowerCase();
+  if (normalized.contains('science') || normalized.contains('bilim')) {
+    return Icons.biotech_outlined;
+  }
+  if (normalized.contains('history') || normalized.contains('tarih')) {
+    return Icons.account_balance_outlined;
+  }
+  if (normalized.contains('travel') || normalized.contains('seyahat')) {
+    return Icons.travel_explore_outlined;
+  }
+  if (normalized.contains('business') || normalized.contains('is')) {
+    return Icons.cases_outlined;
+  }
+  return Icons.auto_stories_outlined;
 }

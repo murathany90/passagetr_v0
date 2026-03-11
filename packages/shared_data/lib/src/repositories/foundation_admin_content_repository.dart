@@ -36,27 +36,64 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
+  Future<AppResult<AdminPackDetail>> fetchPackDetail({
+    required String packId,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AdminPackDetail>(
+        AdminPackDetail(
+          metadata: AdminContentMetadata(id: packId),
+          name: 'Preview Pack',
+        ),
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_get_pack_detail',
+        params: <String, dynamic>{'p_pack_id': packId},
+      );
+      return AppSuccess<AdminPackDetail>(AdminPackDetail.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminPackDetail>('Paket detayi yuklenemedi: $error');
+    }
+  }
+
+  @override
   Future<AppResult<void>> upsertPack({
     String? packId,
     required String name,
     required bool isPublished,
   }) async {
+    final result = await upsertPackDetail(
+      AdminPackDetail(
+        metadata: AdminContentMetadata(id: _normalizedId(packId)),
+        name: name,
+        isPublished: isPublished,
+      ),
+    );
+    return switch (result) {
+      AppSuccess<AdminPackDetail>() => const AppSuccess<void>(null),
+      AppFailure<AdminPackDetail>() => AppFailure<void>(result.message),
+    };
+  }
+
+  @override
+  Future<AppResult<AdminPackDetail>> upsertPackDetail(
+    AdminPackDetail detail,
+  ) async {
     if (!_config.supabaseEnabled) {
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminPackDetail>(detail);
     }
 
     try {
-      await _invokeVoidRpc(
-        'admin_upsert_pack',
-        params: <String, dynamic>{
-          'p_pack_id': _normalizedId(packId),
-          'p_name': name,
-          'p_is_published': isPublished,
-        },
+      final payload = await _invokeJsonRpc(
+        'admin_upsert_pack_detail',
+        params: <String, dynamic>{'p_payload': detail.toJson()},
       );
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminPackDetail>(AdminPackDetail.fromJson(payload));
     } catch (error) {
-      return AppFailure<void>('Paket kaydedilemedi: $error');
+      return AppFailure<AdminPackDetail>('Paket kaydedilemedi: $error');
     }
   }
 
@@ -78,6 +115,27 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
+  Future<AppResult<AdminWordDetail>> fetchWordDetail({
+    required String wordId,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AdminWordDetail>(
+        AdminWordDetail(metadata: AdminContentMetadata(id: wordId)),
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_get_word_detail',
+        params: <String, dynamic>{'p_word_id': wordId},
+      );
+      return AppSuccess<AdminWordDetail>(AdminWordDetail.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminWordDetail>('Kelime detayi yuklenemedi: $error');
+    }
+  }
+
+  @override
   Future<AppResult<void>> upsertWord({
     String? wordId,
     required String packId,
@@ -90,29 +148,42 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     String? notes,
     required bool isPublished,
   }) async {
+    final result = await upsertWordDetail(
+      AdminWordDetail(
+        metadata: AdminContentMetadata(id: _normalizedId(wordId)),
+        packId: packId,
+        enWord: enWord,
+        trMeaning: trMeaning,
+        pos: pos,
+        exampleEn: exampleEn,
+        exampleTr: _normalizedValue(exampleTr),
+        level: _normalizedValue(level),
+        notes: _normalizedValue(notes),
+        isPublished: isPublished,
+      ),
+    );
+    return switch (result) {
+      AppSuccess<AdminWordDetail>() => const AppSuccess<void>(null),
+      AppFailure<AdminWordDetail>() => AppFailure<void>(result.message),
+    };
+  }
+
+  @override
+  Future<AppResult<AdminWordDetail>> upsertWordDetail(
+    AdminWordDetail detail,
+  ) async {
     if (!_config.supabaseEnabled) {
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminWordDetail>(detail);
     }
 
     try {
-      await _invokeVoidRpc(
-        'admin_upsert_word',
-        params: <String, dynamic>{
-          'p_word_id': _normalizedId(wordId),
-          'p_pack_id': packId,
-          'p_en_word': enWord,
-          'p_tr_meaning': trMeaning,
-          'p_pos': pos,
-          'p_example_en': exampleEn,
-          'p_example_tr': _normalizedValue(exampleTr),
-          'p_level': _normalizedValue(level),
-          'p_notes': _normalizedValue(notes),
-          'p_is_published': isPublished,
-        },
+      final payload = await _invokeJsonRpc(
+        'admin_upsert_word_detail',
+        params: <String, dynamic>{'p_payload': detail.toJson()},
       );
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminWordDetail>(AdminWordDetail.fromJson(payload));
     } catch (error) {
-      return AppFailure<void>('Kelime kaydedilemedi: $error');
+      return AppFailure<AdminWordDetail>('Kelime kaydedilemedi: $error');
     }
   }
 
@@ -154,6 +225,51 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
+  Future<AppResult<void>> importReadings({
+    required List<AdminReadingDetail> items,
+  }) async {
+    if (items.isEmpty) {
+      return const AppFailure<void>('En az bir okuma kaydi gerekli.');
+    }
+    if (!_config.supabaseEnabled) {
+      return const AppSuccess<void>(null);
+    }
+
+    try {
+      await _invokeVoidRpc(
+        'admin_import_readings',
+        params: <String, dynamic>{
+          'p_payload': items.map((item) => item.toJson()).toList(growable: false),
+        },
+      );
+      return const AppSuccess<void>(null);
+    } catch (error) {
+      return AppFailure<void>('Okuma CSV import tamamlanamadi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<AdminReadingDetail>> fetchReadingDetail({
+    required String readingId,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AdminReadingDetail>(
+        AdminReadingDetail(metadata: AdminContentMetadata(id: readingId)),
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_get_reading_detail',
+        params: <String, dynamic>{'p_passage_id': readingId},
+      );
+      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminReadingDetail>('Okuma detayi yuklenemedi: $error');
+    }
+  }
+
+  @override
   Future<AppResult<void>> upsertReading({
     String? readingId,
     String? packId,
@@ -162,29 +278,43 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     String? level,
     String? category,
     String? tagsRaw,
+    required bool isPro,
     required bool isPublished,
   }) async {
+    final result = await upsertReadingDetail(
+      AdminReadingDetail(
+        metadata: AdminContentMetadata(id: _normalizedId(readingId)),
+        packId: _normalizedId(packId),
+        title: title,
+        level: _normalizedValue(level),
+        category: _normalizedValue(category),
+        tagsRaw: _normalizedValue(tagsRaw),
+        isPro: isPro,
+        isPublished: isPublished,
+      ),
+    );
+    return switch (result) {
+      AppSuccess<AdminReadingDetail>() => const AppSuccess<void>(null),
+      AppFailure<AdminReadingDetail>() => AppFailure<void>(result.message),
+    };
+  }
+
+  @override
+  Future<AppResult<AdminReadingDetail>> upsertReadingDetail(
+    AdminReadingDetail detail,
+  ) async {
     if (!_config.supabaseEnabled) {
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminReadingDetail>(detail);
     }
 
     try {
-      await _invokeVoidRpc(
-        'admin_upsert_reading_passage',
-        params: <String, dynamic>{
-          'p_passage_id': _normalizedId(readingId),
-          'p_pack_id': _normalizedId(packId),
-          'p_pack_name': _normalizedValue(packName),
-          'p_title': title,
-          'p_level': _normalizedValue(level),
-          'p_category': _normalizedValue(category),
-          'p_tags_raw': _normalizedValue(tagsRaw),
-          'p_is_published': isPublished,
-        },
+      final payload = await _invokeJsonRpc(
+        'admin_upsert_reading_detail',
+        params: <String, dynamic>{'p_payload': detail.toJson()},
       );
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
     } catch (error) {
-      return AppFailure<void>('Okuma kaydedilemedi: $error');
+      return AppFailure<AdminReadingDetail>('Okuma kaydedilemedi: $error');
     }
   }
 
@@ -206,6 +336,33 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
+  Future<AppResult<AdminGrammarModuleDetail>> fetchGrammarModuleDetail({
+    required int moduleId,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AdminGrammarModuleDetail>(
+        AdminGrammarModuleDetail(
+          metadata: AdminContentMetadata(id: moduleId.toString()),
+        ),
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_get_grammar_module_detail',
+        params: <String, dynamic>{'p_module_id': moduleId},
+      );
+      return AppSuccess<AdminGrammarModuleDetail>(
+        AdminGrammarModuleDetail.fromJson(payload),
+      );
+    } catch (error) {
+      return AppFailure<AdminGrammarModuleDetail>(
+        'Gramer modulu detayi yuklenemedi: $error',
+      );
+    }
+  }
+
+  @override
   Future<AppResult<void>> upsertGrammarModule({
     int? moduleId,
     int? sortOrder,
@@ -216,27 +373,43 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     required String color,
     required bool isPublished,
   }) async {
+    final result = await upsertGrammarModuleDetail(
+      AdminGrammarModuleDetail(
+        metadata: AdminContentMetadata(id: moduleId?.toString()),
+        sortOrder: sortOrder ?? 1,
+        title: title,
+        fileName: fileName,
+        icon: icon,
+        color: color,
+        isPublished: isPublished,
+      ),
+    );
+    return switch (result) {
+      AppSuccess<AdminGrammarModuleDetail>() => const AppSuccess<void>(null),
+      AppFailure<AdminGrammarModuleDetail>() => AppFailure<void>(result.message),
+    };
+  }
+
+  @override
+  Future<AppResult<AdminGrammarModuleDetail>> upsertGrammarModuleDetail(
+    AdminGrammarModuleDetail detail,
+  ) async {
     if (!_config.supabaseEnabled) {
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminGrammarModuleDetail>(detail);
     }
 
     try {
-      await _invokeVoidRpc(
-        'admin_upsert_grammar_module',
-        params: <String, dynamic>{
-          'p_module_id': moduleId,
-          'p_sira': sortOrder,
-          'p_baslik': title,
-          'p_dosya_adi': fileName,
-          'p_toplam_sayfa': pageCount,
-          'p_icon': icon,
-          'p_renk': color,
-          'p_is_published': isPublished,
-        },
+      final payload = await _invokeJsonRpc(
+        'admin_upsert_grammar_module_detail',
+        params: <String, dynamic>{'p_payload': detail.toJson()},
       );
-      return const AppSuccess<void>(null);
+      return AppSuccess<AdminGrammarModuleDetail>(
+        AdminGrammarModuleDetail.fromJson(payload),
+      );
     } catch (error) {
-      return AppFailure<void>('Gramer modulu kaydedilemedi: $error');
+      return AppFailure<AdminGrammarModuleDetail>(
+        'Gramer modulu kaydedilemedi: $error',
+      );
     }
   }
 
@@ -284,6 +457,18 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     await Supabase.instance.client.rpc<void>(functionName, params: params);
   }
 
+  Future<Map<String, dynamic>> _invokeJsonRpc(
+    String functionName, {
+    required Map<String, dynamic> params,
+  }) async {
+    await SupabaseBootstrap.initialize(_config);
+    final response = await Supabase.instance.client.rpc<dynamic>(
+      functionName,
+      params: params,
+    );
+    return _coerceMap(response);
+  }
+
   String? _normalizedId(String? value) {
     final trimmed = value?.trim();
     if (trimmed == null || trimmed.isEmpty) {
@@ -299,4 +484,14 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     }
     return trimmed;
   }
+}
+
+Map<String, dynamic> _coerceMap(dynamic value) {
+  if (value is Map<String, dynamic>) {
+    return value;
+  }
+  if (value is Map) {
+    return value.map((key, item) => MapEntry(key.toString(), item));
+  }
+  return const <String, dynamic>{};
 }

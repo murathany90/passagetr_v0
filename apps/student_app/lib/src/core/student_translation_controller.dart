@@ -1,9 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:shared_domain/shared_domain.dart';
 import '../features/readings/reading_translation_seed.dart';
 
 class StudentTranslationController extends StateNotifier<Map<String, String>> {
-  StudentTranslationController() : super(const <String, String>{});
+  StudentTranslationController({required this.readingRepository})
+    : super(const <String, String>{});
+
+  final ReadingRepository readingRepository;
 
   String? cachedTranslation(String readingId, int sectionIndex) {
     return state[_cacheKey(readingId, sectionIndex)];
@@ -12,7 +15,6 @@ class StudentTranslationController extends StateNotifier<Map<String, String>> {
   Future<String> loadTranslation({
     required String readingId,
     required int sectionIndex,
-    required String sourceText,
   }) async {
     final key = _cacheKey(readingId, sectionIndex);
     final cached = state[key];
@@ -20,9 +22,13 @@ class StudentTranslationController extends StateNotifier<Map<String, String>> {
       return cached;
     }
 
-    final translated =
-        readingTranslationFor(readingId, sectionIndex) ??
-        'Çeviri önbelleği henüz hazır değil. Kaynak metin: $sourceText';
+    String? translated = await readingRepository.fetchSentenceTranslation(
+      readingId,
+      sectionIndex,
+    );
+    translated ??= readingTranslationFor(readingId, sectionIndex);
+    translated ??= 'Cumle cevirisi bulunamadi.';
+
     state = <String, String>{...state, key: translated};
     return translated;
   }

@@ -1,4 +1,146 @@
 import 'package:shared_core/shared_core.dart';
+import 'package:shared_domain/shared_domain.dart';
+
+enum AdminAuthStatus {
+  bootstrapping,
+  authenticated,
+  unauthenticated,
+  unauthorized,
+  sessionExpired,
+  busy,
+}
+
+class AdminAuthState {
+  const AdminAuthState({
+    required this.status,
+    required this.accessContext,
+    this.message,
+  });
+
+  final AdminAuthStatus status;
+  final AccessContext accessContext;
+  final String? message;
+
+  bool get isBusy => status == AdminAuthStatus.busy;
+  bool get isBootstrapping => status == AdminAuthStatus.bootstrapping;
+  bool get isAuthenticated => status == AdminAuthStatus.authenticated;
+  bool get needsLogin =>
+      status == AdminAuthStatus.unauthenticated ||
+      status == AdminAuthStatus.unauthorized ||
+      status == AdminAuthStatus.sessionExpired;
+
+  AdminAuthState copyWith({
+    AdminAuthStatus? status,
+    AccessContext? accessContext,
+    String? message,
+    bool clearMessage = false,
+  }) {
+    return AdminAuthState(
+      status: status ?? this.status,
+      accessContext: accessContext ?? this.accessContext,
+      message: clearMessage ? null : message ?? this.message,
+    );
+  }
+}
+
+class AdminSettingsState {
+  const AdminSettingsState({
+    this.persisted = const AdminSettingsSnapshot(),
+    this.draft = const AdminSettingsSnapshot(),
+    this.isLoading = true,
+    this.isSaving = false,
+    this.errorMessage,
+    this.noticeMessage,
+  });
+
+  final AdminSettingsSnapshot persisted;
+  final AdminSettingsSnapshot draft;
+  final bool isLoading;
+  final bool isSaving;
+  final String? errorMessage;
+  final String? noticeMessage;
+
+  bool get isDirty =>
+      persisted.toJson().toString() != draft.toJson().toString();
+
+  AdminSettingsState copyWith({
+    AdminSettingsSnapshot? persisted,
+    AdminSettingsSnapshot? draft,
+    bool? isLoading,
+    bool? isSaving,
+    String? errorMessage,
+    String? noticeMessage,
+    bool clearError = false,
+    bool clearNotice = false,
+  }) {
+    return AdminSettingsState(
+      persisted: persisted ?? this.persisted,
+      draft: draft ?? this.draft,
+      isLoading: isLoading ?? this.isLoading,
+      isSaving: isSaving ?? this.isSaving,
+      errorMessage: clearError ? null : errorMessage ?? this.errorMessage,
+      noticeMessage: clearNotice ? null : noticeMessage ?? this.noticeMessage,
+    );
+  }
+}
+
+class AdminWordPageRequest {
+  const AdminWordPageRequest({
+    required this.packId,
+    required this.query,
+    required this.offset,
+    required this.limit,
+    this.isPublished,
+  });
+
+  final String? packId;
+  final String query;
+  final int offset;
+  final int limit;
+  final bool? isPublished;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AdminWordPageRequest &&
+        other.packId == packId &&
+        other.query == query &&
+        other.offset == offset &&
+        other.limit == limit &&
+        other.isPublished == isPublished;
+  }
+
+  @override
+  int get hashCode => Object.hash(packId, query, offset, limit, isPublished);
+}
+
+class AdminReadingPageRequest {
+  const AdminReadingPageRequest({
+    required this.query,
+    required this.offset,
+    required this.limit,
+    this.level,
+    this.isPublished,
+  });
+
+  final String query;
+  final int offset;
+  final int limit;
+  final String? level;
+  final bool? isPublished;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AdminReadingPageRequest &&
+        other.query == query &&
+        other.offset == offset &&
+        other.limit == limit &&
+        other.level == level &&
+        other.isPublished == isPublished;
+  }
+
+  @override
+  int get hashCode => Object.hash(query, offset, limit, level, isPublished);
+}
 
 class AdminDashboardSummary {
   const AdminDashboardSummary({
@@ -61,6 +203,41 @@ class AdminAuditRecord {
   final String timestampLabel;
 }
 
+enum AdminAuditFeedState { ready, empty, unavailable }
+
+class AdminAuditFeed {
+  const AdminAuditFeed._({
+    required this.state,
+    required this.records,
+    required this.message,
+  });
+
+  const AdminAuditFeed.ready(List<AdminAuditRecord> records)
+    : this._(state: AdminAuditFeedState.ready, records: records, message: null);
+
+  const AdminAuditFeed.empty(String message)
+    : this._(
+        state: AdminAuditFeedState.empty,
+        records: const <AdminAuditRecord>[],
+        message: message,
+      );
+
+  const AdminAuditFeed.unavailable(String message)
+    : this._(
+        state: AdminAuditFeedState.unavailable,
+        records: const <AdminAuditRecord>[],
+        message: message,
+      );
+
+  final AdminAuditFeedState state;
+  final List<AdminAuditRecord> records;
+  final String? message;
+
+  bool get hasRecords => records.isNotEmpty;
+  bool get isUnavailable => state == AdminAuditFeedState.unavailable;
+  bool get isEmptyState => state == AdminAuditFeedState.empty;
+}
+
 class AdminPackRecord {
   const AdminPackRecord({
     required this.id,
@@ -68,6 +245,8 @@ class AdminPackRecord {
     required this.wordCount,
     required this.isPublished,
     required this.updatedAtLabel,
+    this.createdAtLabel,
+    this.updatedByLabel,
   });
 
   final String id;
@@ -75,6 +254,8 @@ class AdminPackRecord {
   final int wordCount;
   final bool isPublished;
   final String updatedAtLabel;
+  final String? createdAtLabel;
+  final String? updatedByLabel;
 
   AdminPackRecord copyWith({
     String? id,
@@ -82,6 +263,8 @@ class AdminPackRecord {
     int? wordCount,
     bool? isPublished,
     String? updatedAtLabel,
+    String? createdAtLabel,
+    String? updatedByLabel,
   }) {
     return AdminPackRecord(
       id: id ?? this.id,
@@ -89,6 +272,8 @@ class AdminPackRecord {
       wordCount: wordCount ?? this.wordCount,
       isPublished: isPublished ?? this.isPublished,
       updatedAtLabel: updatedAtLabel ?? this.updatedAtLabel,
+      createdAtLabel: createdAtLabel ?? this.createdAtLabel,
+      updatedByLabel: updatedByLabel ?? this.updatedByLabel,
     );
   }
 }
@@ -106,6 +291,8 @@ class AdminWordRecord {
     required this.notes,
     required this.isPublished,
     required this.updatedAtLabel,
+    this.createdAtLabel,
+    this.updatedByLabel,
   });
 
   final String id;
@@ -119,6 +306,8 @@ class AdminWordRecord {
   final String? notes;
   final bool isPublished;
   final String updatedAtLabel;
+  final String? createdAtLabel;
+  final String? updatedByLabel;
 
   AdminWordRecord copyWith({
     String? id,
@@ -132,6 +321,8 @@ class AdminWordRecord {
     String? notes,
     bool? isPublished,
     String? updatedAtLabel,
+    String? createdAtLabel,
+    String? updatedByLabel,
   }) {
     return AdminWordRecord(
       id: id ?? this.id,
@@ -145,6 +336,8 @@ class AdminWordRecord {
       notes: notes ?? this.notes,
       isPublished: isPublished ?? this.isPublished,
       updatedAtLabel: updatedAtLabel ?? this.updatedAtLabel,
+      createdAtLabel: createdAtLabel ?? this.createdAtLabel,
+      updatedByLabel: updatedByLabel ?? this.updatedByLabel,
     );
   }
 }
@@ -158,8 +351,11 @@ class AdminReadingRecord {
     required this.level,
     required this.category,
     required this.tagsRaw,
+    required this.isPro,
     required this.isPublished,
     required this.updatedAtLabel,
+    this.createdAtLabel,
+    this.updatedByLabel,
   });
 
   final String id;
@@ -169,8 +365,11 @@ class AdminReadingRecord {
   final String? level;
   final String? category;
   final String? tagsRaw;
+  final bool isPro;
   final bool isPublished;
   final String updatedAtLabel;
+  final String? createdAtLabel;
+  final String? updatedByLabel;
 
   AdminReadingRecord copyWith({
     String? id,
@@ -180,8 +379,11 @@ class AdminReadingRecord {
     String? level,
     String? category,
     String? tagsRaw,
+    bool? isPro,
     bool? isPublished,
     String? updatedAtLabel,
+    String? createdAtLabel,
+    String? updatedByLabel,
   }) {
     return AdminReadingRecord(
       id: id ?? this.id,
@@ -191,8 +393,11 @@ class AdminReadingRecord {
       level: level ?? this.level,
       category: category ?? this.category,
       tagsRaw: tagsRaw ?? this.tagsRaw,
+      isPro: isPro ?? this.isPro,
       isPublished: isPublished ?? this.isPublished,
       updatedAtLabel: updatedAtLabel ?? this.updatedAtLabel,
+      createdAtLabel: createdAtLabel ?? this.createdAtLabel,
+      updatedByLabel: updatedByLabel ?? this.updatedByLabel,
     );
   }
 }
@@ -208,6 +413,8 @@ class AdminGrammarRecord {
     required this.color,
     required this.isPublished,
     required this.updatedAtLabel,
+    this.createdAtLabel,
+    this.updatedByLabel,
   });
 
   final int id;
@@ -219,6 +426,8 @@ class AdminGrammarRecord {
   final String color;
   final bool isPublished;
   final String updatedAtLabel;
+  final String? createdAtLabel;
+  final String? updatedByLabel;
 
   AdminGrammarRecord copyWith({
     int? id,
@@ -230,6 +439,8 @@ class AdminGrammarRecord {
     String? color,
     bool? isPublished,
     String? updatedAtLabel,
+    String? createdAtLabel,
+    String? updatedByLabel,
   }) {
     return AdminGrammarRecord(
       id: id ?? this.id,
@@ -241,6 +452,8 @@ class AdminGrammarRecord {
       color: color ?? this.color,
       isPublished: isPublished ?? this.isPublished,
       updatedAtLabel: updatedAtLabel ?? this.updatedAtLabel,
+      createdAtLabel: createdAtLabel ?? this.createdAtLabel,
+      updatedByLabel: updatedByLabel ?? this.updatedByLabel,
     );
   }
 }

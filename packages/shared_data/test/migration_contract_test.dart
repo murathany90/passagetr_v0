@@ -47,6 +47,10 @@ void main() {
       '202603090027_admin_console_management_rpcs.sql',
       '202603090028_user_daily_stats_analytics_helpers.sql',
       '202603100029_admin_console_crud_rpcs.sql',
+      '202603100030_reading_catalog_access_and_admin_is_pro.sql',
+      '202603110031_admin_console_hardening_p1_p2.sql',
+      '202603110032_admin_console_stabilization_detail_contracts.sql',
+      '202603110033_admin_console_reading_import.sql',
     ];
 
     final fileNames = migrationDir
@@ -103,5 +107,62 @@ void main() {
     expect(sql, contains('admin_upsert_reading_passage'));
     expect(sql, contains('admin_upsert_grammar_module'));
     expect(sql, contains('admin_reorder_grammar_modules'));
+  });
+
+  test('phase 5.1 reading catalog migration contains access helpers', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603100030_reading_catalog_access_and_admin_is_pro.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('student_list_reading_catalog'));
+    expect(sql, contains('pull_content_changes'));
+    expect(sql, contains('is_pro'));
+    expect(sql, contains('seq_no > 50'));
+  });
+
+  test('phase 5.5 admin hardening migration contains paged RPCs and settings', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603110031_admin_console_hardening_p1_p2.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('create table if not exists public.app_settings'));
+    expect(sql, contains('admin_list_users_paged'));
+    expect(sql, contains('admin_bulk_set_user_access'));
+    expect(sql, contains('admin_get_settings'));
+    expect(sql, contains('admin_upsert_settings'));
+    expect(sql, contains('admin_fetch_dashboard_snapshot'));
+    expect(sql, contains('admin_assign_invited_user_access'));
+    expect(sql, contains('publish_at timestamptz'));
+    expect(sql, contains('unpublish_at timestamptz'));
+  });
+
+  test('phase 5.6 admin stabilization migration contains detail RPCs', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603110032_admin_console_stabilization_detail_contracts.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_get_pack_detail'));
+    expect(sql, contains('admin_upsert_pack_detail'));
+    expect(sql, contains('admin_get_word_detail'));
+    expect(sql, contains('admin_upsert_word_detail'));
+    expect(sql, contains('admin_get_reading_detail'));
+    expect(sql, contains('admin_upsert_reading_detail'));
+    expect(sql, contains('admin_get_grammar_module_detail'));
+    expect(sql, contains('admin_upsert_grammar_module_detail'));
+    expect(sql, contains('admin_count_words_from_html'));
+  });
+
+  test('phase 5.7 admin reading import migration contains import wrapper', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603110033_admin_console_reading_import.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_import_readings'));
+    expect(sql, contains('admin_upsert_reading_detail'));
+    expect(sql, contains('admin.reading.imported'));
   });
 }

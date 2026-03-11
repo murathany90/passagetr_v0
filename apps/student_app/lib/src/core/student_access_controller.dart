@@ -59,6 +59,43 @@ class StudentAccessController extends StateNotifier<AccessContext> {
     return result;
   }
 
+  Future<AppResult<void>> resendSignUpConfirmation({
+    required String email,
+  }) {
+    return _authRepository.resendSignUpConfirmation(email: email);
+  }
+
+  Future<AppResult<AuthSession>> updateDisplayName({
+    required String displayName,
+  }) async {
+    final result = await _authRepository.updateDisplayName(
+      displayName: displayName,
+    );
+    if (result is AppFailure<AuthSession> &&
+        result.message ==
+            'Display name update requires a registered session.' &&
+        state.hasIdentifiedProfile &&
+        state.session.user != null) {
+      final session = AuthSession(
+        user: AuthUser(
+          id: state.session.user!.id,
+          email: state.session.user!.email,
+          isAnonymous: state.session.user!.isAnonymous,
+          displayName: displayName.trim(),
+        ),
+        claims: Map<String, String>.from(state.session.claims),
+        accessToken: state.session.accessToken,
+        refreshToken: state.session.refreshToken,
+        expiresAt: state.session.expiresAt,
+      );
+      state = AccessContext.fromSession(session);
+      return AppSuccess<AuthSession>(session);
+    }
+
+    _updateFromResult(result);
+    return result;
+  }
+
   Future<AppResult<AuthSession>> upgradeAnonymousWithEmail({
     required String email,
     required String password,

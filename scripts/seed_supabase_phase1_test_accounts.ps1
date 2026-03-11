@@ -63,6 +63,7 @@ function Ensure-TestUser {
     [array]$ExistingUsers
   )
 
+  $grantedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
   $headers = @{
     apikey        = $ServiceRoleKey
     Authorization = "Bearer $ServiceRoleKey"
@@ -121,8 +122,10 @@ function Ensure-TestUser {
     }) `
     -Body @(
       @{
-        user_id = $existingUser.id
-        role    = "user"
+        user_id    = $existingUser.id
+        role       = "user"
+        granted_at = $grantedAt
+        revoked_at = $null
       }
     ) | Out-Null
 
@@ -135,8 +138,10 @@ function Ensure-TestUser {
       }) `
       -Body @(
         @{
-          user_id = $existingUser.id
-          role    = $Account.role
+          user_id    = $existingUser.id
+          role       = $Account.role
+          granted_at = $grantedAt
+          revoked_at = $null
         }
       ) | Out-Null
   }

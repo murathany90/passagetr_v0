@@ -6,6 +6,7 @@ import 'package:shared_ui/shared_ui.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../core/student_providers.dart';
+import '../features/changelog/changelog_page.dart';
 import '../features/common/page_parts.dart';
 import '../features/grammar/grammar_detail_page.dart';
 import '../features/grammar/grammar_page.dart';
@@ -83,6 +84,10 @@ final studentRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/profile',
             builder: (context, state) => const StudentProfilePage(),
+          ),
+          GoRoute(
+            path: '/changelog',
+            builder: (context, state) => const StudentChangelogPage(),
           ),
           GoRoute(
             path: '/dev-access',

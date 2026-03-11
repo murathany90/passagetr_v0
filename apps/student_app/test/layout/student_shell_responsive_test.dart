@@ -8,22 +8,25 @@ import 'package:student_app/src/core/student_providers.dart';
 import 'package:student_app/src/features/common/page_parts.dart';
 
 void main() {
-  Future<void> pumpShell(WidgetTester tester, {required Size size}) async {
+  Future<ProviderContainer> pumpShell(
+    WidgetTester tester, {
+    required Size size,
+  }) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = size;
     addTearDown(() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
 
     final router = GoRouter(
       initialLocation: '/',
       routes: [
         ShellRoute(
-          builder: (context, state, child) => StudentAppShell(
-            state: state,
-            child: child,
-          ),
+          builder: (context, state, child) =>
+              StudentAppShell(state: state, child: child),
           routes: [
             GoRoute(
               path: '/',
@@ -46,7 +49,8 @@ void main() {
     addTearDown(router.dispose);
 
     await tester.pumpWidget(
-      ProviderScope(
+      UncontrolledProviderScope(
+        container: container,
         child: MaterialApp.router(
           theme: AppTheme.light(),
           routerConfig: router,
@@ -54,19 +58,58 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+
+    return container;
   }
 
-  testWidgets('uses bottom navigation on narrow layouts', (tester) async {
+  testWidgets('uses giriş entry on narrow anonymous layouts', (tester) async {
     await pumpShell(tester, size: const Size(390, 844));
 
     expect(find.text('Ana Sayfa'), findsOneWidget);
-    expect(find.text(WorkspaceInfo.branchName), findsNothing);
+    expect(find.text('Giriş'), findsOneWidget);
+    expect(find.text('Profil'), findsNothing);
+    expect(find.text('12'), findsNothing);
+    expect(find.text(WorkspaceInfo.appVersion), findsNothing);
   });
 
-  testWidgets('uses sidebar rail on wide layouts', (tester) async {
+  testWidgets('uses sidebar rail on wide anonymous layouts', (tester) async {
     await pumpShell(tester, size: const Size(1280, 900));
 
-    expect(find.text(WorkspaceInfo.branchName), findsOneWidget);
+    expect(find.text(WorkspaceInfo.appVersion), findsOneWidget);
     expect(find.text('Ana Sayfa'), findsOneWidget);
+    expect(find.text('Giriş'), findsOneWidget);
+    expect(find.text('Profil'), findsNothing);
+    expect(find.text('12'), findsNothing);
+    expect(find.text('Çıkış Yap'), findsNothing);
+  });
+
+  testWidgets('switches giriş entry to profil after authentication', (
+    tester,
+  ) async {
+    final container = await pumpShell(tester, size: const Size(390, 844));
+
+    container.read(studentAccessProvider.notifier).setAnonymous(false);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Profil'), findsOneWidget);
+    expect(find.text('Giriş'), findsNothing);
+  });
+
+  testWidgets('shows sidebar logout action on wide authenticated layouts', (
+    tester,
+  ) async {
+    final container = await pumpShell(tester, size: const Size(1280, 900));
+
+    container.read(studentAccessProvider.notifier).setAnonymous(false);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Profil'), findsAtLeastNWidgets(1));
+    expect(find.text('Çıkış Yap'), findsOneWidget);
+
+    await tester.tap(find.text('Çıkış Yap'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Profil'), findsNothing);
+    expect(find.text('Giriş'), findsAtLeastNWidgets(1));
   });
 }

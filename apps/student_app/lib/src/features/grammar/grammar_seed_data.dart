@@ -209,9 +209,48 @@ GrammarModuleSeed grammarSeedFor(int moduleId) {
     }
   }
 
-  return grammarModuleSeeds.first;
+  return _fallbackGrammarModuleSeed(moduleId);
 }
 
 GrammarReaderSeed grammarReaderSeedFor(int moduleId) {
-  return grammarReaderSeeds[moduleId] ?? grammarReaderSeeds.values.first;
+  return grammarReaderSeeds[moduleId] ?? _fallbackGrammarReaderSeed(moduleId);
+}
+
+GrammarModuleSeed _fallbackGrammarModuleSeed(int moduleId) {
+  const palette = <Color>[
+    Color(0xFF4776E6),
+    Color(0xFFF59E0B),
+    Color(0xFF10B981),
+    Color(0xFFEF4444),
+  ];
+  return GrammarModuleSeed(
+    id: moduleId,
+    title: 'Gramer Modülü',
+    pageCount: 0,
+    description: 'Bu modülün açıklaması yakında güncellenecek.',
+    state: GrammarModuleState.inProgress,
+    progressPercent: 0,
+    icon: Icons.auto_stories_outlined,
+    tint: palette[moduleId.abs() % palette.length],
+  );
+}
+
+GrammarReaderSeed _fallbackGrammarReaderSeed(int moduleId) {
+  return GrammarReaderSeed(
+    moduleId: moduleId,
+    summary: 'Bu modülün ayrıntılı içeriği yakında genişletilecek.',
+    pages: const <GrammarReaderPageSeed>[
+      GrammarReaderPageSeed(
+        title: 'İçerik Hazırlanıyor',
+        body:
+            'Bu gramer modülü için ayrıntılı anlatım henüz eklenmedi. İçerik yayınlandığında burada konu özeti ve örnekler görünecek.',
+        highlight: 'Yeni içerik yakında yayınlanacak.',
+      ),
+    ],
+    quiz: const GrammarQuizQuestionSeed(
+      prompt: 'Bu modül için quiz henüz hazır değil.',
+      options: <String>['Daha sonra tekrar kontrol et'],
+      correctAnswer: 'Daha sonra tekrar kontrol et',
+    ),
+  );
 }

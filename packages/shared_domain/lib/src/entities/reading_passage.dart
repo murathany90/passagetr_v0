@@ -5,6 +5,7 @@ class ReadingPassage {
     required this.level,
     required this.category,
     this.summary,
+    this.isPro = false,
   });
 
   final String id;
@@ -12,4 +13,5 @@ class ReadingPassage {
   final String? level;
   final String? category;
   final String? summary;
+  final bool isPro;
 }

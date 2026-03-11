@@ -2,6 +2,8 @@ param(
   [ValidateSet("student_app", "admin_console")]
   [string]$AppName = "student_app",
   [string]$EnvironmentFile = "env/app.web.json",
+  [ValidateSet("auto", "html", "canvaskit", "wasm")]
+  [string]$WebRenderer = "auto",
   [switch]$SkipAnalyze,
   [switch]$SkipTests,
   [switch]$SkipSmoke,
@@ -144,6 +146,7 @@ function Invoke-LocalSmoke {
     @{ Path = "/main.dart.js"; Contains = "" },
     @{ Path = "/flutter_bootstrap.js"; Contains = "" },
     @{ Path = "/version.json"; Contains = "" },
+    @{ Path = "/changelog"; Contains = "flutter_bootstrap.js" },
     @{ Path = "/profile"; Contains = "flutter_bootstrap.js" }
   )
 
@@ -170,7 +173,8 @@ try {
     "-ExecutionPolicy", "Bypass",
     "-File", $buildScript,
     "-AppName", $AppName,
-    "-EnvironmentFile", $EnvironmentFile
+    "-EnvironmentFile", $EnvironmentFile,
+    "-WebRenderer", $WebRenderer
   )
   if ($SkipAnalyze) {
     $buildArgs += "-SkipAnalyze"

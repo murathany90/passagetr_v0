@@ -24,6 +24,8 @@ class _StudentReadingDetailPageState
   bool _focusModeEnabled = false;
   final Set<int> _revealedTranslations = <int>{};
   final Set<int> _loadingTranslations = <int>{};
+  final Map<int, _SelectedDictionaryWord> _selectedWords =
+      <int, _SelectedDictionaryWord>{};
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +48,38 @@ class _StudentReadingDetailPageState
               onFavoriteToggle: () {},
               onShare: () {},
             ),
-            body: const StudentSurfaceCard(child: Text('Okuma bulunamadı.')),
+            body: const StudentSurfaceCard(child: Text('Okuma bulunamadi.')),
           );
         }
 
-        final seed = readingSeedFor(reading.id);
+        final isLocked = reading.isPro && !accessContext.canViewPremium;
+        if (isLocked) {
+          return StudentDetailFrame(
+            destination: StudentDestination.readings,
+            accessContext: accessContext,
+            header: ReadingDetailHeader(
+              isBookmarked: false,
+              isFavorite: false,
+              onBack: () => _goBack(context),
+              onBookmarkToggle: () {},
+              onFavoriteToggle: () {},
+              onShare: () {},
+            ),
+            body: _ReadingStateCard(
+              title: 'Bu okuma Pro uyelik gerektirir',
+              message:
+                  'Kayit listede gorunur, ancak tam icerik ve detay ekranina erismek icin Pro gerekir.',
+              actionLabel: 'Proyu Gor',
+              onAction: () => context.go('/premium'),
+            ),
+          );
+        }
+
+        final seed = readingSeedForPassage(reading);
+        final articleSections = _resolveArticleSections(
+          seed,
+          ref.watch(studentReadingSectionsProvider(reading.id)).valueOrNull,
+        );
         final engagement = ref
             .watch(studentReadingEngagementProvider.notifier)
             .stateFor(reading.id);
@@ -65,7 +94,7 @@ class _StudentReadingDetailPageState
             onBookmarkToggle: () => _toggleBookmark(reading.id),
             onFavoriteToggle: () => _toggleFavorite(reading.id),
             onShare: () =>
-                _showSnackBar('Paylaşım sonraki fazda etkinleşecek.'),
+                _showSnackBar('Paylasim sonraki fazda etkinlesecek.'),
           ),
           body: LayoutBuilder(
             builder: (context, constraints) {
@@ -73,6 +102,7 @@ class _StudentReadingDetailPageState
               final infoPanel = _ReadingInfoPanel(
                 reading: reading,
                 seed: seed,
+                summary: _resolveVisibleSummary(reading, seed),
                 focusModeEnabled: _focusModeEnabled,
                 onToggleFocusMode: () {
                   setState(() {
@@ -81,19 +111,19 @@ class _StudentReadingDetailPageState
                 },
               );
               final articlePanel = _ReadingArticlePanel(
-                reading: reading,
-                seed: seed,
+                readingId: reading.id,
+                title: reading.title,
+                sections: articleSections,
                 focusModeEnabled: _focusModeEnabled,
                 revealedTranslations: _revealedTranslations,
                 loadingTranslations: _loadingTranslations,
-                translationForSection: (index) => ref
+                selectedWords: _selectedWords,
+                translationForSection: (lookupIndex) => ref
                     .read(studentTranslationProvider.notifier)
-                    .cachedTranslation(reading.id, index),
-                onToggleTranslation: (index) => _toggleTranslation(
-                  readingId: reading.id,
-                  sectionIndex: index,
-                  sourceText: seed.sections[index].body,
-                ),
+                    .cachedTranslation(reading.id, lookupIndex),
+                onWordTap: _handleWordTap,
+                onWordLongPress: (section) =>
+                    _toggleTranslation(readingId: reading.id, section: section),
               );
               final focusWordsPanel = _FocusWordsPanel(words: seed.focusWords);
 
@@ -126,8 +156,17 @@ class _StudentReadingDetailPageState
       },
       loading: () =>
           const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (error, stackTrace) =>
-          Scaffold(body: Center(child: Text('$error'))),
+      error: (error, stackTrace) => Scaffold(
+        body: Center(
+          child: _ReadingStateCard(
+            title: 'Okuma simdi acilamiyor',
+            message:
+                'Baglanti tekrar geldiginde ekrani yeniden acmayi dene veya okuma listesine geri don.',
+            actionLabel: 'Okuma Listesine Don',
+            onAction: () => context.go('/readings'),
+          ),
+        ),
+      ),
     );
   }
 
@@ -144,6 +183,15 @@ class _StudentReadingDetailPageState
     return null;
   }
 
+  String? _resolveVisibleSummary(ReadingPassage reading, ReadingSeedData seed) {
+    final readingSummary = reading.summary?.trim();
+    if (readingSummary != null && readingSummary.isNotEmpty) {
+      return isFallbackReadingSummary(readingSummary) ? null : readingSummary;
+    }
+
+    return isFallbackReadingSummary(seed.summary) ? null : seed.summary;
+  }
+
   void _goBack(BuildContext context) {
     if (context.canPop()) {
       context.pop();
@@ -158,7 +206,7 @@ class _StudentReadingDetailPageState
         .read(studentReadingEngagementProvider.notifier)
         .toggleBookmark(readingId);
     if (mounted) {
-      _showSnackBar('Yer imi durumu güncellendi.');
+      _showSnackBar('Yer imi durumu guncellendi.');
     }
   }
 
@@ -167,45 +215,71 @@ class _StudentReadingDetailPageState
         .read(studentReadingEngagementProvider.notifier)
         .toggleFavorite(readingId);
     if (mounted) {
-      _showSnackBar('Favori durumu güncellendi.');
+      _showSnackBar('Favori durumu guncellendi.');
     }
+  }
+
+  void _handleWordTap(int lookupIndex, _SentenceToken token) {
+    if (!token.isLookupable) {
+      return;
+    }
+
+    setState(() {
+      final current = _selectedWords[lookupIndex];
+      if (current?.lookupQuery == token.lookupQuery &&
+          current?.displayWord == token.displayWord) {
+        _selectedWords.remove(lookupIndex);
+      } else {
+        _selectedWords[lookupIndex] = _SelectedDictionaryWord(
+          displayWord: token.displayWord,
+          lookupQuery: token.lookupQuery,
+        );
+      }
+    });
   }
 
   Future<void> _toggleTranslation({
     required String readingId,
-    required int sectionIndex,
-    required String sourceText,
+    required _ReadingArticleSection section,
   }) async {
-    if (_revealedTranslations.contains(sectionIndex)) {
+    final lookupIndex = section.lookupIndex;
+    if (_revealedTranslations.contains(lookupIndex)) {
       setState(() {
-        _revealedTranslations.remove(sectionIndex);
+        _revealedTranslations.remove(lookupIndex);
+      });
+      return;
+    }
+
+    final directTranslation = section.turkishText?.trim();
+    if (directTranslation != null && directTranslation.isNotEmpty) {
+      setState(() {
+        _revealedTranslations.add(lookupIndex);
       });
       return;
     }
 
     final controller = ref.read(studentTranslationProvider.notifier);
-    final cached = controller.cachedTranslation(readingId, sectionIndex);
+    final cached = controller.cachedTranslation(readingId, lookupIndex);
     if (cached != null) {
       setState(() {
-        _revealedTranslations.add(sectionIndex);
+        _revealedTranslations.add(lookupIndex);
       });
       return;
     }
 
     setState(() {
-      _loadingTranslations.add(sectionIndex);
+      _loadingTranslations.add(lookupIndex);
     });
     await controller.loadTranslation(
       readingId: readingId,
-      sectionIndex: sectionIndex,
-      sourceText: sourceText,
+      sectionIndex: lookupIndex,
     );
     if (!mounted) {
       return;
     }
     setState(() {
-      _loadingTranslations.remove(sectionIndex);
-      _revealedTranslations.add(sectionIndex);
+      _loadingTranslations.remove(lookupIndex);
+      _revealedTranslations.add(lookupIndex);
     });
   }
 
@@ -214,6 +288,113 @@ class _StudentReadingDetailPageState
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
+}
+
+List<_ReadingArticleSection> _resolveArticleSections(
+  ReadingSeedData seed,
+  List<ReadingSentence>? remoteSections,
+) {
+  if (remoteSections != null && remoteSections.isNotEmpty) {
+    final sections = <_ReadingArticleSection>[];
+    for (var i = 0; i < remoteSections.length; i++) {
+      final section = remoteSections[i];
+      final englishText = section.englishText.trim();
+      if (englishText.isEmpty) {
+        continue;
+      }
+      sections.add(
+        _ReadingArticleSection(
+          lookupIndex: i,
+          heading: '',
+          englishText: englishText,
+          turkishText: _trimToNull(section.turkishText),
+        ),
+      );
+    }
+    return sections;
+  }
+
+  final sections = <_ReadingArticleSection>[];
+  for (var i = 0; i < seed.sections.length; i++) {
+    final section = seed.sections[i];
+    if (section.body.trim().isEmpty) {
+      continue;
+    }
+    sections.add(
+      _ReadingArticleSection(
+        lookupIndex: i,
+        heading: section.heading,
+        englishText: section.body,
+      ),
+    );
+  }
+  return sections;
+}
+
+String? _trimToNull(String? value) {
+  final trimmed = value?.trim();
+  if (trimmed == null || trimmed.isEmpty) {
+    return null;
+  }
+  return trimmed;
+}
+
+class _ReadingArticleSection {
+  const _ReadingArticleSection({
+    required this.lookupIndex,
+    required this.heading,
+    required this.englishText,
+    this.turkishText,
+  });
+
+  final int lookupIndex;
+  final String heading;
+  final String englishText;
+  final String? turkishText;
+}
+
+class _SelectedDictionaryWord {
+  const _SelectedDictionaryWord({
+    required this.displayWord,
+    required this.lookupQuery,
+  });
+
+  final String displayWord;
+  final String lookupQuery;
+}
+
+class _SentenceToken {
+  const _SentenceToken({required this.displayWord, required this.lookupQuery});
+
+  final String displayWord;
+  final String lookupQuery;
+
+  bool get isLookupable => lookupQuery.isNotEmpty;
+}
+
+final RegExp _tokenPattern = RegExp(r'\S+');
+final RegExp _edgePunctuationPattern = RegExp(r'^[^A-Za-z0-9]+|[^A-Za-z0-9]+$');
+
+List<_SentenceToken> _tokenizeSentence(String text) {
+  return _tokenPattern
+      .allMatches(text)
+      .map((match) {
+        final displayWord = match.group(0) ?? '';
+        return _SentenceToken(
+          displayWord: displayWord,
+          lookupQuery: _normalizeDictionaryQuery(displayWord),
+        );
+      })
+      .where((token) => token.displayWord.isNotEmpty)
+      .toList(growable: false);
+}
+
+String _normalizeDictionaryQuery(String value) {
+  return value
+      .trim()
+      .toLowerCase()
+      .replaceAll('’', "'")
+      .replaceAll(_edgePunctuationPattern, '');
 }
 
 class ReadingDetailHeader extends StatelessWidget {
@@ -245,7 +426,7 @@ class ReadingDetailHeader extends StatelessWidget {
           TextButton.icon(
             onPressed: onBack,
             icon: Icon(Icons.chevron_left_rounded, color: tokens.secondaryText),
-            label: const Text('Geri Dön'),
+            label: const Text('Geri Don'),
           ),
           const Spacer(),
           IconButton(
@@ -278,12 +459,14 @@ class _ReadingInfoPanel extends StatelessWidget {
   const _ReadingInfoPanel({
     required this.reading,
     required this.seed,
+    required this.summary,
     required this.focusModeEnabled,
     required this.onToggleFocusMode,
   });
 
   final ReadingPassage reading;
   final ReadingSeedData seed;
+  final String? summary;
   final bool focusModeEnabled;
   final VoidCallback onToggleFocusMode;
 
@@ -302,26 +485,26 @@ class _ReadingInfoPanel extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Text(reading.title, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 10),
-          Text(
-            seed.summary,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
-          ),
+          if (summary != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              summary!,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
+            ),
+          ],
           const SizedBox(height: 16),
           _MetaPill(label: 'Yazar', value: seed.author),
           const SizedBox(height: 10),
-          _MetaPill(label: 'Süre', value: '${seed.durationMinutes} dk'),
-          const SizedBox(height: 10),
-          _MetaPill(label: 'İlerleme', value: '%${seed.progressPercent}'),
+          _MetaPill(label: 'Ilerleme', value: '%${seed.progressPercent}'),
           const SizedBox(height: 18),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             value: focusModeEnabled,
             onChanged: (_) => onToggleFocusMode(),
             title: const Text('Odak modu'),
-            subtitle: const Text('Dikkat dağıtan bölümleri azalt.'),
+            subtitle: const Text('Dikkat dagitan bolumleri azalt.'),
           ),
         ],
       ),
@@ -361,118 +544,76 @@ class _MetaPill extends StatelessWidget {
   }
 }
 
-class _ReadingArticlePanel extends StatelessWidget {
+class _ReadingArticlePanel extends ConsumerWidget {
   const _ReadingArticlePanel({
-    required this.reading,
-    required this.seed,
+    required this.readingId,
+    required this.title,
+    required this.sections,
     required this.focusModeEnabled,
     required this.revealedTranslations,
     required this.loadingTranslations,
+    required this.selectedWords,
     required this.translationForSection,
-    required this.onToggleTranslation,
+    required this.onWordTap,
+    required this.onWordLongPress,
   });
 
-  final ReadingPassage reading;
-  final ReadingSeedData seed;
+  final String readingId;
+  final String title;
+  final List<_ReadingArticleSection> sections;
   final bool focusModeEnabled;
   final Set<int> revealedTranslations;
   final Set<int> loadingTranslations;
-  final String? Function(int sectionIndex) translationForSection;
-  final ValueChanged<int> onToggleTranslation;
+  final Map<int, _SelectedDictionaryWord> selectedWords;
+  final String? Function(int lookupIndex) translationForSection;
+  final void Function(int lookupIndex, _SentenceToken token) onWordTap;
+  final ValueChanged<_ReadingArticleSection> onWordLongPress;
 
   @override
-  Widget build(BuildContext context) {
-    final tokens = AppThemeTokens.of(context);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         StudentSurfaceCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                reading.title,
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                'Okurken çeviri katmanını ihtiyaç duyduğun bölümlerde aç. İkinci açılışta aynı bölüm önbellekten gelir.',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
-              ),
-            ],
-          ),
+          child: Text(title, style: Theme.of(context).textTheme.displaySmall),
         ),
         const SizedBox(height: 16),
-        for (var index = 0; index < seed.sections.length; index++) ...[
+        for (final section in sections) ...[
           StudentSurfaceCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (seed.sections[index].heading.isNotEmpty) ...[
+                if (section.heading.isNotEmpty) ...[
                   Text(
-                    seed.sections[index].heading,
+                    section.heading,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 12),
                 ],
-                Text(
-                  seed.sections[index].body,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    height: focusModeEnabled ? 1.9 : 1.6,
+                _InteractiveSentenceText(
+                  sentence: section.englishText,
+                  focusModeEnabled: focusModeEnabled,
+                  selectedWord: selectedWords[section.lookupIndex],
+                  onWordTap: (token) => onWordTap(section.lookupIndex, token),
+                  onWordLongPress: () => onWordLongPress(section),
+                ),
+                if (selectedWords.containsKey(section.lookupIndex)) ...[
+                  const SizedBox(height: 16),
+                  _DictionaryInlinePanel(
+                    query: selectedWords[section.lookupIndex]!,
                   ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    TextButton.icon(
-                      onPressed: () => onToggleTranslation(index),
-                      icon: loadingTranslations.contains(index)
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : Icon(
-                              revealedTranslations.contains(index)
-                                  ? Icons.translate_rounded
-                                  : Icons.g_translate_rounded,
-                            ),
-                      label: Text(
-                        revealedTranslations.contains(index)
-                            ? 'Türkçe Çeviriyi Gizle'
-                            : 'Türkçe Çeviriyi Göster',
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: tokens.accentSoft.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: Text('Bölüm ${index + 1}'),
-                    ),
-                  ],
-                ),
-                if (revealedTranslations.contains(index)) ...[
-                  const SizedBox(height: 12),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: tokens.accentSoft.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Text(
-                      translationForSection(index) ?? 'Çeviri yüklenemedi.',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
+                ],
+                if (loadingTranslations.contains(section.lookupIndex)) ...[
+                  const SizedBox(height: 16),
+                  const _InlineLoadingPanel(),
+                ],
+                if (revealedTranslations.contains(section.lookupIndex)) ...[
+                  const SizedBox(height: 16),
+                  _SentenceTranslationPanel(
+                    translation:
+                        section.turkishText ??
+                        translationForSection(section.lookupIndex) ??
+                        'Cumle cevirisi bulunamadi.',
                   ),
                 ],
               ],
@@ -481,6 +622,209 @@ class _ReadingArticlePanel extends StatelessWidget {
           const SizedBox(height: 16),
         ],
       ],
+    );
+  }
+}
+
+class _InteractiveSentenceText extends StatelessWidget {
+  const _InteractiveSentenceText({
+    required this.sentence,
+    required this.focusModeEnabled,
+    required this.selectedWord,
+    required this.onWordTap,
+    required this.onWordLongPress,
+  });
+
+  final String sentence;
+  final bool focusModeEnabled;
+  final _SelectedDictionaryWord? selectedWord;
+  final ValueChanged<_SentenceToken> onWordTap;
+  final VoidCallback onWordLongPress;
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = Theme.of(
+      context,
+    ).textTheme.bodyLarge?.copyWith(height: focusModeEnabled ? 1.9 : 1.6);
+    final tokens = AppThemeTokens.of(context);
+    final words = _tokenizeSentence(sentence);
+
+    return Wrap(
+      spacing: 4,
+      runSpacing: focusModeEnabled ? 10 : 6,
+      children: [
+        for (final token in words)
+          _SentenceTokenChip(
+            token: token,
+            textStyle: textStyle,
+            isSelected:
+                selectedWord?.lookupQuery == token.lookupQuery &&
+                selectedWord?.displayWord == token.displayWord,
+            accentColor: tokens.accentSoft,
+            onTap: () => onWordTap(token),
+            onLongPress: onWordLongPress,
+          ),
+      ],
+    );
+  }
+}
+
+class _SentenceTokenChip extends StatelessWidget {
+  const _SentenceTokenChip({
+    required this.token,
+    required this.textStyle,
+    required this.isSelected,
+    required this.accentColor,
+    required this.onTap,
+    required this.onLongPress,
+  });
+
+  final _SentenceToken token;
+  final TextStyle? textStyle;
+  final bool isSelected;
+  final Color accentColor;
+  final VoidCallback onTap;
+  final VoidCallback onLongPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: isSelected
+          ? accentColor.withValues(alpha: 0.16)
+          : Colors.transparent,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: token.isLookupable ? onTap : null,
+        onLongPress: onLongPress,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+          child: Text(token.displayWord, style: textStyle),
+        ),
+      ),
+    );
+  }
+}
+
+class _DictionaryInlinePanel extends ConsumerWidget {
+  const _DictionaryInlinePanel({required this.query});
+
+  final _SelectedDictionaryWord query;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tokens = AppThemeTokens.of(context);
+    final dictionaryEntry = ref.watch(
+      studentDictionaryEntryProvider(query.lookupQuery),
+    );
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: dictionaryEntry.when(
+        loading: () => const Row(
+          children: [
+            SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+            SizedBox(width: 12),
+            Expanded(child: Text('Sozluk aranıyor...')),
+          ],
+        ),
+        error: (error, stackTrace) => const Text('Sozlukte bulunamadi.'),
+        data: (entry) {
+          if (entry == null) {
+            return const Text('Sozlukte bulunamadi.');
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      query.displayWord,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  if (entry.pos != null && entry.pos!.isNotEmpty)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: tokens.accentSoft.withValues(alpha: 0.16),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(entry.pos!),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                entry.trMeaning,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _InlineLoadingPanel extends StatelessWidget {
+  const _InlineLoadingPanel();
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.accentSoft.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: const Row(
+        children: [
+          SizedBox(
+            width: 18,
+            height: 18,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          SizedBox(width: 12),
+          Expanded(child: Text('Cumle cevirisi yukleniyor...')),
+        ],
+      ),
+    );
+  }
+}
+
+class _SentenceTranslationPanel extends StatelessWidget {
+  const _SentenceTranslationPanel({required this.translation});
+
+  final String translation;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.accentSoft.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Text(translation, style: Theme.of(context).textTheme.bodyLarge),
     );
   }
 }
@@ -496,7 +840,7 @@ class _FocusWordsPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('ODAK KELİMELER', style: Theme.of(context).textTheme.titleLarge),
+          Text('ODAK KELIMELER', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 16),
           for (final word in words) ...[
             Row(
@@ -519,6 +863,40 @@ class _FocusWordsPanel extends StatelessWidget {
             ),
             const SizedBox(height: 14),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadingStateCard extends StatelessWidget {
+  const _ReadingStateCard({
+    required this.title,
+    required this.message,
+    required this.actionLabel,
+    required this.onAction,
+  });
+
+  final String title;
+  final String message;
+  final String actionLabel;
+  final VoidCallback onAction;
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentSurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 10),
+          Text(message, style: Theme.of(context).textTheme.bodyLarge),
+          const SizedBox(height: 16),
+          FilledButton.icon(
+            onPressed: onAction,
+            icon: const Icon(Icons.arrow_forward_rounded),
+            label: Text(actionLabel),
+          ),
         ],
       ),
     );

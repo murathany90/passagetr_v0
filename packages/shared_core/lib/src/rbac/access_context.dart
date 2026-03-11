@@ -16,6 +16,7 @@ class AccessContext {
 
   bool get isAnonymous => session.user?.isAnonymous ?? true;
   bool get isAuthenticated => session.isAuthenticated;
+  bool get hasIdentifiedProfile => isAuthenticated && !isAnonymous;
   String? get userId => session.user?.id;
   String? get email => session.user?.email;
   bool get canAccessAdmin => role == AppRole.admin || role == AppRole.developer;

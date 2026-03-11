@@ -41,6 +41,7 @@ class FoundationShell extends StatelessWidget {
                 spacing: 12,
                 runSpacing: 12,
                 children: [
+                  _InfoChip(label: WorkspaceInfo.appVersion),
                   _InfoChip(label: WorkspaceInfo.branchName),
                   _InfoChip(label: WorkspaceInfo.architecture),
                   _InfoChip(label: 'role=${accessContext.role.value}'),

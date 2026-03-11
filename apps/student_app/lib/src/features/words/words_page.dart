@@ -33,13 +33,8 @@ class _StudentWordsPageState extends ConsumerState<StudentWordsPage> {
   Widget build(BuildContext context) {
     final accessContext = ref.watch(studentAccessProvider);
     final packProgress = ref.watch(studentPackProgressProvider);
+    final wordSummary = ref.watch(studentWordSummaryProvider);
     final packs = ref.watch(studentPacksProvider);
-    final words = ref.watch(studentWordsProvider);
-    final wordProgress = ref.watch(studentWordProgressProvider).valueOrNull;
-
-    final studiedWordCount =
-        wordProgress?.values.where((item) => item.seenCount > 0).length ?? 0;
-    final totalWords = words.valueOrNull?.length ?? 0;
 
     return StudentShellFrame(
       destination: StudentDestination.words,
@@ -60,11 +55,7 @@ class _StudentWordsPageState extends ConsumerState<StudentWordsPage> {
             },
           ),
           const SizedBox(height: 24),
-          _StudySummaryRow(
-            studiedWordCount: studiedWordCount,
-            totalWords: totalWords,
-            reviewCount: ref.watch(studentReviewWordCountProvider),
-          ),
+          _StudySummaryRow(summary: wordSummary),
           const SizedBox(height: 24),
           const StudentSectionTitle(title: 'Çalışma Merkezi'),
           const SizedBox(height: 16),
@@ -113,6 +104,7 @@ class _StudentWordsPageState extends ConsumerState<StudentWordsPage> {
           packs.when(
             data: (items) {
               final filtered = items
+                  .where((item) => item.wordCount > 0)
                   .where((item) => item.name.toLowerCase().contains(_query))
                   .toList(growable: false);
 
@@ -161,8 +153,9 @@ class _StudentWordsPageState extends ConsumerState<StudentWordsPage> {
                             progressPercent:
                                 packProgress[filtered[index].id] ?? 0,
                             accentColor: _packAccentColor(context, index),
-                            onTap: () =>
-                                context.go('/words/packs/${filtered[index].id}'),
+                            onTap: () => context.go(
+                              '/words/packs/${filtered[index].id}',
+                            ),
                           ),
                         ),
                     ],
@@ -194,15 +187,9 @@ class _StudentWordsPageState extends ConsumerState<StudentWordsPage> {
 }
 
 class _StudySummaryRow extends StatelessWidget {
-  const _StudySummaryRow({
-    required this.studiedWordCount,
-    required this.totalWords,
-    required this.reviewCount,
-  });
+  const _StudySummaryRow({required this.summary});
 
-  final int studiedWordCount;
-  final int totalWords;
-  final int reviewCount;
+  final StudentWordSummary summary;
 
   @override
   Widget build(BuildContext context) {
@@ -210,11 +197,15 @@ class _StudySummaryRow extends StatelessWidget {
     final items = <({String label, String value, Color color})>[
       (
         label: 'Çalışılan',
-        value: '$studiedWordCount',
+        value: '${summary.studiedCount}',
         color: tokens.accentBlue,
       ),
-      (label: 'Toplam', value: '$totalWords', color: tokens.accent),
-      (label: 'Tekrar', value: '$reviewCount', color: tokens.badgeOrange),
+      (label: 'Toplam', value: '${summary.totalCount}', color: tokens.accent),
+      (
+        label: 'Tekrar',
+        value: '${summary.reviewCount}',
+        color: tokens.badgeOrange,
+      ),
     ];
 
     return Wrap(

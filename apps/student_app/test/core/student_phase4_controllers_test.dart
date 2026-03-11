@@ -32,17 +32,17 @@ void main() {
 
   group('StudentTranslationController', () {
     test('loadTranslation caches section translation', () async {
-      final controller = StudentTranslationController();
+      final controller = StudentTranslationController(
+        readingRepository: const _FakeReadingRepository(),
+      );
 
       final first = await controller.loadTranslation(
         readingId: 'reading-silent-ocean',
         sectionIndex: 0,
-        sourceText: 'source',
       );
       final second = await controller.loadTranslation(
         readingId: 'reading-silent-ocean',
         sectionIndex: 0,
-        sourceText: 'source',
       );
 
       expect(first, isNotEmpty);
@@ -52,6 +52,22 @@ void main() {
         equals(first),
       );
     });
+
+    test(
+      'loadTranslation returns short fallback when seed is missing',
+      () async {
+        final controller = StudentTranslationController(
+          readingRepository: const _FakeReadingRepository(),
+        );
+
+        final result = await controller.loadTranslation(
+          readingId: 'missing-reading',
+          sectionIndex: 9,
+        );
+
+        expect(result, 'Cumle cevirisi bulunamadi.');
+      },
+    );
   });
 
   group('StudentGrammarProgressController', () {
@@ -66,7 +82,7 @@ void main() {
 
         await controller.recordProgress(
           moduleId: 2,
-          pageId: 9,
+          pageId: 109,
           lastPageNo: 9,
           completedPages: 9,
           completed: false,
@@ -79,6 +95,7 @@ void main() {
             jsonDecode(repository.enqueuedEvents.single.payloadJson)
                 as Map<String, dynamic>;
         expect(payload['module_id'], 2);
+        expect(payload['page_id'], 109);
         expect(payload['last_page_no'], 9);
       },
     );
@@ -103,7 +120,7 @@ class _Phase4FakeProgressRepository implements ProgressRepository {
       const <GrammarProgress>[
         GrammarProgress(
           moduleId: 2,
-          pageId: 8,
+          pageId: 108,
           lastPageNo: 8,
           completedPages: 8,
           completed: false,
@@ -113,4 +130,22 @@ class _Phase4FakeProgressRepository implements ProgressRepository {
   @override
   Future<List<WordProgress>> fetchWordProgress() async =>
       const <WordProgress>[];
+}
+
+class _FakeReadingRepository implements ReadingRepository {
+  const _FakeReadingRepository();
+
+  @override
+  Future<List<ReadingPassage>> fetchReadings() async =>
+      const <ReadingPassage>[];
+
+  @override
+  Future<List<ReadingSentence>> fetchReadingSections(String passageId) async {
+    return const <ReadingSentence>[];
+  }
+
+  @override
+  Future<String?> fetchSentenceTranslation(String passageId, int idx) async {
+    return null;
+  }
 }

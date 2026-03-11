@@ -27,10 +27,10 @@ void main() {
   testWidgets('stacks settings panels on narrow widths', (tester) async {
     await pumpSettings(tester, size: const Size(920, 1100));
 
+    final editorOffset = tester.getTopLeft(find.text('Product Config'));
     final envOffset = tester.getTopLeft(find.text('Sistem Ozeti'));
-    final auditOffset = tester.getTopLeft(find.text('Audit Akisi'));
 
-    expect(auditOffset.dy, greaterThan(envOffset.dy + 40));
+    expect(envOffset.dy, greaterThan(editorOffset.dy + 200));
   });
 
   testWidgets('places settings panels side by side on wide widths', (
@@ -38,9 +38,11 @@ void main() {
   ) async {
     await pumpSettings(tester, size: const Size(1440, 1100));
 
+    final editorOffset = tester.getTopLeft(find.text('Product Config'));
     final envOffset = tester.getTopLeft(find.text('Sistem Ozeti'));
     final auditOffset = tester.getTopLeft(find.text('Audit Akisi'));
 
-    expect(auditOffset.dx, greaterThan(envOffset.dx + 120));
+    expect(envOffset.dx, greaterThan(editorOffset.dx + 120));
+    expect(auditOffset.dy, greaterThan(envOffset.dy + 40));
   });
 }

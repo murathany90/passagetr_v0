@@ -20,9 +20,12 @@ class StudentReadingsPage extends ConsumerStatefulWidget {
 }
 
 class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
+  static const int _pageSize = 21;
+
   final searchController = TextEditingController();
   ReadingCollectionView selectedView = ReadingCollectionView.library;
   String query = '';
+  int currentPage = 0;
 
   @override
   void dispose() {
@@ -44,12 +47,8 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
         width: 280,
         child: StudentSearchField(
           controller: searchController,
-          hintText: 'Makale, hikâye ara...',
-          onChanged: (value) {
-            setState(() {
-              query = value.trim();
-            });
-          },
+          hintText: 'Makale, hikaye ara...',
+          onChanged: _updateQuery,
         ),
       ),
       body: readings.when(
@@ -64,8 +63,14 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                 ? 2
                 : 1;
             final spacing = isWide ? 22.0 : 16.0;
-            final itemWidth =
-                (constraints.maxWidth - (spacing * (columns - 1))) / columns;
+            final totalPages = (visibleItems.length / _pageSize).ceil();
+            final resolvedPage = totalPages == 0
+                ? 0
+                : currentPage.clamp(0, totalPages - 1);
+            final pageItems = visibleItems
+                .skip(resolvedPage * _pageSize)
+                .take(_pageSize)
+                .toList(growable: false);
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,12 +78,8 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                 if (!isWide) ...[
                   StudentSearchField(
                     controller: searchController,
-                    hintText: 'Makale, hikâye ara...',
-                    onChanged: (value) {
-                      setState(() {
-                        query = value.trim();
-                      });
-                    },
+                    hintText: 'Makale, hikaye ara...',
+                    onChanged: _updateQuery,
                   ),
                   const SizedBox(height: 18),
                 ],
@@ -87,6 +88,7 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                   onSelectionChanged: (value) {
                     setState(() {
                       selectedView = value;
+                      currentPage = 0;
                     });
                   },
                 ),
@@ -95,28 +97,66 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                   const StudentSurfaceCard(
                     child: Text('Aramana uygun okuma bulunamadı.'),
                   )
-                else
-                  Wrap(
-                    spacing: spacing,
-                    runSpacing: spacing,
-                    children: [
-                      for (final item in visibleItems)
-                        SizedBox(
-                          width: itemWidth,
-                          child: _ReadingCard(
-                            reading: item,
-                            seed: readingSeedFor(item.id),
-                            onTap: () => context.go('/readings/${item.id}'),
-                          ),
-                        ),
-                    ],
+                else ...[
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: columns,
+                      crossAxisSpacing: spacing,
+                      mainAxisSpacing: spacing,
+                      mainAxisExtent: 580,
+                    ),
+                    itemCount: pageItems.length,
+                    itemBuilder: (context, index) {
+                      final item = pageItems[index];
+                      final isLocked =
+                          item.isPro && !accessContext.canViewPremium;
+                      return _ReadingCard(
+                        reading: item,
+                        seed: readingSeedForPassage(item),
+                        isLocked: isLocked,
+                        onTap: () => isLocked
+                            ? context.go('/premium')
+                            : context.go('/readings/${item.id}'),
+                      );
+                    },
                   ),
+                  if (totalPages > 1) ...[
+                    const SizedBox(height: 24),
+                    _ReadingsPaginationBar(
+                      currentPage: resolvedPage,
+                      totalPages: totalPages,
+                      pageSize: _pageSize,
+                      totalItems: visibleItems.length,
+                      onPrevious: resolvedPage == 0
+                          ? null
+                          : () {
+                              setState(() {
+                                currentPage = resolvedPage - 1;
+                              });
+                            },
+                      onNext: resolvedPage >= totalPages - 1
+                          ? null
+                          : () {
+                              setState(() {
+                                currentPage = resolvedPage + 1;
+                              });
+                            },
+                    ),
+                  ],
+                ],
               ],
             );
           },
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Text(error.toString()),
+        error: (error, stackTrace) => _ReadingsStateCard(
+          title: 'Okuma kutuphanesi simdi yuklenemiyor',
+          message:
+              'Baglanti tekrar geldiginde okumalar otomatik yenilenir. Bu ekrani yeniden acmayi dene.',
+          onRetry: () => ref.invalidate(studentReadingsProvider),
+        ),
       ),
     );
   }
@@ -125,9 +165,10 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
     final normalizedQuery = query.toLowerCase();
     final filtered = items
         .where((item) {
-          final seed = readingSeedFor(item.id);
-          final displaySummary =
-              (item.summary?.isNotEmpty ?? false) ? item.summary : seed.summary;
+          final seed = readingSeedForPassage(item);
+          final displaySummary = (item.summary?.isNotEmpty ?? false)
+              ? item.summary
+              : seed.summary;
           final haystack =
               '${item.title} ${item.category ?? ''} ${item.level ?? ''} $displaySummary'
                   .toLowerCase();
@@ -137,19 +178,24 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
 
     if (selectedView == ReadingCollectionView.discover) {
       final discoverItems = filtered
-          .where((item) {
-            return readingSeedFor(item.id).progressPercent < 100;
-          })
+          .where((item) => readingSeedForPassage(item).progressPercent < 100)
           .toList(growable: false);
       discoverItems.sort(
-        (left, right) => readingSeedFor(
-          left.id,
-        ).progressPercent.compareTo(readingSeedFor(right.id).progressPercent),
+        (left, right) => readingSeedForPassage(left).progressPercent.compareTo(
+          readingSeedForPassage(right).progressPercent,
+        ),
       );
       return discoverItems;
     }
 
     return filtered;
+  }
+
+  void _updateQuery(String value) {
+    setState(() {
+      query = value.trim();
+      currentPage = 0;
+    });
   }
 }
 
@@ -173,7 +219,7 @@ class _ReadingToggle extends StatelessWidget {
         ),
         ButtonSegment(
           value: ReadingCollectionView.discover,
-          label: Text('Keşfet'),
+          label: Text('Kesfet'),
         ),
       ],
       selected: <ReadingCollectionView>{selectedView},
@@ -188,11 +234,13 @@ class _ReadingCard extends StatelessWidget {
   const _ReadingCard({
     required this.reading,
     required this.seed,
+    required this.isLocked,
     required this.onTap,
   });
 
   final ReadingPassage reading;
   final ReadingSeedData seed;
+  final bool isLocked;
   final VoidCallback onTap;
 
   @override
@@ -204,6 +252,7 @@ class _ReadingCard extends StatelessWidget {
       minHeight: 520,
       onTap: onTap,
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
@@ -220,6 +269,21 @@ class _ReadingCard extends StatelessWidget {
                 right: 14,
                 child: Row(
                   children: [
+                    if (reading.isPro) ...[
+                      _CardChip(
+                        label: isLocked ? 'PRO KILITLI' : 'PRO',
+                        backgroundColor: isLocked
+                            ? tokens.warning.withValues(alpha: 0.14)
+                            : tokens.accent.withValues(alpha: 0.14),
+                        foregroundColor: isLocked
+                            ? tokens.warning
+                            : tokens.accent,
+                        icon: isLocked
+                            ? Icons.lock_outline_rounded
+                            : Icons.workspace_premium_outlined,
+                      ),
+                      const SizedBox(width: 8),
+                    ],
                     _CardChip(
                       label: reading.level ?? '-',
                       backgroundColor: seed.levelBadgeColor.withValues(
@@ -227,102 +291,210 @@ class _ReadingCard extends StatelessWidget {
                       ),
                       foregroundColor: seed.levelBadgeColor,
                     ),
-                    const SizedBox(width: 8),
-                    _CardChip(
-                      label: '${seed.durationMinutes} dk',
-                      backgroundColor: Colors.white.withValues(alpha: 0.9),
-                      foregroundColor: tokens.secondaryText,
-                      icon: Icons.schedule_rounded,
-                    ),
                   ],
                 ),
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  reading.title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.headlineMedium?.copyWith(height: 1.15),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  (reading.summary?.isNotEmpty ?? false)
-                      ? reading.summary!
-                      : seed.summary,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: tokens.secondaryText,
-                    height: 1.45,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                if (seed.isCompleted)
-                  Row(
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: tokens.success,
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        'Tamamlandı',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleLarge?.copyWith(color: tokens.success),
-                      ),
-                    ],
-                  )
-                else if (seed.progressPercent == 0)
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
-                    'Okumaya Başla →',
+                    reading.title,
                     style: Theme.of(
                       context,
-                    ).textTheme.titleLarge?.copyWith(color: tokens.accent),
-                  )
-                else
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'İLERLEME',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  color: tokens.secondaryText,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '${seed.progressPercent}%',
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w800),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      StudentProgressBar(
-                        value: seed.progressPercent / 100,
-                        color: tokens.accent,
-                      ),
-                    ],
+                    ).textTheme.headlineMedium?.copyWith(height: 1.15),
                   ),
-              ],
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: Text(
+                      _cardSummaryFor(reading, seed, isLocked),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: tokens.secondaryText,
+                        height: 1.45,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  if (isLocked)
+                    Text(
+                      'Pro ile Ac',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge?.copyWith(color: tokens.accent),
+                    )
+                  else if (seed.isCompleted)
+                    Row(
+                      children: [
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: tokens.success,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Tamamlandi',
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(color: tokens.success),
+                        ),
+                      ],
+                    )
+                  else if (seed.progressPercent == 0)
+                    Text(
+                      'Okumaya Basla ->',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge?.copyWith(color: tokens.accent),
+                    )
+                  else
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'ILERLEME',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: tokens.secondaryText,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                            ),
+                            const Spacer(),
+                            Text(
+                              '${seed.progressPercent}%',
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        StudentProgressBar(
+                          value: seed.progressPercent / 100,
+                          color: tokens.accent,
+                        ),
+                      ],
+                    ),
+                ],
+              ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  String _cardSummaryFor(
+    ReadingPassage reading,
+    ReadingSeedData seed,
+    bool isLocked,
+  ) {
+    if (isLocked) {
+      return 'Bu okuma listede gorunur; tam icerik icin Pro gerekir.';
+    }
+
+    final summary = reading.summary?.trim();
+    if (summary != null && summary.isNotEmpty) {
+      return summary;
+    }
+
+    return seed.summary;
+  }
+}
+
+class _ReadingsPaginationBar extends StatelessWidget {
+  const _ReadingsPaginationBar({
+    required this.currentPage,
+    required this.totalPages,
+    required this.pageSize,
+    required this.totalItems,
+    required this.onPrevious,
+    required this.onNext,
+  });
+
+  final int currentPage;
+  final int totalPages;
+  final int pageSize;
+  final int totalItems;
+  final VoidCallback? onPrevious;
+  final VoidCallback? onNext;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    final startIndex = (currentPage * pageSize) + 1;
+    final endIndex = ((currentPage + 1) * pageSize).clamp(0, totalItems);
+
+    return StudentSurfaceCard(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isCompact = constraints.maxWidth < 560;
+          final controls = [
+            OutlinedButton.icon(
+              onPressed: onPrevious,
+              icon: const Icon(Icons.chevron_left_rounded),
+              label: const Text('Onceki'),
+            ),
+            const SizedBox(width: 10, height: 10),
+            FilledButton.icon(
+              onPressed: onNext,
+              icon: const Icon(Icons.chevron_right_rounded),
+              label: const Text('Sonraki'),
+            ),
+          ];
+
+          if (isCompact) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$startIndex-$endIndex / $totalItems okuma',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Sayfa ${currentPage + 1} / $totalPages',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Row(children: controls),
+              ],
+            );
+          }
+
+          return Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '$startIndex-$endIndex / $totalItems okuma',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
+                ),
+              ),
+              Text(
+                'Sayfa ${currentPage + 1} / $totalPages',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(width: 16),
+              ...controls,
+            ],
+          );
+        },
       ),
     );
   }
@@ -366,6 +538,38 @@ class _CardChip extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ReadingsStateCard extends StatelessWidget {
+  const _ReadingsStateCard({
+    required this.title,
+    required this.message,
+    required this.onRetry,
+  });
+
+  final String title;
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentSurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 10),
+          Text(message, style: Theme.of(context).textTheme.bodyLarge),
+          const SizedBox(height: 16),
+          FilledButton.icon(
+            onPressed: onRetry,
+            icon: const Icon(Icons.refresh_rounded),
+            label: const Text('Tekrar Dene'),
+          ),
+        ],
       ),
     );
   }

@@ -52,13 +52,7 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
         ..._mapRowsToContentEntities(
           scope: scope,
           entityType: 'reading_passages',
-          rows:
-              (await client
-                      .from('reading_passages')
-                      .select(
-                        'id,pack_id,title,level,category,tags_raw,is_published,is_pro,updated_at,created_at',
-                      ))
-                  as List<dynamic>,
+          rows: await _readingCatalogRows(client),
         ),
         ..._mapRowsToContentEntities(
           scope: scope,
@@ -338,6 +332,20 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
         )
         .where((record) => record.entityId.isNotEmpty)
         .toList(growable: false);
+  }
+
+  Future<List<dynamic>> _readingCatalogRows(SupabaseClient client) async {
+    try {
+      return await client.rpc<dynamic>('student_list_reading_catalog')
+          as List<dynamic>;
+    } catch (_) {
+      return (await client
+              .from('reading_passages')
+              .select(
+                'id,pack_id,title,level,category,tags_raw,is_published,is_pro,updated_at,created_at',
+              ))
+          as List<dynamic>;
+    }
   }
 
   List<ProgressSnapshotRecord> _mapRowsToProgressSnapshots({

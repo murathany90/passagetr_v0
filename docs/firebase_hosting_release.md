@@ -42,6 +42,17 @@ Important:
 - Do not prefer raw `firebase deploy --only hosting` as the default release path.
 - Use the PowerShell release scripts in this repo so the build is validated and pruned first.
 - `firebase.json` now also ignores the local sqlite and drift worker artifacts as a safety net, but the scripts remain the primary release path.
+- Release versioning is part of the deploy contract.
+- Before every live deploy, update:
+  - `packages/shared_core/lib/src/workspace_info.dart`
+  - `packages/shared_core/lib/src/release/release_catalog.dart`
+  - `docs/release/CHANGELOG.md`
+  - `apps/student_app/pubspec.yaml`
+  - `apps/admin_console/pubspec.yaml`
+- Validate both release entry points against the same metadata source:
+  - wide web sidebar version chip
+  - narrow/mobile `Profil/Giris` release card
+- The build script should fail if the current release version is missing from the changelog or if app pubspec versions drift from the shared release metadata.
 
 ## 3. Build only
 
@@ -56,6 +67,8 @@ What it does:
 - runs `flutter analyze`
 - runs the targeted widget tests
 - builds release web
+- validates the shared release version and changelog contract
+- rewrites `version.json` with the shared release version metadata
 - prunes sqlite/db debug artifacts from `build/web`
 - verifies the required production artifacts still exist
 
@@ -70,6 +83,7 @@ What it does:
 - runs the build script
 - starts a local static server smoke test
 - checks `/`, `/index.html`, `/main.dart.js`, `/flutter_bootstrap.js`, `/version.json`
+- checks `/changelog`
 - checks route refresh behavior with `/readings/example`
 - deploys with `firebase deploy --only hosting`
 
@@ -116,6 +130,8 @@ Verify:
 - app opens without a config error
 - anonymous auth session is created
 - `Ana Sayfa`, `Kelime`, `Okuma`, `Gramer` flows open
+- wide web sidebar version chip shows the current shared version and opens `/changelog`
+- narrow/mobile `Profil/Giris` screen shows the same shared version and opens `/changelog`
 - route refresh does not return `404`
 - browser network does not request:
   - `app_content.db`

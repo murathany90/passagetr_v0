@@ -17,24 +17,12 @@ class StudentHomePage extends ConsumerWidget {
     final accessContext = ref.watch(studentAccessProvider);
     final streakDays = ref.watch(studentStreakDaysProvider);
     final reviewCount = ref.watch(studentReviewWordCountProvider);
-    final continueProgress = ref.watch(studentContinueProgressProvider);
+    final continueSummary = ref.watch(studentContinueReadingSummaryProvider);
     final todayWords = ref.watch(studentTodayWordCountProvider);
     final todaySentences = ref.watch(studentTodaySentenceCountProvider);
     final weeklyTrend = ref.watch(studentWeeklyTrendProvider);
     final goalProgress = ref.watch(studentGoalProgressProvider);
     final completedGoalDays = ref.watch(studentCompletedGoalDaysProvider);
-    final readings = ref.watch(studentReadingsProvider);
-
-    final continueReading = readings.maybeWhen(
-      data: _selectContinueReading,
-      orElse: () => const ReadingPassage(
-        id: 'reading-placeholder',
-        title: 'Okuma Yüklenemedi',
-        level: '-',
-        category: '-',
-      ),
-    );
-
     final displayName = _displayNameFor(accessContext);
 
     return StudentShellFrame(
@@ -56,9 +44,12 @@ class StudentHomePage extends ConsumerWidget {
             goalProgress: goalProgress,
           );
           final continueCard = _ContinueReadingCard(
-            reading: continueReading,
-            progressPercent: continueProgress,
-            onPressed: () => context.go('/readings/${continueReading.id}'),
+            reading: continueSummary.reading,
+            progressPercent: continueSummary.progressPercent,
+            ctaLabel: continueSummary.ctaLabel,
+            onPressed: continueSummary.hasReading
+                ? () => context.go('/readings/${continueSummary.reading.id}')
+                : null,
           );
           final reviewCard = _ReviewCard(
             reviewCount: reviewCount,
@@ -113,19 +104,6 @@ class StudentHomePage extends ConsumerWidget {
     );
   }
 
-  static ReadingPassage _selectContinueReading(List<ReadingPassage> items) {
-    if (items.isEmpty) {
-      return const ReadingPassage(
-        id: 'reading-placeholder',
-        title: 'Okuma Yüklenemedi',
-        level: '-',
-        category: '-',
-      );
-    }
-
-    return items.first;
-  }
-
   static String _displayNameFor(AccessContext accessContext) {
     final rawDisplayName = accessContext.session.user?.displayName?.trim();
     if (rawDisplayName != null && rawDisplayName.isNotEmpty) {
@@ -142,7 +120,7 @@ class StudentHomePage extends ConsumerWidget {
           .join(' ');
     }
 
-    return 'Öğrenci';
+    return accessContext.isAnonymous ? 'Misafir' : 'Öğrenci';
   }
 }
 
@@ -285,17 +263,19 @@ class _ContinueReadingCard extends StatelessWidget {
   const _ContinueReadingCard({
     required this.reading,
     required this.progressPercent,
+    required this.ctaLabel,
     required this.onPressed,
   });
 
   final ReadingPassage reading;
   final int progressPercent;
-  final VoidCallback onPressed;
+  final String ctaLabel;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
-    final readingSeed = readingSeedFor(reading.id);
+    final readingSeed = readingSeedForPassage(reading);
 
     return StudentSurfaceCard(
       minHeight: 154,
@@ -311,7 +291,7 @@ class _ContinueReadingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'KALDIĞIN YERDEN DEVAM ET',
+                      ctaLabel,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: tokens.accent,
                         fontWeight: FontWeight.w900,

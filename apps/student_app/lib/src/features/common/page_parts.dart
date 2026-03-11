@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -8,7 +9,15 @@ import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/student_providers.dart';
 
-enum StudentDestination { home, words, readings, grammar, profile, admin }
+enum StudentDestination {
+  home,
+  words,
+  readings,
+  grammar,
+  profile,
+  changelog,
+  admin,
+}
 
 class StudentAppShell extends ConsumerWidget {
   const StudentAppShell({super.key, required this.child, required this.state});
@@ -30,6 +39,8 @@ class StudentAppShell extends ConsumerWidget {
       destination = StudentDestination.readings;
     } else if (path.startsWith('/grammar')) {
       destination = StudentDestination.grammar;
+    } else if (path.startsWith('/changelog')) {
+      destination = StudentDestination.changelog;
     } else if (path.startsWith('/profile') ||
         path.startsWith('/premium') ||
         path.startsWith('/dev-access')) {
@@ -146,10 +157,7 @@ class StudentShellFrame extends StatelessWidget {
             ),
           );
 
-          return SafeArea(
-            bottom: !isWide,
-            child: content,
-          );
+          return SafeArea(bottom: !isWide, child: content);
         },
       ),
     );
@@ -208,10 +216,7 @@ class StudentDetailFrame extends StatelessWidget {
             ),
           );
 
-          return SafeArea(
-            bottom: !isWide,
-            child: content,
-          );
+          return SafeArea(bottom: !isWide, child: content);
         },
       ),
     );
@@ -632,7 +637,7 @@ class AdminLauncherPage extends StatelessWidget {
   }
 }
 
-class _StudentSidebar extends StatelessWidget {
+class _StudentSidebar extends ConsumerWidget {
   const _StudentSidebar({
     required this.destination,
     required this.accessContext,
@@ -642,9 +647,10 @@ class _StudentSidebar extends StatelessWidget {
   final AccessContext accessContext;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final tokens = AppThemeTokens.of(context);
     final destinations = _sidebarDestinations(accessContext);
+    final accountItem = _accountDestination(accessContext);
 
     return Container(
       width: tokens.railWidth,
@@ -683,10 +689,102 @@ class _StudentSidebar extends StatelessWidget {
             ),
           const Spacer(),
           Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Column(
+              children: [
+                _SidebarButton(
+                  item: accountItem,
+                  selected: destination == accountItem.destination,
+                ),
+                if (accessContext.hasIdentifiedProfile) ...[
+                  const SizedBox(height: 8),
+                  _SidebarActionButton(
+                    label: 'Çıkış Yap',
+                    icon: Icons.logout_rounded,
+                    onPressed: () async {
+                      final result = await ref
+                          .read(studentAccessProvider.notifier)
+                          .signOut();
+                      if (!context.mounted) {
+                        return;
+                      }
+
+                      final message = switch (result) {
+                        AppSuccess<void>() => 'Oturum kapatıldı.',
+                        AppFailure<void>() => result.message,
+                      };
+
+                      if (result is AppSuccess<void>) {
+                        context.go('/');
+                      }
+
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(message)));
+                    },
+                  ),
+                ],
+              ],
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 18),
-            child: Chip(label: Text(WorkspaceInfo.branchName)),
+            child: ActionChip(
+              key: const ValueKey<String>('sidebar_version_chip'),
+              label: Text(WorkspaceInfo.appVersion),
+              avatar: const Icon(Icons.update_rounded, size: 18),
+              onPressed: () => context.go(WorkspaceInfo.releaseNotesPath),
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SidebarActionButton extends StatelessWidget {
+  const _SidebarActionButton({
+    required this.label,
+    required this.icon,
+    required this.onPressed,
+  });
+
+  final String label;
+  final IconData icon;
+  final Future<void> Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(18),
+      onTap: () {
+        unawaited(onPressed());
+      },
+      child: Ink(
+        width: 76,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+        decoration: BoxDecoration(
+          color: tokens.surfaceMuted.withValues(alpha: 0.32),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.surfaceBorder),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: tokens.secondaryText, size: 26),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: tokens.secondaryText,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -718,27 +816,12 @@ class _SidebarButton extends StatelessWidget {
           color: background,
           borderRadius: BorderRadius.circular(18),
         ),
-        child: Stack(
-          clipBehavior: Clip.none,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(item.icon, color: foreground, size: 26),
-                const SizedBox(height: 8),
-                Text(
-                  item.label,
-                  textAlign: TextAlign.center,
-                  style: labelStyle,
-                ),
-              ],
-            ),
-            if (item.badgeCount != null)
-              Positioned(
-                right: 8,
-                top: -8,
-                child: _BadgePill(count: item.badgeCount!),
-              ),
+            Icon(item.icon, color: foreground, size: 26),
+            const SizedBox(height: 8),
+            Text(item.label, textAlign: TextAlign.center, style: labelStyle),
           ],
         ),
       ),
@@ -759,19 +842,11 @@ class _StudentBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
     final items = _bottomDestinations(accessContext);
-    final selectedStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
-      color: tokens.accent,
-      fontWeight: FontWeight.w700,
-    );
-    final unselectedStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
-      color: tokens.secondaryText,
-      fontWeight: FontWeight.w700,
-    );
 
     return SafeArea(
       top: false,
       child: Container(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 12),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
         decoration: BoxDecoration(
           color: tokens.mobileNavBackground,
           border: Border(top: BorderSide(color: tokens.surfaceBorder)),
@@ -787,42 +862,10 @@ class _StudentBottomNavigationBar extends StatelessWidget {
           children: [
             for (final item in items)
               Expanded(
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(18),
+                child: _BottomNavButton(
+                  item: item,
+                  selected: destination == item.destination,
                   onTap: () => _navigate(context, item.destination),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              item.icon,
-                              color: destination == item.destination
-                                  ? tokens.accent
-                                  : tokens.secondaryText,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              item.label,
-                              overflow: TextOverflow.ellipsis,
-                              style: destination == item.destination
-                                  ? selectedStyle
-                                  : unselectedStyle,
-                            ),
-                          ],
-                        ),
-                        if (item.badgeCount != null)
-                          Positioned(
-                            right: 12,
-                            top: -4,
-                            child: _BadgePill(count: item.badgeCount!),
-                          ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
           ],
@@ -832,26 +875,65 @@ class _StudentBottomNavigationBar extends StatelessWidget {
   }
 }
 
-class _BadgePill extends StatelessWidget {
-  const _BadgePill({required this.count});
+class _BottomNavButton extends StatelessWidget {
+  const _BottomNavButton({
+    required this.item,
+    required this.selected,
+    required this.onTap,
+  });
 
-  final int count;
+  final _StudentNavItem item;
+  final bool selected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-      decoration: BoxDecoration(
-        color: tokens.badgeOrange,
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        '$count',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 11,
-          fontWeight: FontWeight.w800,
+    final labelStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
+      color: selected ? tokens.accent : tokens.secondaryText,
+      fontWeight: FontWeight.w700,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          onTap: onTap,
+          child: Ink(
+            height: 68,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: selected
+                  ? tokens.accentSoft.withValues(alpha: 0.14)
+                  : Colors.transparent,
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    item.icon,
+                    size: 24,
+                    color: selected ? tokens.accent : tokens.secondaryText,
+                  ),
+                  const SizedBox(height: 6),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Text(
+                      item.label,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: labelStyle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -863,13 +945,11 @@ class _StudentNavItem {
     required this.destination,
     required this.label,
     required this.icon,
-    this.badgeCount,
   });
 
   final StudentDestination destination;
   final String label;
   final IconData icon;
-  final int? badgeCount;
 }
 
 List<_StudentNavItem> _bottomDestinations(AccessContext accessContext) {
@@ -883,7 +963,6 @@ List<_StudentNavItem> _bottomDestinations(AccessContext accessContext) {
       destination: StudentDestination.words,
       label: 'Kelimeler',
       icon: Icons.dashboard_outlined,
-      badgeCount: 12,
     ),
     const _StudentNavItem(
       destination: StudentDestination.readings,
@@ -895,11 +974,7 @@ List<_StudentNavItem> _bottomDestinations(AccessContext accessContext) {
       label: 'Gramer',
       icon: Icons.style_outlined,
     ),
-    const _StudentNavItem(
-      destination: StudentDestination.profile,
-      label: 'Profil',
-      icon: Icons.person_outline_rounded,
-    ),
+    _accountDestination(accessContext),
   ];
 }
 
@@ -914,7 +989,6 @@ List<_StudentNavItem> _sidebarDestinations(AccessContext accessContext) {
       destination: StudentDestination.words,
       label: 'Kelimeler',
       icon: Icons.dashboard_outlined,
-      badgeCount: 12,
     ),
     const _StudentNavItem(
       destination: StudentDestination.readings,
@@ -925,11 +999,6 @@ List<_StudentNavItem> _sidebarDestinations(AccessContext accessContext) {
       destination: StudentDestination.grammar,
       label: 'Gramer',
       icon: Icons.style_outlined,
-    ),
-    const _StudentNavItem(
-      destination: StudentDestination.profile,
-      label: 'Profil',
-      icon: Icons.person_outline_rounded,
     ),
   ];
 
@@ -946,6 +1015,22 @@ List<_StudentNavItem> _sidebarDestinations(AccessContext accessContext) {
   return items;
 }
 
+_StudentNavItem _accountDestination(AccessContext accessContext) {
+  if (accessContext.hasIdentifiedProfile) {
+    return const _StudentNavItem(
+      destination: StudentDestination.profile,
+      label: 'Profil',
+      icon: Icons.person_outline_rounded,
+    );
+  }
+
+  return const _StudentNavItem(
+    destination: StudentDestination.profile,
+    label: 'Giriş',
+    icon: Icons.login_rounded,
+  );
+}
+
 void _navigate(BuildContext context, StudentDestination destination) {
   final route = switch (destination) {
     StudentDestination.home => '/',
@@ -953,6 +1038,7 @@ void _navigate(BuildContext context, StudentDestination destination) {
     StudentDestination.readings => '/readings',
     StudentDestination.grammar => '/grammar',
     StudentDestination.profile => '/profile',
+    StudentDestination.changelog => WorkspaceInfo.releaseNotesPath,
     StudentDestination.admin => '/admin',
   };
 
@@ -966,6 +1052,7 @@ String _browserTitleForDestination(StudentDestination destination) {
     StudentDestination.readings => 'Okuma',
     StudentDestination.grammar => 'Gramer',
     StudentDestination.profile => 'Profil',
+    StudentDestination.changelog => 'Surum Notlari',
     StudentDestination.admin => 'Admin Launcher',
   };
 }

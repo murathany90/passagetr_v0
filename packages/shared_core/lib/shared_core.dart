@@ -8,5 +8,6 @@ export 'src/errors/app_exception.dart';
 export 'src/logging/app_logger.dart';
 export 'src/network/cache_policy.dart';
 export 'src/rbac/access_context.dart';
+export 'src/release/release_catalog.dart';
 export 'src/result/app_result.dart';
 export 'src/workspace_info.dart';

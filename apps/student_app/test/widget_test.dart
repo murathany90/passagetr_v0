@@ -80,7 +80,27 @@ void main() {
       find.textContaining('Gramer'),
     );
     expect(find.textContaining('Gramer'), findsWidgets);
-    expect(_titleFinder('PASSAGETR | Gramer Modülleri'), findsWidgets);
+    expect(_titleFinder('PASSAGETR | Gramer Konulari'), findsWidgets);
+
+    await _navigateTo(tester, container, '/profile', find.text('Misafir Modu'));
+    expect(find.text('Misafir Modu'), findsOneWidget);
+    expect(find.text('Hesap erisimi'), findsOneWidget);
+    expect(find.text('UYGULAMA AYARLARI'), findsOneWidget);
+    expect(find.text('PASSAGETR PRO'), findsNothing);
+    expect(find.text('Ahmet Yılmaz'), findsNothing);
+    expect(find.text('ahmet.yilmaz@example.com'), findsNothing);
+    expect(_titleFinder('PASSAGETR | Giriş'), findsWidgets);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey<String>('auth_sign_in_button')),
+    );
+    await tester.tap(find.byKey(const ValueKey<String>('auth_sign_in_button')));
+    await tester.pumpAndSettle();
+    expect(find.text('E-posta zorunlu.'), findsOneWidget);
+    expect(find.text('Sifre zorunlu.'), findsOneWidget);
+
+    container.read(studentAccessProvider.notifier).setAnonymous(false);
+    await tester.pump();
 
     await _navigateTo(
       tester,
@@ -89,10 +109,47 @@ void main() {
       find.text('PASSAGETR PRO'),
     );
     expect(find.text('PASSAGETR PRO'), findsOneWidget);
-    expect(find.text('UYGULAMA AYARLARI'), findsOneWidget);
-    expect(find.text('Hesap erişimi'), findsNothing);
-    expect(find.text('Free'), findsNothing);
+    expect(find.text('Hesap erisimi'), findsNothing);
     expect(_titleFinder('PASSAGETR | Profil'), findsWidgets);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey<String>('profile_settings_button')),
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('profile_settings_button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Profil Ayarları'), findsOneWidget);
+    expect(find.text('HIZLI İŞLEMLER'), findsOneWidget);
+    expect(find.text('Planı Gör'), findsWidgets);
+    expect(find.text('Oturumu Yenile'), findsWidgets);
+    expect(
+      find.byKey(const ValueKey<String>('profile_display_name_field')),
+      findsOneWidget,
+    );
+
+    await tester.enterText(
+      find.byKey(const ValueKey<String>('profile_display_name_field')),
+      'Ada Lovelace',
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('profile_save_display_name_button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ada Lovelace'), findsWidgets);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey<String>('settings_manage_account_button')),
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('settings_manage_account_button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Hesap Yönetimi'), findsOneWidget);
+    expect(find.text('Kullanıcı Adı'), findsOneWidget);
   });
 
   testWidgets('dev access route is locked for users and open for admins', (

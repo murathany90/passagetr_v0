@@ -1,4 +1,5 @@
 import 'package:shared_core/shared_core.dart';
+import '../entities/admin_console_contracts.dart';
 
 abstract interface class AdminContentRepository {
   Future<AppResult<void>> setContentPublished({
@@ -7,13 +8,19 @@ abstract interface class AdminContentRepository {
     required bool isPublished,
   });
 
+  Future<AppResult<AdminPackDetail>> fetchPackDetail({required String packId});
+
   Future<AppResult<void>> upsertPack({
     String? packId,
     required String name,
     required bool isPublished,
   });
 
+  Future<AppResult<AdminPackDetail>> upsertPackDetail(AdminPackDetail detail);
+
   Future<AppResult<void>> deletePack({required String packId});
+
+  Future<AppResult<AdminWordDetail>> fetchWordDetail({required String wordId});
 
   Future<AppResult<void>> upsertWord({
     String? wordId,
@@ -28,11 +35,21 @@ abstract interface class AdminContentRepository {
     required bool isPublished,
   });
 
+  Future<AppResult<AdminWordDetail>> upsertWordDetail(AdminWordDetail detail);
+
   Future<AppResult<void>> deleteWord({required String wordId});
 
   Future<AppResult<void>> importWords({
     required String packId,
     required List<Map<String, dynamic>> rows,
+  });
+
+  Future<AppResult<void>> importReadings({
+    required List<AdminReadingDetail> items,
+  });
+
+  Future<AppResult<AdminReadingDetail>> fetchReadingDetail({
+    required String readingId,
   });
 
   Future<AppResult<void>> upsertReading({
@@ -43,10 +60,19 @@ abstract interface class AdminContentRepository {
     String? level,
     String? category,
     String? tagsRaw,
+    required bool isPro,
     required bool isPublished,
   });
 
+  Future<AppResult<AdminReadingDetail>> upsertReadingDetail(
+    AdminReadingDetail detail,
+  );
+
   Future<AppResult<void>> deleteReading({required String readingId});
+
+  Future<AppResult<AdminGrammarModuleDetail>> fetchGrammarModuleDetail({
+    required int moduleId,
+  });
 
   Future<AppResult<void>> upsertGrammarModule({
     int? moduleId,
@@ -58,6 +84,10 @@ abstract interface class AdminContentRepository {
     required String color,
     required bool isPublished,
   });
+
+  Future<AppResult<AdminGrammarModuleDetail>> upsertGrammarModuleDetail(
+    AdminGrammarModuleDetail detail,
+  );
 
   Future<AppResult<void>> deleteGrammarModule({required int moduleId});
 

@@ -8,6 +8,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'admin_access_controller.dart';
 import 'admin_cms_controller.dart';
 import 'admin_console_models.dart';
+import 'admin_settings_controller.dart';
+import 'admin_user_management_controller.dart';
 
 final adminAppConfigProvider = Provider<AppConfig>((ref) {
   return AppConfig.fromEnvironment(
@@ -17,17 +19,16 @@ final adminAppConfigProvider = Provider<AppConfig>((ref) {
   );
 });
 
-final adminAccessProvider =
-    StateNotifierProvider<AdminAccessController, AccessContext>(
+final adminAuthStateProvider =
+    StateNotifierProvider<AdminAccessController, AdminAuthState>(
       (ref) => AdminAccessController(
         authRepository: ref.watch(adminAuthRepositoryProvider),
-        initialAccessContext: AccessContext.preview(
-          role: AppRole.admin,
-          plan: EntitlementPlan.free,
-          isAnonymous: false,
-        ),
       ),
     );
+
+final adminAccessProvider = Provider<AccessContext>((ref) {
+  return ref.watch(adminAuthStateProvider).accessContext;
+});
 
 final adminAuthRepositoryProvider = Provider<FoundationAuthRepository>((ref) {
   final repository = FoundationAuthRepository(
@@ -48,9 +49,124 @@ final adminContentRepositoryProvider = Provider<AdminContentRepository>(
   ),
 );
 
+final adminUserManagementRepositoryProvider =
+    Provider<AdminUserManagementRepository>(
+      (ref) => FoundationAdminUserManagementRepository(
+        config: ref.watch(adminAppConfigProvider),
+      ),
+    );
+
+final adminSettingsRepositoryProvider = Provider<AdminSettingsRepository>(
+  (ref) => FoundationAdminSettingsRepository(
+    config: ref.watch(adminAppConfigProvider),
+  ),
+);
+
+final adminAnalyticsRepositoryProvider = Provider<AdminAnalyticsRepository>(
+  (ref) => FoundationAdminAnalyticsRepository(
+    config: ref.watch(adminAppConfigProvider),
+  ),
+);
+
 final adminUserAccessServiceProvider = Provider<AdminUserAccessService>(
   (ref) => AdminUserAccessService(config: ref.watch(adminAppConfigProvider)),
 );
+
+final adminSettingsStateProvider =
+    StateNotifierProvider<AdminSettingsController, AdminSettingsState>(
+      (ref) => AdminSettingsController(
+        repository: ref.watch(adminSettingsRepositoryProvider),
+      ),
+    );
+
+final adminActiveSettingsProvider = Provider<AdminSettingsSnapshot>((ref) {
+  return ref.watch(adminSettingsStateProvider).draft;
+});
+
+final adminDefaultListPageSizeProvider = Provider<int>((ref) {
+  final size = ref
+      .watch(adminActiveSettingsProvider)
+      .dataManagement
+      .defaultListPageSize;
+  return size < 10 ? 10 : size;
+});
+
+final adminUserListQueryProvider =
+    StateNotifierProvider<AdminUserListQueryController, AdminUserListQuery>(
+      (ref) => AdminUserListQueryController(),
+    );
+
+final adminSelectedUserIdsProvider =
+    StateNotifierProvider<AdminSelectedUsersController, Set<String>>(
+      (ref) => AdminSelectedUsersController(),
+    );
+
+final adminUserListOverridesProvider =
+    StateNotifierProvider<
+      AdminUserListOverridesController,
+      Map<String, AdminUserListItem>
+    >((ref) => AdminUserListOverridesController());
+
+final adminDeletedUserIdsProvider =
+    StateNotifierProvider<AdminDeletedUsersController, Set<String>>(
+      (ref) => AdminDeletedUsersController(),
+    );
+
+final adminUsersPageProvider = FutureProvider<AdminPage<AdminUserListItem>>((
+  ref,
+) async {
+  final repository = ref.watch(adminUserManagementRepositoryProvider);
+  final query = ref.watch(adminUserListQueryProvider);
+  final overrides = ref.watch(adminUserListOverridesProvider);
+  final deletedIds = ref.watch(adminDeletedUserIdsProvider);
+  final result = await repository.listUsers(query);
+  if (result case AppSuccess<AdminPage<AdminUserListItem>>()) {
+    final page = result.value;
+    final items = <AdminUserListItem>[
+      for (final item in page.items)
+        if (!deletedIds.contains(item.id)) overrides[item.id] ?? item,
+    ];
+    if (query.offset == 0) {
+      for (final override in overrides.values) {
+        final alreadyIncluded = items.any((item) => item.id == override.id);
+        if (alreadyIncluded || !_matchesUserQuery(override, query)) {
+          continue;
+        }
+        if (deletedIds.contains(override.id)) {
+          continue;
+        }
+        items.insert(0, override);
+      }
+    }
+    final removedOnPage = page.items.where((item) => deletedIds.contains(item.id)).length;
+    final totalCount =
+        (page.totalCount - removedOnPage) +
+        _countInjectedUserOverrides(page.items, overrides, query) -
+        overrides.values.where((item) => deletedIds.contains(item.id)).length;
+    return AdminPage<AdminUserListItem>(
+      items: items,
+      totalCount: totalCount < 0 ? 0 : totalCount,
+      offset: page.offset,
+      limit: page.limit,
+    );
+  }
+  throw Exception((result as AppFailure<AdminPage<AdminUserListItem>>).message);
+});
+
+final adminDashboardWindowProvider = StateProvider<int>((ref) => 7);
+
+final adminDashboardSnapshotProvider = FutureProvider<AdminDashboardSnapshot>((
+  ref,
+) async {
+  final repository = ref.watch(adminAnalyticsRepositoryProvider);
+  final result = await repository.fetchDashboardSnapshot(
+    days: ref.watch(adminDashboardWindowProvider),
+  );
+  if (result case AppSuccess<AdminDashboardSnapshot>()) {
+    return result.value;
+  }
+  throw Exception((result as AppFailure<AdminDashboardSnapshot>).message);
+});
 
 final _previewPackRepositoryProvider = Provider<PackRepository>(
   (ref) => FoundationPackRepository(config: ref.watch(adminAppConfigProvider)),
@@ -154,19 +270,8 @@ final adminWordEntriesProvider = FutureProvider<List<AdminWordRecord>>((
 final adminPacksProvider = FutureProvider<List<AdminPackRecord>>((ref) async {
   final changes = ref.watch(adminPackChangesProvider);
   final baseItems = await ref.watch(_adminPacksBaseProvider.future);
-  final words = await ref.watch(adminWordEntriesProvider.future);
-  final wordCounts = <String, int>{};
-  for (final item in words) {
-    wordCounts.update(item.packId, (value) => value + 1, ifAbsent: () => 1);
-  }
-
-  final merged =
-      _mergeCollection(baseItems, changes, idOf: (item) => item.id)
-          .map((item) {
-            return item.copyWith(wordCount: wordCounts[item.id] ?? 0);
-          })
-          .toList(growable: false)
-        ..sort((left, right) => left.name.compareTo(right.name));
+  final merged = _mergeCollection(baseItems, changes, idOf: (item) => item.id)
+    ..sort((left, right) => left.name.compareTo(right.name));
 
   return merged;
 });
@@ -180,6 +285,32 @@ final adminReadingsProvider = FutureProvider<List<AdminReadingRecord>>((
     ..sort((left, right) => left.title.compareTo(right.title));
   return merged;
 });
+
+final adminWordPageProvider =
+    FutureProvider.family<AdminPage<AdminWordRecord>, AdminWordPageRequest>((
+      ref,
+      request,
+    ) async {
+      return _loadAdminWordPage(
+        ref.watch(adminAppConfigProvider),
+        request: request,
+        previewRepository: ref.watch(_previewWordRepositoryProvider),
+        changes: ref.watch(adminWordChangesProvider),
+      );
+    });
+
+final adminReadingPageProvider =
+    FutureProvider.family<
+      AdminPage<AdminReadingRecord>,
+      AdminReadingPageRequest
+    >((ref, request) async {
+      return _loadAdminReadingPage(
+        ref.watch(adminAppConfigProvider),
+        request: request,
+        previewRepository: ref.watch(_previewReadingRepositoryProvider),
+        changes: ref.watch(adminReadingChangesProvider),
+      );
+    });
 
 final adminGrammarModulesProvider = FutureProvider<List<AdminGrammarRecord>>((
   ref,
@@ -222,12 +353,69 @@ final adminUsersProvider = FutureProvider<List<AdminUserRecord>>((ref) async {
       .toList(growable: false);
 });
 
+final adminAuditFeedProvider = FutureProvider<AdminAuditFeed>((ref) async {
+  final local = ref.watch(adminAuditOverridesProvider);
+  final config = ref.watch(adminAppConfigProvider);
+  if (!config.supabaseEnabled) {
+    return local.isNotEmpty
+        ? AdminAuditFeed.ready(local)
+        : const AdminAuditFeed.unavailable(
+            'Supabase bağlantısı kapalı. Audit akışı preview modunda görüntülenemiyor.',
+          );
+  }
+
+  await SupabaseBootstrap.initialize(config);
+  if (Supabase.instance.client.auth.currentSession == null) {
+    return local.isNotEmpty
+        ? AdminAuditFeed.ready(local)
+        : const AdminAuditFeed.unavailable(
+            'Audit kayıtlarını görmek için admin oturumu açın.',
+          );
+  }
+
+  try {
+    final rows =
+        (await Supabase.instance.client
+                .from('audit_logs')
+                .select('id,action,target_type,target_id,created_at')
+                .order('created_at', ascending: false)
+                .limit(8))
+            as List<dynamic>;
+    final remote = rows
+        .whereType<Map<String, dynamic>>()
+        .map(
+          (row) => AdminAuditRecord(
+            id: row['id']?.toString() ?? '',
+            title: row['action']?.toString() ?? 'audit',
+            subtitle:
+                '${row['target_type'] ?? '-'} / ${row['target_id'] ?? '-'}',
+            timestampLabel: _formatLastSeen(row['created_at']),
+          ),
+        )
+        .where((item) => item.id.isNotEmpty)
+        .toList(growable: false);
+    final records = <AdminAuditRecord>[...local, ...remote];
+    if (records.isEmpty) {
+      return const AdminAuditFeed.empty(
+        'Henüz audit kaydı oluşmadı. İlk yönetim işlemi burada görünecek.',
+      );
+    }
+
+    return AdminAuditFeed.ready(records);
+  } catch (_) {
+    return local.isNotEmpty
+        ? AdminAuditFeed.ready(local)
+        : const AdminAuditFeed.unavailable(
+            'Audit kayıtları şu anda yüklenemiyor. Supabase erişimini ve yetkileri doğrulayın.',
+          );
+  }
+});
+
 final adminAuditLogProvider = FutureProvider<List<AdminAuditRecord>>((
   ref,
 ) async {
-  final remote = await _loadAdminAuditLogs(ref.watch(adminAppConfigProvider));
-  final local = ref.watch(adminAuditOverridesProvider);
-  return <AdminAuditRecord>[...local, ...remote];
+  final feed = await ref.watch(adminAuditFeedProvider.future);
+  return feed.records;
 });
 
 final adminDashboardSummaryProvider = FutureProvider<AdminDashboardSummary>((
@@ -252,7 +440,7 @@ final adminDashboardSummaryProvider = FutureProvider<AdminDashboardSummary>((
 });
 
 final adminBootstrapProvider = FutureProvider<void>((ref) async {
-  await ref.read(adminAccessProvider.notifier).restoreSession();
+  await ref.read(adminAuthStateProvider.notifier).restoreSession();
 });
 
 Future<List<AdminUserRecord>> _loadAdminUsers(AppConfig config) async {
@@ -309,9 +497,11 @@ Future<List<AdminPackRecord>> _loadAdminPacks(
               (row) => AdminPackRecord(
                 id: row['id']?.toString() ?? '',
                 name: row['name']?.toString() ?? '',
-                wordCount: 0,
+                wordCount: (row['word_count'] as num?)?.toInt() ?? 0,
                 isPublished: row['is_published'] as bool? ?? false,
                 updatedAtLabel: _formatLastSeen(row['updated_at']),
+                createdAtLabel: _formatLastSeen(row['created_at']),
+                updatedByLabel: row['updated_by_email']?.toString(),
               ),
             )
             .where((item) => item.id.isNotEmpty)
@@ -329,6 +519,8 @@ Future<List<AdminPackRecord>> _loadAdminPacks(
           wordCount: item.wordCount,
           isPublished: true,
           updatedAtLabel: 'preview',
+          createdAtLabel: 'preview',
+          updatedByLabel: 'preview',
         ),
       )
       .toList(growable: false);
@@ -360,6 +552,8 @@ Future<List<AdminWordRecord>> _loadAdminWords(
                 notes: row['notes']?.toString(),
                 isPublished: row['is_published'] as bool? ?? false,
                 updatedAtLabel: _formatLastSeen(row['updated_at']),
+                createdAtLabel: _formatLastSeen(row['created_at']),
+                updatedByLabel: row['updated_by_email']?.toString(),
               ),
             )
             .where((item) => item.id.isNotEmpty)
@@ -383,6 +577,8 @@ Future<List<AdminWordRecord>> _loadAdminWords(
           notes: null,
           isPublished: true,
           updatedAtLabel: 'preview',
+          createdAtLabel: 'preview',
+          updatedByLabel: 'preview',
         ),
       )
       .toList(growable: false);
@@ -412,8 +608,11 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
                 level: row['level']?.toString(),
                 category: row['category']?.toString(),
                 tagsRaw: row['tags_raw']?.toString(),
+                isPro: row['is_pro'] as bool? ?? false,
                 isPublished: row['is_published'] as bool? ?? false,
                 updatedAtLabel: _formatLastSeen(row['updated_at']),
+                createdAtLabel: _formatLastSeen(row['created_at']),
+                updatedByLabel: row['updated_by_email']?.toString(),
               ),
             )
             .where((item) => item.id.isNotEmpty)
@@ -433,11 +632,200 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
           level: item.level,
           category: item.category,
           tagsRaw: null,
+          isPro: item.isPro,
           isPublished: true,
           updatedAtLabel: 'preview',
+          createdAtLabel: 'preview',
+          updatedByLabel: 'preview',
         ),
       )
       .toList(growable: false);
+}
+
+Future<AdminPage<AdminWordRecord>> _loadAdminWordPage(
+  AppConfig config, {
+  required AdminWordPageRequest request,
+  required WordRepository previewRepository,
+  required AdminCollectionState<AdminWordRecord> changes,
+}) async {
+  if (config.supabaseEnabled) {
+    await SupabaseBootstrap.initialize(config);
+    if (Supabase.instance.client.auth.currentSession != null) {
+      try {
+        final response = await Supabase.instance.client.rpc<dynamic>(
+          'admin_list_words_paged',
+          params: <String, dynamic>{
+            'p_pack_id': request.packId,
+            'p_query': request.query.isEmpty ? null : request.query,
+            'p_status': _statusFilterValue(request.isPublished),
+            'p_offset': request.offset,
+            'p_limit': request.limit,
+          },
+        );
+        final payload = _coerceMap(response);
+        return AdminPage<AdminWordRecord>(
+          items: _coerceList(payload['items'])
+              .map(
+                (row) => AdminWordRecord(
+                  id: row['id']?.toString() ?? '',
+                  packId: row['pack_id']?.toString() ?? '',
+                  enWord: row['en_word']?.toString() ?? '',
+                  trMeaning: row['tr_meaning']?.toString() ?? '',
+                  pos: row['pos']?.toString() ?? '',
+                  exampleEn: row['example_en']?.toString() ?? '',
+                  exampleTr: row['example_tr']?.toString(),
+                  level: row['level']?.toString(),
+                  notes: row['notes']?.toString(),
+                  isPublished: row['is_published'] as bool? ?? false,
+                  updatedAtLabel: _formatLastSeen(row['updated_at']),
+                  createdAtLabel: _formatLastSeen(row['created_at']),
+                  updatedByLabel: row['updated_by_email']?.toString(),
+                ),
+              )
+              .where((item) => item.id.isNotEmpty)
+              .toList(growable: false),
+          totalCount: (payload['total_count'] as num?)?.toInt() ?? 0,
+          offset: (payload['offset'] as num?)?.toInt() ?? request.offset,
+          limit: (payload['limit'] as num?)?.toInt() ?? request.limit,
+        );
+      } catch (_) {}
+    }
+  }
+
+  final previewWords = await previewRepository.fetchWords();
+  final baseItems = previewWords
+      .map(
+        (item) => AdminWordRecord(
+          id: item.id,
+          packId: item.packId,
+          enWord: item.enWord,
+          trMeaning: item.trMeaning,
+          pos: item.pos,
+          exampleEn: '${item.enWord} example',
+          exampleTr: null,
+          level: null,
+          notes: null,
+          isPublished: true,
+          updatedAtLabel: 'preview',
+          createdAtLabel: 'preview',
+          updatedByLabel: 'preview',
+        ),
+      )
+      .toList(growable: false);
+  final merged =
+      _mergeCollection(baseItems, changes, idOf: (item) => item.id)
+          .where(
+            (item) => request.packId == null || item.packId == request.packId,
+          )
+          .where((item) {
+            if (request.isPublished == null) {
+              return true;
+            }
+            return item.isPublished == request.isPublished;
+          })
+          .where((item) {
+            if (request.query.isEmpty) {
+              return true;
+            }
+            final haystack =
+                '${item.enWord} ${item.trMeaning} ${item.pos} ${item.level ?? ''}'
+                    .toLowerCase();
+            return haystack.contains(request.query.toLowerCase());
+          })
+          .toList(growable: false)
+        ..sort((left, right) => left.enWord.compareTo(right.enWord));
+  return _slicePage(merged, offset: request.offset, limit: request.limit);
+}
+
+Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
+  AppConfig config, {
+  required AdminReadingPageRequest request,
+  required ReadingRepository previewRepository,
+  required AdminCollectionState<AdminReadingRecord> changes,
+}) async {
+  if (config.supabaseEnabled) {
+    await SupabaseBootstrap.initialize(config);
+    if (Supabase.instance.client.auth.currentSession != null) {
+      try {
+        final response = await Supabase.instance.client.rpc<dynamic>(
+          'admin_list_reading_passages_paged',
+          params: <String, dynamic>{
+            'p_query': request.query.isEmpty ? null : request.query,
+            'p_level': request.level,
+            'p_status': _statusFilterValue(request.isPublished),
+            'p_offset': request.offset,
+            'p_limit': request.limit,
+          },
+        );
+        final payload = _coerceMap(response);
+        return AdminPage<AdminReadingRecord>(
+          items: _coerceList(payload['items'])
+              .map(
+                (row) => AdminReadingRecord(
+                  id: row['id']?.toString() ?? '',
+                  packId: row['pack_id']?.toString(),
+                  packName: row['pack_name']?.toString(),
+                  title: row['title']?.toString() ?? '',
+                  level: row['level']?.toString(),
+                  category: row['category']?.toString(),
+                  tagsRaw: row['tags_raw']?.toString(),
+                  isPro: row['is_pro'] as bool? ?? false,
+                  isPublished: row['is_published'] as bool? ?? false,
+                  updatedAtLabel: _formatLastSeen(row['updated_at']),
+                  createdAtLabel: _formatLastSeen(row['created_at']),
+                  updatedByLabel: row['updated_by_email']?.toString(),
+                ),
+              )
+              .where((item) => item.id.isNotEmpty)
+              .toList(growable: false),
+          totalCount: (payload['total_count'] as num?)?.toInt() ?? 0,
+          offset: (payload['offset'] as num?)?.toInt() ?? request.offset,
+          limit: (payload['limit'] as num?)?.toInt() ?? request.limit,
+        );
+      } catch (_) {}
+    }
+  }
+
+  final previewReadings = await previewRepository.fetchReadings();
+  final baseItems = previewReadings
+      .map(
+        (item) => AdminReadingRecord(
+          id: item.id,
+          packId: null,
+          packName: null,
+          title: item.title,
+          level: item.level,
+          category: item.category,
+          tagsRaw: null,
+          isPro: item.isPro,
+          isPublished: true,
+          updatedAtLabel: 'preview',
+          createdAtLabel: 'preview',
+          updatedByLabel: 'preview',
+        ),
+      )
+      .toList(growable: false);
+  final merged =
+      _mergeCollection(baseItems, changes, idOf: (item) => item.id)
+          .where((item) => request.level == null || item.level == request.level)
+          .where((item) {
+            if (request.isPublished == null) {
+              return true;
+            }
+            return item.isPublished == request.isPublished;
+          })
+          .where((item) {
+            if (request.query.isEmpty) {
+              return true;
+            }
+            final haystack =
+                '${item.title} ${item.category ?? ''} ${item.level ?? ''} ${item.tagsRaw ?? ''}'
+                    .toLowerCase();
+            return haystack.contains(request.query.toLowerCase());
+          })
+          .toList(growable: false)
+        ..sort((left, right) => left.title.compareTo(right.title));
+  return _slicePage(merged, offset: request.offset, limit: request.limit);
 }
 
 Future<List<AdminGrammarRecord>> _loadAdminGrammarModules(
@@ -487,46 +875,55 @@ Future<List<AdminGrammarRecord>> _loadAdminGrammarModules(
           color: '#4776E6',
           isPublished: true,
           updatedAtLabel: 'preview',
+          createdAtLabel: 'preview',
+          updatedByLabel: 'preview',
         ),
       )
       .toList(growable: false);
 }
 
-Future<List<AdminAuditRecord>> _loadAdminAuditLogs(AppConfig config) async {
-  if (!config.supabaseEnabled) {
-    return const <AdminAuditRecord>[];
+AdminPage<T> _slicePage<T>(
+  List<T> items, {
+  required int offset,
+  required int limit,
+}) {
+  final safeOffset = offset.clamp(0, items.length);
+  final end = (safeOffset + limit).clamp(0, items.length);
+  return AdminPage<T>(
+    items: items.sublist(safeOffset, end),
+    totalCount: items.length,
+    offset: offset,
+    limit: limit,
+  );
+}
+
+Map<String, dynamic> _coerceMap(dynamic value) {
+  if (value is Map<String, dynamic>) {
+    return value;
   }
-
-  await SupabaseBootstrap.initialize(config);
-  if (Supabase.instance.client.auth.currentSession == null) {
-    return const <AdminAuditRecord>[];
+  if (value is Map) {
+    return value.map((key, item) => MapEntry(key.toString(), item));
   }
+  return const <String, dynamic>{};
+}
 
-  try {
-    final rows =
-        (await Supabase.instance.client
-                .from('audit_logs')
-                .select('id,action,target_type,target_id,created_at')
-                .order('created_at', ascending: false)
-                .limit(8))
-            as List<dynamic>;
-
-    return rows
-        .whereType<Map<String, dynamic>>()
+List<Map<String, dynamic>> _coerceList(dynamic value) {
+  if (value is List<dynamic>) {
+    return value
+        .whereType<Map>()
         .map(
-          (row) => AdminAuditRecord(
-            id: row['id']?.toString() ?? '',
-            title: row['action']?.toString() ?? 'audit',
-            subtitle:
-                '${row['target_type'] ?? '-'} / ${row['target_id'] ?? '-'}',
-            timestampLabel: _formatLastSeen(row['created_at']),
-          ),
+          (item) => item.map((key, value) => MapEntry(key.toString(), value)),
         )
-        .where((item) => item.id.isNotEmpty)
         .toList(growable: false);
-  } catch (_) {
-    return const <AdminAuditRecord>[];
   }
+  return const <Map<String, dynamic>>[];
+}
+
+String? _statusFilterValue(bool? isPublished) {
+  if (isPublished == null) {
+    return null;
+  }
+  return isPublished ? 'published' : 'draft';
 }
 
 List<T> _mergeCollection<T>(
@@ -565,6 +962,36 @@ EntitlementPlan _parsePlan(String? value) {
     (item) => item.value == value,
     orElse: () => EntitlementPlan.free,
   );
+}
+
+bool _matchesUserQuery(AdminUserListItem item, AdminUserListQuery query) {
+  final loweredQuery = query.query.toLowerCase();
+  final matchesQuery =
+      loweredQuery.isEmpty ||
+      item.email.toLowerCase().contains(loweredQuery) ||
+      item.displayName.toLowerCase().contains(loweredQuery);
+  final matchesRole = query.role == null || item.role == query.role;
+  final matchesPlan = query.plan == null || item.plan == query.plan;
+  final matchesStatus =
+      query.status == null ||
+      query.status == AdminUserStatusFilter.all ||
+      item.statusLabel == query.status!.value;
+  return matchesQuery && matchesRole && matchesPlan && matchesStatus;
+}
+
+int _countInjectedUserOverrides(
+  List<AdminUserListItem> baseItems,
+  Map<String, AdminUserListItem> overrides,
+  AdminUserListQuery query,
+) {
+  final baseIds = baseItems.map((item) => item.id).toSet();
+  var count = 0;
+  for (final item in overrides.values) {
+    if (!baseIds.contains(item.id) && _matchesUserQuery(item, query)) {
+      count += 1;
+    }
+  }
+  return count;
 }
 
 String _formatLastSeen(Object? rawValue) {

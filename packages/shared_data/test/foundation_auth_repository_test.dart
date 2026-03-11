@@ -90,5 +90,36 @@ void main() {
         repository.dispose();
       },
     );
+
+    test(
+      'updateDisplayName updates preview session for registered users when Supabase is disabled',
+      () async {
+        final repository = FoundationAuthRepository(
+          config: const AppConfig(
+            appName: 'PASSAGETR Test',
+            environment: AppEnvironment.dev,
+            platformMode: PlatformMode.mobile,
+            supabaseUrl: '',
+            supabaseAnonKey: '',
+            adminConsoleUrl: '',
+            adminPreviewEnabled: false,
+          ),
+          fallbackAccessContext: AccessContext.preview(
+            role: AppRole.user,
+            plan: EntitlementPlan.free,
+            isAnonymous: false,
+          ),
+        );
+
+        final result = await repository.updateDisplayName(
+          displayName: 'Ada Lovelace',
+        );
+
+        expect(result, isA<AppSuccess<AuthSession>>());
+        final session = (result as AppSuccess<AuthSession>).value;
+        expect(session.user?.displayName, 'Ada Lovelace');
+        repository.dispose();
+      },
+    );
   });
 }

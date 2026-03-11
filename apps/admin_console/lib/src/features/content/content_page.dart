@@ -1,9 +1,11 @@
+﻿import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_core/shared_core.dart';
+import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/admin_console_models.dart';
@@ -23,6 +25,10 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   String _query = '';
   String? _selectedPackId;
   String? _readingLevelFilter;
+  bool? _wordPublishedFilter;
+  bool? _readingPublishedFilter;
+  int _wordOffset = 0;
+  int _readingOffset = 0;
 
   bool get _isPreviewMode => !ref.read(adminAppConfigProvider).supabaseEnabled;
 
@@ -65,25 +71,48 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   }
 
   Widget _buildDestinationBody(BuildContext context) {
+    final pageSize = ref.watch(adminDefaultListPageSizeProvider);
     switch (widget.destination) {
       case AdminDestination.words:
         final packs = ref.watch(adminPacksProvider);
-        final words = ref.watch(adminWordEntriesProvider);
         return packs.when(
-          data: (packItems) => words.when(
-            data: (wordItems) {
-              _ensureSelectedPack(packItems);
-              return _buildWordsLayout(context, packItems, wordItems);
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stackTrace) => Text(error.toString()),
-          ),
+          data: (packItems) {
+            _ensureSelectedPack(packItems);
+            final words = ref.watch(
+              adminWordPageProvider(
+                AdminWordPageRequest(
+                  packId: _selectedPackId,
+                  query: _query,
+                  offset: _wordOffset,
+                  limit: pageSize,
+                  isPublished: _wordPublishedFilter,
+                ),
+              ),
+            );
+            return words.when(
+              data: (wordItems) {
+                return _buildWordsLayout(context, packItems, wordItems);
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Text(error.toString()),
+            );
+          },
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) => Text(error.toString()),
         );
       case AdminDestination.readings:
         final packs = ref.watch(adminPacksProvider);
-        final readings = ref.watch(adminReadingsProvider);
+        final readings = ref.watch(
+          adminReadingPageProvider(
+            AdminReadingPageRequest(
+              query: _query,
+              offset: _readingOffset,
+              limit: pageSize,
+              level: _readingLevelFilter,
+              isPublished: _readingPublishedFilter,
+            ),
+          ),
+        );
         return packs.when(
           data: (packItems) => readings.when(
             data: (readingItems) =>
@@ -110,7 +139,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   Widget _buildWordsLayout(
     BuildContext context,
     List<AdminPackRecord> packs,
-    List<AdminWordRecord> words,
+    AdminPage<AdminWordRecord> wordsPage,
   ) {
     AdminPackRecord? selectedPack;
     for (final item in packs) {
@@ -120,18 +149,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       }
     }
     final activePack = selectedPack;
-    final visibleWords = words
-        .where((item) => selectedPack == null || item.packId == selectedPack.id)
-        .where((item) {
-          if (_query.isEmpty) {
-            return true;
-          }
-          final haystack =
-              '${item.enWord} ${item.trMeaning} ${item.pos} ${item.level ?? ''}'
-                  .toLowerCase();
-          return haystack.contains(_query);
-        })
-        .toList(growable: false);
+    final visibleWords = wordsPage.items;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -161,10 +179,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                     onTap: () {
                       setState(() {
                         _selectedPackId = pack.id;
+                        _wordOffset = 0;
                       });
                     },
                     onEdit: () => _openPackEditor(context, existing: pack),
-                    onDelete: () => _deletePack(context, pack, words),
+                    onDelete: () => _deletePack(context, pack),
                     onTogglePublished: (value) =>
                         _togglePublishedForPack(context, pack, value),
                   ),
@@ -204,31 +223,63 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           ),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: const InputDecoration(
-                        hintText: 'Kelime, anlam veya etiket ara',
-                        prefixIcon: Icon(Icons.search_rounded),
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Kelime, anlam veya etiket ara',
+                  prefixIcon: Icon(Icons.search_rounded),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _query = value.trim().toLowerCase();
+                    _wordOffset = 0;
+                  });
+                },
+              ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 220,
+                      child: DropdownButtonFormField<bool?>(
+                        initialValue: _wordPublishedFilter,
+                        isExpanded: true,
+                        decoration: const InputDecoration(labelText: 'Durum'),
+                        items: const [
+                          DropdownMenuItem<bool?>(
+                            value: null,
+                            child: Text('Tum durumlar'),
+                          ),
+                          DropdownMenuItem<bool?>(
+                            value: true,
+                            child: Text('Yayinda'),
+                          ),
+                          DropdownMenuItem<bool?>(
+                            value: false,
+                            child: Text('Taslak'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            _wordPublishedFilter = value;
+                            _wordOffset = 0;
+                          });
+                        },
                       ),
-                      onChanged: (value) {
-                        setState(() {
-                          _query = value.trim().toLowerCase();
-                        });
-                      },
                     ),
-                  ),
-                  if (activePack != null) ...[
-                    const SizedBox(width: 12),
-                    _MetricChip(
-                      label:
-                          '${visibleWords.length} / ${activePack.wordCount} kelime',
-                    ),
-                    const SizedBox(width: 12),
-                    _MetricChip(label: 'guncel ${activePack.updatedAtLabel}'),
+                    if (activePack != null) ...[
+                      _MetricChip(
+                        label:
+                            '${wordsPage.offset + 1}-${wordsPage.offset + visibleWords.length} / ${activePack.wordCount} kelime',
+                      ),
+                      _MetricChip(label: 'guncel ${activePack.updatedAtLabel}'),
+                    ],
                   ],
-                ],
+                ),
               ),
               const SizedBox(height: 20),
               if (activePack == null)
@@ -252,7 +303,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                         )
                       : null,
                 )
-              else
+              else ...[
                 for (final word in visibleWords) ...[
                   _WordRow(
                     word: word,
@@ -268,6 +319,22 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   ),
                   const Divider(height: 1),
                 ],
+                const SizedBox(height: 16),
+                _PagedListFooter(
+                  hasPrevious: wordsPage.hasPreviousPage,
+                  hasNext: wordsPage.hasNextPage,
+                  onPrevious: () {
+                    setState(() {
+                      _wordOffset = math.max(0, _wordOffset - wordsPage.limit);
+                    });
+                  },
+                  onNext: () {
+                    setState(() {
+                      _wordOffset += wordsPage.limit;
+                    });
+                  },
+                ),
+              ],
             ],
           ),
         );
@@ -293,77 +360,107 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   Widget _buildReadingsLayout(
     BuildContext context,
     List<AdminPackRecord> packs,
-    List<AdminReadingRecord> readings,
+    AdminPage<AdminReadingRecord> readingsPage,
   ) {
-    final levels =
-        readings
-            .map((item) => item.level)
-            .whereType<String>()
-            .toSet()
-            .toList(growable: false)
-          ..sort();
-    final visibleReadings = readings
-        .where((item) {
-          final matchesLevel =
-              _readingLevelFilter == null || item.level == _readingLevelFilter;
-          final haystack =
-              '${item.title} ${item.category ?? ''} ${item.level ?? ''} ${item.tagsRaw ?? ''}'
-                  .toLowerCase();
-          final matchesQuery = _query.isEmpty || haystack.contains(_query);
-          return matchesLevel && matchesQuery;
-        })
-        .toList(growable: false);
+    const levels = <String>['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+    final visibleReadings = readingsPage.items;
 
     return AdminPanelCard(
       title: 'Okuma Operasyonlari',
-      trailing: FilledButton.icon(
-        onPressed: () => _openReadingEditor(context, packs: packs),
-        icon: const Icon(Icons.add_rounded),
-        label: const Text('Yeni Parca Ekle'),
+      trailing: Wrap(
+        spacing: 12,
+        runSpacing: 12,
+        children: [
+          FilledButton.tonalIcon(
+            onPressed: () => _openReadingImportDialog(context, packs: packs),
+            icon: const Icon(Icons.upload_file_rounded),
+            label: const Text('CSV Yukle'),
+          ),
+          FilledButton.icon(
+            onPressed: () => _openReadingEditor(context, packs: packs),
+            icon: const Icon(Icons.add_rounded),
+            label: const Text('Yeni Parca Ekle'),
+          ),
+        ],
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: const InputDecoration(
-                    hintText: 'Baslik, kategori veya tag ara',
-                    prefixIcon: Icon(Icons.search_rounded),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _query = value.trim().toLowerCase();
-                    });
-                  },
-                ),
-              ),
-              const SizedBox(width: 12),
-              SizedBox(
-                width: 180,
-                child: DropdownButtonFormField<String?>(
-                  initialValue: _readingLevelFilter,
-                  decoration: const InputDecoration(labelText: 'Seviye'),
-                  items: [
-                    const DropdownMenuItem<String?>(
-                      value: null,
-                      child: Text('Tum seviyeler'),
-                    ),
-                    ...levels.map(
-                      (item) => DropdownMenuItem<String?>(
-                        value: item,
-                        child: Text(item),
+          TextField(
+            decoration: const InputDecoration(
+              hintText: 'Baslik, kategori veya tag ara',
+              prefixIcon: Icon(Icons.search_rounded),
+            ),
+            onChanged: (value) {
+              setState(() {
+                _query = value.trim().toLowerCase();
+                _readingOffset = 0;
+              });
+            },
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                SizedBox(
+                  width: 220,
+                  child: DropdownButtonFormField<String?>(
+                    initialValue: _readingLevelFilter,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'Seviye'),
+                    items: [
+                      const DropdownMenuItem<String?>(
+                        value: null,
+                        child: Text('Tum seviyeler'),
                       ),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      _readingLevelFilter = value;
-                    });
-                  },
+                      ...levels.map(
+                        (item) => DropdownMenuItem<String?>(
+                          value: item,
+                          child: Text(item),
+                        ),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _readingLevelFilter = value;
+                        _readingOffset = 0;
+                      });
+                    },
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 220,
+                  child: DropdownButtonFormField<bool?>(
+                    initialValue: _readingPublishedFilter,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'Durum'),
+                    items: const [
+                      DropdownMenuItem<bool?>(
+                        value: null,
+                        child: Text('Tum durumlar'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: true,
+                        child: Text('Yayinda'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: false,
+                        child: Text('Taslak'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _readingPublishedFilter = value;
+                        _readingOffset = 0;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 20),
           if (visibleReadings.isEmpty)
@@ -379,7 +476,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   ? () => _openReadingEditor(context, packs: packs)
                   : null,
             )
-          else
+          else ...[
             for (final reading in visibleReadings) ...[
               _ReadingRow(
                 reading: reading,
@@ -395,6 +492,25 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               ),
               const Divider(height: 1),
             ],
+            const SizedBox(height: 16),
+            _PagedListFooter(
+              hasPrevious: readingsPage.hasPreviousPage,
+              hasNext: readingsPage.hasNextPage,
+              onPrevious: () {
+                setState(() {
+                  _readingOffset = math.max(
+                    0,
+                    _readingOffset - readingsPage.limit,
+                  );
+                });
+              },
+              onNext: () {
+                setState(() {
+                  _readingOffset += readingsPage.limit;
+                });
+              },
+            ),
+          ],
         ],
       ),
     );
@@ -517,10 +633,24 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       ref.read(adminPackChangesProvider.notifier).upsert(record);
       _selectedPackId ??= record.id;
     } else {
-      ref.read(adminPackChangesProvider.notifier).clear();
+      if (existing != null) {
+        ref
+            .read(adminPackChangesProvider.notifier)
+            .upsert(
+              existing.copyWith(
+                name: draft.name,
+                isPublished: draft.isPublished,
+                updatedAtLabel: 'az once',
+              ),
+            );
+      }
       ref.invalidate(adminPacksProvider);
       ref.invalidate(adminWordEntriesProvider);
+      ref.invalidate(adminWordPageProvider);
       ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
@@ -532,11 +662,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     );
   }
 
-  Future<void> _deletePack(
-    BuildContext context,
-    AdminPackRecord pack,
-    List<AdminWordRecord> words,
-  ) async {
+  Future<void> _deletePack(BuildContext context, AdminPackRecord pack) async {
     final shouldDelete = await _confirmAction(
       context,
       title: 'Paketi sil',
@@ -562,6 +688,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     }
 
     if (_isPreviewMode) {
+      final words = await ref.read(adminWordEntriesProvider.future);
       ref.read(adminPackChangesProvider.notifier).remove(pack.id);
       final wordNotifier = ref.read(adminWordChangesProvider.notifier);
       for (final item in words.where((item) => item.packId == pack.id)) {
@@ -573,11 +700,14 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         });
       }
     } else {
-      ref.read(adminPackChangesProvider.notifier).clear();
-      ref.read(adminWordChangesProvider.notifier).clear();
+      ref.read(adminPackChangesProvider.notifier).remove(pack.id);
       ref.invalidate(adminPacksProvider);
       ref.invalidate(adminWordEntriesProvider);
+      ref.invalidate(adminWordPageProvider);
       ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit('admin.pack.deleted', pack.name);
@@ -623,8 +753,14 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             pack.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
           );
     } else {
-      ref.read(adminPackChangesProvider.notifier).clear();
+      ref
+          .read(adminPackChangesProvider.notifier)
+          .upsert(
+            pack.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
+          );
       ref.invalidate(adminPacksProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
@@ -640,12 +776,18 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     AdminWordRecord? existing,
     String? selectedPackId,
   }) async {
-    final draft = await showDialog<_WordEditorDraft>(
+    final detail = existing == null
+        ? AdminWordDetail(packId: selectedPackId)
+        : await _loadWordDetail(existing);
+    if (detail == null || !context.mounted) {
+      return;
+    }
+
+    final draft = await showDialog<AdminWordDetail>(
       context: context,
       builder: (context) => _WordEditorDialog(
         packs: packs,
-        existing: existing,
-        selectedPackId: selectedPackId,
+        initialDetail: detail,
       ),
     );
     if (draft == null) {
@@ -654,68 +796,78 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     final result = await ref
         .read(adminContentRepositoryProvider)
-        .upsertWord(
-          wordId: existing?.id,
-          packId: draft.packId,
-          enWord: draft.enWord,
-          trMeaning: draft.trMeaning,
-          pos: draft.pos,
-          exampleEn: draft.exampleEn,
-          exampleTr: draft.exampleTr,
-          level: draft.level,
-          notes: draft.notes,
-          isPublished: draft.isPublished,
-        );
+        .upsertWordDetail(draft);
     if (!mounted) {
       return;
     }
 
-    if (result case AppFailure<void>()) {
+    if (result case AppFailure<AdminWordDetail>()) {
       _showSnackBar(result.message, isError: true);
       return;
     }
 
+    final savedDetail = (result as AppSuccess<AdminWordDetail>).value;
     if (_isPreviewMode) {
       final record =
           (existing ??
                   AdminWordRecord(
-                    id: _clientId('word'),
-                    packId: draft.packId,
-                    enWord: draft.enWord,
-                    trMeaning: draft.trMeaning,
-                    pos: draft.pos,
-                    exampleEn: draft.exampleEn,
-                    exampleTr: draft.exampleTr,
-                    level: draft.level,
-                    notes: draft.notes,
-                    isPublished: draft.isPublished,
+                    id: savedDetail.metadata.id ?? _clientId('word'),
+                    packId: savedDetail.packId ?? '',
+                    enWord: savedDetail.enWord,
+                    trMeaning: savedDetail.trMeaning,
+                    pos: savedDetail.pos,
+                    exampleEn: savedDetail.exampleEn,
+                    exampleTr: savedDetail.exampleTr,
+                    level: savedDetail.level,
+                    notes: savedDetail.notes,
+                    isPublished: savedDetail.isPublished,
                     updatedAtLabel: 'az once',
                   ))
               .copyWith(
-                packId: draft.packId,
-                enWord: draft.enWord,
-                trMeaning: draft.trMeaning,
-                pos: draft.pos,
-                exampleEn: draft.exampleEn,
-                exampleTr: draft.exampleTr,
-                level: draft.level,
-                notes: draft.notes,
-                isPublished: draft.isPublished,
+                packId: savedDetail.packId ?? '',
+                enWord: savedDetail.enWord,
+                trMeaning: savedDetail.trMeaning,
+                pos: savedDetail.pos,
+                exampleEn: savedDetail.exampleEn,
+                exampleTr: savedDetail.exampleTr,
+                level: savedDetail.level,
+                notes: savedDetail.notes,
+                isPublished: savedDetail.isPublished,
                 updatedAtLabel: 'az once',
               );
       ref.read(adminWordChangesProvider.notifier).upsert(record);
       setState(() {
-        _selectedPackId = draft.packId;
+        _selectedPackId = savedDetail.packId;
       });
     } else {
-      ref.read(adminWordChangesProvider.notifier).clear();
+      if (existing != null) {
+        ref
+            .read(adminWordChangesProvider.notifier)
+            .upsert(
+              existing.copyWith(
+                packId: savedDetail.packId ?? existing.packId,
+                enWord: savedDetail.enWord,
+                trMeaning: savedDetail.trMeaning,
+                pos: savedDetail.pos,
+                exampleEn: savedDetail.exampleEn,
+                exampleTr: savedDetail.exampleTr,
+                level: savedDetail.level,
+                notes: savedDetail.notes,
+                isPublished: savedDetail.isPublished,
+                updatedAtLabel: 'az once',
+              ),
+            );
+      }
       ref.invalidate(adminWordEntriesProvider);
+      ref.invalidate(adminWordPageProvider);
       ref.invalidate(adminPacksProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
       existing == null ? 'admin.word.created' : 'admin.word.updated',
-      draft.enWord,
+      savedDetail.enWord,
     );
     _showSnackBar(existing == null ? 'Kelime eklendi.' : 'Kelime guncellendi.');
   }
@@ -748,9 +900,12 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     if (_isPreviewMode) {
       ref.read(adminWordChangesProvider.notifier).remove(word.id);
     } else {
-      ref.read(adminWordChangesProvider.notifier).clear();
+      ref.read(adminWordChangesProvider.notifier).remove(word.id);
       ref.invalidate(adminWordEntriesProvider);
+      ref.invalidate(adminWordPageProvider);
       ref.invalidate(adminPacksProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit('admin.word.deleted', word.enWord);
@@ -796,8 +951,15 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             word.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
           );
     } else {
-      ref.read(adminWordChangesProvider.notifier).clear();
+      ref
+          .read(adminWordChangesProvider.notifier)
+          .upsert(
+            word.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
+          );
       ref.invalidate(adminWordEntriesProvider);
+      ref.invalidate(adminWordPageProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
@@ -851,41 +1013,32 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         );
       }
     } else {
-      ref.read(adminWordChangesProvider.notifier).clear();
       ref.invalidate(adminWordEntriesProvider);
+      ref.invalidate(adminWordPageProvider);
       ref.invalidate(adminPacksProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit('admin.word.imported', '${pack.name} / ${rows.length} satir');
     _showSnackBar('${rows.length} kelime import edildi.');
   }
 
-  Future<void> _openReadingEditor(
+  Future<void> _openReadingImportDialog(
     BuildContext context, {
     required List<AdminPackRecord> packs,
-    AdminReadingRecord? existing,
   }) async {
-    final draft = await showDialog<_ReadingEditorDraft>(
+    final items = await showDialog<List<AdminReadingDetail>>(
       context: context,
-      builder: (context) =>
-          _ReadingEditorDialog(packs: packs, existing: existing),
+      builder: (context) => _ReadingImportDialog(packs: packs),
     );
-    if (draft == null) {
+    if (items == null || items.isEmpty) {
       return;
     }
 
     final result = await ref
         .read(adminContentRepositoryProvider)
-        .upsertReading(
-          readingId: existing?.id,
-          packId: draft.packId,
-          packName: draft.packName,
-          title: draft.title,
-          level: draft.level,
-          category: draft.category,
-          tagsRaw: draft.tagsRaw,
-          isPublished: draft.isPublished,
-        );
+        .importReadings(items: items);
     if (!mounted) {
       return;
     }
@@ -896,38 +1049,126 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     }
 
     if (_isPreviewMode) {
+      final notifier = ref.read(adminReadingChangesProvider.notifier);
+      for (final item in items) {
+        notifier.upsert(
+          AdminReadingRecord(
+            id: _clientId('reading'),
+            packId: item.packId,
+            packName: _packNameFromId(item.packId, packs),
+            title: item.title,
+            level: item.level,
+            category: item.category,
+            tagsRaw: item.tagsRaw,
+            isPro: item.isPro,
+            isPublished: item.isPublished,
+            updatedAtLabel: 'az once',
+          ),
+        );
+      }
+    } else {
+      ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminPacksProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
+    }
+
+    _pushAudit(
+      'admin.reading.imported',
+      '${items.length} okuma parcasi CSV ile eklendi',
+    );
+    _showSnackBar('${items.length} okuma parcasi import edildi.');
+  }
+
+  Future<void> _openReadingEditor(
+    BuildContext context, {
+    required List<AdminPackRecord> packs,
+    AdminReadingRecord? existing,
+  }) async {
+    final detail = existing == null
+        ? const AdminReadingDetail()
+        : await _loadReadingDetail(existing);
+    if (detail == null || !context.mounted) {
+      return;
+    }
+
+    final draft = await showDialog<AdminReadingDetail>(
+      context: context,
+      builder: (context) =>
+          _ReadingEditorDialog(packs: packs, initialDetail: detail),
+    );
+    if (draft == null) {
+      return;
+    }
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .upsertReadingDetail(draft);
+    if (!mounted) {
+      return;
+    }
+
+    if (result case AppFailure<AdminReadingDetail>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    final savedDetail = (result as AppSuccess<AdminReadingDetail>).value;
+    if (_isPreviewMode) {
       final record =
           (existing ??
                   AdminReadingRecord(
-                    id: _clientId('reading'),
-                    packId: draft.packId,
-                    packName: draft.packName,
-                    title: draft.title,
-                    level: draft.level,
-                    category: draft.category,
-                    tagsRaw: draft.tagsRaw,
-                    isPublished: draft.isPublished,
+                    id: savedDetail.metadata.id ?? _clientId('reading'),
+                    packId: savedDetail.packId,
+                    packName: _packNameFromId(savedDetail.packId, packs),
+                    title: savedDetail.title,
+                    level: savedDetail.level,
+                    category: savedDetail.category,
+                    tagsRaw: savedDetail.tagsRaw,
+                    isPro: savedDetail.isPro,
+                    isPublished: savedDetail.isPublished,
                     updatedAtLabel: 'az once',
                   ))
               .copyWith(
-                packId: draft.packId,
-                packName: draft.packName,
-                title: draft.title,
-                level: draft.level,
-                category: draft.category,
-                tagsRaw: draft.tagsRaw,
-                isPublished: draft.isPublished,
+                packId: savedDetail.packId,
+                packName: _packNameFromId(savedDetail.packId, packs),
+                title: savedDetail.title,
+                level: savedDetail.level,
+                category: savedDetail.category,
+                tagsRaw: savedDetail.tagsRaw,
+                isPro: savedDetail.isPro,
+                isPublished: savedDetail.isPublished,
                 updatedAtLabel: 'az once',
               );
       ref.read(adminReadingChangesProvider.notifier).upsert(record);
     } else {
-      ref.read(adminReadingChangesProvider.notifier).clear();
+      if (existing != null) {
+        ref
+            .read(adminReadingChangesProvider.notifier)
+            .upsert(
+              existing.copyWith(
+                packId: savedDetail.packId,
+                packName: _packNameFromId(savedDetail.packId, packs),
+                title: savedDetail.title,
+                level: savedDetail.level,
+                category: savedDetail.category,
+                tagsRaw: savedDetail.tagsRaw,
+                isPro: savedDetail.isPro,
+                isPublished: savedDetail.isPublished,
+                updatedAtLabel: 'az once',
+              ),
+            );
+      }
       ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
       existing == null ? 'admin.reading.created' : 'admin.reading.updated',
-      draft.title,
+      savedDetail.title,
     );
     _showSnackBar(
       existing == null ? 'Okuma olusturuldu.' : 'Okuma guncellendi.',
@@ -965,8 +1206,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     if (_isPreviewMode) {
       ref.read(adminReadingChangesProvider.notifier).remove(reading.id);
     } else {
-      ref.read(adminReadingChangesProvider.notifier).clear();
+      ref.read(adminReadingChangesProvider.notifier).remove(reading.id);
       ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit('admin.reading.deleted', reading.title);
@@ -1012,8 +1256,15 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             reading.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
           );
     } else {
-      ref.read(adminReadingChangesProvider.notifier).clear();
+      ref
+          .read(adminReadingChangesProvider.notifier)
+          .upsert(
+            reading.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
+          );
       ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
@@ -1027,9 +1278,16 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     BuildContext context, {
     AdminGrammarRecord? existing,
   }) async {
-    final draft = await showDialog<_GrammarEditorDraft>(
+    final detail = existing == null
+        ? const AdminGrammarModuleDetail()
+        : await _loadGrammarDetail(existing);
+    if (detail == null || !context.mounted) {
+      return;
+    }
+
+    final draft = await showDialog<AdminGrammarModuleDetail>(
       context: context,
-      builder: (context) => _GrammarEditorDialog(existing: existing),
+      builder: (context) => _GrammarEditorDialog(initialDetail: detail),
     );
     if (draft == null) {
       return;
@@ -1037,25 +1295,17 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     final result = await ref
         .read(adminContentRepositoryProvider)
-        .upsertGrammarModule(
-          moduleId: existing?.id,
-          sortOrder: existing?.sortOrder,
-          title: draft.title,
-          fileName: draft.fileName,
-          pageCount: draft.pageCount,
-          icon: draft.icon,
-          color: draft.color,
-          isPublished: draft.isPublished,
-        );
+        .upsertGrammarModuleDetail(draft);
     if (!mounted) {
       return;
     }
 
-    if (result case AppFailure<void>()) {
+    if (result case AppFailure<AdminGrammarModuleDetail>()) {
       _showSnackBar(result.message, isError: true);
       return;
     }
 
+    final savedDetail = (result as AppSuccess<AdminGrammarModuleDetail>).value;
     if (_isPreviewMode) {
       final currentModules = await ref.read(adminGrammarModulesProvider.future);
       final nextId = currentModules.fold<int>(
@@ -1065,34 +1315,53 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       final record =
           (existing ??
                   AdminGrammarRecord(
-                    id: nextId + 1,
-                    sortOrder: currentModules.length + 1,
-                    title: draft.title,
-                    fileName: draft.fileName,
-                    pageCount: draft.pageCount,
-                    icon: draft.icon,
-                    color: draft.color,
-                    isPublished: draft.isPublished,
+                    id:
+                        int.tryParse(savedDetail.metadata.id ?? '') ??
+                        (nextId + 1),
+                    sortOrder: savedDetail.sortOrder,
+                    title: savedDetail.title,
+                    fileName: savedDetail.fileName,
+                    pageCount: savedDetail.pages.length,
+                    icon: savedDetail.icon,
+                    color: savedDetail.color,
+                    isPublished: savedDetail.isPublished,
                     updatedAtLabel: 'az once',
                   ))
               .copyWith(
-                title: draft.title,
-                fileName: draft.fileName,
-                pageCount: draft.pageCount,
-                icon: draft.icon,
-                color: draft.color,
-                isPublished: draft.isPublished,
+                title: savedDetail.title,
+                fileName: savedDetail.fileName,
+                pageCount: savedDetail.pages.length,
+                icon: savedDetail.icon,
+                color: savedDetail.color,
+                isPublished: savedDetail.isPublished,
                 updatedAtLabel: 'az once',
               );
       ref.read(adminGrammarChangesProvider.notifier).upsert(record);
     } else {
-      ref.read(adminGrammarChangesProvider.notifier).clear();
+      if (existing != null) {
+        ref
+            .read(adminGrammarChangesProvider.notifier)
+            .upsert(
+              existing.copyWith(
+                sortOrder: savedDetail.sortOrder,
+                title: savedDetail.title,
+                fileName: savedDetail.fileName,
+                pageCount: savedDetail.pages.length,
+                icon: savedDetail.icon,
+                color: savedDetail.color,
+                isPublished: savedDetail.isPublished,
+                updatedAtLabel: 'az once',
+              ),
+            );
+      }
       ref.invalidate(adminGrammarModulesProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
       existing == null ? 'admin.grammar.created' : 'admin.grammar.updated',
-      draft.title,
+      savedDetail.title,
     );
     _showSnackBar(
       existing == null
@@ -1134,8 +1403,10 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           .read(adminGrammarChangesProvider.notifier)
           .remove(module.id.toString());
     } else {
-      ref.read(adminGrammarChangesProvider.notifier).clear();
+      ref.read(adminGrammarChangesProvider.notifier).remove(module.id.toString());
       ref.invalidate(adminGrammarModulesProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit('admin.grammar.deleted', module.title);
@@ -1181,8 +1452,14 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             module.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
           );
     } else {
-      ref.read(adminGrammarChangesProvider.notifier).clear();
+      ref
+          .read(adminGrammarChangesProvider.notifier)
+          .upsert(
+            module.copyWith(isPublished: nextValue, updatedAtLabel: 'az once'),
+          );
       ref.invalidate(adminGrammarModulesProvider);
+      ref.invalidate(adminDashboardSnapshotProvider);
+      ref.invalidate(adminAuditFeedProvider);
     }
 
     _pushAudit(
@@ -1242,8 +1519,108 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     ref.read(adminGrammarChangesProvider.notifier).clear();
     ref.invalidate(adminGrammarModulesProvider);
+    ref.invalidate(adminDashboardSnapshotProvider);
+    ref.invalidate(adminAuditFeedProvider);
     _pushAudit('admin.grammar.reordered', '${item.title} sirasi guncellendi');
     _showSnackBar('Gramer sirasi guncellendi.');
+  }
+
+  Future<AdminWordDetail?> _loadWordDetail(AdminWordRecord existing) async {
+    if (_isPreviewMode) {
+      return AdminWordDetail(
+        metadata: AdminContentMetadata(id: existing.id),
+        packId: existing.packId,
+        enWord: existing.enWord,
+        trMeaning: existing.trMeaning,
+        pos: existing.pos,
+        exampleEn: existing.exampleEn,
+        exampleTr: existing.exampleTr,
+        level: existing.level,
+        notes: existing.notes,
+        isPublished: existing.isPublished,
+      );
+    }
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .fetchWordDetail(wordId: existing.id);
+    if (result case AppSuccess<AdminWordDetail>()) {
+      return result.value;
+    }
+    _showSnackBar(
+      (result as AppFailure<AdminWordDetail>).message,
+      isError: true,
+    );
+    return null;
+  }
+
+  Future<AdminReadingDetail?> _loadReadingDetail(
+    AdminReadingRecord existing,
+  ) async {
+    if (_isPreviewMode) {
+      return AdminReadingDetail(
+        metadata: AdminContentMetadata(id: existing.id),
+        packId: existing.packId,
+        title: existing.title,
+        level: existing.level,
+        category: existing.category,
+        tagsRaw: existing.tagsRaw,
+        isPro: existing.isPro,
+        isPublished: existing.isPublished,
+      );
+    }
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .fetchReadingDetail(readingId: existing.id);
+    if (result case AppSuccess<AdminReadingDetail>()) {
+      return result.value;
+    }
+    _showSnackBar(
+      (result as AppFailure<AdminReadingDetail>).message,
+      isError: true,
+    );
+    return null;
+  }
+
+  Future<AdminGrammarModuleDetail?> _loadGrammarDetail(
+    AdminGrammarRecord existing,
+  ) async {
+    if (_isPreviewMode) {
+      return AdminGrammarModuleDetail(
+        metadata: AdminContentMetadata(id: existing.id.toString()),
+        sortOrder: existing.sortOrder,
+        title: existing.title,
+        fileName: existing.fileName,
+        icon: existing.icon,
+        color: existing.color,
+        isPublished: existing.isPublished,
+      );
+    }
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .fetchGrammarModuleDetail(moduleId: existing.id);
+    if (result case AppSuccess<AdminGrammarModuleDetail>()) {
+      return result.value;
+    }
+    _showSnackBar(
+      (result as AppFailure<AdminGrammarModuleDetail>).message,
+      isError: true,
+    );
+    return null;
+  }
+
+  String? _packNameFromId(String? packId, List<AdminPackRecord> packs) {
+    if (packId == null) {
+      return null;
+    }
+    for (final pack in packs) {
+      if (pack.id == packId) {
+        return pack.name;
+      }
+    }
+    return null;
   }
 
   Future<bool> _confirmAction(
@@ -1485,6 +1862,13 @@ class _WordRow extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
+                const SizedBox(height: 6),
+                Text(
+                  'Olusturma: ${word.createdAtLabel ?? '-'} | Guncelleyen: ${word.updatedByLabel ?? '-'}',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
+                ),
               ],
             ),
           ),
@@ -1497,7 +1881,8 @@ class _WordRow extends StatelessWidget {
                 _MetricChip(label: word.pos),
                 if (word.level != null && word.level!.isNotEmpty)
                   _MetricChip(label: word.level!),
-                _MetricChip(label: word.updatedAtLabel),
+                _MetricChip(label: 'guncel ${word.updatedAtLabel}'),
+                _MetricChip(label: word.isPublished ? 'yayinda' : 'taslak'),
               ],
             ),
           ),
@@ -1568,6 +1953,13 @@ class _ReadingRow extends StatelessWidget {
                     context,
                   ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
                 ),
+                const SizedBox(height: 6),
+                Text(
+                  'Olusturma: ${reading.createdAtLabel ?? '-'} | Guncelleyen: ${reading.updatedByLabel ?? '-'}',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
+                ),
               ],
             ),
           ),
@@ -1579,7 +1971,9 @@ class _ReadingRow extends StatelessWidget {
               children: [
                 _MetricChip(label: reading.level ?? '-'),
                 _MetricChip(label: reading.category ?? '-'),
-                _MetricChip(label: reading.updatedAtLabel),
+                _MetricChip(label: reading.isPro ? 'pro' : 'free'),
+                _MetricChip(label: 'guncel ${reading.updatedAtLabel}'),
+                _MetricChip(label: reading.isPublished ? 'yayinda' : 'taslak'),
               ],
             ),
           ),
@@ -1726,6 +2120,38 @@ class _MetricChip extends StatelessWidget {
   }
 }
 
+class _PagedListFooter extends StatelessWidget {
+  const _PagedListFooter({
+    required this.hasPrevious,
+    required this.hasNext,
+    required this.onPrevious,
+    required this.onNext,
+  });
+
+  final bool hasPrevious;
+  final bool hasNext;
+  final VoidCallback onPrevious;
+  final VoidCallback onNext;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Spacer(),
+        FilledButton.tonal(
+          onPressed: hasPrevious ? onPrevious : null,
+          child: const Text('Onceki'),
+        ),
+        const SizedBox(width: 8),
+        FilledButton.tonal(
+          onPressed: hasNext ? onNext : null,
+          child: const Text('Sonraki'),
+        ),
+      ],
+    );
+  }
+}
+
 class _EmptyState extends StatelessWidget {
   const _EmptyState({
     required this.title,
@@ -1839,15 +2265,10 @@ class _PackEditorDialogState extends State<_PackEditorDialog> {
 }
 
 class _WordEditorDialog extends StatefulWidget {
-  const _WordEditorDialog({
-    required this.packs,
-    this.existing,
-    this.selectedPackId,
-  });
+  const _WordEditorDialog({required this.packs, required this.initialDetail});
 
   final List<AdminPackRecord> packs;
-  final AdminWordRecord? existing;
-  final String? selectedPackId;
+  final AdminWordDetail initialDetail;
 
   @override
   State<_WordEditorDialog> createState() => _WordEditorDialogState();
@@ -1857,35 +2278,53 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
   late final TextEditingController _enWordController;
   late final TextEditingController _trMeaningController;
   late final TextEditingController _posController;
+  late final TextEditingController _posRawController;
   late final TextEditingController _exampleEnController;
   late final TextEditingController _exampleTrController;
+  late final TextEditingController _synonymsController;
+  late final TextEditingController _antonymsController;
   late final TextEditingController _levelController;
+  late final TextEditingController _tagsController;
   late final TextEditingController _notesController;
+  late final TextEditingController _publishAtController;
+  late final TextEditingController _unpublishAtController;
+  late bool _isPro;
   late bool _isPublished;
+  String? _validationMessage;
   String? _packId;
 
   @override
   void initState() {
     super.initState();
-    final existing = widget.existing;
+    final detail = widget.initialDetail;
     _packId =
-        existing?.packId ??
-        widget.selectedPackId ??
+        detail.packId ??
         (widget.packs.isEmpty ? null : widget.packs.first.id);
-    _enWordController = TextEditingController(text: existing?.enWord ?? '');
+    _enWordController = TextEditingController(text: detail.enWord);
     _trMeaningController = TextEditingController(
-      text: existing?.trMeaning ?? '',
+      text: detail.trMeaning,
     );
-    _posController = TextEditingController(text: existing?.pos ?? 'n.');
+    _posController = TextEditingController(text: detail.pos);
+    _posRawController = TextEditingController(text: detail.posRaw ?? '');
     _exampleEnController = TextEditingController(
-      text: existing?.exampleEn ?? '',
+      text: detail.exampleEn,
     );
     _exampleTrController = TextEditingController(
-      text: existing?.exampleTr ?? '',
+      text: detail.exampleTr ?? '',
     );
-    _levelController = TextEditingController(text: existing?.level ?? '');
-    _notesController = TextEditingController(text: existing?.notes ?? '');
-    _isPublished = existing?.isPublished ?? true;
+    _synonymsController = TextEditingController(text: detail.synonymsRaw ?? '');
+    _antonymsController = TextEditingController(text: detail.antonymsRaw ?? '');
+    _levelController = TextEditingController(text: detail.level ?? '');
+    _tagsController = TextEditingController(text: detail.tagsRaw ?? '');
+    _notesController = TextEditingController(text: detail.notes ?? '');
+    _publishAtController = TextEditingController(
+      text: _formatDateTimeInput(detail.publishAt),
+    );
+    _unpublishAtController = TextEditingController(
+      text: _formatDateTimeInput(detail.unpublishAt),
+    );
+    _isPro = detail.isPro;
+    _isPublished = detail.isPublished;
   }
 
   @override
@@ -1893,23 +2332,40 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
     _enWordController.dispose();
     _trMeaningController.dispose();
     _posController.dispose();
+    _posRawController.dispose();
     _exampleEnController.dispose();
     _exampleTrController.dispose();
+    _synonymsController.dispose();
+    _antonymsController.dispose();
     _levelController.dispose();
+    _tagsController.dispose();
     _notesController.dispose();
+    _publishAtController.dispose();
+    _unpublishAtController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final metadata = widget.initialDetail.metadata;
     return AlertDialog(
-      title: Text(widget.existing == null ? 'Yeni Kelime' : 'Kelimeyi Duzenle'),
+      title: Text(
+        metadata.id == null ? 'Yeni Kelime' : 'Kelimeyi Duzenle',
+      ),
       content: SizedBox(
-        width: 620,
+        width: 760,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (_validationMessage != null) ...[
+                Text(
+                  _validationMessage!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+                const SizedBox(height: 12),
+              ],
               DropdownButtonFormField<String>(
                 initialValue: _packId,
                 decoration: const InputDecoration(labelText: 'Paket'),
@@ -1967,6 +2423,24 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
                 ],
               ),
               const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _posRawController,
+                      decoration: const InputDecoration(labelText: 'POS Raw'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      controller: _tagsController,
+                      decoration: const InputDecoration(labelText: 'Tagler'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
               TextField(
                 controller: _exampleEnController,
                 decoration: const InputDecoration(labelText: 'Example EN'),
@@ -1979,12 +2453,46 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
                 maxLines: 2,
               ),
               const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _synonymsController,
+                      decoration: const InputDecoration(
+                        labelText: 'Synonyms Raw',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      controller: _antonymsController,
+                      decoration: const InputDecoration(
+                        labelText: 'Antonyms Raw',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
               TextField(
                 controller: _notesController,
                 decoration: const InputDecoration(labelText: 'Notlar'),
                 maxLines: 3,
               ),
               const SizedBox(height: 16),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                value: _isPro,
+                onChanged: (value) {
+                  setState(() {
+                    _isPro = value;
+                  });
+                },
+                title: const Text('Pro icerik'),
+                subtitle: const Text('Kelime premium plan gerektirsin.'),
+              ),
+              const SizedBox(height: 8),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 value: _isPublished,
@@ -1996,6 +2504,32 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
                 title: const Text('Yayinda'),
                 subtitle: const Text('Kelime student tarafinda gorunsun.'),
               ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _publishAtController,
+                      decoration: const InputDecoration(
+                        labelText: 'Publish At',
+                        helperText: 'YYYY-MM-DD HH:MM',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      controller: _unpublishAtController,
+                      decoration: const InputDecoration(
+                        labelText: 'Unpublish At',
+                        helperText: 'YYYY-MM-DD HH:MM',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _MetadataSummary(metadata: metadata),
             ],
           ),
         ),
@@ -2007,24 +2541,52 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
         ),
         FilledButton(
           onPressed: () {
+            final publishAt = _parseDateTimeInput(_publishAtController.text);
+            final unpublishAt = _parseDateTimeInput(_unpublishAtController.text);
             if (_packId == null ||
                 _enWordController.text.trim().isEmpty ||
                 _trMeaningController.text.trim().isEmpty ||
                 _posController.text.trim().isEmpty ||
                 _exampleEnController.text.trim().isEmpty) {
+              setState(() {
+                _validationMessage = 'Paket, EN kelime, TR anlam, POS ve example EN zorunlu.';
+              });
+              return;
+            }
+            if ((_publishAtController.text.trim().isNotEmpty && publishAt == null) ||
+                (_unpublishAtController.text.trim().isNotEmpty && unpublishAt == null)) {
+              setState(() {
+                _validationMessage = 'Publish/Unpublish alanlari gecersiz tarih formatinda.';
+              });
               return;
             }
             Navigator.of(context).pop(
-              _WordEditorDraft(
+              widget.initialDetail.copyWith(
                 packId: _packId!,
                 enWord: _enWordController.text.trim(),
                 trMeaning: _trMeaningController.text.trim(),
                 pos: _posController.text.trim(),
+                posRaw: _emptyAsNull(_posRawController.text),
                 exampleEn: _exampleEnController.text.trim(),
                 exampleTr: _emptyAsNull(_exampleTrController.text),
+                synonymsRaw: _emptyAsNull(_synonymsController.text),
+                antonymsRaw: _emptyAsNull(_antonymsController.text),
                 level: _emptyAsNull(_levelController.text),
+                tagsRaw: _emptyAsNull(_tagsController.text),
                 notes: _emptyAsNull(_notesController.text),
+                isPro: _isPro,
                 isPublished: _isPublished,
+                publishAt: publishAt,
+                unpublishAt: unpublishAt,
+                clearPosRaw: _posRawController.text.trim().isEmpty,
+                clearExampleTr: _exampleTrController.text.trim().isEmpty,
+                clearSynonymsRaw: _synonymsController.text.trim().isEmpty,
+                clearAntonymsRaw: _antonymsController.text.trim().isEmpty,
+                clearLevel: _levelController.text.trim().isEmpty,
+                clearTagsRaw: _tagsController.text.trim().isEmpty,
+                clearNotes: _notesController.text.trim().isEmpty,
+                clearPublishAt: _publishAtController.text.trim().isEmpty,
+                clearUnpublishAt: _unpublishAtController.text.trim().isEmpty,
               ),
             );
           },
@@ -2036,10 +2598,13 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
 }
 
 class _ReadingEditorDialog extends StatefulWidget {
-  const _ReadingEditorDialog({required this.packs, this.existing});
+  const _ReadingEditorDialog({
+    required this.packs,
+    required this.initialDetail,
+  });
 
   final List<AdminPackRecord> packs;
-  final AdminReadingRecord? existing;
+  final AdminReadingDetail initialDetail;
 
   @override
   State<_ReadingEditorDialog> createState() => _ReadingEditorDialogState();
@@ -2050,19 +2615,42 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
   late final TextEditingController _levelController;
   late final TextEditingController _categoryController;
   late final TextEditingController _tagsController;
+  late final TextEditingController _publishAtController;
+  late final TextEditingController _unpublishAtController;
+  late final TextEditingController _sentencesJsonController;
+  late final TextEditingController _linkedWordsJsonController;
+  late bool _isPro;
   late bool _isPublished;
+  String? _validationMessage;
   String? _packId;
 
   @override
   void initState() {
     super.initState();
-    final existing = widget.existing;
-    _titleController = TextEditingController(text: existing?.title ?? '');
-    _levelController = TextEditingController(text: existing?.level ?? '');
-    _categoryController = TextEditingController(text: existing?.category ?? '');
-    _tagsController = TextEditingController(text: existing?.tagsRaw ?? '');
-    _isPublished = existing?.isPublished ?? true;
-    _packId = existing?.packId;
+    final detail = widget.initialDetail;
+    _titleController = TextEditingController(text: detail.title);
+    _levelController = TextEditingController(text: detail.level ?? '');
+    _categoryController = TextEditingController(text: detail.category ?? '');
+    _tagsController = TextEditingController(text: detail.tagsRaw ?? '');
+    _publishAtController = TextEditingController(
+      text: _formatDateTimeInput(detail.publishAt),
+    );
+    _unpublishAtController = TextEditingController(
+      text: _formatDateTimeInput(detail.unpublishAt),
+    );
+    _sentencesJsonController = TextEditingController(
+      text: _prettyJson(
+        detail.sentences.map((item) => item.toJson()).toList(growable: false),
+      ),
+    );
+    _linkedWordsJsonController = TextEditingController(
+      text: _prettyJson(
+        detail.linkedWords.map((item) => item.toJson()).toList(growable: false),
+      ),
+    );
+    _isPro = detail.isPro;
+    _isPublished = detail.isPublished;
+    _packId = detail.packId;
   }
 
   @override
@@ -2071,19 +2659,32 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
     _levelController.dispose();
     _categoryController.dispose();
     _tagsController.dispose();
+    _publishAtController.dispose();
+    _unpublishAtController.dispose();
+    _sentencesJsonController.dispose();
+    _linkedWordsJsonController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final metadata = widget.initialDetail.metadata;
     return AlertDialog(
-      title: Text(widget.existing == null ? 'Yeni Okuma' : 'Okumayi Duzenle'),
+      title: Text(metadata.id == null ? 'Yeni Okuma' : 'Okumayi Duzenle'),
       content: SizedBox(
-        width: 620,
+        width: 820,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (_validationMessage != null) ...[
+                Text(
+                  _validationMessage!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+                const SizedBox(height: 12),
+              ],
               DropdownButtonFormField<String?>(
                 initialValue: _packId,
                 decoration: const InputDecoration(labelText: 'Paket'),
@@ -2138,6 +2739,20 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
               const SizedBox(height: 16),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
+                value: _isPro,
+                onChanged: (value) {
+                  setState(() {
+                    _isPro = value;
+                  });
+                },
+                title: const Text('Pro icerik'),
+                subtitle: const Text(
+                  'Free kullanici karti gorur, detay icin Pro gerekir.',
+                ),
+              ),
+              const SizedBox(height: 8),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
                 value: _isPublished,
                 onChanged: (value) {
                   setState(() {
@@ -2147,6 +2762,51 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 title: const Text('Yayinda'),
                 subtitle: const Text('Parca student listesinde gorunsun.'),
               ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _publishAtController,
+                      decoration: const InputDecoration(
+                        labelText: 'Publish At',
+                        helperText: 'YYYY-MM-DD HH:MM',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      controller: _unpublishAtController,
+                      decoration: const InputDecoration(
+                        labelText: 'Unpublish At',
+                        helperText: 'YYYY-MM-DD HH:MM',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _sentencesJsonController,
+                maxLines: 12,
+                decoration: const InputDecoration(
+                  labelText: 'Sentences JSON',
+                  helperText:
+                      'Her kayit: idx, sentence_en, sentence_tr, translations[].',
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _linkedWordsJsonController,
+                maxLines: 8,
+                decoration: const InputDecoration(
+                  labelText: 'Linked Words JSON',
+                  helperText: 'Her kayit: word_id, en_word, tr_meaning.',
+                ),
+              ),
+              const SizedBox(height: 16),
+              _MetadataSummary(metadata: metadata),
             ],
           ),
         ),
@@ -2159,25 +2819,51 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
         FilledButton(
           onPressed: () {
             final title = _titleController.text.trim();
+            final publishAt = _parseDateTimeInput(_publishAtController.text);
+            final unpublishAt = _parseDateTimeInput(_unpublishAtController.text);
             if (title.isEmpty) {
+              setState(() {
+                _validationMessage = 'Baslik zorunlu.';
+              });
               return;
             }
-            AdminPackRecord? pack;
-            for (final item in widget.packs) {
-              if (item.id == _packId) {
-                pack = item;
-                break;
-              }
+            if ((_publishAtController.text.trim().isNotEmpty && publishAt == null) ||
+                (_unpublishAtController.text.trim().isNotEmpty && unpublishAt == null)) {
+              setState(() {
+                _validationMessage = 'Publish/Unpublish alanlari gecersiz tarih formatinda.';
+              });
+              return;
+            }
+            final sentencesJson = _decodeJsonArray(_sentencesJsonController.text);
+            final linkedWordsJson = _decodeJsonArray(_linkedWordsJsonController.text);
+            if (sentencesJson == null || linkedWordsJson == null) {
+              setState(() {
+                _validationMessage = 'Sentences JSON veya Linked Words JSON gecersiz.';
+              });
+              return;
             }
             Navigator.of(context).pop(
-              _ReadingEditorDraft(
+              widget.initialDetail.copyWith(
                 packId: _packId,
-                packName: pack?.name,
                 title: title,
                 level: _emptyAsNull(_levelController.text),
                 category: _emptyAsNull(_categoryController.text),
                 tagsRaw: _emptyAsNull(_tagsController.text),
+                isPro: _isPro,
                 isPublished: _isPublished,
+                publishAt: publishAt,
+                unpublishAt: unpublishAt,
+                sentences: sentencesJson
+                    .map(AdminReadingSentenceInput.fromJson)
+                    .toList(growable: false),
+                linkedWords: linkedWordsJson
+                    .map(AdminReadingWordLinkInput.fromJson)
+                    .toList(growable: false),
+                clearLevel: _levelController.text.trim().isEmpty,
+                clearCategory: _categoryController.text.trim().isEmpty,
+                clearTagsRaw: _tagsController.text.trim().isEmpty,
+                clearPublishAt: _publishAtController.text.trim().isEmpty,
+                clearUnpublishAt: _unpublishAtController.text.trim().isEmpty,
               ),
             );
           },
@@ -2189,9 +2875,9 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
 }
 
 class _GrammarEditorDialog extends StatefulWidget {
-  const _GrammarEditorDialog({this.existing});
+  const _GrammarEditorDialog({required this.initialDetail});
 
-  final AdminGrammarRecord? existing;
+  final AdminGrammarModuleDetail initialDetail;
 
   @override
   State<_GrammarEditorDialog> createState() => _GrammarEditorDialogState();
@@ -2200,47 +2886,72 @@ class _GrammarEditorDialog extends StatefulWidget {
 class _GrammarEditorDialogState extends State<_GrammarEditorDialog> {
   late final TextEditingController _titleController;
   late final TextEditingController _fileNameController;
-  late final TextEditingController _pageCountController;
+  late final TextEditingController _sortOrderController;
   late final TextEditingController _iconController;
   late final TextEditingController _colorController;
+  late final TextEditingController _publishAtController;
+  late final TextEditingController _unpublishAtController;
+  late final TextEditingController _pagesJsonController;
   late bool _isPublished;
+  String? _validationMessage;
 
   @override
   void initState() {
     super.initState();
-    final existing = widget.existing;
-    _titleController = TextEditingController(text: existing?.title ?? '');
-    _fileNameController = TextEditingController(text: existing?.fileName ?? '');
-    _pageCountController = TextEditingController(
-      text: existing?.pageCount.toString() ?? '0',
+    final detail = widget.initialDetail;
+    _titleController = TextEditingController(text: detail.title);
+    _fileNameController = TextEditingController(text: detail.fileName);
+    _sortOrderController = TextEditingController(
+      text: detail.sortOrder.toString(),
     );
-    _iconController = TextEditingController(text: existing?.icon ?? '📘');
-    _colorController = TextEditingController(
-      text: existing?.color ?? '#4776E6',
+    _iconController = TextEditingController(text: detail.icon);
+    _colorController = TextEditingController(text: detail.color);
+    _publishAtController = TextEditingController(
+      text: _formatDateTimeInput(detail.publishAt),
     );
-    _isPublished = existing?.isPublished ?? true;
+    _unpublishAtController = TextEditingController(
+      text: _formatDateTimeInput(detail.unpublishAt),
+    );
+    _pagesJsonController = TextEditingController(
+      text: _prettyJson(
+        detail.pages.map((item) => item.toJson()).toList(growable: false),
+      ),
+    );
+    _isPublished = detail.isPublished;
   }
 
   @override
   void dispose() {
     _titleController.dispose();
     _fileNameController.dispose();
-    _pageCountController.dispose();
+    _sortOrderController.dispose();
     _iconController.dispose();
     _colorController.dispose();
+    _publishAtController.dispose();
+    _unpublishAtController.dispose();
+    _pagesJsonController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final metadata = widget.initialDetail.metadata;
     return AlertDialog(
-      title: Text(widget.existing == null ? 'Yeni Modul' : 'Modulu Duzenle'),
+      title: Text(metadata.id == null ? 'Yeni Modul' : 'Modulu Duzenle'),
       content: SizedBox(
-        width: 560,
+        width: 820,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (_validationMessage != null) ...[
+                Text(
+                  _validationMessage!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+                const SizedBox(height: 12),
+              ],
               TextField(
                 controller: _titleController,
                 decoration: const InputDecoration(labelText: 'Modul basligi'),
@@ -2257,9 +2968,9 @@ class _GrammarEditorDialogState extends State<_GrammarEditorDialog> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: TextField(
-                      controller: _pageCountController,
+                      controller: _sortOrderController,
                       decoration: const InputDecoration(
-                        labelText: 'Toplam sayfa',
+                        labelText: 'Sira',
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -2296,6 +3007,42 @@ class _GrammarEditorDialogState extends State<_GrammarEditorDialog> {
                 title: const Text('Yayinda'),
                 subtitle: const Text('Modul student uygulamasinda gorunsun.'),
               ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _publishAtController,
+                      decoration: const InputDecoration(
+                        labelText: 'Publish At',
+                        helperText: 'YYYY-MM-DD HH:MM',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      controller: _unpublishAtController,
+                      decoration: const InputDecoration(
+                        labelText: 'Unpublish At',
+                        helperText: 'YYYY-MM-DD HH:MM',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _pagesJsonController,
+                maxLines: 16,
+                decoration: const InputDecoration(
+                  labelText: 'Pages JSON',
+                  helperText:
+                      'Her page: page_number, title, html_content, examples[], tests[].',
+                ),
+              ),
+              const SizedBox(height: 16),
+              _MetadataSummary(metadata: metadata),
             ],
           ),
         ),
@@ -2309,23 +3056,48 @@ class _GrammarEditorDialogState extends State<_GrammarEditorDialog> {
           onPressed: () {
             final title = _titleController.text.trim();
             final fileName = _fileNameController.text.trim();
-            final pageCount =
-                int.tryParse(_pageCountController.text.trim()) ?? 0;
+            final sortOrder = int.tryParse(_sortOrderController.text.trim()) ?? 1;
+            final publishAt = _parseDateTimeInput(_publishAtController.text);
+            final unpublishAt = _parseDateTimeInput(_unpublishAtController.text);
             if (title.isEmpty || fileName.isEmpty) {
+              setState(() {
+                _validationMessage = 'Modul basligi ve dosya adi zorunlu.';
+              });
+              return;
+            }
+            if ((_publishAtController.text.trim().isNotEmpty && publishAt == null) ||
+                (_unpublishAtController.text.trim().isNotEmpty && unpublishAt == null)) {
+              setState(() {
+                _validationMessage = 'Publish/Unpublish alanlari gecersiz tarih formatinda.';
+              });
+              return;
+            }
+            final pagesJson = _decodeJsonArray(_pagesJsonController.text);
+            if (pagesJson == null) {
+              setState(() {
+                _validationMessage = 'Pages JSON gecersiz.';
+              });
               return;
             }
             Navigator.of(context).pop(
-              _GrammarEditorDraft(
+              widget.initialDetail.copyWith(
+                sortOrder: sortOrder,
                 title: title,
                 fileName: fileName,
-                pageCount: pageCount,
                 icon: _iconController.text.trim().isEmpty
-                    ? '📘'
+                    ? 'book'
                     : _iconController.text.trim(),
                 color: _colorController.text.trim().isEmpty
                     ? '#4776E6'
                     : _colorController.text.trim(),
                 isPublished: _isPublished,
+                publishAt: publishAt,
+                unpublishAt: unpublishAt,
+                pages: pagesJson
+                    .map(AdminGrammarPageInput.fromJson)
+                    .toList(growable: false),
+                clearPublishAt: _publishAtController.text.trim().isEmpty,
+                clearUnpublishAt: _unpublishAtController.text.trim().isEmpty,
               ),
             );
           },
@@ -2412,38 +3184,298 @@ class _WordImportDialogState extends State<_WordImportDialog> {
   }
 
   List<Map<String, dynamic>> _parseCsvRows(String rawValue) {
-    final lines = rawValue
-        .split('\n')
-        .map((item) => item.trim())
-        .where((item) => item.isNotEmpty)
-        .toList(growable: false);
-    if (lines.isEmpty) {
-      return const <Map<String, dynamic>>[];
+    return _parseWordCsvRows(rawValue);
+  }
+}
+
+class _ReadingImportDialog extends StatefulWidget {
+  const _ReadingImportDialog({required this.packs});
+
+  final List<AdminPackRecord> packs;
+
+  @override
+  State<_ReadingImportDialog> createState() => _ReadingImportDialogState();
+}
+
+class _ReadingImportDialogState extends State<_ReadingImportDialog> {
+  late final TextEditingController _csvController;
+  String? _errorText;
+
+  @override
+  void initState() {
+    super.initState();
+    _csvController = TextEditingController(
+      text: '''import_key,pack_name,title,level,category,tags_raw,is_pro,is_published,sentence_idx,sentence_en,sentence_tr,translations_json,linked_words_json
+science-1,Starter Pack,Why Sleep Matters,B1,science,"sleep, health",false,true,1,"Sleep helps the brain recover.","Uyku beynin toparlanmasina yardim eder.","[{""provider"":""manual"",""target_lang"":""tr"",""translated_text"":""Uyku beynin toparlanmasina yardim eder.""}]","[{""word_id"":"""",""en_word"":""recover"",""tr_meaning"":""toparlanmak""}]"
+science-1,Starter Pack,Why Sleep Matters,B1,science,"sleep, health",false,true,2,"It also improves memory and focus.","Ayrica hafiza ve odagi gelistirir.","[]","[]"''',
+    );
+  }
+
+  @override
+  void dispose() {
+    _csvController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Okuma CSV Yukle'),
+      content: SizedBox(
+        width: 860,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Beklenen kolonlar: import_key, pack_id veya pack_name, title, level, category, tags_raw, is_pro, is_published, sentence_idx, sentence_en, sentence_tr, translations_json, linked_words_json',
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _csvController,
+              maxLines: 16,
+              decoration: InputDecoration(
+                hintText: 'CSV verisini buraya yapistir',
+                errorText: _errorText,
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Vazgec'),
+        ),
+        FilledButton(
+          onPressed: () {
+            final parsedItems = _parseReadingCsvRows(
+              _csvController.text,
+              widget.packs,
+            );
+            if (parsedItems == null || parsedItems.isEmpty) {
+              setState(() {
+                _errorText =
+                    'Gecerli en az bir okuma kaydi gerekli. Header, sentence_idx ve sentence_en alanlarini kontrol edin.';
+              });
+              return;
+            }
+            Navigator.of(context).pop(parsedItems);
+          },
+          child: const Text('Import Et'),
+        ),
+      ],
+    );
+  }
+}
+
+List<Map<String, dynamic>> _parseWordCsvRows(String rawValue) {
+  final table = _parseCsvTable(rawValue);
+  if (table.isEmpty) {
+    return const <Map<String, dynamic>>[];
+  }
+
+  final normalizedFirstRow = table.first
+      .map(_normalizeCsvHeader)
+      .toList(growable: false);
+  final hasHeader = normalizedFirstRow.contains('en_word') &&
+      normalizedFirstRow.contains('tr_meaning');
+
+  final headers = hasHeader
+      ? normalizedFirstRow
+      : <String>[
+          'en_word',
+          'tr_meaning',
+          'pos',
+          'example_en',
+          'example_tr',
+          'level',
+          'notes',
+        ];
+  final startIndex = hasHeader ? 1 : 0;
+
+  final rows = <Map<String, dynamic>>[];
+  for (var rowIndex = startIndex; rowIndex < table.length; rowIndex++) {
+    final row = table[rowIndex];
+    if (row.every((item) => item.trim().isEmpty)) {
+      continue;
     }
 
-    final rows = <Map<String, dynamic>>[];
-    for (var index = 0; index < lines.length; index++) {
-      final line = lines[index];
-      if (index == 0 && line.toLowerCase().startsWith('en_word,')) {
-        continue;
-      }
-      final parts = line.split(',');
-      if (parts.length < 4) {
-        continue;
-      }
-      rows.add(<String, dynamic>{
-        'en_word': parts[0].trim(),
-        'tr_meaning': parts[1].trim(),
-        'pos': parts[2].trim().isEmpty ? 'other' : parts[2].trim(),
-        'example_en': parts[3].trim(),
-        'example_tr': parts.length > 4 ? _emptyAsNull(parts[4]) : null,
-        'level': parts.length > 5 ? _emptyAsNull(parts[5]) : null,
-        'notes': parts.length > 6
-            ? _emptyAsNull(parts.sublist(6).join(','))
-            : null,
-      });
+    final record = _csvRowToRecord(headers, row);
+    final enWord = record['en_word']?.trim() ?? '';
+    final trMeaning = record['tr_meaning']?.trim() ?? '';
+    final exampleEn = record['example_en']?.trim() ?? '';
+    if (enWord.isEmpty || trMeaning.isEmpty || exampleEn.isEmpty) {
+      continue;
     }
-    return rows;
+
+    rows.add(<String, dynamic>{
+      'en_word': enWord,
+      'tr_meaning': trMeaning,
+      'pos': (record['pos']?.trim().isNotEmpty ?? false)
+          ? record['pos']!.trim()
+          : 'other',
+      'example_en': exampleEn,
+      'example_tr': _emptyAsNull(record['example_tr'] ?? ''),
+      'level': _emptyAsNull(record['level'] ?? ''),
+      'notes': _emptyAsNull(record['notes'] ?? ''),
+    });
+  }
+
+  return rows;
+}
+
+List<AdminReadingDetail>? _parseReadingCsvRows(
+  String rawValue,
+  List<AdminPackRecord> packs,
+) {
+  final table = _parseCsvTable(rawValue);
+  if (table.isEmpty) {
+    return const <AdminReadingDetail>[];
+  }
+
+  final headers = table.first.map(_normalizeCsvHeader).toList(growable: false);
+  if (!headers.contains('title') ||
+      !headers.contains('sentence_idx') ||
+      !headers.contains('sentence_en')) {
+    return null;
+  }
+
+  final packById = <String, String>{
+    for (final pack in packs) pack.id: pack.id,
+  };
+  final packByName = <String, String>{
+    for (final pack in packs) pack.name.trim().toLowerCase(): pack.id,
+  };
+
+  final grouped = <String, _ReadingImportBuilder>{};
+  for (var rowIndex = 1; rowIndex < table.length; rowIndex++) {
+    final record = _csvRowToRecord(headers, table[rowIndex]);
+    if (record.values.every((value) => value.trim().isEmpty)) {
+      continue;
+    }
+
+    final title = record['title']?.trim() ?? '';
+    final idx = int.tryParse(record['sentence_idx']?.trim() ?? '');
+    final sentenceEn = record['sentence_en']?.trim() ?? '';
+    if (title.isEmpty || idx == null || sentenceEn.isEmpty) {
+      return null;
+    }
+
+    final packIdValue = _emptyAsNull(record['pack_id'] ?? '');
+    final packNameValue = _emptyAsNull(record['pack_name'] ?? '');
+    final resolvedPackId = packIdValue != null
+        ? packById[packIdValue]
+        : packNameValue == null
+        ? null
+        : packByName[packNameValue.toLowerCase()];
+    if (packIdValue != null && resolvedPackId == null) {
+      return null;
+    }
+    if (packNameValue != null && resolvedPackId == null) {
+      return null;
+    }
+
+    final importKey = _emptyAsNull(record['import_key'] ?? '') ??
+        '${resolvedPackId ?? '-'}|$title|${record['level'] ?? ''}|${record['category'] ?? ''}';
+    final builder = grouped.putIfAbsent(
+      importKey,
+      () => _ReadingImportBuilder(
+        packId: resolvedPackId,
+        title: title,
+        level: _emptyAsNull(record['level'] ?? ''),
+        category: _emptyAsNull(record['category'] ?? ''),
+        tagsRaw: _emptyAsNull(record['tags_raw'] ?? ''),
+        isPro: _parseCsvBool(record['is_pro'], fallback: false),
+        isPublished: _parseCsvBool(record['is_published'], fallback: true),
+      ),
+    );
+
+    final translationsJson = _decodeJsonArray(record['translations_json'] ?? '');
+    final linkedWordsJson = _decodeJsonArray(record['linked_words_json'] ?? '');
+    if (translationsJson == null || linkedWordsJson == null) {
+      return null;
+    }
+
+    builder.addSentence(
+      AdminReadingSentenceInput(
+        idx: idx,
+        sentenceEn: sentenceEn,
+        sentenceTr: _emptyAsNull(record['sentence_tr'] ?? ''),
+        translations: translationsJson
+            .map(AdminReadingSentenceTranslationInput.fromJson)
+            .toList(growable: false),
+      ),
+    );
+    builder.addLinkedWords(
+      linkedWordsJson
+          .map(AdminReadingWordLinkInput.fromJson)
+          .where(
+            (item) =>
+                item.enWord.trim().isNotEmpty || item.wordId.trim().isNotEmpty,
+          )
+          .toList(growable: false),
+    );
+  }
+
+  return grouped.values
+      .map((builder) => builder.build())
+      .toList(growable: false);
+}
+
+class _ReadingImportBuilder {
+  _ReadingImportBuilder({
+    required this.packId,
+    required this.title,
+    required this.level,
+    required this.category,
+    required this.tagsRaw,
+    required this.isPro,
+    required this.isPublished,
+  });
+
+  final String? packId;
+  final String title;
+  final String? level;
+  final String? category;
+  final String? tagsRaw;
+  final bool isPro;
+  final bool isPublished;
+  final Map<int, AdminReadingSentenceInput> _sentencesByIndex =
+      <int, AdminReadingSentenceInput>{};
+  final Map<String, AdminReadingWordLinkInput> _linkedWordsByKey =
+      <String, AdminReadingWordLinkInput>{};
+
+  void addSentence(AdminReadingSentenceInput item) {
+    _sentencesByIndex[item.idx] = item;
+  }
+
+  void addLinkedWords(List<AdminReadingWordLinkInput> items) {
+    for (final item in items) {
+      final key = item.wordId.trim().isNotEmpty
+          ? item.wordId.trim()
+          : item.enWord.trim().toLowerCase();
+      _linkedWordsByKey[key] = item;
+    }
+  }
+
+  AdminReadingDetail build() {
+    final sortedSentences = _sentencesByIndex.values.toList(growable: false)
+      ..sort((left, right) => left.idx.compareTo(right.idx));
+    final linkedWords = _linkedWordsByKey.values.toList(growable: false)
+      ..sort((left, right) => left.enWord.compareTo(right.enWord));
+
+    return AdminReadingDetail(
+      packId: packId,
+      title: title,
+      level: level,
+      category: category,
+      tagsRaw: tagsRaw,
+      isPro: isPro,
+      isPublished: isPublished,
+      sentences: sortedSentences,
+      linkedWords: linkedWords,
+    );
   }
 }
 
@@ -2454,66 +3486,165 @@ class _PackEditorDraft {
   final bool isPublished;
 }
 
-class _WordEditorDraft {
-  const _WordEditorDraft({
-    required this.packId,
-    required this.enWord,
-    required this.trMeaning,
-    required this.pos,
-    required this.exampleEn,
-    required this.exampleTr,
-    required this.level,
-    required this.notes,
-    required this.isPublished,
-  });
+class _MetadataSummary extends StatelessWidget {
+  const _MetadataSummary({required this.metadata});
 
-  final String packId;
-  final String enWord;
-  final String trMeaning;
-  final String pos;
-  final String exampleEn;
-  final String? exampleTr;
-  final String? level;
-  final String? notes;
-  final bool isPublished;
+  final AdminContentMetadata metadata;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Metadata',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        Text('id: ${metadata.id ?? '-'}'),
+        Text('created: ${_formatMetadataDate(metadata.createdAt)}'),
+        Text('updated: ${_formatMetadataDate(metadata.updatedAt)}'),
+        Text('created by: ${metadata.createdByEmail ?? '-'}'),
+        Text('updated by: ${metadata.updatedByEmail ?? '-'}'),
+      ],
+    );
+  }
 }
 
-class _ReadingEditorDraft {
-  const _ReadingEditorDraft({
-    required this.packId,
-    required this.packName,
-    required this.title,
-    required this.level,
-    required this.category,
-    required this.tagsRaw,
-    required this.isPublished,
-  });
-
-  final String? packId;
-  final String? packName;
-  final String title;
-  final String? level;
-  final String? category;
-  final String? tagsRaw;
-  final bool isPublished;
+String _formatMetadataDate(DateTime? value) {
+  if (value == null) {
+    return '-';
+  }
+  return _formatDateTimeInput(value);
 }
 
-class _GrammarEditorDraft {
-  const _GrammarEditorDraft({
-    required this.title,
-    required this.fileName,
-    required this.pageCount,
-    required this.icon,
-    required this.color,
-    required this.isPublished,
-  });
+String _prettyJson(Object value) {
+  return const JsonEncoder.withIndent('  ').convert(value);
+}
 
-  final String title;
-  final String fileName;
-  final int pageCount;
-  final String icon;
-  final String color;
-  final bool isPublished;
+List<List<String>> _parseCsvTable(String rawValue) {
+  final rows = <List<String>>[];
+  final row = <String>[];
+  final field = StringBuffer();
+  var inQuotes = false;
+
+  void pushField() {
+    row.add(field.toString().trim());
+    field.clear();
+  }
+
+  void pushRow() {
+    pushField();
+    final isMeaningful = row.any((item) => item.isNotEmpty);
+    if (isMeaningful) {
+      rows.add(List<String>.from(row));
+    }
+    row.clear();
+  }
+
+  for (var index = 0; index < rawValue.length; index++) {
+    final char = rawValue[index];
+    if (char == '"') {
+      final nextChar = index + 1 < rawValue.length ? rawValue[index + 1] : null;
+      if (inQuotes && nextChar == '"') {
+        field.write('"');
+        index++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (!inQuotes && char == ',') {
+      pushField();
+      continue;
+    }
+
+    if (!inQuotes && (char == '\n' || char == '\r')) {
+      if (char == '\r' &&
+          index + 1 < rawValue.length &&
+          rawValue[index + 1] == '\n') {
+        index++;
+      }
+      pushRow();
+      continue;
+    }
+
+    field.write(char);
+  }
+
+  if (field.isNotEmpty || row.isNotEmpty) {
+    pushRow();
+  }
+
+  if (rows.isNotEmpty && rows.first.isNotEmpty) {
+    rows.first[0] = rows.first[0].replaceFirst('\uFEFF', '');
+  }
+  return rows;
+}
+
+Map<String, String> _csvRowToRecord(List<String> headers, List<String> row) {
+  final record = <String, String>{};
+  for (var index = 0; index < headers.length; index++) {
+    record[headers[index]] = index < row.length ? row[index].trim() : '';
+  }
+  return record;
+}
+
+String _normalizeCsvHeader(String rawValue) {
+  return rawValue
+      .trim()
+      .toLowerCase()
+      .replaceAll(' ', '_')
+      .replaceAll('-', '_');
+}
+
+bool _parseCsvBool(String? rawValue, {required bool fallback}) {
+  final normalized = rawValue?.trim().toLowerCase();
+  return switch (normalized) {
+    '1' || 'true' || 'yes' || 'y' => true,
+    '0' || 'false' || 'no' || 'n' => false,
+    _ => fallback,
+  };
+}
+
+List<Map<String, dynamic>>? _decodeJsonArray(String rawValue) {
+  final trimmed = rawValue.trim();
+  if (trimmed.isEmpty) {
+    return const <Map<String, dynamic>>[];
+  }
+
+  final decoded = jsonDecode(trimmed);
+  if (decoded is! List) {
+    return null;
+  }
+  return decoded
+      .whereType<Map>()
+      .map(
+        (item) => item.map((key, value) => MapEntry(key.toString(), value)),
+      )
+      .toList(growable: false);
+}
+
+String _formatDateTimeInput(DateTime? value) {
+  if (value == null) {
+    return '';
+  }
+  final local = value.toLocal();
+  final month = local.month.toString().padLeft(2, '0');
+  final day = local.day.toString().padLeft(2, '0');
+  final hour = local.hour.toString().padLeft(2, '0');
+  final minute = local.minute.toString().padLeft(2, '0');
+  return '${local.year}-$month-$day $hour:$minute';
+}
+
+DateTime? _parseDateTimeInput(String rawValue) {
+  final trimmed = rawValue.trim();
+  if (trimmed.isEmpty) {
+    return null;
+  }
+  final normalized = trimmed.contains('T') ? trimmed : trimmed.replaceFirst(' ', 'T');
+  return DateTime.tryParse(normalized);
 }
 
 String? _emptyAsNull(String rawValue) {
@@ -2523,3 +3654,4 @@ String? _emptyAsNull(String rawValue) {
   }
   return trimmed;
 }
+

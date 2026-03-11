@@ -69,6 +69,41 @@ void main() {
         repository.dispose();
       },
     );
+
+    test(
+      'updateDisplayName refreshes the access context display name',
+      () async {
+        final repository = _FakeAuthRepository(
+          updateDisplayNameResult: AppSuccess<AuthSession>(
+            _authenticatedSession(
+              role: AppRole.user,
+              plan: EntitlementPlan.free,
+              email: 'user@passagetr.dev',
+              displayName: 'Ada Lovelace',
+            ),
+          ),
+        );
+
+        final controller = StudentAccessController(
+          authRepository: repository,
+          initialAccessContext: AccessContext.preview(
+            role: AppRole.user,
+            plan: EntitlementPlan.free,
+            isAnonymous: false,
+          ),
+        );
+
+        final result = await controller.updateDisplayName(
+          displayName: 'Ada Lovelace',
+        );
+
+        expect(result, isA<AppSuccess<AuthSession>>());
+        expect(controller.state.session.user?.displayName, 'Ada Lovelace');
+
+        controller.dispose();
+        repository.dispose();
+      },
+    );
   });
 }
 
@@ -76,15 +111,20 @@ class _FakeAuthRepository implements AuthRepository {
   _FakeAuthRepository({
     AppResult<AuthSession>? refreshResult,
     AppResult<AuthSession>? upgradeResult,
+    AppResult<AuthSession>? updateDisplayNameResult,
   }) : _refreshResult =
            refreshResult ?? AppSuccess<AuthSession>(AuthSession.anonymous()),
        _upgradeResult =
-           upgradeResult ?? AppSuccess<AuthSession>(AuthSession.anonymous());
+           upgradeResult ?? AppSuccess<AuthSession>(AuthSession.anonymous()),
+       _updateDisplayNameResult =
+           updateDisplayNameResult ??
+           AppSuccess<AuthSession>(AuthSession.anonymous());
 
   final StreamController<AccessContext> _controller =
       StreamController<AccessContext>.broadcast();
   final AppResult<AuthSession> _refreshResult;
   final AppResult<AuthSession> _upgradeResult;
+  final AppResult<AuthSession> _updateDisplayNameResult;
 
   @override
   Future<AuthSession> restoreSession() async => AuthSession.anonymous();
@@ -117,6 +157,20 @@ class _FakeAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<AppResult<void>> resendSignUpConfirmation({
+    required String email,
+  }) async {
+    return const AppSuccess<void>(null);
+  }
+
+  @override
+  Future<AppResult<AuthSession>> updateDisplayName({
+    required String displayName,
+  }) async {
+    return _updateDisplayNameResult;
+  }
+
+  @override
   Future<AppResult<AuthSession>> upgradeAnonymousWithEmail({
     required String email,
     required String password,
@@ -136,9 +190,15 @@ AuthSession _authenticatedSession({
   required AppRole role,
   required EntitlementPlan plan,
   required String email,
+  String? displayName,
 }) {
   return AuthSession(
-    user: AuthUser(id: '${role.value}-user', email: email, isAnonymous: false),
+    user: AuthUser(
+      id: '${role.value}-user',
+      email: email,
+      isAnonymous: false,
+      displayName: displayName,
+    ),
     claims: <String, String>{'app_role': role.value, 'plan': plan.value},
     accessToken: 'access-token',
     refreshToken: 'refresh-token',

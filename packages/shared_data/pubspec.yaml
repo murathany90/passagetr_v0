@@ -19,6 +19,7 @@ dependencies:
     path: ../shared_core
   shared_domain:
     path: ../shared_domain
+  sqlite3: ^3.1.7
   sqlite3_flutter_libs: ^0.5.39
   supabase_flutter: ^2.10.3
 

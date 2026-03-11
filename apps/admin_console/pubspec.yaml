@@ -1,7 +1,7 @@
 name: admin_console
 description: PASSAGETR v2 admin console
 publish_to: none
-version: 0.1.0+1
+version: 2.0.4+4
 resolution: workspace
 
 environment:

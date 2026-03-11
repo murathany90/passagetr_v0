@@ -216,11 +216,13 @@ class WordsStudyHeader extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.onBack,
+    this.backLabel = 'Kelimelere Don',
   });
 
   final String title;
   final String subtitle;
   final VoidCallback onBack;
+  final String backLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -232,7 +234,7 @@ class WordsStudyHeader extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: onBack,
             icon: const Icon(Icons.chevron_left_rounded),
-            label: const Text('Kelimelere Dön'),
+            label: Text(backLabel),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -263,12 +265,16 @@ class WordStudyProgressCard extends StatelessWidget {
     required this.totalCount,
     required this.mastery,
     required this.seenCount,
+    this.itemLabel = 'Kart',
+    this.footerText,
   });
 
   final int currentIndex;
   final int totalCount;
   final int mastery;
   final int seenCount;
+  final String itemLabel;
+  final String? footerText;
 
   @override
   Widget build(BuildContext context) {
@@ -282,7 +288,7 @@ class WordStudyProgressCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Kart $currentIndex / $totalCount',
+                  '$itemLabel $currentIndex / $totalCount',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
@@ -312,7 +318,7 @@ class WordStudyProgressCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Bu kelime şimdiye kadar $seenCount kez çalışıldı.',
+            footerText ?? 'Bu kelime simdiye kadar $seenCount kez calisildi.',
             style: Theme.of(
               context,
             ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),

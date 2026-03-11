@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/admin_console_models.dart';
 import '../../core/admin_providers.dart';
 
 enum AdminDestination { dashboard, users, readings, words, grammar, settings }
@@ -190,6 +191,8 @@ class _AdminSidebar extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Text(
                   accessContext.email ?? 'Admin console',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.white.withValues(alpha: 0.92),
                   ),
@@ -218,7 +221,7 @@ class _AdminSidebar extends ConsumerWidget {
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () async {
-              await ref.read(adminAccessProvider.notifier).signOut();
+              await ref.read(adminAuthStateProvider.notifier).signOut();
             },
             icon: const Icon(Icons.logout_rounded),
             label: const Text('Çıkış Yap'),
@@ -394,6 +397,48 @@ class AdminPanelCard extends StatelessWidget {
   }
 }
 
+class AdminEmptyState extends StatelessWidget {
+  const AdminEmptyState({
+    super.key,
+    required this.title,
+    required this.message,
+    this.icon = Icons.info_outline_rounded,
+  });
+
+  final String title;
+  final String message;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: tokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: tokens.secondaryText),
+          const SizedBox(height: 12),
+          Text(title, style: Theme.of(context).textTheme.titleLarge),
+          const SizedBox(height: 6),
+          Text(
+            message,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class AdminLoginPage extends ConsumerStatefulWidget {
   const AdminLoginPage({super.key});
 
@@ -425,7 +470,17 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
     final config = ref.watch(adminAppConfigProvider);
-    final controller = ref.read(adminAccessProvider.notifier);
+    final authState = ref.watch(adminAuthStateProvider);
+    final controller = ref.read(adminAuthStateProvider.notifier);
+    ref.listen<AdminAuthState>(adminAuthStateProvider, (previous, next) {
+      if (previous?.message == next.message || next.message == null) {
+        return;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(next.message!)));
+      controller.clearMessage();
+    });
 
     return Scaffold(
       backgroundColor: tokens.appBackground,
@@ -479,62 +534,107 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
                             ? 'Supabase bağlantısı aktif. Admin claim olan kullanıcı ile giriş yap.'
                             : 'Supabase env eksik. Preview admin shell kullanılacak.',
                       ),
+                      if (authState.isBootstrapping || authState.isBusy) ...[
+                        const SizedBox(height: 16),
+                        const LinearProgressIndicator(),
+                      ],
+                      if (authState.status == AdminAuthStatus.unauthorized ||
+                          authState.status ==
+                              AdminAuthStatus.sessionExpired) ...[
+                        const SizedBox(height: 16),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: tokens.surfaceMuted,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Text(
+                            authState.message ??
+                                'Bu oturum admin console erisimi icin yeterli degil.',
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 18),
                       TextField(
                         controller: _emailController,
+                        enabled: !authState.isBusy,
                         decoration: const InputDecoration(labelText: 'E-posta'),
                       ),
                       const SizedBox(height: 16),
                       TextField(
                         controller: _passwordController,
+                        enabled: !authState.isBusy,
                         obscureText: true,
                         decoration: const InputDecoration(labelText: 'Şifre'),
                       ),
                       const SizedBox(height: 20),
-                      Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
-                        children: [
-                          FilledButton(
-                            onPressed: () async {
-                              final messenger = ScaffoldMessenger.of(context);
-                              final result = await controller.signInWithEmail(
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text,
-                              );
-                              if (!mounted) {
-                                return;
-                              }
-                              final message = switch (result) {
-                                AppSuccess<AuthSession>() =>
-                                  'Giriş tamamlandı. Admin claim varsa dashboard açılır.',
-                                AppFailure<AuthSession>() => result.message,
-                              };
-                              messenger.showSnackBar(
-                                SnackBar(content: Text(message)),
-                              );
-                            },
-                            child: const Text('Admin Girişi'),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: authState.isBusy
+                              ? null
+                              : () async {
+                                  await controller.signInWithEmail(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text,
+                                  );
+                                },
+                          child: Text(
+                            authState.isBusy
+                                ? 'Giris kontrol ediliyor...'
+                                : 'Admin Girisi',
                           ),
-                          FilledButton.tonal(
-                            onPressed: () async {
-                              final messenger = ScaffoldMessenger.of(context);
-                              final result = await controller.refreshSession();
-                              if (!mounted) {
-                                return;
-                              }
-                              final message = switch (result) {
-                                AppSuccess<AuthSession>() =>
-                                  'Claimler yenilendi.',
-                                AppFailure<AuthSession>() => result.message,
-                              };
-                              messenger.showSnackBar(
-                                SnackBar(content: Text(message)),
-                              );
-                            },
-                            child: const Text('Claimleri Yenile'),
-                          ),
-                        ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Wrap(
+                          spacing: 12,
+                          runSpacing: 12,
+                          children: [
+                            FilledButton(
+                              onPressed: () async {
+                                final messenger = ScaffoldMessenger.of(context);
+                                final result = await controller.signInWithEmail(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text,
+                                );
+                                if (!mounted) {
+                                  return;
+                                }
+                                final message = switch (result) {
+                                  AppSuccess<AuthSession>() =>
+                                    'Giriş tamamlandı. Admin claim varsa dashboard açılır.',
+                                  AppFailure<AuthSession>() => result.message,
+                                };
+                                messenger.showSnackBar(
+                                  SnackBar(content: Text(message)),
+                                );
+                              },
+                              child: const Text('Admin Girişi'),
+                            ),
+                            FilledButton.tonal(
+                              onPressed: () async {
+                                final messenger = ScaffoldMessenger.of(context);
+                                final result = await controller
+                                    .refreshSession();
+                                if (!mounted) {
+                                  return;
+                                }
+                                final message = switch (result) {
+                                  AppSuccess<AuthSession>() =>
+                                    'Claimler yenilendi.',
+                                  AppFailure<AuthSession>() => result.message,
+                                };
+                                messenger.showSnackBar(
+                                  SnackBar(content: Text(message)),
+                                );
+                              },
+                              child: const Text('Claimleri Yenile'),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

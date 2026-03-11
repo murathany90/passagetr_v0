@@ -14,7 +14,7 @@ class AppTheme {
       surfaceBorder: Color(0xFFE3E8F1),
       surfaceShadow: Color(0x140F172A),
       primaryText: Color(0xFF18243D),
-      secondaryText: Color(0xFF7D8CAA),
+      secondaryText: Color(0xFF5A6D8B),
       accent: Color(0xFF1B2D63),
       accentSoft: Color(0xFFDCE4F4),
       hero: Color(0xFFFF6A00),

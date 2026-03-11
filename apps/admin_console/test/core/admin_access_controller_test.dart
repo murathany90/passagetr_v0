@@ -28,9 +28,9 @@ void main() {
         final result = await controller.refreshSession();
 
         expect(result, isA<AppSuccess<AuthSession>>());
-        expect(controller.state.canAccessAdmin, isTrue);
-        expect(controller.state.canViewPremium, isTrue);
-        expect(controller.state.email, 'admin@passagetr.dev');
+        expect(controller.state.accessContext.canAccessAdmin, isTrue);
+        expect(controller.state.accessContext.canViewPremium, isTrue);
+        expect(controller.state.accessContext.email, 'admin@passagetr.dev');
 
         controller.dispose();
         repository.dispose();
@@ -51,8 +51,8 @@ void main() {
       final result = await controller.signOut();
 
       expect(result, isA<AppSuccess<void>>());
-      expect(controller.state.isAnonymous, isTrue);
-      expect(controller.state.canAccessAdmin, isFalse);
+      expect(controller.state.accessContext.isAnonymous, isTrue);
+      expect(controller.state.accessContext.canAccessAdmin, isFalse);
 
       controller.dispose();
       repository.dispose();
@@ -95,6 +95,20 @@ class _FakeAuthRepository implements AuthRepository {
   Future<AppResult<AuthSession>> signInWithEmail({
     required String email,
     required String password,
+  }) async {
+    return AppFailure<AuthSession>('not used in test');
+  }
+
+  @override
+  Future<AppResult<void>> resendSignUpConfirmation({
+    required String email,
+  }) async {
+    return const AppSuccess<void>(null);
+  }
+
+  @override
+  Future<AppResult<AuthSession>> updateDisplayName({
+    required String displayName,
   }) async {
     return AppFailure<AuthSession>('not used in test');
   }
