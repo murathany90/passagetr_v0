@@ -177,13 +177,15 @@ class _Phase4FakeProgressRepository implements ProgressRepository {
 class _FakeReadingEngagementRepository implements ReadingEngagementRepository {
   _FakeReadingEngagementRepository({
     List<ReadingEngagement>? seedEngagements,
-    this.bookmarkResult = const AppSuccess<void>(null),
-    this.favoriteResult = const AppSuccess<void>(null),
-  }) : _seedEngagements = seedEngagements ?? const <ReadingEngagement>[];
+    AppResult<void> bookmarkResult = const AppSuccess<void>(null),
+    AppResult<void> favoriteResult = const AppSuccess<void>(null),
+  })  : _seedEngagements = seedEngagements ?? const <ReadingEngagement>[],
+        _bookmarkResult = bookmarkResult,
+        _favoriteResult = favoriteResult;
 
   final List<ReadingEngagement> _seedEngagements;
-  final AppResult<void> bookmarkResult;
-  final AppResult<void> favoriteResult;
+  final AppResult<void> _bookmarkResult;
+  final AppResult<void> _favoriteResult;
   final List<(String, bool)> bookmarkWrites = <(String, bool)>[];
   final List<(String, bool)> favoriteWrites = <(String, bool)>[];
 
@@ -196,13 +198,13 @@ class _FakeReadingEngagementRepository implements ReadingEngagementRepository {
     bool isBookmarked,
   ) async {
     bookmarkWrites.add((passageId, isBookmarked));
-    return bookmarkResult;
+    return _bookmarkResult;
   }
 
   @override
   Future<AppResult<void>> setFavorite(String passageId, bool isFavorite) async {
     favoriteWrites.add((passageId, isFavorite));
-    return favoriteResult;
+    return _favoriteResult;
   }
 }
 
