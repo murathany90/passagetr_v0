@@ -16,6 +16,12 @@ jobs:
         with:
           channel: stable
 
+      - name: Create mock env file
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path env
+          Set-Content -Path env/app.web.json -Value "{}"
+
       - name: Flutter pub get
         shell: pwsh
         run: flutter pub get
