@@ -9,6 +9,28 @@ Zorunlu kural:
 - Web sidebar chip ve dar layout/APK `Profil/Giris` release kartinin ayni shared metadata kaynagindan beslendigini deploy oncesi dogrula.
 - Deploy scriptleri bu dosyada guncel surum etiketi yoksa fail etmelidir.
 
+## v2.0.5 - 2026-03-12
+
+Baslik:
+Okuma odak kelimeleri ve passage gecisi
+
+Notlar:
+- Okuma detay sayfasi acilisinda content refresh tetiklenir; stale local cache odak kelime panelini bos birakmaz.
+- `studentReadingsProvider`, `studentReadingSectionsProvider` ve `studentReadingFocusWordsProvider` ayni reading icin birlikte invalidate edilir.
+- Okuma detayinin altina minimal `Onceki parca / Sonraki parca` gecis karti eklendi.
+- Student web ve release APK bu reading detail duzeltmeleriyle yeniden deploy edildi.
+
+## v2.0.6 - 2026-03-12
+
+Baslik:
+Analytics kaynagi seffafligi ve haftalik bar grafik
+
+Notlar:
+- `fetch_user_daily_stats` kullanilamadiginda analytics fallback'i sessizce gizlenmez; home ve premium ekranlari `Tahmini Veri` etiketi gosterir.
+- Analytics snapshot modeli veri kaynaginin `remote` veya `estimated` oldugunu tasir ve fallback nedeni loglanir.
+- Ana sayfadaki haftalik ilerleme karti artik bugunun degil gercek haftanin toplam kelime ve oturum sayilarini gosterir.
+- Haftalik trend cizgisi kaldirildi; yerine ayni gunluk aktivite skorlarini gosteren bar grafik geldi.
+
 ## v2.0.3 - 2026-03-11
 
 Baslik:

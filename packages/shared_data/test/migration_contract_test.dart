@@ -121,22 +121,25 @@ void main() {
     expect(sql, contains('seq_no > 50'));
   });
 
-  test('phase 5.5 admin hardening migration contains paged RPCs and settings', () {
-    final migrationFile = File(
-      '${migrationDir.path}${Platform.pathSeparator}202603110031_admin_console_hardening_p1_p2.sql',
-    );
-    final sql = migrationFile.readAsStringSync();
+  test(
+    'phase 5.5 admin hardening migration contains paged RPCs and settings',
+    () {
+      final migrationFile = File(
+        '${migrationDir.path}${Platform.pathSeparator}202603110031_admin_console_hardening_p1_p2.sql',
+      );
+      final sql = migrationFile.readAsStringSync();
 
-    expect(sql, contains('create table if not exists public.app_settings'));
-    expect(sql, contains('admin_list_users_paged'));
-    expect(sql, contains('admin_bulk_set_user_access'));
-    expect(sql, contains('admin_get_settings'));
-    expect(sql, contains('admin_upsert_settings'));
-    expect(sql, contains('admin_fetch_dashboard_snapshot'));
-    expect(sql, contains('admin_assign_invited_user_access'));
-    expect(sql, contains('publish_at timestamptz'));
-    expect(sql, contains('unpublish_at timestamptz'));
-  });
+      expect(sql, contains('create table if not exists public.app_settings'));
+      expect(sql, contains('admin_list_users_paged'));
+      expect(sql, contains('admin_bulk_set_user_access'));
+      expect(sql, contains('admin_get_settings'));
+      expect(sql, contains('admin_upsert_settings'));
+      expect(sql, contains('admin_fetch_dashboard_snapshot'));
+      expect(sql, contains('admin_assign_invited_user_access'));
+      expect(sql, contains('publish_at timestamptz'));
+      expect(sql, contains('unpublish_at timestamptz'));
+    },
+  );
 
   test('phase 5.6 admin stabilization migration contains detail RPCs', () {
     final migrationFile = File(
@@ -164,5 +167,21 @@ void main() {
     expect(sql, contains('admin_import_readings'));
     expect(sql, contains('admin_upsert_reading_detail'));
     expect(sql, contains('admin.reading.imported'));
+  });
+
+  test('phase 5.8 focus word bulk migration contains repaired RPCs', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603120035_admin_focus_word_bulk_and_filter_fixes.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_suggest_reading_focus_words_v2'));
+    expect(sql, contains('admin_autolink_all_reading_focus_words_v2'));
+    expect(sql, contains('sample_failures'));
+    expect(sql, contains('admin_list_reading_passages_paged'));
+    expect(
+      sql,
+      contains('coalesce((select count(*)::integer from filtered), 0)'),
+    );
   });
 }

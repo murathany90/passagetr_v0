@@ -68,6 +68,19 @@ abstract interface class AdminContentRepository {
     AdminReadingDetail detail,
   );
 
+  Future<AppResult<AdminReadingDetail>> autoAssignReadingFocusWords({
+    required String readingId,
+    int limit = 10,
+    bool replaceExisting = true,
+  });
+
+  Future<AppResult<AdminBulkReadingFocusWordAssignmentResult>>
+  autoAssignFocusWordsForAllReadings({
+    int limit = 10,
+    bool onlyMissing = true,
+    bool includeUnpublished = true,
+  });
+
   Future<AppResult<void>> deleteReading({required String readingId});
 
   Future<AppResult<AdminGrammarModuleDetail>> fetchGrammarModuleDetail({

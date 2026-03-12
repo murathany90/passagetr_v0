@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
 import 'package:shared_domain/shared_domain.dart';
@@ -17,24 +19,41 @@ class StudentAnalyticsService {
 
   static const int goalTargetScore = 12;
 
-  Future<List<StudentDailyStat>> loadDailyStats({
+  Future<StudentAnalyticsLoadResult> loadDailyStats({
     required AccessContext accessContext,
     int days = 7,
   }) async {
-    final remote = await _loadRemoteDailyStats(
+    final remote = await _tryLoadRemoteDailyStats(
       accessContext: accessContext,
       days: days,
     );
-    if (remote.isNotEmpty) {
-      return _ensureSevenDayShape(remote, days: days);
+    if (remote.stats.isNotEmpty) {
+      return StudentAnalyticsLoadResult(
+        stats: _ensureSevenDayShape(remote.stats, days: days),
+        source: StudentAnalyticsSource.remote,
+      );
     }
 
     final fallback = await _buildFallbackDailyStats(days: days);
-    return _ensureSevenDayShape(fallback, days: days);
+    final fallbackReason =
+        remote.fallbackReason ?? 'remote_unavailable_unknown_reason';
+    final actor =
+        accessContext.email?.trim().isNotEmpty == true
+        ? accessContext.email!.trim()
+        : accessContext.userId ?? 'anonymous';
+    developer.log(
+      'Using estimated analytics for $actor: $fallbackReason',
+      name: 'StudentAnalyticsService',
+    );
+    return StudentAnalyticsLoadResult(
+      stats: _ensureSevenDayShape(fallback, days: days),
+      source: StudentAnalyticsSource.estimated,
+      fallbackReason: fallbackReason,
+    );
   }
 
-  StudentAnalyticsSnapshot buildSnapshot(List<StudentDailyStat> stats) {
-    final ordered = stats.toList(growable: false)
+  StudentAnalyticsSnapshot buildSnapshot(StudentAnalyticsLoadResult result) {
+    final ordered = result.stats.toList(growable: false)
       ..sort((a, b) => a.date.compareTo(b.date));
     final today = ordered.isEmpty
         ? StudentDailyStat(
@@ -80,22 +99,31 @@ class StudentAnalyticsService {
       weeklyTrend: ordered
           .map((item) => (item.activityScore / maxScore).clamp(0, 1).toDouble())
           .toList(growable: false),
+      source: result.source,
+      fallbackReason: result.fallbackReason,
     );
   }
 
-  Future<List<StudentDailyStat>> _loadRemoteDailyStats({
+  Future<({List<StudentDailyStat> stats, String? fallbackReason})>
+  _tryLoadRemoteDailyStats({
     required AccessContext accessContext,
     required int days,
   }) async {
     if (!_config.supabaseEnabled || !accessContext.isAuthenticated) {
-      return const <StudentDailyStat>[];
+      return (
+        stats: const <StudentDailyStat>[],
+        fallbackReason: 'supabase_disabled_or_user_not_authenticated',
+      );
     }
 
     try {
       await SupabaseBootstrap.initialize(_config);
       final session = Supabase.instance.client.auth.currentSession;
       if (session == null) {
-        return const <StudentDailyStat>[];
+        return (
+          stats: const <StudentDailyStat>[],
+          fallbackReason: 'missing_active_session',
+        );
       }
 
       final rows =
@@ -105,7 +133,7 @@ class StudentAnalyticsService {
               ))
               as List<dynamic>;
 
-      return rows
+      final stats = rows
           .whereType<Map<String, dynamic>>()
           .map((row) {
             final date =
@@ -121,8 +149,18 @@ class StudentAnalyticsService {
             );
           })
           .toList(growable: false);
+      if (stats.isEmpty) {
+        return (
+          stats: const <StudentDailyStat>[],
+          fallbackReason: 'remote_daily_stats_empty',
+        );
+      }
+      return (stats: stats, fallbackReason: null);
     } catch (_) {
-      return const <StudentDailyStat>[];
+      return (
+        stats: const <StudentDailyStat>[],
+        fallbackReason: 'remote_daily_stats_rpc_failed',
+      );
     }
   }
 

@@ -82,4 +82,67 @@ void main() {
       'Second sentence.',
     ]);
   });
+
+  test('loads focus words by joining passage links with synced words', () async {
+    final database = FakeLocalSyncStore();
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_words',
+        entityId: 'link-2',
+        payloadJson: '{"passage_id":"reading-1","word_id":"word-2"}',
+        updatedAt: DateTime.utc(2026, 3, 10, 18, 7),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_words',
+        entityId: 'link-1',
+        payloadJson: '{"passage_id":"reading-1","word_id":"word-1"}',
+        updatedAt: DateTime.utc(2026, 3, 10, 18, 6),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'words',
+        entityType: 'words',
+        entityId: 'word-1',
+        payloadJson:
+            '{"id":"word-1","en_word":"ocean","tr_meaning":"okyanus","pos":"noun"}',
+        updatedAt: DateTime.utc(2026, 3, 10, 18, 0),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'words',
+        entityType: 'words',
+        entityId: 'word-2',
+        payloadJson:
+            '{"id":"word-2","en_word":"mystery","tr_meaning":"gizem","pos":"noun"}',
+        updatedAt: DateTime.utc(2026, 3, 10, 18, 1),
+      ),
+    );
+
+    final repository = FoundationReadingRepository(
+      database: database,
+      config: const AppConfig(
+        appName: 'PASSAGETR',
+        environment: AppEnvironment.dev,
+        platformMode: PlatformMode.mobile,
+        supabaseUrl: '',
+        supabaseAnonKey: '',
+        adminConsoleUrl: '',
+        adminPreviewEnabled: true,
+      ),
+    );
+
+    final focusWords = await repository.fetchFocusWords('reading-1');
+
+    expect(
+      focusWords.map((item) => item.enWord).toList(growable: false),
+      <String>['ocean', 'mystery'],
+    );
+    expect(focusWords.first.trMeaning, 'okyanus');
+  });
 }

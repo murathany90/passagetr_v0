@@ -4,6 +4,7 @@ export 'src/entities/dictionary_entry.dart';
 export 'src/entities/grammar_progress.dart';
 export 'src/entities/grammar_module.dart';
 export 'src/entities/grammar_module_detail.dart';
+export 'src/entities/reading_focus_word.dart';
 export 'src/entities/reading_passage.dart';
 export 'src/entities/reading_sentence.dart';
 export 'src/entities/user_profile.dart';

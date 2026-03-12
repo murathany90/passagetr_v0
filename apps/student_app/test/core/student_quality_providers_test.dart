@@ -205,6 +205,12 @@ class _FakeWordRepository implements WordRepository {
 
   @override
   Future<List<WordEntry>> fetchWords({String? packId}) async => words;
+
+  @override
+  Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
+    final idSet = ids.toSet();
+    return words.where((item) => idSet.contains(item.id)).toList(growable: false);
+  }
 }
 
 class _FakeReadingRepository implements ReadingRepository {
@@ -218,6 +224,11 @@ class _FakeReadingRepository implements ReadingRepository {
   @override
   Future<List<ReadingSentence>> fetchReadingSections(String passageId) async {
     return const <ReadingSentence>[];
+  }
+
+  @override
+  Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
+    return const <ReadingFocusWord>[];
   }
 
   @override

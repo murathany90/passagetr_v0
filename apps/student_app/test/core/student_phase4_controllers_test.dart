@@ -145,6 +145,11 @@ class _FakeReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
+    return const <ReadingFocusWord>[];
+  }
+
+  @override
   Future<String?> fetchSentenceTranslation(String passageId, int idx) async {
     return null;
   }

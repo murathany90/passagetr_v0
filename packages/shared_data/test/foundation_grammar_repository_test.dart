@@ -107,12 +107,67 @@ void main() {
       expect(detail!.module.title, 'Tense System');
       expect(detail.pages, hasLength(2));
       expect(detail.pages.first.title, 'Present Simple');
-      expect(detail.pages.first.examples.single.english, 'She works every day.');
+      expect(
+        detail.pages.first.examples.single.english,
+        'She works every day.',
+      );
       expect(
         detail.pages.last.questions.single.correctAnswer,
         'I have finished my homework.',
       );
     });
+
+    test(
+      'fetchModuleDetail preserves labeled options from keyed question maps',
+      () async {
+        final database = FakeLocalSyncStore();
+        await database.upsertContentEntity(
+          ContentEntityRecord(
+            scope: 'grammar',
+            entityType: 'gramer_modulleri',
+            entityId: '56',
+            payloadJson:
+                '{"id":56,"sira":1,"baslik":"Basics","toplam_sayfa":1,"icon":"menu_book","renk":"#2563EB","is_published":true}',
+            updatedAt: DateTime.utc(2026, 3, 11, 10, 0),
+          ),
+        );
+        await database.upsertContentEntity(
+          ContentEntityRecord(
+            scope: 'grammar',
+            entityType: 'gramer_sayfalari',
+            entityId: '1169',
+            payloadJson:
+                '{"id":1169,"modul_id":56,"sayfa_no":1,"baslik":"Sentence basics","icerik_html":"<p>Content</p>","kelime_sayisi":12,"is_published":true}',
+            updatedAt: DateTime.utc(2026, 3, 11, 10, 1),
+          ),
+        );
+        await database.upsertContentEntity(
+          ContentEntityRecord(
+            scope: 'grammar',
+            entityType: 'gramer_testler',
+            entityId: '1183',
+            payloadJson:
+                '{"id":1183,"sayfa_id":1169,"sira":0,"soru":"How many noun phrases?","secenekler_json":{"A":"2","B":"3","C":"4","D":"5"},"dogru_cevap":"B) 3","aciklama":"Three noun phrases.","is_published":true}',
+            updatedAt: DateTime.utc(2026, 3, 11, 10, 2),
+          ),
+        );
+
+        final repository = FoundationGrammarRepository(
+          database: database,
+          config: _testConfig,
+        );
+
+        final detail = await repository.fetchModuleDetail(56);
+
+        expect(detail, isNotNull);
+        expect(detail!.pages.single.questions.single.options, <String>[
+          'A) 2',
+          'B) 3',
+          'C) 4',
+          'D) 5',
+        ]);
+      },
+    );
   });
 }
 

@@ -244,6 +244,16 @@ void main() {
                   ),
                 ],
               },
+              focusWordsByPassage: const <String, List<ReadingFocusWord>>{
+                'reading-live': <ReadingFocusWord>[
+                  ReadingFocusWord(
+                    wordId: 'word-1',
+                    enWord: 'orbit',
+                    trMeaning: 'yorunge',
+                    pos: 'noun',
+                  ),
+                ],
+              },
             ),
           ),
         ],
@@ -261,6 +271,8 @@ void main() {
         ),
         findsNothing,
       );
+      expect(find.text('orbit'), findsOneWidget);
+      expect(find.text('yorunge'), findsOneWidget);
 
       final firstWordFinder = find.text('First');
       await tester.ensureVisible(firstWordFinder);
@@ -270,6 +282,232 @@ void main() {
       expect(find.text('Birinci canli cumle.'), findsOneWidget);
     },
   );
+
+  testWidgets('reading detail shows previous and next passage shortcuts', (
+    tester,
+  ) async {
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/readings/reading-2',
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/readings',
+          builder: (context, state) => const StudentReadingsPage(),
+        ),
+        GoRoute(
+          path: '/readings/:readingId',
+          builder: (context, state) => StudentReadingDetailPage(
+            readingId: state.pathParameters['readingId']!,
+          ),
+        ),
+      ],
+      overrides: <Override>[
+        studentReadingRepositoryProvider.overrideWithValue(
+          _FakeReadingRepository(
+            readings: const <ReadingPassage>[
+              ReadingPassage(
+                id: 'reading-1',
+                title: '001-Alpha',
+                level: 'A1',
+                category: 'Daily Life',
+              ),
+              ReadingPassage(
+                id: 'reading-2',
+                title: '002-Beta',
+                level: 'A2',
+                category: 'Daily Life',
+              ),
+              ReadingPassage(
+                id: 'reading-3',
+                title: '003-Gamma',
+                level: 'B1',
+                category: 'Work',
+              ),
+            ],
+            sectionsByPassage: const <String, List<ReadingSentence>>{
+              'reading-1': <ReadingSentence>[
+                ReadingSentence(
+                  passageId: 'reading-1',
+                  index: 1,
+                  englishText: 'Alpha sentence.',
+                ),
+              ],
+              'reading-2': <ReadingSentence>[
+                ReadingSentence(
+                  passageId: 'reading-2',
+                  index: 1,
+                  englishText: 'Beta sentence.',
+                ),
+              ],
+              'reading-3': <ReadingSentence>[
+                ReadingSentence(
+                  passageId: 'reading-3',
+                  index: 1,
+                  englishText: 'Gamma sentence.',
+                ),
+              ],
+            },
+          ),
+        ),
+      ],
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Onceki parca'), findsOneWidget);
+    expect(find.text('Sonraki parca'), findsOneWidget);
+    expect(find.text('001-Alpha'), findsOneWidget);
+    expect(find.text('003-Gamma'), findsOneWidget);
+
+    final nextButtonFinder = find.byKey(
+      const ValueKey<String>('reading_nav_next_reading-3'),
+    );
+    await tester.ensureVisible(nextButtonFinder);
+    await tester.tap(nextButtonFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('003-Gamma'), findsWidgets);
+    expect(
+      find.byKey(const ValueKey<String>('reading_nav_prev_reading-2')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets(
+    'focus words open the same popup and related words resolve to card or dictionary',
+    (tester) async {
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/readings/reading-focus',
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/readings',
+          builder: (context, state) => const StudentReadingsPage(),
+        ),
+        GoRoute(
+          path: '/readings/:readingId',
+          builder: (context, state) => StudentReadingDetailPage(
+            readingId: state.pathParameters['readingId']!,
+          ),
+        ),
+      ],
+      overrides: <Override>[
+        studentReadingRepositoryProvider.overrideWithValue(
+          _FakeReadingRepository(
+            readings: const <ReadingPassage>[
+              ReadingPassage(
+                id: 'reading-focus',
+                title: '102-Focus Passage',
+                level: 'B1',
+                category: 'Science',
+              ),
+            ],
+            sectionsByPassage: const <String, List<ReadingSentence>>{
+              'reading-focus': <ReadingSentence>[
+                ReadingSentence(
+                  passageId: 'reading-focus',
+                  index: 1,
+                  englishText: 'Orbit shapes every mission.',
+                  turkishText: 'Yorunge her gorevi sekillendirir.',
+                ),
+              ],
+            },
+            focusWordsByPassage: const <String, List<ReadingFocusWord>>{
+              'reading-focus': <ReadingFocusWord>[
+                ReadingFocusWord(
+                  wordId: 'word-1',
+                  enWord: 'orbit',
+                  trMeaning: 'yorunge',
+                  pos: 'n.',
+                ),
+              ],
+            },
+          ),
+        ),
+        studentWordRepositoryProvider.overrideWithValue(
+          const _FakeWordRepository(<WordEntry>[
+            WordEntry(
+              id: 'word-1',
+              packId: 'pack-1',
+              enWord: 'orbit',
+              trMeaning: 'yorunge',
+              pos: 'n.',
+              exampleEn: 'The satellite stays in orbit.',
+              exampleTr: 'Uydu yorungede kalir.',
+              synonymsRaw: 'path, track',
+              antonymsRaw: 'standstill',
+            ),
+            WordEntry(
+              id: 'word-2',
+              packId: 'pack-1',
+              enWord: 'path',
+              trMeaning: 'rota',
+              pos: 'n.',
+              exampleEn: 'The rover followed a narrow path.',
+              exampleTr: 'Gezgin dar bir rotayi takip etti.',
+            ),
+          ]),
+        ),
+        studentDictionaryRepositoryProvider.overrideWithValue(
+          const _FakeDictionaryRepository(<String, DictionaryEntry?>{
+            'standstill': DictionaryEntry(
+              enWord: 'standstill',
+              trMeaning: 'durma noktasi',
+              pos: 'n.',
+            ),
+          }),
+        ),
+      ],
+    );
+
+    await tester.pumpAndSettle();
+
+    final focusTokenFinder = find.text('Orbit');
+    await tester.ensureVisible(focusTokenFinder);
+    await tester.tap(focusTokenFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('The satellite stays in orbit.'), findsOneWidget);
+    expect(find.text('Uydu yorungede kalir.'), findsOneWidget);
+    expect(find.text('path'), findsOneWidget);
+    expect(find.text('standstill'), findsOneWidget);
+
+    await tester.tap(find.text('path'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('rota'), findsOneWidget);
+    expect(find.text('The rover followed a narrow path.'), findsOneWidget);
+    expect(find.text('Uydu yorungede kalir.'), findsNothing);
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word_card_dismiss_area')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('rota'), findsNothing);
+
+    final focusPanelFinder = find.text('orbit').last;
+    await tester.ensureVisible(focusPanelFinder);
+    await tester.tap(focusPanelFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('The satellite stays in orbit.'), findsOneWidget);
+    expect(find.text('Uydu yorungede kalir.'), findsOneWidget);
+
+    await tester.tap(find.text('standstill'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sozluk cevirisi'), findsOneWidget);
+    expect(find.text('durma noktasi'), findsOneWidget);
+    expect(find.text('The satellite stays in orbit.'), findsNothing);
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word_card_close_button')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('durma noktasi'), findsNothing);
+  });
 
   testWidgets('words page hides zero-word packs from student listing', (
     tester,
@@ -330,6 +568,9 @@ Future<void> _pumpStudentBehaviorApp(
         studentReadingRepositoryProvider.overrideWithValue(
           const FoundationReadingRepository.preview(),
         ),
+        studentSyncRepositoryProvider.overrideWithValue(
+          const FoundationSyncRepository.preview(),
+        ),
         studentProgressRepositoryProvider.overrideWithValue(
           const FoundationProgressRepository.preview(),
         ),
@@ -353,14 +594,31 @@ class _FakePackRepository implements PackRepository {
   Future<List<ContentPack>> fetchPacks() async => packs;
 }
 
+class _FakeWordRepository implements WordRepository {
+  const _FakeWordRepository(this.words);
+
+  final List<WordEntry> words;
+
+  @override
+  Future<List<WordEntry>> fetchWords({String? packId}) async => words;
+
+  @override
+  Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
+    final idSet = ids.toSet();
+    return words.where((item) => idSet.contains(item.id)).toList(growable: false);
+  }
+}
+
 class _FakeReadingRepository implements ReadingRepository {
   const _FakeReadingRepository({
     this.readings = const <ReadingPassage>[],
     this.sectionsByPassage = const <String, List<ReadingSentence>>{},
+    this.focusWordsByPassage = const <String, List<ReadingFocusWord>>{},
   });
 
   final List<ReadingPassage> readings;
   final Map<String, List<ReadingSentence>> sectionsByPassage;
+  final Map<String, List<ReadingFocusWord>> focusWordsByPassage;
 
   @override
   Future<List<ReadingPassage>> fetchReadings() async => readings;
@@ -368,6 +626,11 @@ class _FakeReadingRepository implements ReadingRepository {
   @override
   Future<List<ReadingSentence>> fetchReadingSections(String passageId) async {
     return sectionsByPassage[passageId] ?? const <ReadingSentence>[];
+  }
+
+  @override
+  Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
+    return focusWordsByPassage[passageId] ?? const <ReadingFocusWord>[];
   }
 
   @override

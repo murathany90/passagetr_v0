@@ -44,7 +44,7 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
             (await client
                     .from('words')
                     .select(
-                      'id,pack_id,en_word,tr_meaning,pos,example_en,example_tr,level,tags_raw,notes,is_published,is_pro,updated_at,created_at',
+                      'id,pack_id,en_word,tr_meaning,pos,example_en,example_tr,synonyms_raw,antonyms_raw,level,tags_raw,notes,is_published,is_pro,updated_at,created_at',
                     ))
                 as List<dynamic>,
       ),

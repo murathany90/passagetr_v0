@@ -15,7 +15,7 @@ import 'student_word_progress_controller.dart';
 
 final studentAppConfigProvider = Provider<AppConfig>((ref) {
   return AppConfig.fromEnvironment(
-    appName: 'PASSAGETR Student',
+    appName: 'Passagetr',
     platformMode: kIsWeb ? PlatformMode.web : PlatformMode.mobile,
   );
 });
@@ -243,6 +243,35 @@ final studentReadingSectionsProvider =
           .fetchReadingSections(readingId);
     });
 
+final studentReadingFocusWordsProvider =
+    FutureProvider.family<List<ReadingFocusWord>, String>((ref, readingId) {
+      return ref
+          .watch(studentReadingRepositoryProvider)
+          .fetchFocusWords(readingId);
+    });
+
+final studentReadingWordCardsProvider =
+    FutureProvider.family<Map<String, WordEntry>, String>((ref, readingId) async {
+      final focusWords = await ref.watch(
+        studentReadingFocusWordsProvider(readingId).future,
+      );
+      final wordIds = focusWords
+          .map((item) => item.wordId.trim())
+          .where((item) => item.isNotEmpty)
+          .toSet()
+          .toList(growable: false);
+      if (wordIds.isEmpty) {
+        return const <String, WordEntry>{};
+      }
+
+      final items = await ref
+          .watch(studentWordRepositoryProvider)
+          .fetchWordsByIds(wordIds);
+      return <String, WordEntry>{
+        for (final item in items) item.id: item,
+      };
+    });
+
 final _readingNumericPrefixPattern = RegExp(r'^\d+');
 
 int _compareReadingPassages(ReadingPassage left, ReadingPassage right) {
@@ -323,7 +352,9 @@ final studentAnalyticsServiceProvider = Provider<StudentAnalyticsService>(
   ),
 );
 
-final studentDailyStatsProvider = FutureProvider<List<StudentDailyStat>>((ref) {
+final studentDailyStatsProvider = FutureProvider<StudentAnalyticsLoadResult>((
+  ref,
+) {
   return ref
       .watch(studentAnalyticsServiceProvider)
       .loadDailyStats(accessContext: ref.watch(studentAccessProvider));
@@ -331,8 +362,8 @@ final studentDailyStatsProvider = FutureProvider<List<StudentDailyStat>>((ref) {
 
 final studentAnalyticsSnapshotProvider =
     FutureProvider<StudentAnalyticsSnapshot>((ref) async {
-      final stats = await ref.watch(studentDailyStatsProvider.future);
-      return ref.watch(studentAnalyticsServiceProvider).buildSnapshot(stats);
+      final result = await ref.watch(studentDailyStatsProvider.future);
+      return ref.watch(studentAnalyticsServiceProvider).buildSnapshot(result);
     });
 
 final studentWordSummaryProvider = Provider<StudentWordSummary>((ref) {
@@ -472,6 +503,18 @@ final studentTodaySentenceCountProvider = Provider<int>((ref) {
       );
 });
 
+final studentWeeklyWordCountProvider = Provider<int>((ref) {
+  return ref
+      .watch(studentAnalyticsSnapshotProvider)
+      .maybeWhen(data: (snapshot) => snapshot.weeklyWords, orElse: () => 0);
+});
+
+final studentWeeklySessionCountProvider = Provider<int>((ref) {
+  return ref
+      .watch(studentAnalyticsSnapshotProvider)
+      .maybeWhen(data: (snapshot) => snapshot.weeklySessions, orElse: () => 0);
+});
+
 final studentWeeklyTrendProvider = Provider<List<double>>((ref) {
   return ref
       .watch(studentAnalyticsSnapshotProvider)
@@ -497,6 +540,12 @@ final studentCompletedGoalDaysProvider = Provider<int>((ref) {
         data: (snapshot) => snapshot.completedGoalDays,
         orElse: () => 4,
       );
+});
+
+final studentAnalyticsEstimatedProvider = Provider<bool>((ref) {
+  return ref
+      .watch(studentAnalyticsSnapshotProvider)
+      .maybeWhen(data: (snapshot) => snapshot.isEstimated, orElse: () => true);
 });
 
 const _fallbackPackProgress = <String, int>{};

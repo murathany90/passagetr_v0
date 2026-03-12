@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,11 +8,32 @@ import 'package:shared_ui/shared_ui.dart';
 import '../../core/student_providers.dart';
 import '../common/page_parts.dart';
 
-class StudentGrammarPage extends ConsumerWidget {
+class StudentGrammarPage extends ConsumerStatefulWidget {
   const StudentGrammarPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<StudentGrammarPage> createState() => _StudentGrammarPageState();
+}
+
+class _StudentGrammarPageState extends ConsumerState<StudentGrammarPage> {
+  bool _isRefreshing = false;
+  bool _hasTriggeredInitialRefresh = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || kIsWeb || _hasTriggeredInitialRefresh) {
+        return;
+      }
+      _hasTriggeredInitialRefresh = true;
+      _refreshContent(showFeedback: false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ref = this.ref;
     final accessContext = ref.watch(studentAccessProvider);
     final modules = ref.watch(studentGrammarModulesProvider);
     final progressMap =
@@ -32,19 +54,20 @@ class StudentGrammarPage extends ConsumerWidget {
               title: 'Gramer konulari henuz hazir degil',
               message:
                   'Yeni moduller yayinlandiginda burada otomatik olarak gorunecek.',
-              onRetry: () => ref.invalidate(studentGrammarModulesProvider),
+              onRetry: () => _refreshContent(showFeedback: true),
             );
           }
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _GrammarIntroCard(moduleCount: items.length),
-              const SizedBox(height: 24),
-              _GrammarTimeline(
-                modules: items,
-                progressMap: progressMap,
+              _GrammarIntroCard(
+                moduleCount: items.length,
+                isRefreshing: _isRefreshing,
+                onRefresh: () => _refreshContent(showFeedback: true),
               ),
+              const SizedBox(height: 24),
+              _GrammarTimeline(modules: items, progressMap: progressMap),
             ],
           );
         },
@@ -53,17 +76,62 @@ class StudentGrammarPage extends ConsumerWidget {
           title: 'Gramer konulari simdi yuklenemiyor',
           message:
               'Baglanti tekrar geldiginde bu sayfa yenilenecek. Biraz sonra tekrar dene.',
-          onRetry: () => ref.invalidate(studentGrammarModulesProvider),
+          onRetry: () => _refreshContent(showFeedback: true),
         ),
       ),
+    );
+  }
+
+  Future<void> _refreshContent({required bool showFeedback}) async {
+    if (_isRefreshing) {
+      return;
+    }
+
+    setState(() {
+      _isRefreshing = true;
+    });
+
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    final result = await ref
+        .read(studentSyncRepositoryProvider)
+        .syncNow(SyncScope.content);
+    ref.invalidate(studentGrammarModulesProvider);
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _isRefreshing = false;
+    });
+
+    if (!showFeedback) {
+      return;
+    }
+
+    if (result.isFailure) {
+      messenger?.showSnackBar(
+        const SnackBar(content: Text('Gramer icerigi simdi yenilenemedi.')),
+      );
+      return;
+    }
+
+    messenger?.showSnackBar(
+      const SnackBar(content: Text('Gramer icerigi yenilendi.')),
     );
   }
 }
 
 class _GrammarIntroCard extends StatelessWidget {
-  const _GrammarIntroCard({required this.moduleCount});
+  const _GrammarIntroCard({
+    required this.moduleCount,
+    required this.isRefreshing,
+    required this.onRefresh,
+  });
 
   final int moduleCount;
+  final bool isRefreshing;
+  final Future<void> Function() onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +148,7 @@ class _GrammarIntroCard extends StatelessWidget {
               color: tokens.accentBlue.withValues(alpha: 0.18),
               borderRadius: BorderRadius.circular(18),
             ),
-            child: Icon(
-              Icons.auto_stories_rounded,
-              color: tokens.accentBlue,
-            ),
+            child: Icon(Icons.auto_stories_rounded, color: tokens.accentBlue),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -101,6 +166,33 @@ class _GrammarIntroCard extends StatelessWidget {
                     context,
                   ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
                 ),
+                const SizedBox(height: 14),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: isRefreshing ? null : () => onRefresh(),
+                      icon: isRefreshing
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.refresh_rounded),
+                      label: Text(
+                        isRefreshing ? 'Yenileniyor' : 'Icerigi yenile',
+                      ),
+                    ),
+                    Text(
+                      'Android acilisinda zorunlu sync de calisir.',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: tokens.secondaryText,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -111,10 +203,7 @@ class _GrammarIntroCard extends StatelessWidget {
 }
 
 class _GrammarTimeline extends StatelessWidget {
-  const _GrammarTimeline({
-    required this.modules,
-    required this.progressMap,
-  });
+  const _GrammarTimeline({required this.modules, required this.progressMap});
 
   final List<GrammarModule> modules;
   final Map<int, GrammarProgress> progressMap;
@@ -411,7 +500,10 @@ class _GrammarModuleCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: accentColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(999),
@@ -439,18 +531,15 @@ class _GrammarModuleCard extends StatelessWidget {
                   color: accentColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(
-                  _grammarIcon(module.icon),
-                  color: accentColor,
-                ),
+                child: Icon(_grammarIcon(module.icon), color: accentColor),
               ),
               const SizedBox(width: 14),
               Expanded(
                 child: Text(
                   module.title,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    height: 1.15,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.headlineSmall?.copyWith(height: 1.15),
                 ),
               ),
             ],
@@ -466,9 +555,9 @@ class _GrammarModuleCard extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 '${module.pageCount} sayfa',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: tokens.secondaryText,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
               ),
             ],
           ),
@@ -509,10 +598,7 @@ class _GrammarModuleCard extends StatelessWidget {
 }
 
 class _StatusPill extends StatelessWidget {
-  const _StatusPill({
-    required this.status,
-    required this.accentColor,
-  });
+  const _StatusPill({required this.status, required this.accentColor});
 
   final _GrammarModuleStatus status;
   final Color accentColor;

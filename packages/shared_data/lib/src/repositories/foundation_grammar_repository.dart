@@ -71,7 +71,9 @@ class FoundationGrammarRepository implements GrammarRepository {
     );
     return _sortModules(
       records
-          .map((record) => _moduleFromPayload(_decodePayload(record.payloadJson)))
+          .map(
+            (record) => _moduleFromPayload(_decodePayload(record.payloadJson)),
+          )
           .whereType<GrammarModule>()
           .toList(growable: false),
     );
@@ -146,7 +148,8 @@ class FoundationGrammarRepository implements GrammarRepository {
         (await Supabase.instance.client
                 .from('gramer_modulleri')
                 .select('id,sira,baslik,toplam_sayfa,icon,renk,is_published')
-                .order('sira')) as List<dynamic>;
+                .order('sira'))
+            as List<dynamic>;
 
     return _sortModules(
       rows
@@ -182,7 +185,8 @@ class FoundationGrammarRepository implements GrammarRepository {
                   'id,modul_id,sayfa_no,baslik,icerik_html,kelime_sayisi,is_published',
                 )
                 .eq('modul_id', moduleId)
-                .order('sayfa_no')) as List<dynamic>;
+                .order('sayfa_no'))
+            as List<dynamic>;
     final pagePayloads = pageRows
         .whereType<Map<String, dynamic>>()
         .where(_isVisible)
@@ -193,14 +197,18 @@ class FoundationGrammarRepository implements GrammarRepository {
         .toList(growable: false);
 
     List<Map<String, dynamic>> examplePayloads = const <Map<String, dynamic>>[];
-    List<Map<String, dynamic>> questionPayloads = const <Map<String, dynamic>>[];
+    List<Map<String, dynamic>> questionPayloads =
+        const <Map<String, dynamic>>[];
     if (pageIds.isNotEmpty) {
       final exampleRows =
           (await client
                   .from('gramer_ornekler')
-                  .select('id,sayfa_id,sira,ingilizce,turkce,aciklama,is_published')
+                  .select(
+                    'id,sayfa_id,sira,ingilizce,turkce,aciklama,is_published',
+                  )
                   .inFilter('sayfa_id', pageIds)
-                  .order('sira')) as List<dynamic>;
+                  .order('sira'))
+              as List<dynamic>;
       final questionRows =
           (await client
                   .from('gramer_testler')
@@ -208,7 +216,8 @@ class FoundationGrammarRepository implements GrammarRepository {
                     'id,sayfa_id,sira,soru,secenekler_json,dogru_cevap,aciklama,is_published',
                   )
                   .inFilter('sayfa_id', pageIds)
-                  .order('sira')) as List<dynamic>;
+                  .order('sira'))
+              as List<dynamic>;
       examplePayloads = exampleRows
           .whereType<Map<String, dynamic>>()
           .where(_isVisible)
@@ -234,34 +243,43 @@ class FoundationGrammarRepository implements GrammarRepository {
     required List<Map<String, dynamic>> examplePayloads,
     required List<Map<String, dynamic>> questionPayloads,
   }) {
-    final pages = pagePayloads
-        .map((payload) {
-          final pageId = _readInt(payload['id']);
-          final examples = examplePayloads
-              .where((item) => _readInt(item['sayfa_id']) == pageId)
-              .map(_exampleFromPayload)
-              .whereType<GrammarExample>()
-              .toList(growable: false)
-            ..sort((left, right) => left.sortOrder.compareTo(right.sortOrder));
-          final questions = questionPayloads
-              .where((item) => _readInt(item['sayfa_id']) == pageId)
-              .map(_questionFromPayload)
-              .whereType<GrammarQuestion>()
-              .toList(growable: false)
-            ..sort((left, right) => left.sortOrder.compareTo(right.sortOrder));
-          return GrammarPageDetail(
-            id: pageId,
-            pageNumber: _readInt(payload['sayfa_no'], fallback: 1),
-            title: _readString(payload['baslik']),
-            htmlContent: _readString(payload['icerik_html']),
-            wordCount: _readInt(payload['kelime_sayisi']),
-            examples: examples,
-            questions: questions,
-          );
-        })
-        .where((item) => item.id > 0)
-        .toList(growable: false)
-      ..sort((left, right) => left.pageNumber.compareTo(right.pageNumber));
+    final pages =
+        pagePayloads
+            .map((payload) {
+              final pageId = _readInt(payload['id']);
+              final examples =
+                  examplePayloads
+                      .where((item) => _readInt(item['sayfa_id']) == pageId)
+                      .map(_exampleFromPayload)
+                      .whereType<GrammarExample>()
+                      .toList(growable: false)
+                    ..sort(
+                      (left, right) =>
+                          left.sortOrder.compareTo(right.sortOrder),
+                    );
+              final questions =
+                  questionPayloads
+                      .where((item) => _readInt(item['sayfa_id']) == pageId)
+                      .map(_questionFromPayload)
+                      .whereType<GrammarQuestion>()
+                      .toList(growable: false)
+                    ..sort(
+                      (left, right) =>
+                          left.sortOrder.compareTo(right.sortOrder),
+                    );
+              return GrammarPageDetail(
+                id: pageId,
+                pageNumber: _readInt(payload['sayfa_no'], fallback: 1),
+                title: _readString(payload['baslik']),
+                htmlContent: _readString(payload['icerik_html']),
+                wordCount: _readInt(payload['kelime_sayisi']),
+                examples: examples,
+                questions: questions,
+              );
+            })
+            .where((item) => item.id > 0)
+            .toList(growable: false)
+          ..sort((left, right) => left.pageNumber.compareTo(right.pageNumber));
     return pages;
   }
 
@@ -343,10 +361,7 @@ class FoundationGrammarRepository implements GrammarRepository {
           .toList(growable: false);
     }
     if (value is Map<dynamic, dynamic>) {
-      return value.values
-          .map((item) => item.toString().trim())
-          .where((item) => item.isNotEmpty)
-          .toList(growable: false);
+      return _formatOptionEntries(value.entries);
     }
     if (value is String && value.trim().isNotEmpty) {
       final decoded = _decodeDynamic(value);
@@ -357,13 +372,32 @@ class FoundationGrammarRepository implements GrammarRepository {
             .toList(growable: false);
       }
       if (decoded is Map<dynamic, dynamic>) {
-        return decoded.values
-            .map((item) => item.toString().trim())
-            .where((item) => item.isNotEmpty)
-            .toList(growable: false);
+        return _formatOptionEntries(decoded.entries);
       }
     }
     return const <String>[];
+  }
+
+  List<String> _formatOptionEntries(
+    Iterable<MapEntry<dynamic, dynamic>> entries,
+  ) {
+    final formatted =
+        entries
+            .map(
+              (entry) => MapEntry(
+                entry.key.toString().trim(),
+                entry.value.toString().trim(),
+              ),
+            )
+            .where((entry) => entry.value.isNotEmpty)
+            .toList(growable: false)
+          ..sort((left, right) => left.key.compareTo(right.key));
+    return formatted
+        .map(
+          (entry) =>
+              entry.key.isEmpty ? entry.value : '${entry.key}) ${entry.value}',
+        )
+        .toList(growable: false);
   }
 
   Map<String, dynamic> _decodePayload(String payloadJson) {
@@ -445,7 +479,8 @@ const List<GrammarModule> _previewModules = <GrammarModule>[
   ),
 ];
 
-const Map<int, GrammarModuleDetail> _previewDetails = <int, GrammarModuleDetail>{
+const Map<int, GrammarModuleDetail>
+_previewDetails = <int, GrammarModuleDetail>{
   1: GrammarModuleDetail(
     module: GrammarModule(
       id: 1,

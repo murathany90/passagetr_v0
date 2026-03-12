@@ -84,6 +84,84 @@ class AdminSettingsState {
   }
 }
 
+class AdminWordsFilterState {
+  const AdminWordsFilterState({
+    this.query = '',
+    this.packId,
+    this.isPublished,
+    this.offset = 0,
+  });
+
+  final String query;
+  final String? packId;
+  final bool? isPublished;
+  final int offset;
+
+  AdminWordsFilterState copyWith({
+    String? query,
+    String? packId,
+    bool? isPublished,
+    int? offset,
+    bool clearPackId = false,
+    bool clearPublished = false,
+  }) {
+    return AdminWordsFilterState(
+      query: query ?? this.query,
+      packId: clearPackId ? null : packId ?? this.packId,
+      isPublished: clearPublished ? null : isPublished ?? this.isPublished,
+      offset: offset ?? this.offset,
+    );
+  }
+}
+
+class AdminReadingsFilterState {
+  const AdminReadingsFilterState({
+    this.query = '',
+    this.level,
+    this.isPublished,
+    this.offset = 0,
+  });
+
+  final String query;
+  final String? level;
+  final bool? isPublished;
+  final int offset;
+
+  AdminReadingsFilterState copyWith({
+    String? query,
+    String? level,
+    bool? isPublished,
+    int? offset,
+    bool clearLevel = false,
+    bool clearPublished = false,
+  }) {
+    return AdminReadingsFilterState(
+      query: query ?? this.query,
+      level: clearLevel ? null : level ?? this.level,
+      isPublished: clearPublished ? null : isPublished ?? this.isPublished,
+      offset: offset ?? this.offset,
+    );
+  }
+}
+
+class AdminGrammarFilterState {
+  const AdminGrammarFilterState({this.query = '', this.isPublished});
+
+  final String query;
+  final bool? isPublished;
+
+  AdminGrammarFilterState copyWith({
+    String? query,
+    bool? isPublished,
+    bool clearPublished = false,
+  }) {
+    return AdminGrammarFilterState(
+      query: query ?? this.query,
+      isPublished: clearPublished ? null : isPublished ?? this.isPublished,
+    );
+  }
+}
+
 class AdminWordPageRequest {
   const AdminWordPageRequest({
     required this.packId,
@@ -353,6 +431,8 @@ class AdminReadingRecord {
     required this.tagsRaw,
     required this.isPro,
     required this.isPublished,
+    required this.linkedWordCount,
+    this.linkedWordsPreview = const <String>[],
     required this.updatedAtLabel,
     this.createdAtLabel,
     this.updatedByLabel,
@@ -367,6 +447,8 @@ class AdminReadingRecord {
   final String? tagsRaw;
   final bool isPro;
   final bool isPublished;
+  final int linkedWordCount;
+  final List<String> linkedWordsPreview;
   final String updatedAtLabel;
   final String? createdAtLabel;
   final String? updatedByLabel;
@@ -381,6 +463,8 @@ class AdminReadingRecord {
     String? tagsRaw,
     bool? isPro,
     bool? isPublished,
+    int? linkedWordCount,
+    List<String>? linkedWordsPreview,
     String? updatedAtLabel,
     String? createdAtLabel,
     String? updatedByLabel,
@@ -395,6 +479,8 @@ class AdminReadingRecord {
       tagsRaw: tagsRaw ?? this.tagsRaw,
       isPro: isPro ?? this.isPro,
       isPublished: isPublished ?? this.isPublished,
+      linkedWordCount: linkedWordCount ?? this.linkedWordCount,
+      linkedWordsPreview: linkedWordsPreview ?? this.linkedWordsPreview,
       updatedAtLabel: updatedAtLabel ?? this.updatedAtLabel,
       createdAtLabel: createdAtLabel ?? this.createdAtLabel,
       updatedByLabel: updatedByLabel ?? this.updatedByLabel,

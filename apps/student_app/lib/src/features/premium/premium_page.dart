@@ -135,6 +135,8 @@ class _PremiumHero extends StatelessWidget {
                   label:
                       '${(snapshot.todayGoalProgress * 100).round()}% günlük hedef',
                 ),
+                if (snapshot.isEstimated)
+                  const _HeroPill(label: 'Tahmini veri'),
                 _HeroPill(label: '${snapshot.completedGoalDays} hedef tamam'),
               ],
             ),
@@ -269,6 +271,16 @@ class _AnalyticsMetrics extends StatelessWidget {
             'Analytics özeti',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
+          if (snapshot.isEstimated) ...[
+            const SizedBox(height: 10),
+            Text(
+              'Canli gunluk istatistikler gelmedigi icin tahmini analytics gosteriliyor.',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppThemeTokens.of(context).warning,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
           const SizedBox(height: 18),
           Wrap(
             spacing: 12,

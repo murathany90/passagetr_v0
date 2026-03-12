@@ -1087,6 +1087,55 @@ class AdminReadingDetail {
   }
 }
 
+class AdminBulkReadingFocusWordAssignmentResult {
+  const AdminBulkReadingFocusWordAssignmentResult({
+    this.processedCount = 0,
+    this.assignedCount = 0,
+    this.skippedExistingCount = 0,
+    this.noMatchCount = 0,
+    this.errorCount = 0,
+    this.sampleFailures = const <String>[],
+  });
+
+  final int processedCount;
+  final int assignedCount;
+  final int skippedExistingCount;
+  final int noMatchCount;
+  final int errorCount;
+  final List<String> sampleFailures;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'processed_count': processedCount,
+    'assigned_count': assignedCount,
+    'skipped_existing_count': skippedExistingCount,
+    'no_match_count': noMatchCount,
+    'error_count': errorCount,
+    'sample_failures': sampleFailures,
+  };
+
+  factory AdminBulkReadingFocusWordAssignmentResult.fromJson(
+    Map<String, dynamic>? json,
+  ) {
+    final rawFailures = json?['sample_failures'];
+    return AdminBulkReadingFocusWordAssignmentResult(
+      processedCount: (json?['processed_count'] as num?)?.toInt() ?? 0,
+      assignedCount: (json?['assigned_count'] as num?)?.toInt() ?? 0,
+      skippedExistingCount:
+          (json?['skipped_existing_count'] as num?)?.toInt() ?? 0,
+      noMatchCount: (json?['no_match_count'] as num?)?.toInt() ?? 0,
+      errorCount: (json?['error_count'] as num?)?.toInt() ?? 0,
+      sampleFailures: switch (rawFailures) {
+        List<dynamic>() =>
+          rawFailures
+              .map((item) => item.toString().trim())
+              .where((item) => item.isNotEmpty)
+              .toList(growable: false),
+        _ => const <String>[],
+      },
+    );
+  }
+}
+
 class AdminGrammarExampleInput {
   const AdminGrammarExampleInput({
     this.id,

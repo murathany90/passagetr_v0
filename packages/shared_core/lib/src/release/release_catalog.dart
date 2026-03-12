@@ -20,6 +20,32 @@ class ReleaseNoteEntry {
 
 const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
   ReleaseNoteEntry(
+    version: 'v2.0.6',
+    releaseDate: '2026-03-12',
+    title: 'Analytics kaynagi seffafligi ve haftalik bar grafik',
+    summary:
+        'Ana sayfadaki haftalik ilerleme karti artik gercek haftalik toplamlarla calisir, tahmini veri kullandiginda bunu acikca belirtir ve cizgi yerine bar grafik render eder.',
+    highlights: <String>[
+      'Student analytics snapshot modeli remote ve estimated kaynak bilgisini birlikte tasir.',
+      'Canli gunluk analytics verisi gelmezse home ve premium ekranlarinda Tahmini Veri etiketi gosterilir.',
+      'Haftalik ilerleme kartindaki ikincil metrikler bugunun degil gercek haftanin toplam kelime ve oturum sayilarini gosterir.',
+      'Ana sayfadaki haftalik trend cizgisi bar grafik olarak yeniden tasarlandi ve bu build web ile APK release olarak yayinlandi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.5',
+    releaseDate: '2026-03-12',
+    title: 'Okuma odak kelimeleri ve passage gecisi',
+    summary:
+        'Okuma detayinda odak kelimeler guncel icerik sync sonrasinda yeniden yuklenir hale geldi; ayni ekran icinden onceki ve sonraki passage gecisi eklendi.',
+    highlights: <String>[
+      'Reading detail sayfasi acilisinda content refresh ile odak kelime ve cumle verilerini yeniden ister.',
+      'Odak kelime paneli stale provider sonucuna takilmayip mevcut reading icin yeniden invalidate edilir.',
+      'Okuma detayinin altina minimal Onceki parca ve Sonraki parca navigasyon karti eklendi.',
+      'Student web ve release APK bu okuma akisi duzeltmeleriyle yeniden yayinlandi.',
+    ],
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.4',
     releaseDate: '2026-03-11',
     title: 'Gramer veri senkronu ve timeline deneyimi',

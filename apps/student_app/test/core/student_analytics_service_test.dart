@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_domain/shared_domain.dart';
+import 'package:student_app/src/core/student_analytics_models.dart';
 import 'package:student_app/src/core/student_analytics_service.dart';
 
 class _FakeProgressRepository implements ProgressRepository {
@@ -53,25 +54,28 @@ void main() {
     );
 
     test('loadDailyStats produces seven fallback records', () async {
-      final stats = await service.loadDailyStats(
+      final result = await service.loadDailyStats(
         accessContext: AccessContext.anonymous(),
       );
 
-      expect(stats, hasLength(7));
-      expect(stats.last.streakCount, greaterThanOrEqualTo(1));
-      expect(stats.last.wordsStudied, greaterThanOrEqualTo(8));
+      expect(result.source, StudentAnalyticsSource.estimated);
+      expect(result.stats, hasLength(7));
+      expect(result.stats.last.streakCount, greaterThanOrEqualTo(1));
+      expect(result.stats.last.wordsStudied, greaterThanOrEqualTo(8));
     });
 
     test('buildSnapshot aggregates weekly totals and trend', () async {
-      final stats = await service.loadDailyStats(
+      final result = await service.loadDailyStats(
         accessContext: AccessContext.anonymous(),
       );
-      final snapshot = service.buildSnapshot(stats);
+      final snapshot = service.buildSnapshot(result);
 
       expect(snapshot.weeklyTrend, hasLength(7));
       expect(snapshot.weeklyWords, greaterThan(0));
       expect(snapshot.todayGoalProgress, greaterThan(0));
       expect(snapshot.streakDays, greaterThanOrEqualTo(1));
+      expect(snapshot.isEstimated, isTrue);
+      expect(snapshot.weeklySessions, greaterThan(0));
     });
   });
 }

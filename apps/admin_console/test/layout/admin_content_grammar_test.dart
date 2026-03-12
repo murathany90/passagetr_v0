@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 void main() {
-  testWidgets('readings CMS renders CSV import actions', (tester) async {
+  testWidgets('grammar CMS renders status filter controls', (tester) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(1440, 1100);
     addTearDown(() {
@@ -18,17 +18,14 @@ void main() {
       ProviderScope(
         child: MaterialApp(
           theme: AppTheme.light(),
-          home: const AdminContentPage(destination: AdminDestination.readings),
+          home: const AdminContentPage(destination: AdminDestination.grammar),
         ),
       ),
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Okuma Operasyonlari'), findsOneWidget);
-    expect(find.text('Tumune Ata'), findsOneWidget);
-    expect(find.text('CSV Yukle'), findsOneWidget);
-    expect(find.text('Yeni Parca Ekle'), findsOneWidget);
+    expect(find.text('Gramer Modulleri'), findsOneWidget);
+    expect(find.text('Durum'), findsOneWidget);
     expect(find.text('Filtreleri sifirla'), findsOneWidget);
-    expect(find.textContaining('odak 0'), findsWidgets);
   });
 }

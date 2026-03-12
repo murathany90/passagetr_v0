@@ -138,7 +138,9 @@ final adminUsersPageProvider = FutureProvider<AdminPage<AdminUserListItem>>((
         items.insert(0, override);
       }
     }
-    final removedOnPage = page.items.where((item) => deletedIds.contains(item.id)).length;
+    final removedOnPage = page.items
+        .where((item) => deletedIds.contains(item.id))
+        .length;
     final totalCount =
         (page.totalCount - removedOnPage) +
         _countInjectedUserOverrides(page.items, overrides, query) -
@@ -486,27 +488,30 @@ Future<List<AdminPackRecord>> _loadAdminPacks(
 }) async {
   if (config.supabaseEnabled) {
     await SupabaseBootstrap.initialize(config);
-    if (Supabase.instance.client.auth.currentSession != null) {
-      try {
-        final rows =
-            (await Supabase.instance.client.rpc<dynamic>('admin_list_packs'))
-                as List<dynamic>;
-        return rows
-            .whereType<Map<String, dynamic>>()
-            .map(
-              (row) => AdminPackRecord(
-                id: row['id']?.toString() ?? '',
-                name: row['name']?.toString() ?? '',
-                wordCount: (row['word_count'] as num?)?.toInt() ?? 0,
-                isPublished: row['is_published'] as bool? ?? false,
-                updatedAtLabel: _formatLastSeen(row['updated_at']),
-                createdAtLabel: _formatLastSeen(row['created_at']),
-                updatedByLabel: row['updated_by_email']?.toString(),
-              ),
-            )
-            .where((item) => item.id.isNotEmpty)
-            .toList(growable: false);
-      } catch (_) {}
+    if (Supabase.instance.client.auth.currentSession == null) {
+      throw Exception('Admin oturumu bulunamadi.');
+    }
+    try {
+      final rows =
+          (await Supabase.instance.client.rpc<dynamic>('admin_list_packs'))
+              as List<dynamic>;
+      return rows
+          .whereType<Map<String, dynamic>>()
+          .map(
+            (row) => AdminPackRecord(
+              id: row['id']?.toString() ?? '',
+              name: row['name']?.toString() ?? '',
+              wordCount: (row['word_count'] as num?)?.toInt() ?? 0,
+              isPublished: row['is_published'] as bool? ?? false,
+              updatedAtLabel: _formatLastSeen(row['updated_at']),
+              createdAtLabel: _formatLastSeen(row['created_at']),
+              updatedByLabel: row['updated_by_email']?.toString(),
+            ),
+          )
+          .where((item) => item.id.isNotEmpty)
+          .toList(growable: false);
+    } catch (error) {
+      throw Exception('Paket listesi yuklenemedi: $error');
     }
   }
 
@@ -532,33 +537,36 @@ Future<List<AdminWordRecord>> _loadAdminWords(
 }) async {
   if (config.supabaseEnabled) {
     await SupabaseBootstrap.initialize(config);
-    if (Supabase.instance.client.auth.currentSession != null) {
-      try {
-        final rows =
-            (await Supabase.instance.client.rpc<dynamic>('admin_list_words'))
-                as List<dynamic>;
-        return rows
-            .whereType<Map<String, dynamic>>()
-            .map(
-              (row) => AdminWordRecord(
-                id: row['id']?.toString() ?? '',
-                packId: row['pack_id']?.toString() ?? '',
-                enWord: row['en_word']?.toString() ?? '',
-                trMeaning: row['tr_meaning']?.toString() ?? '',
-                pos: row['pos']?.toString() ?? '',
-                exampleEn: row['example_en']?.toString() ?? '',
-                exampleTr: row['example_tr']?.toString(),
-                level: row['level']?.toString(),
-                notes: row['notes']?.toString(),
-                isPublished: row['is_published'] as bool? ?? false,
-                updatedAtLabel: _formatLastSeen(row['updated_at']),
-                createdAtLabel: _formatLastSeen(row['created_at']),
-                updatedByLabel: row['updated_by_email']?.toString(),
-              ),
-            )
-            .where((item) => item.id.isNotEmpty)
-            .toList(growable: false);
-      } catch (_) {}
+    if (Supabase.instance.client.auth.currentSession == null) {
+      throw Exception('Admin oturumu bulunamadi.');
+    }
+    try {
+      final rows =
+          (await Supabase.instance.client.rpc<dynamic>('admin_list_words'))
+              as List<dynamic>;
+      return rows
+          .whereType<Map<String, dynamic>>()
+          .map(
+            (row) => AdminWordRecord(
+              id: row['id']?.toString() ?? '',
+              packId: row['pack_id']?.toString() ?? '',
+              enWord: row['en_word']?.toString() ?? '',
+              trMeaning: row['tr_meaning']?.toString() ?? '',
+              pos: row['pos']?.toString() ?? '',
+              exampleEn: row['example_en']?.toString() ?? '',
+              exampleTr: row['example_tr']?.toString(),
+              level: row['level']?.toString(),
+              notes: row['notes']?.toString(),
+              isPublished: row['is_published'] as bool? ?? false,
+              updatedAtLabel: _formatLastSeen(row['updated_at']),
+              createdAtLabel: _formatLastSeen(row['created_at']),
+              updatedByLabel: row['updated_by_email']?.toString(),
+            ),
+          )
+          .where((item) => item.id.isNotEmpty)
+          .toList(growable: false);
+    } catch (error) {
+      throw Exception('Kelime listesi yuklenemedi: $error');
     }
   }
 
@@ -590,34 +598,41 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
 }) async {
   if (config.supabaseEnabled) {
     await SupabaseBootstrap.initialize(config);
-    if (Supabase.instance.client.auth.currentSession != null) {
-      try {
-        final rows =
-            (await Supabase.instance.client.rpc<dynamic>(
-                  'admin_list_reading_passages',
-                ))
-                as List<dynamic>;
-        return rows
-            .whereType<Map<String, dynamic>>()
-            .map(
-              (row) => AdminReadingRecord(
-                id: row['id']?.toString() ?? '',
-                packId: row['pack_id']?.toString(),
-                packName: row['pack_name']?.toString(),
-                title: row['title']?.toString() ?? '',
-                level: row['level']?.toString(),
-                category: row['category']?.toString(),
-                tagsRaw: row['tags_raw']?.toString(),
-                isPro: row['is_pro'] as bool? ?? false,
-                isPublished: row['is_published'] as bool? ?? false,
-                updatedAtLabel: _formatLastSeen(row['updated_at']),
-                createdAtLabel: _formatLastSeen(row['created_at']),
-                updatedByLabel: row['updated_by_email']?.toString(),
+    if (Supabase.instance.client.auth.currentSession == null) {
+      throw Exception('Admin oturumu bulunamadi.');
+    }
+    try {
+      final rows =
+          (await Supabase.instance.client.rpc<dynamic>(
+                'admin_list_reading_passages',
+              ))
+              as List<dynamic>;
+      return rows
+          .whereType<Map<String, dynamic>>()
+          .map(
+            (row) => AdminReadingRecord(
+              id: row['id']?.toString() ?? '',
+              packId: row['pack_id']?.toString(),
+              packName: row['pack_name']?.toString(),
+              title: row['title']?.toString() ?? '',
+              level: row['level']?.toString(),
+              category: row['category']?.toString(),
+              tagsRaw: row['tags_raw']?.toString(),
+              isPro: row['is_pro'] as bool? ?? false,
+              isPublished: row['is_published'] as bool? ?? false,
+              linkedWordCount: (row['linked_word_count'] as num?)?.toInt() ?? 0,
+              linkedWordsPreview: _coerceStringList(
+                row['linked_words_preview'],
               ),
-            )
-            .where((item) => item.id.isNotEmpty)
-            .toList(growable: false);
-      } catch (_) {}
+              updatedAtLabel: _formatLastSeen(row['updated_at']),
+              createdAtLabel: _formatLastSeen(row['created_at']),
+              updatedByLabel: row['updated_by_email']?.toString(),
+            ),
+          )
+          .where((item) => item.id.isNotEmpty)
+          .toList(growable: false);
+    } catch (error) {
+      throw Exception('Okuma listesi yuklenemedi: $error');
     }
   }
 
@@ -634,6 +649,8 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
           tagsRaw: null,
           isPro: item.isPro,
           isPublished: true,
+          linkedWordCount: 0,
+          linkedWordsPreview: const <String>[],
           updatedAtLabel: 'preview',
           createdAtLabel: 'preview',
           updatedByLabel: 'preview',
@@ -650,45 +667,48 @@ Future<AdminPage<AdminWordRecord>> _loadAdminWordPage(
 }) async {
   if (config.supabaseEnabled) {
     await SupabaseBootstrap.initialize(config);
-    if (Supabase.instance.client.auth.currentSession != null) {
-      try {
-        final response = await Supabase.instance.client.rpc<dynamic>(
-          'admin_list_words_paged',
-          params: <String, dynamic>{
-            'p_pack_id': request.packId,
-            'p_query': request.query.isEmpty ? null : request.query,
-            'p_status': _statusFilterValue(request.isPublished),
-            'p_offset': request.offset,
-            'p_limit': request.limit,
-          },
-        );
-        final payload = _coerceMap(response);
-        return AdminPage<AdminWordRecord>(
-          items: _coerceList(payload['items'])
-              .map(
-                (row) => AdminWordRecord(
-                  id: row['id']?.toString() ?? '',
-                  packId: row['pack_id']?.toString() ?? '',
-                  enWord: row['en_word']?.toString() ?? '',
-                  trMeaning: row['tr_meaning']?.toString() ?? '',
-                  pos: row['pos']?.toString() ?? '',
-                  exampleEn: row['example_en']?.toString() ?? '',
-                  exampleTr: row['example_tr']?.toString(),
-                  level: row['level']?.toString(),
-                  notes: row['notes']?.toString(),
-                  isPublished: row['is_published'] as bool? ?? false,
-                  updatedAtLabel: _formatLastSeen(row['updated_at']),
-                  createdAtLabel: _formatLastSeen(row['created_at']),
-                  updatedByLabel: row['updated_by_email']?.toString(),
-                ),
-              )
-              .where((item) => item.id.isNotEmpty)
-              .toList(growable: false),
-          totalCount: (payload['total_count'] as num?)?.toInt() ?? 0,
-          offset: (payload['offset'] as num?)?.toInt() ?? request.offset,
-          limit: (payload['limit'] as num?)?.toInt() ?? request.limit,
-        );
-      } catch (_) {}
+    if (Supabase.instance.client.auth.currentSession == null) {
+      throw Exception('Admin oturumu bulunamadi.');
+    }
+    try {
+      final response = await Supabase.instance.client.rpc<dynamic>(
+        'admin_list_words_paged',
+        params: <String, dynamic>{
+          'p_pack_id': request.packId,
+          'p_query': request.query.isEmpty ? null : request.query,
+          'p_status': _statusFilterValue(request.isPublished),
+          'p_offset': request.offset,
+          'p_limit': request.limit,
+        },
+      );
+      final payload = _coerceMap(response);
+      return AdminPage<AdminWordRecord>(
+        items: _coerceList(payload['items'])
+            .map(
+              (row) => AdminWordRecord(
+                id: row['id']?.toString() ?? '',
+                packId: row['pack_id']?.toString() ?? '',
+                enWord: row['en_word']?.toString() ?? '',
+                trMeaning: row['tr_meaning']?.toString() ?? '',
+                pos: row['pos']?.toString() ?? '',
+                exampleEn: row['example_en']?.toString() ?? '',
+                exampleTr: row['example_tr']?.toString(),
+                level: row['level']?.toString(),
+                notes: row['notes']?.toString(),
+                isPublished: row['is_published'] as bool? ?? false,
+                updatedAtLabel: _formatLastSeen(row['updated_at']),
+                createdAtLabel: _formatLastSeen(row['created_at']),
+                updatedByLabel: row['updated_by_email']?.toString(),
+              ),
+            )
+            .where((item) => item.id.isNotEmpty)
+            .toList(growable: false),
+        totalCount: (payload['total_count'] as num?)?.toInt() ?? 0,
+        offset: (payload['offset'] as num?)?.toInt() ?? request.offset,
+        limit: (payload['limit'] as num?)?.toInt() ?? request.limit,
+      );
+    } catch (error) {
+      throw Exception('Kelime sayfasi yuklenemedi: $error');
     }
   }
 
@@ -745,44 +765,52 @@ Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
 }) async {
   if (config.supabaseEnabled) {
     await SupabaseBootstrap.initialize(config);
-    if (Supabase.instance.client.auth.currentSession != null) {
-      try {
-        final response = await Supabase.instance.client.rpc<dynamic>(
-          'admin_list_reading_passages_paged',
-          params: <String, dynamic>{
-            'p_query': request.query.isEmpty ? null : request.query,
-            'p_level': request.level,
-            'p_status': _statusFilterValue(request.isPublished),
-            'p_offset': request.offset,
-            'p_limit': request.limit,
-          },
-        );
-        final payload = _coerceMap(response);
-        return AdminPage<AdminReadingRecord>(
-          items: _coerceList(payload['items'])
-              .map(
-                (row) => AdminReadingRecord(
-                  id: row['id']?.toString() ?? '',
-                  packId: row['pack_id']?.toString(),
-                  packName: row['pack_name']?.toString(),
-                  title: row['title']?.toString() ?? '',
-                  level: row['level']?.toString(),
-                  category: row['category']?.toString(),
-                  tagsRaw: row['tags_raw']?.toString(),
-                  isPro: row['is_pro'] as bool? ?? false,
-                  isPublished: row['is_published'] as bool? ?? false,
-                  updatedAtLabel: _formatLastSeen(row['updated_at']),
-                  createdAtLabel: _formatLastSeen(row['created_at']),
-                  updatedByLabel: row['updated_by_email']?.toString(),
+    if (Supabase.instance.client.auth.currentSession == null) {
+      throw Exception('Admin oturumu bulunamadi.');
+    }
+    try {
+      final response = await Supabase.instance.client.rpc<dynamic>(
+        'admin_list_reading_passages_paged',
+        params: <String, dynamic>{
+          'p_query': request.query.isEmpty ? null : request.query,
+          'p_level': request.level,
+          'p_status': _statusFilterValue(request.isPublished),
+          'p_offset': request.offset,
+          'p_limit': request.limit,
+        },
+      );
+      final payload = _coerceMap(response);
+      return AdminPage<AdminReadingRecord>(
+        items: _coerceList(payload['items'])
+            .map(
+              (row) => AdminReadingRecord(
+                id: row['id']?.toString() ?? '',
+                packId: row['pack_id']?.toString(),
+                packName: row['pack_name']?.toString(),
+                title: row['title']?.toString() ?? '',
+                level: row['level']?.toString(),
+                category: row['category']?.toString(),
+                tagsRaw: row['tags_raw']?.toString(),
+                isPro: row['is_pro'] as bool? ?? false,
+                isPublished: row['is_published'] as bool? ?? false,
+                linkedWordCount:
+                    (row['linked_word_count'] as num?)?.toInt() ?? 0,
+                linkedWordsPreview: _coerceStringList(
+                  row['linked_words_preview'],
                 ),
-              )
-              .where((item) => item.id.isNotEmpty)
-              .toList(growable: false),
-          totalCount: (payload['total_count'] as num?)?.toInt() ?? 0,
-          offset: (payload['offset'] as num?)?.toInt() ?? request.offset,
-          limit: (payload['limit'] as num?)?.toInt() ?? request.limit,
-        );
-      } catch (_) {}
+                updatedAtLabel: _formatLastSeen(row['updated_at']),
+                createdAtLabel: _formatLastSeen(row['created_at']),
+                updatedByLabel: row['updated_by_email']?.toString(),
+              ),
+            )
+            .where((item) => item.id.isNotEmpty)
+            .toList(growable: false),
+        totalCount: (payload['total_count'] as num?)?.toInt() ?? 0,
+        offset: (payload['offset'] as num?)?.toInt() ?? request.offset,
+        limit: (payload['limit'] as num?)?.toInt() ?? request.limit,
+      );
+    } catch (error) {
+      throw Exception('Okuma sayfasi yuklenemedi: $error');
     }
   }
 
@@ -799,6 +827,8 @@ Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
           tagsRaw: null,
           isPro: item.isPro,
           isPublished: true,
+          linkedWordCount: 0,
+          linkedWordsPreview: const <String>[],
           updatedAtLabel: 'preview',
           createdAtLabel: 'preview',
           updatedByLabel: 'preview',
@@ -834,31 +864,34 @@ Future<List<AdminGrammarRecord>> _loadAdminGrammarModules(
 }) async {
   if (config.supabaseEnabled) {
     await SupabaseBootstrap.initialize(config);
-    if (Supabase.instance.client.auth.currentSession != null) {
-      try {
-        final rows =
-            (await Supabase.instance.client.rpc<dynamic>(
-                  'admin_list_grammar_modules',
-                ))
-                as List<dynamic>;
-        return rows
-            .whereType<Map<String, dynamic>>()
-            .map(
-              (row) => AdminGrammarRecord(
-                id: (row['id'] as num?)?.toInt() ?? 0,
-                sortOrder: (row['sira'] as num?)?.toInt() ?? 0,
-                title: row['baslik']?.toString() ?? '',
-                fileName: row['dosya_adi']?.toString() ?? '',
-                pageCount: (row['toplam_sayfa'] as num?)?.toInt() ?? 0,
-                icon: row['icon']?.toString() ?? '📘',
-                color: row['renk']?.toString() ?? '#4776E6',
-                isPublished: row['is_published'] as bool? ?? false,
-                updatedAtLabel: _formatLastSeen(row['updated_at']),
-              ),
-            )
-            .where((item) => item.id > 0)
-            .toList(growable: false);
-      } catch (_) {}
+    if (Supabase.instance.client.auth.currentSession == null) {
+      throw Exception('Admin oturumu bulunamadi.');
+    }
+    try {
+      final rows =
+          (await Supabase.instance.client.rpc<dynamic>(
+                'admin_list_grammar_modules',
+              ))
+              as List<dynamic>;
+      return rows
+          .whereType<Map<String, dynamic>>()
+          .map(
+            (row) => AdminGrammarRecord(
+              id: (row['id'] as num?)?.toInt() ?? 0,
+              sortOrder: (row['sira'] as num?)?.toInt() ?? 0,
+              title: row['baslik']?.toString() ?? '',
+              fileName: row['dosya_adi']?.toString() ?? '',
+              pageCount: (row['toplam_sayfa'] as num?)?.toInt() ?? 0,
+              icon: row['icon']?.toString() ?? '📘',
+              color: row['renk']?.toString() ?? '#4776E6',
+              isPublished: row['is_published'] as bool? ?? false,
+              updatedAtLabel: _formatLastSeen(row['updated_at']),
+            ),
+          )
+          .where((item) => item.id > 0)
+          .toList(growable: false);
+    } catch (error) {
+      throw Exception('Gramer listesi yuklenemedi: $error');
     }
   }
 
@@ -917,6 +950,16 @@ List<Map<String, dynamic>> _coerceList(dynamic value) {
         .toList(growable: false);
   }
   return const <Map<String, dynamic>>[];
+}
+
+List<String> _coerceStringList(dynamic value) {
+  if (value is List<dynamic>) {
+    return value
+        .map((item) => item.toString().trim())
+        .where((item) => item.isNotEmpty)
+        .toList(growable: false);
+  }
+  return const <String>[];
 }
 
 String? _statusFilterValue(bool? isPublished) {

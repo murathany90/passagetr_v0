@@ -91,6 +91,43 @@ class FoundationWordRepository implements WordRepository {
     ];
   }
 
+  @override
+  Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
+    final normalizedIds = ids
+        .map((item) => item.trim())
+        .where((item) => item.isNotEmpty)
+        .toSet()
+        .toList(growable: false);
+    if (normalizedIds.isEmpty) {
+      return const <WordEntry>[];
+    }
+
+    final localItems = await _readFromLocal();
+    final localById = <String, WordEntry>{
+      for (final item in localItems)
+        if (normalizedIds.contains(item.id)) item.id: item,
+    };
+    final needsRemote =
+        localById.length != normalizedIds.length ||
+        localById.values.any((item) => !_hasRichMetadata(item));
+    if (!needsRemote && localById.isNotEmpty) {
+      return normalizedIds
+          .map((id) => localById[id])
+          .whereType<WordEntry>()
+          .toList(growable: false);
+    }
+
+    final remoteItems = await _readFromRemoteByIds(normalizedIds);
+    if (remoteItems.isNotEmpty) {
+      return remoteItems;
+    }
+
+    return normalizedIds
+        .map((id) => localById[id])
+        .whereType<WordEntry>()
+        .toList(growable: false);
+  }
+
   Future<List<WordEntry>> _readFromLocal({String? packId}) async {
     final database = _database;
     if (database == null) {
@@ -110,6 +147,11 @@ class FoundationWordRepository implements WordRepository {
             enWord: payload['en_word']?.toString() ?? '',
             trMeaning: payload['tr_meaning']?.toString() ?? '',
             pos: payload['pos']?.toString() ?? '',
+            exampleEn: payload['example_en']?.toString() ?? '',
+            exampleTr: payload['example_tr']?.toString(),
+            synonymsRaw: payload['synonyms_raw']?.toString(),
+            antonymsRaw: payload['antonyms_raw']?.toString(),
+            notes: payload['notes']?.toString(),
           );
         })
         .where(
@@ -129,7 +171,9 @@ class FoundationWordRepository implements WordRepository {
     await SupabaseBootstrap.initialize(config);
     var query = Supabase.instance.client
         .from('words')
-        .select('id,pack_id,en_word,tr_meaning,pos');
+        .select(
+          'id,pack_id,en_word,tr_meaning,pos,example_en,example_tr,synonyms_raw,antonyms_raw,notes',
+        );
     if (packId != null && packId.isNotEmpty) {
       query = query.eq('pack_id', packId);
     }
@@ -143,10 +187,59 @@ class FoundationWordRepository implements WordRepository {
             enWord: row['en_word']?.toString() ?? '',
             trMeaning: row['tr_meaning']?.toString() ?? '',
             pos: row['pos']?.toString() ?? '',
+            exampleEn: row['example_en']?.toString() ?? '',
+            exampleTr: row['example_tr']?.toString(),
+            synonymsRaw: row['synonyms_raw']?.toString(),
+            antonymsRaw: row['antonyms_raw']?.toString(),
+            notes: row['notes']?.toString(),
           ),
         )
         .where((item) => item.id.isNotEmpty)
         .toList(growable: false);
+  }
+
+  Future<List<WordEntry>> _readFromRemoteByIds(List<String> ids) async {
+    final config = _config;
+    if (config == null || !config.supabaseEnabled || ids.isEmpty) {
+      return const <WordEntry>[];
+    }
+
+    await SupabaseBootstrap.initialize(config);
+    final rows =
+        (await Supabase.instance.client
+                .from('words')
+                .select(
+                  'id,pack_id,en_word,tr_meaning,pos,example_en,example_tr,synonyms_raw,antonyms_raw,notes',
+                )
+                .inFilter('id', ids)
+                .order('en_word'))
+            as List<dynamic>;
+    return rows
+        .whereType<Map<String, dynamic>>()
+        .map(
+          (row) => WordEntry(
+            id: row['id']?.toString() ?? '',
+            packId: row['pack_id']?.toString() ?? '',
+            enWord: row['en_word']?.toString() ?? '',
+            trMeaning: row['tr_meaning']?.toString() ?? '',
+            pos: row['pos']?.toString() ?? '',
+            exampleEn: row['example_en']?.toString() ?? '',
+            exampleTr: row['example_tr']?.toString(),
+            synonymsRaw: row['synonyms_raw']?.toString(),
+            antonymsRaw: row['antonyms_raw']?.toString(),
+            notes: row['notes']?.toString(),
+          ),
+        )
+        .where((item) => item.id.isNotEmpty)
+        .toList(growable: false);
+  }
+
+  bool _hasRichMetadata(WordEntry item) {
+    return item.exampleEn.trim().isNotEmpty ||
+        (item.exampleTr?.trim().isNotEmpty ?? false) ||
+        (item.synonymsRaw?.trim().isNotEmpty ?? false) ||
+        (item.antonymsRaw?.trim().isNotEmpty ?? false) ||
+        (item.notes?.trim().isNotEmpty ?? false);
   }
 
   Map<String, dynamic> _decodePayload(String payloadJson) {

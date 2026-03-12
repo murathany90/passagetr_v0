@@ -14,7 +14,7 @@ class StudentApp extends ConsumerWidget {
     final themeMode = ref.watch(studentThemeModeProvider);
 
     return MaterialApp.router(
-      title: 'PASSAGETR Student',
+      title: 'Passagetr',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),

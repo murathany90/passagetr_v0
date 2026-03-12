@@ -18,11 +18,12 @@ class StudentHomePage extends ConsumerWidget {
     final streakDays = ref.watch(studentStreakDaysProvider);
     final reviewCount = ref.watch(studentReviewWordCountProvider);
     final continueSummary = ref.watch(studentContinueReadingSummaryProvider);
-    final todayWords = ref.watch(studentTodayWordCountProvider);
-    final todaySentences = ref.watch(studentTodaySentenceCountProvider);
+    final weeklyWords = ref.watch(studentWeeklyWordCountProvider);
+    final weeklySessions = ref.watch(studentWeeklySessionCountProvider);
     final weeklyTrend = ref.watch(studentWeeklyTrendProvider);
     final goalProgress = ref.watch(studentGoalProgressProvider);
     final completedGoalDays = ref.watch(studentCompletedGoalDaysProvider);
+    final analyticsEstimated = ref.watch(studentAnalyticsEstimatedProvider);
     final displayName = _displayNameFor(accessContext);
 
     return StudentShellFrame(
@@ -55,12 +56,13 @@ class StudentHomePage extends ConsumerWidget {
             reviewCount: reviewCount,
             onPressed: () => context.go('/words/flashcards'),
           );
-          final weeklyCard = _WeeklyProgressCard(
+          final weeklyCard = _AnalyticsWeeklyProgressCard(
             trend: weeklyTrend,
-            totalWords: todayWords,
-            totalSentences: todaySentences,
+            totalWords: weeklyWords,
+            totalSentences: weeklySessions,
             completedGoalDays: completedGoalDays,
             goalProgress: goalProgress,
+            isEstimated: analyticsEstimated,
           );
 
           if (!isWide) {
@@ -446,6 +448,7 @@ class _ReviewCard extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _WeeklyProgressCard extends StatelessWidget {
   const _WeeklyProgressCard({
     required this.trend,
@@ -453,6 +456,7 @@ class _WeeklyProgressCard extends StatelessWidget {
     required this.totalSentences,
     required this.completedGoalDays,
     required this.goalProgress,
+    required this.isEstimated,
   });
 
   final List<double> trend;
@@ -460,6 +464,7 @@ class _WeeklyProgressCard extends StatelessWidget {
   final int totalSentences;
   final int completedGoalDays;
   final double goalProgress;
+  final bool isEstimated;
 
   @override
   Widget build(BuildContext context) {
@@ -561,6 +566,129 @@ class _WeeklyProgressCard extends StatelessWidget {
   }
 }
 
+class _AnalyticsWeeklyProgressCard extends StatelessWidget {
+  const _AnalyticsWeeklyProgressCard({
+    required this.trend,
+    required this.totalWords,
+    required this.totalSentences,
+    required this.completedGoalDays,
+    required this.goalProgress,
+    required this.isEstimated,
+  });
+
+  final List<double> trend;
+  final int totalWords;
+  final int totalSentences;
+  final int completedGoalDays;
+  final double goalProgress;
+  final bool isEstimated;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return StudentSurfaceCard(
+      minHeight: 390,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Haftalik Ilerleme',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      isEstimated
+                          ? 'Canli veri yerine tahmini haftalik trend gosteriliyor.'
+                          : 'Canli haftalik aktivite ozeti',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: tokens.secondaryText,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: isEstimated
+                      ? tokens.warning.withValues(alpha: 0.12)
+                      : tokens.surfaceMuted,
+                  borderRadius: BorderRadius.circular(tokens.pillRadius),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        isEstimated ? 'Tahmini Veri' : 'Bu Hafta',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        isEstimated
+                            ? Icons.info_outline_rounded
+                            : Icons.bar_chart_rounded,
+                        color: isEstimated ? tokens.warning : tokens.accent,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 26),
+          Row(
+            children: [
+              _MetricPill(
+                label: '${(goalProgress * 100).round()}%',
+                caption: 'Bugunku hedef',
+              ),
+              const SizedBox(width: 18),
+              _MetricPill(
+                label: '$completedGoalDays gun',
+                caption: '$totalWords kelime | $totalSentences oturum',
+              ),
+            ],
+          ),
+          const SizedBox(height: 22),
+          SizedBox(
+            height: 210,
+            child: CustomPaint(
+              painter: _WeeklyBarPainter(
+                color: tokens.accent,
+                fillColor: tokens.accentSoft.withValues(alpha: 0.85),
+                values: trend,
+              ),
+              child: const SizedBox.expand(),
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Row(
+            children: [
+              _WeekLabel('Pzt'),
+              _WeekLabel('Sal'),
+              _WeekLabel('Car'),
+              _WeekLabel('Per'),
+              _WeekLabel('Cum'),
+              _WeekLabel('Cmt'),
+              _WeekLabel('Paz'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _MetricPill extends StatelessWidget {
   const _MetricPill({required this.label, required this.caption});
 
@@ -610,6 +738,80 @@ class _WeekLabel extends StatelessWidget {
   }
 }
 
+class _WeeklyBarPainter extends CustomPainter {
+  const _WeeklyBarPainter({
+    required this.color,
+    required this.fillColor,
+    required this.values,
+  });
+
+  final Color color;
+  final Color fillColor;
+  final List<double> values;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (values.isEmpty) {
+      return;
+    }
+
+    final baselinePaint = Paint()
+      ..color = color.withValues(alpha: 0.12)
+      ..strokeWidth = 1.5;
+    final barPaint = Paint()..color = fillColor;
+    final capPaint = Paint()..color = color;
+    final segmentWidth = size.width / values.length;
+    final barWidth = segmentWidth * 0.58;
+    final capHeight = 8.0;
+    final radius = Radius.circular(barWidth / 2);
+
+    canvas.drawLine(
+      Offset(0, size.height),
+      Offset(size.width, size.height),
+      baselinePaint,
+    );
+
+    for (var index = 0; index < values.length; index++) {
+      final normalized = values[index].clamp(0, 1);
+      final barHeight = (size.height * normalized).clamp(10.0, size.height);
+      final left = (segmentWidth * index) + ((segmentWidth - barWidth) / 2);
+      final top = size.height - barHeight;
+      final bodyRect = RRect.fromRectAndCorners(
+        Rect.fromLTWH(left, top, barWidth, barHeight),
+        topLeft: radius,
+        topRight: radius,
+        bottomLeft: radius,
+        bottomRight: radius,
+      );
+      canvas.drawRRect(bodyRect, barPaint);
+
+      final capRect = RRect.fromRectAndCorners(
+        Rect.fromLTWH(left, top, barWidth, capHeight.clamp(0, barHeight)),
+        topLeft: radius,
+        topRight: radius,
+      );
+      canvas.drawRRect(capRect, capPaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _WeeklyBarPainter oldDelegate) {
+    if (oldDelegate.color != color || oldDelegate.fillColor != fillColor) {
+      return true;
+    }
+    if (oldDelegate.values.length != values.length) {
+      return true;
+    }
+    for (var index = 0; index < values.length; index++) {
+      if (oldDelegate.values[index] != values[index]) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+// ignore: unused_element
 class _WeeklyTrendPainter extends CustomPainter {
   const _WeeklyTrendPainter({
     required this.color,

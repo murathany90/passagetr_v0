@@ -83,6 +83,25 @@ class FoundationReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
+    final localItems = await _readFocusWordsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      return localItems;
+    }
+
+    try {
+      final remoteItems = await _readFocusWordsFromRemote(passageId);
+      if (remoteItems.isNotEmpty) {
+        return remoteItems;
+      }
+    } catch (_) {
+      // Keep the panel empty when linked words are unavailable.
+    }
+
+    return const <ReadingFocusWord>[];
+  }
+
+  @override
   Future<String?> fetchSentenceTranslation(String passageId, int idx) async {
     final candidateIndexes = _candidateSentenceIndexes(idx);
     final database = _database;
@@ -238,6 +257,95 @@ class FoundationReadingRepository implements ReadingRepository {
       ..sort((left, right) => left.index.compareTo(right.index));
   }
 
+  Future<List<ReadingFocusWord>> _readFocusWordsFromLocal(
+    String passageId,
+  ) async {
+    final database = _database;
+    if (database == null) {
+      return const <ReadingFocusWord>[];
+    }
+
+    final linkRecords = await database.listContentEntities(
+      scope: 'readings',
+      entityType: 'reading_passage_words',
+    );
+    final wordRecords = await database.listContentEntities(
+      scope: 'words',
+      entityType: 'words',
+    );
+    final wordsById = <String, Map<String, dynamic>>{
+      for (final record in wordRecords)
+        record.entityId: _decodePayload(record.payloadJson),
+    };
+
+    final links =
+        linkRecords
+            .where((record) {
+              final payload = _decodePayload(record.payloadJson);
+              return payload['passage_id']?.toString() == passageId;
+            })
+            .toList(growable: false)
+          ..sort((left, right) {
+            final timestampComparison = left.updatedAt.compareTo(
+              right.updatedAt,
+            );
+            if (timestampComparison != 0) {
+              return timestampComparison;
+            }
+            return left.entityId.compareTo(right.entityId);
+          });
+
+    return _mapFocusWordsFromLocalLinks(links, wordsById);
+  }
+
+  Future<List<ReadingFocusWord>> _readFocusWordsFromRemote(
+    String passageId,
+  ) async {
+    final config = _config;
+    if (config == null || !config.supabaseEnabled) {
+      return const <ReadingFocusWord>[];
+    }
+
+    await SupabaseBootstrap.initialize(config);
+    final client = Supabase.instance.client;
+    final linkRows =
+        (await client
+                .from('reading_passage_words')
+                .select('word_id,created_at')
+                .eq('passage_id', passageId)
+                .order('created_at'))
+            as List<dynamic>;
+
+    final links = linkRows.whereType<Map<String, dynamic>>().toList(
+      growable: false,
+    );
+    if (links.isEmpty) {
+      return const <ReadingFocusWord>[];
+    }
+
+    final wordIds = links
+        .map((row) => row['word_id']?.toString() ?? '')
+        .where((id) => id.isNotEmpty)
+        .toSet()
+        .toList(growable: false);
+    if (wordIds.isEmpty) {
+      return const <ReadingFocusWord>[];
+    }
+
+    final wordRows =
+        (await client
+                .from('words')
+                .select('id,en_word,tr_meaning,pos')
+                .inFilter('id', wordIds))
+            as List<dynamic>;
+    final wordsById = <String, Map<String, dynamic>>{
+      for (final row in wordRows.whereType<Map<String, dynamic>>())
+        row['id']?.toString() ?? '': row,
+    }..remove('');
+
+    return _mapFocusWordsFromRemoteLinks(links, wordsById);
+  }
+
   Map<String, dynamic> _decodePayload(String payloadJson) {
     final decoded = jsonDecode(payloadJson);
     if (decoded is Map<String, dynamic>) {
@@ -293,5 +401,64 @@ class FoundationReadingRepository implements ReadingRepository {
         .where((item) => item.englishText.trim().isNotEmpty)
         .toList(growable: false)
       ..sort((left, right) => left.index.compareTo(right.index));
+  }
+
+  List<ReadingFocusWord> _mapFocusWordsFromLocalLinks(
+    List<ContentEntityRecord> links,
+    Map<String, Map<String, dynamic>> wordsById,
+  ) {
+    return links
+        .map((record) {
+          final payload = _decodePayload(record.payloadJson);
+          final wordId = payload['word_id']?.toString() ?? '';
+          if (wordId.isEmpty) {
+            return null;
+          }
+          final wordPayload = wordsById[wordId];
+          if (wordPayload == null) {
+            return null;
+          }
+          return _focusWordFromPayload(wordId, wordPayload);
+        })
+        .whereType<ReadingFocusWord>()
+        .toList(growable: false);
+  }
+
+  List<ReadingFocusWord> _mapFocusWordsFromRemoteLinks(
+    List<Map<String, dynamic>> links,
+    Map<String, Map<String, dynamic>> wordsById,
+  ) {
+    return links
+        .map((payload) {
+          final wordId = payload['word_id']?.toString() ?? '';
+          if (wordId.isEmpty) {
+            return null;
+          }
+          final wordPayload = wordsById[wordId];
+          if (wordPayload == null) {
+            return null;
+          }
+          return _focusWordFromPayload(wordId, wordPayload);
+        })
+        .whereType<ReadingFocusWord>()
+        .toList(growable: false);
+  }
+
+  ReadingFocusWord? _focusWordFromPayload(
+    String wordId,
+    Map<String, dynamic> payload,
+  ) {
+    final enWord = payload['en_word']?.toString().trim() ?? '';
+    final trMeaning = payload['tr_meaning']?.toString().trim() ?? '';
+    if (enWord.isEmpty || trMeaning.isEmpty) {
+      return null;
+    }
+
+    return ReadingFocusWord(
+      wordId: wordId,
+      enWord: enWord,
+      trMeaning: trMeaning,
+      pos: payload['pos']?.toString().trim(),
+    );
   }
 }

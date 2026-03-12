@@ -27,6 +27,7 @@ void main() {
     expect(find.text('Paketler'), findsOneWidget);
     expect(find.text('Yeni Paket'), findsOneWidget);
     expect(find.text('CSV Yukle'), findsOneWidget);
+    expect(find.text('Filtreleri sifirla'), findsOneWidget);
     expect(find.textContaining('Kelimeleri'), findsOneWidget);
   });
 }

@@ -78,6 +78,47 @@ void main() {
       },
     );
 
+    test('syncNow content bypasses TTL and forces remote refresh', () async {
+      final database = FakeLocalSyncStore();
+      final remoteClient = FakeSyncRemoteClient(
+        contentChangesByScope: <String, List<ContentDeltaRecord>>{
+          'grammar': <ContentDeltaRecord>[
+            ContentDeltaRecord(
+              changeId: 31,
+              scope: 'grammar',
+              entityType: 'gramer_modulleri',
+              entityId: '56',
+              operation: 'update',
+              payloadJson:
+                  '{"id":56,"sira":1,"baslik":"Basics","toplam_sayfa":1,"icon":"menu_book","renk":"#2563EB","is_published":true}',
+              changedAt: DateTime.utc(2026, 3, 11, 12, 5),
+            ),
+          ],
+        },
+      );
+      await database.upsertSyncMeta(
+        SyncMetaRecord(
+          scope: 'content:grammar',
+          lastPullAt: DateTime.utc(2026, 3, 11, 12, 0),
+          lastServerCursor: '0',
+          lastContentVersion: null,
+        ),
+      );
+      final repository = FoundationSyncRepository(
+        database: database,
+        remoteClient: remoteClient,
+        now: () => DateTime.utc(2026, 3, 11, 12, 10),
+      );
+
+      final result = await repository.syncNow(SyncScope.content);
+
+      expect(result, isA<AppSuccess<void>>());
+      expect(remoteClient.requestedScopes, contains('grammar'));
+      final entities = await database.listContentEntities(scope: 'grammar');
+      expect(entities, hasLength(1));
+      expect(entities.single.entityType, 'gramer_modulleri');
+    });
+
     test(
       'syncIfStale progress flushes pending outbox and marks records synced',
       () async {

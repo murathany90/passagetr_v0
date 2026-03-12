@@ -19,6 +19,20 @@ class StudentDailyStat {
       wordsStudied + (readingsCompleted * 12) + (grammarCompleted * 10);
 }
 
+enum StudentAnalyticsSource { remote, estimated }
+
+class StudentAnalyticsLoadResult {
+  const StudentAnalyticsLoadResult({
+    required this.stats,
+    required this.source,
+    this.fallbackReason,
+  });
+
+  final List<StudentDailyStat> stats;
+  final StudentAnalyticsSource source;
+  final String? fallbackReason;
+}
+
 class StudentAnalyticsSnapshot {
   const StudentAnalyticsSnapshot({
     required this.streakDays,
@@ -32,6 +46,8 @@ class StudentAnalyticsSnapshot {
     required this.weeklyReadings,
     required this.weeklyGrammar,
     required this.weeklyTrend,
+    required this.source,
+    this.fallbackReason,
   });
 
   final int streakDays;
@@ -45,6 +61,12 @@ class StudentAnalyticsSnapshot {
   final int weeklyReadings;
   final int weeklyGrammar;
   final List<double> weeklyTrend;
+  final StudentAnalyticsSource source;
+  final String? fallbackReason;
+
+  bool get isEstimated => source == StudentAnalyticsSource.estimated;
+
+  int get weeklySessions => weeklyReadings + weeklyGrammar;
 
   double get todayGoalProgress {
     if (goalTarget <= 0) {

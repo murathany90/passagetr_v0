@@ -217,6 +217,7 @@ class _StudentGrammarDetailPageState
                   FilledButton(
                     onPressed: () => _advance(
                       moduleId: detail.module.id,
+                      pages: detail.pages,
                       currentPage: currentPage,
                       totalPages: totalPages,
                       isLastPage: isLastPage,
@@ -277,7 +278,9 @@ class _StudentGrammarDetailPageState
     }
 
     if (progress.pageId != null) {
-      final pageIdIndex = pages.indexWhere((item) => item.id == progress.pageId);
+      final pageIdIndex = pages.indexWhere(
+        (item) => item.id == progress.pageId,
+      );
       if (pageIdIndex >= 0) {
         return pageIdIndex;
       }
@@ -296,6 +299,7 @@ class _StudentGrammarDetailPageState
 
   Future<void> _advance({
     required int moduleId,
+    required List<GrammarPageDetail> pages,
     required GrammarPageDetail currentPage,
     required int totalPages,
     required bool isLastPage,
@@ -311,10 +315,14 @@ class _StudentGrammarDetailPageState
 
     final controller = ref.read(studentGrammarProgressProvider.notifier);
     final completedPages = currentPage.pageNumber.clamp(0, totalPages);
+    final nextPage = isLastPage ? currentPage : pages[_currentPageIndex + 1];
+    final nextPageNumber = isLastPage
+        ? currentPage.pageNumber
+        : nextPage.pageNumber;
     await controller.recordProgress(
       moduleId: moduleId,
-      pageId: currentPage.id,
-      lastPageNo: currentPage.pageNumber,
+      pageId: nextPage.id,
+      lastPageNo: nextPageNumber,
       completedPages: completedPages,
       completed: isLastPage,
     );
@@ -349,13 +357,54 @@ class _StudentGrammarDetailPageState
       }
       final correctAnswer = question.correctAnswer;
       if (correctAnswer != null && correctAnswer.isNotEmpty) {
-        if (selectedAnswer.trim() != correctAnswer.trim()) {
+        if (!_answersMatch(selectedAnswer, correctAnswer)) {
           return false;
         }
       }
     }
 
     return true;
+  }
+
+  bool _answersMatch(String selectedAnswer, String correctAnswer) {
+    final selectedCanonical = _canonicalAnswer(selectedAnswer);
+    final correctCanonical = _canonicalAnswer(correctAnswer);
+    if (selectedCanonical == correctCanonical) {
+      return true;
+    }
+
+    final selectedBody = _answerBody(selectedAnswer);
+    final correctBody = _answerBody(correctAnswer);
+    if (selectedBody.isNotEmpty && selectedBody == correctBody) {
+      return true;
+    }
+
+    final selectedLabel = _answerLabel(selectedAnswer);
+    final correctLabel = _answerLabel(correctAnswer);
+    if (selectedLabel.isNotEmpty &&
+        correctLabel.isNotEmpty &&
+        selectedLabel == correctLabel) {
+      return true;
+    }
+
+    return false;
+  }
+
+  String _canonicalAnswer(String value) {
+    return value.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  String _answerBody(String value) {
+    final normalized = _canonicalAnswer(value);
+    return normalized.replaceFirst(RegExp(r'^[a-z0-9]+[\)\.\:\-]\s*'), '');
+  }
+
+  String _answerLabel(String value) {
+    final normalized = _canonicalAnswer(value);
+    final match = RegExp(
+      r'^([a-z0-9]+)(?:[\)\.\:\-].*)?$',
+    ).firstMatch(normalized);
+    return match?.group(1) ?? '';
   }
 }
 
@@ -379,10 +428,7 @@ class _GrammarExampleTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            example.english,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+          Text(example.english, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 6),
           Text(
             example.turkish,
@@ -390,7 +436,8 @@ class _GrammarExampleTile extends StatelessWidget {
               context,
             ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
           ),
-          if (example.description != null && example.description!.isNotEmpty) ...[
+          if (example.description != null &&
+              example.description!.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
               example.description!,
@@ -421,11 +468,9 @@ class _GrammarQuestionCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          question.prompt,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        if (question.description != null && question.description!.isNotEmpty) ...[
+        Text(question.prompt, style: Theme.of(context).textTheme.titleLarge),
+        if (question.description != null &&
+            question.description!.isNotEmpty) ...[
           const SizedBox(height: 6),
           Text(
             question.description!,

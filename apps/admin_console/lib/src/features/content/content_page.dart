@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -22,15 +22,32 @@ class AdminContentPage extends ConsumerStatefulWidget {
 }
 
 class _AdminContentPageState extends ConsumerState<AdminContentPage> {
-  String _query = '';
-  String? _selectedPackId;
-  String? _readingLevelFilter;
-  bool? _wordPublishedFilter;
-  bool? _readingPublishedFilter;
-  int _wordOffset = 0;
-  int _readingOffset = 0;
+  late final TextEditingController _wordsQueryController;
+  late final TextEditingController _readingsQueryController;
+  late final TextEditingController _grammarQueryController;
+
+  AdminWordsFilterState _wordsFilters = const AdminWordsFilterState();
+  AdminReadingsFilterState _readingsFilters = const AdminReadingsFilterState();
+  AdminGrammarFilterState _grammarFilters = const AdminGrammarFilterState();
+  bool _isBulkAssigningFocusWords = false;
 
   bool get _isPreviewMode => !ref.read(adminAppConfigProvider).supabaseEnabled;
+
+  @override
+  void initState() {
+    super.initState();
+    _wordsQueryController = TextEditingController();
+    _readingsQueryController = TextEditingController();
+    _grammarQueryController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _wordsQueryController.dispose();
+    _readingsQueryController.dispose();
+    _grammarQueryController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +98,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             final words = ref.watch(
               adminWordPageProvider(
                 AdminWordPageRequest(
-                  packId: _selectedPackId,
-                  query: _query,
-                  offset: _wordOffset,
+                  packId: _wordsFilters.packId,
+                  query: _wordsFilters.query,
+                  offset: _wordsFilters.offset,
                   limit: pageSize,
-                  isPublished: _wordPublishedFilter,
+                  isPublished: _wordsFilters.isPublished,
                 ),
               ),
             );
@@ -105,11 +122,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         final readings = ref.watch(
           adminReadingPageProvider(
             AdminReadingPageRequest(
-              query: _query,
-              offset: _readingOffset,
+              query: _readingsFilters.query,
+              offset: _readingsFilters.offset,
               limit: pageSize,
-              level: _readingLevelFilter,
-              isPublished: _readingPublishedFilter,
+              level: _readingsFilters.level,
+              isPublished: _readingsFilters.isPublished,
             ),
           ),
         );
@@ -143,7 +160,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   ) {
     AdminPackRecord? selectedPack;
     for (final item in packs) {
-      if (item.id == _selectedPackId) {
+      if (item.id == _wordsFilters.packId) {
         selectedPack = item;
         break;
       }
@@ -178,8 +195,10 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                     isSelected: pack.id == selectedPack?.id,
                     onTap: () {
                       setState(() {
-                        _selectedPackId = pack.id;
-                        _wordOffset = 0;
+                        _wordsFilters = _wordsFilters.copyWith(
+                          packId: pack.id,
+                          offset: 0,
+                        );
                       });
                     },
                     onEdit: () => _openPackEditor(context, existing: pack),
@@ -224,14 +243,17 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           child: Column(
             children: [
               TextField(
+                controller: _wordsQueryController,
                 decoration: const InputDecoration(
                   hintText: 'Kelime, anlam veya etiket ara',
                   prefixIcon: Icon(Icons.search_rounded),
                 ),
                 onChanged: (value) {
                   setState(() {
-                    _query = value.trim().toLowerCase();
-                    _wordOffset = 0;
+                    _wordsFilters = _wordsFilters.copyWith(
+                      query: value.trim().toLowerCase(),
+                      offset: 0,
+                    );
                   });
                 },
               ),
@@ -246,7 +268,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                     SizedBox(
                       width: 220,
                       child: DropdownButtonFormField<bool?>(
-                        initialValue: _wordPublishedFilter,
+                        initialValue: _wordsFilters.isPublished,
                         isExpanded: true,
                         decoration: const InputDecoration(labelText: 'Durum'),
                         items: const [
@@ -265,11 +287,19 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                         ],
                         onChanged: (value) {
                           setState(() {
-                            _wordPublishedFilter = value;
-                            _wordOffset = 0;
+                            _wordsFilters = _wordsFilters.copyWith(
+                              isPublished: value,
+                              offset: 0,
+                              clearPublished: value == null,
+                            );
                           });
                         },
                       ),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () => _resetWordFilters(),
+                      icon: const Icon(Icons.filter_alt_off_rounded),
+                      label: const Text('Filtreleri sifirla'),
                     ),
                     if (activePack != null) ...[
                       _MetricChip(
@@ -291,11 +321,13 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               else if (visibleWords.isEmpty)
                 _EmptyState(
                   title: 'Kelime bulunamadi',
-                  subtitle: _query.isEmpty
+                  subtitle: _wordsFilters.query.isEmpty
                       ? 'Bu pakette henuz kelime yok. Yeni kelime ekle veya CSV import et.'
                       : 'Arama filtresi sonuc vermedi.',
-                  actionLabel: _query.isEmpty ? 'Yeni Kelime' : null,
-                  onAction: _query.isEmpty
+                  actionLabel: _wordsFilters.query.isEmpty
+                      ? 'Yeni Kelime'
+                      : null,
+                  onAction: _wordsFilters.query.isEmpty
                       ? () => _openWordEditor(
                           context,
                           packs: packs,
@@ -325,12 +357,19 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   hasNext: wordsPage.hasNextPage,
                   onPrevious: () {
                     setState(() {
-                      _wordOffset = math.max(0, _wordOffset - wordsPage.limit);
+                      _wordsFilters = _wordsFilters.copyWith(
+                        offset: math.max(
+                          0,
+                          _wordsFilters.offset - wordsPage.limit,
+                        ),
+                      );
                     });
                   },
                   onNext: () {
                     setState(() {
-                      _wordOffset += wordsPage.limit;
+                      _wordsFilters = _wordsFilters.copyWith(
+                        offset: _wordsFilters.offset + wordsPage.limit,
+                      );
                     });
                   },
                 ),
@@ -371,6 +410,22 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         spacing: 12,
         runSpacing: 12,
         children: [
+          Tooltip(
+            message: 'Tum okumalar icin odak kelimeleri otomatik ata',
+            child: FilledButton.tonalIcon(
+              onPressed: _isPreviewMode || _isBulkAssigningFocusWords
+                  ? null
+                  : () => _autoAssignFocusWordsForAllReadings(context),
+              icon: _isBulkAssigningFocusWords
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.auto_awesome_rounded),
+              label: const Text('Tumune Ata'),
+            ),
+          ),
           FilledButton.tonalIcon(
             onPressed: () => _openReadingImportDialog(context, packs: packs),
             icon: const Icon(Icons.upload_file_rounded),
@@ -386,14 +441,17 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       child: Column(
         children: [
           TextField(
+            controller: _readingsQueryController,
             decoration: const InputDecoration(
               hintText: 'Baslik, kategori veya tag ara',
               prefixIcon: Icon(Icons.search_rounded),
             ),
             onChanged: (value) {
               setState(() {
-                _query = value.trim().toLowerCase();
-                _readingOffset = 0;
+                _readingsFilters = _readingsFilters.copyWith(
+                  query: value.trim().toLowerCase(),
+                  offset: 0,
+                );
               });
             },
           ),
@@ -408,7 +466,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                 SizedBox(
                   width: 220,
                   child: DropdownButtonFormField<String?>(
-                    initialValue: _readingLevelFilter,
+                    initialValue: _readingsFilters.level,
                     isExpanded: true,
                     decoration: const InputDecoration(labelText: 'Seviye'),
                     items: [
@@ -425,8 +483,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                     ],
                     onChanged: (value) {
                       setState(() {
-                        _readingLevelFilter = value;
-                        _readingOffset = 0;
+                        _readingsFilters = _readingsFilters.copyWith(
+                          level: value,
+                          offset: 0,
+                          clearLevel: value == null,
+                        );
                       });
                     },
                   ),
@@ -434,7 +495,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                 SizedBox(
                   width: 220,
                   child: DropdownButtonFormField<bool?>(
-                    initialValue: _readingPublishedFilter,
+                    initialValue: _readingsFilters.isPublished,
                     isExpanded: true,
                     decoration: const InputDecoration(labelText: 'Durum'),
                     items: const [
@@ -453,11 +514,19 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                     ],
                     onChanged: (value) {
                       setState(() {
-                        _readingPublishedFilter = value;
-                        _readingOffset = 0;
+                        _readingsFilters = _readingsFilters.copyWith(
+                          isPublished: value,
+                          offset: 0,
+                          clearPublished: value == null,
+                        );
                       });
                     },
                   ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: () => _resetReadingFilters(),
+                  icon: const Icon(Icons.filter_alt_off_rounded),
+                  label: const Text('Filtreleri sifirla'),
                 ),
               ],
             ),
@@ -466,13 +535,22 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           if (visibleReadings.isEmpty)
             _EmptyState(
               title: 'Okuma kaydi yok',
-              subtitle: _query.isEmpty && _readingLevelFilter == null
+              subtitle:
+                  _readingsFilters.query.isEmpty &&
+                      _readingsFilters.level == null &&
+                      _readingsFilters.isPublished == null
                   ? 'Yeni parca ekleyip publish akisini bu panelden yonet.'
                   : 'Secili filtrelerle eslesen kayit bulunamadi.',
-              actionLabel: _query.isEmpty && _readingLevelFilter == null
+              actionLabel:
+                  _readingsFilters.query.isEmpty &&
+                      _readingsFilters.level == null &&
+                      _readingsFilters.isPublished == null
                   ? 'Parca Ekle'
                   : null,
-              onAction: _query.isEmpty && _readingLevelFilter == null
+              onAction:
+                  _readingsFilters.query.isEmpty &&
+                      _readingsFilters.level == null &&
+                      _readingsFilters.isPublished == null
                   ? () => _openReadingEditor(context, packs: packs)
                   : null,
             )
@@ -487,6 +565,13 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   existing: reading,
                 ),
                 onDelete: () => _deleteReading(context, reading),
+                onAutoAssign: _isPreviewMode
+                    ? null
+                    : () => _autoAssignReadingFocusWords(
+                        context,
+                        reading,
+                        packs: packs,
+                      ),
                 onTogglePublished: (value) =>
                     _togglePublishedForReading(context, reading, value),
               ),
@@ -498,15 +583,19 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               hasNext: readingsPage.hasNextPage,
               onPrevious: () {
                 setState(() {
-                  _readingOffset = math.max(
-                    0,
-                    _readingOffset - readingsPage.limit,
+                  _readingsFilters = _readingsFilters.copyWith(
+                    offset: math.max(
+                      0,
+                      _readingsFilters.offset - readingsPage.limit,
+                    ),
                   );
                 });
               },
               onNext: () {
                 setState(() {
-                  _readingOffset += readingsPage.limit;
+                  _readingsFilters = _readingsFilters.copyWith(
+                    offset: _readingsFilters.offset + readingsPage.limit,
+                  );
                 });
               },
             ),
@@ -520,11 +609,19 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     BuildContext context,
     List<AdminGrammarRecord> modules,
   ) {
+    final canReorder =
+        _grammarFilters.query.isEmpty && _grammarFilters.isPublished == null;
     final visibleModules = modules
         .where((item) {
           final haystack = '${item.title} ${item.fileName} ${item.pageCount}'
               .toLowerCase();
-          return _query.isEmpty || haystack.contains(_query);
+          final matchesQuery =
+              _grammarFilters.query.isEmpty ||
+              haystack.contains(_grammarFilters.query);
+          final matchesStatus =
+              _grammarFilters.isPublished == null ||
+              item.isPublished == _grammarFilters.isPublished;
+          return matchesQuery && matchesStatus;
         })
         .toList(growable: false);
 
@@ -538,25 +635,82 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       child: Column(
         children: [
           TextField(
+            controller: _grammarQueryController,
             decoration: const InputDecoration(
               hintText: 'Modul adi veya dosya adi ara',
               prefixIcon: Icon(Icons.search_rounded),
             ),
             onChanged: (value) {
               setState(() {
-                _query = value.trim().toLowerCase();
+                _grammarFilters = _grammarFilters.copyWith(
+                  query: value.trim().toLowerCase(),
+                );
               });
             },
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                SizedBox(
+                  width: 220,
+                  child: DropdownButtonFormField<bool?>(
+                    initialValue: _grammarFilters.isPublished,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'Durum'),
+                    items: const [
+                      DropdownMenuItem<bool?>(
+                        value: null,
+                        child: Text('Tum durumlar'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: true,
+                        child: Text('Yayinda'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: false,
+                        child: Text('Taslak'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _grammarFilters = _grammarFilters.copyWith(
+                          isPublished: value,
+                          clearPublished: value == null,
+                        );
+                      });
+                    },
+                  ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: () => _resetGrammarFilters(),
+                  icon: const Icon(Icons.filter_alt_off_rounded),
+                  label: const Text('Filtreleri sifirla'),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 20),
           if (visibleModules.isEmpty)
             _EmptyState(
               title: 'Gramer modulu yok',
-              subtitle: _query.isEmpty
+              subtitle:
+                  _grammarFilters.query.isEmpty &&
+                      _grammarFilters.isPublished == null
                   ? 'Yeni modul ekleyip sirayi bu panelden yonet.'
                   : 'Arama sonucu bulunamadi.',
-              actionLabel: _query.isEmpty ? 'Modul Ekle' : null,
-              onAction: _query.isEmpty
+              actionLabel:
+                  _grammarFilters.query.isEmpty &&
+                      _grammarFilters.isPublished == null
+                  ? 'Modul Ekle'
+                  : null,
+              onAction:
+                  _grammarFilters.query.isEmpty &&
+                      _grammarFilters.isPublished == null
                   ? () => _openGrammarEditor(context)
                   : null,
             )
@@ -564,8 +718,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             for (var index = 0; index < visibleModules.length; index++) ...[
               _GrammarRow(
                 module: visibleModules[index],
-                canMoveUp: index > 0,
-                canMoveDown: index < visibleModules.length - 1,
+                canMoveUp: canReorder && index > 0,
+                canMoveDown: canReorder && index < visibleModules.length - 1,
                 onMoveUp: () =>
                     _reorderGrammar(context, modules, index, index - 1),
                 onMoveDown: () =>
@@ -631,7 +785,9 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                 updatedAtLabel: 'az once',
               );
       ref.read(adminPackChangesProvider.notifier).upsert(record);
-      _selectedPackId ??= record.id;
+      _wordsFilters = _wordsFilters.copyWith(
+        packId: _wordsFilters.packId ?? record.id,
+      );
     } else {
       if (existing != null) {
         ref
@@ -694,9 +850,9 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       for (final item in words.where((item) => item.packId == pack.id)) {
         wordNotifier.remove(item.id);
       }
-      if (_selectedPackId == pack.id) {
+      if (_wordsFilters.packId == pack.id) {
         setState(() {
-          _selectedPackId = null;
+          _wordsFilters = _wordsFilters.copyWith(clearPackId: true);
         });
       }
     } else {
@@ -785,10 +941,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     final draft = await showDialog<AdminWordDetail>(
       context: context,
-      builder: (context) => _WordEditorDialog(
-        packs: packs,
-        initialDetail: detail,
-      ),
+      builder: (context) =>
+          _WordEditorDialog(packs: packs, initialDetail: detail),
     );
     if (draft == null) {
       return;
@@ -837,7 +991,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               );
       ref.read(adminWordChangesProvider.notifier).upsert(record);
       setState(() {
-        _selectedPackId = savedDetail.packId;
+        _wordsFilters = _wordsFilters.copyWith(
+          packId: savedDetail.packId,
+          offset: 0,
+          clearPackId: savedDetail.packId == null,
+        );
       });
     } else {
       if (existing != null) {
@@ -1062,6 +1220,12 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             tagsRaw: item.tagsRaw,
             isPro: item.isPro,
             isPublished: item.isPublished,
+            linkedWordCount: item.linkedWords.length,
+            linkedWordsPreview: item.linkedWords
+                .map((entry) => entry.enWord.trim())
+                .where((entry) => entry.isNotEmpty)
+                .take(3)
+                .toList(growable: false),
             updatedAtLabel: 'az once',
           ),
         );
@@ -1116,47 +1280,21 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     final savedDetail = (result as AppSuccess<AdminReadingDetail>).value;
     if (_isPreviewMode) {
-      final record =
-          (existing ??
-                  AdminReadingRecord(
-                    id: savedDetail.metadata.id ?? _clientId('reading'),
-                    packId: savedDetail.packId,
-                    packName: _packNameFromId(savedDetail.packId, packs),
-                    title: savedDetail.title,
-                    level: savedDetail.level,
-                    category: savedDetail.category,
-                    tagsRaw: savedDetail.tagsRaw,
-                    isPro: savedDetail.isPro,
-                    isPublished: savedDetail.isPublished,
-                    updatedAtLabel: 'az once',
-                  ))
-              .copyWith(
-                packId: savedDetail.packId,
-                packName: _packNameFromId(savedDetail.packId, packs),
-                title: savedDetail.title,
-                level: savedDetail.level,
-                category: savedDetail.category,
-                tagsRaw: savedDetail.tagsRaw,
-                isPro: savedDetail.isPro,
-                isPublished: savedDetail.isPublished,
-                updatedAtLabel: 'az once',
-              );
+      final record = _readingRecordFromDetail(
+        detail: savedDetail,
+        packs: packs,
+        existing: existing,
+      );
       ref.read(adminReadingChangesProvider.notifier).upsert(record);
     } else {
       if (existing != null) {
         ref
             .read(adminReadingChangesProvider.notifier)
             .upsert(
-              existing.copyWith(
-                packId: savedDetail.packId,
-                packName: _packNameFromId(savedDetail.packId, packs),
-                title: savedDetail.title,
-                level: savedDetail.level,
-                category: savedDetail.category,
-                tagsRaw: savedDetail.tagsRaw,
-                isPro: savedDetail.isPro,
-                isPublished: savedDetail.isPublished,
-                updatedAtLabel: 'az once',
+              _readingRecordFromDetail(
+                detail: savedDetail,
+                packs: packs,
+                existing: existing,
               ),
             );
       }
@@ -1272,6 +1410,111 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       'reading / ${reading.title}',
     );
     _showSnackBar(nextValue ? 'Okuma yayinda.' : 'Okuma taslaga alindi.');
+  }
+
+  Future<void> _autoAssignReadingFocusWords(
+    BuildContext context,
+    AdminReadingRecord reading, {
+    required List<AdminPackRecord> packs,
+  }) async {
+    final shouldProceed = await _confirmAction(
+      context,
+      title: 'Odak kelimeleri otomatik ata',
+      description:
+          'V2 mantigi mevcut odak kelimeleri silip yerine en fazla 10 yeni eslesme atayacak.',
+      confirmLabel: 'Otomatik Ata',
+    );
+    if (!shouldProceed) {
+      return;
+    }
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .autoAssignReadingFocusWords(readingId: reading.id);
+    if (!mounted) {
+      return;
+    }
+
+    if (result case AppFailure<AdminReadingDetail>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    final detail = (result as AppSuccess<AdminReadingDetail>).value;
+    final updatedRecord = _readingRecordFromDetail(
+      detail: detail,
+      packs: packs,
+      existing: reading,
+    );
+    ref.read(adminReadingChangesProvider.notifier).upsert(updatedRecord);
+    if (!_isPreviewMode) {
+      ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminAuditFeedProvider);
+    }
+
+    _pushAudit(
+      'admin.reading.focus_words.auto_assigned_v2',
+      '${reading.title} / ${detail.linkedWords.length} kelime',
+    );
+    _showSnackBar(
+      detail.linkedWords.isEmpty
+          ? 'Uygun odak kelime bulunamadi.'
+          : '${detail.linkedWords.length} odak kelime atandi.',
+    );
+  }
+
+  Future<void> _autoAssignFocusWordsForAllReadings(BuildContext context) async {
+    final shouldProceed = await _confirmAction(
+      context,
+      title: 'Tum okumalar icin odak kelimeleri otomatik ata',
+      description:
+          'Sadece odak kelimesi olmayan pasajlar islenecek, mevcut manuel linkler korunacak ve pasaj basina en fazla 10 kart atanacak.',
+      confirmLabel: 'Tumune Ata',
+    );
+    if (!shouldProceed) {
+      return;
+    }
+
+    setState(() {
+      _isBulkAssigningFocusWords = true;
+    });
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .autoAssignFocusWordsForAllReadings(
+          limit: 10,
+          onlyMissing: true,
+          includeUnpublished: true,
+        );
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _isBulkAssigningFocusWords = false;
+    });
+
+    if (result case AppFailure<AdminBulkReadingFocusWordAssignmentResult>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    final summary =
+        (result as AppSuccess<AdminBulkReadingFocusWordAssignmentResult>).value;
+    ref.read(adminReadingChangesProvider.notifier).clear();
+    ref.invalidate(adminReadingsProvider);
+    ref.invalidate(adminReadingPageProvider);
+    ref.invalidate(adminAuditFeedProvider);
+
+    _pushAudit(
+      'admin.reading.focus_words.auto_assigned_v2.bulk',
+      '${summary.assignedCount} pasaj guncellendi',
+    );
+    _showSnackBar(
+      '${summary.assignedCount} pasajda odak kelime atandi, ${summary.noMatchCount} pasajda eslesme bulunamadi.',
+    );
+    await _showBulkFocusWordSummary(this.context, summary);
   }
 
   Future<void> _openGrammarEditor(
@@ -1403,7 +1646,9 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           .read(adminGrammarChangesProvider.notifier)
           .remove(module.id.toString());
     } else {
-      ref.read(adminGrammarChangesProvider.notifier).remove(module.id.toString());
+      ref
+          .read(adminGrammarChangesProvider.notifier)
+          .remove(module.id.toString());
       ref.invalidate(adminGrammarModulesProvider);
       ref.invalidate(adminDashboardSnapshotProvider);
       ref.invalidate(adminAuditFeedProvider);
@@ -1583,6 +1828,49 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     return null;
   }
 
+  AdminReadingRecord _readingRecordFromDetail({
+    required AdminReadingDetail detail,
+    required List<AdminPackRecord> packs,
+    AdminReadingRecord? existing,
+  }) {
+    return (existing ??
+            AdminReadingRecord(
+              id: detail.metadata.id ?? _clientId('reading'),
+              packId: detail.packId,
+              packName: _packNameFromId(detail.packId, packs),
+              title: detail.title,
+              level: detail.level,
+              category: detail.category,
+              tagsRaw: detail.tagsRaw,
+              isPro: detail.isPro,
+              isPublished: detail.isPublished,
+              linkedWordCount: detail.linkedWords.length,
+              linkedWordsPreview: _linkedWordPreviewFromDetail(detail),
+              updatedAtLabel: 'az once',
+            ))
+        .copyWith(
+          packId: detail.packId,
+          packName: _packNameFromId(detail.packId, packs),
+          title: detail.title,
+          level: detail.level,
+          category: detail.category,
+          tagsRaw: detail.tagsRaw,
+          isPro: detail.isPro,
+          isPublished: detail.isPublished,
+          linkedWordCount: detail.linkedWords.length,
+          linkedWordsPreview: _linkedWordPreviewFromDetail(detail),
+          updatedAtLabel: 'az once',
+        );
+  }
+
+  List<String> _linkedWordPreviewFromDetail(AdminReadingDetail detail) {
+    return detail.linkedWords
+        .map((item) => item.enWord.trim())
+        .where((item) => item.isNotEmpty)
+        .take(3)
+        .toList(growable: false);
+  }
+
   Future<AdminGrammarModuleDetail?> _loadGrammarDetail(
     AdminGrammarRecord existing,
   ) async {
@@ -1623,6 +1911,75 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     return null;
   }
 
+  void _resetWordFilters() {
+    _wordsQueryController.clear();
+    setState(() {
+      _wordsFilters = _wordsFilters.copyWith(
+        query: '',
+        offset: 0,
+        clearPublished: true,
+      );
+    });
+  }
+
+  void _resetReadingFilters() {
+    _readingsQueryController.clear();
+    setState(() {
+      _readingsFilters = _readingsFilters.copyWith(
+        query: '',
+        offset: 0,
+        clearLevel: true,
+        clearPublished: true,
+      );
+    });
+  }
+
+  void _resetGrammarFilters() {
+    _grammarQueryController.clear();
+    setState(() {
+      _grammarFilters = _grammarFilters.copyWith(
+        query: '',
+        clearPublished: true,
+      );
+    });
+  }
+
+  Future<void> _showBulkFocusWordSummary(
+    BuildContext context,
+    AdminBulkReadingFocusWordAssignmentResult summary,
+  ) async {
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Toplu odak kelime atama sonucu'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Islenen pasaj: ${summary.processedCount}'),
+            Text('Atama yapilan pasaj: ${summary.assignedCount}'),
+            Text('Atlanan mevcut kayit: ${summary.skippedExistingCount}'),
+            Text('Eslesme bulunamayan: ${summary.noMatchCount}'),
+            Text('Hata alan: ${summary.errorCount}'),
+            if (summary.sampleFailures.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              const Text('Ornek hatalar:'),
+              const SizedBox(height: 6),
+              for (final item in summary.sampleFailures)
+                Text(item, maxLines: 2, overflow: TextOverflow.ellipsis),
+            ],
+          ],
+        ),
+        actions: [
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Tamam'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<bool> _confirmAction(
     BuildContext context, {
     required String title,
@@ -1660,14 +2017,14 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     if (packs.isEmpty) {
       return;
     }
-    final hasSelected = packs.any((item) => item.id == _selectedPackId);
-    if (_selectedPackId == null || !hasSelected) {
+    final hasSelected = packs.any((item) => item.id == _wordsFilters.packId);
+    if (_wordsFilters.packId == null || !hasSelected) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) {
           return;
         }
         setState(() {
-          _selectedPackId = packs.first.id;
+          _wordsFilters = _wordsFilters.copyWith(packId: packs.first.id);
         });
       });
     }
@@ -1920,6 +2277,7 @@ class _ReadingRow extends StatelessWidget {
     required this.packLabel,
     required this.onEdit,
     required this.onDelete,
+    required this.onAutoAssign,
     required this.onTogglePublished,
   });
 
@@ -1927,6 +2285,7 @@ class _ReadingRow extends StatelessWidget {
   final String packLabel;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
+  final VoidCallback? onAutoAssign;
   final ValueChanged<bool> onTogglePublished;
 
   @override
@@ -1960,6 +2319,17 @@ class _ReadingRow extends StatelessWidget {
                     context,
                   ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
                 ),
+                const SizedBox(height: 6),
+                Text(
+                  reading.linkedWordCount == 0
+                      ? 'Odak kelimeler: atanmamis'
+                      : 'Odak kelimeler (${reading.linkedWordCount}): ${reading.linkedWordsPreview.join(', ')}${reading.linkedWordCount > reading.linkedWordsPreview.length ? ' ...' : ''}',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
+                ),
               ],
             ),
           ),
@@ -1972,6 +2342,7 @@ class _ReadingRow extends StatelessWidget {
                 _MetricChip(label: reading.level ?? '-'),
                 _MetricChip(label: reading.category ?? '-'),
                 _MetricChip(label: reading.isPro ? 'pro' : 'free'),
+                _MetricChip(label: 'odak ${reading.linkedWordCount}'),
                 _MetricChip(label: 'guncel ${reading.updatedAtLabel}'),
                 _MetricChip(label: reading.isPublished ? 'yayinda' : 'taslak'),
               ],
@@ -1989,6 +2360,11 @@ class _ReadingRow extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Switch(value: reading.isPublished, onChanged: onTogglePublished),
+              IconButton(
+                onPressed: onAutoAssign,
+                tooltip: 'Odak kelimeleri otomatik ata',
+                icon: const Icon(Icons.auto_awesome_rounded),
+              ),
               IconButton(
                 onPressed: onEdit,
                 icon: const Icon(Icons.edit_outlined),
@@ -2298,20 +2674,13 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
     super.initState();
     final detail = widget.initialDetail;
     _packId =
-        detail.packId ??
-        (widget.packs.isEmpty ? null : widget.packs.first.id);
+        detail.packId ?? (widget.packs.isEmpty ? null : widget.packs.first.id);
     _enWordController = TextEditingController(text: detail.enWord);
-    _trMeaningController = TextEditingController(
-      text: detail.trMeaning,
-    );
+    _trMeaningController = TextEditingController(text: detail.trMeaning);
     _posController = TextEditingController(text: detail.pos);
     _posRawController = TextEditingController(text: detail.posRaw ?? '');
-    _exampleEnController = TextEditingController(
-      text: detail.exampleEn,
-    );
-    _exampleTrController = TextEditingController(
-      text: detail.exampleTr ?? '',
-    );
+    _exampleEnController = TextEditingController(text: detail.exampleEn);
+    _exampleTrController = TextEditingController(text: detail.exampleTr ?? '');
     _synonymsController = TextEditingController(text: detail.synonymsRaw ?? '');
     _antonymsController = TextEditingController(text: detail.antonymsRaw ?? '');
     _levelController = TextEditingController(text: detail.level ?? '');
@@ -2349,9 +2718,7 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
   Widget build(BuildContext context) {
     final metadata = widget.initialDetail.metadata;
     return AlertDialog(
-      title: Text(
-        metadata.id == null ? 'Yeni Kelime' : 'Kelimeyi Duzenle',
-      ),
+      title: Text(metadata.id == null ? 'Yeni Kelime' : 'Kelimeyi Duzenle'),
       content: SizedBox(
         width: 760,
         child: SingleChildScrollView(
@@ -2542,21 +2909,27 @@ class _WordEditorDialogState extends State<_WordEditorDialog> {
         FilledButton(
           onPressed: () {
             final publishAt = _parseDateTimeInput(_publishAtController.text);
-            final unpublishAt = _parseDateTimeInput(_unpublishAtController.text);
+            final unpublishAt = _parseDateTimeInput(
+              _unpublishAtController.text,
+            );
             if (_packId == null ||
                 _enWordController.text.trim().isEmpty ||
                 _trMeaningController.text.trim().isEmpty ||
                 _posController.text.trim().isEmpty ||
                 _exampleEnController.text.trim().isEmpty) {
               setState(() {
-                _validationMessage = 'Paket, EN kelime, TR anlam, POS ve example EN zorunlu.';
+                _validationMessage =
+                    'Paket, EN kelime, TR anlam, POS ve example EN zorunlu.';
               });
               return;
             }
-            if ((_publishAtController.text.trim().isNotEmpty && publishAt == null) ||
-                (_unpublishAtController.text.trim().isNotEmpty && unpublishAt == null)) {
+            if ((_publishAtController.text.trim().isNotEmpty &&
+                    publishAt == null) ||
+                (_unpublishAtController.text.trim().isNotEmpty &&
+                    unpublishAt == null)) {
               setState(() {
-                _validationMessage = 'Publish/Unpublish alanlari gecersiz tarih formatinda.';
+                _validationMessage =
+                    'Publish/Unpublish alanlari gecersiz tarih formatinda.';
               });
               return;
             }
@@ -2820,25 +3193,35 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
           onPressed: () {
             final title = _titleController.text.trim();
             final publishAt = _parseDateTimeInput(_publishAtController.text);
-            final unpublishAt = _parseDateTimeInput(_unpublishAtController.text);
+            final unpublishAt = _parseDateTimeInput(
+              _unpublishAtController.text,
+            );
             if (title.isEmpty) {
               setState(() {
                 _validationMessage = 'Baslik zorunlu.';
               });
               return;
             }
-            if ((_publishAtController.text.trim().isNotEmpty && publishAt == null) ||
-                (_unpublishAtController.text.trim().isNotEmpty && unpublishAt == null)) {
+            if ((_publishAtController.text.trim().isNotEmpty &&
+                    publishAt == null) ||
+                (_unpublishAtController.text.trim().isNotEmpty &&
+                    unpublishAt == null)) {
               setState(() {
-                _validationMessage = 'Publish/Unpublish alanlari gecersiz tarih formatinda.';
+                _validationMessage =
+                    'Publish/Unpublish alanlari gecersiz tarih formatinda.';
               });
               return;
             }
-            final sentencesJson = _decodeJsonArray(_sentencesJsonController.text);
-            final linkedWordsJson = _decodeJsonArray(_linkedWordsJsonController.text);
+            final sentencesJson = _decodeJsonArray(
+              _sentencesJsonController.text,
+            );
+            final linkedWordsJson = _decodeJsonArray(
+              _linkedWordsJsonController.text,
+            );
             if (sentencesJson == null || linkedWordsJson == null) {
               setState(() {
-                _validationMessage = 'Sentences JSON veya Linked Words JSON gecersiz.';
+                _validationMessage =
+                    'Sentences JSON veya Linked Words JSON gecersiz.';
               });
               return;
             }
@@ -2969,9 +3352,7 @@ class _GrammarEditorDialogState extends State<_GrammarEditorDialog> {
                   Expanded(
                     child: TextField(
                       controller: _sortOrderController,
-                      decoration: const InputDecoration(
-                        labelText: 'Sira',
-                      ),
+                      decoration: const InputDecoration(labelText: 'Sira'),
                       keyboardType: TextInputType.number,
                     ),
                   ),
@@ -3056,19 +3437,25 @@ class _GrammarEditorDialogState extends State<_GrammarEditorDialog> {
           onPressed: () {
             final title = _titleController.text.trim();
             final fileName = _fileNameController.text.trim();
-            final sortOrder = int.tryParse(_sortOrderController.text.trim()) ?? 1;
+            final sortOrder =
+                int.tryParse(_sortOrderController.text.trim()) ?? 1;
             final publishAt = _parseDateTimeInput(_publishAtController.text);
-            final unpublishAt = _parseDateTimeInput(_unpublishAtController.text);
+            final unpublishAt = _parseDateTimeInput(
+              _unpublishAtController.text,
+            );
             if (title.isEmpty || fileName.isEmpty) {
               setState(() {
                 _validationMessage = 'Modul basligi ve dosya adi zorunlu.';
               });
               return;
             }
-            if ((_publishAtController.text.trim().isNotEmpty && publishAt == null) ||
-                (_unpublishAtController.text.trim().isNotEmpty && unpublishAt == null)) {
+            if ((_publishAtController.text.trim().isNotEmpty &&
+                    publishAt == null) ||
+                (_unpublishAtController.text.trim().isNotEmpty &&
+                    unpublishAt == null)) {
               setState(() {
-                _validationMessage = 'Publish/Unpublish alanlari gecersiz tarih formatinda.';
+                _validationMessage =
+                    'Publish/Unpublish alanlari gecersiz tarih formatinda.';
               });
               return;
             }
@@ -3205,7 +3592,8 @@ class _ReadingImportDialogState extends State<_ReadingImportDialog> {
   void initState() {
     super.initState();
     _csvController = TextEditingController(
-      text: '''import_key,pack_name,title,level,category,tags_raw,is_pro,is_published,sentence_idx,sentence_en,sentence_tr,translations_json,linked_words_json
+      text:
+          '''import_key,pack_name,title,level,category,tags_raw,is_pro,is_published,sentence_idx,sentence_en,sentence_tr,translations_json,linked_words_json
 science-1,Starter Pack,Why Sleep Matters,B1,science,"sleep, health",false,true,1,"Sleep helps the brain recover.","Uyku beynin toparlanmasina yardim eder.","[{""provider"":""manual"",""target_lang"":""tr"",""translated_text"":""Uyku beynin toparlanmasina yardim eder.""}]","[{""word_id"":"""",""en_word"":""recover"",""tr_meaning"":""toparlanmak""}]"
 science-1,Starter Pack,Why Sleep Matters,B1,science,"sleep, health",false,true,2,"It also improves memory and focus.","Ayrica hafiza ve odagi gelistirir.","[]","[]"''',
     );
@@ -3278,7 +3666,8 @@ List<Map<String, dynamic>> _parseWordCsvRows(String rawValue) {
   final normalizedFirstRow = table.first
       .map(_normalizeCsvHeader)
       .toList(growable: false);
-  final hasHeader = normalizedFirstRow.contains('en_word') &&
+  final hasHeader =
+      normalizedFirstRow.contains('en_word') &&
       normalizedFirstRow.contains('tr_meaning');
 
   final headers = hasHeader
@@ -3341,9 +3730,7 @@ List<AdminReadingDetail>? _parseReadingCsvRows(
     return null;
   }
 
-  final packById = <String, String>{
-    for (final pack in packs) pack.id: pack.id,
-  };
+  final packById = <String, String>{for (final pack in packs) pack.id: pack.id};
   final packByName = <String, String>{
     for (final pack in packs) pack.name.trim().toLowerCase(): pack.id,
   };
@@ -3376,7 +3763,8 @@ List<AdminReadingDetail>? _parseReadingCsvRows(
       return null;
     }
 
-    final importKey = _emptyAsNull(record['import_key'] ?? '') ??
+    final importKey =
+        _emptyAsNull(record['import_key'] ?? '') ??
         '${resolvedPackId ?? '-'}|$title|${record['level'] ?? ''}|${record['category'] ?? ''}';
     final builder = grouped.putIfAbsent(
       importKey,
@@ -3391,7 +3779,9 @@ List<AdminReadingDetail>? _parseReadingCsvRows(
       ),
     );
 
-    final translationsJson = _decodeJsonArray(record['translations_json'] ?? '');
+    final translationsJson = _decodeJsonArray(
+      record['translations_json'] ?? '',
+    );
     final linkedWordsJson = _decodeJsonArray(record['linked_words_json'] ?? '');
     if (translationsJson == null || linkedWordsJson == null) {
       return null;
@@ -3496,10 +3886,7 @@ class _MetadataSummary extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Metadata',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        Text('Metadata', style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
         Text('id: ${metadata.id ?? '-'}'),
         Text('created: ${_formatMetadataDate(metadata.createdAt)}'),
@@ -3620,9 +4007,7 @@ List<Map<String, dynamic>>? _decodeJsonArray(String rawValue) {
   }
   return decoded
       .whereType<Map>()
-      .map(
-        (item) => item.map((key, value) => MapEntry(key.toString(), value)),
-      )
+      .map((item) => item.map((key, value) => MapEntry(key.toString(), value)))
       .toList(growable: false);
 }
 
@@ -3643,7 +4028,9 @@ DateTime? _parseDateTimeInput(String rawValue) {
   if (trimmed.isEmpty) {
     return null;
   }
-  final normalized = trimmed.contains('T') ? trimmed : trimmed.replaceFirst(' ', 'T');
+  final normalized = trimmed.contains('T')
+      ? trimmed
+      : trimmed.replaceFirst(' ', 'T');
   return DateTime.tryParse(normalized);
 }
 
@@ -3654,4 +4041,3 @@ String? _emptyAsNull(String rawValue) {
   }
   return trimmed;
 }
-

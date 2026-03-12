@@ -239,7 +239,9 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       await _invokeVoidRpc(
         'admin_import_readings',
         params: <String, dynamic>{
-          'p_payload': items.map((item) => item.toJson()).toList(growable: false),
+          'p_payload': items
+              .map((item) => item.toJson())
+              .toList(growable: false),
         },
       );
       return const AppSuccess<void>(null);
@@ -263,7 +265,9 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         'admin_get_reading_detail',
         params: <String, dynamic>{'p_passage_id': readingId},
       );
-      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+      return AppSuccess<AdminReadingDetail>(
+        AdminReadingDetail.fromJson(payload),
+      );
     } catch (error) {
       return AppFailure<AdminReadingDetail>('Okuma detayi yuklenemedi: $error');
     }
@@ -312,9 +316,74 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         'admin_upsert_reading_detail',
         params: <String, dynamic>{'p_payload': detail.toJson()},
       );
-      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+      return AppSuccess<AdminReadingDetail>(
+        AdminReadingDetail.fromJson(payload),
+      );
     } catch (error) {
       return AppFailure<AdminReadingDetail>('Okuma kaydedilemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<AdminReadingDetail>> autoAssignReadingFocusWords({
+    required String readingId,
+    int limit = 10,
+    bool replaceExisting = true,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminReadingDetail>(
+        'Preview modunda otomatik odak kelime atama desteklenmiyor.',
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_autolink_reading_focus_words_v2',
+        params: <String, dynamic>{
+          'p_passage_id': readingId,
+          'p_limit': limit,
+          'p_replace_existing': replaceExisting,
+        },
+      );
+      return AppSuccess<AdminReadingDetail>(
+        AdminReadingDetail.fromJson(payload),
+      );
+    } catch (error) {
+      return AppFailure<AdminReadingDetail>(
+        'Odak kelimeler otomatik atanamadi: $error',
+      );
+    }
+  }
+
+  @override
+  Future<AppResult<AdminBulkReadingFocusWordAssignmentResult>>
+  autoAssignFocusWordsForAllReadings({
+    int limit = 10,
+    bool onlyMissing = true,
+    bool includeUnpublished = true,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminBulkReadingFocusWordAssignmentResult>(
+        'Preview modunda toplu odak kelime atama desteklenmiyor.',
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_autolink_all_reading_focus_words_v2',
+        params: <String, dynamic>{
+          'p_limit': limit,
+          'p_only_missing': onlyMissing,
+          'p_include_unpublished': includeUnpublished,
+        },
+      );
+      return AppSuccess<AdminBulkReadingFocusWordAssignmentResult>(
+        AdminBulkReadingFocusWordAssignmentResult.fromJson(payload),
+      );
+    } catch (error) {
+      return AppFailure<AdminBulkReadingFocusWordAssignmentResult>(
+        'Toplu odak kelime atama tamamlanamadi: $error',
+      );
     }
   }
 
@@ -386,7 +455,9 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     );
     return switch (result) {
       AppSuccess<AdminGrammarModuleDetail>() => const AppSuccess<void>(null),
-      AppFailure<AdminGrammarModuleDetail>() => AppFailure<void>(result.message),
+      AppFailure<AdminGrammarModuleDetail>() => AppFailure<void>(
+        result.message,
+      ),
     };
   }
 

@@ -26,6 +26,18 @@ class FoundationSyncRepository implements SyncRepository {
 
   @override
   Future<AppResult<void>> syncIfStale(SyncScope scope) async {
+    return _runSync(scope, force: false);
+  }
+
+  @override
+  Future<AppResult<void>> syncNow(SyncScope scope) async {
+    return _runSync(scope, force: true);
+  }
+
+  Future<AppResult<void>> _runSync(
+    SyncScope scope, {
+    required bool force,
+  }) async {
     if (_database == null) {
       return const AppSuccess<void>(null);
     }
@@ -33,16 +45,20 @@ class FoundationSyncRepository implements SyncRepository {
     try {
       switch (scope) {
         case SyncScope.content:
-          await _syncContentScope();
+          await _syncContentScope(force: force);
           break;
         case SyncScope.progress:
           final flushedAny = await _flushPendingOutbox();
-          await _syncProgressSnapshots(force: flushedAny);
+          await _syncProgressSnapshots(force: force || flushedAny);
           await _touchScope(scope.name);
           break;
         case SyncScope.auth:
         case SyncScope.admin:
-          await _touchIfExpired(scope.name, _ttlFor(scope));
+          if (force) {
+            await _touchScope(scope.name);
+          } else {
+            await _touchIfExpired(scope.name, _ttlFor(scope));
+          }
           break;
       }
 
@@ -52,7 +68,7 @@ class FoundationSyncRepository implements SyncRepository {
     }
   }
 
-  Future<void> _syncContentScope() async {
+  Future<void> _syncContentScope({bool force = false}) async {
     final database = _database;
     final remoteClient = _remoteClient;
     if (database == null ||
@@ -81,7 +97,8 @@ class FoundationSyncRepository implements SyncRepository {
         }
       }
 
-      if (!_isExpired(meta?.lastPullAt, _ttlFor(SyncScope.content)) &&
+      if (!force &&
+          !_isExpired(meta?.lastPullAt, _ttlFor(SyncScope.content)) &&
           !needsBootstrap) {
         continue;
       }

@@ -63,45 +63,70 @@ void main() {
     },
   );
 
-  testWidgets(
-    'grammar timeline stacks cards on narrow layouts',
-    (tester) async {
-      final grammarRepository = _FakeGrammarRepository();
-      final progressRepository = _FakeProgressRepository();
+  testWidgets('grammar timeline stacks cards on narrow layouts', (
+    tester,
+  ) async {
+    final grammarRepository = _FakeGrammarRepository();
+    final progressRepository = _FakeProgressRepository();
 
-      await tester.binding.setSurfaceSize(const Size(420, 1400));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.binding.setSurfaceSize(const Size(420, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            studentGrammarRepositoryProvider.overrideWithValue(
-              grammarRepository,
-            ),
-            studentProgressRepositoryProvider.overrideWithValue(
-              progressRepository,
-            ),
-          ],
-          child: MaterialApp(
-            theme: AppTheme.light(),
-            home: const StudentGrammarPage(),
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          studentGrammarRepositoryProvider.overrideWithValue(grammarRepository),
+          studentProgressRepositoryProvider.overrideWithValue(
+            progressRepository,
           ),
+        ],
+        child: MaterialApp(
+          theme: AppTheme.light(),
+          home: const StudentGrammarPage(),
         ),
-      );
-      await tester.pumpAndSettle();
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      final firstCard = find.byKey(
-        const ValueKey<String>('grammar_timeline_card_57'),
-      );
-      final secondCard = find.byKey(
-        const ValueKey<String>('grammar_timeline_card_58'),
-      );
-      final firstOffset = tester.getTopLeft(firstCard);
-      final secondOffset = tester.getTopLeft(secondCard);
+    final firstCard = find.byKey(
+      const ValueKey<String>('grammar_timeline_card_57'),
+    );
+    final secondCard = find.byKey(
+      const ValueKey<String>('grammar_timeline_card_58'),
+    );
+    final firstOffset = tester.getTopLeft(firstCard);
+    final secondOffset = tester.getTopLeft(secondCard);
 
-      expect((firstOffset.dx - secondOffset.dx).abs(), lessThan(8));
-    },
-  );
+    expect((firstOffset.dx - secondOffset.dx).abs(), lessThan(8));
+  });
+
+  testWidgets('grammar page triggers a content refresh on first open', (
+    tester,
+  ) async {
+    final grammarRepository = _FakeGrammarRepository();
+    final progressRepository = _FakeProgressRepository();
+    final syncRepository = _FakeSyncRepository();
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          studentGrammarRepositoryProvider.overrideWithValue(grammarRepository),
+          studentProgressRepositoryProvider.overrideWithValue(
+            progressRepository,
+          ),
+          studentSyncRepositoryProvider.overrideWithValue(syncRepository),
+        ],
+        child: MaterialApp(
+          theme: AppTheme.light(),
+          home: const StudentGrammarPage(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(syncRepository.syncNowCalls, <SyncScope>[SyncScope.content]);
+    expect(find.text('Icerigi yenile'), findsOneWidget);
+  });
 
   testWidgets(
     'grammar detail uses DB detail and resumes by lastPageNo when pageId is stale',
@@ -138,17 +163,59 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Present Perfect'), findsOneWidget);
-      expect(
-        find.text('Which sentence is present perfect?'),
-        findsOneWidget,
-      );
+      expect(find.text('Which sentence is present perfect?'), findsOneWidget);
       expect(find.textContaining('Icerik hazirlaniyor'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'grammar detail advances after selecting the correct labeled answer',
+    (tester) async {
+      final grammarRepository = _FakeGrammarRepository.withLabeledQuestion();
+      final progressRepository = _FakeProgressRepository();
+
+      await tester.binding.setSurfaceSize(const Size(900, 1400));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            studentGrammarRepositoryProvider.overrideWithValue(
+              grammarRepository,
+            ),
+            studentProgressRepositoryProvider.overrideWithValue(
+              progressRepository,
+            ),
+          ],
+          child: MaterialApp(
+            theme: AppTheme.light(),
+            home: const StudentGrammarDetailPage(moduleId: 56),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(find.text('B) 3'));
+      await tester.tap(find.text('B) 3'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Sonraki sayfa'));
+      await tester.tap(find.text('Sonraki sayfa'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Second page'), findsOneWidget);
+      expect(progressRepository.enqueuedEvents, hasLength(1));
     },
   );
 }
 
 class _FakeGrammarRepository implements GrammarRepository {
-  const _FakeGrammarRepository();
+  const _FakeGrammarRepository({bool useLabeledQuestion = false})
+    : _useLabeledQuestion = useLabeledQuestion;
+
+  const _FakeGrammarRepository.withLabeledQuestion()
+    : this(useLabeledQuestion: true);
+
+  final bool _useLabeledQuestion;
 
   @override
   Future<List<GrammarModule>> fetchModules() async {
@@ -174,6 +241,44 @@ class _FakeGrammarRepository implements GrammarRepository {
 
   @override
   Future<GrammarModuleDetail?> fetchModuleDetail(int moduleId) async {
+    if (_useLabeledQuestion && moduleId == 56) {
+      return const GrammarModuleDetail(
+        module: GrammarModule(
+          id: 56,
+          sortOrder: 1,
+          title: 'Basics',
+          pageCount: 2,
+          icon: 'menu_book',
+          color: '#2563EB',
+        ),
+        pages: <GrammarPageDetail>[
+          GrammarPageDetail(
+            id: 1169,
+            pageNumber: 1,
+            title: 'Sentence basics',
+            htmlContent: '<p>Content</p>',
+            wordCount: 12,
+            questions: <GrammarQuestion>[
+              GrammarQuestion(
+                id: 1183,
+                sortOrder: 1,
+                prompt: 'How many noun phrases?',
+                options: <String>['A) 2', 'B) 3', 'C) 4', 'D) 5'],
+                correctAnswer: 'B) 3',
+              ),
+            ],
+          ),
+          GrammarPageDetail(
+            id: 1170,
+            pageNumber: 2,
+            title: 'Second page',
+            htmlContent: '<p>Next content</p>',
+            wordCount: 8,
+          ),
+        ],
+      );
+    }
+
     if (moduleId != 57) {
       return null;
     }
@@ -220,14 +325,14 @@ class _FakeGrammarRepository implements GrammarRepository {
 }
 
 class _FakeProgressRepository implements ProgressRepository {
-  _FakeProgressRepository({
-    this.grammarProgress = const <GrammarProgress>[],
-  });
+  _FakeProgressRepository({this.grammarProgress = const <GrammarProgress>[]});
 
   final List<GrammarProgress> grammarProgress;
+  final List<OutboxEvent> enqueuedEvents = <OutboxEvent>[];
 
   @override
   Future<AppResult<void>> enqueue(OutboxEvent event) async {
+    enqueuedEvents.add(event);
     return const AppSuccess<void>(null);
   }
 
@@ -241,4 +346,19 @@ class _FakeProgressRepository implements ProgressRepository {
   @override
   Future<List<WordProgress>> fetchWordProgress() async =>
       const <WordProgress>[];
+}
+
+class _FakeSyncRepository implements SyncRepository {
+  final List<SyncScope> syncNowCalls = <SyncScope>[];
+
+  @override
+  Future<AppResult<void>> syncIfStale(SyncScope scope) async {
+    return const AppSuccess<void>(null);
+  }
+
+  @override
+  Future<AppResult<void>> syncNow(SyncScope scope) async {
+    syncNowCalls.add(scope);
+    return const AppSuccess<void>(null);
+  }
 }
