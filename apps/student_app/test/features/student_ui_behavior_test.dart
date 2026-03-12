@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
+import 'package:student_app/src/core/student_access_controller.dart';
 import 'package:student_app/src/core/student_providers.dart';
 import 'package:student_app/src/features/common/page_parts.dart';
 import 'package:student_app/src/features/readings/reading_detail_page.dart';
@@ -13,6 +15,9 @@ import 'package:student_app/src/features/words/flashcards_page.dart';
 import 'package:student_app/src/features/words/mini_test_page.dart';
 import 'package:student_app/src/features/words/word_pack_detail_page.dart';
 import 'package:student_app/src/features/words/words_page.dart';
+
+import '../support/fake_reading_engagement_repository.dart';
+import '../support/fake_word_favorite_repository.dart';
 
 void main() {
   testWidgets('admin launcher opens admin console callback', (tester) async {
@@ -200,6 +205,155 @@ void main() {
   });
 
   testWidgets(
+    'readings page filters saved and favorite items from hydrated state',
+    (tester) async {
+      final container = await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/readings',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/readings',
+            builder: (context, state) => const StudentReadingsPage(),
+          ),
+        ],
+        overrides: <Override>[
+          studentReadingRepositoryProvider.overrideWithValue(
+            _FakeReadingRepository(
+              readings: const <ReadingPassage>[
+                ReadingPassage(
+                  id: 'reading-silent-ocean',
+                  title: 'Saved Reading',
+                  level: 'A2',
+                  category: 'Science',
+                ),
+                ReadingPassage(
+                  id: 'reading-coffee-shops',
+                  title: 'Favorite Reading',
+                  level: 'A2',
+                  category: 'Daily Life',
+                ),
+                ReadingPassage(
+                  id: 'reading-brief-history',
+                  title: 'Neutral Reading',
+                  level: 'B1',
+                  category: 'History',
+                ),
+              ],
+            ),
+          ),
+          studentReadingEngagementRepositoryProvider.overrideWithValue(
+            const FakeReadingEngagementRepository(<ReadingEngagement>[
+              ReadingEngagement(
+                passageId: 'reading-silent-ocean',
+                isBookmarked: true,
+                isFavorite: false,
+              ),
+              ReadingEngagement(
+                passageId: 'reading-coffee-shops',
+                isBookmarked: false,
+                isFavorite: true,
+              ),
+            ]),
+          ),
+        ],
+      );
+
+      container.read(studentAccessProvider.notifier).setAnonymous(false);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Kayitlilar'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Saved Reading'), findsOneWidget);
+      expect(find.text('Favorite Reading'), findsNothing);
+      expect(find.text('Neutral Reading'), findsNothing);
+
+      await tester.tap(find.text('Favoriler'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Favorite Reading'), findsOneWidget);
+      expect(find.text('Saved Reading'), findsNothing);
+    },
+  );
+
+  testWidgets('readings page keeps Kesfet chip in all readings only', (
+    tester,
+  ) async {
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/readings',
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/readings',
+          builder: (context, state) => const StudentReadingsPage(),
+        ),
+      ],
+      overrides: <Override>[
+        studentReadingRepositoryProvider.overrideWithValue(
+          _FakeReadingRepository(
+            readings: const <ReadingPassage>[
+              ReadingPassage(
+                id: 'reading-silent-ocean',
+                title: 'Incomplete Reading',
+                level: 'A2',
+                category: 'Science',
+              ),
+              ReadingPassage(
+                id: 'reading-coffee-shops',
+                title: 'Completed Reading',
+                level: 'A2',
+                category: 'Daily Life',
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+
+    await tester.pumpAndSettle();
+    expect(find.text('Kesfet'), findsOneWidget);
+
+    await tester.tap(find.text('Kesfet'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Incomplete Reading'), findsOneWidget);
+    expect(find.text('Completed Reading'), findsNothing);
+
+    await tester.tap(find.text('Kayitlilar'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Kesfet'), findsNothing);
+  });
+
+  testWidgets(
+    'anonymous readings page shows auth state for saved and favorites',
+    (tester) async {
+      await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/readings',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/readings',
+            builder: (context, state) => const StudentReadingsPage(),
+          ),
+        ],
+      );
+
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Kayitlilar'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Kayitlilar giris gerektirir'), findsOneWidget);
+      expect(find.text('Profile Git'), findsOneWidget);
+
+      await tester.tap(find.text('Favoriler'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Favoriler giris gerektirir'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
     'reading detail uses repository sentences, direct translation and hides placeholder summary',
     (tester) async {
       await _pumpStudentBehaviorApp(
@@ -376,53 +530,317 @@ void main() {
   testWidgets(
     'focus words open the same popup and related words resolve to card or dictionary',
     (tester) async {
+      await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/readings/reading-focus',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/readings',
+            builder: (context, state) => const StudentReadingsPage(),
+          ),
+          GoRoute(
+            path: '/readings/:readingId',
+            builder: (context, state) => StudentReadingDetailPage(
+              readingId: state.pathParameters['readingId']!,
+            ),
+          ),
+        ],
+        overrides: <Override>[
+          studentReadingRepositoryProvider.overrideWithValue(
+            _FakeReadingRepository(
+              readings: const <ReadingPassage>[
+                ReadingPassage(
+                  id: 'reading-focus',
+                  title: '102-Focus Passage',
+                  level: 'B1',
+                  category: 'Science',
+                ),
+              ],
+              sectionsByPassage: const <String, List<ReadingSentence>>{
+                'reading-focus': <ReadingSentence>[
+                  ReadingSentence(
+                    passageId: 'reading-focus',
+                    index: 1,
+                    englishText: 'Orbit shapes every mission.',
+                    turkishText: 'Yorunge her gorevi sekillendirir.',
+                  ),
+                ],
+              },
+              focusWordsByPassage: const <String, List<ReadingFocusWord>>{
+                'reading-focus': <ReadingFocusWord>[
+                  ReadingFocusWord(
+                    wordId: 'word-1',
+                    enWord: 'orbit',
+                    trMeaning: 'yorunge',
+                    pos: 'n.',
+                  ),
+                ],
+              },
+            ),
+          ),
+          studentWordRepositoryProvider.overrideWithValue(
+            const _FakeWordRepository(<WordEntry>[
+              WordEntry(
+                id: 'word-1',
+                packId: 'pack-1',
+                enWord: 'orbit',
+                trMeaning: 'yorunge',
+                pos: 'n.',
+                exampleEn: 'The satellite stays in orbit.',
+                exampleTr: 'Uydu yorungede kalir.',
+                synonymsRaw: 'path, track',
+                antonymsRaw: 'standstill',
+              ),
+              WordEntry(
+                id: 'word-2',
+                packId: 'pack-1',
+                enWord: 'path',
+                trMeaning: 'rota',
+                pos: 'n.',
+                exampleEn: 'The rover followed a narrow path.',
+                exampleTr: 'Gezgin dar bir rotayi takip etti.',
+              ),
+            ]),
+          ),
+          studentDictionaryRepositoryProvider.overrideWithValue(
+            const _FakeDictionaryRepository(<String, DictionaryEntry?>{
+              'standstill': DictionaryEntry(
+                enWord: 'standstill',
+                trMeaning: 'durma noktasi',
+                pos: 'n.',
+              ),
+            }),
+          ),
+        ],
+      );
+
+      await tester.pumpAndSettle();
+
+      final focusTokenFinder = find.text('Orbit');
+      await tester.ensureVisible(focusTokenFinder);
+      await tester.tap(focusTokenFinder);
+      await tester.pumpAndSettle();
+
+      expect(find.text('The satellite stays in orbit.'), findsOneWidget);
+      expect(find.text('Uydu yorungede kalir.'), findsOneWidget);
+      expect(find.text('path'), findsOneWidget);
+      expect(find.text('standstill'), findsOneWidget);
+
+      await tester.tap(find.text('path'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('rota'), findsOneWidget);
+      expect(find.text('The rover followed a narrow path.'), findsOneWidget);
+      expect(find.text('Uydu yorungede kalir.'), findsNothing);
+
+      await tester.tap(
+        find.byKey(const ValueKey<String>('word_card_dismiss_area')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('rota'), findsNothing);
+
+      final focusPanelFinder = find.text('orbit').last;
+      await tester.ensureVisible(focusPanelFinder);
+      await tester.tap(focusPanelFinder);
+      await tester.pumpAndSettle();
+
+      expect(find.text('The satellite stays in orbit.'), findsOneWidget);
+      expect(find.text('Uydu yorungede kalir.'), findsOneWidget);
+
+      await tester.tap(find.text('standstill'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Sozluk cevirisi'), findsOneWidget);
+      expect(find.text('durma noktasi'), findsOneWidget);
+      expect(find.text('The satellite stays in orbit.'), findsNothing);
+
+      await tester.tap(
+        find.byKey(const ValueKey<String>('word_card_close_button')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('durma noktasi'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'anonymous reading detail disables bookmark and favorite actions',
+    (tester) async {
+      await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/readings/reading-silent-ocean',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/readings',
+            builder: (context, state) => const StudentReadingsPage(),
+          ),
+          GoRoute(
+            path: '/readings/:readingId',
+            builder: (context, state) => StudentReadingDetailPage(
+              readingId: state.pathParameters['readingId']!,
+            ),
+          ),
+        ],
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(find.text('Kaydetmek icin giris yap'), findsOneWidget);
+      final bookmarkButton = tester.widget<IconButton>(
+        find.ancestor(
+          of: find.byIcon(Icons.bookmark_border_rounded),
+          matching: find.byType(IconButton),
+        ),
+      );
+      final favoriteButton = tester.widget<IconButton>(
+        find.ancestor(
+          of: find.byIcon(Icons.favorite_border_rounded),
+          matching: find.byType(IconButton),
+        ),
+      );
+      expect(bookmarkButton.onPressed, isNull);
+      expect(favoriteButton.onPressed, isNull);
+    },
+  );
+
+  testWidgets(
+    'words page favorites view sorts hydrated favorites and filters active results',
+    (tester) async {
+      await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/words',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/words',
+            builder: (context, state) => const StudentWordsPage(),
+          ),
+        ],
+        overrides: <Override>[
+          studentWordRepositoryProvider.overrideWithValue(
+            const _FakeWordRepository(<WordEntry>[
+              WordEntry(
+                id: 'word-1',
+                packId: 'pack-1',
+                enWord: 'orbit',
+                trMeaning: 'yorunge',
+                pos: 'n.',
+                exampleEn: 'The satellite stays in orbit.',
+              ),
+              WordEntry(
+                id: 'word-2',
+                packId: 'pack-1',
+                enWord: 'array',
+                trMeaning: 'dizi',
+                pos: 'n.',
+                exampleEn: 'The data sits in an array.',
+              ),
+              WordEntry(
+                id: 'word-3',
+                packId: 'pack-1',
+                enWord: 'calm',
+                trMeaning: 'sakin',
+                pos: 'adj.',
+              ),
+            ]),
+          ),
+          studentWordFavoriteRepositoryProvider.overrideWithValue(
+            FakeWordFavoriteRepository(
+              items: <WordFavorite>[
+                WordFavorite(
+                  wordId: 'word-2',
+                  isFavorite: true,
+                  favoritedAt: DateTime.utc(2026, 3, 1),
+                ),
+                WordFavorite(
+                  wordId: 'word-1',
+                  isFavorite: true,
+                  favoritedAt: DateTime.utc(2026, 3, 2),
+                ),
+              ],
+            ),
+          ),
+          _identifiedAccessOverride(),
+        ],
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Favoriler'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('orbit'), findsOneWidget);
+      expect(find.text('array'), findsOneWidget);
+      expect(find.text('calm'), findsNothing);
+      expect(
+        tester.getTopLeft(find.text('orbit')).dy,
+        lessThan(tester.getTopLeft(find.text('array')).dy),
+      );
+
+      await tester.ensureVisible(find.text('orbit'));
+      await tester.tap(find.text('orbit'));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(const ValueKey<String>('word_card_close_button')),
+        findsOneWidget,
+      );
+      expect(find.text('The satellite stays in orbit.'), findsOneWidget);
+
+      await tester.tap(
+        find.byKey(const ValueKey<String>('word_card_close_button')),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextField).first, 'dizi');
+      await tester.pumpAndSettle();
+
+      expect(find.text('array'), findsOneWidget);
+      expect(find.text('orbit'), findsNothing);
+    },
+  );
+
+  testWidgets('anonymous words page shows auth state for favorites', (
+    tester,
+  ) async {
     await _pumpStudentBehaviorApp(
       tester,
-      initialLocation: '/readings/reading-focus',
+      initialLocation: '/words',
       routes: <RouteBase>[
         GoRoute(
-          path: '/readings',
-          builder: (context, state) => const StudentReadingsPage(),
+          path: '/words',
+          builder: (context, state) => const StudentWordsPage(),
         ),
+      ],
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Favoriler'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Favoriler giris gerektirir'), findsOneWidget);
+    expect(find.text('Profile Git'), findsOneWidget);
+  });
+
+  testWidgets('word card popup toggles favorite state immediately', (
+    tester,
+  ) async {
+    final favoriteRepository = FakeWordFavoriteRepository();
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/words/packs/pack-1',
+      routes: <RouteBase>[
         GoRoute(
-          path: '/readings/:readingId',
-          builder: (context, state) => StudentReadingDetailPage(
-            readingId: state.pathParameters['readingId']!,
+          path: '/words/packs/:packId',
+          builder: (context, state) => StudentWordPackDetailPage(
+            packId: state.pathParameters['packId']!,
           ),
         ),
       ],
       overrides: <Override>[
-        studentReadingRepositoryProvider.overrideWithValue(
-          _FakeReadingRepository(
-            readings: const <ReadingPassage>[
-              ReadingPassage(
-                id: 'reading-focus',
-                title: '102-Focus Passage',
-                level: 'B1',
-                category: 'Science',
-              ),
-            ],
-            sectionsByPassage: const <String, List<ReadingSentence>>{
-              'reading-focus': <ReadingSentence>[
-                ReadingSentence(
-                  passageId: 'reading-focus',
-                  index: 1,
-                  englishText: 'Orbit shapes every mission.',
-                  turkishText: 'Yorunge her gorevi sekillendirir.',
-                ),
-              ],
-            },
-            focusWordsByPassage: const <String, List<ReadingFocusWord>>{
-              'reading-focus': <ReadingFocusWord>[
-                ReadingFocusWord(
-                  wordId: 'word-1',
-                  enWord: 'orbit',
-                  trMeaning: 'yorunge',
-                  pos: 'n.',
-                ),
-              ],
-            },
-          ),
+        studentPackRepositoryProvider.overrideWithValue(
+          const _FakePackRepository(<ContentPack>[
+            ContentPack(id: 'pack-1', name: 'Pack One', wordCount: 1),
+          ]),
         ),
         studentWordRepositoryProvider.overrideWithValue(
           const _FakeWordRepository(<WordEntry>[
@@ -432,82 +850,130 @@ void main() {
               enWord: 'orbit',
               trMeaning: 'yorunge',
               pos: 'n.',
-              exampleEn: 'The satellite stays in orbit.',
-              exampleTr: 'Uydu yorungede kalir.',
-              synonymsRaw: 'path, track',
-              antonymsRaw: 'standstill',
-            ),
-            WordEntry(
-              id: 'word-2',
-              packId: 'pack-1',
-              enWord: 'path',
-              trMeaning: 'rota',
-              pos: 'n.',
-              exampleEn: 'The rover followed a narrow path.',
-              exampleTr: 'Gezgin dar bir rotayi takip etti.',
             ),
           ]),
         ),
-        studentDictionaryRepositoryProvider.overrideWithValue(
-          const _FakeDictionaryRepository(<String, DictionaryEntry?>{
-            'standstill': DictionaryEntry(
-              enWord: 'standstill',
-              trMeaning: 'durma noktasi',
+        studentWordFavoriteRepositoryProvider.overrideWithValue(
+          favoriteRepository,
+        ),
+        _identifiedAccessOverride(),
+      ],
+    );
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('orbit'));
+    await tester.tap(find.text('orbit'));
+    await tester.pumpAndSettle();
+
+    final favoriteFinder = find.byKey(
+      const ValueKey<String>('word_card_favorite_word-1'),
+    );
+    expect(tester.widget<IconButton>(favoriteFinder).onPressed, isNotNull);
+    await tester.tap(favoriteFinder);
+    await tester.pumpAndSettle();
+
+    expect(favoriteRepository.favoriteWrites, [('word-1', true)]);
+    expect(find.byIcon(Icons.favorite_rounded), findsOneWidget);
+  });
+
+  testWidgets('anonymous word card popup disables favorite action', (
+    tester,
+  ) async {
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/words/packs/pack-1',
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/words/packs/:packId',
+          builder: (context, state) => StudentWordPackDetailPage(
+            packId: state.pathParameters['packId']!,
+          ),
+        ),
+      ],
+      overrides: <Override>[
+        studentPackRepositoryProvider.overrideWithValue(
+          const _FakePackRepository(<ContentPack>[
+            ContentPack(id: 'pack-1', name: 'Pack One', wordCount: 1),
+          ]),
+        ),
+        studentWordRepositoryProvider.overrideWithValue(
+          const _FakeWordRepository(<WordEntry>[
+            WordEntry(
+              id: 'word-1',
+              packId: 'pack-1',
+              enWord: 'orbit',
+              trMeaning: 'yorunge',
               pos: 'n.',
             ),
-          }),
+          ]),
         ),
       ],
     );
 
     await tester.pumpAndSettle();
-
-    final focusTokenFinder = find.text('Orbit');
-    await tester.ensureVisible(focusTokenFinder);
-    await tester.tap(focusTokenFinder);
+    await tester.ensureVisible(find.text('orbit'));
+    await tester.tap(find.text('orbit'));
     await tester.pumpAndSettle();
 
-    expect(find.text('The satellite stays in orbit.'), findsOneWidget);
-    expect(find.text('Uydu yorungede kalir.'), findsOneWidget);
-    expect(find.text('path'), findsOneWidget);
-    expect(find.text('standstill'), findsOneWidget);
-
-    await tester.tap(find.text('path'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('rota'), findsOneWidget);
-    expect(find.text('The rover followed a narrow path.'), findsOneWidget);
-    expect(find.text('Uydu yorungede kalir.'), findsNothing);
-
-    await tester.tap(
-      find.byKey(const ValueKey<String>('word_card_dismiss_area')),
+    expect(find.text('Favoriye eklemek icin giris yap'), findsOneWidget);
+    final favoriteButton = tester.widget<IconButton>(
+      find.byKey(const ValueKey<String>('word_card_favorite_word-1')),
     );
-    await tester.pumpAndSettle();
-
-    expect(find.text('rota'), findsNothing);
-
-    final focusPanelFinder = find.text('orbit').last;
-    await tester.ensureVisible(focusPanelFinder);
-    await tester.tap(focusPanelFinder);
-    await tester.pumpAndSettle();
-
-    expect(find.text('The satellite stays in orbit.'), findsOneWidget);
-    expect(find.text('Uydu yorungede kalir.'), findsOneWidget);
-
-    await tester.tap(find.text('standstill'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Sozluk cevirisi'), findsOneWidget);
-    expect(find.text('durma noktasi'), findsOneWidget);
-    expect(find.text('The satellite stays in orbit.'), findsNothing);
-
-    await tester.tap(
-      find.byKey(const ValueKey<String>('word_card_close_button')),
-    );
-    await tester.pumpAndSettle();
-
-    expect(find.text('durma noktasi'), findsNothing);
+    expect(favoriteButton.onPressed, isNull);
   });
+
+  testWidgets(
+    'flashcard favorite toggle updates state without changing study flow',
+    (tester) async {
+      final favoriteRepository = FakeWordFavoriteRepository();
+      await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/words/flashcards',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/words/flashcards',
+            builder: (context, state) => StudentFlashcardsPage(
+              packId: state.uri.queryParameters['packId'],
+            ),
+          ),
+        ],
+        overrides: <Override>[
+          studentWordRepositoryProvider.overrideWithValue(
+            const _FakeWordRepository(<WordEntry>[
+              WordEntry(
+                id: 'word-1',
+                packId: 'pack-1',
+                enWord: 'orbit',
+                trMeaning: 'yorunge',
+                pos: 'n.',
+              ),
+            ]),
+          ),
+          studentWordFavoriteRepositoryProvider.overrideWithValue(
+            favoriteRepository,
+          ),
+          _identifiedAccessOverride(),
+        ],
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('orbit'), findsOneWidget);
+      expect(find.text('Bilmiyorum'), findsOneWidget);
+
+      final favoriteFinder = find.byKey(
+        const ValueKey<String>('flashcard_favorite_word-1'),
+      );
+      final favoriteButton = tester.widget<IconButton>(favoriteFinder);
+      expect(favoriteButton.onPressed, isNotNull);
+      favoriteButton.onPressed!.call();
+      await tester.pumpAndSettle();
+
+      expect(favoriteRepository.favoriteWrites, [('word-1', true)]);
+      expect(find.text('orbit'), findsOneWidget);
+      expect(find.text('Bilmiyorum'), findsOneWidget);
+      expect(find.byIcon(Icons.favorite_rounded), findsOneWidget);
+    },
+  );
 
   testWidgets('words page hides zero-word packs from student listing', (
     tester,
@@ -538,7 +1004,7 @@ void main() {
   });
 }
 
-Future<void> _pumpStudentBehaviorApp(
+Future<ProviderContainer> _pumpStudentBehaviorApp(
   WidgetTester tester, {
   required String initialLocation,
   required List<RouteBase> routes,
@@ -568,6 +1034,12 @@ Future<void> _pumpStudentBehaviorApp(
         studentReadingRepositoryProvider.overrideWithValue(
           const FoundationReadingRepository.preview(),
         ),
+        studentReadingEngagementRepositoryProvider.overrideWithValue(
+          FoundationReadingEngagementRepository.preview(),
+        ),
+        studentWordFavoriteRepositoryProvider.overrideWithValue(
+          FoundationWordFavoriteRepository.preview(),
+        ),
         studentSyncRepositoryProvider.overrideWithValue(
           const FoundationSyncRepository.preview(),
         ),
@@ -581,6 +1053,22 @@ Future<void> _pumpStudentBehaviorApp(
         darkTheme: AppTheme.dark(),
         routerConfig: router,
       ),
+    ),
+  );
+
+  return ProviderScope.containerOf(tester.element(find.byType(MaterialApp)));
+}
+
+Override _identifiedAccessOverride() {
+  final accessContext = AccessContext.preview(
+    role: AppRole.user,
+    plan: EntitlementPlan.free,
+    isAnonymous: false,
+  );
+  return studentAccessProvider.overrideWith(
+    (ref) => StudentAccessController(
+      authRepository: _StaticAuthRepository(accessContext),
+      initialAccessContext: accessContext,
     ),
   );
 }
@@ -605,7 +1093,75 @@ class _FakeWordRepository implements WordRepository {
   @override
   Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
     final idSet = ids.toSet();
-    return words.where((item) => idSet.contains(item.id)).toList(growable: false);
+    return words
+        .where((item) => idSet.contains(item.id))
+        .toList(growable: false);
+  }
+}
+
+class _StaticAuthRepository implements AuthRepository {
+  const _StaticAuthRepository(this.accessContext);
+
+  final AccessContext accessContext;
+
+  @override
+  Future<AuthSession> restoreSession() async => accessContext.session;
+
+  @override
+  Future<AppResult<AuthSession>> refreshSession() async {
+    return AppSuccess<AuthSession>(accessContext.session);
+  }
+
+  @override
+  Stream<AccessContext> watchAccessContext() =>
+      const Stream<AccessContext>.empty();
+
+  @override
+  Future<AppResult<AuthSession>> signInAnonymously() async {
+    return AppSuccess<AuthSession>(accessContext.session);
+  }
+
+  @override
+  Future<AppResult<AuthSession>> signUpWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    return AppSuccess<AuthSession>(accessContext.session);
+  }
+
+  @override
+  Future<AppResult<AuthSession>> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    return AppSuccess<AuthSession>(accessContext.session);
+  }
+
+  @override
+  Future<AppResult<void>> resendSignUpConfirmation({
+    required String email,
+  }) async {
+    return const AppSuccess<void>(null);
+  }
+
+  @override
+  Future<AppResult<AuthSession>> updateDisplayName({
+    required String displayName,
+  }) async {
+    return AppSuccess<AuthSession>(accessContext.session);
+  }
+
+  @override
+  Future<AppResult<AuthSession>> upgradeAnonymousWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    return AppSuccess<AuthSession>(accessContext.session);
+  }
+
+  @override
+  Future<AppResult<void>> signOut() async {
+    return const AppSuccess<void>(null);
   }
 }
 

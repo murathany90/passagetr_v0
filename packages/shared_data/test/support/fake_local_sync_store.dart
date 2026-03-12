@@ -105,6 +105,27 @@ class FakeLocalSyncStore implements LocalSyncStore {
   }
 
   @override
+  Future<void> replaceProgressSnapshots({
+    required String entityType,
+    required List<ProgressSnapshotRecord> records,
+  }) async {
+    _progressSnapshots.removeWhere(
+      (_, snapshot) => snapshot.entityType == entityType,
+    );
+    for (final record in records) {
+      await upsertProgressSnapshot(record);
+    }
+  }
+
+  @override
+  Future<void> deleteProgressSnapshot({
+    required String entityType,
+    required String entityId,
+  }) async {
+    _progressSnapshots.remove(_progressKey(entityType, entityId));
+  }
+
+  @override
   Future<void> updateOutboxStatus({
     required String eventId,
     required String status,

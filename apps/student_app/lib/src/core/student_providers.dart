@@ -13,6 +13,7 @@ import 'student_reading_engagement_controller.dart';
 import 'tts/student_tts_controller.dart';
 import 'tts/student_tts_engine.dart';
 import 'student_translation_controller.dart';
+import 'student_word_favorite_controller.dart';
 import 'student_word_progress_controller.dart';
 
 final studentAppConfigProvider = Provider<AppConfig>((ref) {
@@ -164,9 +165,8 @@ final studentTtsEngineProvider = Provider<StudentTtsEngine>((ref) {
 
 final studentTtsControllerProvider =
     StateNotifierProvider<StudentTtsController, StudentTtsState>(
-      (ref) => StudentTtsController(
-        engine: ref.watch(studentTtsEngineProvider),
-      ),
+      (ref) =>
+          StudentTtsController(engine: ref.watch(studentTtsEngineProvider)),
     );
 
 final studentIsWordSpeakingProvider = Provider.family<bool, String>((
@@ -217,6 +217,47 @@ final studentProgressRepositoryProvider = Provider<ProgressRepository>(
         ),
 );
 
+final studentReadingEngagementRepositoryProvider =
+    Provider<ReadingEngagementRepository>((ref) {
+      final config = ref.watch(studentAppConfigProvider);
+      final accessContext = ref.watch(studentAccessProvider);
+      if (!config.supabaseEnabled) {
+        return FoundationReadingEngagementRepository.preview(
+          accessContext: accessContext,
+        );
+      }
+
+      return FoundationReadingEngagementRepository(
+        database: kIsWeb ? null : ref.watch(studentAppDatabaseProvider),
+        progressRepository: kIsWeb
+            ? null
+            : ref.watch(studentProgressRepositoryProvider),
+        config: config,
+        accessContext: accessContext,
+      );
+    });
+
+final studentWordFavoriteRepositoryProvider = Provider<WordFavoriteRepository>((
+  ref,
+) {
+  final config = ref.watch(studentAppConfigProvider);
+  final accessContext = ref.watch(studentAccessProvider);
+  if (!config.supabaseEnabled) {
+    return FoundationWordFavoriteRepository.preview(
+      accessContext: accessContext,
+    );
+  }
+
+  return FoundationWordFavoriteRepository(
+    database: kIsWeb ? null : ref.watch(studentAppDatabaseProvider),
+    progressRepository: kIsWeb
+        ? null
+        : ref.watch(studentProgressRepositoryProvider),
+    config: config,
+    accessContext: accessContext,
+  );
+});
+
 final studentWordProgressProvider =
     StateNotifierProvider<
       StudentWordProgressController,
@@ -227,6 +268,26 @@ final studentWordProgressProvider =
         accessContext: ref.watch(studentAccessProvider),
       ),
     );
+
+final studentWordFavoritesProvider =
+    StateNotifierProvider<
+      StudentWordFavoriteController,
+      Map<String, WordFavorite>
+    >(
+      (ref) => StudentWordFavoriteController(
+        favoriteRepository: ref.watch(studentWordFavoriteRepositoryProvider),
+        syncRepository: ref.watch(studentSyncRepositoryProvider),
+        accessContext: ref.watch(studentAccessProvider),
+      ),
+    );
+
+final studentWordFavoriteByIdProvider = Provider.family<WordFavorite, String>((
+  ref,
+  wordId,
+) {
+  return ref.watch(studentWordFavoritesProvider)[wordId] ??
+      WordFavorite.empty(wordId: wordId);
+});
 
 final studentGrammarProgressProvider =
     StateNotifierProvider<
@@ -241,12 +302,22 @@ final studentGrammarProgressProvider =
 final studentReadingEngagementProvider =
     StateNotifierProvider<
       StudentReadingEngagementController,
-      Map<String, ReadingEngagementState>
+      Map<String, ReadingEngagement>
     >(
       (ref) => StudentReadingEngagementController(
-        progressRepository: ref.watch(studentProgressRepositoryProvider),
+        engagementRepository: ref.watch(
+          studentReadingEngagementRepositoryProvider,
+        ),
+        syncRepository: ref.watch(studentSyncRepositoryProvider),
+        accessContext: ref.watch(studentAccessProvider),
       ),
     );
+
+final studentReadingEngagementByIdProvider =
+    Provider.family<ReadingEngagement, String>((ref, readingId) {
+      return ref.watch(studentReadingEngagementProvider)[readingId] ??
+          ReadingEngagement.empty(passageId: readingId);
+    });
 
 final studentTranslationProvider =
     StateNotifierProvider<StudentTranslationController, Map<String, String>>((
@@ -297,7 +368,10 @@ final studentReadingFocusWordsProvider =
     });
 
 final studentReadingWordCardsProvider =
-    FutureProvider.family<Map<String, WordEntry>, String>((ref, readingId) async {
+    FutureProvider.family<Map<String, WordEntry>, String>((
+      ref,
+      readingId,
+    ) async {
       final focusWords = await ref.watch(
         studentReadingFocusWordsProvider(readingId).future,
       );
@@ -313,9 +387,7 @@ final studentReadingWordCardsProvider =
       final items = await ref
           .watch(studentWordRepositoryProvider)
           .fetchWordsByIds(wordIds);
-      return <String, WordEntry>{
-        for (final item in items) item.id: item,
-      };
+      return <String, WordEntry>{for (final item in items) item.id: item};
     });
 
 final _readingNumericPrefixPattern = RegExp(r'^\d+');

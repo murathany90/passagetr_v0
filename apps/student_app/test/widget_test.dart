@@ -71,7 +71,7 @@ void main() {
       find.textContaining('Okuma'),
     );
     expect(find.textContaining('Okuma'), findsWidgets);
-    expect(_titleFinder('PASSAGETR | Okuma Odası'), findsWidgets);
+    expect(_titleFinder('PASSAGETR | Okuma Odasi'), findsWidgets);
 
     await _navigateTo(
       tester,

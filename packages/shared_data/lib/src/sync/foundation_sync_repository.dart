@@ -183,8 +183,11 @@ class FoundationSyncRepository implements SyncRepository {
 
     final entityTypes = <String>[
       'user_word_progress',
+      'user_word_favorites',
       'user_reading_progress',
       'user_grammar_progress',
+      'user_reading_bookmarks',
+      'user_reading_favorites',
     ];
     final now = _now().toUtc();
 
@@ -199,8 +202,15 @@ class FoundationSyncRepository implements SyncRepository {
       final snapshots = await remoteClient.fetchProgressSnapshots(
         entityType: entityType,
       );
-      for (final snapshot in snapshots) {
-        await database.upsertProgressSnapshot(snapshot);
+      if (_shouldReplaceProgressSnapshots(entityType)) {
+        await database.replaceProgressSnapshots(
+          entityType: entityType,
+          records: snapshots,
+        );
+      } else {
+        for (final snapshot in snapshots) {
+          await database.upsertProgressSnapshot(snapshot);
+        }
       }
 
       await database.upsertSyncMeta(
@@ -324,6 +334,12 @@ class FoundationSyncRepository implements SyncRepository {
       SyncScope.progress => const Duration(seconds: 30),
       SyncScope.admin => const Duration(minutes: 1),
     };
+  }
+
+  bool _shouldReplaceProgressSnapshots(String entityType) {
+    return entityType == 'user_reading_bookmarks' ||
+        entityType == 'user_reading_favorites' ||
+        entityType == 'user_word_favorites';
   }
 
   static DateTime _defaultNow() => DateTime.now().toUtc();

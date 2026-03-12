@@ -4,12 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/interaction_guard.dart';
 import '../../core/student_providers.dart';
 import '../common/page_parts.dart';
 import 'reading_artwork.dart';
 import 'reading_seed_data.dart';
 
-enum ReadingCollectionView { library, discover }
+enum ReadingCollectionView { all, saved, favorites }
 
 class StudentReadingsPage extends ConsumerStatefulWidget {
   const StudentReadingsPage({super.key});
@@ -23,7 +24,8 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
   static const int _pageSize = 21;
 
   final searchController = TextEditingController();
-  ReadingCollectionView selectedView = ReadingCollectionView.library;
+  ReadingCollectionView selectedView = ReadingCollectionView.all;
+  bool discoverOnly = false;
   String query = '';
   int currentPage = 0;
 
@@ -37,11 +39,13 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
   Widget build(BuildContext context) {
     final accessContext = ref.watch(studentAccessProvider);
     final readings = ref.watch(studentReadingsProvider);
+    final engagementByPassage = ref.watch(studentReadingEngagementProvider);
+    final canPersistEngagement = InteractionGuard.canPersist(accessContext);
 
     return StudentShellFrame(
       destination: StudentDestination.readings,
-      title: 'Okuma Odası',
-      subtitle: 'İngilizce metinler okuyarak anlama becerini geliştir.',
+      title: 'Okuma Odasi',
+      subtitle: 'Ingilizce metinler okuyarak anlama becerini gelistir.',
       accessContext: accessContext,
       headerAction: SizedBox(
         width: 280,
@@ -56,7 +60,12 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
           builder: (context, constraints) {
             final isWide =
                 constraints.maxWidth >= AppBreakpoints.studentReadingsWide;
-            final visibleItems = _visibleReadings(items);
+            final showAuthRequired =
+                !canPersistEngagement &&
+                selectedView != ReadingCollectionView.all;
+            final visibleItems = showAuthRequired
+                ? const <ReadingPassage>[]
+                : _visibleReadings(items, engagementByPassage);
             final columns = constraints.maxWidth >= AppBreakpoints.desktopWide
                 ? 3
                 : constraints.maxWidth >= AppBreakpoints.mobileWide
@@ -92,10 +101,34 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                     });
                   },
                 ),
+                if (selectedView == ReadingCollectionView.all) ...[
+                  const SizedBox(height: 16),
+                  FilterChip(
+                    label: const Text('Kesfet'),
+                    selected: discoverOnly,
+                    onSelected: (value) {
+                      setState(() {
+                        discoverOnly = value;
+                        currentPage = 0;
+                      });
+                    },
+                  ),
+                ],
                 const SizedBox(height: 28),
-                if (visibleItems.isEmpty)
-                  const StudentSurfaceCard(
-                    child: Text('Aramana uygun okuma bulunamadı.'),
+                if (showAuthRequired)
+                  _ReadingsInfoCard(
+                    title: selectedView == ReadingCollectionView.saved
+                        ? 'Kayitlilar giris gerektirir'
+                        : 'Favoriler giris gerektirir',
+                    message:
+                        'Tum okumalari gezebilirsin, ancak kisisel kayitlarin ve favorilerin icin giris yapman gerekir.',
+                    actionLabel: 'Profile Git',
+                    onAction: () => context.go('/profile'),
+                  )
+                else if (visibleItems.isEmpty)
+                  _ReadingsInfoCard(
+                    title: _emptyTitleForSelectedView(),
+                    message: _emptyMessageForSelectedView(),
                   )
                 else ...[
                   GridView.builder(
@@ -161,9 +194,33 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
     );
   }
 
-  List<ReadingPassage> _visibleReadings(List<ReadingPassage> items) {
+  List<ReadingPassage> _visibleReadings(
+    List<ReadingPassage> items,
+    Map<String, ReadingEngagement> engagementByPassage,
+  ) {
     final normalizedQuery = query.toLowerCase();
-    final filtered = items
+    final filteredByView = switch (selectedView) {
+      ReadingCollectionView.all =>
+        items
+            .where(
+              (item) =>
+                  !discoverOnly ||
+                  readingSeedForPassage(item).progressPercent < 100,
+            )
+            .toList(growable: false),
+      ReadingCollectionView.saved =>
+        items
+            .where(
+              (item) => engagementByPassage[item.id]?.isBookmarked ?? false,
+            )
+            .toList(growable: false),
+      ReadingCollectionView.favorites =>
+        items
+            .where((item) => engagementByPassage[item.id]?.isFavorite ?? false)
+            .toList(growable: false),
+    };
+
+    final visible = filteredByView
         .where((item) {
           final seed = readingSeedForPassage(item);
           final displaySummary = (item.summary?.isNotEmpty ?? false)
@@ -176,19 +233,71 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
         })
         .toList(growable: false);
 
-    if (selectedView == ReadingCollectionView.discover) {
-      final discoverItems = filtered
-          .where((item) => readingSeedForPassage(item).progressPercent < 100)
-          .toList(growable: false);
-      discoverItems.sort(
-        (left, right) => readingSeedForPassage(left).progressPercent.compareTo(
-          readingSeedForPassage(right).progressPercent,
-        ),
-      );
-      return discoverItems;
+    switch (selectedView) {
+      case ReadingCollectionView.all:
+        if (discoverOnly) {
+          visible.sort(
+            (left, right) => readingSeedForPassage(left).progressPercent
+                .compareTo(readingSeedForPassage(right).progressPercent),
+          );
+        }
+        return visible;
+      case ReadingCollectionView.saved:
+        visible.sort(
+          (left, right) => _compareEngagementTimestamp(
+            engagementByPassage[right.id]?.bookmarkedAt,
+            engagementByPassage[left.id]?.bookmarkedAt,
+            left.title,
+            right.title,
+          ),
+        );
+        return visible;
+      case ReadingCollectionView.favorites:
+        visible.sort(
+          (left, right) => _compareEngagementTimestamp(
+            engagementByPassage[right.id]?.favoritedAt,
+            engagementByPassage[left.id]?.favoritedAt,
+            left.title,
+            right.title,
+          ),
+        );
+        return visible;
+    }
+  }
+
+  int _compareEngagementTimestamp(
+    DateTime? left,
+    DateTime? right,
+    String fallbackLeftTitle,
+    String fallbackRightTitle,
+  ) {
+    final timestampComparison = (left?.millisecondsSinceEpoch ?? 0).compareTo(
+      right?.millisecondsSinceEpoch ?? 0,
+    );
+    if (timestampComparison != 0) {
+      return timestampComparison;
     }
 
-    return filtered;
+    return fallbackLeftTitle.compareTo(fallbackRightTitle);
+  }
+
+  String _emptyTitleForSelectedView() {
+    return switch (selectedView) {
+      ReadingCollectionView.all => 'Aramana uygun okuma bulunamadi',
+      ReadingCollectionView.saved => 'Kayitli okuma yok',
+      ReadingCollectionView.favorites => 'Favori okuma yok',
+    };
+  }
+
+  String _emptyMessageForSelectedView() {
+    return switch (selectedView) {
+      ReadingCollectionView.all =>
+        'Arama metnini veya filtreleri degistirerek tekrar dene.',
+      ReadingCollectionView.saved =>
+        'Bir okumayi yer imlerine eklediginde burada goreceksin.',
+      ReadingCollectionView.favorites =>
+        'Begendigin okumalari favorilere eklediginde burada goreceksin.',
+    };
   }
 
   void _updateQuery(String value) {
@@ -214,12 +323,16 @@ class _ReadingToggle extends StatelessWidget {
       showSelectedIcon: false,
       segments: const [
         ButtonSegment(
-          value: ReadingCollectionView.library,
-          label: Text('Okuma Listem'),
+          value: ReadingCollectionView.all,
+          label: Text('Tum Okumalar'),
         ),
         ButtonSegment(
-          value: ReadingCollectionView.discover,
-          label: Text('Kesfet'),
+          value: ReadingCollectionView.saved,
+          label: Text('Kayitlilar'),
+        ),
+        ButtonSegment(
+          value: ReadingCollectionView.favorites,
+          label: Text('Favoriler'),
         ),
       ],
       selected: <ReadingCollectionView>{selectedView},
@@ -569,6 +682,38 @@ class _ReadingsStateCard extends StatelessWidget {
             icon: const Icon(Icons.refresh_rounded),
             label: const Text('Tekrar Dene'),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadingsInfoCard extends StatelessWidget {
+  const _ReadingsInfoCard({
+    required this.title,
+    required this.message,
+    this.actionLabel,
+    this.onAction,
+  });
+
+  final String title;
+  final String message;
+  final String? actionLabel;
+  final VoidCallback? onAction;
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentSurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 10),
+          Text(message, style: Theme.of(context).textTheme.bodyLarge),
+          if (actionLabel != null && onAction != null) ...[
+            const SizedBox(height: 16),
+            FilledButton(onPressed: onAction, child: Text(actionLabel!)),
+          ],
         ],
       ),
     );

@@ -323,6 +323,40 @@ class AppDatabase extends GeneratedDatabase implements LocalSyncStore {
   }
 
   @override
+  Future<void> replaceProgressSnapshots({
+    required String entityType,
+    required List<ProgressSnapshotRecord> records,
+  }) async {
+    await transaction(() async {
+      await customStatement(
+        '''
+        DELETE FROM ${AppDatabaseContract.progressSnapshotTable}
+        WHERE entity_type = ?
+        ''',
+        <Object?>[entityType],
+      );
+
+      for (final record in records) {
+        await upsertProgressSnapshot(record);
+      }
+    });
+  }
+
+  @override
+  Future<void> deleteProgressSnapshot({
+    required String entityType,
+    required String entityId,
+  }) async {
+    await customStatement(
+      '''
+      DELETE FROM ${AppDatabaseContract.progressSnapshotTable}
+      WHERE entity_type = ? AND entity_id = ?
+      ''',
+      <Object?>[entityType, entityId],
+    );
+  }
+
+  @override
   Future<List<SyncOutboxRecord>> listOutbox({
     String status = AppDatabaseContract.pendingStatus,
   }) async {

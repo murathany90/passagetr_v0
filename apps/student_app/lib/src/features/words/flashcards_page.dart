@@ -6,11 +6,12 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/interaction_guard.dart';
 import '../../core/student_providers.dart';
+import '../../core/student_word_progress_controller.dart';
 import '../../core/tts/student_tts_controller.dart';
 import '../../core/tts/student_tts_engine.dart';
 import '../../core/tts/student_tts_icon_button.dart';
-import '../../core/student_word_progress_controller.dart';
 import '../common/page_parts.dart';
 
 class StudentFlashcardsPage extends ConsumerStatefulWidget {
@@ -54,11 +55,11 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
       accessContext: accessContext,
       header: WordsStudyHeader(
         title: widget.packId == null
-            ? 'Flashcard Çalışması'
-            : 'Paket Flashcard Çalışması',
+            ? 'Flashcard Calismasi'
+            : 'Paket Flashcard Calismasi',
         subtitle: widget.packId == null
-            ? 'Zayıf kelimelerden başlayarak hızlı tekrar yap.'
-            : 'Seçili paketteki kelimelerle hızlı tekrar yap.',
+            ? 'Zayif kelimelerden baslayarak hizli tekrar yap.'
+            : 'Secili paketteki kelimelerle hizli tekrar yap.',
         onBack: () => context.go(
           widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
         ),
@@ -83,8 +84,8 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
             return StudentSurfaceCard(
               child: Text(
                 widget.packId == null
-                    ? 'Çalışılacak kelime bulunamadı.'
-                    : 'Seçili pakette çalışılacak kelime bulunamadı.',
+                    ? 'Calisilacak kelime bulunamadi.'
+                    : 'Secili pakette calisilacak kelime bulunamadi.',
               ),
             );
           }
@@ -105,7 +106,9 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                 });
               },
               onBack: () => context.go(
-                widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
+                widget.packId == null
+                    ? '/words'
+                    : '/words/packs/${widget.packId}',
               ),
             );
           }
@@ -114,6 +117,8 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
           final currentProgress =
               progressMap[word.id] ??
               const WordProgress(wordId: '', mastery: 0, seenCount: 0);
+          final favorite = ref.watch(studentWordFavoriteByIdProvider(word.id));
+          final canToggleFavorite = InteractionGuard.canPersist(accessContext);
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,6 +134,11 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                 word: word,
                 showMeaning: _showMeaning,
                 ttsState: ref.watch(studentTtsControllerProvider),
+                isFavorite: favorite.isFavorite,
+                canToggleFavorite: canToggleFavorite,
+                favoriteHelperText: canToggleFavorite
+                    ? null
+                    : 'Favoriye eklemek icin giris yap',
                 onToggle: () {
                   setState(() {
                     _showMeaning = !_showMeaning;
@@ -152,6 +162,21 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                 },
                 onStopWord: () =>
                     ref.read(studentTtsControllerProvider.notifier).stop(),
+                onFavoriteToggle: () async {
+                  final result = await ref
+                      .read(studentWordFavoritesProvider.notifier)
+                      .toggleFavorite(word.id);
+                  if (!mounted) {
+                    return;
+                  }
+
+                  final message = result.isSuccess
+                      ? 'Favori durumu guncellendi.'
+                      : 'Favori durumu simdi guncellenemedi.';
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(message)));
+                },
               ),
               const SizedBox(height: 20),
               LayoutBuilder(
@@ -169,8 +194,8 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                       ),
                     ),
                     _AnswerButton(
-                      label: 'Kararsızım',
-                      subtitle: 'Bir kez daha göster',
+                      label: 'Kararsizim',
+                      subtitle: 'Bir kez daha goster',
                       color: AppThemeTokens.of(context).warning,
                       onPressed: () => _recordAnswer(
                         word: word,
@@ -179,7 +204,7 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                     ),
                     _AnswerButton(
                       label: 'Biliyorum',
-                      subtitle: 'Ustalık puanını yükselt',
+                      subtitle: 'Ustalik puanini yukselt',
                       color: AppThemeTokens.of(context).green,
                       onPressed: () => _recordAnswer(
                         word: word,
@@ -339,7 +364,7 @@ class WordStudyProgressCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
-                  'Ustalık %$mastery',
+                  'Ustalik %$mastery',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: tokens.badgeOrange,
                     fontWeight: FontWeight.w700,
@@ -371,17 +396,25 @@ class _FlashcardCard extends StatelessWidget {
     required this.word,
     required this.showMeaning,
     required this.ttsState,
+    required this.isFavorite,
+    required this.canToggleFavorite,
+    required this.favoriteHelperText,
     required this.onToggle,
     required this.onPlayWord,
     required this.onStopWord,
+    required this.onFavoriteToggle,
   });
 
   final WordEntry word;
   final bool showMeaning;
   final StudentTtsState ttsState;
+  final bool isFavorite;
+  final bool canToggleFavorite;
+  final String? favoriteHelperText;
   final VoidCallback onToggle;
   final Future<void> Function() onPlayWord;
   final Future<void> Function() onStopWord;
+  final Future<void> Function() onFavoriteToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -420,7 +453,7 @@ class _FlashcardCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Ön yüzde İngilizce, arka yüzde anlam var',
+                'On yuzde Ingilizce, arka yuzde anlam var',
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
@@ -471,14 +504,44 @@ class _FlashcardCard extends StatelessWidget {
                     onPlay: onPlayWord,
                     onStop: onStopWord,
                   ),
+                  Tooltip(
+                    message: canToggleFavorite
+                        ? (isFavorite
+                              ? 'Favorilerden cikar'
+                              : 'Favorilere ekle')
+                        : 'Favoriye eklemek icin giris yap',
+                    child: IconButton(
+                      key: ValueKey<String>('flashcard_favorite_${word.id}'),
+                      onPressed: canToggleFavorite ? onFavoriteToggle : null,
+                      icon: Icon(
+                        isFavorite
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border_rounded,
+                      ),
+                      tooltip: canToggleFavorite
+                          ? (isFavorite
+                                ? 'Favorilerden cikar'
+                                : 'Favorilere ekle')
+                          : 'Favoriye eklemek icin giris yap',
+                    ),
+                  ),
                   const Spacer(),
                   TextButton.icon(
                     onPressed: onToggle,
                     icon: const Icon(Icons.flip_to_back_rounded),
-                    label: Text(showMeaning ? 'Ön yüze dön' : 'Kartı çevir'),
+                    label: Text(showMeaning ? 'On yuze don' : 'Karti cevir'),
                   ),
                 ],
               ),
+              if (favoriteHelperText != null) ...[
+                const SizedBox(height: 12),
+                Text(
+                  favoriteHelperText!,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
+                ),
+              ],
             ],
           ),
         ),
@@ -545,12 +608,12 @@ class _FlashcardCompletionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Tur tamamlandı',
+            'Tur tamamlandi',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 12),
           Text(
-            '$totalCount kelime üzerinde çalıştın. Bildiğin $knownCount, kararsız kaldığın $unsureCount, tekrar isteyen $unknownCount.',
+            '$totalCount kelime uzerinde calistin. Bildigin $knownCount, kararsiz kaldigin $unsureCount, tekrar isteyen $unknownCount.',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
@@ -558,12 +621,12 @@ class _FlashcardCompletionCard extends StatelessWidget {
             children: [
               FilledButton(
                 onPressed: onRestart,
-                child: const Text('Tekrar Başlat'),
+                child: const Text('Tekrar Baslat'),
               ),
               const SizedBox(width: 12),
               OutlinedButton(
                 onPressed: onBack,
-                child: const Text('Kelime Merkezine Dön'),
+                child: const Text('Kelime Merkezine Don'),
               ),
             ],
           ),

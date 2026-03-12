@@ -8,6 +8,7 @@ import 'package:shared_core/shared_core.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/interaction_guard.dart';
 import '../../core/student_providers.dart';
 import '../../core/tts/student_tts_controller.dart';
 import '../../core/tts/student_tts_engine.dart';
@@ -93,6 +94,8 @@ class _StudentReadingDetailPageState
             header: ReadingDetailHeader(
               isBookmarked: false,
               isFavorite: false,
+              canToggleEngagement: false,
+              engagementHelperText: null,
               onBack: () => _goBack(context),
               onBookmarkToggle: () {},
               onFavoriteToggle: () {},
@@ -110,6 +113,8 @@ class _StudentReadingDetailPageState
             header: ReadingDetailHeader(
               isBookmarked: false,
               isFavorite: false,
+              canToggleEngagement: false,
+              engagementHelperText: null,
               onBack: () => _goBack(context),
               onBookmarkToggle: () {},
               onFavoriteToggle: () {},
@@ -142,9 +147,10 @@ class _StudentReadingDetailPageState
           focusWordCards.valueOrNull ?? const <String, WordEntry>{},
         );
         final ttsState = ref.watch(studentTtsControllerProvider);
-        final engagement = ref
-            .watch(studentReadingEngagementProvider.notifier)
-            .stateFor(reading.id);
+        final engagement = ref.watch(
+          studentReadingEngagementByIdProvider(reading.id),
+        );
+        final canPersistEngagement = InteractionGuard.canPersist(accessContext);
 
         return StudentDetailFrame(
           destination: StudentDestination.readings,
@@ -152,6 +158,10 @@ class _StudentReadingDetailPageState
           header: ReadingDetailHeader(
             isBookmarked: engagement.isBookmarked,
             isFavorite: engagement.isFavorite,
+            canToggleEngagement: canPersistEngagement,
+            engagementHelperText: canPersistEngagement
+                ? null
+                : 'Kaydetmek icin giris yap',
             onBack: () => _goBack(context),
             onBookmarkToggle: () => _toggleBookmark(reading.id),
             onFavoriteToggle: () => _toggleFavorite(reading.id),
@@ -347,20 +357,28 @@ class _StudentReadingDetailPageState
   }
 
   Future<void> _toggleBookmark(String readingId) async {
-    await ref
+    final result = await ref
         .read(studentReadingEngagementProvider.notifier)
         .toggleBookmark(readingId);
     if (mounted) {
-      _showSnackBar('Yer imi durumu guncellendi.');
+      _showSnackBar(
+        result.isSuccess
+            ? 'Yer imi durumu guncellendi.'
+            : 'Yer imi durumu simdi guncellenemedi.',
+      );
     }
   }
 
   Future<void> _toggleFavorite(String readingId) async {
-    await ref
+    final result = await ref
         .read(studentReadingEngagementProvider.notifier)
         .toggleFavorite(readingId);
     if (mounted) {
-      _showSnackBar('Favori durumu guncellendi.');
+      _showSnackBar(
+        result.isSuccess
+            ? 'Favori durumu guncellendi.'
+            : 'Favori durumu simdi guncellenemedi.',
+      );
     }
   }
 
@@ -644,18 +662,21 @@ List<_SentenceToken> _tokenizeSentence(
     return const <_SentenceToken>[];
   }
 
-  final focusPhrases = focusWordCards
-      .map((item) {
-        final parts = item.enWord
-            .split(RegExp(r'\s+'))
-            .map(_normalizeDictionaryQuery)
-            .where((part) => part.isNotEmpty)
-            .toList(growable: false);
-        return _FocusPhrase(word: item, parts: parts);
-      })
-      .where((item) => item.parts.isNotEmpty)
-      .toList(growable: false)
-    ..sort((left, right) => right.parts.length.compareTo(left.parts.length));
+  final focusPhrases =
+      focusWordCards
+          .map((item) {
+            final parts = item.enWord
+                .split(RegExp(r'\s+'))
+                .map(_normalizeDictionaryQuery)
+                .where((part) => part.isNotEmpty)
+                .toList(growable: false);
+            return _FocusPhrase(word: item, parts: parts);
+          })
+          .where((item) => item.parts.isNotEmpty)
+          .toList(growable: false)
+        ..sort(
+          (left, right) => right.parts.length.compareTo(left.parts.length),
+        );
 
   final matchedWords = List<WordEntry?>.filled(rawTokens.length, null);
   for (var index = 0; index < rawTokens.length; index++) {
@@ -676,7 +697,8 @@ List<_SentenceToken> _tokenizeSentence(
 
       var matches = true;
       for (var partIndex = 0; partIndex < phrase.parts.length; partIndex++) {
-        if (rawTokens[index + partIndex].normalized != phrase.parts[partIndex]) {
+        if (rawTokens[index + partIndex].normalized !=
+            phrase.parts[partIndex]) {
           matches = false;
           break;
         }
@@ -711,7 +733,10 @@ String _normalizeDictionaryQuery(String value) {
 }
 
 class _RawSentenceToken {
-  const _RawSentenceToken({required this.displayWord, required this.normalized});
+  const _RawSentenceToken({
+    required this.displayWord,
+    required this.normalized,
+  });
 
   final String displayWord;
   final String normalized;
@@ -729,18 +754,22 @@ class ReadingDetailHeader extends StatelessWidget {
     super.key,
     required this.isBookmarked,
     required this.isFavorite,
+    required this.canToggleEngagement,
     required this.onBack,
     required this.onBookmarkToggle,
     required this.onFavoriteToggle,
     required this.onShare,
+    this.engagementHelperText,
   });
 
   final bool isBookmarked;
   final bool isFavorite;
+  final bool canToggleEngagement;
   final VoidCallback onBack;
   final VoidCallback onBookmarkToggle;
   final VoidCallback onFavoriteToggle;
   final VoidCallback onShare;
+  final String? engagementHelperText;
 
   @override
   Widget build(BuildContext context) {
@@ -756,20 +785,40 @@ class ReadingDetailHeader extends StatelessWidget {
             label: const Text('Geri Don'),
           ),
           const Spacer(),
-          IconButton(
-            onPressed: onBookmarkToggle,
-            icon: Icon(
-              isBookmarked
-                  ? Icons.bookmark_rounded
-                  : Icons.bookmark_border_rounded,
+          if (engagementHelperText != null) ...[
+            Text(
+              engagementHelperText!,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: tokens.secondaryText,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(width: 8),
+          ],
+          Tooltip(
+            message: canToggleEngagement
+                ? 'Yer imi'
+                : 'Kaydetmek icin giris yap',
+            child: IconButton(
+              onPressed: canToggleEngagement ? onBookmarkToggle : null,
+              icon: Icon(
+                isBookmarked
+                    ? Icons.bookmark_rounded
+                    : Icons.bookmark_border_rounded,
+              ),
             ),
           ),
-          IconButton(
-            onPressed: onFavoriteToggle,
-            icon: Icon(
-              isFavorite
-                  ? Icons.favorite_rounded
-                  : Icons.favorite_border_rounded,
+          Tooltip(
+            message: canToggleEngagement
+                ? 'Favori'
+                : 'Kaydetmek icin giris yap',
+            child: IconButton(
+              onPressed: canToggleEngagement ? onFavoriteToggle : null,
+              icon: Icon(
+                isFavorite
+                    ? Icons.favorite_rounded
+                    : Icons.favorite_border_rounded,
+              ),
             ),
           ),
           IconButton(
@@ -952,7 +1001,7 @@ class _ReadingArticlePanel extends ConsumerWidget {
   final String? Function(int lookupIndex) translationForSection;
   final ValueChanged<ReadingPassage> onNavigateToReading;
   final Future<void> Function(String readingId, _ReadingArticleSection section)
-      onPlaySentence;
+  onPlaySentence;
   final Future<void> Function(_ReadingArticleSection section) onStopSentence;
   final void Function(int lookupIndex, _SentenceToken token) onWordTap;
   final ValueChanged<_ReadingArticleSection> onWordLongPress;
@@ -1016,7 +1065,9 @@ class _ReadingArticlePanel extends ConsumerWidget {
                             Expanded(
                               child: Text(
                                 section.heading,
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall,
                               ),
                             )
                           else
@@ -1038,16 +1089,15 @@ class _ReadingArticlePanel extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      if (section.heading.isNotEmpty) const SizedBox(height: 12),
+                      if (section.heading.isNotEmpty)
+                        const SizedBox(height: 12),
                       _InteractiveSentenceText(
                         sentence: section.englishText,
                         focusModeEnabled: focusModeEnabled,
                         focusWordCards: linkedWordCards,
                         selectedWord: selectedWords[section.lookupIndex],
-                        onWordTap: (token) => onWordTap(
-                          section.lookupIndex,
-                          token,
-                        ),
+                        onWordTap: (token) =>
+                            onWordTap(section.lookupIndex, token),
                         onWordLongPress: () => onWordLongPress(section),
                       ),
                       if (selectedWords.containsKey(section.lookupIndex)) ...[
@@ -1056,11 +1106,15 @@ class _ReadingArticlePanel extends ConsumerWidget {
                           query: selectedWords[section.lookupIndex]!,
                         ),
                       ],
-                      if (loadingTranslations.contains(section.lookupIndex)) ...[
+                      if (loadingTranslations.contains(
+                        section.lookupIndex,
+                      )) ...[
                         const SizedBox(height: 16),
                         const _InlineLoadingPanel(),
                       ],
-                      if (revealedTranslations.contains(section.lookupIndex)) ...[
+                      if (revealedTranslations.contains(
+                        section.lookupIndex,
+                      )) ...[
                         const SizedBox(height: 16),
                         _SentenceTranslationPanel(
                           translation:
@@ -1123,11 +1177,7 @@ class _ReadingPassagePager extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Container(
-              width: 1,
-              height: 52,
-              color: tokens.surfaceBorder,
-            ),
+            child: Container(width: 1, height: 52, color: tokens.surfaceBorder),
           ),
           Expanded(
             child: _ReadingNavigationButton(
@@ -1316,8 +1366,8 @@ class _SentenceTokenChip extends StatelessWidget {
       color: isSelected
           ? accentColor.withValues(alpha: 0.16)
           : isFocusWord
-              ? focusColor.withValues(alpha: 0.08)
-              : Colors.transparent,
+          ? focusColor.withValues(alpha: 0.08)
+          : Colors.transparent,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),

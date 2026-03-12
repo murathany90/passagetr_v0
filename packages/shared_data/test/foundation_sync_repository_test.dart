@@ -160,8 +160,11 @@ void main() {
           remoteClient.requestedProgressTypes,
           containsAll(<String>[
             'user_word_progress',
+            'user_word_favorites',
             'user_reading_progress',
             'user_grammar_progress',
+            'user_reading_bookmarks',
+            'user_reading_favorites',
           ]),
         );
         expect(pending, isEmpty);
@@ -240,6 +243,100 @@ void main() {
         );
         expect(snapshots, hasLength(1));
         expect(snapshots.first.payloadJson, contains('"mastery":24'));
+      },
+    );
+
+    test(
+      'syncIfStale progress replaces bookmark snapshots so removed remote rows disappear locally',
+      () async {
+        final database = FakeLocalSyncStore();
+        await database.upsertProgressSnapshot(
+          ProgressSnapshotRecord(
+            entityType: 'user_reading_bookmarks',
+            entityId: 'reading-stale',
+            payloadJson:
+                '{"passage_id":"reading-stale","created_at":"2026-03-09T17:00:00Z"}',
+            updatedAt: DateTime.utc(2026, 3, 9, 17, 0),
+          ),
+        );
+        final remoteClient = FakeSyncRemoteClient(
+          progressSnapshotsByType: <String, List<ProgressSnapshotRecord>>{
+            'user_reading_bookmarks': <ProgressSnapshotRecord>[
+              ProgressSnapshotRecord(
+                entityType: 'user_reading_bookmarks',
+                entityId: 'reading-fresh',
+                payloadJson:
+                    '{"passage_id":"reading-fresh","created_at":"2026-03-09T18:00:00Z"}',
+                updatedAt: DateTime.utc(2026, 3, 9, 18, 0),
+              ),
+            ],
+          },
+        );
+        final repository = FoundationSyncRepository(
+          database: database,
+          remoteClient: remoteClient,
+          now: () => DateTime.utc(2026, 3, 9, 18, 5),
+        );
+
+        final result = await repository.syncIfStale(SyncScope.progress);
+
+        expect(result, isA<AppSuccess<void>>());
+        final snapshots = await database.listProgressSnapshots(
+          entityType: 'user_reading_bookmarks',
+        );
+        expect(
+          snapshots
+              .map((snapshot) => snapshot.entityId)
+              .toList(growable: false),
+          <String>['reading-fresh'],
+        );
+      },
+    );
+
+    test(
+      'syncIfStale progress replaces word favorite snapshots so removed remote rows disappear locally',
+      () async {
+        final database = FakeLocalSyncStore();
+        await database.upsertProgressSnapshot(
+          ProgressSnapshotRecord(
+            entityType: 'user_word_favorites',
+            entityId: 'word-stale',
+            payloadJson:
+                '{"word_id":"word-stale","created_at":"2026-03-13T17:00:00Z"}',
+            updatedAt: DateTime.utc(2026, 3, 13, 17, 0),
+          ),
+        );
+        final remoteClient = FakeSyncRemoteClient(
+          progressSnapshotsByType: <String, List<ProgressSnapshotRecord>>{
+            'user_word_favorites': <ProgressSnapshotRecord>[
+              ProgressSnapshotRecord(
+                entityType: 'user_word_favorites',
+                entityId: 'word-fresh',
+                payloadJson:
+                    '{"word_id":"word-fresh","created_at":"2026-03-13T18:00:00Z"}',
+                updatedAt: DateTime.utc(2026, 3, 13, 18, 0),
+              ),
+            ],
+          },
+        );
+        final repository = FoundationSyncRepository(
+          database: database,
+          remoteClient: remoteClient,
+          now: () => DateTime.utc(2026, 3, 13, 18, 5),
+        );
+
+        final result = await repository.syncIfStale(SyncScope.progress);
+
+        expect(result, isA<AppSuccess<void>>());
+        final snapshots = await database.listProgressSnapshots(
+          entityType: 'user_word_favorites',
+        );
+        expect(
+          snapshots
+              .map((snapshot) => snapshot.entityId)
+              .toList(growable: false),
+          <String>['word-fresh'],
+        );
       },
     );
   });

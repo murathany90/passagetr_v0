@@ -56,7 +56,10 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('word_pack_tts_word-1')), findsOne);
+    expect(
+      find.byKey(const ValueKey<String>('word_pack_tts_word-1')),
+      findsOne,
+    );
 
     final packTtsButton = find.descendant(
       of: find.byKey(const ValueKey<String>('word_pack_tts_word-1')),
@@ -75,7 +78,10 @@ void main() {
     await tester.tap(find.text('orbit'));
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('word_card_tts_word-1')), findsOne);
+    expect(
+      find.byKey(const ValueKey<String>('word_card_tts_word-1')),
+      findsOne,
+    );
   });
 
   testWidgets('flashcard TTS always reads enWord on both card faces', (
@@ -89,8 +95,9 @@ void main() {
       routes: <RouteBase>[
         GoRoute(
           path: '/words/flashcards',
-          builder: (context, state) =>
-              StudentFlashcardsPage(packId: state.uri.queryParameters['packId']),
+          builder: (context, state) => StudentFlashcardsPage(
+            packId: state.uri.queryParameters['packId'],
+          ),
         ),
       ],
       overrides: <Override>[
@@ -279,6 +286,9 @@ Future<void> _pumpStudentTtsApp(
         studentReadingRepositoryProvider.overrideWithValue(
           const FoundationReadingRepository.preview(),
         ),
+        studentWordFavoriteRepositoryProvider.overrideWithValue(
+          FoundationWordFavoriteRepository.preview(),
+        ),
         studentSyncRepositoryProvider.overrideWithValue(
           const FoundationSyncRepository.preview(),
         ),
@@ -316,7 +326,9 @@ class _FakeWordRepository implements WordRepository {
   @override
   Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
     final idSet = ids.toSet();
-    return words.where((item) => idSet.contains(item.id)).toList(growable: false);
+    return words
+        .where((item) => idSet.contains(item.id))
+        .toList(growable: false);
   }
 }
 

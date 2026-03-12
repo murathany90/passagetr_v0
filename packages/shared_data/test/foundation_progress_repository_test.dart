@@ -44,30 +44,33 @@ void main() {
       expect(progress.single.seenCount, 9);
     });
 
-    test('fetchGrammarProgress reads cached grammar snapshots from local store', () async {
-      final database = FakeLocalSyncStore();
-      final repository = FoundationProgressRepository(
-        database: database,
-        now: () => DateTime.utc(2026, 3, 9, 9, 56),
-      );
+    test(
+      'fetchGrammarProgress reads cached grammar snapshots from local store',
+      () async {
+        final database = FakeLocalSyncStore();
+        final repository = FoundationProgressRepository(
+          database: database,
+          now: () => DateTime.utc(2026, 3, 9, 9, 56),
+        );
 
-      await database.upsertProgressSnapshot(
-        ProgressSnapshotRecord(
-          entityType: 'user_grammar_progress',
-          entityId: '2',
-          payloadJson:
-              '{"module_id":2,"page_id":8,"last_page_no":8,"completed_pages":8,"completed":false}',
-          updatedAt: DateTime.utc(2026, 3, 9, 9, 51),
-        ),
-      );
+        await database.upsertProgressSnapshot(
+          ProgressSnapshotRecord(
+            entityType: 'user_grammar_progress',
+            entityId: '2',
+            payloadJson:
+                '{"module_id":2,"page_id":8,"last_page_no":8,"completed_pages":8,"completed":false}',
+            updatedAt: DateTime.utc(2026, 3, 9, 9, 51),
+          ),
+        );
 
-      final progress = await repository.fetchGrammarProgress();
+        final progress = await repository.fetchGrammarProgress();
 
-      expect(progress, hasLength(1));
-      expect(progress.single.moduleId, 2);
-      expect(progress.single.lastPageNo, 8);
-      expect(progress.single.completed, isFalse);
-    });
+        expect(progress, hasLength(1));
+        expect(progress.single.moduleId, 2);
+        expect(progress.single.lastPageNo, 8);
+        expect(progress.single.completed, isFalse);
+      },
+    );
 
     test('enqueue writes event into pending outbox', () async {
       final database = FakeLocalSyncStore();
@@ -194,6 +197,51 @@ void main() {
         expect(pending, hasLength(1));
         expect(pending.first.eventId, 'evt-bookmark-new');
         expect(pending.first.payloadJson, contains('"should_bookmark":false'));
+      },
+    );
+
+    test(
+      'enqueue keeps newest word favorite intent and removes older duplicates',
+      () async {
+        final database = FakeLocalSyncStore();
+        final repository = FoundationProgressRepository(
+          database: database,
+          now: () => DateTime.utc(2026, 3, 13, 10, 10),
+        );
+
+        await database.enqueueOutbox(
+          SyncOutboxRecord(
+            eventId: 'evt-word-favorite-old',
+            entityType: 'user_word_favorites',
+            entityId: 'word-12',
+            operation: OutboxOperation.event.name,
+            payloadJson: '{"word_id":"word-12","should_favorite":true}',
+            clientTs: DateTime.utc(2026, 3, 13, 10, 2),
+            retryCount: 0,
+            status: AppDatabaseContract.pendingStatus,
+            nextRetryAt: null,
+          ),
+        );
+
+        final result = await repository.enqueue(
+          const OutboxEvent(
+            eventId: 'evt-word-favorite-new',
+            scope: SyncScope.progress,
+            entityType: 'user_word_favorites',
+            entityId: 'word-12',
+            operation: OutboxOperation.event,
+            payloadJson: '{"word_id":"word-12","should_favorite":false}',
+          ),
+        );
+
+        expect(result, isA<AppSuccess<void>>());
+
+        final pending = await database.listOutbox(
+          status: AppDatabaseContract.pendingStatus,
+        );
+        expect(pending, hasLength(1));
+        expect(pending.first.eventId, 'evt-word-favorite-new');
+        expect(pending.first.payloadJson, contains('"should_favorite":false'));
       },
     );
 

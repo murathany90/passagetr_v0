@@ -26,6 +26,14 @@ abstract interface class LocalSyncStore {
   Future<List<ProgressSnapshotRecord>> listProgressSnapshots({
     String? entityType,
   });
+  Future<void> replaceProgressSnapshots({
+    required String entityType,
+    required List<ProgressSnapshotRecord> records,
+  });
+  Future<void> deleteProgressSnapshot({
+    required String entityType,
+    required String entityId,
+  });
   Future<List<SyncOutboxRecord>> listOutbox({String status = 'pending'});
   Future<void> enqueueOutbox(SyncOutboxRecord record);
   Future<void> updateOutboxStatus({

@@ -51,6 +51,7 @@ void main() {
       '202603110031_admin_console_hardening_p1_p2.sql',
       '202603110032_admin_console_stabilization_detail_contracts.sql',
       '202603110033_admin_console_reading_import.sql',
+      '202603130036_word_favorites.sql',
     ];
 
     final fileNames = migrationDir
@@ -182,6 +183,31 @@ void main() {
     expect(
       sql,
       contains('coalesce((select count(*)::integer from filtered), 0)'),
+    );
+  });
+
+  test('word favorites migration contains table and sync RPC', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603130036_word_favorites.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(
+      sql,
+      contains('create table if not exists public.user_word_favorites'),
+    );
+    expect(
+      sql,
+      contains(
+        'create or replace function public.apply_user_word_favorite_event',
+      ),
+    );
+    expect(sql, contains('mark_sync_event_processed'));
+    expect(
+      sql,
+      contains(
+        'grant execute on function public.apply_user_word_favorite_event',
+      ),
     );
   });
 }

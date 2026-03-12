@@ -61,7 +61,8 @@ class OutboxConflictResolver {
       'user_word_progress' ||
       'user_grammar_progress' ||
       'user_reading_bookmarks' ||
-      'user_reading_favorites' => true,
+      'user_reading_favorites' ||
+      'user_word_favorites' => true,
       _ => false,
     };
   }
@@ -88,7 +89,8 @@ class OutboxConflictResolver {
         _mergeGrammarProgressPayload(incomingPayload, existingRecords),
       ),
       'user_reading_bookmarks' ||
-      'user_reading_favorites' => jsonEncode(incomingPayload),
+      'user_reading_favorites' ||
+      'user_word_favorites' => jsonEncode(incomingPayload),
       _ => incomingPayloadJson,
     };
   }

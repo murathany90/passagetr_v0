@@ -10,22 +10,64 @@ import 'package:student_app/src/core/student_translation_controller.dart';
 
 void main() {
   group('StudentReadingEngagementController', () {
+    test('load hydrates bookmark and favorite state from repository', () async {
+      final repository = _FakeReadingEngagementRepository(
+        seedEngagements: const <ReadingEngagement>[
+          ReadingEngagement(
+            passageId: 'reading-silent-ocean',
+            isBookmarked: true,
+            isFavorite: false,
+            bookmarkedAt: null,
+          ),
+          ReadingEngagement(
+            passageId: 'reading-coffee-shops',
+            isBookmarked: false,
+            isFavorite: true,
+            favoritedAt: null,
+          ),
+        ],
+      );
+      final controller = StudentReadingEngagementController(
+        engagementRepository: repository,
+        syncRepository: const _FakeSyncRepository(),
+        accessContext: _identifiedAccessContext(),
+        isWeb: true,
+      );
+
+      await Future<void>.delayed(Duration.zero);
+
+      expect(controller.state['reading-silent-ocean']?.isBookmarked, isTrue);
+      expect(controller.state['reading-coffee-shops']?.isFavorite, isTrue);
+    });
+
     test(
-      'toggleBookmark updates local state and enqueues bookmark event',
+      'toggleBookmark updates local state and writes bookmark intent',
       () async {
-        final repository = _Phase4FakeProgressRepository();
+        final repository = _FakeReadingEngagementRepository(
+          seedEngagements: const <ReadingEngagement>[
+            ReadingEngagement(
+              passageId: 'reading-silent-ocean',
+              isBookmarked: true,
+              isFavorite: false,
+            ),
+          ],
+        );
         final controller = StudentReadingEngagementController(
-          progressRepository: repository,
+          engagementRepository: repository,
+          syncRepository: const _FakeSyncRepository(),
+          accessContext: _identifiedAccessContext(),
           now: () => DateTime.utc(2026, 3, 9, 12, 0),
+          isWeb: true,
         );
 
+        await Future<void>.delayed(Duration.zero);
         await controller.toggleBookmark('reading-silent-ocean');
 
-        expect(controller.state['reading-silent-ocean']?.isBookmarked, isFalse);
-        expect(
-          repository.enqueuedEvents.single.entityType,
-          'user_reading_bookmarks',
-        );
+        expect(controller.state.containsKey('reading-silent-ocean'), isFalse);
+        expect(repository.bookmarkWrites.single, (
+          'reading-silent-ocean',
+          false,
+        ));
       },
     );
   });
@@ -132,6 +174,50 @@ class _Phase4FakeProgressRepository implements ProgressRepository {
       const <WordProgress>[];
 }
 
+class _FakeReadingEngagementRepository implements ReadingEngagementRepository {
+  _FakeReadingEngagementRepository({
+    List<ReadingEngagement>? seedEngagements,
+    this.bookmarkResult = const AppSuccess<void>(null),
+    this.favoriteResult = const AppSuccess<void>(null),
+  }) : _seedEngagements = seedEngagements ?? const <ReadingEngagement>[];
+
+  final List<ReadingEngagement> _seedEngagements;
+  final AppResult<void> bookmarkResult;
+  final AppResult<void> favoriteResult;
+  final List<(String, bool)> bookmarkWrites = <(String, bool)>[];
+  final List<(String, bool)> favoriteWrites = <(String, bool)>[];
+
+  @override
+  Future<List<ReadingEngagement>> fetchAll() async => _seedEngagements;
+
+  @override
+  Future<AppResult<void>> setBookmark(
+    String passageId,
+    bool isBookmarked,
+  ) async {
+    bookmarkWrites.add((passageId, isBookmarked));
+    return bookmarkResult;
+  }
+
+  @override
+  Future<AppResult<void>> setFavorite(String passageId, bool isFavorite) async {
+    favoriteWrites.add((passageId, isFavorite));
+    return favoriteResult;
+  }
+}
+
+class _FakeSyncRepository implements SyncRepository {
+  const _FakeSyncRepository();
+
+  @override
+  Future<AppResult<void>> syncIfStale(SyncScope scope) async =>
+      const AppSuccess<void>(null);
+
+  @override
+  Future<AppResult<void>> syncNow(SyncScope scope) async =>
+      const AppSuccess<void>(null);
+}
+
 class _FakeReadingRepository implements ReadingRepository {
   const _FakeReadingRepository();
 
@@ -153,4 +239,17 @@ class _FakeReadingRepository implements ReadingRepository {
   Future<String?> fetchSentenceTranslation(String passageId, int idx) async {
     return null;
   }
+}
+
+AccessContext _identifiedAccessContext() {
+  return AccessContext.fromSession(
+    AuthSession(
+      user: const AuthUser(
+        id: 'test-user',
+        email: 'test@passagetr.dev',
+        isAnonymous: false,
+      ),
+      claims: const <String, String>{'app_role': 'user', 'plan': 'free'},
+    ),
+  );
 }

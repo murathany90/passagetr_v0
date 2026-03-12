@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_core/shared_core.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/interaction_guard.dart';
 import '../../core/student_providers.dart';
 import '../../core/tts/student_tts_controller.dart';
 import '../../core/tts/student_tts_engine.dart';
@@ -113,10 +115,10 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
     if (_ownsTtsPlayback) {
       unawaited(
         _ttsController.stopIfMatching(
-              target: StudentTtsTarget.word,
-              readingId: widget.readingId,
-              wordId: _content.word?.id,
-            ),
+          target: StudentTtsTarget.word,
+          readingId: widget.readingId,
+          wordId: _content.word?.id,
+        ),
       );
     }
     super.dispose();
@@ -203,10 +205,10 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
 
   Future<void> _stopWord(WordEntry word) async {
     await _ttsController.stopIfMatching(
-          target: StudentTtsTarget.word,
-          readingId: widget.readingId,
-          wordId: word.id,
-        );
+      target: StudentTtsTarget.word,
+      readingId: widget.readingId,
+      wordId: word.id,
+    );
     if (!mounted) {
       return;
     }
@@ -224,10 +226,32 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
+  Future<void> _toggleFavorite(WordEntry word) async {
+    final result = await ref
+        .read(studentWordFavoritesProvider.notifier)
+        .toggleFavorite(word.id);
+    if (!mounted) {
+      return;
+    }
+
+    final message = switch (result) {
+      AppSuccess<void>() => 'Favori durumu guncellendi.',
+      AppFailure<void>() => 'Favori durumu simdi guncellenemedi.',
+    };
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
+    final accessContext = ref.watch(studentAccessProvider);
     final word = _content.word;
+    final favorite = word == null
+        ? null
+        : ref.watch(studentWordFavoriteByIdProvider(word.id));
+    final canToggleFavorite = InteractionGuard.canPersist(accessContext);
     final dictionaryEntry = _content.dictionaryEntry;
     final synonyms = _splitWordList(word?.synonymsRaw);
     final antonyms = _splitWordList(word?.antonymsRaw);
@@ -257,7 +281,10 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: Theme.of(context).textTheme.headlineSmall),
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                     if (word == null) ...[
                       const SizedBox(height: 8),
                       Container(
@@ -271,10 +298,11 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
                         ),
                         child: Text(
                           'Sozluk cevirisi',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: tokens.secondaryText,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: tokens.secondaryText,
+                                fontWeight: FontWeight.w700,
+                              ),
                         ),
                       ),
                     ],
@@ -303,6 +331,30 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
                   onPlay: () => _playWord(word),
                   onStop: () => _stopWord(word),
                 ),
+              if (word != null)
+                Tooltip(
+                  message: canToggleFavorite
+                      ? (favorite?.isFavorite ?? false)
+                            ? 'Favorilerden cikar'
+                            : 'Favorilere ekle'
+                      : 'Favoriye eklemek icin giris yap',
+                  child: IconButton(
+                    key: ValueKey<String>('word_card_favorite_${word.id}'),
+                    onPressed: canToggleFavorite
+                        ? () => _toggleFavorite(word)
+                        : null,
+                    icon: Icon(
+                      favorite?.isFavorite ?? false
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_border_rounded,
+                    ),
+                    tooltip: canToggleFavorite
+                        ? (favorite?.isFavorite ?? false)
+                              ? 'Favorilerden cikar'
+                              : 'Favorilere ekle'
+                        : 'Favoriye eklemek icin giris yap',
+                  ),
+                ),
               if (partOfSpeech.trim().isNotEmpty)
                 Container(
                   margin: const EdgeInsets.only(left: 4, right: 8),
@@ -330,6 +382,15 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
               ),
             ],
           ),
+          if (word != null && !canToggleFavorite) ...[
+            const SizedBox(height: 6),
+            Text(
+              'Favoriye eklemek icin giris yap',
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
+            ),
+          ],
           const SizedBox(height: 10),
           Text(
             meaning ?? 'Bu kelime icin ceviri bulunamadi.',
@@ -406,9 +467,9 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
               title: 'Not',
               child: Text(
                 word.notes!.trim(),
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: tokens.secondaryText,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
               ),
             ),
           ],
@@ -419,9 +480,7 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
 }
 
 class _WordSheetContent {
-  const _WordSheetContent.word(this.word)
-    : query = '',
-      dictionaryEntry = null;
+  const _WordSheetContent.word(this.word) : query = '', dictionaryEntry = null;
 
   const _WordSheetContent.dictionary({
     required this.query,
@@ -462,11 +521,7 @@ class _WordCardSection extends StatelessWidget {
 }
 
 class _WordListChip extends StatelessWidget {
-  const _WordListChip({
-    required this.label,
-    required this.color,
-    this.onTap,
-  });
+  const _WordListChip({required this.label, required this.color, this.onTap});
 
   final String label;
   final Color color;
@@ -528,6 +583,4 @@ String _normalizeStudentWordQuery(String value) {
       .replaceAll(_edgePunctuationPattern, '');
 }
 
-final RegExp _edgePunctuationPattern = RegExp(
-  r'^[^A-Za-z0-9]+|[^A-Za-z0-9]+$',
-);
+final RegExp _edgePunctuationPattern = RegExp(r'^[^A-Za-z0-9]+|[^A-Za-z0-9]+$');

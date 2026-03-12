@@ -148,6 +148,15 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
                 as List<dynamic>,
         entityIdKey: 'word_id',
       ),
+      'user_word_favorites' => _mapRowsToProgressSnapshots(
+        entityType: entityType,
+        rows:
+            (await client
+                    .from('user_word_favorites')
+                    .select('word_id,created_at'))
+                as List<dynamic>,
+        entityIdKey: 'word_id',
+      ),
       'user_reading_progress' => _mapRowsToProgressSnapshots(
         entityType: entityType,
         rows:
@@ -169,6 +178,24 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
                     ))
                 as List<dynamic>,
         entityIdKey: 'module_id',
+      ),
+      'user_reading_bookmarks' => _mapRowsToProgressSnapshots(
+        entityType: entityType,
+        rows:
+            (await client
+                    .from('user_reading_bookmarks')
+                    .select('passage_id,created_at'))
+                as List<dynamic>,
+        entityIdKey: 'passage_id',
+      ),
+      'user_reading_favorites' => _mapRowsToProgressSnapshots(
+        entityType: entityType,
+        rows:
+            (await client
+                    .from('user_reading_favorites')
+                    .select('passage_id,created_at'))
+                as List<dynamic>,
+        entityIdKey: 'passage_id',
       ),
       _ => const <ProgressSnapshotRecord>[],
     };
@@ -255,6 +282,16 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
             'p_correct_count_delta': payload['correct_count_delta'] ?? 0,
             'p_wrong_count_delta': payload['wrong_count_delta'] ?? 0,
             'p_mastery_delta': payload['mastery_delta'] ?? 0,
+          },
+        );
+        return true;
+      case 'user_word_favorites':
+        await Supabase.instance.client.rpc<void>(
+          'apply_user_word_favorite_event',
+          params: <String, dynamic>{
+            'p_event_id': record.eventId,
+            'p_word_id': payload['word_id'],
+            'p_should_favorite': payload['should_favorite'] ?? false,
           },
         );
         return true;

@@ -1,95 +1,110 @@
 import 'dart:async';
-import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_domain/shared_domain.dart';
 
-class ReadingEngagementState {
-  const ReadingEngagementState({
-    required this.isBookmarked,
-    required this.isFavorite,
-  });
-
-  final bool isBookmarked;
-  final bool isFavorite;
-
-  ReadingEngagementState copyWith({bool? isBookmarked, bool? isFavorite}) {
-    return ReadingEngagementState(
-      isBookmarked: isBookmarked ?? this.isBookmarked,
-      isFavorite: isFavorite ?? this.isFavorite,
-    );
-  }
-}
-
 class StudentReadingEngagementController
-    extends StateNotifier<Map<String, ReadingEngagementState>> {
+    extends StateNotifier<Map<String, ReadingEngagement>> {
   StudentReadingEngagementController({
-    required ProgressRepository progressRepository,
+    required ReadingEngagementRepository engagementRepository,
+    required SyncRepository syncRepository,
+    required AccessContext accessContext,
     DateTime Function()? now,
-  }) : _progressRepository = progressRepository,
+    bool? isWeb,
+  }) : _engagementRepository = engagementRepository,
+       _syncRepository = syncRepository,
+       _accessContext = accessContext,
        _now = now ?? _defaultNow,
-       super(const <String, ReadingEngagementState>{
-         'reading-silent-ocean': ReadingEngagementState(
-           isBookmarked: true,
-           isFavorite: false,
-         ),
-         'reading-coffee-shops': ReadingEngagementState(
-           isBookmarked: false,
-           isFavorite: true,
-         ),
-       });
+       _isWeb = isWeb ?? kIsWeb,
+       super(const <String, ReadingEngagement>{}) {
+    unawaited(load());
+  }
 
-  final ProgressRepository _progressRepository;
+  final ReadingEngagementRepository _engagementRepository;
+  final SyncRepository _syncRepository;
+  final AccessContext _accessContext;
   final DateTime Function() _now;
+  final bool _isWeb;
 
-  ReadingEngagementState stateFor(String readingId) {
-    return state[readingId] ??
-        const ReadingEngagementState(isBookmarked: false, isFavorite: false);
+  ReadingEngagement engagementFor(String readingId) {
+    return state[readingId] ?? ReadingEngagement.empty(passageId: readingId);
+  }
+
+  Future<void> load() async {
+    if (!_accessContext.hasIdentifiedProfile) {
+      state = const <String, ReadingEngagement>{};
+      return;
+    }
+
+    if (!_isWeb) {
+      await _syncRepository.syncIfStale(SyncScope.progress);
+    }
+
+    final engagements = await _engagementRepository.fetchAll();
+    state = _toMap(engagements);
   }
 
   Future<AppResult<void>> toggleBookmark(String readingId) async {
-    final current = stateFor(readingId);
-    final nextValue = !current.isBookmarked;
-    state = <String, ReadingEngagementState>{
-      ...state,
-      readingId: current.copyWith(isBookmarked: nextValue),
-    };
-    return _progressRepository.enqueue(
-      OutboxEvent(
-        eventId: 'bookmark-$readingId-${_now().microsecondsSinceEpoch}',
-        scope: SyncScope.progress,
-        entityType: 'user_reading_bookmarks',
-        entityId: readingId,
-        operation: OutboxOperation.event,
-        payloadJson: jsonEncode(<String, dynamic>{
-          'passage_id': readingId,
-          'should_bookmark': nextValue,
-        }),
-      ),
+    if (!_accessContext.hasIdentifiedProfile) {
+      return const AppSuccess<void>(null);
+    }
+
+    final current = engagementFor(readingId);
+    final next = current.setBookmark(!current.isBookmarked, at: _now());
+    final previousState = state;
+    state = _upsert(state, next);
+
+    final result = await _engagementRepository.setBookmark(
+      readingId,
+      next.isBookmarked,
     );
+    if (result is AppFailure<void>) {
+      state = previousState;
+    }
+    return result;
   }
 
   Future<AppResult<void>> toggleFavorite(String readingId) async {
-    final current = stateFor(readingId);
-    final nextValue = !current.isFavorite;
-    state = <String, ReadingEngagementState>{
-      ...state,
-      readingId: current.copyWith(isFavorite: nextValue),
-    };
-    return _progressRepository.enqueue(
-      OutboxEvent(
-        eventId: 'favorite-$readingId-${_now().microsecondsSinceEpoch}',
-        scope: SyncScope.progress,
-        entityType: 'user_reading_favorites',
-        entityId: readingId,
-        operation: OutboxOperation.event,
-        payloadJson: jsonEncode(<String, dynamic>{
-          'passage_id': readingId,
-          'should_favorite': nextValue,
-        }),
-      ),
+    if (!_accessContext.hasIdentifiedProfile) {
+      return const AppSuccess<void>(null);
+    }
+
+    final current = engagementFor(readingId);
+    final next = current.setFavorite(!current.isFavorite, at: _now());
+    final previousState = state;
+    state = _upsert(state, next);
+
+    final result = await _engagementRepository.setFavorite(
+      readingId,
+      next.isFavorite,
     );
+    if (result is AppFailure<void>) {
+      state = previousState;
+    }
+    return result;
+  }
+
+  Map<String, ReadingEngagement> _toMap(List<ReadingEngagement> engagements) {
+    return <String, ReadingEngagement>{
+      for (final engagement in engagements)
+        if (engagement.isBookmarked || engagement.isFavorite)
+          engagement.passageId: engagement,
+    };
+  }
+
+  Map<String, ReadingEngagement> _upsert(
+    Map<String, ReadingEngagement> current,
+    ReadingEngagement next,
+  ) {
+    final updated = <String, ReadingEngagement>{...current};
+    if (!next.isBookmarked && !next.isFavorite) {
+      updated.remove(next.passageId);
+    } else {
+      updated[next.passageId] = next;
+    }
+    return updated;
   }
 
   static DateTime _defaultNow() => DateTime.now().toUtc();
