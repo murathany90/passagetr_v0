@@ -20,6 +20,18 @@ Notlar:
 - Okuma detayinin altina minimal `Onceki parca / Sonraki parca` gecis karti eklendi.
 - Student web ve release APK bu reading detail duzeltmeleriyle yeniden deploy edildi.
 
+## v2.0.7 - 2026-03-12
+
+Baslik:
+Web ve Android icin native TTS
+
+Notlar:
+- `student_app` icine `flutter_tts` tabanli native TTS katmani eklendi; ayni anda tek aktif oynatim korunur.
+- Kelime paketi satirlarinda, ortak kelime karti popup'inda ve flashcard ekraninda English kelimeyi sesli oynatan speaker/stop aksiyonlari eklendi.
+- Okuma detay ekraninda tam passage, tek cumle ve odak kelime popup'i icin TTS oynatimi eklendi.
+- Route degisimi, popup kapanisi ve app background durumunda aktif TTS otomatik durdurulur.
+- Web release ve Android release APK bu TTS akisiyla derlenip dogrulandi.
+
 ## v2.0.6 - 2026-03-12
 
 Baslik:

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,16 +7,41 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/student_providers.dart';
+import '../../core/tts/student_tts_controller.dart';
+import '../../core/tts/student_tts_engine.dart';
+import '../../core/tts/student_tts_icon_button.dart';
 import '../common/page_parts.dart';
 import 'flashcards_page.dart';
+import 'student_word_card_sheet.dart';
 
-class StudentWordPackDetailPage extends ConsumerWidget {
+class StudentWordPackDetailPage extends ConsumerStatefulWidget {
   const StudentWordPackDetailPage({super.key, required this.packId});
 
   final String packId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<StudentWordPackDetailPage> createState() =>
+      _StudentWordPackDetailPageState();
+}
+
+class _StudentWordPackDetailPageState
+    extends ConsumerState<StudentWordPackDetailPage> {
+  late final StudentTtsController _ttsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _ttsController = ref.read(studentTtsControllerProvider.notifier);
+  }
+
+  @override
+  void dispose() {
+    unawaited(_ttsController.stop());
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final accessContext = ref.watch(studentAccessProvider);
     final packs = ref.watch(studentPacksProvider);
     final words = ref.watch(studentWordsProvider);
@@ -34,12 +61,12 @@ class StudentWordPackDetailPage extends ConsumerWidget {
             final pack = _resolvePack(packItems);
             if (pack == null) {
               return const StudentSurfaceCard(
-                child: Text('Kelime paketi bulunamadi.'),
+                child: Text('Kelime paketi bulunamadı.'),
               );
             }
 
             final scopedWords = wordItems
-                .where((item) => item.packId == packId)
+                .where((item) => item.packId == widget.packId)
                 .toList(growable: false);
 
             return Column(
@@ -48,7 +75,7 @@ class StudentWordPackDetailPage extends ConsumerWidget {
                 StudentPackCard(
                   title: pack.name,
                   wordCount: pack.wordCount,
-                  progressPercent: packProgress[packId] ?? 0,
+                  progressPercent: packProgress[widget.packId] ?? 0,
                   accentColor: AppThemeTokens.of(context).accentBlue,
                 ),
                 const SizedBox(height: 18),
@@ -62,8 +89,9 @@ class StudentWordPackDetailPage extends ConsumerWidget {
                           'Seçili paketteki kelimeler için hızlı tekrar turu aç.',
                       icon: Icons.style_rounded,
                       color: AppThemeTokens.of(context).accentBlue,
-                      onPressed: () =>
-                          context.go('/words/flashcards?packId=$packId'),
+                      onPressed: () => context.go(
+                        '/words/flashcards?packId=${widget.packId}',
+                      ),
                     );
                     final testCard = _PackActionCard(
                       title: 'Mini Test Başlat',
@@ -72,7 +100,7 @@ class StudentWordPackDetailPage extends ConsumerWidget {
                       icon: Icons.quiz_outlined,
                       color: AppThemeTokens.of(context).badgeOrange,
                       onPressed: () =>
-                          context.go('/words/tests?packId=$packId'),
+                          context.go('/words/tests?packId=${widget.packId}'),
                     );
 
                     if (!isWide) {
@@ -109,41 +137,11 @@ class StudentWordPackDetailPage extends ConsumerWidget {
                   )
                 else
                   for (final word in scopedWords) ...[
-                    StudentSurfaceCard(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  word.enWord,
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  word.trMeaning,
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppThemeTokens.of(
-                                context,
-                              ).surfaceMuted,
-                              borderRadius: BorderRadius.circular(999),
-                            ),
-                            child: Text(word.pos),
-                          ),
-                        ],
+                    _WordPackRow(
+                      word: word,
+                      onOpenWordCard: () => showStudentWordCardSheet(
+                        context,
+                        initialWord: word,
                       ),
                     ),
                     const SizedBox(height: 14),
@@ -162,7 +160,7 @@ class StudentWordPackDetailPage extends ConsumerWidget {
 
   ContentPack? _resolvePack(List<ContentPack> items) {
     for (final item in items) {
-      if (item.id == packId) {
+      if (item.id == widget.packId) {
         return item;
       }
     }
@@ -206,6 +204,85 @@ class _PackActionCard extends StatelessWidget {
           Text(title, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 8),
           Text(subtitle, style: Theme.of(context).textTheme.bodyLarge),
+        ],
+      ),
+    );
+  }
+}
+
+class _WordPackRow extends ConsumerWidget {
+  const _WordPackRow({
+    required this.word,
+    required this.onOpenWordCard,
+  });
+
+  final WordEntry word;
+  final VoidCallback onOpenWordCard;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tokens = AppThemeTokens.of(context);
+    final ttsState = ref.watch(studentTtsControllerProvider);
+    final isSpeaking = ref.watch(studentIsWordSpeakingProvider(word.id));
+    final isInitializing =
+        ttsState.isInitializing &&
+        ttsState.activeTarget == StudentTtsTarget.word &&
+        ttsState.activeWordId == word.id;
+
+    return StudentSurfaceCard(
+      onTap: onOpenWordCard,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(word.enWord, style: Theme.of(context).textTheme.titleLarge),
+                const SizedBox(height: 8),
+                Text(
+                  word.trMeaning,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          StudentTtsIconButton(
+            key: ValueKey<String>('word_pack_tts_${word.id}'),
+            isSpeaking: isSpeaking,
+            isInitializing: isInitializing,
+            isUnavailable: ttsState.isUnavailable,
+            tooltip: isSpeaking ? 'Durdur' : 'Kelimeyi dinle',
+            visualDensity: VisualDensity.compact,
+            onPlay: () async {
+              final result = await ref
+                  .read(studentTtsControllerProvider.notifier)
+                  .playWord(word: word);
+              if (!context.mounted ||
+                  result == StudentTtsActionResult.started ||
+                  result == StudentTtsActionResult.stopped) {
+                return;
+              }
+
+              final message =
+                  ref.read(studentTtsControllerProvider).errorMessage ??
+                  'Metin simdi okunamadi.';
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(message)));
+            },
+            onStop: () => ref.read(studentTtsControllerProvider.notifier).stop(),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: tokens.surfaceMuted,
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(word.pos),
+          ),
         ],
       ),
     );

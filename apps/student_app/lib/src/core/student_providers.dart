@@ -10,6 +10,8 @@ import 'student_analytics_models.dart';
 import 'student_analytics_service.dart';
 import 'student_grammar_progress_controller.dart';
 import 'student_reading_engagement_controller.dart';
+import 'tts/student_tts_controller.dart';
+import 'tts/student_tts_engine.dart';
 import 'student_translation_controller.dart';
 import 'student_word_progress_controller.dart';
 
@@ -153,6 +155,50 @@ final studentDictionaryRepositoryProvider = Provider<DictionaryRepository>(
     config: ref.watch(studentAppConfigProvider),
   ),
 );
+
+final studentTtsEngineProvider = Provider<StudentTtsEngine>((ref) {
+  final engine = NativeStudentTtsEngine();
+  ref.onDispose(() => engine.dispose());
+  return engine;
+});
+
+final studentTtsControllerProvider =
+    StateNotifierProvider<StudentTtsController, StudentTtsState>(
+      (ref) => StudentTtsController(
+        engine: ref.watch(studentTtsEngineProvider),
+      ),
+    );
+
+final studentIsWordSpeakingProvider = Provider.family<bool, String>((
+  ref,
+  wordId,
+) {
+  final state = ref.watch(studentTtsControllerProvider);
+  return state.isSpeaking &&
+      state.activeTarget == StudentTtsTarget.word &&
+      state.activeWordId == wordId;
+});
+
+final studentIsSentenceSpeakingProvider =
+    Provider.family<bool, ({String readingId, int sentenceIndex})>((
+      ref,
+      target,
+    ) {
+      final state = ref.watch(studentTtsControllerProvider);
+      return state.isSpeaking &&
+          state.activeReadingId == target.readingId &&
+          state.activeSentenceIndex == target.sentenceIndex;
+    });
+
+final studentIsPassageSpeakingProvider = Provider.family<bool, String>((
+  ref,
+  readingId,
+) {
+  final state = ref.watch(studentTtsControllerProvider);
+  return state.isSpeaking &&
+      state.activeTarget == StudentTtsTarget.passage &&
+      state.activeReadingId == readingId;
+});
 
 final studentSyncRepositoryProvider = Provider<SyncRepository>(
   (ref) => kIsWeb || !ref.watch(studentAppConfigProvider).supabaseEnabled

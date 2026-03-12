@@ -20,6 +20,19 @@ class ReleaseNoteEntry {
 
 const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
   ReleaseNoteEntry(
+    version: 'v2.0.7',
+    releaseDate: '2026-03-12',
+    title: 'Web ve Android icin native TTS',
+    summary:
+        'Student app icine native TTS eklendi; kelime paketleri, flashcard ve okuma detay akislari web ile Android release buildlerinde sesli okuma destekler hale geldi.',
+    highlights: <String>[
+      'Yeni StudentTtsEngine ve StudentTtsController katmani tek aktif oynatim kurali ile calisir.',
+      'Kelime paketi listesi ve ortak word-card popup icine kelime bazli dinle/durdur aksiyonu eklendi.',
+      'Flashcard ekraninda her iki yuzde de yalnizca English kelimeyi okuyan speaker aksiyonu eklendi.',
+      'Reading detail ekraninda full passage, sentence ve word seviyesinde TTS; route ve popup kapanisinda otomatik durdurma davranisi eklendi.',
+    ],
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.6',
     releaseDate: '2026-03-12',
     title: 'Analytics kaynagi seffafligi ve haftalik bar grafik',

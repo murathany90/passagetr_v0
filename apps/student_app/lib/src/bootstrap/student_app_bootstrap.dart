@@ -20,6 +20,18 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
   bool _smokeActionScheduled = false;
   StreamSubscription<bool>? _connectivitySubscription;
   bool _connectivityBound = false;
+  AppLifecycleListener? _appLifecycleListener;
+
+  @override
+  void initState() {
+    super.initState();
+    _appLifecycleListener = AppLifecycleListener(
+      onHide: _stopActiveTts,
+      onInactive: _stopActiveTts,
+      onPause: _stopActiveTts,
+      onDetach: _stopActiveTts,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +59,7 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
 
   @override
   void dispose() {
+    _appLifecycleListener?.dispose();
     unawaited(_connectivitySubscription?.cancel());
     super.dispose();
   }
@@ -117,5 +130,9 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
     final syncRepository = ref.read(studentSyncRepositoryProvider);
     await syncRepository.syncIfStale(SyncScope.content);
     await syncRepository.syncIfStale(SyncScope.progress);
+  }
+
+  void _stopActiveTts() {
+    unawaited(ref.read(studentTtsControllerProvider.notifier).stop());
   }
 }

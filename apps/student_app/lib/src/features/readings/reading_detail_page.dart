@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,7 +9,11 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/student_providers.dart';
+import '../../core/tts/student_tts_controller.dart';
+import '../../core/tts/student_tts_engine.dart';
+import '../../core/tts/student_tts_icon_button.dart';
 import '../common/page_parts.dart';
+import '../words/student_word_card_sheet.dart';
 import 'reading_artwork.dart';
 import 'reading_seed_data.dart';
 
@@ -30,10 +36,12 @@ class _StudentReadingDetailPageState
   final Set<int> _loadingTranslations = <int>{};
   final Map<int, _SelectedDictionaryWord> _selectedWords =
       <int, _SelectedDictionaryWord>{};
+  late final StudentTtsController _ttsController;
 
   @override
   void initState() {
     super.initState();
+    _ttsController = ref.read(studentTtsControllerProvider.notifier);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted || _hasTriggeredInitialRefresh) {
         return;
@@ -44,12 +52,19 @@ class _StudentReadingDetailPageState
   }
 
   @override
+  void dispose() {
+    unawaited(_ttsController.stop());
+    super.dispose();
+  }
+
+  @override
   void didUpdateWidget(covariant StudentReadingDetailPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.readingId == widget.readingId) {
       return;
     }
 
+    unawaited(_ttsController.stop());
     _revealedTranslations.clear();
     _loadingTranslations.clear();
     _selectedWords.clear();
@@ -126,6 +141,7 @@ class _StudentReadingDetailPageState
           focusWords.valueOrNull ?? const <ReadingFocusWord>[],
           focusWordCards.valueOrNull ?? const <String, WordEntry>{},
         );
+        final ttsState = ref.watch(studentTtsControllerProvider);
         final engagement = ref
             .watch(studentReadingEngagementProvider.notifier)
             .stateFor(reading.id);
@@ -146,15 +162,20 @@ class _StudentReadingDetailPageState
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= AppBreakpoints.desktop;
               final infoPanel = _ReadingInfoPanel(
+                readingId: reading.id,
                 reading: reading,
                 seed: seed,
                 summary: _resolveVisibleSummary(reading, seed),
                 focusModeEnabled: _focusModeEnabled,
+                articleSections: articleSections,
+                ttsState: ttsState,
                 onToggleFocusMode: () {
                   setState(() {
                     _focusModeEnabled = !_focusModeEnabled;
                   });
                 },
+                onPlayPassage: () => _playPassage(reading.id, articleSections),
+                onStopPassage: _stopActiveTts,
               );
               final articlePanel = _ReadingArticlePanel(
                 readingId: reading.id,
@@ -173,6 +194,8 @@ class _StudentReadingDetailPageState
                     .cachedTranslation(reading.id, lookupIndex),
                 onNavigateToReading: (targetReading) =>
                     _navigateToReading(targetReading, accessContext),
+                onPlaySentence: _playSentence,
+                onStopSentence: _stopSentence,
                 onWordTap: _handleWordTap,
                 onWordLongPress: (section) =>
                     _toggleTranslation(readingId: reading.id, section: section),
@@ -264,6 +287,7 @@ class _StudentReadingDetailPageState
   }
 
   void _goBack(BuildContext context) {
+    unawaited(_ttsController.stop());
     if (context.canPop()) {
       context.pop();
       return;
@@ -313,6 +337,7 @@ class _StudentReadingDetailPageState
   }
 
   void _navigateToReading(ReadingPassage reading, AccessContext accessContext) {
+    unawaited(_ttsController.stop());
     if (reading.isPro && !accessContext.canViewPremium) {
       context.go('/premium');
       return;
@@ -364,66 +389,10 @@ class _StudentReadingDetailPageState
   }
 
   Future<void> _showWordCardSheet(WordEntry word) async {
-    await showGeneralDialog<void>(
-      context: context,
-      barrierLabel: 'Kelime kartini kapat',
-      barrierDismissible: true,
-      barrierColor: Colors.black.withValues(alpha: 0.54),
-      transitionDuration: const Duration(milliseconds: 180),
-      pageBuilder: (dialogContext, animation, secondaryAnimation) {
-        return SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: MediaQuery.of(dialogContext).viewInsets.bottom + 16,
-            ),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: GestureDetector(
-                    key: const ValueKey<String>('word_card_dismiss_area'),
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => Navigator.of(dialogContext).pop(),
-                    child: const SizedBox.expand(),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 560),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: SingleChildScrollView(
-                        child: _WordCardSheet(initialWord: word),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
-        final curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeOutCubic,
-          reverseCurve: Curves.easeInCubic,
-        );
-        return FadeTransition(
-          opacity: curvedAnimation,
-          child: SlideTransition(
-            position:
-                Tween<Offset>(
-                  begin: const Offset(0, 0.08),
-                  end: Offset.zero,
-                ).animate(curvedAnimation),
-            child: child,
-          ),
-        );
-      },
+    await showStudentWordCardSheet(
+      context,
+      initialWord: word,
+      readingId: widget.readingId,
     );
   }
 
@@ -476,6 +445,68 @@ class _StudentReadingDetailPageState
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _playPassage(
+    String readingId,
+    List<_ReadingArticleSection> articleSections,
+  ) async {
+    final segments = articleSections
+        .map(
+          (section) => StudentTtsPassageSegment(
+            sentenceIndex: section.lookupIndex,
+            text: section.englishText,
+          ),
+        )
+        .toList(growable: false);
+    final result = await ref
+        .read(studentTtsControllerProvider.notifier)
+        .playPassage(readingId: readingId, segments: segments);
+    if (!mounted ||
+        result == StudentTtsActionResult.started ||
+        result == StudentTtsActionResult.stopped) {
+      return;
+    }
+    _showTtsFeedback();
+  }
+
+  Future<void> _playSentence(
+    String readingId,
+    _ReadingArticleSection section,
+  ) async {
+    final result = await ref
+        .read(studentTtsControllerProvider.notifier)
+        .playSentence(
+          readingId: readingId,
+          sentenceIndex: section.lookupIndex,
+          text: section.englishText,
+        );
+    if (!mounted ||
+        result == StudentTtsActionResult.started ||
+        result == StudentTtsActionResult.stopped) {
+      return;
+    }
+    _showTtsFeedback();
+  }
+
+  Future<void> _stopSentence(_ReadingArticleSection section) {
+    return ref
+        .read(studentTtsControllerProvider.notifier)
+        .stopIfMatching(
+          readingId: widget.readingId,
+          sentenceIndex: section.lookupIndex,
+        );
+  }
+
+  Future<void> _stopActiveTts() {
+    return _ttsController.stop();
+  }
+
+  void _showTtsFeedback() {
+    final message =
+        ref.read(studentTtsControllerProvider).errorMessage ??
+        'Metin simdi okunamadi.';
+    _showSnackBar(message);
   }
 }
 
@@ -545,21 +576,6 @@ WordEntry _fallbackWordEntry(ReadingFocusWord word) {
     trMeaning: word.trMeaning,
     pos: word.pos ?? '',
   );
-}
-
-List<String> _splitWordList(String? rawValue) {
-  if (rawValue == null || rawValue.trim().isEmpty) {
-    return const <String>[];
-  }
-
-  final values = rawValue
-      .split(RegExp(r'[,\n;|]'))
-      .map((item) => item.trim())
-      .where((item) => item.isNotEmpty)
-      .toSet()
-      .toList(growable: false);
-  values.sort();
-  return values;
 }
 
 class _ReadingArticleSection {
@@ -768,22 +784,40 @@ class ReadingDetailHeader extends StatelessWidget {
 
 class _ReadingInfoPanel extends StatelessWidget {
   const _ReadingInfoPanel({
+    required this.readingId,
     required this.reading,
     required this.seed,
     required this.summary,
     required this.focusModeEnabled,
+    required this.articleSections,
+    required this.ttsState,
     required this.onToggleFocusMode,
+    required this.onPlayPassage,
+    required this.onStopPassage,
   });
 
+  final String readingId;
   final ReadingPassage reading;
   final ReadingSeedData seed;
   final String? summary;
   final bool focusModeEnabled;
+  final List<_ReadingArticleSection> articleSections;
+  final StudentTtsState ttsState;
   final VoidCallback onToggleFocusMode;
+  final Future<void> Function() onPlayPassage;
+  final Future<void> Function() onStopPassage;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
+    final isPassageSpeaking =
+        ttsState.isSpeaking &&
+        ttsState.activeTarget == StudentTtsTarget.passage &&
+        ttsState.activeReadingId == readingId;
+    final isPassageInitializing =
+        ttsState.isInitializing &&
+        ttsState.activeTarget == StudentTtsTarget.passage &&
+        ttsState.activeReadingId == readingId;
 
     return StudentSurfaceCard(
       child: Column(
@@ -809,6 +843,34 @@ class _ReadingInfoPanel extends StatelessWidget {
           _MetaPill(label: 'Yazar', value: seed.author),
           const SizedBox(height: 10),
           _MetaPill(label: 'Ilerleme', value: '%${seed.progressPercent}'),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              key: ValueKey<String>('reading_passage_tts_$readingId'),
+              onPressed: articleSections.isEmpty || ttsState.isUnavailable
+                  ? null
+                  : () async {
+                      if (isPassageSpeaking) {
+                        await onStopPassage();
+                        return;
+                      }
+                      await onPlayPassage();
+                    },
+              icon: isPassageInitializing
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Icon(
+                      isPassageSpeaking
+                          ? Icons.stop_rounded
+                          : Icons.volume_up_rounded,
+                    ),
+              label: Text(isPassageSpeaking ? 'Durdur' : 'Parcayi Dinle'),
+            ),
+          ),
           const SizedBox(height: 18),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
@@ -870,6 +932,8 @@ class _ReadingArticlePanel extends ConsumerWidget {
     required this.selectedWords,
     required this.translationForSection,
     required this.onNavigateToReading,
+    required this.onPlaySentence,
+    required this.onStopSentence,
     required this.onWordTap,
     required this.onWordLongPress,
   });
@@ -887,11 +951,15 @@ class _ReadingArticlePanel extends ConsumerWidget {
   final Map<int, _SelectedDictionaryWord> selectedWords;
   final String? Function(int lookupIndex) translationForSection;
   final ValueChanged<ReadingPassage> onNavigateToReading;
+  final Future<void> Function(String readingId, _ReadingArticleSection section)
+      onPlaySentence;
+  final Future<void> Function(_ReadingArticleSection section) onStopSentence;
   final void Function(int lookupIndex, _SentenceToken token) onWordTap;
   final ValueChanged<_ReadingArticleSection> onWordLongPress;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ttsState = ref.watch(studentTtsControllerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -900,46 +968,112 @@ class _ReadingArticlePanel extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         for (final section in sections) ...[
-          StudentSurfaceCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (section.heading.isNotEmpty) ...[
-                  Text(
-                    section.heading,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 12),
-                ],
-                _InteractiveSentenceText(
-                  sentence: section.englishText,
-                  focusModeEnabled: focusModeEnabled,
-                  focusWordCards: linkedWordCards,
-                  selectedWord: selectedWords[section.lookupIndex],
-                  onWordTap: (token) => onWordTap(section.lookupIndex, token),
-                  onWordLongPress: () => onWordLongPress(section),
+          Builder(
+            builder: (context) {
+              final isSentenceSpeaking =
+                  ttsState.isSpeaking &&
+                  ttsState.activeReadingId == readingId &&
+                  ttsState.activeSentenceIndex == section.lookupIndex;
+              final isSentenceInitializing =
+                  ttsState.isInitializing &&
+                  ttsState.activeReadingId == readingId &&
+                  ttsState.activeSentenceIndex == section.lookupIndex;
+              final isHighlighted =
+                  ttsState.activeReadingId == readingId &&
+                  ttsState.activeSentenceIndex == section.lookupIndex &&
+                  (ttsState.activeTarget == StudentTtsTarget.passage ||
+                      ttsState.activeTarget == StudentTtsTarget.sentence) &&
+                  (ttsState.isSpeaking || ttsState.isInitializing);
+
+              return AnimatedContainer(
+                key: ValueKey<String>(
+                  'reading_section_${section.lookupIndex}_${isHighlighted ? 'active' : 'idle'}',
                 ),
-                if (selectedWords.containsKey(section.lookupIndex)) ...[
-                  const SizedBox(height: 16),
-                  _DictionaryInlinePanel(
-                    query: selectedWords[section.lookupIndex]!,
+                duration: const Duration(milliseconds: 180),
+                curve: Curves.easeOutCubic,
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: isHighlighted
+                      ? AppThemeTokens.of(
+                          context,
+                        ).accentBlue.withValues(alpha: 0.08)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(26),
+                  border: Border.all(
+                    color: isHighlighted
+                        ? AppThemeTokens.of(context).accentBlue
+                        : Colors.transparent,
                   ),
-                ],
-                if (loadingTranslations.contains(section.lookupIndex)) ...[
-                  const SizedBox(height: 16),
-                  const _InlineLoadingPanel(),
-                ],
-                if (revealedTranslations.contains(section.lookupIndex)) ...[
-                  const SizedBox(height: 16),
-                  _SentenceTranslationPanel(
-                    translation:
-                        section.turkishText ??
-                        translationForSection(section.lookupIndex) ??
-                        'Cumle cevirisi bulunamadi.',
+                ),
+                child: StudentSurfaceCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (section.heading.isNotEmpty)
+                            Expanded(
+                              child: Text(
+                                section.heading,
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              ),
+                            )
+                          else
+                            const Spacer(),
+                          StudentTtsIconButton(
+                            key: ValueKey<String>(
+                              'reading_sentence_tts_${section.lookupIndex}',
+                            ),
+                            isSpeaking: isSentenceSpeaking,
+                            isInitializing: isSentenceInitializing,
+                            isUnavailable: ttsState.isUnavailable,
+                            tooltip: isSentenceSpeaking
+                                ? 'Durdur'
+                                : 'Cumleyi dinle',
+                            iconSize: 18,
+                            visualDensity: VisualDensity.compact,
+                            onPlay: () => onPlaySentence(readingId, section),
+                            onStop: () => onStopSentence(section),
+                          ),
+                        ],
+                      ),
+                      if (section.heading.isNotEmpty) const SizedBox(height: 12),
+                      _InteractiveSentenceText(
+                        sentence: section.englishText,
+                        focusModeEnabled: focusModeEnabled,
+                        focusWordCards: linkedWordCards,
+                        selectedWord: selectedWords[section.lookupIndex],
+                        onWordTap: (token) => onWordTap(
+                          section.lookupIndex,
+                          token,
+                        ),
+                        onWordLongPress: () => onWordLongPress(section),
+                      ),
+                      if (selectedWords.containsKey(section.lookupIndex)) ...[
+                        const SizedBox(height: 16),
+                        _DictionaryInlinePanel(
+                          query: selectedWords[section.lookupIndex]!,
+                        ),
+                      ],
+                      if (loadingTranslations.contains(section.lookupIndex)) ...[
+                        const SizedBox(height: 16),
+                        const _InlineLoadingPanel(),
+                      ],
+                      if (revealedTranslations.contains(section.lookupIndex)) ...[
+                        const SizedBox(height: 16),
+                        _SentenceTranslationPanel(
+                          translation:
+                              section.turkishText ??
+                              translationForSection(section.lookupIndex) ??
+                              'Cumle cevirisi bulunamadi.',
+                        ),
+                      ],
+                    ],
                   ),
-                ],
-              ],
-            ),
+                ),
+              );
+            },
           ),
           const SizedBox(height: 16),
         ],
@@ -1271,340 +1405,6 @@ class _DictionaryInlinePanel extends ConsumerWidget {
       ),
     );
   }
-}
-
-class _WordCardSheet extends ConsumerStatefulWidget {
-  const _WordCardSheet({required this.initialWord});
-
-  final WordEntry initialWord;
-
-  @override
-  ConsumerState<_WordCardSheet> createState() => _WordCardSheetState();
-}
-
-class _WordCardSheetState extends ConsumerState<_WordCardSheet> {
-  late _WordSheetContent _content = _WordSheetContent.word(widget.initialWord);
-  bool _isResolvingRelated = false;
-
-  Future<void> _openRelatedWord(String label) async {
-    final normalizedQuery = _normalizeDictionaryQuery(label);
-    if (normalizedQuery.isEmpty || _isResolvingRelated) {
-      return;
-    }
-
-    final activeWord = _content.word;
-    if (activeWord != null &&
-        _normalizeDictionaryQuery(activeWord.enWord) == normalizedQuery) {
-      return;
-    }
-
-    setState(() {
-      _isResolvingRelated = true;
-    });
-
-    try {
-      final cachedWords = ref.read(studentWordsProvider).valueOrNull;
-      late final List<WordEntry> allWords;
-      if (cachedWords != null) {
-        allWords = cachedWords;
-      } else {
-        allWords = await ref.read(studentWordsProvider.future);
-      }
-      final matchedWord = _findWordCardByQuery(allWords, normalizedQuery);
-      if (!mounted) {
-        return;
-      }
-
-      if (matchedWord != null) {
-        setState(() {
-          _content = _WordSheetContent.word(matchedWord);
-        });
-        return;
-      }
-
-      final dictionaryEntry = await ref.read(
-        studentDictionaryEntryProvider(normalizedQuery).future,
-      );
-      if (!mounted) {
-        return;
-      }
-
-      setState(() {
-        _content = dictionaryEntry != null
-            ? _WordSheetContent.dictionary(
-                query: label.trim(),
-                dictionaryEntry: dictionaryEntry,
-              )
-            : _WordSheetContent.missing(query: label.trim());
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isResolvingRelated = false;
-        });
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = AppThemeTokens.of(context);
-    final word = _content.word;
-    final dictionaryEntry = _content.dictionaryEntry;
-    final synonyms = _splitWordList(word?.synonymsRaw);
-    final antonyms = _splitWordList(word?.antonymsRaw);
-    final title = word?.enWord ?? _content.query;
-    final partOfSpeech = word?.pos ?? dictionaryEntry?.pos ?? '';
-    final meaning = word?.trMeaning ?? dictionaryEntry?.trMeaning;
-
-    return StudentSurfaceCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    if (word == null) ...[
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: tokens.surfaceMuted,
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                        child: Text(
-                          'Sozluk cevirisi',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: tokens.secondaryText,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              if (_isResolvingRelated) ...[
-                const Padding(
-                  padding: EdgeInsets.only(top: 10, right: 8),
-                  child: SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                ),
-              ],
-              if (partOfSpeech.trim().isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: tokens.accentBlue.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Text(
-                    partOfSpeech,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: tokens.accentBlue,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              IconButton(
-                key: const ValueKey<String>('word_card_close_button'),
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.close_rounded),
-                tooltip: 'Kapat',
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            meaning ?? 'Bu kelime icin ceviri bulunamadi.',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          if (word != null &&
-              (word.exampleEn.trim().isNotEmpty ||
-                  (word.exampleTr?.trim().isNotEmpty ?? false))) ...[
-            const SizedBox(height: 18),
-            _WordCardSection(
-              title: 'Ornek',
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (word.exampleEn.trim().isNotEmpty)
-                    Text(
-                      word.exampleEn.trim(),
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  if (word.exampleTr?.trim().isNotEmpty ?? false) ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      word.exampleTr!.trim(),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: tokens.secondaryText,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ],
-          if (word != null && synonyms.isNotEmpty) ...[
-            const SizedBox(height: 18),
-            _WordCardSection(
-              title: 'Es anlamli',
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final item in synonyms)
-                    _WordListChip(
-                      label: item,
-                      color: tokens.accentBlue,
-                      onTap: () => _openRelatedWord(item),
-                    ),
-                ],
-              ),
-            ),
-          ],
-          if (word != null && antonyms.isNotEmpty) ...[
-            const SizedBox(height: 18),
-            _WordCardSection(
-              title: 'Zit anlamli',
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final item in antonyms)
-                    _WordListChip(
-                      label: item,
-                      color: tokens.warning,
-                      onTap: () => _openRelatedWord(item),
-                    ),
-                ],
-              ),
-            ),
-          ],
-          if (word != null && (word.notes?.trim().isNotEmpty ?? false)) ...[
-            const SizedBox(height: 18),
-            _WordCardSection(
-              title: 'Not',
-              child: Text(
-                word.notes!.trim(),
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: tokens.secondaryText,
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-class _WordSheetContent {
-  const _WordSheetContent.word(this.word)
-    : query = '',
-      dictionaryEntry = null;
-
-  const _WordSheetContent.dictionary({
-    required this.query,
-    required this.dictionaryEntry,
-  }) : word = null;
-
-  const _WordSheetContent.missing({required this.query})
-    : word = null,
-      dictionaryEntry = null;
-
-  final WordEntry? word;
-  final String query;
-  final DictionaryEntry? dictionaryEntry;
-}
-
-class _WordCardSection extends StatelessWidget {
-  const _WordCardSection({required this.title, required this.child});
-
-  final String title;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        const SizedBox(height: 10),
-        child,
-      ],
-    );
-  }
-}
-
-class _WordListChip extends StatelessWidget {
-  const _WordListChip({
-    required this.label,
-    required this.color,
-    this.onTap,
-  });
-
-  final String label;
-  final Color color;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: color.withValues(alpha: 0.12),
-      borderRadius: BorderRadius.circular(999),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(999),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Text(
-            label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-WordEntry? _findWordCardByQuery(List<WordEntry> words, String query) {
-  for (final word in words) {
-    if (_normalizeDictionaryQuery(word.enWord) == query) {
-      return word;
-    }
-  }
-
-  return null;
 }
 
 class _InlineLoadingPanel extends StatelessWidget {

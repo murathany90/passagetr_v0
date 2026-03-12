@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +7,9 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/student_providers.dart';
+import '../../core/tts/student_tts_controller.dart';
+import '../../core/tts/student_tts_engine.dart';
+import '../../core/tts/student_tts_icon_button.dart';
 import '../../core/student_word_progress_controller.dart';
 import '../common/page_parts.dart';
 
@@ -24,6 +29,19 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
   int _knownCount = 0;
   int _unsureCount = 0;
   int _unknownCount = 0;
+  late final StudentTtsController _ttsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _ttsController = ref.read(studentTtsControllerProvider.notifier);
+  }
+
+  @override
+  void dispose() {
+    unawaited(_ttsController.stop());
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +128,30 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
               _FlashcardCard(
                 word: word,
                 showMeaning: _showMeaning,
+                ttsState: ref.watch(studentTtsControllerProvider),
                 onToggle: () {
                   setState(() {
                     _showMeaning = !_showMeaning;
                   });
                 },
+                onPlayWord: () async {
+                  final messenger = ScaffoldMessenger.of(context);
+                  final result = await ref
+                      .read(studentTtsControllerProvider.notifier)
+                      .playWord(word: word);
+                  if (!mounted ||
+                      result == StudentTtsActionResult.started ||
+                      result == StudentTtsActionResult.stopped) {
+                    return;
+                  }
+
+                  final message =
+                      ref.read(studentTtsControllerProvider).errorMessage ??
+                      'Metin simdi okunamadi.';
+                  messenger.showSnackBar(SnackBar(content: Text(message)));
+                },
+                onStopWord: () =>
+                    ref.read(studentTtsControllerProvider.notifier).stop(),
               ),
               const SizedBox(height: 20),
               LayoutBuilder(
@@ -333,16 +370,30 @@ class _FlashcardCard extends StatelessWidget {
   const _FlashcardCard({
     required this.word,
     required this.showMeaning,
+    required this.ttsState,
     required this.onToggle,
+    required this.onPlayWord,
+    required this.onStopWord,
   });
 
   final WordEntry word;
   final bool showMeaning;
+  final StudentTtsState ttsState;
   final VoidCallback onToggle;
+  final Future<void> Function() onPlayWord;
+  final Future<void> Function() onStopWord;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
+    final isSpeaking =
+        ttsState.isSpeaking &&
+        ttsState.activeTarget == StudentTtsTarget.word &&
+        ttsState.activeWordId == word.id;
+    final isInitializing =
+        ttsState.isInitializing &&
+        ttsState.activeTarget == StudentTtsTarget.word &&
+        ttsState.activeWordId == word.id;
 
     return StudentSurfaceCard(
       onTap: onToggle,
@@ -409,6 +460,16 @@ class _FlashcardCard extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
+                  ),
+                  const SizedBox(width: 8),
+                  StudentTtsIconButton(
+                    key: ValueKey<String>('flashcard_tts_${word.id}'),
+                    isSpeaking: isSpeaking,
+                    isInitializing: isInitializing,
+                    isUnavailable: ttsState.isUnavailable,
+                    tooltip: isSpeaking ? 'Durdur' : 'Kelimeyi dinle',
+                    onPlay: onPlayWord,
+                    onStop: onStopWord,
                   ),
                   const Spacer(),
                   TextButton.icon(
