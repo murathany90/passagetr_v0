@@ -22,7 +22,9 @@ jobs:
 
       - name: Prepare env file
         shell: pwsh
-        run: Copy-Item env/app.dev.json.example env/app.web.json
+        run: |
+          Copy-Item env/app.dev.json.example env/app.web.json
+          Copy-Item env/app.web.prod.json.example env/app.web.prod.json
 
       - name: Run quality gate
         shell: pwsh
