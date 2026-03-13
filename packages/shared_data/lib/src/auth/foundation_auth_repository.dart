@@ -120,7 +120,10 @@ class FoundationAuthRepository implements AuthRepository {
       _emit(AccessContext.anonymous());
       return AppSuccess<AuthSession>(AccessContext.anonymous().session);
     } catch (error) {
-      return AppFailure<AuthSession>(_signUpFailureMessage(error), cause: error);
+      return AppFailure<AuthSession>(
+        _signUpFailureMessage(error),
+        cause: error,
+      );
     }
   }
 
@@ -147,7 +150,10 @@ class FoundationAuthRepository implements AuthRepository {
       );
       return AppSuccess<AuthSession>(_current.session);
     } catch (error) {
-      return AppFailure<AuthSession>(_signInFailureMessage(error), cause: error);
+      return AppFailure<AuthSession>(
+        _signInFailureMessage(error),
+        cause: error,
+      );
     }
   }
 

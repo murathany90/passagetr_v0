@@ -65,11 +65,15 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                         runSpacing: 12,
                         children: [
                           SizedBox(
-                            width: constraints.maxWidth < 560 ? constraints.maxWidth : 220,
+                            width: constraints.maxWidth < 560
+                                ? constraints.maxWidth
+                                : 220,
                             child: DropdownButtonFormField<AppRole?>(
                               initialValue: query.role,
                               isExpanded: true,
-                              decoration: const InputDecoration(labelText: 'Rol'),
+                              decoration: const InputDecoration(
+                                labelText: 'Rol',
+                              ),
                               items: const [
                                 DropdownMenuItem<AppRole?>(
                                   value: null,
@@ -94,11 +98,15 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                             ),
                           ),
                           SizedBox(
-                            width: constraints.maxWidth < 560 ? constraints.maxWidth : 220,
+                            width: constraints.maxWidth < 560
+                                ? constraints.maxWidth
+                                : 220,
                             child: DropdownButtonFormField<EntitlementPlan?>(
                               initialValue: query.plan,
                               isExpanded: true,
-                              decoration: const InputDecoration(labelText: 'Plan'),
+                              decoration: const InputDecoration(
+                                labelText: 'Plan',
+                              ),
                               items: const [
                                 DropdownMenuItem<EntitlementPlan?>(
                                   value: null,
@@ -119,7 +127,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                             ),
                           ),
                           SizedBox(
-                            width: constraints.maxWidth < 560 ? constraints.maxWidth : 220,
+                            width: constraints.maxWidth < 560
+                                ? constraints.maxWidth
+                                : 220,
                             child:
                                 DropdownButtonFormField<AdminUserStatusFilter?>(
                                   initialValue: query.status,
@@ -185,7 +195,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
   Widget _buildInviteStatusCard(BuildContext context) {
     final result = _lastInviteResult!;
     final isAccepted = result.accepted;
-    final title = isAccepted ? 'Son Davet Kuyruga Alindi' : 'Son Davet Reddedildi';
+    final title = isAccepted
+        ? 'Son Davet Kuyruga Alindi'
+        : 'Son Davet Reddedildi';
     final message = isAccepted
         ? '${result.email} icin davet Supabase mail kuyru guna alindi. Mail teslimati SMTP/Auth ayarlarina baglidir.'
         : result.errorMessage ??
@@ -205,7 +217,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
             FilledButton.tonalIcon(
               onPressed: _isInviteBusy ? null : () => _retryLastInvite(context),
               icon: const Icon(Icons.refresh_rounded),
-              label: Text(_isInviteBusy ? 'Yeniden deneniyor...' : 'Retry Invite'),
+              label: Text(
+                _isInviteBusy ? 'Yeniden deneniyor...' : 'Retry Invite',
+              ),
             ),
         ],
       ),
@@ -409,8 +423,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                 displayName: '',
                 role: result.value.role,
                 plan: result.value.plan,
-                statusLabel:
-                    result.value.role == AppRole.user ? 'active' : 'staff',
+                statusLabel: result.value.role == AppRole.user
+                    ? 'active'
+                    : 'staff',
                 lastSeenAt: null,
                 updatedAt: DateTime.now(),
               ),
@@ -464,8 +479,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                 displayName: '',
                 role: result.value.role,
                 plan: result.value.plan,
-                statusLabel:
-                    result.value.role == AppRole.user ? 'active' : 'staff',
+                statusLabel: result.value.role == AppRole.user
+                    ? 'active'
+                    : 'staff',
                 lastSeenAt: null,
                 updatedAt: DateTime.now(),
               ),
@@ -597,9 +613,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                 timestampLabel: 'az once',
               ),
             );
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kullanici guncellendi.')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Kullanici guncellendi.')));
       case AppFailure<AdminUserListItem>():
         ScaffoldMessenger.of(
           context,
@@ -663,9 +679,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
       return;
     }
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text((result as AppFailure<void>).message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text((result as AppFailure<void>).message)),
+    );
   }
 
   Future<void> _applyBulkUpdate(

@@ -109,9 +109,7 @@ class _ReleaseEntryCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       entry.releaseDate,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: tokens.secondaryText,
                       ),
                     ),

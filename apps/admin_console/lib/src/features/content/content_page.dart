@@ -2256,10 +2256,12 @@ class _WordRow extends StatelessWidget {
             children: [
               Switch(value: word.isPublished, onChanged: onTogglePublished),
               IconButton(
+                tooltip: 'Düzenle',
                 onPressed: onEdit,
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
+                tooltip: 'Sil',
                 onPressed: onDelete,
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
@@ -2366,10 +2368,12 @@ class _ReadingRow extends StatelessWidget {
                 icon: const Icon(Icons.auto_awesome_rounded),
               ),
               IconButton(
+                tooltip: 'Düzenle',
                 onPressed: onEdit,
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
+                tooltip: 'Sil',
                 onPressed: onDelete,
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
@@ -2447,19 +2451,23 @@ class _GrammarRow extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
+                tooltip: 'Yukarı Taşı',
                 onPressed: canMoveUp ? onMoveUp : null,
                 icon: const Icon(Icons.keyboard_arrow_up_rounded),
               ),
               IconButton(
+                tooltip: 'Aşağı Taşı',
                 onPressed: canMoveDown ? onMoveDown : null,
                 icon: const Icon(Icons.keyboard_arrow_down_rounded),
               ),
               Switch(value: module.isPublished, onChanged: onTogglePublished),
               IconButton(
+                tooltip: 'Düzenle',
                 onPressed: onEdit,
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
+                tooltip: 'Sil',
                 onPressed: onDelete,
                 icon: const Icon(Icons.delete_outline_rounded),
               ),

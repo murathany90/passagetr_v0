@@ -209,7 +209,9 @@ class _FakeWordRepository implements WordRepository {
   @override
   Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
     final idSet = ids.toSet();
-    return words.where((item) => idSet.contains(item.id)).toList(growable: false);
+    return words
+        .where((item) => idSet.contains(item.id))
+        .toList(growable: false);
   }
 }
 

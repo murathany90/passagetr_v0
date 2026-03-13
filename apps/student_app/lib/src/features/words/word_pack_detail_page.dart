@@ -139,10 +139,8 @@ class _StudentWordPackDetailPageState
                   for (final word in scopedWords) ...[
                     _WordPackRow(
                       word: word,
-                      onOpenWordCard: () => showStudentWordCardSheet(
-                        context,
-                        initialWord: word,
-                      ),
+                      onOpenWordCard: () =>
+                          showStudentWordCardSheet(context, initialWord: word),
                     ),
                     const SizedBox(height: 14),
                   ],
@@ -211,10 +209,7 @@ class _PackActionCard extends StatelessWidget {
 }
 
 class _WordPackRow extends ConsumerWidget {
-  const _WordPackRow({
-    required this.word,
-    required this.onOpenWordCard,
-  });
+  const _WordPackRow({required this.word, required this.onOpenWordCard});
 
   final WordEntry word;
   final VoidCallback onOpenWordCard;
@@ -238,7 +233,10 @@ class _WordPackRow extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(word.enWord, style: Theme.of(context).textTheme.titleLarge),
+                Text(
+                  word.enWord,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 8),
                 Text(
                   word.trMeaning,
@@ -272,7 +270,8 @@ class _WordPackRow extends ConsumerWidget {
                 context,
               ).showSnackBar(SnackBar(content: Text(message)));
             },
-            onStop: () => ref.read(studentTtsControllerProvider.notifier).stop(),
+            onStop: () =>
+                ref.read(studentTtsControllerProvider.notifier).stop(),
           ),
           const SizedBox(width: 8),
           Container(

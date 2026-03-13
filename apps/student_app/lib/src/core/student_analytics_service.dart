@@ -37,8 +37,7 @@ class StudentAnalyticsService {
     final fallback = await _buildFallbackDailyStats(days: days);
     final fallbackReason =
         remote.fallbackReason ?? 'remote_unavailable_unknown_reason';
-    final actor =
-        accessContext.email?.trim().isNotEmpty == true
+    final actor = accessContext.email?.trim().isNotEmpty == true
         ? accessContext.email!.trim()
         : accessContext.userId ?? 'anonymous';
     developer.log(

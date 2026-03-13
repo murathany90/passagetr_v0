@@ -153,7 +153,9 @@ class _DevAccessPanel extends StatelessWidget {
             value: accessContext.isAnonymous,
             onChanged: controller.setAnonymous,
             title: const Text('Anonim oturum'),
-            subtitle: const Text('Preview auth ve yükseltme akışı için kullanılır.'),
+            subtitle: const Text(
+              'Preview auth ve yükseltme akışı için kullanılır.',
+            ),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -234,10 +236,11 @@ class _DevAccessPanel extends StatelessWidget {
               OutlinedButton(
                 onPressed: accessContext.isAnonymous
                     ? () async {
-                        final result = await controller.upgradeAnonymousWithEmail(
-                          email: emailController.text.trim(),
-                          password: passwordController.text,
-                        );
+                        final result = await controller
+                            .upgradeAnonymousWithEmail(
+                              email: emailController.text.trim(),
+                              password: passwordController.text,
+                            );
                         if (!context.mounted) {
                           return;
                         }
