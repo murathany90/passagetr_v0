@@ -141,8 +141,7 @@ class FoundationAdminUserManagementRepository
           displayName: request.displayName,
           role: request.role,
           plan: request.plan,
-          statusLabel:
-              request.role == AppRole.user ? 'active' : 'staff',
+          statusLabel: request.role == AppRole.user ? 'active' : 'staff',
           lastSeenAt: null,
           updatedAt: DateTime.now(),
         ),
@@ -154,10 +153,7 @@ class FoundationAdminUserManagementRepository
       final response = await Supabase.instance.client.functions.invoke(
         'admin_manage_users',
         method: HttpMethod.post,
-        body: <String, dynamic>{
-          'action': 'update',
-          ...request.toJson(),
-        },
+        body: <String, dynamic>{'action': 'update', ...request.toJson()},
       );
       final payload = _asMap(response.data);
       if (response.status >= 400) {

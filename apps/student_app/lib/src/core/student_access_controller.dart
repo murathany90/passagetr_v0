@@ -59,9 +59,7 @@ class StudentAccessController extends StateNotifier<AccessContext> {
     return result;
   }
 
-  Future<AppResult<void>> resendSignUpConfirmation({
-    required String email,
-  }) {
+  Future<AppResult<void>> resendSignUpConfirmation({required String email}) {
     return _authRepository.resendSignUpConfirmation(email: email);
   }
 

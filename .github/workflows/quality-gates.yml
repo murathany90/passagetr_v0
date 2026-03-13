@@ -20,6 +20,12 @@ jobs:
         shell: pwsh
         run: flutter pub get
 
+      - name: Prepare env file
+        shell: pwsh
+        run: |
+          Copy-Item env/app.dev.json.example env/app.web.json
+          Copy-Item env/app.web.prod.json.example env/app.web.prod.json
+
       - name: Run quality gate
         shell: pwsh
         run: .\scripts\quality_gate.ps1 -EnvironmentFile env/app.web.json -SkipRlsSmoke

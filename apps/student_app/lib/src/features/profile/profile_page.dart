@@ -1402,6 +1402,7 @@ class _AuthAccessSheetState extends State<_AuthAccessSheet> {
                 ),
                 if (widget.showCloseAction)
                   IconButton(
+                    tooltip: 'Kapat',
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(Icons.close_rounded),
                   ),

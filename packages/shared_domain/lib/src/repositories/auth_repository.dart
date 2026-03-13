@@ -15,9 +15,7 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
   });
-  Future<AppResult<void>> resendSignUpConfirmation({
-    required String email,
-  });
+  Future<AppResult<void>> resendSignUpConfirmation({required String email});
   Future<AppResult<AuthSession>> updateDisplayName({
     required String displayName,
   });

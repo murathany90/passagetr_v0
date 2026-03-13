@@ -19,7 +19,11 @@ void main() {
         progressRepository: repository,
         accessContext: AccessContext.fromSession(
           AuthSession(
-            user: const AuthUser(id: 'test-user', email: 'test@t.com', isAnonymous: false),
+            user: const AuthUser(
+              id: 'test-user',
+              email: 'test@t.com',
+              isAnonymous: false,
+            ),
             claims: const <String, String>{'app_role': 'user', 'plan': 'free'},
           ),
         ),
@@ -40,8 +44,15 @@ void main() {
           progressRepository: repository,
           accessContext: AccessContext.fromSession(
             AuthSession(
-              user: const AuthUser(id: 'test-user', email: 'test@t.com', isAnonymous: false),
-              claims: const <String, String>{'app_role': 'user', 'plan': 'free'},
+              user: const AuthUser(
+                id: 'test-user',
+                email: 'test@t.com',
+                isAnonymous: false,
+              ),
+              claims: const <String, String>{
+                'app_role': 'user',
+                'plan': 'free',
+              },
             ),
           ),
           now: () => DateTime.utc(2026, 3, 9, 11, 0),
@@ -80,7 +91,11 @@ void main() {
         progressRepository: repository,
         accessContext: AccessContext.fromSession(
           AuthSession(
-            user: const AuthUser(id: 'test-user', email: 'test@t.com', isAnonymous: false),
+            user: const AuthUser(
+              id: 'test-user',
+              email: 'test@t.com',
+              isAnonymous: false,
+            ),
             claims: const <String, String>{'app_role': 'user', 'plan': 'free'},
           ),
         ),

@@ -285,8 +285,8 @@ class StudentTtsController extends StateNotifier<StudentTtsState> {
         kIsWeb
             ? 'Bu tarayici TTS desteklemiyor.'
             : 'Bu cihazda English TTS kullanilamiyor.',
-      StudentTtsAvailability.available || StudentTtsAvailability.unknown =>
-        'Metin simdi okunamadi.',
+      StudentTtsAvailability.available ||
+      StudentTtsAvailability.unknown => 'Metin simdi okunamadi.',
     };
   }
 }
