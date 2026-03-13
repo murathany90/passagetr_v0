@@ -7,17 +7,33 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../bootstrap/supabase_bootstrap.dart';
 import '../local/drift/local_sync_store.dart';
 
+typedef WordRemoteReader = Future<List<WordEntry>> Function({String? packId});
+typedef WordRemoteByIdsReader =
+    Future<List<WordEntry>> Function(List<String> ids);
+
 class FoundationWordRepository implements WordRepository {
-  const FoundationWordRepository.preview() : _database = null, _config = null;
+  const FoundationWordRepository.preview({
+    WordRemoteReader? remoteReaderOverride,
+    WordRemoteByIdsReader? remoteByIdsReaderOverride,
+  }) : _database = null,
+       _config = null,
+       _remoteReaderOverride = remoteReaderOverride,
+       _remoteByIdsReaderOverride = remoteByIdsReaderOverride;
 
   const FoundationWordRepository({
     LocalSyncStore? database,
     required AppConfig config,
+    WordRemoteReader? remoteReaderOverride,
+    WordRemoteByIdsReader? remoteByIdsReaderOverride,
   }) : _database = database,
-       _config = config;
+       _config = config,
+       _remoteReaderOverride = remoteReaderOverride,
+       _remoteByIdsReaderOverride = remoteByIdsReaderOverride;
 
   final LocalSyncStore? _database;
   final AppConfig? _config;
+  final WordRemoteReader? _remoteReaderOverride;
+  final WordRemoteByIdsReader? _remoteByIdsReaderOverride;
 
   @override
   Future<List<WordEntry>> fetchWords({String? packId}) async {
@@ -26,9 +42,13 @@ class FoundationWordRepository implements WordRepository {
       return localItems;
     }
 
-    final remoteItems = await _readFromRemote(packId: packId);
-    if (remoteItems.isNotEmpty) {
-      return remoteItems;
+    try {
+      final remoteItems = await _readFromRemote(packId: packId);
+      if (remoteItems.isNotEmpty) {
+        return remoteItems;
+      }
+    } catch (_) {
+      // Fall back to bundled preview content when the network path is unavailable.
     }
 
     return const <WordEntry>[
@@ -117,9 +137,13 @@ class FoundationWordRepository implements WordRepository {
           .toList(growable: false);
     }
 
-    final remoteItems = await _readFromRemoteByIds(normalizedIds);
-    if (remoteItems.isNotEmpty) {
-      return remoteItems;
+    try {
+      final remoteItems = await _readFromRemoteByIds(normalizedIds);
+      if (remoteItems.isNotEmpty) {
+        return remoteItems;
+      }
+    } catch (_) {
+      // Keep partial local metadata available when the network path is unavailable.
     }
 
     return normalizedIds
@@ -163,6 +187,11 @@ class FoundationWordRepository implements WordRepository {
   }
 
   Future<List<WordEntry>> _readFromRemote({String? packId}) async {
+    final remoteReaderOverride = _remoteReaderOverride;
+    if (remoteReaderOverride != null) {
+      return remoteReaderOverride(packId: packId);
+    }
+
     final config = _config;
     if (config == null || !config.supabaseEnabled) {
       return const <WordEntry>[];
@@ -199,6 +228,11 @@ class FoundationWordRepository implements WordRepository {
   }
 
   Future<List<WordEntry>> _readFromRemoteByIds(List<String> ids) async {
+    final remoteByIdsReaderOverride = _remoteByIdsReaderOverride;
+    if (remoteByIdsReaderOverride != null) {
+      return remoteByIdsReaderOverride(ids);
+    }
+
     final config = _config;
     if (config == null || !config.supabaseEnabled || ids.isEmpty) {
       return const <WordEntry>[];

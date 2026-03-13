@@ -7,17 +7,26 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../bootstrap/supabase_bootstrap.dart';
 import '../local/drift/local_sync_store.dart';
 
+typedef PackRemoteReader = Future<List<ContentPack>> Function();
+
 class FoundationPackRepository implements PackRepository {
-  const FoundationPackRepository.preview() : _database = null, _config = null;
+  const FoundationPackRepository.preview({
+    PackRemoteReader? remoteReaderOverride,
+  }) : _database = null,
+       _config = null,
+       _remoteReaderOverride = remoteReaderOverride;
 
   const FoundationPackRepository({
     LocalSyncStore? database,
     required AppConfig config,
+    PackRemoteReader? remoteReaderOverride,
   }) : _database = database,
-       _config = config;
+       _config = config,
+       _remoteReaderOverride = remoteReaderOverride;
 
   final LocalSyncStore? _database;
   final AppConfig? _config;
+  final PackRemoteReader? _remoteReaderOverride;
 
   @override
   Future<List<ContentPack>> fetchPacks() async {
@@ -26,18 +35,18 @@ class FoundationPackRepository implements PackRepository {
       return localItems;
     }
 
-    final remoteItems = await _readFromRemote();
-    if (remoteItems.isNotEmpty) {
-      return remoteItems;
+    try {
+      final remoteItems = await _readFromRemote();
+      if (remoteItems.isNotEmpty) {
+        return remoteItems;
+      }
+    } catch (_) {
+      // Fall back to bundled preview content when the network path is unavailable.
     }
 
     return const <ContentPack>[
       ContentPack(id: 'pack-yds-001', name: 'YDS İlk 1000', wordCount: 1000),
-      ContentPack(
-        id: 'pack-business',
-        name: 'İş İngilizcesi',
-        wordCount: 250,
-      ),
+      ContentPack(id: 'pack-business', name: 'İş İngilizcesi', wordCount: 250),
       ContentPack(
         id: 'pack-academic',
         name: 'Akademik Kelimeler',
@@ -99,6 +108,11 @@ class FoundationPackRepository implements PackRepository {
   }
 
   Future<List<ContentPack>> _readFromRemote() async {
+    final remoteReaderOverride = _remoteReaderOverride;
+    if (remoteReaderOverride != null) {
+      return remoteReaderOverride();
+    }
+
     final config = _config;
     if (config == null || !config.supabaseEnabled) {
       return const <ContentPack>[];
