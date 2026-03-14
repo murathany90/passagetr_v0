@@ -822,6 +822,7 @@ class ReadingDetailHeader extends StatelessWidget {
             ),
           ),
           IconButton(
+            tooltip: 'Paylaş',
             onPressed: onShare,
             icon: const Icon(Icons.share_outlined),
           ),
