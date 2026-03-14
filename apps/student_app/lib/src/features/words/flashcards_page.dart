@@ -163,6 +163,7 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                 onStopWord: () =>
                     ref.read(studentTtsControllerProvider.notifier).stop(),
                 onFavoriteToggle: () async {
+                  final scaffoldMessenger = ScaffoldMessenger.of(context);
                   final result = await ref
                       .read(studentWordFavoritesProvider.notifier)
                       .toggleFavorite(word.id);
@@ -173,9 +174,7 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
                   final message = result.isSuccess
                       ? 'Favori durumu guncellendi.'
                       : 'Favori durumu simdi guncellenemedi.';
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text(message)));
+                  scaffoldMessenger.showSnackBar(SnackBar(content: Text(message)));
                 },
               ),
               const SizedBox(height: 20),
