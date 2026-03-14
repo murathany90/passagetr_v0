@@ -37,6 +37,9 @@ class _StudentReadingDetailPageState
   final Set<int> _loadingTranslations = <int>{};
   final Map<int, _SelectedDictionaryWord> _selectedWords =
       <int, _SelectedDictionaryWord>{};
+  final Map<String, int> _selectedQuestionOptionIndexes = <String, int>{};
+  _ReadingQuizResult? _readingQuizResult;
+  bool _isSubmittingReadingQuiz = false;
   late final StudentTtsController _ttsController;
 
   @override
@@ -69,6 +72,9 @@ class _StudentReadingDetailPageState
     _revealedTranslations.clear();
     _loadingTranslations.clear();
     _selectedWords.clear();
+    _selectedQuestionOptionIndexes.clear();
+    _readingQuizResult = null;
+    _isSubmittingReadingQuiz = false;
     _hasTriggeredInitialRefresh = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) {
@@ -139,6 +145,9 @@ class _StudentReadingDetailPageState
         final focusWords = ref.watch(
           studentReadingFocusWordsProvider(reading.id),
         );
+        final readingQuestions = ref.watch(
+          studentReadingQuestionsProvider(reading.id),
+        );
         final focusWordCards = ref.watch(
           studentReadingWordCardsProvider(reading.id),
         );
@@ -199,6 +208,11 @@ class _StudentReadingDetailPageState
                 revealedTranslations: _revealedTranslations,
                 loadingTranslations: _loadingTranslations,
                 selectedWords: _selectedWords,
+                questions: readingQuestions,
+                selectedQuestionOptionIndexes: _selectedQuestionOptionIndexes,
+                readingQuizResult: _readingQuizResult,
+                isSubmittingReadingQuiz: _isSubmittingReadingQuiz,
+                persistsAttempts: InteractionGuard.canPersist(accessContext),
                 translationForSection: (lookupIndex) => ref
                     .read(studentTranslationProvider.notifier)
                     .cachedTranslation(reading.id, lookupIndex),
@@ -209,6 +223,10 @@ class _StudentReadingDetailPageState
                 onWordTap: _handleWordTap,
                 onWordLongPress: (section) =>
                     _toggleTranslation(readingId: reading.id, section: section),
+                onQuestionSelected: _selectReadingQuestionOption,
+                onSubmitQuiz: (questions) =>
+                    _submitReadingQuiz(reading.id, questions),
+                onClearQuiz: _clearReadingQuiz,
               );
               final focusWordsPanel = _FocusWordsPanel(
                 focusWords: focusWords,
@@ -324,6 +342,7 @@ class _StudentReadingDetailPageState
     ref.invalidate(studentReadingsProvider);
     ref.invalidate(studentReadingSectionsProvider(widget.readingId));
     ref.invalidate(studentReadingFocusWordsProvider(widget.readingId));
+    ref.invalidate(studentReadingQuestionsProvider(widget.readingId));
     ref.invalidate(studentReadingWordCardsProvider(widget.readingId));
 
     if (!mounted) {
@@ -463,6 +482,81 @@ class _StudentReadingDetailPageState
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _selectReadingQuestionOption(ReadingQuestion question, int optionIndex) {
+    setState(() {
+      _selectedQuestionOptionIndexes[question.id] = optionIndex;
+      _readingQuizResult = null;
+    });
+  }
+
+  void _clearReadingQuiz() {
+    setState(() {
+      _selectedQuestionOptionIndexes.clear();
+      _readingQuizResult = null;
+      _isSubmittingReadingQuiz = false;
+    });
+  }
+
+  Future<void> _submitReadingQuiz(
+    String readingId,
+    List<ReadingQuestion> questions,
+  ) async {
+    if (_isSubmittingReadingQuiz || questions.isEmpty) {
+      return;
+    }
+
+    for (final question in questions) {
+      if (!_selectedQuestionOptionIndexes.containsKey(question.id)) {
+        _showSnackBar('Tum sorulari cevapladiktan sonra kontrol et.');
+        return;
+      }
+    }
+
+    final correctCount = questions.where((question) {
+      return _selectedQuestionOptionIndexes[question.id] ==
+          question.correctOptionIndex;
+    }).length;
+    final wrongCount = questions.length - correctCount;
+    final score = ((correctCount / questions.length) * 100).round();
+
+    setState(() {
+      _readingQuizResult = _ReadingQuizResult(
+        correctCount: correctCount,
+        wrongCount: wrongCount,
+        score: score,
+      );
+      _isSubmittingReadingQuiz = true;
+    });
+
+    final result = await ref
+        .read(studentWordProgressProvider.notifier)
+        .recordTestAttempt(
+          sourceType: 'reading',
+          sourceId: readingId,
+          score: score,
+          correctCount: correctCount,
+          wrongCount: wrongCount,
+          payload: <String, dynamic>{
+            'passage_id': readingId,
+            'question_count': questions.length,
+            'correct_count': correctCount,
+            'wrong_count': wrongCount,
+          },
+        );
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _isSubmittingReadingQuiz = false;
+    });
+
+    if (result.isFailure) {
+      _showSnackBar('Mini test sonucu kaydedilemedi.');
+    }
   }
 
   Future<void> _playPassage(
@@ -625,6 +719,18 @@ class _AdjacentReadings {
 
   final ReadingPassage? previous;
   final ReadingPassage? next;
+}
+
+class _ReadingQuizResult {
+  const _ReadingQuizResult({
+    required this.correctCount,
+    required this.wrongCount,
+    required this.score,
+  });
+
+  final int correctCount;
+  final int wrongCount;
+  final int score;
 }
 
 class _SentenceToken {
@@ -979,12 +1085,20 @@ class _ReadingArticlePanel extends ConsumerWidget {
     required this.revealedTranslations,
     required this.loadingTranslations,
     required this.selectedWords,
+    required this.questions,
+    required this.selectedQuestionOptionIndexes,
+    required this.readingQuizResult,
+    required this.isSubmittingReadingQuiz,
+    required this.persistsAttempts,
     required this.translationForSection,
     required this.onNavigateToReading,
     required this.onPlaySentence,
     required this.onStopSentence,
     required this.onWordTap,
     required this.onWordLongPress,
+    required this.onQuestionSelected,
+    required this.onSubmitQuiz,
+    required this.onClearQuiz,
   });
 
   final String readingId;
@@ -998,6 +1112,11 @@ class _ReadingArticlePanel extends ConsumerWidget {
   final Set<int> revealedTranslations;
   final Set<int> loadingTranslations;
   final Map<int, _SelectedDictionaryWord> selectedWords;
+  final AsyncValue<List<ReadingQuestion>> questions;
+  final Map<String, int> selectedQuestionOptionIndexes;
+  final _ReadingQuizResult? readingQuizResult;
+  final bool isSubmittingReadingQuiz;
+  final bool persistsAttempts;
   final String? Function(int lookupIndex) translationForSection;
   final ValueChanged<ReadingPassage> onNavigateToReading;
   final Future<void> Function(String readingId, _ReadingArticleSection section)
@@ -1005,6 +1124,10 @@ class _ReadingArticlePanel extends ConsumerWidget {
   final Future<void> Function(_ReadingArticleSection section) onStopSentence;
   final void Function(int lookupIndex, _SentenceToken token) onWordTap;
   final ValueChanged<_ReadingArticleSection> onWordLongPress;
+  final void Function(ReadingQuestion question, int optionIndex)
+  onQuestionSelected;
+  final Future<void> Function(List<ReadingQuestion> questions) onSubmitQuiz;
+  final VoidCallback onClearQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -1131,6 +1254,35 @@ class _ReadingArticlePanel extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
         ],
+        ...switch (questions) {
+          AsyncData<List<ReadingQuestion>>(value: final items)
+              when items.isNotEmpty => <Widget>[
+                _ReadingQuestionsPanel(
+                  questions: items,
+                  selectedQuestionOptionIndexes: selectedQuestionOptionIndexes,
+                  readingQuizResult: readingQuizResult,
+                  isSubmitting: isSubmittingReadingQuiz,
+                  persistsAttempts: persistsAttempts,
+                  onOptionSelected: onQuestionSelected,
+                  onSubmit: () => onSubmitQuiz(items),
+                  onClear: onClearQuiz,
+                ),
+                const SizedBox(height: 16),
+              ],
+          AsyncLoading<List<ReadingQuestion>>() => <Widget>[
+            _ReadingQuestionsLoadingCard(),
+            const SizedBox(height: 16),
+          ],
+          AsyncError<List<ReadingQuestion>>() => <Widget>[
+            _ReadingQuestionsStateCard(
+              title: 'Mini test simdi yuklenemiyor',
+              message:
+                  'Soru kayitlari daha sonra yeniden yuklenebilir. Okuma icerigi kullanilmaya devam ediyor.',
+            ),
+            const SizedBox(height: 16),
+          ],
+          _ => const <Widget>[],
+        },
         _ReadingPassagePager(
           previousReading: previousReading,
           nextReading: nextReading,
@@ -1138,6 +1290,295 @@ class _ReadingArticlePanel extends ConsumerWidget {
           onNavigateToReading: onNavigateToReading,
         ),
       ],
+    );
+  }
+}
+
+class _ReadingQuestionsPanel extends StatelessWidget {
+  const _ReadingQuestionsPanel({
+    required this.questions,
+    required this.selectedQuestionOptionIndexes,
+    required this.readingQuizResult,
+    required this.isSubmitting,
+    required this.persistsAttempts,
+    required this.onOptionSelected,
+    required this.onSubmit,
+    required this.onClear,
+  });
+
+  final List<ReadingQuestion> questions;
+  final Map<String, int> selectedQuestionOptionIndexes;
+  final _ReadingQuizResult? readingQuizResult;
+  final bool isSubmitting;
+  final bool persistsAttempts;
+  final void Function(ReadingQuestion question, int optionIndex) onOptionSelected;
+  final VoidCallback onSubmit;
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final result = readingQuizResult;
+    final allAnswered = questions.every(
+      (question) => selectedQuestionOptionIndexes.containsKey(question.id),
+    );
+
+    return StudentSurfaceCard(
+      key: const ValueKey<String>('reading_quiz_panel'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Mini Test', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 8),
+          Text(
+            persistsAttempts
+                ? 'Gecisi bitirdikten sonra cevaplarini kontrol et.'
+                : 'Cevaplarini simdi kontrol edebilirsin. Sonuc bu oturumda kalir.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          if (result != null) ...[
+            const SizedBox(height: 14),
+            _ReadingQuizResultBanner(result: result, questionCount: questions.length),
+          ],
+          const SizedBox(height: 16),
+          for (final question in questions) ...[
+            _ReadingQuestionCard(
+              question: question,
+              selectedOptionIndex: selectedQuestionOptionIndexes[question.id],
+              resultVisible: result != null,
+              onOptionSelected: (optionIndex) =>
+                  onOptionSelected(question, optionIndex),
+            ),
+            if (question.explanation != null &&
+                question.explanation!.trim().isNotEmpty &&
+                result != null) ...[
+              const SizedBox(height: 10),
+              _ReadingQuestionExplanation(text: question.explanation!.trim()),
+            ],
+            if (question != questions.last) const SizedBox(height: 16),
+          ],
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              OutlinedButton(
+                onPressed: selectedQuestionOptionIndexes.isEmpty ? null : onClear,
+                child: const Text('Temizle'),
+              ),
+              const Spacer(),
+              FilledButton(
+                key: const ValueKey<String>('reading_quiz_submit'),
+                onPressed: allAnswered && !isSubmitting ? onSubmit : null,
+                child: Text(
+                  isSubmitting ? 'Kaydediliyor...' : 'Cevaplari Kontrol Et',
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadingQuizResultBanner extends StatelessWidget {
+  const _ReadingQuizResultBanner({
+    required this.result,
+    required this.questionCount,
+  });
+
+  final _ReadingQuizResult result;
+  final int questionCount;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final allCorrect = result.correctCount == questionCount;
+    final background = allCorrect
+        ? colorScheme.primaryContainer
+        : colorScheme.secondaryContainer;
+    final foreground = allCorrect
+        ? colorScheme.onPrimaryContainer
+        : colorScheme.onSecondaryContainer;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Text(
+        'Skor ${result.score}% - ${result.correctCount} dogru, ${result.wrongCount} yanlis',
+        style: Theme.of(
+          context,
+        ).textTheme.titleMedium?.copyWith(color: foreground),
+      ),
+    );
+  }
+}
+
+class _ReadingQuestionCard extends StatelessWidget {
+  const _ReadingQuestionCard({
+    required this.question,
+    required this.selectedOptionIndex,
+    required this.resultVisible,
+    required this.onOptionSelected,
+  });
+
+  final ReadingQuestion question;
+  final int? selectedOptionIndex;
+  final bool resultVisible;
+  final ValueChanged<int> onOptionSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(question.question, style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 12),
+        for (var index = 0; index < question.options.length; index++) ...[
+          _ReadingQuestionOptionTile(
+            key: ValueKey<String>('reading_quiz_option_${question.id}_$index'),
+            label: question.options[index],
+            isSelected: selectedOptionIndex == index,
+            isCorrect: question.correctOptionIndex == index,
+            showResult: resultVisible,
+            onTap: () => onOptionSelected(index),
+          ),
+          if (index < question.options.length - 1) const SizedBox(height: 10),
+        ],
+      ],
+    );
+  }
+}
+
+class _ReadingQuestionOptionTile extends StatelessWidget {
+  const _ReadingQuestionOptionTile({
+    super.key,
+    required this.label,
+    required this.isSelected,
+    required this.isCorrect,
+    required this.showResult,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool isSelected;
+  final bool isCorrect;
+  final bool showResult;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final isWrongSelection = showResult && isSelected && !isCorrect;
+    final isCorrectSelection = showResult && isCorrect;
+    final borderColor = isCorrectSelection
+        ? colorScheme.primary
+        : isWrongSelection
+        ? colorScheme.error
+        : isSelected
+        ? tokens.accent
+        : tokens.surfaceBorder;
+    final backgroundColor = isCorrectSelection
+        ? colorScheme.primaryContainer
+        : isWrongSelection
+        ? colorScheme.errorContainer
+        : isSelected
+        ? tokens.accentSoft.withValues(alpha: 0.28)
+        : Colors.transparent;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: onTap,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: borderColor),
+            color: backgroundColor,
+          ),
+          child: Text(label),
+        ),
+      ),
+    );
+  }
+}
+
+class _ReadingQuestionExplanation extends StatelessWidget {
+  const _ReadingQuestionExplanation({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: tokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+    );
+  }
+}
+
+class _ReadingQuestionsLoadingCard extends StatelessWidget {
+  const _ReadingQuestionsLoadingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return const _ReadingQuestionsStateCard(
+      title: 'Mini test yukleniyor',
+      message: 'Okuma sorulari getiriliyor.',
+      isLoading: true,
+    );
+  }
+}
+
+class _ReadingQuestionsStateCard extends StatelessWidget {
+  const _ReadingQuestionsStateCard({
+    required this.title,
+    required this.message,
+    this.isLoading = false,
+  });
+
+  final String title;
+  final String message;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentSurfaceCard(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (isLoading) ...[
+            const SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+            const SizedBox(width: 12),
+          ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: Theme.of(context).textTheme.titleLarge),
+                const SizedBox(height: 8),
+                Text(message, style: Theme.of(context).textTheme.bodyMedium),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -69,14 +69,11 @@ if ($LASTEXITCODE -ne 0) {
 
 Push-Location $repoRoot
 try {
-  Push-Location (Join-Path $repoRoot "apps\student_app")
-  try {
-    flutter build apk --release "--dart-define-from-file=$envFilePath" --target-platform android-arm64
-    if ($LASTEXITCODE -ne 0) {
-      throw "Android release build failed."
-    }
-  } finally {
-    Pop-Location
+  & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptRoot "build_android_release.ps1") `
+    -AppName "student_app" `
+    -EnvironmentFile $EnvironmentFile
+  if ($LASTEXITCODE -ne 0) {
+    throw "Android release build failed."
   }
 } finally {
   Pop-Location

@@ -79,6 +79,8 @@ class StaticContentImporter:
         mode: str,
         batch_size: int,
         report_file: Path,
+        word_pack_report_file: Path,
+        skip_word_pack_reclassification: bool,
     ) -> None:
         self.client = client
         self.words_file = words_file
@@ -87,6 +89,8 @@ class StaticContentImporter:
         self.mode = mode
         self.batch_size = batch_size
         self.report_file = report_file
+        self.word_pack_report_file = word_pack_report_file
+        self.skip_word_pack_reclassification = skip_word_pack_reclassification
 
         self.words_stats = WordsStats()
         self.passages_stats = PassagesStats()
@@ -115,6 +119,7 @@ class StaticContentImporter:
 
         pack_names = self._collect_pack_names(passages_rows, passages_mapping)
         pack_names.add("YDS Set 001")
+        pack_names.add("Other")
         pack_id_by_name = self._upsert_packs(pack_names)
         set001_pack_name = "YDS Set 001"
         set001_pack_id = pack_id_by_name.get("YDS Set 001")
@@ -138,7 +143,25 @@ class StaticContentImporter:
             sentences_rows, sentences_mapping, passage_id_by_title
         )
         self._insert_sentences(sentence_payload)
-        self.id_parity_stats = self._validate_id_parity(pack_id_by_name)
+
+        word_pack_reclassification: Optional[Dict[str, Any]] = None
+        reclassified_word_ids: set[str] = set()
+        if not self.skip_word_pack_reclassification:
+            word_pack_reclassification = self._run_word_pack_reclassification()
+            reclassified_word_ids = set(
+                word_pack_reclassification.get("word_ids", []) or []
+            )
+            word_pack_reclassification = {
+                key: value
+                for key, value in word_pack_reclassification.items()
+                if key != "word_ids"
+            }
+
+        self.id_parity_stats = self._validate_id_parity(
+            pack_id_by_name,
+            source_pack_name=set001_pack_name,
+            reclassified_word_ids=reclassified_word_ids,
+        )
 
         elapsed_ms = int((time.perf_counter() - started) * 1000)
         report = {
@@ -165,6 +188,12 @@ class StaticContentImporter:
             "sentences": self.sentences_stats.__dict__,
             "id_parity": self.id_parity_stats.__dict__,
             "id_parity_ok": self.id_parity_stats.ok,
+            "word_pack_reclassification": word_pack_reclassification
+            if word_pack_reclassification is not None
+            else {
+                "skipped": True,
+                "report_file": str(self.word_pack_report_file),
+            },
         }
 
         self.report_file.parent.mkdir(parents=True, exist_ok=True)
@@ -460,7 +489,12 @@ class StaticContentImporter:
             )
             self.sentences_stats.rows_loaded += len(rows)
 
-    def _validate_id_parity(self, pack_id_by_name: Dict[str, str]) -> IdParityStats:
+    def _validate_id_parity(
+        self,
+        pack_id_by_name: Dict[str, str],
+        source_pack_name: str,
+        reclassified_word_ids: set[str],
+    ) -> IdParityStats:
         stats = IdParityStats()
         pack_name_by_id: Dict[str, str] = {
             value: key for key, value in pack_id_by_name.items()
@@ -476,7 +510,11 @@ class StaticContentImporter:
             pack_id = str(row.get("pack_id") or "").strip()
             en_word = str(row.get("en_word") or "")
             pos = str(row.get("pos") or "")
-            pack_name = pack_name_by_id.get(pack_id, "")
+            pack_name = (
+                source_pack_name
+                if row_id in reclassified_word_ids
+                else pack_name_by_id.get(pack_id, "")
+            )
             expected = word_id_for_values(pack_name, en_word, pos)
             if not row_id or row_id != expected:
                 stats.word_mismatch_count += 1
@@ -524,6 +562,184 @@ class StaticContentImporter:
             and stats.sentence_mismatch_count == 0
         )
         return stats
+
+    def _run_word_pack_reclassification(self) -> Dict[str, Any]:
+        preview_response = self._retry(
+            lambda: self.client.rpc(
+                "admin_preview_word_pack_reclassification",
+                params={
+                    "p_source_pack_name": "YDS Set 001",
+                    "p_target_pack_names": [
+                        "YDS Set 001",
+                        "YDS Set 002",
+                        "YDS Set 003",
+                        "YDS Set 004",
+                        "YDS Set 005",
+                    ],
+                    "p_other_pack_name": "Other",
+                    "p_autolink_missing": True,
+                    "p_autolink_limit": 10,
+                },
+            ).execute(),
+            action="admin_preview_word_pack_reclassification rpc",
+        )
+
+        preview_rows = [dict(item) for item in (preview_response.data or [])]
+        if not preview_rows:
+            raise RuntimeError(
+                "Kelime paket yeniden siniflandirma preview sonucu bos dondu."
+            )
+
+        run_id = str(preview_rows[0].get("run_id") or "").strip()
+        if not run_id:
+            raise RuntimeError("Kelime paket preview run_id uretmedi.")
+
+        preview_rows = self._fetch_reclassification_rows(run_id)
+        target_counts: Dict[str, int] = {}
+        reason_counts: Dict[str, int] = {}
+        for row in preview_rows:
+            target_name = str(row.get("target_pack_name") or "").strip()
+            reason = str(row.get("reason") or "").strip()
+            if target_name:
+                target_counts[target_name] = target_counts.get(target_name, 0) + 1
+            if reason:
+                reason_counts[reason] = reason_counts.get(reason, 0) + 1
+
+        preview_report = {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "run_id": run_id,
+            "source_pack_name": "YDS Set 001",
+            "target_pack_names": [
+                "YDS Set 001",
+                "YDS Set 002",
+                "YDS Set 003",
+                "YDS Set 004",
+                "YDS Set 005",
+            ],
+            "other_pack_name": "Other",
+            "summary": {
+                "total_words": len(preview_rows),
+                "target_counts": target_counts,
+                "reason_counts": reason_counts,
+            },
+            "items": preview_rows,
+        }
+        self.word_pack_report_file.parent.mkdir(parents=True, exist_ok=True)
+        self.word_pack_report_file.write_text(
+            json.dumps(preview_report, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+        apply_response = self._retry(
+            lambda: self.client.rpc(
+                "admin_apply_word_pack_reclassification",
+                params={"p_run_id": run_id},
+            ).execute(),
+            action="admin_apply_word_pack_reclassification rpc",
+        )
+        apply_summary = dict(apply_response.data or {})
+
+        return {
+            "skipped": False,
+            "run_id": run_id,
+            "report_file": str(self.word_pack_report_file),
+            "preview_summary": preview_report["summary"],
+            "apply_summary": apply_summary,
+            "word_ids": [
+                str(row.get("word_id") or "").strip()
+                for row in preview_rows
+                if str(row.get("word_id") or "").strip()
+            ],
+        }
+
+    def _fetch_reclassification_rows(self, run_id: str) -> List[Dict[str, Any]]:
+        items: List[Dict[str, Any]] = []
+        offset = 0
+        page_size = 1000
+
+        while True:
+            response = self._retry(
+                lambda offset=offset: self.client.table(
+                    "word_pack_reclassification_items"
+                )
+                .select(
+                    "word_id,current_pack_id,target_pack_id,reason,set_hit_counts,linked_passage_count"
+                )
+                .eq("run_id", run_id)
+                .order("word_id", desc=False)
+                .range(offset, offset + page_size - 1)
+                .execute(),
+                action="word_pack_reclassification_items fetch",
+            )
+            chunk = [dict(item) for item in (response.data or [])]
+            items.extend(chunk)
+            if len(chunk) < page_size:
+                break
+            offset += len(chunk)
+
+        word_ids = [str(item.get("word_id") or "").strip() for item in items]
+        pack_ids = {
+            str(item.get("current_pack_id") or "").strip()
+            for item in items
+        } | {
+            str(item.get("target_pack_id") or "").strip()
+            for item in items
+        }
+        pack_ids.discard("")
+
+        word_map: Dict[str, str] = {}
+        for index in range(0, len(word_ids), 500):
+            batch = [word_id for word_id in word_ids[index : index + 500] if word_id]
+            if not batch:
+                continue
+            response = self._retry(
+                lambda batch=batch: self.client.table("words")
+                .select("id,en_word")
+                .in_("id", batch)
+                .execute(),
+                action="words fetch for reclassification report",
+            )
+            for row in response.data or []:
+                word_map[str(row.get("id") or "").strip()] = str(
+                    row.get("en_word") or ""
+                ).strip()
+
+        pack_map: Dict[str, str] = {}
+        pack_id_list = [pack_id for pack_id in pack_ids if pack_id]
+        for index in range(0, len(pack_id_list), 500):
+            batch = pack_id_list[index : index + 500]
+            if not batch:
+                continue
+            response = self._retry(
+                lambda batch=batch: self.client.table("packs")
+                .select("id,name")
+                .in_("id", batch)
+                .execute(),
+                action="packs fetch for reclassification report",
+            )
+            for row in response.data or []:
+                pack_map[str(row.get("id") or "").strip()] = str(
+                    row.get("name") or ""
+                ).strip()
+
+        rows: List[Dict[str, Any]] = []
+        for item in items:
+            word_id = str(item.get("word_id") or "").strip()
+            current_pack_id = str(item.get("current_pack_id") or "").strip()
+            target_pack_id = str(item.get("target_pack_id") or "").strip()
+            rows.append(
+                {
+                    "run_id": run_id,
+                    "word_id": word_id,
+                    "en_word": word_map.get(word_id, ""),
+                    "current_pack_name": pack_map.get(current_pack_id, ""),
+                    "target_pack_name": pack_map.get(target_pack_id, ""),
+                    "reason": str(item.get("reason") or "").strip(),
+                    "set_hit_counts": item.get("set_hit_counts") or {},
+                    "linked_passage_count": int(item.get("linked_passage_count") or 0),
+                }
+            )
+        return rows
 
     def _fetch_all_rows(self, table: str, columns: str, action: str) -> List[Dict[str, Any]]:
         rows: List[Dict[str, Any]] = []
@@ -615,6 +831,15 @@ def build_parser() -> argparse.ArgumentParser:
         "--report-file",
         default="json_output/static_content_import_report.json",
     )
+    parser.add_argument(
+        "--word-pack-report-file",
+        default="json_output/word_pack_reclassification_report.json",
+    )
+    parser.add_argument(
+        "--skip-word-pack-reclassification",
+        action="store_true",
+        help="YDS Set 001 kelimelerini passage odak kelimelerine gore yeniden paketleme adimini atlar.",
+    )
     parser.add_argument("--supabase-url", default="", help="Opsiyonel SUPABASE_URL override")
     parser.add_argument(
         "--supabase-key",
@@ -631,6 +856,7 @@ def main() -> int:
     passages_file = Path(args.passages_file).expanduser().resolve()
     sentences_file = Path(args.sentences_file).expanduser().resolve()
     report_file = Path(args.report_file).expanduser().resolve()
+    word_pack_report_file = Path(args.word_pack_report_file).expanduser().resolve()
 
     for path in (words_file, passages_file, sentences_file):
         if not path.exists():
@@ -671,6 +897,8 @@ def main() -> int:
         mode=args.mode,
         batch_size=args.batch_size,
         report_file=report_file,
+        word_pack_report_file=word_pack_report_file,
+        skip_word_pack_reclassification=bool(args.skip_word_pack_reclassification),
     )
 
     try:

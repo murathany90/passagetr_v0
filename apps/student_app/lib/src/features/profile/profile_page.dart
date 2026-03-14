@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/student_access_controller.dart';
+import '../../core/student_content_refresh_controller.dart';
 import '../../core/student_providers.dart';
 import '../common/page_parts.dart';
 
@@ -42,6 +44,9 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
     final config = ref.watch(studentAppConfigProvider);
     final controller = ref.read(studentAccessProvider.notifier);
     final themeMode = ref.watch(studentThemeModeProvider);
+    final contentRefreshState = ref.watch(
+      studentContentRefreshControllerProvider,
+    );
     final hasIdentifiedProfile = accessContext.hasIdentifiedProfile;
     final pageTitle = hasIdentifiedProfile ? 'Profil' : 'Giriş';
     final pageSubtitle = hasIdentifiedProfile
@@ -59,12 +64,14 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
               accessContext: accessContext,
               controller: controller,
               themeMode: themeMode,
+              contentRefreshState: contentRefreshState,
             )
           : _buildGuestBody(
               accessContext: accessContext,
               config: config,
               controller: controller,
               themeMode: themeMode,
+              contentRefreshState: contentRefreshState,
             ),
     );
   }
@@ -73,6 +80,7 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
     required AccessContext accessContext,
     required StudentAccessController controller,
     required ThemeMode themeMode,
+    required StudentContentRefreshState contentRefreshState,
   }) {
     final showReleaseInfoCard =
         MediaQuery.sizeOf(context).width < AppBreakpoints.shellWide;
@@ -103,6 +111,9 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
             ref.read(studentThemeModeProvider.notifier).state = value;
           },
           onLanguageChanged: _updateLanguage,
+          showContentRefreshAction: !kIsWeb,
+          contentRefreshState: contentRefreshState,
+          onRefreshContentPressed: _refreshContentWithFeedback,
         ),
         if (showReleaseInfoCard) ...[
           const SizedBox(height: 18),
@@ -136,6 +147,7 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
     required AppConfig config,
     required StudentAccessController controller,
     required ThemeMode themeMode,
+    required StudentContentRefreshState contentRefreshState,
   }) {
     final showReleaseInfoCard =
         MediaQuery.sizeOf(context).width < AppBreakpoints.shellWide;
@@ -162,6 +174,9 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
             ref.read(studentThemeModeProvider.notifier).state = value;
           },
           onLanguageChanged: _updateLanguage,
+          showContentRefreshAction: !kIsWeb,
+          contentRefreshState: contentRefreshState,
+          onRefreshContentPressed: _refreshContentWithFeedback,
         ),
         if (showReleaseInfoCard) ...[
           const SizedBox(height: 18),
@@ -207,6 +222,8 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
                     ref.read(studentThemeModeProvider.notifier).state = value;
                   },
                   onLanguageChanged: _updateLanguage,
+                  showContentRefreshAction: !kIsWeb,
+                  onRefreshContentPressed: _refreshContentWithFeedback,
                   onManageAccountPressed: () {
                     Navigator.of(sheetContext).pop();
                     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -330,6 +347,22 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
       AppSuccess<void>() => 'Oturum kapatıldı.',
       AppFailure<void>() => result.message,
     });
+  }
+
+  Future<void> _refreshContentWithFeedback() async {
+    final result = await ref
+        .read(studentContentRefreshControllerProvider.notifier)
+        .refreshContent();
+    if (!mounted) {
+      return;
+    }
+
+    final state = ref.read(studentContentRefreshControllerProvider);
+    final fallbackMessage = switch (result) {
+      AppSuccess<void>() => 'Icerik yenilendi.',
+      AppFailure<void>() => 'Icerik simdi yenilenemedi.',
+    };
+    _showMessage(state.message ?? fallbackMessage);
   }
 
   void _updateLanguage(String? value) {
@@ -549,12 +582,18 @@ class _AppSettingsCard extends StatelessWidget {
     required this.selectedLanguage,
     required this.onThemeChanged,
     required this.onLanguageChanged,
+    required this.showContentRefreshAction,
+    required this.contentRefreshState,
+    required this.onRefreshContentPressed,
   });
 
   final ThemeMode themeMode;
   final String selectedLanguage;
   final ValueChanged<ThemeMode> onThemeChanged;
   final ValueChanged<String?> onLanguageChanged;
+  final bool showContentRefreshAction;
+  final StudentContentRefreshState contentRefreshState;
+  final Future<void> Function() onRefreshContentPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -601,6 +640,54 @@ class _AppSettingsCard extends StatelessWidget {
             ],
             onChanged: onLanguageChanged,
           ),
+          if (showContentRefreshAction) ...[
+            const SizedBox(height: 20),
+            Text('Icerik', style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.tonalIcon(
+                key: const ValueKey<String>('profile_refresh_content_button'),
+                onPressed: contentRefreshState.isLoading
+                    ? null
+                    : () {
+                        unawaited(onRefreshContentPressed());
+                      },
+                icon: contentRefreshState.isLoading
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.sync_rounded),
+                label: Text(
+                  contentRefreshState.isLoading
+                      ? 'Icerik yenileniyor...'
+                      : 'Icerigi yenile',
+                ),
+              ),
+            ),
+            if (contentRefreshState.message != null) ...[
+              const SizedBox(height: 10),
+              Text(
+                contentRefreshState.message!,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: switch (contentRefreshState.status) {
+                    StudentContentRefreshStatus.success => tokens.success,
+                    StudentContentRefreshStatus.error => Theme.of(
+                      context,
+                    ).colorScheme.error,
+                    _ => tokens.secondaryText,
+                  },
+                  fontWeight:
+                      contentRefreshState.status ==
+                          StudentContentRefreshStatus.loading
+                      ? FontWeight.w600
+                      : FontWeight.w500,
+                ),
+              ),
+            ],
+          ],
         ],
       ),
     );
@@ -682,6 +769,8 @@ class _ProfileSettingsSheet extends ConsumerStatefulWidget {
     required this.selectedLanguage,
     required this.onThemeChanged,
     required this.onLanguageChanged,
+    required this.showContentRefreshAction,
+    required this.onRefreshContentPressed,
     required this.onManageAccountPressed,
     required this.onSubscriptionPressed,
     required this.onRefreshPressed,
@@ -695,6 +784,8 @@ class _ProfileSettingsSheet extends ConsumerStatefulWidget {
   final String selectedLanguage;
   final ValueChanged<ThemeMode> onThemeChanged;
   final ValueChanged<String?> onLanguageChanged;
+  final bool showContentRefreshAction;
+  final Future<void> Function() onRefreshContentPressed;
   final VoidCallback onManageAccountPressed;
   final VoidCallback onSubscriptionPressed;
   final Future<void> Function() onRefreshPressed;
@@ -855,6 +946,11 @@ class _ProfileSettingsSheetState extends ConsumerState<_ProfileSettingsSheet> {
           selectedLanguage: widget.selectedLanguage,
           onThemeChanged: widget.onThemeChanged,
           onLanguageChanged: widget.onLanguageChanged,
+          showContentRefreshAction: widget.showContentRefreshAction,
+          contentRefreshState: ref.watch(
+            studentContentRefreshControllerProvider,
+          ),
+          onRefreshContentPressed: widget.onRefreshContentPressed,
         ),
         const SizedBox(height: 16),
         _SettingsQuickActionsCard(

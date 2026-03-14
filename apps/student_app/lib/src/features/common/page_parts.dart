@@ -729,11 +729,23 @@ class _StudentSidebar extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 18),
-            child: ActionChip(
+            child: SizedBox(
+              width: tokens.railWidth - 20,
               key: const ValueKey<String>('sidebar_version_chip'),
-              label: Text(WorkspaceInfo.appVersion),
-              avatar: const Icon(Icons.update_rounded, size: 18),
-              onPressed: () => context.go(WorkspaceInfo.releaseNotesPath),
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size(0, 36),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  textStyle: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w800),
+                ),
+                onPressed: () => context.go(WorkspaceInfo.releaseNotesPath),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(WorkspaceInfo.appVersion, maxLines: 1),
+                ),
+              ),
             ),
           ),
         ],

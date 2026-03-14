@@ -5,6 +5,7 @@ import 'package:shared_ui/shared_ui.dart';
 
 import '../core/admin_console_models.dart';
 import '../core/admin_providers.dart';
+import '../features/ai_assistant/ai_assistant_page.dart' deferred as ai_assistant_page;
 import '../features/common/admin_page_parts.dart';
 import '../features/content/content_page.dart' deferred as content_page;
 import '../features/dashboard/dashboard_page.dart' deferred as dashboard_page;
@@ -66,6 +67,15 @@ final adminConsoleRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/content',
         redirect: (context, state) => '/content/readings',
+      ),
+      GoRoute(
+        path: '/content/ai-assistant',
+        builder: (context, state) => _AdminRouteGate(
+          child: DeferredPageLoader(
+            loadLibrary: ai_assistant_page.loadLibrary,
+            builder: (context) => ai_assistant_page.AdminAiAssistantPage(),
+          ),
+        ),
       ),
       GoRoute(
         path: '/content/readings',

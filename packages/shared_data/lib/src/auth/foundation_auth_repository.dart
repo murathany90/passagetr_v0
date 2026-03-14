@@ -34,7 +34,7 @@ class FoundationAuthRepository implements AuthRepository {
     }
 
     _ensureAuthSubscription();
-    final session = Supabase.instance.client.auth.currentSession;
+    final session = await _resolveValidSupabaseSession();
     await _emitResolvedContext(session);
     return _current.session;
   }
@@ -50,12 +50,7 @@ class FoundationAuthRepository implements AuthRepository {
       await _ensureSupabaseReady();
       _ensureAuthSubscription();
 
-      Session? session = Supabase.instance.client.auth.currentSession;
-      if (session?.refreshToken != null) {
-        final response = await Supabase.instance.client.auth.refreshSession();
-        session =
-            response.session ?? Supabase.instance.client.auth.currentSession;
-      }
+      final session = await _resolveValidSupabaseSession(forceRefresh: true);
 
       await _emitResolvedContext(session);
       return AppSuccess<AuthSession>(_current.session);
@@ -276,6 +271,86 @@ class FoundationAuthRepository implements AuthRepository {
     }
 
     await SupabaseBootstrap.initialize(_config);
+  }
+
+  Future<Session?> _resolveValidSupabaseSession({
+    bool forceRefresh = false,
+  }) async {
+    final auth = Supabase.instance.client.auth;
+    var session = auth.currentSession;
+    if (session == null) {
+      return null;
+    }
+
+    final hasRefreshToken =
+        session.refreshToken != null && session.refreshToken!.trim().isNotEmpty;
+    if (hasRefreshToken && (forceRefresh || session.isExpired || _expiresSoon(session))) {
+      session = await _tryRefreshSession(auth, fallback: session);
+    }
+
+    if (await _isSessionValid(auth, session)) {
+      return session;
+    }
+
+    if (hasRefreshToken) {
+      session = await _tryRefreshSession(auth, fallback: session);
+      if (await _isSessionValid(auth, session)) {
+        return session;
+      }
+    }
+
+    await _signOutSilently(auth);
+    return null;
+  }
+
+  Future<Session?> _tryRefreshSession(
+    GoTrueClient auth, {
+    required Session? fallback,
+  }) async {
+    try {
+      final response = await auth.refreshSession();
+      return response.session ?? auth.currentSession ?? fallback;
+    } catch (_) {
+      return auth.currentSession ?? fallback;
+    }
+  }
+
+  Future<bool> _isSessionValid(GoTrueClient auth, Session? session) async {
+    final accessToken = session?.accessToken.trim();
+    if (accessToken == null || accessToken.isEmpty) {
+      return false;
+    }
+
+    try {
+      final response = await auth.getUser(accessToken);
+      final user = response.user;
+      return user != null && user.id.isNotEmpty;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool _expiresSoon(Session session) {
+    final expiresAt = session.expiresAt;
+    if (expiresAt == null) {
+      return false;
+    }
+
+    final expiresAtDate = DateTime.fromMillisecondsSinceEpoch(
+      expiresAt * 1000,
+      isUtc: true,
+    );
+    return expiresAtDate.isBefore(
+      DateTime.now().toUtc().add(const Duration(minutes: 2)),
+    );
+  }
+
+  Future<void> _signOutSilently(GoTrueClient auth) async {
+    try {
+      await auth.signOut();
+    } catch (_) {
+      _emit(AccessContext.anonymous());
+    }
   }
 
   void _ensureAuthSubscription() {

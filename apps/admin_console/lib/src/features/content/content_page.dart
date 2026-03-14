@@ -1210,23 +1210,10 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       final notifier = ref.read(adminReadingChangesProvider.notifier);
       for (final item in items) {
         notifier.upsert(
-          AdminReadingRecord(
-            id: _clientId('reading'),
-            packId: item.packId,
-            packName: _packNameFromId(item.packId, packs),
-            title: item.title,
-            level: item.level,
-            category: item.category,
-            tagsRaw: item.tagsRaw,
-            isPro: item.isPro,
-            isPublished: item.isPublished,
-            linkedWordCount: item.linkedWords.length,
-            linkedWordsPreview: item.linkedWords
-                .map((entry) => entry.enWord.trim())
-                .where((entry) => entry.isNotEmpty)
-                .take(3)
-                .toList(growable: false),
-            updatedAtLabel: 'az once',
+          adminReadingRecordFromDetail(
+            detail: item,
+            packs: packs,
+            fallbackId: _clientId('reading'),
           ),
         );
       }
@@ -1833,42 +1820,12 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     required List<AdminPackRecord> packs,
     AdminReadingRecord? existing,
   }) {
-    return (existing ??
-            AdminReadingRecord(
-              id: detail.metadata.id ?? _clientId('reading'),
-              packId: detail.packId,
-              packName: _packNameFromId(detail.packId, packs),
-              title: detail.title,
-              level: detail.level,
-              category: detail.category,
-              tagsRaw: detail.tagsRaw,
-              isPro: detail.isPro,
-              isPublished: detail.isPublished,
-              linkedWordCount: detail.linkedWords.length,
-              linkedWordsPreview: _linkedWordPreviewFromDetail(detail),
-              updatedAtLabel: 'az once',
-            ))
-        .copyWith(
-          packId: detail.packId,
-          packName: _packNameFromId(detail.packId, packs),
-          title: detail.title,
-          level: detail.level,
-          category: detail.category,
-          tagsRaw: detail.tagsRaw,
-          isPro: detail.isPro,
-          isPublished: detail.isPublished,
-          linkedWordCount: detail.linkedWords.length,
-          linkedWordsPreview: _linkedWordPreviewFromDetail(detail),
-          updatedAtLabel: 'az once',
-        );
-  }
-
-  List<String> _linkedWordPreviewFromDetail(AdminReadingDetail detail) {
-    return detail.linkedWords
-        .map((item) => item.enWord.trim())
-        .where((item) => item.isNotEmpty)
-        .take(3)
-        .toList(growable: false);
+    return adminReadingRecordFromDetail(
+      detail: detail,
+      packs: packs,
+      existing: existing,
+      fallbackId: _clientId('reading'),
+    );
   }
 
   Future<AdminGrammarModuleDetail?> _loadGrammarDetail(
@@ -1896,18 +1853,6 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       (result as AppFailure<AdminGrammarModuleDetail>).message,
       isError: true,
     );
-    return null;
-  }
-
-  String? _packNameFromId(String? packId, List<AdminPackRecord> packs) {
-    if (packId == null) {
-      return null;
-    }
-    for (final pack in packs) {
-      if (pack.id == packId) {
-        return pack.name;
-      }
-    }
     return null;
   }
 
@@ -2076,6 +2021,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   }
 
   String _titleFor(AdminDestination destination) => switch (destination) {
+    AdminDestination.aiAssistant => 'AI Asistan',
     AdminDestination.readings => 'Okuma CMS',
     AdminDestination.words => 'Kelime CMS',
     AdminDestination.grammar => 'Gramer CMS',
@@ -2083,6 +2029,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   };
 
   String _subtitleFor(AdminDestination destination) => switch (destination) {
+    AdminDestination.aiAssistant =>
+      'AI ile reading taslagi uret, linked wordleri coz ve yayina al.',
     AdminDestination.readings =>
       'Parca olustur, guncelle ve yayin akislarini dogrudan panelden yonet.',
     AdminDestination.words =>

@@ -9,16 +9,72 @@ Zorunlu kural:
 - Web sidebar chip ve dar layout/APK `Profil/Giris` release kartinin ayni shared metadata kaynagindan beslendigini deploy oncesi dogrula.
 - Deploy scriptleri bu dosyada guncel surum etiketi yoksa fail etmelidir.
 
-## v2.0.5 - 2026-03-12
+## v2.0.13 - 2026-03-14
 
 Baslik:
-Okuma odak kelimeleri ve passage gecisi
+Student manual content refresh
 
 Notlar:
-- Okuma detay sayfasi acilisinda content refresh tetiklenir; stale local cache odak kelime panelini bos birakmaz.
-- `studentReadingsProvider`, `studentReadingSectionsProvider` ve `studentReadingFocusWordsProvider` ayni reading icin birlikte invalidate edilir.
-- Okuma detayinin altina minimal `Onceki parca / Sonraki parca` gecis karti eklendi.
-- Student web ve release APK bu reading detail duzeltmeleriyle yeniden deploy edildi.
+- Student mobil `Ayarlar` ekranina `Icerigi yenile` aksiyonu eklendi; bu buton `SyncScope.content` icin zorunlu sync calistirir.
+- Refresh sonrasi `packs`, `words`, `readings` ve `grammar` providerlari invalidate edilir; yeni AI reading ve AI kaynakli kelime kartlari APK tarafinda hemen gorunur.
+- Ayarlar karti loading, basari ve hata durumlarini kisa metin ve snackbar ile gosterir.
+- Student web production yeniden deploy edildi ve `arm64-v8a` release APK guncel surumle yeniden uretildi.
+
+## v2.0.12 - 2026-03-14
+
+Baslik:
+Student reading pack filter and version chip fix
+
+Notlar:
+- Student web sidebar altindaki surum etiketi dar rail uzerinde kirpilmamasi icin icon kaldirildi ve metin-odakli compact button yapisina gecildi.
+- Okuma Odasi sayfasina `Paket` dropdown filtresi eklendi; filtre `Tum Okumalar`, `Kayitlilar` ve `Favoriler` gorunumlerinde ayni state ile calisir.
+- Reading catalog mappingi `pack_id` tasir hale geldi; boylece web ve APK tarafinda published readingler secili pakete gore filtrelenebilir.
+- Student web yeniden deploy edildi ve Android icin tek `arm64-v8a` kucuk release APK uretildi.
+
+## v2.0.11 - 2026-03-14
+
+Baslik:
+Admin AI POS normalization hotfix
+
+Notlar:
+- Admin AI Asistan yeni kelime karti taslaklarinda AI tarafindan gelen `noun`, `verb`, `adjective` gibi POS alias degerlerini DB uyumlu kisa formata normalize eder.
+- Auto-match akisi AI suggestion POS degerini katalogdaki `n.`, `v.`, `adj.` gibi kayitlarla ayni kanonik formatta karsilastirir.
+- `admin_upsert_word_detail` oncesi repository katmaninda ikinci bir POS normalizasyonu uygulanir; gecersiz POS artik DB constraint hatasi yerine client tarafinda net hata verir.
+- Bu hotfix ile bos paket secildiginde AI tarafindan uretilen focus word kartlari save/publish sirasinda `words_pos_check` hatasina dusmeden kaydedilebilir.
+
+## v2.0.10 - 2026-03-14
+
+Baslik:
+Admin AI auto-linked focus words
+
+Notlar:
+- Admin AI Asistan generate formundan `Category` ve `Tags Raw` input alanlari kaldirildi; bu alanlar artik yalnizca AI cevabindan gelir.
+- Draft editor AI tarafindan uretilen `Kategori` ve `Tags Raw` degerlerini duzenlenebilir olarak gostermeye devam eder.
+- Linked word akisi manuel katalog eslestirme yerine secili pakete gore otomatik eslesme veya yeni kelime karti taslagi uretimi davranisina gecti.
+- Save/Publish sirasinda eksik focus words published kelime karti olarak upsert edilir, ardindan reading linked words zincirine baglanir.
+- Edge function promptu `category` ve `tags_raw` alanlarini modelin icerikten infer etmesini zorlar.
+
+## v2.0.9 - 2026-03-13
+
+Baslik:
+Reading mini test consumption
+
+Notlar:
+- Student reading detail ekrani artik `reading_passage_questions` kayitlarini canli veriden veya local sync deposundan yukler.
+- Okuma akisi icine cevap secimi, skor banner'i, soru bazli dogru/yanlis vurgusu ve aciklama paneli eklendi.
+- Mini test sonucu `source_type=reading` olarak `user_test_attempts` outbox event zincirine yazilir.
+- Student web build ve repository/widget testleri bu reading soru tuketim akisiyla dogrulandi.
+
+## v2.0.8 - 2026-03-13
+
+Baslik:
+Admin AI reading assistant
+
+Notlar:
+- Admin console icine `/content/ai-assistant` rotasi ve admin-only AI draft yuzeyi eklendi.
+- Gemini tabanli edge function ile reading title, sentences, linked word onerileri ve soru taslagi JSON olarak uretilir hale geldi.
+- Admin draft editoru linked word cozumleme tamamlanmadan `Save Draft` veya `Publish` aksiyonuna izin vermez.
+- `reading_passage_questions`, `ai_generated` ve `ai_generation_meta` alanlari migration ile eklendi; mevcut reading detail RPC zinciri genisletildi.
 
 ## v2.0.7 - 2026-03-12
 
@@ -42,6 +98,17 @@ Notlar:
 - Analytics snapshot modeli veri kaynaginin `remote` veya `estimated` oldugunu tasir ve fallback nedeni loglanir.
 - Ana sayfadaki haftalik ilerleme karti artik bugunun degil gercek haftanin toplam kelime ve oturum sayilarini gosterir.
 - Haftalik trend cizgisi kaldirildi; yerine ayni gunluk aktivite skorlarini gosteren bar grafik geldi.
+
+## v2.0.5 - 2026-03-12
+
+Baslik:
+Okuma odak kelimeleri ve passage gecisi
+
+Notlar:
+- Okuma detay sayfasi acilisinda content refresh tetiklenir; stale local cache odak kelime panelini bos birakmaz.
+- `studentReadingsProvider`, `studentReadingSectionsProvider` ve `studentReadingFocusWordsProvider` ayni reading icin birlikte invalidate edilir.
+- Okuma detayinin altina minimal `Onceki parca / Sonraki parca` gecis karti eklendi.
+- Student web ve release APK bu reading detail duzeltmeleriyle yeniden deploy edildi.
 
 ## v2.0.3 - 2026-03-11
 

@@ -6,6 +6,7 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'admin_access_controller.dart';
+import 'admin_ai_assistant_controller.dart';
 import 'admin_cms_controller.dart';
 import 'admin_console_models.dart';
 import 'admin_settings_controller.dart';
@@ -31,13 +32,16 @@ final adminAccessProvider = Provider<AccessContext>((ref) {
 });
 
 final adminAuthRepositoryProvider = Provider<FoundationAuthRepository>((ref) {
+  final config = ref.watch(adminAppConfigProvider);
   final repository = FoundationAuthRepository(
-    config: ref.watch(adminAppConfigProvider),
-    fallbackAccessContext: AccessContext.preview(
-      role: AppRole.admin,
-      plan: EntitlementPlan.free,
-      isAnonymous: false,
-    ),
+    config: config,
+    fallbackAccessContext: config.supabaseEnabled
+        ? AccessContext.anonymous()
+        : AccessContext.preview(
+            role: AppRole.admin,
+            plan: EntitlementPlan.free,
+            isAnonymous: false,
+          ),
   );
   ref.onDispose(repository.dispose);
   return repository;
@@ -45,6 +49,12 @@ final adminAuthRepositoryProvider = Provider<FoundationAuthRepository>((ref) {
 
 final adminContentRepositoryProvider = Provider<AdminContentRepository>(
   (ref) => FoundationAdminContentRepository(
+    config: ref.watch(adminAppConfigProvider),
+  ),
+);
+
+final adminAiReadingRepositoryProvider = Provider<AdminAiReadingRepository>(
+  (ref) => FoundationAdminAiReadingRepository(
     config: ref.watch(adminAppConfigProvider),
   ),
 );
@@ -78,6 +88,16 @@ final adminSettingsStateProvider =
         repository: ref.watch(adminSettingsRepositoryProvider),
       ),
     );
+
+final adminAiAssistantControllerProvider = StateNotifierProvider<
+  AdminAiAssistantController,
+  AdminAiAssistantState
+>((ref) {
+  return AdminAiAssistantController(
+    aiRepository: ref.watch(adminAiReadingRepositoryProvider),
+    contentRepository: ref.watch(adminContentRepositoryProvider),
+  );
+});
 
 final adminActiveSettingsProvider = Provider<AdminSettingsSnapshot>((ref) {
   return ref.watch(adminSettingsStateProvider).draft;

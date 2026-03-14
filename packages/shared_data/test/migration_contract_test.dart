@@ -52,6 +52,10 @@ void main() {
       '202603110032_admin_console_stabilization_detail_contracts.sql',
       '202603110033_admin_console_reading_import.sql',
       '202603130036_word_favorites.sql',
+      '202603130037_admin_ai_reading_assistant.sql',
+      '202603140038_word_pack_reclassification.sql',
+      '202603140039_word_pack_reclassification_preview_hotfix.sql',
+      '202603140040_word_pack_reclassification_apply_hotfix.sql',
     ];
 
     final fileNames = migrationDir
@@ -209,5 +213,67 @@ void main() {
         'grant execute on function public.apply_user_word_favorite_event',
       ),
     );
+  });
+
+  test('phase 11 AI reading assistant migration extends reading detail', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603130037_admin_ai_reading_assistant.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('reading_passage_questions'));
+    expect(sql, contains('ai_generated boolean not null default false'));
+    expect(sql, contains('ai_generation_meta jsonb'));
+    expect(sql, contains('admin_get_reading_detail'));
+    expect(sql, contains("'questions'"));
+    expect(sql, contains('admin_upsert_reading_detail'));
+    expect(sql, contains("'question_count'"));
+  });
+
+  test(
+    'word pack reclassification migration contains preview and apply RPCs',
+    () {
+      final migrationFile = File(
+        '${migrationDir.path}${Platform.pathSeparator}202603140038_word_pack_reclassification.sql',
+      );
+      final sql = migrationFile.readAsStringSync();
+
+      expect(sql, contains('word_pack_reclassification_runs'));
+      expect(sql, contains('word_pack_reclassification_items'));
+      expect(sql, contains('admin_preview_word_pack_reclassification'));
+      expect(sql, contains('admin_apply_word_pack_reclassification'));
+      expect(sql, contains('tie_break_lowest_set'));
+      expect(sql, contains('no_linked_passages'));
+      expect(sql, contains('service_role'));
+    },
+  );
+
+  test('word pack reclassification hotfix migration prefers column names', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603140039_word_pack_reclassification_preview_hotfix.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_preview_word_pack_reclassification'));
+    expect(sql, contains('#variable_conflict use_column'));
+    expect(
+      sql,
+      contains(
+        'grant execute on function public.admin_preview_word_pack_reclassification',
+      ),
+    );
+  });
+
+  test('word pack reclassification apply hotfix handles duplicate merges', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603140040_word_pack_reclassification_apply_hotfix.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_apply_word_pack_reclassification'));
+    expect(sql, contains('user_word_progress'));
+    expect(sql, contains('user_word_favorites'));
+    expect(sql, contains('reading_passage_words'));
+    expect(sql, contains('merged_duplicate_count'));
   });
 }

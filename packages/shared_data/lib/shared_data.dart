@@ -6,6 +6,7 @@ export 'src/local/drift/database_executor_factory.dart';
 export 'src/local/drift/local_sync_models.dart';
 export 'src/local/drift/local_sync_store.dart';
 export 'src/repositories/foundation_admin_content_repository.dart';
+export 'src/repositories/foundation_admin_ai_reading_repository.dart';
 export 'src/repositories/foundation_admin_user_management_repository.dart';
 export 'src/repositories/foundation_admin_settings_repository.dart';
 export 'src/repositories/foundation_admin_analytics_repository.dart';

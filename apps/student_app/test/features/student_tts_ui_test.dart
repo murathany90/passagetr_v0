@@ -357,6 +357,11 @@ class _FakeReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<List<ReadingQuestion>> fetchQuestions(String passageId) async {
+    return const <ReadingQuestion>[];
+  }
+
+  @override
   Future<String?> fetchSentenceTranslation(String passageId, int idx) async =>
       null;
 }

@@ -83,6 +83,39 @@ void main() {
     ]);
   });
 
+  test('loads reading pack id from local sync store', () async {
+    final database = FakeLocalSyncStore();
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passages',
+        entityId: 'reading-1',
+        payloadJson:
+            '{"id":"reading-1","pack_id":"pack-2","title":"Pack Reading","level":"B1","category":"History","is_pro":false}',
+        updatedAt: DateTime.utc(2026, 3, 14, 10, 0),
+      ),
+    );
+
+    final repository = FoundationReadingRepository(
+      database: database,
+      config: const AppConfig(
+        appName: 'PASSAGETR',
+        environment: AppEnvironment.dev,
+        platformMode: PlatformMode.mobile,
+        supabaseUrl: '',
+        supabaseAnonKey: '',
+        adminConsoleUrl: '',
+        adminPreviewEnabled: true,
+      ),
+    );
+
+    final readings = await repository.fetchReadings();
+
+    expect(readings, hasLength(1));
+    expect(readings.single.id, 'reading-1');
+    expect(readings.single.packId, 'pack-2');
+  });
+
   test('loads focus words by joining passage links with synced words', () async {
     final database = FakeLocalSyncStore();
     await database.upsertContentEntity(
@@ -144,5 +177,61 @@ void main() {
       <String>['ocean', 'mystery'],
     );
     expect(focusWords.first.trMeaning, 'okyanus');
+  });
+
+  test('loads published reading questions from local sync store', () async {
+    final database = FakeLocalSyncStore();
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_questions',
+        entityId: 'question-2',
+        payloadJson:
+            '{"id":"question-2","passage_id":"reading-1","sort_order":2,"question":"Second question?","options_json":["A","B"],"correct_option_index":1,"is_published":true}',
+        updatedAt: DateTime.utc(2026, 3, 13, 18, 2),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_questions',
+        entityId: 'question-1',
+        payloadJson:
+            '{"id":"question-1","passage_id":"reading-1","sort_order":1,"question":"First question?","options_json":["Yes","No"],"correct_option_index":0,"explanation":"Because the text says so.","is_published":true}',
+        updatedAt: DateTime.utc(2026, 3, 13, 18, 1),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_questions',
+        entityId: 'question-hidden',
+        payloadJson:
+            '{"id":"question-hidden","passage_id":"reading-1","sort_order":3,"question":"Hidden question?","options_json":["A","B"],"correct_option_index":0,"is_published":false}',
+        updatedAt: DateTime.utc(2026, 3, 13, 18, 3),
+      ),
+    );
+
+    final repository = FoundationReadingRepository(
+      database: database,
+      config: const AppConfig(
+        appName: 'PASSAGETR',
+        environment: AppEnvironment.dev,
+        platformMode: PlatformMode.mobile,
+        supabaseUrl: '',
+        supabaseAnonKey: '',
+        adminConsoleUrl: '',
+        adminPreviewEnabled: true,
+      ),
+    );
+
+    final questions = await repository.fetchQuestions('reading-1');
+
+    expect(
+      questions.map((item) => item.question).toList(growable: false),
+      <String>['First question?', 'Second question?'],
+    );
+    expect(questions.first.correctOptionIndex, 0);
+    expect(questions.first.explanation, 'Because the text says so.');
   });
 }

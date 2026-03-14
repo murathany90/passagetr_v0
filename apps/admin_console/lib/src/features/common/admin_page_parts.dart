@@ -7,7 +7,15 @@ import 'package:shared_ui/shared_ui.dart';
 import '../../core/admin_console_models.dart';
 import '../../core/admin_providers.dart';
 
-enum AdminDestination { dashboard, users, readings, words, grammar, settings }
+enum AdminDestination {
+  dashboard,
+  users,
+  aiAssistant,
+  readings,
+  words,
+  grammar,
+  settings,
+}
 
 class AdminShellFrame extends StatelessWidget {
   const AdminShellFrame({
@@ -131,6 +139,12 @@ class _AdminSidebar extends ConsumerWidget {
             label: 'Kullanıcılar',
             icon: Icons.group_outlined,
             route: '/users',
+          ),
+          (
+            destination: AdminDestination.aiAssistant,
+            label: 'AI Asistan',
+            icon: Icons.auto_awesome_outlined,
+            route: '/content/ai-assistant',
           ),
           (
             destination: AdminDestination.readings,

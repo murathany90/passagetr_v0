@@ -20,6 +20,84 @@ class ReleaseNoteEntry {
 
 const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
   ReleaseNoteEntry(
+    version: 'v2.0.13',
+    releaseDate: '2026-03-14',
+    title: 'Student manual content refresh',
+    summary:
+        'Student mobil ayarlar ekranina zorunlu content sync calistiran manuel yenileme aksiyonu eklendi; boylece AI ile yayinlanan yeni reading ve kelime kartlari APK tarafinda 6 saatlik TTL beklemeden gorunebilir.',
+    highlights: <String>[
+      'Ayarlar ekraninda mobilde gorunen Icerigi yenile butonu SyncScope.content icin zorunlu sync tetikler.',
+      'Refresh sonrasi packs, readings, words ve grammar providerlari invalidate edilerek yeni lokal ayna hemen okunur.',
+      'Yukleniyor, basari ve hata durumlari ayarlar kartinda ve snackbar ile kisa geri bildirim verir.',
+      'Student web deploy ve arm64-v8a release APK bu akisl a birlikte uretildi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.12',
+    releaseDate: '2026-03-14',
+    title: 'Student reading pack filter and version chip fix',
+    summary:
+        'Student web sidebar surum etiketi dar rail uzerinde tam gorunecek sekilde sadeleştirildi; Okuma Odasi sayfasina paket secimi filtresi eklendi ve reading catalog pack_id bilgisi web ile APK akisi icin tasinmaya baslandi.',
+    highlights: <String>[
+      'Sidebar surum chipi icon yerine dar rail uyumlu metin-odakli outlined button olarak guncellendi.',
+      'Okuma Odasi artik Tum Paketler veya belirli bir paket secilerek filtrelenebilir; filtre saved ve favorites gorunumlerinde de calisir.',
+      'Reading repository local ve remote catalog mappingi pack_id bilgisini student tarafa tasir.',
+      'Student release bu degisikliklerle web ve kucuk arm64 APK olarak yayinlandi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.11',
+    releaseDate: '2026-03-14',
+    title: 'Admin AI POS normalization hotfix',
+    summary:
+        'Admin AI Asistan yeni kelime karti taslaklarinda AI tarafindan gelen POS alias degerlerini DB uyumlu kisaltmalara normalize eder; boylece hem mevcut katalog eslesmesi hem de kelime karti kaydi words_pos_check hatasina dusmeden ilerler.',
+    highlights: <String>[
+      'AI suggestion icindeki noun, verb, adjective gibi alias POS degerleri n., v., adj. gibi kanonik formata cevrilir.',
+      'Auto-match akisi artik AI noun ile katalogdaki n. kartlarini ayni POS olarak eslestirir.',
+      'Yeni kelime karti save oncesi repository katmaninda tekrar normalize edilir ve gecersiz POS degeri DB yerine client tarafinda net hata verir.',
+      'YDS Set 002 gibi bos paketlerde AI ile uretilen focus word kartlari published olarak kaydedilirken words_pos_check constraint hatasi alinmaz.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.10',
+    releaseDate: '2026-03-14',
+    title: 'Admin AI auto-linked focus words',
+    summary:
+        'Admin AI Asistan generate formundan category ve tags girdi alanlari kaldirildi; secili pakete gore linked words otomatik eslesir veya yeni kelime karti taslagi olarak save/publish sirasinda olusturulur hale geldi.',
+    highlights: <String>[
+      'AI response icindeki category ve tags_raw alanlari draft editor icinde duzenlenebilir olarak korunur.',
+      'Linked word paneli manuel katalog eslestirme yerine auto-match, unlink ve yeni kart taslagi edit/delete davranisina gecti.',
+      'Eksik focus words save veya publish sirasinda admin_upsert_word_detail ile published kart olarak olusturulup sonra reading linked words kaydina baglanir.',
+      'Edge function promptu category ve tags alanlarini artik kullanicidan degil modelden infer eder.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.9',
+    releaseDate: '2026-03-13',
+    title: 'Reading mini test consumption',
+    summary:
+        'Student reading detail ekrani artik admin tarafinda tanimlanan okuma sorularini canli veriden yukleyip mini test olarak sunar; sonuc ozeti ve reading tipinde test attempt kaydi eklenmistir.',
+    highlights: <String>[
+      'Reading repository ve sync bootstrap reading_passage_questions kayitlarini yukler hale getirildi.',
+      'Student reading detail sayfasina cevap secimi, skor hesaplama ve aciklama gosteren mini test paneli eklendi.',
+      'Cevaplar kontrol edildiginde source_type=reading olacak sekilde user_test_attempts eventi kuyruklanir.',
+      'Student UI, TTS ve repository testleri soru tuketim senaryolariyla genisletildi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.8',
+    releaseDate: '2026-03-13',
+    title: 'Admin AI reading assistant',
+    summary:
+        'Admin console icine AI destekli reading draft uretimi, linked word cozumleme ve soru editoru eklendi; okuma detay persistence hatti AI metadata ve soru kayitlarini destekler hale geldi.',
+    highlights: <String>[
+      'Admin panelde /content/ai-assistant rotasi, generate formu, draft editoru ve publish paneli eklendi.',
+      'AI draft akisi linked word onerilerini cozulmeden save veya publish etmeye izin vermez.',
+      'AdminReadingDetail sozlesmesi questions, aiGenerated ve aiGenerationMeta alanlariyla genisletildi.',
+      'Supabase migration ve edge function ile reading_passage_questions, ai_generation_meta ve Gemini tabanli draft uretimi canliya hazirlandi.',
+    ],
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.7',
     releaseDate: '2026-03-12',
     title: 'Web ve Android icin native TTS',

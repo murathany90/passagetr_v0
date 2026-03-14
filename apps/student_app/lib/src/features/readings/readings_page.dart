@@ -26,6 +26,7 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
   final searchController = TextEditingController();
   ReadingCollectionView selectedView = ReadingCollectionView.all;
   bool discoverOnly = false;
+  String? selectedPackId;
   String query = '';
   int currentPage = 0;
 
@@ -39,6 +40,7 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
   Widget build(BuildContext context) {
     final accessContext = ref.watch(studentAccessProvider);
     final readings = ref.watch(studentReadingsProvider);
+    final packs = ref.watch(studentPacksProvider);
     final engagementByPassage = ref.watch(studentReadingEngagementProvider);
     final canPersistEngagement = InteractionGuard.canPersist(accessContext);
 
@@ -63,9 +65,21 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
             final showAuthRequired =
                 !canPersistEngagement &&
                 selectedView != ReadingCollectionView.all;
+            final packOptions = _packOptionsFor(
+              items,
+              packs.valueOrNull ?? const <ContentPack>[],
+            );
+            final resolvedSelectedPackId =
+                packOptions.any((item) => item.id == selectedPackId)
+                ? selectedPackId
+                : null;
             final visibleItems = showAuthRequired
                 ? const <ReadingPassage>[]
-                : _visibleReadings(items, engagementByPassage);
+                : _visibleReadings(
+                    items,
+                    engagementByPassage,
+                    selectedPackId: resolvedSelectedPackId,
+                  );
             final columns = constraints.maxWidth >= AppBreakpoints.desktopWide
                 ? 3
                 : constraints.maxWidth >= AppBreakpoints.mobileWide
@@ -101,17 +115,61 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                     });
                   },
                 ),
-                if (selectedView == ReadingCollectionView.all) ...[
+                if (selectedView == ReadingCollectionView.all ||
+                    packOptions.length > 1) ...[
                   const SizedBox(height: 16),
-                  FilterChip(
-                    label: const Text('Kesfet'),
-                    selected: discoverOnly,
-                    onSelected: (value) {
-                      setState(() {
-                        discoverOnly = value;
-                        currentPage = 0;
-                      });
-                    },
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      if (selectedView == ReadingCollectionView.all)
+                        FilterChip(
+                          label: const Text('Kesfet'),
+                          selected: discoverOnly,
+                          onSelected: (value) {
+                            setState(() {
+                              discoverOnly = value;
+                              currentPage = 0;
+                            });
+                          },
+                        ),
+                      if (packOptions.length > 1)
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minWidth: 220,
+                            maxWidth: 320,
+                          ),
+                          child: DropdownButtonFormField<String?>(
+                            key: const ValueKey<String>(
+                              'reading-pack-filter-dropdown',
+                            ),
+                            initialValue: resolvedSelectedPackId,
+                            isExpanded: true,
+                            decoration: const InputDecoration(
+                              labelText: 'Paket',
+                            ),
+                            items: <DropdownMenuItem<String?>>[
+                              const DropdownMenuItem<String?>(
+                                value: null,
+                                child: Text('Tum Paketler'),
+                              ),
+                              ...packOptions.map(
+                                (item) => DropdownMenuItem<String?>(
+                                  value: item.id,
+                                  child: Text(item.label),
+                                ),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                selectedPackId = value;
+                                currentPage = 0;
+                              });
+                            },
+                          ),
+                        ),
+                    ],
                   ),
                 ],
                 const SizedBox(height: 28),
@@ -196,27 +254,35 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
 
   List<ReadingPassage> _visibleReadings(
     List<ReadingPassage> items,
-    Map<String, ReadingEngagement> engagementByPassage,
-  ) {
+    Map<String, ReadingEngagement> engagementByPassage, {
+    String? selectedPackId,
+  }) {
     final normalizedQuery = query.toLowerCase();
     final filteredByView = switch (selectedView) {
       ReadingCollectionView.all =>
         items
             .where(
               (item) =>
-                  !discoverOnly ||
-                  readingSeedForPassage(item).progressPercent < 100,
+                  (selectedPackId == null || item.packId == selectedPackId) &&
+                  (!discoverOnly ||
+                      readingSeedForPassage(item).progressPercent < 100),
             )
             .toList(growable: false),
       ReadingCollectionView.saved =>
         items
             .where(
-              (item) => engagementByPassage[item.id]?.isBookmarked ?? false,
+              (item) =>
+                  (selectedPackId == null || item.packId == selectedPackId) &&
+                  (engagementByPassage[item.id]?.isBookmarked ?? false),
             )
             .toList(growable: false),
       ReadingCollectionView.favorites =>
         items
-            .where((item) => engagementByPassage[item.id]?.isFavorite ?? false)
+            .where(
+              (item) =>
+                  (selectedPackId == null || item.packId == selectedPackId) &&
+                  (engagementByPassage[item.id]?.isFavorite ?? false),
+            )
             .toList(growable: false),
     };
 
@@ -306,6 +372,43 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
       currentPage = 0;
     });
   }
+
+  List<_ReadingPackFilterOption> _packOptionsFor(
+    List<ReadingPassage> readings,
+    List<ContentPack> packs,
+  ) {
+    final packNames = <String, String>{
+      for (final pack in packs)
+        if (pack.id.trim().isNotEmpty) pack.id.trim(): pack.name.trim(),
+    };
+    final seen = <String>{};
+    final options = <_ReadingPackFilterOption>[];
+    for (final item in readings) {
+      final packId = item.packId?.trim();
+      if (packId == null || packId.isEmpty || !seen.add(packId)) {
+        continue;
+      }
+      final label = packNames[packId];
+      options.add(
+        _ReadingPackFilterOption(
+          id: packId,
+          label: (label == null || label.isEmpty) ? packId : label,
+        ),
+      );
+    }
+    options.sort(
+      (left, right) =>
+          left.label.toLowerCase().compareTo(right.label.toLowerCase()),
+    );
+    return options;
+  }
+}
+
+class _ReadingPackFilterOption {
+  const _ReadingPackFilterOption({required this.id, required this.label});
+
+  final String id;
+  final String label;
 }
 
 class _ReadingToggle extends StatelessWidget {

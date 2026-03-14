@@ -176,10 +176,17 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       return AppSuccess<AdminWordDetail>(detail);
     }
 
+    final normalizedDetail = _normalizeWordDetail(detail);
+    if (normalizedDetail case AppFailure<AdminWordDetail>()) {
+      return normalizedDetail;
+    }
+    final requestDetail =
+        (normalizedDetail as AppSuccess<AdminWordDetail>).value;
+
     try {
       final payload = await _invokeJsonRpc(
         'admin_upsert_word_detail',
-        params: <String, dynamic>{'p_payload': detail.toJson()},
+        params: <String, dynamic>{'p_payload': requestDetail.toJson()},
       );
       return AppSuccess<AdminWordDetail>(AdminWordDetail.fromJson(payload));
     } catch (error) {
@@ -554,6 +561,28 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       return null;
     }
     return trimmed;
+  }
+
+  AppResult<AdminWordDetail> _normalizeWordDetail(AdminWordDetail detail) {
+    final rawPos = detail.pos.trim();
+    final normalizedPos =
+        normalizeAdminWordPos(rawPos) ?? normalizeAdminWordPos(detail.posRaw);
+    if (normalizedPos == null) {
+      return const AppFailure<AdminWordDetail>(
+        'Kelime kaydedilemedi: POS gecersiz. Gecerli degerler: n., v., adj., adv., prep., conj., det., modal, NP, phr. v.',
+      );
+    }
+
+    final resolvedPosRaw =
+        _normalizedValue(detail.posRaw) ??
+        (rawPos != normalizedPos ? rawPos : null);
+    return AppSuccess<AdminWordDetail>(
+      detail.copyWith(
+        pos: normalizedPos,
+        posRaw: resolvedPosRaw,
+        clearPosRaw: resolvedPosRaw == null,
+      ),
+    );
   }
 }
 

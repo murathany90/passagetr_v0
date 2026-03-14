@@ -543,3 +543,60 @@ class AdminGrammarRecord {
     );
   }
 }
+
+AdminReadingRecord adminReadingRecordFromDetail({
+  required AdminReadingDetail detail,
+  required List<AdminPackRecord> packs,
+  AdminReadingRecord? existing,
+  String fallbackId = 'reading-draft',
+  String updatedAtLabel = 'az once',
+}) {
+  return (existing ??
+          AdminReadingRecord(
+            id: detail.metadata.id ?? fallbackId,
+            packId: detail.packId,
+            packName: adminPackNameFromId(detail.packId, packs),
+            title: detail.title,
+            level: detail.level,
+            category: detail.category,
+            tagsRaw: detail.tagsRaw,
+            isPro: detail.isPro,
+            isPublished: detail.isPublished,
+            linkedWordCount: detail.linkedWords.length,
+            linkedWordsPreview: adminLinkedWordPreviewFromDetail(detail),
+            updatedAtLabel: updatedAtLabel,
+          ))
+      .copyWith(
+        packId: detail.packId,
+        packName: adminPackNameFromId(detail.packId, packs),
+        title: detail.title,
+        level: detail.level,
+        category: detail.category,
+        tagsRaw: detail.tagsRaw,
+        isPro: detail.isPro,
+        isPublished: detail.isPublished,
+        linkedWordCount: detail.linkedWords.length,
+        linkedWordsPreview: adminLinkedWordPreviewFromDetail(detail),
+        updatedAtLabel: updatedAtLabel,
+      );
+}
+
+String? adminPackNameFromId(String? packId, List<AdminPackRecord> packs) {
+  if (packId == null) {
+    return null;
+  }
+  for (final pack in packs) {
+    if (pack.id == packId) {
+      return pack.name;
+    }
+  }
+  return null;
+}
+
+List<String> adminLinkedWordPreviewFromDetail(AdminReadingDetail detail) {
+  return detail.linkedWords
+      .map((item) => item.enWord.trim())
+      .where((item) => item.isNotEmpty)
+      .take(3)
+      .toList(growable: false);
+}

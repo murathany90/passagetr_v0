@@ -101,7 +101,29 @@ For a local smoke-only run without pushing a release:
 powershell -ExecutionPolicy Bypass -File .\scripts\deploy_web_firebase.ps1 -EnvironmentFile env\app.web.prod.json -SkipDeploy
 ```
 
-## 4.1. Fast preflight checklist
+## 4.1. Android release APK
+
+Android release APK icin desteklenen tek yol repo icindeki env-dogrulamali script'tir:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\build_android_release.ps1 -EnvironmentFile env\app.web.prod.json
+```
+
+Bu script:
+
+- `env/app.web.prod.json` dosyasini okur
+- `SUPABASE_URL` ve `SUPABASE_ANON_KEY` alanlarini build oncesi zorunlu olarak dogrular
+- `student_app` icin `android-arm64` release APK uretir
+- `--split-per-abi`, `--obfuscate` ve `--split-debug-info` kullanir
+- ciktiyi `apps/student_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk` altina yazar
+
+Onemli:
+
+- Duz `flutter build apk ...` komutunu release icin kullanmayin.
+- `--dart-define-from-file=env/app.web.prod.json` olmadan uretilen APK, Supabase env degerleri bos kalacagi icin preview auth yuzeyine duser.
+- Web deploy tamamlandiktan sonra Android APK ayri olarak bu script ile uretilmelidir.
+
+## 4.2. Fast preflight checklist
 
 Run this any time before deploy:
 

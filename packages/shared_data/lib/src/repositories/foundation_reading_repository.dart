@@ -44,6 +44,7 @@ class FoundationReadingRepository implements ReadingRepository {
         title: 'The Silent Ocean',
         level: 'Zor',
         category: 'Bilim',
+        packId: 'pack-yds-001',
         isPro: false,
       ),
       ReadingPassage(
@@ -51,6 +52,7 @@ class FoundationReadingRepository implements ReadingRepository {
         title: 'A Brief History of Time',
         level: 'Orta',
         category: 'Bilim',
+        packId: 'pack-academic',
         isPro: false,
       ),
       ReadingPassage(
@@ -58,6 +60,7 @@ class FoundationReadingRepository implements ReadingRepository {
         title: 'Everyday English in Coffee Shops',
         level: 'Kolay',
         category: 'Gunluk Yasam',
+        packId: 'pack-daily-speaking',
         isPro: false,
       ),
     ];
@@ -99,6 +102,25 @@ class FoundationReadingRepository implements ReadingRepository {
     }
 
     return const <ReadingFocusWord>[];
+  }
+
+  @override
+  Future<List<ReadingQuestion>> fetchQuestions(String passageId) async {
+    final localItems = await _readQuestionsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      return localItems;
+    }
+
+    try {
+      final remoteItems = await _readQuestionsFromRemote(passageId);
+      if (remoteItems.isNotEmpty) {
+        return remoteItems;
+      }
+    } catch (_) {
+      // Keep quiz surface empty when question records are unavailable.
+    }
+
+    return const <ReadingQuestion>[];
   }
 
   @override
@@ -167,6 +189,7 @@ class FoundationReadingRepository implements ReadingRepository {
             title: payload['title']?.toString() ?? '',
             level: payload['level']?.toString(),
             category: payload['category']?.toString(),
+            packId: payload['pack_id']?.toString(),
             summary: payload['summary']?.toString(),
             isPro: payload['is_pro'] as bool? ?? false,
           );
@@ -192,7 +215,7 @@ class FoundationReadingRepository implements ReadingRepository {
       rows =
           (await client
                   .from('reading_passages')
-                  .select('id,title,level,category,is_pro')
+                  .select('id,pack_id,title,level,category,is_pro')
                   .order('title'))
               as List<dynamic>;
     }
@@ -204,6 +227,7 @@ class FoundationReadingRepository implements ReadingRepository {
             title: row['title']?.toString() ?? '',
             level: row['level']?.toString(),
             category: row['category']?.toString(),
+            packId: row['pack_id']?.toString(),
             summary: row['summary']?.toString(),
             isPro: row['is_pro'] as bool? ?? false,
           ),
@@ -346,6 +370,49 @@ class FoundationReadingRepository implements ReadingRepository {
     return _mapFocusWordsFromRemoteLinks(links, wordsById);
   }
 
+  Future<List<ReadingQuestion>> _readQuestionsFromLocal(
+    String passageId,
+  ) async {
+    final database = _database;
+    if (database == null) {
+      return const <ReadingQuestion>[];
+    }
+
+    final records = await database.listContentEntities(
+      scope: 'readings',
+      entityType: 'reading_passage_questions',
+    );
+    return _mapQuestionRecords(records, passageId);
+  }
+
+  Future<List<ReadingQuestion>> _readQuestionsFromRemote(
+    String passageId,
+  ) async {
+    final config = _config;
+    if (config == null || !config.supabaseEnabled) {
+      return const <ReadingQuestion>[];
+    }
+
+    await SupabaseBootstrap.initialize(config);
+    final rows =
+        (await Supabase.instance.client
+                .from('reading_passage_questions')
+                .select(
+                  'id,passage_id,sort_order,question,options_json,correct_option_index,explanation,is_published',
+                )
+                .eq('passage_id', passageId)
+                .eq('is_published', true)
+                .order('sort_order'))
+            as List<dynamic>;
+
+    return rows
+        .whereType<Map<String, dynamic>>()
+        .map(_questionFromPayload)
+        .whereType<ReadingQuestion>()
+        .toList(growable: false)
+      ..sort((left, right) => left.sortOrder.compareTo(right.sortOrder));
+  }
+
   Map<String, dynamic> _decodePayload(String payloadJson) {
     final decoded = jsonDecode(payloadJson);
     if (decoded is Map<String, dynamic>) {
@@ -381,6 +448,19 @@ class FoundationReadingRepository implements ReadingRepository {
       return int.tryParse(value);
     }
     return null;
+  }
+
+  bool _asBool(Object? value) {
+    if (value is bool) {
+      return value;
+    }
+    if (value is String) {
+      return value.toLowerCase() == 'true';
+    }
+    if (value is num) {
+      return value != 0;
+    }
+    return false;
   }
 
   List<ReadingSentence> _mapSentenceRecords(
@@ -444,6 +524,25 @@ class FoundationReadingRepository implements ReadingRepository {
         .toList(growable: false);
   }
 
+  List<ReadingQuestion> _mapQuestionRecords(
+    List<ContentEntityRecord> records,
+    String passageId,
+  ) {
+    return records
+        .map((record) => _decodePayload(record.payloadJson))
+        .where((payload) => payload['passage_id']?.toString() == passageId)
+        .where(
+          (payload) =>
+              payload['is_published'] == null ||
+              _asBool(payload['is_published']),
+        )
+        .map(_questionFromPayload)
+        .whereType<ReadingQuestion>()
+        .where((item) => item.passageId == passageId)
+        .toList(growable: false)
+      ..sort((left, right) => left.sortOrder.compareTo(right.sortOrder));
+  }
+
   ReadingFocusWord? _focusWordFromPayload(
     String wordId,
     Map<String, dynamic> payload,
@@ -460,5 +559,68 @@ class FoundationReadingRepository implements ReadingRepository {
       trMeaning: trMeaning,
       pos: payload['pos']?.toString().trim(),
     );
+  }
+
+  ReadingQuestion? _questionFromPayload(Map<String, dynamic> payload) {
+    final passageId = payload['passage_id']?.toString().trim() ?? '';
+    final question = payload['question']?.toString().trim() ?? '';
+    final options = _readStringList(
+      payload['options_json'] ?? payload['options'],
+    );
+    final correctOptionIndex = _asInt(payload['correct_option_index']) ?? -1;
+    final isPublished = payload.containsKey('is_published')
+        ? _asBool(payload['is_published'])
+        : true;
+    if (!isPublished ||
+        passageId.isEmpty ||
+        question.isEmpty ||
+        options.length < 2 ||
+        correctOptionIndex < 0 ||
+        correctOptionIndex >= options.length) {
+      return null;
+    }
+
+    return ReadingQuestion(
+      id: payload['id']?.toString().trim().isNotEmpty == true
+          ? payload['id']!.toString().trim()
+          : '$passageId:${_asInt(payload['sort_order']) ?? 1}:$question',
+      passageId: passageId,
+      sortOrder: _asInt(payload['sort_order']) ?? 1,
+      question: question,
+      options: options,
+      correctOptionIndex: correctOptionIndex,
+      explanation: _nullableTrimmed(payload['explanation']?.toString()),
+    );
+  }
+
+  List<String> _readStringList(Object? value) {
+    if (value is List) {
+      return value
+          .map((item) => item.toString().trim())
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false);
+    }
+    if (value is String) {
+      try {
+        final decoded = jsonDecode(value);
+        if (decoded is List) {
+          return decoded
+              .map((item) => item.toString().trim())
+              .where((item) => item.isNotEmpty)
+              .toList(growable: false);
+        }
+      } catch (_) {
+        return const <String>[];
+      }
+    }
+    return const <String>[];
+  }
+
+  String? _nullableTrimmed(String? value) {
+    final trimmed = value?.trim();
+    if (trimmed == null || trimmed.isEmpty) {
+      return null;
+    }
+    return trimmed;
   }
 }

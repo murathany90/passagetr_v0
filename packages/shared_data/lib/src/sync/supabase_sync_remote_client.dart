@@ -76,6 +76,17 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
           entityIdBuilder: (row) =>
               '${row['passage_id'] ?? ''}:${row['word_id'] ?? ''}',
         ),
+        ..._mapRowsToContentEntities(
+          scope: scope,
+          entityType: 'reading_passage_questions',
+          rows:
+              (await client
+                      .from('reading_passage_questions')
+                      .select(
+                        'id,passage_id,sort_order,question,options_json,correct_option_index,explanation,is_published,updated_at,created_at',
+                      ))
+                  as List<dynamic>,
+        ),
       ],
       'grammar' => <ContentEntityRecord>[
         ..._mapRowsToContentEntities(

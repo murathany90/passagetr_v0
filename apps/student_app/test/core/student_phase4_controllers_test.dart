@@ -177,13 +177,9 @@ class _Phase4FakeProgressRepository implements ProgressRepository {
 class _FakeReadingEngagementRepository implements ReadingEngagementRepository {
   _FakeReadingEngagementRepository({
     List<ReadingEngagement>? seedEngagements,
-    this.bookmarkResult = const AppSuccess<void>(null),
-    this.favoriteResult = const AppSuccess<void>(null),
   }) : _seedEngagements = seedEngagements ?? const <ReadingEngagement>[];
 
   final List<ReadingEngagement> _seedEngagements;
-  final AppResult<void> bookmarkResult;
-  final AppResult<void> favoriteResult;
   final List<(String, bool)> bookmarkWrites = <(String, bool)>[];
   final List<(String, bool)> favoriteWrites = <(String, bool)>[];
 
@@ -196,13 +192,13 @@ class _FakeReadingEngagementRepository implements ReadingEngagementRepository {
     bool isBookmarked,
   ) async {
     bookmarkWrites.add((passageId, isBookmarked));
-    return bookmarkResult;
+    return const AppSuccess<void>(null);
   }
 
   @override
   Future<AppResult<void>> setFavorite(String passageId, bool isFavorite) async {
     favoriteWrites.add((passageId, isFavorite));
-    return favoriteResult;
+    return const AppSuccess<void>(null);
   }
 }
 
@@ -233,6 +229,11 @@ class _FakeReadingRepository implements ReadingRepository {
   @override
   Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
     return const <ReadingFocusWord>[];
+  }
+
+  @override
+  Future<List<ReadingQuestion>> fetchQuestions(String passageId) async {
+    return const <ReadingQuestion>[];
   }
 
   @override

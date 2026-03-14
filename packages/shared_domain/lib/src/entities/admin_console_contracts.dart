@@ -1,5 +1,7 @@
 import 'package:shared_core/shared_core.dart';
 
+import 'admin_ai_reading_contracts.dart';
+
 enum AdminUserStatusFilter { all, active, anonymous, staff }
 
 extension AdminUserStatusFilterX on AdminUserStatusFilter {
@@ -698,7 +700,7 @@ class AdminWordDetail {
     this.packId,
     this.enWord = '',
     this.trMeaning = '',
-    this.pos = 'noun',
+    this.pos = 'n.',
     this.posRaw,
     this.exampleEn = '',
     this.exampleTr,
@@ -807,7 +809,7 @@ class AdminWordDetail {
       packId: _emptyStringAsNull(json?['pack_id']?.toString()),
       enWord: json?['en_word']?.toString() ?? '',
       trMeaning: json?['tr_meaning']?.toString() ?? '',
-      pos: json?['pos']?.toString() ?? 'noun',
+      pos: json?['pos']?.toString() ?? 'n.',
       posRaw: _emptyStringAsNull(json?['pos_raw']?.toString()),
       exampleEn: json?['example_en']?.toString() ?? '',
       exampleTr: _emptyStringAsNull(json?['example_tr']?.toString()),
@@ -822,6 +824,73 @@ class AdminWordDetail {
       unpublishAt: _dateTimeFromValue(json?['unpublish_at']),
     );
   }
+}
+
+const List<String> adminAllowedWordPosValues = <String>[
+  'n.',
+  'v.',
+  'adj.',
+  'adv.',
+  'prep.',
+  'conj.',
+  'det.',
+  'modal',
+  'NP',
+  'phr. v.',
+];
+
+const String adminAllowedWordPosValuesLabel =
+    'n., v., adj., adv., prep., conj., det., modal, NP, phr. v.';
+
+String? normalizeAdminWordPos(String? value) {
+  final trimmed = value?.trim();
+  if (trimmed == null || trimmed.isEmpty) {
+    return null;
+  }
+
+  final rawParts = trimmed
+      .split(RegExp(r'\s*(?:;|,|/|\|)\s*'))
+      .map((item) => item.trim())
+      .where((item) => item.isNotEmpty)
+      .toList(growable: false);
+  if (rawParts.isEmpty) {
+    return null;
+  }
+
+  final normalizedParts = <String>[];
+  for (final rawPart in rawParts) {
+    final normalizedPart = _normalizeAdminWordPosToken(rawPart);
+    if (normalizedPart == null) {
+      return null;
+    }
+    normalizedParts.add(normalizedPart);
+  }
+  return normalizedParts.join(';');
+}
+
+String? _normalizeAdminWordPosToken(String raw) {
+  final trimmed = raw.trim();
+  if (trimmed.isEmpty) {
+    return null;
+  }
+  if (trimmed == 'NP') {
+    return 'NP';
+  }
+
+  final collapsed = trimmed.toLowerCase().replaceAll(RegExp(r'[^a-z]+'), '');
+  return switch (collapsed) {
+    'n' || 'noun' || 'nouns' || 'substantive' => 'n.',
+    'v' || 'verb' || 'verbs' => 'v.',
+    'adj' || 'adjective' || 'adjectives' => 'adj.',
+    'adv' || 'adverb' || 'adverbs' => 'adv.',
+    'prep' || 'preposition' || 'prepositions' => 'prep.',
+    'conj' || 'conjunction' || 'conjunctions' => 'conj.',
+    'det' || 'determiner' || 'determiners' || 'article' || 'articles' => 'det.',
+    'modal' || 'modalverb' || 'modalverbs' => 'modal',
+    'np' || 'propernoun' || 'propernouns' => 'NP',
+    'phrv' || 'phrasal' || 'phrasalverb' || 'phrasalverbs' => 'phr. v.',
+    _ => null,
+  };
 }
 
 class AdminReadingWordLinkInput {
@@ -977,6 +1046,9 @@ class AdminReadingDetail {
     this.unpublishAt,
     this.sentences = const <AdminReadingSentenceInput>[],
     this.linkedWords = const <AdminReadingWordLinkInput>[],
+    this.questions = const <AdminReadingQuestionInput>[],
+    this.aiGenerated = false,
+    this.aiGenerationMeta,
   });
 
   final AdminContentMetadata metadata;
@@ -991,6 +1063,9 @@ class AdminReadingDetail {
   final DateTime? unpublishAt;
   final List<AdminReadingSentenceInput> sentences;
   final List<AdminReadingWordLinkInput> linkedWords;
+  final List<AdminReadingQuestionInput> questions;
+  final bool aiGenerated;
+  final AdminAiGenerationMeta? aiGenerationMeta;
 
   AdminReadingDetail copyWith({
     AdminContentMetadata? metadata,
@@ -1005,12 +1080,16 @@ class AdminReadingDetail {
     DateTime? unpublishAt,
     List<AdminReadingSentenceInput>? sentences,
     List<AdminReadingWordLinkInput>? linkedWords,
+    List<AdminReadingQuestionInput>? questions,
+    bool? aiGenerated,
+    AdminAiGenerationMeta? aiGenerationMeta,
     bool clearPackId = false,
     bool clearLevel = false,
     bool clearCategory = false,
     bool clearTagsRaw = false,
     bool clearPublishAt = false,
     bool clearUnpublishAt = false,
+    bool clearAiGenerationMeta = false,
   }) {
     return AdminReadingDetail(
       metadata: metadata ?? this.metadata,
@@ -1025,6 +1104,11 @@ class AdminReadingDetail {
       unpublishAt: clearUnpublishAt ? null : unpublishAt ?? this.unpublishAt,
       sentences: sentences ?? this.sentences,
       linkedWords: linkedWords ?? this.linkedWords,
+      questions: questions ?? this.questions,
+      aiGenerated: aiGenerated ?? this.aiGenerated,
+      aiGenerationMeta: clearAiGenerationMeta
+          ? null
+          : aiGenerationMeta ?? this.aiGenerationMeta,
     );
   }
 
@@ -1043,11 +1127,15 @@ class AdminReadingDetail {
     'linked_words': linkedWords
         .map((item) => item.toJson())
         .toList(growable: false),
+    'questions': questions.map((item) => item.toJson()).toList(growable: false),
+    'ai_generated': aiGenerated,
+    'ai_generation_meta': aiGenerationMeta?.toJson(),
   };
 
   factory AdminReadingDetail.fromJson(Map<String, dynamic>? json) {
     final rawSentences = json?['sentences'];
     final rawLinkedWords = json?['linked_words'];
+    final rawQuestions = json?['questions'];
     return AdminReadingDetail(
       metadata: AdminContentMetadata.fromJson(json),
       packId: _emptyStringAsNull(json?['pack_id']?.toString()),
@@ -1083,6 +1171,26 @@ class AdminReadingDetail {
               .toList(growable: false),
         _ => const <AdminReadingWordLinkInput>[],
       },
+      questions: switch (rawQuestions) {
+        List<dynamic>() =>
+          rawQuestions
+              .whereType<Map>()
+              .map(
+                (item) => AdminReadingQuestionInput.fromJson(
+                  item.map((key, value) => MapEntry(key.toString(), value)),
+                ),
+              )
+              .toList(growable: false),
+        _ => const <AdminReadingQuestionInput>[],
+      },
+      aiGenerated: json?['ai_generated'] as bool? ?? false,
+      aiGenerationMeta: json?['ai_generation_meta'] == null
+          ? null
+          : AdminAiGenerationMeta.fromJson(
+              (json?['ai_generation_meta'] as Map?)?.map(
+                (key, value) => MapEntry(key.toString(), value),
+              ),
+            ),
     );
   }
 }

@@ -2,8 +2,8 @@ class WorkspaceInfo {
   const WorkspaceInfo._();
 
   static const brandName = 'PASSAGETR v2';
-  static const appVersion = 'v2.0.7';
-  static const buildNumber = '7';
+  static const appVersion = 'v2.0.13';
+  static const buildNumber = '13';
   static const releaseNotesPath = '/changelog';
   static const branchName = 'v2-rewrite-foundation';
   static const archiveTag = 'v1-archive-2026-03-08';

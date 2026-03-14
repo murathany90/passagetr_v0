@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -276,6 +278,66 @@ void main() {
     },
   );
 
+  testWidgets('readings page filters items by selected pack', (tester) async {
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/readings',
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/readings',
+          builder: (context, state) => const StudentReadingsPage(),
+        ),
+      ],
+      overrides: <Override>[
+        studentPackRepositoryProvider.overrideWithValue(
+          const _FakePackRepository(<ContentPack>[
+            ContentPack(id: 'pack-1', name: 'YDS Set 001', wordCount: 5314),
+            ContentPack(id: 'pack-2', name: 'YDS Set 002', wordCount: 0),
+          ]),
+        ),
+        studentReadingRepositoryProvider.overrideWithValue(
+          _FakeReadingRepository(
+            readings: const <ReadingPassage>[
+              ReadingPassage(
+                id: 'reading-pack-1',
+                title: 'Set 001 Reading',
+                level: 'A2',
+                category: 'Science',
+                packId: 'pack-1',
+              ),
+              ReadingPassage(
+                id: 'reading-pack-2',
+                title: 'Set 002 Reading',
+                level: 'B1',
+                category: 'History',
+                packId: 'pack-2',
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('reading-pack-filter-dropdown')),
+      findsOneWidget,
+    );
+    expect(find.text('Set 001 Reading'), findsOneWidget);
+    expect(find.text('Set 002 Reading'), findsOneWidget);
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('reading-pack-filter-dropdown')),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('YDS Set 002').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Set 002 Reading'), findsOneWidget);
+    expect(find.text('Set 001 Reading'), findsNothing);
+  });
+
   testWidgets('readings page keeps Kesfet chip in all readings only', (
     tester,
   ) async {
@@ -525,6 +587,119 @@ void main() {
       find.byKey(const ValueKey<String>('reading_nav_prev_reading-2')),
       findsOneWidget,
     );
+  });
+
+  testWidgets('reading detail renders mini test and records reading attempt', (
+    tester,
+  ) async {
+    final progressRepository = _RecordingProgressRepository();
+
+    await _pumpStudentBehaviorApp(
+      tester,
+      initialLocation: '/readings/reading-quiz',
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/readings',
+          builder: (context, state) => const StudentReadingsPage(),
+        ),
+        GoRoute(
+          path: '/readings/:readingId',
+          builder: (context, state) => StudentReadingDetailPage(
+            readingId: state.pathParameters['readingId']!,
+          ),
+        ),
+      ],
+      overrides: <Override>[
+        studentReadingRepositoryProvider.overrideWithValue(
+          _FakeReadingRepository(
+            readings: const <ReadingPassage>[
+              ReadingPassage(
+                id: 'reading-quiz',
+                title: '103-Quiz Passage',
+                level: 'B1',
+                category: 'Science',
+              ),
+            ],
+            sectionsByPassage: const <String, List<ReadingSentence>>{
+              'reading-quiz': <ReadingSentence>[
+                ReadingSentence(
+                  passageId: 'reading-quiz',
+                  index: 1,
+                  englishText: 'Space crews prepare for long missions.',
+                  turkishText: 'Uzay ekipleri uzun gorevlere hazirlanir.',
+                ),
+              ],
+            },
+            questionsByPassage: const <String, List<ReadingQuestion>>{
+              'reading-quiz': <ReadingQuestion>[
+                ReadingQuestion(
+                  id: 'question-1',
+                  passageId: 'reading-quiz',
+                  sortOrder: 1,
+                  question: 'What do space crews prepare for?',
+                  options: <String>['Long missions', 'Cooking classes'],
+                  correctOptionIndex: 0,
+                  explanation:
+                      'The passage states they prepare for long missions.',
+                ),
+                ReadingQuestion(
+                  id: 'question-2',
+                  passageId: 'reading-quiz',
+                  sortOrder: 2,
+                  question: 'Where do they prepare?',
+                  options: <String>['In forests', 'In training programs'],
+                  correctOptionIndex: 1,
+                ),
+              ],
+            },
+          ),
+        ),
+        studentProgressRepositoryProvider.overrideWithValue(progressRepository),
+        _identifiedAccessOverride(),
+      ],
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('reading_quiz_panel')),
+      findsOneWidget,
+    );
+    expect(find.text('Mini Test'), findsOneWidget);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey<String>('reading_quiz_option_question-1_0')),
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('reading_quiz_option_question-1_0')),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byKey(const ValueKey<String>('reading_quiz_option_question-2_0')),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey<String>('reading_quiz_submit')),
+    );
+    await tester.tap(find.byKey(const ValueKey<String>('reading_quiz_submit')));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Skor 50%'), findsOneWidget);
+    expect(progressRepository.enqueuedEvents, hasLength(1));
+    expect(
+      progressRepository.enqueuedEvents.single.entityType,
+      'user_test_attempts',
+    );
+
+    final payload =
+        jsonDecode(progressRepository.enqueuedEvents.single.payloadJson)
+            as Map<String, dynamic>;
+    expect(payload['source_type'], 'reading');
+    expect(payload['source_id'], 'reading-quiz');
+    expect(payload['score'], 50);
+    expect(payload['correct_count'], 1);
+    expect(payload['wrong_count'], 1);
   });
 
   testWidgets(
@@ -1170,11 +1345,13 @@ class _FakeReadingRepository implements ReadingRepository {
     this.readings = const <ReadingPassage>[],
     this.sectionsByPassage = const <String, List<ReadingSentence>>{},
     this.focusWordsByPassage = const <String, List<ReadingFocusWord>>{},
+    this.questionsByPassage = const <String, List<ReadingQuestion>>{},
   });
 
   final List<ReadingPassage> readings;
   final Map<String, List<ReadingSentence>> sectionsByPassage;
   final Map<String, List<ReadingFocusWord>> focusWordsByPassage;
+  final Map<String, List<ReadingQuestion>> questionsByPassage;
 
   @override
   Future<List<ReadingPassage>> fetchReadings() async => readings;
@@ -1190,8 +1367,35 @@ class _FakeReadingRepository implements ReadingRepository {
   }
 
   @override
+  Future<List<ReadingQuestion>> fetchQuestions(String passageId) async {
+    return questionsByPassage[passageId] ?? const <ReadingQuestion>[];
+  }
+
+  @override
   Future<String?> fetchSentenceTranslation(String passageId, int idx) async =>
       null;
+}
+
+class _RecordingProgressRepository implements ProgressRepository {
+  final List<OutboxEvent> enqueuedEvents = <OutboxEvent>[];
+
+  @override
+  Future<AppResult<void>> enqueue(OutboxEvent event) async {
+    enqueuedEvents.add(event);
+    return const AppSuccess<void>(null);
+  }
+
+  @override
+  Future<List<GrammarProgress>> fetchGrammarProgress() async =>
+      const <GrammarProgress>[];
+
+  @override
+  Future<List<ReadingProgress>> fetchReadingProgress() async =>
+      const <ReadingProgress>[];
+
+  @override
+  Future<List<WordProgress>> fetchWordProgress() async =>
+      const <WordProgress>[];
 }
 
 class _FakeDictionaryRepository implements DictionaryRepository {

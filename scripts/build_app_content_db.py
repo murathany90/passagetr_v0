@@ -17,6 +17,9 @@ from openpyxl import load_workbook
 ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
+LEGACY_SCRIPTS_DIR = ROOT_DIR / "scripts" / "legacy"
+if LEGACY_SCRIPTS_DIR.exists() and str(LEGACY_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(LEGACY_SCRIPTS_DIR))
 
 from markdown_to_json_converter import load_grammar_modules_from_markdown
 from static_content_common import (
@@ -98,6 +101,7 @@ class AppContentBuilder:
         report_file: Path,
         dataset_version: str,
         skip_grammar: bool,
+        word_pack_map_file: Optional[Path],
     ) -> None:
         self.dictionary_xlsx = dictionary_xlsx
         self.words_file = words_file
@@ -108,6 +112,7 @@ class AppContentBuilder:
         self.report_file = report_file
         self.dataset_version = dataset_version
         self.skip_grammar = skip_grammar
+        self.word_pack_map_file = word_pack_map_file
 
         self.dictionary_stats = DictionaryStats()
         self.words_stats = WordsStats()
@@ -136,8 +141,18 @@ class AppContentBuilder:
             sentences_mapping, REQUIRED_SENTENCE_COLUMNS, "readings_sentences.csv"
         )
 
-        pack_ids = self._build_packs(passages_rows, passages_mapping)
-        words_payload = self._build_words(words_rows, words_mapping, pack_ids)
+        word_pack_targets = self._load_word_pack_targets()
+        pack_ids = self._build_packs(
+            passages_rows,
+            passages_mapping,
+            extra_pack_names=set(word_pack_targets.values()),
+        )
+        words_payload = self._build_words(
+            words_rows,
+            words_mapping,
+            pack_ids,
+            word_pack_targets,
+        )
         passages_payload, passage_id_by_title = self._build_passages(
             passages_rows, passages_mapping, pack_ids
         )
@@ -209,6 +224,14 @@ class AppContentBuilder:
                 "passages": self.passages_stats.__dict__,
                 "sentences": self.sentences_stats.__dict__,
                 "grammar": self.grammar_stats.__dict__,
+            },
+            "word_pack_strategy": {
+                "source_id_pack_name": "YDS Set 001",
+                "mapping_file": str(self.word_pack_map_file)
+                if self.word_pack_map_file is not None
+                else None,
+                "mapped_word_count": len(word_pack_targets),
+                "mapped_pack_names": sorted(set(word_pack_targets.values())),
             },
         }
 
@@ -310,28 +333,66 @@ class AppContentBuilder:
         self,
         rows: List[List[str]],
         mapping: Dict[str, int],
+        extra_pack_names: Optional[set[str]] = None,
     ) -> Dict[str, str]:
         names: set[str] = {"YDS Set 001"}
         for row in rows:
             pack_name = clean_text(read_field(row, mapping, "pack_name"))
             if pack_name:
                 names.add(pack_name)
+        if extra_pack_names:
+            names.update(
+                pack_name for pack_name in extra_pack_names if clean_text(pack_name)
+            )
         result: Dict[str, str] = {}
         for name in sorted(names):
             result[name] = pack_id_for_name(name)
         return result
+
+    def _load_word_pack_targets(self) -> Dict[str, str]:
+        if self.word_pack_map_file is None:
+            return {}
+        if not self.word_pack_map_file.exists():
+            raise RuntimeError(
+                f"Kelime paket map dosyasi bulunamadi: {self.word_pack_map_file}"
+            )
+
+        raw = json.loads(self.word_pack_map_file.read_text(encoding="utf-8"))
+        if isinstance(raw, dict) and isinstance(raw.get("items"), list):
+            items = raw.get("items") or []
+        elif (
+            isinstance(raw, dict)
+            and isinstance(raw.get("word_pack_reclassification"), dict)
+            and isinstance(raw["word_pack_reclassification"].get("items"), list)
+        ):
+            items = raw["word_pack_reclassification"].get("items") or []
+        else:
+            raise RuntimeError(
+                "Kelime paket map dosya formati gecersiz. "
+                "Beklenen: top-level 'items' veya 'word_pack_reclassification.items'."
+            )
+
+        targets: Dict[str, str] = {}
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            word_id = clean_text(str(item.get("word_id") or ""))
+            target_pack_name = clean_text(str(item.get("target_pack_name") or ""))
+            if word_id and target_pack_name:
+                targets[word_id] = target_pack_name
+        return targets
 
     def _build_words(
         self,
         rows: List[List[str]],
         mapping: Dict[str, int],
         pack_ids: Dict[str, str],
+        word_pack_targets: Dict[str, str],
     ) -> List[Tuple[Any, ...]]:
         payload: List[Tuple[Any, ...]] = []
         dedupe: set[tuple[str, str]] = set()
         source_pack_name = "YDS Set 001"
-        pack_id = pack_ids.get("YDS Set 001")
-        if not pack_id:
+        if source_pack_name not in pack_ids:
             raise RuntimeError("YDS Set 001 pack bulunamadi.")
 
         now_unix = int(datetime.now(timezone.utc).timestamp())
@@ -381,6 +442,12 @@ class AppContentBuilder:
                 en_word,
                 pos_canonical,
             )
+            target_pack_name = word_pack_targets.get(word_id, source_pack_name)
+            pack_id = pack_ids.get(target_pack_name)
+            if not pack_id:
+                raise RuntimeError(
+                    f"Kelime paketi resolve edilemedi: {target_pack_name}"
+                )
             payload.append(
                 (
                     word_id,
@@ -1062,6 +1129,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--report-file", default="json_output/app_content_build_report.json"
     )
     parser.add_argument(
+        "--word-pack-map-file",
+        default="",
+        help="Opsiyonel reclassification raporu. Verilirse kelime pack_id dagitimi bu rapora gore hizalanir.",
+    )
+    parser.add_argument(
         "--dataset-version",
         default=datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S"),
     )
@@ -1077,11 +1149,19 @@ def main() -> int:
     grammar_dir = Path(args.grammar_dir).expanduser().resolve()
     output_db = Path(args.output_db).expanduser().resolve()
     report_file = Path(args.report_file).expanduser().resolve()
+    word_pack_map_file = (
+        Path(args.word_pack_map_file).expanduser().resolve()
+        if str(args.word_pack_map_file or "").strip()
+        else None
+    )
 
     for path in (dictionary_xlsx, words_file, passages_file, sentences_file):
         if not path.exists():
             print(f"[ERROR] Dosya bulunamadi: {path}")
             return 1
+    if word_pack_map_file is not None and not word_pack_map_file.exists():
+        print(f"[ERROR] Kelime paket map dosyasi bulunamadi: {word_pack_map_file}")
+        return 1
     if not args.skip_grammar and not grammar_dir.exists():
         print(f"[ERROR] Grammar klasoru bulunamadi: {grammar_dir}")
         return 1
@@ -1100,6 +1180,7 @@ def main() -> int:
         report_file=report_file,
         dataset_version=str(args.dataset_version).strip(),
         skip_grammar=bool(args.skip_grammar),
+        word_pack_map_file=word_pack_map_file,
     )
     try:
         report = builder.run()

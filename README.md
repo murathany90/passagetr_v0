@@ -1262,7 +1262,7 @@ Repo içinde açıkça tanımlı seeded test hesapları bunlar:
 
 phase1.admin@passagetr.dev / PassageTR#2026!
 phase1.free@passagetr.dev / PassageTR#2026!
-phase1.pro@passagetr.dev / PassageTR#2026!
+phase1.pro@passagetr.dev / phase1.pro@passagetr.dev
 phase1.developer@passagetr.dev / PassageTR#2026!
 Admin panel için doğrudan kullanmanız gereken hesap:
 

@@ -8,6 +8,7 @@ import 'package:shared_domain/shared_domain.dart';
 import 'student_access_controller.dart';
 import 'student_analytics_models.dart';
 import 'student_analytics_service.dart';
+import 'student_content_refresh_controller.dart';
 import 'student_grammar_progress_controller.dart';
 import 'student_reading_engagement_controller.dart';
 import 'tts/student_tts_controller.dart';
@@ -367,6 +368,13 @@ final studentReadingFocusWordsProvider =
           .fetchFocusWords(readingId);
     });
 
+final studentReadingQuestionsProvider =
+    FutureProvider.family<List<ReadingQuestion>, String>((ref, readingId) {
+      return ref
+          .watch(studentReadingRepositoryProvider)
+          .fetchQuestions(readingId);
+    });
+
 final studentReadingWordCardsProvider =
     FutureProvider.family<Map<String, WordEntry>, String>((
       ref,
@@ -457,6 +465,36 @@ final studentGrammarModuleDetailProvider =
 final studentWordsProvider = FutureProvider<List<WordEntry>>((ref) {
   return ref.watch(studentWordRepositoryProvider).fetchWords();
 });
+
+void invalidateStudentContentProviders(Ref ref) {
+  ref.invalidate(studentPacksProvider);
+  ref.invalidate(studentReadingsProvider);
+  ref.invalidate(studentReadingSectionsProvider);
+  ref.invalidate(studentReadingFocusWordsProvider);
+  ref.invalidate(studentReadingQuestionsProvider);
+  ref.invalidate(studentReadingWordCardsProvider);
+  ref.invalidate(studentGrammarModulesProvider);
+  ref.invalidate(studentGrammarModuleDetailProvider);
+  ref.invalidate(studentWordsProvider);
+  ref.invalidate(studentWordSummaryProvider);
+  ref.invalidate(studentReviewWordCountProvider);
+  ref.invalidate(studentContinueReadingSummaryProvider);
+  ref.invalidate(studentContinueReadingIdProvider);
+  ref.invalidate(studentContinueProgressProvider);
+  ref.invalidate(studentPackProgressProvider);
+}
+
+final studentContentRefreshControllerProvider =
+    StateNotifierProvider<
+      StudentContentRefreshController,
+      StudentContentRefreshState
+    >(
+      (ref) => StudentContentRefreshController(
+        syncRepository: ref.watch(studentSyncRepositoryProvider),
+        invalidateContentProviders: () =>
+            invalidateStudentContentProviders(ref),
+      ),
+    );
 
 final studentDictionaryEntryProvider =
     FutureProvider.family<DictionaryEntry?, String>((ref, query) {
