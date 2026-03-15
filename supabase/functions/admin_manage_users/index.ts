@@ -112,7 +112,135 @@ async function resolveUserSummary(
   };
 }
 
-serve(async (req: Request): Promise<Response> => {
+type BulkDeleteItemResult = {
+  user_id: string;
+  status: "deleted" | "skipped" | "failed";
+  message?: string;
+};
+
+type BulkDeleteDeps = {
+  callerRole: string;
+  callerUserId: string;
+  resolveSummary: (userId: string) => Promise<Record<string, unknown>>;
+  deleteUserById: (userId: string) => Promise<string | null>;
+  writeAudit: (payload: {
+    actorUserId: string;
+    action: string;
+    targetId?: string | null;
+    details: Record<string, unknown>;
+  }) => Promise<void>;
+};
+
+async function performDeleteUser(
+  userId: string,
+  deps: BulkDeleteDeps,
+): Promise<{
+  result: BulkDeleteItemResult;
+  summary?: Record<string, unknown>;
+}> {
+  if (userId === deps.callerUserId) {
+    return {
+      result: {
+        user_id: userId,
+        status: "skipped",
+        message: "You cannot delete the active admin session.",
+      },
+    };
+  }
+
+  try {
+    const currentSummary = await deps.resolveSummary(userId);
+    const currentRole = String(currentSummary.app_role ?? "user");
+    if (currentRole === "developer" && deps.callerRole !== "developer") {
+      return {
+        result: {
+          user_id: userId,
+          status: "skipped",
+          message: "Only developer can delete a developer account.",
+        },
+      };
+    }
+
+    const deleteErrorMessage = await deps.deleteUserById(userId);
+    if (deleteErrorMessage) {
+      return {
+        result: {
+          user_id: userId,
+          status: "failed",
+          message: deleteErrorMessage,
+        },
+      };
+    }
+
+    await deps.writeAudit({
+      actorUserId: deps.callerUserId,
+      action: "admin.user.deleted",
+      targetId: userId,
+      details: currentSummary as Record<string, unknown>,
+    });
+    return {
+      result: { user_id: userId, status: "deleted" },
+      summary: currentSummary,
+    };
+  } catch (error) {
+    return {
+      result: {
+        user_id: userId,
+        status: "failed",
+        message: shortErrorText(String(error)),
+      },
+    };
+  }
+}
+
+export async function deleteManyUsers(
+  userIds: string[],
+  deps: BulkDeleteDeps,
+): Promise<{
+  requested_count: number;
+  deleted_count: number;
+  skipped_count: number;
+  failed_count: number;
+  results: BulkDeleteItemResult[];
+}> {
+  const results: BulkDeleteItemResult[] = [];
+  let deletedCount = 0;
+  let skippedCount = 0;
+  let failedCount = 0;
+
+  for (const userId of userIds) {
+    const outcome = await performDeleteUser(userId, deps);
+    results.push(outcome.result);
+    if (outcome.result.status === "deleted") {
+      deletedCount += 1;
+    } else if (outcome.result.status === "skipped") {
+      skippedCount += 1;
+    } else {
+      failedCount += 1;
+    }
+  }
+
+  await deps.writeAudit({
+    actorUserId: deps.callerUserId,
+    action: "admin.user.bulk_deleted",
+    details: {
+      requested_count: userIds.length,
+      deleted_count: deletedCount,
+      skipped_count: skippedCount,
+      failed_count: failedCount,
+    },
+  });
+
+  return {
+    requested_count: userIds.length,
+    deleted_count: deletedCount,
+    skipped_count: skippedCount,
+    failed_count: failedCount,
+    results,
+  };
+}
+
+export async function handleRequest(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
@@ -181,7 +309,7 @@ serve(async (req: Request): Promise<Response> => {
     const action = String(body?.action ?? "").trim().toLowerCase();
     const userId = String(body?.user_id ?? "").trim();
 
-    if (!userId) {
+    if ((action === "update" || action === "delete") && !userId) {
       return json(400, {
         error: "invalid_input",
         message: "user_id is required.",
@@ -291,45 +419,71 @@ serve(async (req: Request): Promise<Response> => {
     }
 
     if (action === "delete") {
-      if (userId === userData.user.id) {
+      const outcome = await performDeleteUser(userId, {
+        callerRole,
+        callerUserId: userData.user.id,
+        resolveSummary: (targetUserId) =>
+          resolveUserSummary(serviceClient, targetUserId),
+        deleteUserById: async (targetUserId) => {
+          const { error: deleteError } = await serviceClient.auth.admin
+            .deleteUser(targetUserId);
+          return deleteError
+            ? shortErrorText(String(deleteError.message ?? deleteError))
+            : null;
+        },
+        writeAudit: (payload) => writeAuditLog(serviceClient, payload),
+      });
+
+      if (outcome.result.status === "skipped") {
         return json(400, {
           error: "invalid_operation",
-          message: "You cannot delete the active admin session.",
+          message: outcome.result.message ?? "Kullanici silinemedi.",
         });
       }
-
-      const currentSummary = await resolveUserSummary(serviceClient, userId);
-      const currentRole = String(currentSummary.app_role ?? "user");
-      if (currentRole === "developer" && callerRole !== "developer") {
-        return json(403, {
-          error: "forbidden",
-          message: "Only developer can delete a developer account.",
-        });
-      }
-
-      const { error: deleteError } = await serviceClient.auth.admin.deleteUser(
-        userId,
-      );
-      if (deleteError) {
+      if (outcome.result.status === "failed") {
         return json(400, {
           error: "delete_failed",
-          message: shortErrorText(String(deleteError.message ?? deleteError)),
+          message: outcome.result.message ?? "Kullanici silinemedi.",
         });
       }
-
-      await writeAuditLog(serviceClient, {
-        actorUserId: userData.user.id,
-        action: "admin.user.deleted",
-        targetId: userId,
-        details: currentSummary as Record<string, unknown>,
-      });
 
       return json(200, { deleted: true, user_id: userId });
     }
 
+    if (action === "delete_many") {
+      const userIds = Array.isArray(body?.user_ids)
+        ? body.user_ids.map((value: unknown) => String(value ?? "").trim())
+          .filter((value: string) => value.length > 0)
+        : [];
+
+      if (userIds.length === 0) {
+        return json(400, {
+          error: "invalid_input",
+          message: "user_ids must contain at least one user.",
+        });
+      }
+
+      const result = await deleteManyUsers(userIds, {
+        callerRole,
+        callerUserId: userData.user.id,
+        resolveSummary: (targetUserId) =>
+          resolveUserSummary(serviceClient, targetUserId),
+        deleteUserById: async (targetUserId) => {
+          const { error: deleteError } = await serviceClient.auth.admin
+            .deleteUser(targetUserId);
+          return deleteError
+            ? shortErrorText(String(deleteError.message ?? deleteError))
+            : null;
+        },
+        writeAudit: (payload) => writeAuditLog(serviceClient, payload),
+      });
+
+      return json(200, result as Record<string, unknown>);
+    }
+
     return json(400, {
       error: "invalid_action",
-      message: "Supported actions are update and delete.",
+      message: "Supported actions are update, delete and delete_many.",
     });
   } catch (error) {
     return json(500, {
@@ -337,4 +491,8 @@ serve(async (req: Request): Promise<Response> => {
       message: shortErrorText(String(error)),
     });
   }
-});
+}
+
+if (import.meta.main) {
+  serve((req: Request) => handleRequest(req));
+}

@@ -133,6 +133,111 @@ class AdminBulkUserUpdate {
   final EntitlementPlan? plan;
 }
 
+enum AdminBulkUserDeleteItemStatus { deleted, skipped, failed }
+
+extension AdminBulkUserDeleteItemStatusX on AdminBulkUserDeleteItemStatus {
+  String get value => switch (this) {
+    AdminBulkUserDeleteItemStatus.deleted => 'deleted',
+    AdminBulkUserDeleteItemStatus.skipped => 'skipped',
+    AdminBulkUserDeleteItemStatus.failed => 'failed',
+  };
+
+  static AdminBulkUserDeleteItemStatus fromValue(String? value) {
+    for (final item in AdminBulkUserDeleteItemStatus.values) {
+      if (item.value == value) {
+        return item;
+      }
+    }
+    return AdminBulkUserDeleteItemStatus.failed;
+  }
+}
+
+class AdminBulkUserDeleteItemResult {
+  const AdminBulkUserDeleteItemResult({
+    required this.userId,
+    required this.status,
+    this.message,
+  });
+
+  final String userId;
+  final AdminBulkUserDeleteItemStatus status;
+  final String? message;
+
+  bool get isDeleted => status == AdminBulkUserDeleteItemStatus.deleted;
+
+  factory AdminBulkUserDeleteItemResult.fromJson(Map<String, dynamic> json) {
+    return AdminBulkUserDeleteItemResult(
+      userId: json['user_id']?.toString() ?? '',
+      status: AdminBulkUserDeleteItemStatusX.fromValue(
+        json['status']?.toString(),
+      ),
+      message: json['message']?.toString(),
+    );
+  }
+}
+
+class AdminBulkUserDeleteResult {
+  const AdminBulkUserDeleteResult({
+    required this.requestedCount,
+    required this.deletedCount,
+    required this.skippedCount,
+    required this.failedCount,
+    required this.results,
+  });
+
+  final int requestedCount;
+  final int deletedCount;
+  final int skippedCount;
+  final int failedCount;
+  final List<AdminBulkUserDeleteItemResult> results;
+
+  List<String> get deletedUserIds => results
+      .where((item) => item.status == AdminBulkUserDeleteItemStatus.deleted)
+      .map((item) => item.userId)
+      .toList(growable: false);
+
+  factory AdminBulkUserDeleteResult.fromJson(Map<String, dynamic> json) {
+    final resultsJson = json['results'];
+    final parsedResults = resultsJson is List
+        ? resultsJson
+              .whereType<Map>()
+              .map(
+                (item) => AdminBulkUserDeleteItemResult.fromJson(
+                  item.cast<String, dynamic>(),
+                ),
+              )
+              .toList(growable: false)
+        : const <AdminBulkUserDeleteItemResult>[];
+
+    return AdminBulkUserDeleteResult(
+      requestedCount:
+          (json['requested_count'] as num?)?.toInt() ?? parsedResults.length,
+      deletedCount:
+          (json['deleted_count'] as num?)?.toInt() ??
+          parsedResults
+              .where(
+                (item) => item.status == AdminBulkUserDeleteItemStatus.deleted,
+              )
+              .length,
+      skippedCount:
+          (json['skipped_count'] as num?)?.toInt() ??
+          parsedResults
+              .where(
+                (item) => item.status == AdminBulkUserDeleteItemStatus.skipped,
+              )
+              .length,
+      failedCount:
+          (json['failed_count'] as num?)?.toInt() ??
+          parsedResults
+              .where(
+                (item) => item.status == AdminBulkUserDeleteItemStatus.failed,
+              )
+              .length,
+      results: parsedResults,
+    );
+  }
+}
+
 class AdminInviteRequest {
   const AdminInviteRequest({
     required this.email,
@@ -1049,6 +1154,7 @@ class AdminReadingDetail {
     this.questions = const <AdminReadingQuestionInput>[],
     this.aiGenerated = false,
     this.aiGenerationMeta,
+    this.cover = const AdminReadingCoverAsset(),
   });
 
   final AdminContentMetadata metadata;
@@ -1066,6 +1172,7 @@ class AdminReadingDetail {
   final List<AdminReadingQuestionInput> questions;
   final bool aiGenerated;
   final AdminAiGenerationMeta? aiGenerationMeta;
+  final AdminReadingCoverAsset cover;
 
   AdminReadingDetail copyWith({
     AdminContentMetadata? metadata,
@@ -1083,6 +1190,7 @@ class AdminReadingDetail {
     List<AdminReadingQuestionInput>? questions,
     bool? aiGenerated,
     AdminAiGenerationMeta? aiGenerationMeta,
+    AdminReadingCoverAsset? cover,
     bool clearPackId = false,
     bool clearLevel = false,
     bool clearCategory = false,
@@ -1109,6 +1217,7 @@ class AdminReadingDetail {
       aiGenerationMeta: clearAiGenerationMeta
           ? null
           : aiGenerationMeta ?? this.aiGenerationMeta,
+      cover: cover ?? this.cover,
     );
   }
 
@@ -1130,6 +1239,11 @@ class AdminReadingDetail {
     'questions': questions.map((item) => item.toJson()).toList(growable: false),
     'ai_generated': aiGenerated,
     'ai_generation_meta': aiGenerationMeta?.toJson(),
+    'cover_media_asset_id': cover.mediaAssetId,
+    'cover_bucket_name': cover.bucketName,
+    'cover_storage_path': cover.storagePath,
+    'cover_alt_text': cover.altText,
+    'cover_generation_meta': cover.generationMeta,
   };
 
   factory AdminReadingDetail.fromJson(Map<String, dynamic>? json) {
@@ -1191,6 +1305,79 @@ class AdminReadingDetail {
                 (key, value) => MapEntry(key.toString(), value),
               ),
             ),
+      cover: AdminReadingCoverAsset.fromJson(json),
+    );
+  }
+}
+
+class AdminReadingCoverAsset {
+  const AdminReadingCoverAsset({
+    this.mediaAssetId,
+    this.bucketName,
+    this.storagePath,
+    this.altText,
+    this.generationMeta,
+  });
+
+  final String? mediaAssetId;
+  final String? bucketName;
+  final String? storagePath;
+  final String? altText;
+  final Map<String, dynamic>? generationMeta;
+
+  bool get hasCover =>
+      (bucketName?.trim().isNotEmpty ?? false) &&
+      (storagePath?.trim().isNotEmpty ?? false);
+
+  AdminReadingCoverAsset copyWith({
+    String? mediaAssetId,
+    String? bucketName,
+    String? storagePath,
+    String? altText,
+    Map<String, dynamic>? generationMeta,
+    bool clearMediaAssetId = false,
+    bool clearBucketName = false,
+    bool clearStoragePath = false,
+    bool clearAltText = false,
+    bool clearGenerationMeta = false,
+  }) {
+    return AdminReadingCoverAsset(
+      mediaAssetId: clearMediaAssetId
+          ? null
+          : mediaAssetId ?? this.mediaAssetId,
+      bucketName: clearBucketName ? null : bucketName ?? this.bucketName,
+      storagePath: clearStoragePath ? null : storagePath ?? this.storagePath,
+      altText: clearAltText ? null : altText ?? this.altText,
+      generationMeta: clearGenerationMeta
+          ? null
+          : generationMeta ?? this.generationMeta,
+    );
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'cover_media_asset_id': mediaAssetId,
+    'cover_bucket_name': bucketName,
+    'cover_storage_path': storagePath,
+    'cover_alt_text': altText,
+    'cover_generation_meta': generationMeta,
+  };
+
+  factory AdminReadingCoverAsset.fromJson(Map<String, dynamic>? json) {
+    return AdminReadingCoverAsset(
+      mediaAssetId: _emptyStringAsNull(
+        json?['cover_media_asset_id']?.toString(),
+      ),
+      bucketName: _emptyStringAsNull(json?['cover_bucket_name']?.toString()),
+      storagePath: _emptyStringAsNull(json?['cover_storage_path']?.toString()),
+      altText: _emptyStringAsNull(json?['cover_alt_text']?.toString()),
+      generationMeta: switch (json?['cover_generation_meta']) {
+        Map<String, dynamic>() =>
+          json?['cover_generation_meta'] as Map<String, dynamic>,
+        Map() => (json?['cover_generation_meta'] as Map).map(
+          (key, value) => MapEntry(key.toString(), value),
+        ),
+        _ => null,
+      },
     );
   }
 }

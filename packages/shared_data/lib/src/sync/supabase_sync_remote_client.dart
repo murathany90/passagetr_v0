@@ -390,7 +390,7 @@ class SupabaseSyncRemoteClient implements SyncRemoteClient {
       return (await client
               .from('reading_passages')
               .select(
-                'id,pack_id,title,level,category,tags_raw,is_published,is_pro,updated_at,created_at',
+                'id,pack_id,title,level,category,tags_raw,cover_bucket_name,cover_storage_path,cover_alt_text,is_published,is_pro,updated_at,created_at',
               ))
           as List<dynamic>;
     }

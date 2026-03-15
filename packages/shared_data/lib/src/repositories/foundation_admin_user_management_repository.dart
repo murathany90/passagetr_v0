@@ -4,12 +4,32 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../bootstrap/supabase_bootstrap.dart';
 
+class AdminUserManagementFunctionResponse {
+  const AdminUserManagementFunctionResponse({
+    required this.status,
+    required this.data,
+  });
+
+  final int status;
+  final Object? data;
+}
+
 class FoundationAdminUserManagementRepository
     implements AdminUserManagementRepository {
-  const FoundationAdminUserManagementRepository({required AppConfig config})
-    : _config = config;
+  const FoundationAdminUserManagementRepository({
+    required AppConfig config,
+    Future<AdminUserManagementFunctionResponse> Function(
+      Map<String, dynamic> body,
+    )?
+    manageUsersInvoker,
+  }) : _config = config,
+       _manageUsersInvoker = manageUsersInvoker;
 
   final AppConfig _config;
+  final Future<AdminUserManagementFunctionResponse> Function(
+    Map<String, dynamic> body,
+  )?
+  _manageUsersInvoker;
 
   @override
   Future<AppResult<AdminPage<AdminUserListItem>>> listUsers(
@@ -141,8 +161,7 @@ class FoundationAdminUserManagementRepository
           displayName: request.displayName,
           role: request.role,
           plan: request.plan,
-          statusLabel:
-              request.role == AppRole.user ? 'active' : 'staff',
+          statusLabel: request.role == AppRole.user ? 'active' : 'staff',
           lastSeenAt: null,
           updatedAt: DateTime.now(),
         ),
@@ -154,10 +173,7 @@ class FoundationAdminUserManagementRepository
       final response = await Supabase.instance.client.functions.invoke(
         'admin_manage_users',
         method: HttpMethod.post,
-        body: <String, dynamic>{
-          'action': 'update',
-          ...request.toJson(),
-        },
+        body: <String, dynamic>{'action': 'update', ...request.toJson()},
       );
       final payload = _asMap(response.data);
       if (response.status >= 400) {
@@ -191,12 +207,10 @@ class FoundationAdminUserManagementRepository
     }
 
     try {
-      await SupabaseBootstrap.initialize(_config);
-      final response = await Supabase.instance.client.functions.invoke(
-        'admin_manage_users',
-        method: HttpMethod.post,
-        body: <String, dynamic>{'action': 'delete', 'user_id': userId},
-      );
+      final response = await _invokeManageUsers(<String, dynamic>{
+        'action': 'delete',
+        'user_id': userId,
+      });
       final payload = _asMap(response.data);
       if (response.status >= 400) {
         return AppFailure<void>(
@@ -206,6 +220,56 @@ class FoundationAdminUserManagementRepository
       return const AppSuccess<void>(null);
     } catch (error) {
       return AppFailure<void>('Kullanici silinemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<AdminBulkUserDeleteResult>> bulkDeleteUsers({
+    required List<String> userIds,
+  }) async {
+    if (userIds.isEmpty) {
+      return const AppFailure<AdminBulkUserDeleteResult>(
+        'En az bir kullanici secilmeli.',
+      );
+    }
+
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AdminBulkUserDeleteResult>(
+        AdminBulkUserDeleteResult(
+          requestedCount: userIds.length,
+          deletedCount: userIds.length,
+          skippedCount: 0,
+          failedCount: 0,
+          results: userIds
+              .map(
+                (userId) => AdminBulkUserDeleteItemResult(
+                  userId: userId,
+                  status: AdminBulkUserDeleteItemStatus.deleted,
+                ),
+              )
+              .toList(growable: false),
+        ),
+      );
+    }
+
+    try {
+      final response = await _invokeManageUsers(<String, dynamic>{
+        'action': 'delete_many',
+        'user_ids': userIds,
+      });
+      final payload = _asMap(response.data);
+      if (response.status >= 400) {
+        return AppFailure<AdminBulkUserDeleteResult>(
+          payload['message']?.toString() ?? 'Toplu kullanici silme basarisiz.',
+        );
+      }
+      return AppSuccess<AdminBulkUserDeleteResult>(
+        AdminBulkUserDeleteResult.fromJson(payload),
+      );
+    } catch (error) {
+      return AppFailure<AdminBulkUserDeleteResult>(
+        'Toplu kullanici silme basarisiz: $error',
+      );
     }
   }
 
@@ -302,6 +366,25 @@ class FoundationAdminUserManagementRepository
       statusLabel: json['status_label']?.toString() ?? 'active',
       lastSeenAt: _parseDateTime(json['last_seen_at']),
       updatedAt: _parseDateTime(json['updated_at']),
+    );
+  }
+
+  Future<AdminUserManagementFunctionResponse> _invokeManageUsers(
+    Map<String, dynamic> body,
+  ) async {
+    if (_manageUsersInvoker != null) {
+      return _manageUsersInvoker!(body);
+    }
+
+    await SupabaseBootstrap.initialize(_config);
+    final response = await Supabase.instance.client.functions.invoke(
+      'admin_manage_users',
+      method: HttpMethod.post,
+      body: body,
+    );
+    return AdminUserManagementFunctionResponse(
+      status: response.status,
+      data: response.data,
     );
   }
 }

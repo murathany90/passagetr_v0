@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -11,6 +13,9 @@ import 'package:shared_ui/shared_ui.dart';
 import '../../core/admin_console_models.dart';
 import '../../core/admin_providers.dart';
 import '../common/admin_page_parts.dart';
+import '../ai_assistant/widgets/ai_draft_editor.dart';
+import '../ai_assistant/widgets/ai_questions_panel.dart';
+import 'widgets/reading_cover_panel.dart';
 
 class AdminContentPage extends ConsumerStatefulWidget {
   const AdminContentPage({super.key, required this.destination});
@@ -30,6 +35,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   AdminReadingsFilterState _readingsFilters = const AdminReadingsFilterState();
   AdminGrammarFilterState _grammarFilters = const AdminGrammarFilterState();
   bool _isBulkAssigningFocusWords = false;
+  AdminAiReadingRun? _activeQuestionRun;
+  AdminAiReadingRun? _activeCoverRun;
 
   bool get _isPreviewMode => !ref.read(adminAppConfigProvider).supabaseEnabled;
 
@@ -39,6 +46,18 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     _wordsQueryController = TextEditingController();
     _readingsQueryController = TextEditingController();
     _grammarQueryController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_restoreActiveReadingAiRuns());
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant AdminContentPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.destination != widget.destination &&
+        widget.destination == AdminDestination.readings) {
+      unawaited(_restoreActiveReadingAiRuns());
+    }
   }
 
   @override
@@ -127,6 +146,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               limit: pageSize,
               level: _readingsFilters.level,
               isPublished: _readingsFilters.isPublished,
+              hasQuestions: _readingsFilters.hasQuestions,
+              hasCover: _readingsFilters.hasCover,
             ),
           ),
         );
@@ -411,6 +432,32 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         runSpacing: 12,
         children: [
           Tooltip(
+            message: 'Filtre sonucundaki mini testi eksik kayitlar icin soru uret',
+            child: FilledButton.tonalIcon(
+              onPressed: _isPreviewMode
+                  ? null
+                  : () => _startReadingAiBackfill(
+                      context,
+                      jobType: 'question_backfill',
+                    ),
+              icon: const Icon(Icons.quiz_outlined),
+              label: const Text('Eksik Mini Testler'),
+            ),
+          ),
+          Tooltip(
+            message: 'Filtre sonucundaki gorseli eksik kayitlar icin kapak uret',
+            child: FilledButton.tonalIcon(
+              onPressed: _isPreviewMode
+                  ? null
+                  : () => _startReadingAiBackfill(
+                      context,
+                      jobType: 'cover_backfill',
+                    ),
+              icon: const Icon(Icons.image_outlined),
+              label: const Text('Eksik Kapaklar'),
+            ),
+          ),
+          Tooltip(
             message: 'Tum okumalar icin odak kelimeleri otomatik ata',
             child: FilledButton.tonalIcon(
               onPressed: _isPreviewMode || _isBulkAssigningFocusWords
@@ -438,8 +485,29 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           ),
         ],
       ),
-      child: Column(
+          child: Column(
         children: [
+          if (_activeQuestionRun != null || _activeCoverRun != null) ...[
+            _ReadingAiRunProgressCard(
+              questionRun: _activeQuestionRun,
+              coverRun: _activeCoverRun,
+              onOpenQuestionRun: _activeQuestionRun == null
+                  ? null
+                  : () => _showReadingAiRunDialog(
+                      context,
+                      jobType: 'question_backfill',
+                      initialRun: _activeQuestionRun!,
+                    ),
+              onOpenCoverRun: _activeCoverRun == null
+                  ? null
+                  : () => _showReadingAiRunDialog(
+                      context,
+                      jobType: 'cover_backfill',
+                      initialRun: _activeCoverRun!,
+                    ),
+            ),
+            const SizedBox(height: 16),
+          ],
           TextField(
             controller: _readingsQueryController,
             decoration: const InputDecoration(
@@ -523,6 +591,68 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                     },
                   ),
                 ),
+                SizedBox(
+                  width: 220,
+                  child: DropdownButtonFormField<bool?>(
+                    initialValue: _readingsFilters.hasQuestions,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'Mini Test'),
+                    items: const [
+                      DropdownMenuItem<bool?>(
+                        value: null,
+                        child: Text('Tum kayitlar'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: true,
+                        child: Text('Mini test var'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: false,
+                        child: Text('Mini test yok'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _readingsFilters = _readingsFilters.copyWith(
+                          hasQuestions: value,
+                          offset: 0,
+                          clearHasQuestions: value == null,
+                        );
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 220,
+                  child: DropdownButtonFormField<bool?>(
+                    initialValue: _readingsFilters.hasCover,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'Gorsel'),
+                    items: const [
+                      DropdownMenuItem<bool?>(
+                        value: null,
+                        child: Text('Tum kayitlar'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: true,
+                        child: Text('Kapak var'),
+                      ),
+                      DropdownMenuItem<bool?>(
+                        value: false,
+                        child: Text('Kapak yok'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _readingsFilters = _readingsFilters.copyWith(
+                          hasCover: value,
+                          offset: 0,
+                          clearHasCover: value == null,
+                        );
+                      });
+                    },
+                  ),
+                ),
                 OutlinedButton.icon(
                   onPressed: () => _resetReadingFilters(),
                   icon: const Icon(Icons.filter_alt_off_rounded),
@@ -538,19 +668,25 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               subtitle:
                   _readingsFilters.query.isEmpty &&
                       _readingsFilters.level == null &&
-                      _readingsFilters.isPublished == null
+                      _readingsFilters.isPublished == null &&
+                      _readingsFilters.hasQuestions == null &&
+                      _readingsFilters.hasCover == null
                   ? 'Yeni parca ekleyip publish akisini bu panelden yonet.'
                   : 'Secili filtrelerle eslesen kayit bulunamadi.',
               actionLabel:
                   _readingsFilters.query.isEmpty &&
                       _readingsFilters.level == null &&
-                      _readingsFilters.isPublished == null
+                      _readingsFilters.isPublished == null &&
+                      _readingsFilters.hasQuestions == null &&
+                      _readingsFilters.hasCover == null
                   ? 'Parca Ekle'
                   : null,
               onAction:
                   _readingsFilters.query.isEmpty &&
                       _readingsFilters.level == null &&
-                      _readingsFilters.isPublished == null
+                      _readingsFilters.isPublished == null &&
+                      _readingsFilters.hasQuestions == null &&
+                      _readingsFilters.hasCover == null
                   ? () => _openReadingEditor(context, packs: packs)
                   : null,
             )
@@ -568,6 +704,13 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                 onAutoAssign: _isPreviewMode
                     ? null
                     : () => _autoAssignReadingFocusWords(
+                        context,
+                        reading,
+                        packs: packs,
+                      ),
+                onGenerateQuestions: _isPreviewMode
+                    ? null
+                    : () => _generateQuestionsForReading(
                         context,
                         reading,
                         packs: packs,
@@ -1247,7 +1390,16 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     final draft = await showDialog<AdminReadingDetail>(
       context: context,
       builder: (context) =>
-          _ReadingEditorDialog(packs: packs, initialDetail: detail),
+          _ReadingEditorDialog(
+            packs: packs,
+            initialDetail: detail,
+            coverUrlBuilder: (cover) =>
+                _coverUrlForAsset(ref.read(adminAppConfigProvider).supabaseUrl, cover),
+            onGenerateCover: _generateCoverForReadingDetail,
+            onUploadCover: _uploadCoverForReadingDetail,
+            onRemoveCover: _removeCoverForReadingDetail,
+            onMessage: _showSnackBar,
+          ),
     );
     if (draft == null) {
       return;
@@ -1502,6 +1654,269 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       '${summary.assignedCount} pasajda odak kelime atandi, ${summary.noMatchCount} pasajda eslesme bulunamadi.',
     );
     await _showBulkFocusWordSummary(this.context, summary);
+  }
+
+  Future<void> _generateQuestionsForReading(
+    BuildContext context,
+    AdminReadingRecord reading, {
+    required List<AdminPackRecord> packs,
+  }) async {
+    final config = await _openQuestionGenerationDialog(
+      context,
+      replaceExisting: reading.questionCount > 0,
+    );
+    if (config == null) {
+      return;
+    }
+
+    final detail = await _loadReadingDetail(reading);
+    if (detail == null || !mounted) {
+      return;
+    }
+
+    final aiRepository = ref.read(adminAiReadingRepositoryProvider);
+    final questionResult = await aiRepository.generateReadingQuestions(
+      AdminAiGenerateReadingQuestionsRequest(
+        readingId: reading.id,
+        provider: config.provider,
+        model: config.model,
+        questionCount: config.questionCount,
+      ),
+    );
+    if (!mounted) {
+      return;
+    }
+
+    if (questionResult case AppFailure<AdminAiGeneratedReadingQuestions>()) {
+      _showSnackBar(questionResult.message, isError: true);
+      return;
+    }
+
+    final generated =
+        (questionResult as AppSuccess<AdminAiGeneratedReadingQuestions>).value;
+    final saveResult = await ref
+        .read(adminContentRepositoryProvider)
+        .upsertReadingDetail(
+          detail.copyWith(
+            questions: generated.questions,
+            aiGenerated: detail.aiGenerated,
+            aiGenerationMeta: detail.aiGenerationMeta,
+          ),
+        );
+    if (!mounted) {
+      return;
+    }
+
+    if (saveResult case AppFailure<AdminReadingDetail>()) {
+      _showSnackBar(saveResult.message, isError: true);
+      return;
+    }
+
+    final savedDetail = (saveResult as AppSuccess<AdminReadingDetail>).value;
+    final updatedRecord = _readingRecordFromDetail(
+      detail: savedDetail,
+      packs: packs,
+      existing: reading,
+    );
+    ref.read(adminReadingChangesProvider.notifier).upsert(updatedRecord);
+    if (!_isPreviewMode) {
+      ref.invalidate(adminReadingsProvider);
+      ref.invalidate(adminReadingPageProvider);
+      ref.invalidate(adminAuditFeedProvider);
+    }
+
+    _pushAudit(
+      'admin.reading.questions.generated',
+      '${reading.title} / ${savedDetail.questions.length} soru',
+    );
+    _showSnackBar('${savedDetail.questions.length} soru kaydedildi.');
+  }
+
+  Future<void> _startReadingAiBackfill(
+    BuildContext context, {
+    required String jobType,
+  }) async {
+    final activeRun = switch (jobType) {
+      'question_backfill' => _activeQuestionRun,
+      _ => _activeCoverRun,
+    };
+    if (activeRun != null && activeRun.isActive) {
+      await _showReadingAiRunDialog(
+        context,
+        jobType: jobType,
+        initialRun: activeRun,
+      );
+      return;
+    }
+
+    final filteredReadings = await _loadFilteredReadingsForBackfill();
+    if (!mounted || !context.mounted) {
+      return;
+    }
+
+    final targetReadings = filteredReadings
+        .where(
+          (item) => jobType == 'question_backfill'
+              ? item.questionCount == 0
+              : !item.hasCover,
+        )
+        .toList(growable: false);
+    if (targetReadings.isEmpty) {
+      _showSnackBar(
+        jobType == 'question_backfill'
+            ? 'Secili filtrede mini testi eksik kayit yok.'
+            : 'Secili filtrede kapagi eksik kayit yok.',
+      );
+      return;
+    }
+
+    await _showReadingAiRunDialog(
+      context,
+      jobType: jobType,
+      targetReadings: targetReadings,
+      filterSnapshot: _buildReadingAiFilterSnapshot(
+        jobType: jobType,
+        targetCount: targetReadings.length,
+      ),
+    );
+  }
+
+  Future<void> _restoreActiveReadingAiRuns() async {
+    if (!mounted ||
+        _isPreviewMode ||
+        widget.destination != AdminDestination.readings) {
+      return;
+    }
+
+    final runResult = await ref
+        .read(adminAiReadingRepositoryProvider)
+        .listActiveReadingAiRuns();
+    if (!mounted) {
+      return;
+    }
+
+    if (runResult case AppFailure<List<AdminAiReadingRun>>()) {
+      return;
+    }
+
+    final runs = (runResult as AppSuccess<List<AdminAiReadingRun>>).value;
+    setState(() {
+      _activeQuestionRun = _firstActiveReadingAiRunForJobType(
+        runs,
+        'question_backfill',
+      );
+      _activeCoverRun = _firstActiveReadingAiRunForJobType(
+        runs,
+        'cover_backfill',
+      );
+    });
+  }
+
+  Future<void> _showReadingAiRunDialog(
+    BuildContext context, {
+    required String jobType,
+    AdminAiReadingRun? initialRun,
+    List<AdminReadingRecord> targetReadings = const <AdminReadingRecord>[],
+    Map<String, dynamic>? filterSnapshot,
+  }) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => _ReadingAiRunDialog(
+        jobType: jobType,
+        targetReadings: targetReadings,
+        initialRun: initialRun,
+        filterSnapshot:
+            filterSnapshot ??
+            initialRun?.filterSnapshot ??
+            const <String, dynamic>{},
+        repository: ref.read(adminAiReadingRepositoryProvider),
+        onRunChanged: (run) => _setActiveReadingAiRun(jobType, run),
+        onRunSettled: _handleReadingAiRunSettled,
+        onMessage: _showSnackBar,
+      ),
+    );
+  }
+
+  void _setActiveReadingAiRun(String jobType, AdminAiReadingRun? run) {
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      final normalized = run != null && run.isActive ? run : null;
+      if (jobType == 'question_backfill') {
+        _activeQuestionRun = normalized;
+      } else {
+        _activeCoverRun = normalized;
+      }
+    });
+  }
+
+  void _handleReadingAiRunSettled(AdminAiReadingRun run) {
+    ref.read(adminReadingChangesProvider.notifier).clear();
+    ref.invalidate(adminReadingsProvider);
+    ref.invalidate(adminReadingPageProvider);
+    ref.invalidate(adminAuditFeedProvider);
+
+    final message = switch (run.status) {
+      'cancelled' => run.jobType == 'question_backfill'
+          ? 'Mini test backfill durduruldu. ${run.processedCount} kayit islendi.'
+          : 'Kapak backfill durduruldu. ${run.processedCount} kayit islendi.',
+      'failed' => run.jobType == 'question_backfill'
+          ? 'Mini test backfill basarisiz oldu: ${run.failedCount} hata.'
+          : 'Kapak backfill basarisiz oldu: ${run.failedCount} hata.',
+      _ => run.jobType == 'question_backfill'
+          ? 'Mini test backfill tamamlandi: ${run.succeededCount} basarili, ${run.failedCount} hata.'
+          : 'Kapak backfill tamamlandi: ${run.succeededCount} basarili, ${run.failedCount} hata.',
+    };
+    _showSnackBar(
+      message,
+      isError: run.status == 'failed' || (run.failedCount > 0 && run.succeededCount == 0),
+    );
+  }
+
+  Map<String, dynamic> _buildReadingAiFilterSnapshot({
+    required String jobType,
+    required int targetCount,
+  }) {
+    return <String, dynamic>{
+      'job_type': jobType,
+      'query': _readingsFilters.query,
+      'level': _readingsFilters.level,
+      'is_published': _readingsFilters.isPublished,
+      'has_questions': _readingsFilters.hasQuestions,
+      'has_cover': _readingsFilters.hasCover,
+      'target_count': targetCount,
+    };
+  }
+
+  Future<List<AdminReadingRecord>> _loadFilteredReadingsForBackfill() async {
+    final allReadings = await ref.read(adminReadingsProvider.future);
+    return allReadings.where((item) {
+      final matchesLevel =
+          _readingsFilters.level == null || item.level == _readingsFilters.level;
+      final matchesPublished =
+          _readingsFilters.isPublished == null ||
+          item.isPublished == _readingsFilters.isPublished;
+      final matchesQuestions = _readingsFilters.hasQuestions == null
+          ? true
+          : _readingsFilters.hasQuestions!
+          ? item.questionCount > 0
+          : item.questionCount == 0;
+      final matchesCover = _readingsFilters.hasCover == null
+          ? true
+          : item.hasCover == _readingsFilters.hasCover;
+      final haystack =
+          '${item.title} ${item.category ?? ''} ${item.level ?? ''} ${item.tagsRaw ?? ''}'
+              .toLowerCase();
+      final matchesQuery = _readingsFilters.query.isEmpty ||
+          haystack.contains(_readingsFilters.query.toLowerCase());
+      return matchesLevel &&
+          matchesPublished &&
+          matchesQuestions &&
+          matchesCover &&
+          matchesQuery;
+    }).toList(growable: false);
   }
 
   Future<void> _openGrammarEditor(
@@ -1828,6 +2243,56 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     );
   }
 
+  Future<AppResult<AdminReadingDetail>> _generateCoverForReadingDetail(
+    AdminReadingDetail detail,
+  ) async {
+    final readingId = detail.metadata.id?.trim();
+    if (readingId == null || readingId.isEmpty) {
+      return const AppFailure<AdminReadingDetail>(
+        'Cover uretimi icin reading once kaydedilmeli.',
+      );
+    }
+    return ref
+        .read(adminAiReadingRepositoryProvider)
+        .generateReadingCover(AdminAiGenerateReadingCoverRequest(readingId: readingId));
+  }
+
+  Future<AppResult<AdminReadingDetail>> _uploadCoverForReadingDetail({
+    required AdminReadingDetail detail,
+    required Uint8List bytes,
+    required String fileName,
+    required String mimeType,
+    String? altText,
+  }) async {
+    final readingId = detail.metadata.id?.trim();
+    if (readingId == null || readingId.isEmpty) {
+      return const AppFailure<AdminReadingDetail>(
+        'Cover yuklemek icin reading once kaydedilmeli.',
+      );
+    }
+    return ref.read(adminContentRepositoryProvider).uploadReadingCover(
+      readingId: readingId,
+      bytes: bytes,
+      fileName: fileName,
+      mimeType: mimeType,
+      altText: altText,
+    );
+  }
+
+  Future<AppResult<AdminReadingDetail>> _removeCoverForReadingDetail(
+    AdminReadingDetail detail,
+  ) async {
+    final readingId = detail.metadata.id?.trim();
+    if (readingId == null || readingId.isEmpty) {
+      return const AppFailure<AdminReadingDetail>(
+        'Cover silmek icin reading once kaydedilmeli.',
+      );
+    }
+    return ref
+        .read(adminContentRepositoryProvider)
+        .removeReadingCover(readingId: readingId);
+  }
+
   Future<AdminGrammarModuleDetail?> _loadGrammarDetail(
     AdminGrammarRecord existing,
   ) async {
@@ -1875,6 +2340,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         offset: 0,
         clearLevel: true,
         clearPublished: true,
+        clearHasQuestions: true,
+        clearHasCover: true,
       );
     });
   }
@@ -1923,6 +2390,123 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         ],
       ),
     );
+  }
+
+  Future<_QuestionGenerationConfig?> _openQuestionGenerationDialog(
+    BuildContext context, {
+    required bool replaceExisting,
+  }) async {
+    var provider = adminAiProviderGemini;
+    String? model = adminAiGeminiDefaultModel;
+    final questionCountController = TextEditingController(text: '3');
+
+    final result = await showDialog<_QuestionGenerationConfig>(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            final modelOptions = adminAiModelsForProvider(provider);
+            model ??= adminAiDefaultModelForProvider(provider);
+            return AlertDialog(
+              title: Text(
+                replaceExisting ? 'Mini Testleri Yeniden Uret' : 'Mini Test Uret',
+              ),
+              content: SizedBox(
+                width: 520,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (replaceExisting) ...[
+                      const Text(
+                        'Bu islem mevcut sorulari yeni AI sonucuyla degistirecek.',
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                    DropdownButtonFormField<String>(
+                      initialValue: provider,
+                      decoration: const InputDecoration(labelText: 'Provider'),
+                      items: const [
+                        DropdownMenuItem(
+                          value: adminAiProviderGemini,
+                          child: Text('Gemini'),
+                        ),
+                        DropdownMenuItem(
+                          value: adminAiProviderOpenRouter,
+                          child: Text('OpenRouter'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value == null) {
+                          return;
+                        }
+                        setModalState(() {
+                          provider = value;
+                          model = adminAiDefaultModelForProvider(value);
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    DropdownButtonFormField<String>(
+                      initialValue: model,
+                      decoration: const InputDecoration(labelText: 'Model'),
+                      items: [
+                        for (final item in modelOptions)
+                          DropdownMenuItem(
+                            value: item,
+                            child: Text(adminAiModelLabel(item)),
+                          ),
+                      ],
+                      onChanged: modelOptions.length <= 1
+                          ? null
+                          : (value) {
+                              setModalState(() {
+                                model = value;
+                              });
+                            },
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: questionCountController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'Question Count',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(dialogContext).pop(),
+                  child: const Text('Vazgec'),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    final questionCount =
+                        int.tryParse(questionCountController.text.trim()) ?? 0;
+                    if (questionCount < 1) {
+                      return;
+                    }
+                    Navigator.of(dialogContext).pop(
+                      _QuestionGenerationConfig(
+                        provider: provider,
+                        model: model,
+                        questionCount: questionCount,
+                      ),
+                    );
+                  },
+                  child: const Text('Baslat'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    questionCountController.dispose();
+    return result;
   }
 
   Future<bool> _confirmAction(
@@ -2226,6 +2810,7 @@ class _ReadingRow extends StatelessWidget {
     required this.onEdit,
     required this.onDelete,
     required this.onAutoAssign,
+    required this.onGenerateQuestions,
     required this.onTogglePublished,
   });
 
@@ -2234,6 +2819,7 @@ class _ReadingRow extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final VoidCallback? onAutoAssign;
+  final VoidCallback? onGenerateQuestions;
   final ValueChanged<bool> onTogglePublished;
 
   @override
@@ -2291,6 +2877,8 @@ class _ReadingRow extends StatelessWidget {
                 _MetricChip(label: reading.category ?? '-'),
                 _MetricChip(label: reading.isPro ? 'pro' : 'free'),
                 _MetricChip(label: 'odak ${reading.linkedWordCount}'),
+                _MetricChip(label: 'mini test ${reading.questionCount}'),
+                _MetricChip(label: reading.hasCover ? 'kapak var' : 'kapak yok'),
                 _MetricChip(label: 'guncel ${reading.updatedAtLabel}'),
                 _MetricChip(label: reading.isPublished ? 'yayinda' : 'taslak'),
               ],
@@ -2308,6 +2896,11 @@ class _ReadingRow extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Switch(value: reading.isPublished, onChanged: onTogglePublished),
+              IconButton(
+                onPressed: onGenerateQuestions,
+                tooltip: 'Mini test uret',
+                icon: const Icon(Icons.quiz_outlined),
+              ),
               IconButton(
                 onPressed: onAutoAssign,
                 tooltip: 'Odak kelimeleri otomatik ata',
@@ -2442,6 +3035,711 @@ class _MetricChip extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ReadingAiRunProgressCard extends StatelessWidget {
+  const _ReadingAiRunProgressCard({
+    this.questionRun,
+    this.coverRun,
+    this.onOpenQuestionRun,
+    this.onOpenCoverRun,
+  });
+
+  final AdminAiReadingRun? questionRun;
+  final AdminAiReadingRun? coverRun;
+  final VoidCallback? onOpenQuestionRun;
+  final VoidCallback? onOpenCoverRun;
+
+  @override
+  Widget build(BuildContext context) {
+    return AdminPanelCard(
+      title: 'AI Backfill Progress',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (questionRun != null)
+            _RunSummaryTile(
+              title: 'Mini Test',
+              run: questionRun!,
+              onOpen: onOpenQuestionRun,
+            ),
+          if (questionRun != null && coverRun != null) const SizedBox(height: 12),
+          if (coverRun != null)
+            _RunSummaryTile(
+              title: 'Cover',
+              run: coverRun!,
+              onOpen: onOpenCoverRun,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RunSummaryTile extends StatelessWidget {
+  const _RunSummaryTile({
+    required this.title,
+    required this.run,
+    this.onOpen,
+  });
+
+  final String title;
+  final AdminAiReadingRun run;
+  final VoidCallback? onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(child: Text('$title / ${run.status}')),
+            if (onOpen != null)
+              FilledButton.tonal(
+                onPressed: onOpen,
+                child: const Text('Ac'),
+              ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'Toplam ${run.totalCount}, islenen ${run.processedCount}, basarili ${run.succeededCount}, hata ${run.failedCount}, atlandi ${run.skippedCount}',
+        ),
+        if (run.pauseReason != null && run.pauseReason!.trim().isNotEmpty) ...[
+          const SizedBox(height: 6),
+          Text(_runPauseReasonLabel(run)),
+        ],
+        if (run.failureSamples.isNotEmpty) ...[
+          const SizedBox(height: 6),
+          for (final item in run.failureSamples.take(3))
+            Text(item, maxLines: 2, overflow: TextOverflow.ellipsis),
+        ],
+      ],
+    );
+  }
+}
+
+class _QuestionGenerationConfig {
+  const _QuestionGenerationConfig({
+    required this.provider,
+    required this.model,
+    required this.questionCount,
+  });
+
+  final String provider;
+  final String? model;
+  final int questionCount;
+}
+
+typedef _AdminMessageCallback = void Function(String message, {bool isError});
+
+class _ReadingAiRunDialog extends StatefulWidget {
+  const _ReadingAiRunDialog({
+    required this.jobType,
+    required this.targetReadings,
+    required this.filterSnapshot,
+    required this.repository,
+    required this.onRunChanged,
+    required this.onRunSettled,
+    required this.onMessage,
+    this.initialRun,
+  });
+
+  final String jobType;
+  final List<AdminReadingRecord> targetReadings;
+  final Map<String, dynamic> filterSnapshot;
+  final AdminAiReadingRepository repository;
+  final ValueChanged<AdminAiReadingRun?> onRunChanged;
+  final ValueChanged<AdminAiReadingRun> onRunSettled;
+  final _AdminMessageCallback onMessage;
+  final AdminAiReadingRun? initialRun;
+
+  @override
+  State<_ReadingAiRunDialog> createState() => _ReadingAiRunDialogState();
+}
+
+class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
+  AdminAiReadingRun? _run;
+  late final TextEditingController _questionCountController;
+  String _questionProvider = adminAiProviderGemini;
+  String? _questionModel = adminAiGeminiDefaultModel;
+  String _coverModel = adminAiGeminiImageDefaultModel;
+  String? _errorText;
+  bool _isActing = false;
+  bool _isPumping = false;
+  bool _settledNotified = false;
+
+  bool get _isQuestionJob => widget.jobType == 'question_backfill';
+  bool get _canStart => widget.targetReadings.isNotEmpty;
+
+  @override
+  void initState() {
+    super.initState();
+    _run = widget.initialRun;
+    _questionCountController = TextEditingController(
+      text: (_run?.questionCount ?? 3).toString(),
+    );
+    if (_run != null) {
+      _questionProvider = _run!.provider == adminAiProviderOpenRouter
+          ? adminAiProviderOpenRouter
+          : adminAiProviderGemini;
+      _questionModel =
+          _run!.model.isEmpty ? adminAiGeminiDefaultModel : _run!.model;
+      _coverModel =
+          _run!.model.isEmpty ? adminAiGeminiImageDefaultModel : _run!.model;
+      _settledNotified = !_run!.isActive;
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _run != null && _run!.isActive && !_run!.isPaused) {
+        unawaited(_pumpRun());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _questionCountController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final run = _run;
+    final title = _isQuestionJob ? 'Mini Test Uret' : 'Cover Backfill';
+    return AlertDialog(
+      title: Text(title),
+      content: SizedBox(
+        width: 620,
+        child: run == null ? _buildConfigBody(context) : _buildProgressBody(context, run),
+      ),
+      actions: _buildActions(context, run),
+    );
+  }
+
+  Widget _buildConfigBody(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Hedef kayit: ${widget.targetReadings.length}'),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final item in _filterSummaryLines(widget.filterSnapshot))
+              _MetricChip(label: item),
+          ],
+        ),
+        const SizedBox(height: 16),
+        if (_isQuestionJob) ...[
+          DropdownButtonFormField<String>(
+            initialValue: _questionProvider,
+            decoration: const InputDecoration(labelText: 'Provider'),
+            items: const [
+              DropdownMenuItem(
+                value: adminAiProviderGemini,
+                child: Text('Gemini'),
+              ),
+              DropdownMenuItem(
+                value: adminAiProviderOpenRouter,
+                child: Text('OpenRouter'),
+              ),
+            ],
+            onChanged: _isActing
+                ? null
+                : (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      _questionProvider = value;
+                      _questionModel = adminAiDefaultModelForProvider(value);
+                    });
+                  },
+          ),
+          const SizedBox(height: 12),
+          DropdownButtonFormField<String>(
+            initialValue: _questionModel,
+            decoration: const InputDecoration(labelText: 'Model'),
+            items: [
+              for (final item in adminAiModelsForProvider(_questionProvider))
+                DropdownMenuItem(
+                  value: item,
+                  child: Text(adminAiModelLabel(item)),
+                ),
+            ],
+            onChanged: adminAiModelsForProvider(_questionProvider).length <= 1 ||
+                    _isActing
+                ? null
+                : (value) {
+                    setState(() {
+                      _questionModel = value;
+                    });
+                  },
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            controller: _questionCountController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Question Count'),
+            enabled: !_isActing,
+          ),
+        ] else ...[
+          DropdownButtonFormField<String>(
+            initialValue: _coverModel,
+            decoration: const InputDecoration(labelText: 'Model'),
+            items: [
+              for (final item in adminAiCoverModels)
+                DropdownMenuItem(
+                  value: item,
+                  child: Text(adminAiModelLabel(item)),
+                ),
+            ],
+            onChanged: _isActing
+                ? null
+                : (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      _coverModel = value;
+                    });
+                  },
+          ),
+        ],
+        if (_errorText != null) ...[
+          const SizedBox(height: 12),
+          Text(
+            _errorText!,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildProgressBody(BuildContext context, AdminAiReadingRun run) {
+    final canEditCoverModel = !_isQuestionJob && (run.status == 'paused' || run.status == 'queued');
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('${_jobLabel(run.jobType)} / ${run.status}'),
+        const SizedBox(height: 12),
+        LinearProgressIndicator(
+          value: run.totalCount <= 0
+              ? null
+              : run.processedCount / run.totalCount,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Toplam ${run.totalCount}, islenen ${run.processedCount}, basarili ${run.succeededCount}, hata ${run.failedCount}, atlandi ${run.skippedCount}',
+        ),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final item in _filterSummaryLines(run.filterSnapshot))
+              _MetricChip(label: item),
+            _MetricChip(label: 'Model ${adminAiModelLabel(run.model)}'),
+            if (run.consecutiveFailureCount > 0)
+              _MetricChip(label: 'Art arda hata ${run.consecutiveFailureCount}'),
+          ],
+        ),
+        if (!_isQuestionJob) ...[
+          const SizedBox(height: 16),
+          DropdownButtonFormField<String>(
+            initialValue: _coverModel,
+            decoration: const InputDecoration(labelText: 'Model'),
+            items: [
+              for (final item in adminAiCoverModels)
+                DropdownMenuItem(
+                  value: item,
+                  child: Text(adminAiModelLabel(item)),
+                ),
+            ],
+            onChanged: canEditCoverModel
+                ? (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      _coverModel = value;
+                    });
+                  }
+                : null,
+          ),
+        ],
+        if (run.pauseReason != null && run.pauseReason!.trim().isNotEmpty) ...[
+          const SizedBox(height: 12),
+          Text(_runPauseReasonLabel(run)),
+        ],
+        if (run.lastErrorMessage != null && run.lastErrorMessage!.trim().isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Text(
+            run.lastErrorMessage!,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+        ],
+        if (run.failureSamples.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          Text(
+            'Son 5 hata',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 8),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.errorContainer.withValues(
+                alpha: 0.35,
+              ),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.error.withValues(
+                  alpha: 0.35,
+                ),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final item in run.failureSamples.take(5))
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 2),
+                          child: Text('• '),
+                        ),
+                        Expanded(
+                          child: Text(
+                            item,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+        if (_errorText != null) ...[
+          const SizedBox(height: 12),
+          Text(
+            _errorText!,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+        ],
+      ],
+    );
+  }
+
+  List<Widget> _buildActions(BuildContext context, AdminAiReadingRun? run) {
+    if (run == null) {
+      return [
+        TextButton(
+          onPressed: _isActing ? null : () => Navigator.of(context).pop(),
+          child: const Text('Vazgec'),
+        ),
+        FilledButton(
+          onPressed: _isActing || !_canStart ? null : _handleStart,
+          child: _isActing
+              ? const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Text('Baslat'),
+        ),
+      ];
+    }
+
+    final canPause = !_isActing && (run.status == 'running' || run.status == 'queued');
+    final canResume = !_isActing && run.status == 'paused';
+    final canCancel = !_isActing && run.isActive;
+    return [
+      TextButton(
+        onPressed: _isActing ? null : () => Navigator.of(context).pop(),
+        child: const Text('Kapat'),
+      ),
+      if (canPause)
+        FilledButton.tonal(
+          onPressed: _handlePause,
+          child: const Text('Duraklat'),
+        ),
+      if (canResume)
+        FilledButton.tonal(
+          onPressed: _handleResume,
+          child: const Text('Devam Et'),
+        ),
+      if (canCancel)
+        FilledButton(
+          onPressed: _handleCancel,
+          child: const Text('Durdur'),
+        ),
+    ];
+  }
+
+  Future<void> _handleStart() async {
+    setState(() {
+      _isActing = true;
+      _errorText = null;
+    });
+
+    final questionCount =
+        int.tryParse(_questionCountController.text.trim()) ?? 0;
+    if (_isQuestionJob && questionCount < 1) {
+      setState(() {
+        _isActing = false;
+        _errorText = 'Question count en az 1 olmalidir.';
+      });
+      return;
+    }
+
+    final model = _isQuestionJob ? _questionModel : _coverModel;
+    final provider = _isQuestionJob
+        ? _questionProvider
+        : adminAiCoverProviderForModel(_coverModel);
+    final result = await widget.repository.createReadingAiRun(
+      AdminAiReadingRunRequest(
+        jobType: widget.jobType,
+        readingIds: widget.targetReadings
+            .map((item) => item.id)
+            .toList(growable: false),
+        provider: provider,
+        model: model,
+        questionCount: questionCount > 0 ? questionCount : 3,
+        filterSnapshot: widget.filterSnapshot,
+      ),
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _isActing = false;
+    });
+
+    if (result case AppSuccess<AdminAiReadingRun>(value: final run)) {
+      _applyRun(run);
+      if (run.isActive && !run.isPaused) {
+        await _pumpRun();
+      }
+      return;
+    }
+
+    final message = (result as AppFailure<AdminAiReadingRun>).message;
+    setState(() {
+      _errorText = message;
+    });
+    widget.onMessage(message, isError: true);
+  }
+
+  Future<void> _handlePause() async {
+    await _runControlAction(action: 'pause');
+  }
+
+  Future<void> _handleResume() async {
+    await _runControlAction(
+      action: 'resume',
+      provider: _isQuestionJob ? _questionProvider : adminAiCoverProviderForModel(_coverModel),
+      model: _isQuestionJob ? _questionModel : _coverModel,
+      questionCount: _isQuestionJob
+          ? int.tryParse(_questionCountController.text.trim())
+          : null,
+    );
+  }
+
+  Future<void> _handleCancel() async {
+    await _runControlAction(action: 'cancel');
+  }
+
+  Future<void> _runControlAction({
+    required String action,
+    String? provider,
+    String? model,
+    int? questionCount,
+  }) async {
+    final run = _run;
+    if (run == null) {
+      return;
+    }
+
+    setState(() {
+      _isActing = true;
+      _errorText = null;
+    });
+    final result = await widget.repository.controlReadingAiRun(
+      runId: run.id,
+      action: action,
+      provider: provider,
+      model: model,
+      questionCount: questionCount,
+    );
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _isActing = false;
+    });
+
+    if (result case AppSuccess<AdminAiReadingRun>(value: final nextRun)) {
+      _applyRun(nextRun);
+      if (action == 'resume' && nextRun.isActive && !nextRun.isPaused) {
+        await _pumpRun();
+      }
+      return;
+    }
+
+    final message = (result as AppFailure<AdminAiReadingRun>).message;
+    setState(() {
+      _errorText = message;
+    });
+    widget.onMessage(message, isError: true);
+  }
+
+  Future<void> _pumpRun() async {
+    if (_isPumping) {
+      return;
+    }
+    _isPumping = true;
+    try {
+      while (mounted) {
+        final run = _run;
+        if (run == null || !run.isActive || run.isPaused) {
+          break;
+        }
+
+        final result = await widget.repository.processReadingAiRun(
+          runId: run.id,
+          batchSize: 1,
+        );
+        if (!mounted) {
+          return;
+        }
+
+        if (result case AppSuccess<AdminAiReadingRun>(value: final nextRun)) {
+          _applyRun(nextRun);
+          if (!nextRun.isActive || nextRun.isPaused) {
+            break;
+          }
+        } else {
+          final message = (result as AppFailure<AdminAiReadingRun>).message;
+          setState(() {
+            _errorText = message;
+          });
+          widget.onMessage(message, isError: true);
+          break;
+        }
+
+        final latestRun = _run;
+        if (latestRun == null || !latestRun.isActive || latestRun.isPaused) {
+          break;
+        }
+
+        await Future<void>.delayed(const Duration(seconds: 10));
+      }
+    } finally {
+      _isPumping = false;
+    }
+  }
+
+  void _applyRun(AdminAiReadingRun run) {
+    setState(() {
+      _run = run;
+      if (run.isActive) {
+        _settledNotified = false;
+      }
+      _questionProvider = run.provider == adminAiProviderOpenRouter
+          ? adminAiProviderOpenRouter
+          : adminAiProviderGemini;
+      if (run.model.trim().isNotEmpty) {
+        if (_isQuestionJob) {
+          _questionModel = run.model;
+        } else {
+          _coverModel = run.model;
+        }
+      }
+      _errorText = null;
+    });
+
+    widget.onRunChanged(run.isActive ? run : null);
+    if (!run.isActive && !_settledNotified) {
+      _settledNotified = true;
+      widget.onRunSettled(run);
+    }
+  }
+}
+
+List<String> _filterSummaryLines(Map<String, dynamic> filterSnapshot) {
+  final lines = <String>[];
+  final query = filterSnapshot['query']?.toString().trim() ?? '';
+  if (query.isNotEmpty) {
+    lines.add('Ara: $query');
+  }
+  final level = filterSnapshot['level']?.toString().trim() ?? '';
+  if (level.isNotEmpty) {
+    lines.add('Seviye: $level');
+  }
+  final published = filterSnapshot['is_published'];
+  if (published is bool) {
+    lines.add(published ? 'Durum: Yayinda' : 'Durum: Taslak');
+  }
+  final targetCount = (filterSnapshot['target_count'] as num?)?.toInt();
+  if (targetCount != null) {
+    lines.add('Hedef: $targetCount');
+  }
+  final hasQuestions = filterSnapshot['has_questions'];
+  if (hasQuestions is bool) {
+    lines.add(hasQuestions ? 'Mini Test: Var' : 'Mini Test: Yok');
+  }
+  final hasCover = filterSnapshot['has_cover'];
+  if (hasCover is bool) {
+    lines.add(hasCover ? 'Gorsel: Var' : 'Gorsel: Yok');
+  }
+  if (lines.isEmpty) {
+    lines.add('Tum kayitlar');
+  }
+  return lines;
+}
+
+AdminAiReadingRun? _firstActiveReadingAiRunForJobType(
+  List<AdminAiReadingRun> runs,
+  String jobType,
+) {
+  for (final run in runs) {
+    if (run.jobType == jobType) {
+      return run;
+    }
+  }
+  return null;
+}
+
+String _jobLabel(String jobType) {
+  return jobType == 'question_backfill' ? 'Mini Test' : 'Cover';
+}
+
+String _runPauseReasonLabel(AdminAiReadingRun run) {
+  return switch (run.pauseReason) {
+    'auto_failure_threshold' =>
+      'Run otomatik duraklatildi: 5 art arda hata algilandi.',
+    'auto_failure_rate_threshold' =>
+      'Run otomatik duraklatildi: toplam hata orani cok yuksek.',
+    'user_paused' => 'Run manuel olarak duraklatildi.',
+    'user_cancelled' => 'Run manuel olarak durduruldu.',
+    _ => 'Run duraklatildi.',
+  };
 }
 
 class _PagedListFooter extends StatelessWidget {
@@ -2922,78 +4220,74 @@ class _ReadingEditorDialog extends StatefulWidget {
   const _ReadingEditorDialog({
     required this.packs,
     required this.initialDetail,
+    required this.coverUrlBuilder,
+    required this.onGenerateCover,
+    required this.onUploadCover,
+    required this.onRemoveCover,
+    required this.onMessage,
   });
 
   final List<AdminPackRecord> packs;
   final AdminReadingDetail initialDetail;
+  final String? Function(AdminReadingCoverAsset cover) coverUrlBuilder;
+  final Future<AppResult<AdminReadingDetail>> Function(AdminReadingDetail detail)
+  onGenerateCover;
+  final Future<AppResult<AdminReadingDetail>> Function({
+    required AdminReadingDetail detail,
+    required Uint8List bytes,
+    required String fileName,
+    required String mimeType,
+    String? altText,
+  })
+  onUploadCover;
+  final Future<AppResult<AdminReadingDetail>> Function(AdminReadingDetail detail)
+  onRemoveCover;
+  final void Function(String message, {bool isError}) onMessage;
 
   @override
   State<_ReadingEditorDialog> createState() => _ReadingEditorDialogState();
 }
 
 class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
-  late final TextEditingController _titleController;
-  late final TextEditingController _levelController;
-  late final TextEditingController _categoryController;
-  late final TextEditingController _tagsController;
   late final TextEditingController _publishAtController;
   late final TextEditingController _unpublishAtController;
-  late final TextEditingController _sentencesJsonController;
   late final TextEditingController _linkedWordsJsonController;
-  late bool _isPro;
-  late bool _isPublished;
+  late AdminReadingDetail _detail;
   String? _validationMessage;
-  String? _packId;
 
   @override
   void initState() {
     super.initState();
-    final detail = widget.initialDetail;
-    _titleController = TextEditingController(text: detail.title);
-    _levelController = TextEditingController(text: detail.level ?? '');
-    _categoryController = TextEditingController(text: detail.category ?? '');
-    _tagsController = TextEditingController(text: detail.tagsRaw ?? '');
+    _detail = widget.initialDetail;
     _publishAtController = TextEditingController(
-      text: _formatDateTimeInput(detail.publishAt),
+      text: _formatDateTimeInput(_detail.publishAt),
     );
     _unpublishAtController = TextEditingController(
-      text: _formatDateTimeInput(detail.unpublishAt),
-    );
-    _sentencesJsonController = TextEditingController(
-      text: _prettyJson(
-        detail.sentences.map((item) => item.toJson()).toList(growable: false),
-      ),
+      text: _formatDateTimeInput(_detail.unpublishAt),
     );
     _linkedWordsJsonController = TextEditingController(
       text: _prettyJson(
-        detail.linkedWords.map((item) => item.toJson()).toList(growable: false),
+        _detail.linkedWords.map((item) => item.toJson()).toList(growable: false),
       ),
     );
-    _isPro = detail.isPro;
-    _isPublished = detail.isPublished;
-    _packId = detail.packId;
   }
 
   @override
   void dispose() {
-    _titleController.dispose();
-    _levelController.dispose();
-    _categoryController.dispose();
-    _tagsController.dispose();
     _publishAtController.dispose();
     _unpublishAtController.dispose();
-    _sentencesJsonController.dispose();
     _linkedWordsJsonController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final metadata = widget.initialDetail.metadata;
+    final metadata = _detail.metadata;
+    final hasPersistedId = metadata.id?.trim().isNotEmpty ?? false;
     return AlertDialog(
       title: Text(metadata.id == null ? 'Yeni Okuma' : 'Okumayi Duzenle'),
       content: SizedBox(
-        width: 820,
+        width: 960,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -3007,7 +4301,7 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 const SizedBox(height: 12),
               ],
               DropdownButtonFormField<String?>(
-                initialValue: _packId,
+                initialValue: _detail.packId,
                 decoration: const InputDecoration(labelText: 'Paket'),
                 items: [
                   const DropdownMenuItem<String?>(
@@ -3021,51 +4315,20 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                     ),
                 ],
                 onChanged: (value) {
-                  setState(() {
-                    _packId = value;
-                  });
+                  _updateDetail(
+                    _detail.copyWith(
+                      packId: value,
+                      clearPackId: value == null,
+                    ),
+                  );
                 },
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Baslik'),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _levelController,
-                      decoration: const InputDecoration(labelText: 'Seviye'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      controller: _categoryController,
-                      decoration: const InputDecoration(labelText: 'Kategori'),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _tagsController,
-                decoration: const InputDecoration(
-                  labelText: 'Tagler',
-                  helperText: 'Virgulle ayir: science, exams, b1',
-                ),
               ),
               const SizedBox(height: 16),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                value: _isPro,
-                onChanged: (value) {
-                  setState(() {
-                    _isPro = value;
-                  });
-                },
+                value: _detail.isPro,
+                onChanged: (value) =>
+                    _updateDetail(_detail.copyWith(isPro: value)),
                 title: const Text('Pro icerik'),
                 subtitle: const Text(
                   'Free kullanici karti gorur, detay icin Pro gerekir.',
@@ -3074,12 +4337,9 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
               const SizedBox(height: 8),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                value: _isPublished,
-                onChanged: (value) {
-                  setState(() {
-                    _isPublished = value;
-                  });
-                },
+                value: _detail.isPublished,
+                onChanged: (value) =>
+                    _updateDetail(_detail.copyWith(isPublished: value)),
                 title: const Text('Yayinda'),
                 subtitle: const Text('Parca student listesinde gorunsun.'),
               ),
@@ -3108,14 +4368,9 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 ],
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _sentencesJsonController,
-                maxLines: 12,
-                decoration: const InputDecoration(
-                  labelText: 'Sentences JSON',
-                  helperText:
-                      'Her kayit: idx, sentence_en, sentence_tr, translations[].',
-                ),
+              AiDraftEditor(
+                detail: _detail,
+                onChanged: _updateDetail,
               ),
               const SizedBox(height: 16),
               TextField(
@@ -3125,6 +4380,36 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                   labelText: 'Linked Words JSON',
                   helperText: 'Her kayit: word_id, en_word, tr_meaning.',
                 ),
+              ),
+              const SizedBox(height: 16),
+              AiQuestionsPanel(
+                detail: _detail,
+                onChanged: _updateDetail,
+              ),
+              const SizedBox(height: 16),
+              ReadingCoverPanel(
+                detail: _detail,
+                coverUrl: widget.coverUrlBuilder(_detail.cover),
+                enabled: hasPersistedId,
+                disabledMessage: hasPersistedId
+                    ? null
+                    : 'Cover islemleri icin reading once kaydedilmeli.',
+                onChanged: _updateDetail,
+                onGenerate: () => widget.onGenerateCover(_detail),
+                onUpload: ({
+                  required bytes,
+                  required fileName,
+                  required mimeType,
+                  String? altText,
+                }) => widget.onUploadCover(
+                  detail: _detail,
+                  bytes: bytes,
+                  fileName: fileName,
+                  mimeType: mimeType,
+                  altText: altText,
+                ),
+                onRemove: () => widget.onRemoveCover(_detail),
+                onMessage: widget.onMessage,
               ),
               const SizedBox(height: 16),
               _MetadataSummary(metadata: metadata),
@@ -3139,12 +4424,11 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
         ),
         FilledButton(
           onPressed: () {
-            final title = _titleController.text.trim();
             final publishAt = _parseDateTimeInput(_publishAtController.text);
             final unpublishAt = _parseDateTimeInput(
               _unpublishAtController.text,
             );
-            if (title.isEmpty) {
+            if (_detail.title.trim().isEmpty) {
               setState(() {
                 _validationMessage = 'Baslik zorunlu.';
               });
@@ -3160,39 +4444,22 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
               });
               return;
             }
-            final sentencesJson = _decodeJsonArray(
-              _sentencesJsonController.text,
-            );
             final linkedWordsJson = _decodeJsonArray(
               _linkedWordsJsonController.text,
             );
-            if (sentencesJson == null || linkedWordsJson == null) {
+            if (linkedWordsJson == null) {
               setState(() {
-                _validationMessage =
-                    'Sentences JSON veya Linked Words JSON gecersiz.';
+                _validationMessage = 'Linked Words JSON gecersiz.';
               });
               return;
             }
             Navigator.of(context).pop(
-              widget.initialDetail.copyWith(
-                packId: _packId,
-                title: title,
-                level: _emptyAsNull(_levelController.text),
-                category: _emptyAsNull(_categoryController.text),
-                tagsRaw: _emptyAsNull(_tagsController.text),
-                isPro: _isPro,
-                isPublished: _isPublished,
+              _detail.copyWith(
                 publishAt: publishAt,
                 unpublishAt: unpublishAt,
-                sentences: sentencesJson
-                    .map(AdminReadingSentenceInput.fromJson)
-                    .toList(growable: false),
                 linkedWords: linkedWordsJson
                     .map(AdminReadingWordLinkInput.fromJson)
                     .toList(growable: false),
-                clearLevel: _levelController.text.trim().isEmpty,
-                clearCategory: _categoryController.text.trim().isEmpty,
-                clearTagsRaw: _tagsController.text.trim().isEmpty,
                 clearPublishAt: _publishAtController.text.trim().isEmpty,
                 clearUnpublishAt: _unpublishAtController.text.trim().isEmpty,
               ),
@@ -3202,6 +4469,13 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
         ),
       ],
     );
+  }
+
+  void _updateDetail(AdminReadingDetail detail) {
+    setState(() {
+      _detail = detail;
+      _validationMessage = null;
+    });
   }
 }
 
@@ -3957,6 +5231,32 @@ List<Map<String, dynamic>>? _decodeJsonArray(String rawValue) {
       .whereType<Map>()
       .map((item) => item.map((key, value) => MapEntry(key.toString(), value)))
       .toList(growable: false);
+}
+
+String? _coverUrlForAsset(String supabaseUrl, AdminReadingCoverAsset cover) {
+  final bucket = cover.bucketName?.trim();
+  final storagePath = cover.storagePath?.trim();
+  if (bucket == null ||
+      bucket.isEmpty ||
+      storagePath == null ||
+      storagePath.isEmpty) {
+    return null;
+  }
+
+  final normalizedBaseUrl = supabaseUrl.trim();
+  if (normalizedBaseUrl.isEmpty) {
+    return null;
+  }
+
+  final normalizedBase = normalizedBaseUrl.endsWith('/')
+      ? normalizedBaseUrl.substring(0, normalizedBaseUrl.length - 1)
+      : normalizedBaseUrl;
+  final encodedPath = storagePath
+      .split('/')
+      .where((segment) => segment.isNotEmpty)
+      .map(Uri.encodeComponent)
+      .join('/');
+  return '$normalizedBase/storage/v1/object/public/$bucket/$encodedPath';
 }
 
 String _formatDateTimeInput(DateTime? value) {

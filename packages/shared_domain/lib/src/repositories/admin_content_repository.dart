@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:shared_core/shared_core.dart';
 import '../entities/admin_console_contracts.dart';
 
@@ -67,6 +69,18 @@ abstract interface class AdminContentRepository {
   Future<AppResult<AdminReadingDetail>> upsertReadingDetail(
     AdminReadingDetail detail,
   );
+
+  Future<AppResult<AdminReadingDetail>> uploadReadingCover({
+    required String readingId,
+    required Uint8List bytes,
+    required String fileName,
+    required String mimeType,
+    String? altText,
+  });
+
+  Future<AppResult<AdminReadingDetail>> removeReadingCover({
+    required String readingId,
+  });
 
   Future<AppResult<AdminReadingDetail>> autoAssignReadingFocusWords({
     required String readingId,

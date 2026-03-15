@@ -8,7 +8,7 @@ import 'package:shared_ui/shared_ui.dart';
 void main() {
   testWidgets('readings CMS renders CSV import actions', (tester) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(1440, 1100);
+    tester.view.physicalSize = const Size(1920, 1200);
     addTearDown(() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
@@ -28,6 +28,10 @@ void main() {
     expect(find.text('Tumune Ata'), findsOneWidget);
     expect(find.text('CSV Yukle'), findsOneWidget);
     expect(find.text('Yeni Parca Ekle'), findsOneWidget);
+    expect(find.text('Eksik Mini Testler'), findsOneWidget);
+    expect(find.text('Eksik Kapaklar'), findsOneWidget);
+    expect(find.text('Mini Test'), findsOneWidget);
+    expect(find.text('Gorsel'), findsOneWidget);
     expect(find.text('Filtreleri sifirla'), findsOneWidget);
     expect(find.textContaining('odak 0'), findsWidgets);
   });

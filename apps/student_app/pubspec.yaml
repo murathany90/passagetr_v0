@@ -1,7 +1,7 @@
 name: student_app
 description: PASSAGETR v2 student application
 publish_to: none
-version: 2.0.13+13
+version: 2.0.18+18
 resolution: workspace
 
 environment:
@@ -38,3 +38,8 @@ flutter:
   assets:
     - assets/images/readings/
     - assets/db/dictionary_local.sqlite
+
+
+
+
+

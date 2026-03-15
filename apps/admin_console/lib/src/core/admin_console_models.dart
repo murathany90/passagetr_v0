@@ -119,26 +119,38 @@ class AdminReadingsFilterState {
     this.query = '',
     this.level,
     this.isPublished,
+    this.hasQuestions,
+    this.hasCover,
     this.offset = 0,
   });
 
   final String query;
   final String? level;
   final bool? isPublished;
+  final bool? hasQuestions;
+  final bool? hasCover;
   final int offset;
 
   AdminReadingsFilterState copyWith({
     String? query,
     String? level,
     bool? isPublished,
+    bool? hasQuestions,
+    bool? hasCover,
     int? offset,
     bool clearLevel = false,
     bool clearPublished = false,
+    bool clearHasQuestions = false,
+    bool clearHasCover = false,
   }) {
     return AdminReadingsFilterState(
       query: query ?? this.query,
       level: clearLevel ? null : level ?? this.level,
       isPublished: clearPublished ? null : isPublished ?? this.isPublished,
+      hasQuestions: clearHasQuestions
+          ? null
+          : hasQuestions ?? this.hasQuestions,
+      hasCover: clearHasCover ? null : hasCover ?? this.hasCover,
       offset: offset ?? this.offset,
     );
   }
@@ -198,6 +210,8 @@ class AdminReadingPageRequest {
     required this.limit,
     this.level,
     this.isPublished,
+    this.hasQuestions,
+    this.hasCover,
   });
 
   final String query;
@@ -205,6 +219,8 @@ class AdminReadingPageRequest {
   final int limit;
   final String? level;
   final bool? isPublished;
+  final bool? hasQuestions;
+  final bool? hasCover;
 
   @override
   bool operator ==(Object other) {
@@ -213,11 +229,21 @@ class AdminReadingPageRequest {
         other.offset == offset &&
         other.limit == limit &&
         other.level == level &&
-        other.isPublished == isPublished;
+        other.isPublished == isPublished &&
+        other.hasQuestions == hasQuestions &&
+        other.hasCover == hasCover;
   }
 
   @override
-  int get hashCode => Object.hash(query, offset, limit, level, isPublished);
+  int get hashCode => Object.hash(
+    query,
+    offset,
+    limit,
+    level,
+    isPublished,
+    hasQuestions,
+    hasCover,
+  );
 }
 
 class AdminDashboardSummary {
@@ -432,6 +458,8 @@ class AdminReadingRecord {
     required this.isPro,
     required this.isPublished,
     required this.linkedWordCount,
+    required this.questionCount,
+    required this.hasCover,
     this.linkedWordsPreview = const <String>[],
     required this.updatedAtLabel,
     this.createdAtLabel,
@@ -448,6 +476,8 @@ class AdminReadingRecord {
   final bool isPro;
   final bool isPublished;
   final int linkedWordCount;
+  final int questionCount;
+  final bool hasCover;
   final List<String> linkedWordsPreview;
   final String updatedAtLabel;
   final String? createdAtLabel;
@@ -464,6 +494,8 @@ class AdminReadingRecord {
     bool? isPro,
     bool? isPublished,
     int? linkedWordCount,
+    int? questionCount,
+    bool? hasCover,
     List<String>? linkedWordsPreview,
     String? updatedAtLabel,
     String? createdAtLabel,
@@ -480,6 +512,8 @@ class AdminReadingRecord {
       isPro: isPro ?? this.isPro,
       isPublished: isPublished ?? this.isPublished,
       linkedWordCount: linkedWordCount ?? this.linkedWordCount,
+      questionCount: questionCount ?? this.questionCount,
+      hasCover: hasCover ?? this.hasCover,
       linkedWordsPreview: linkedWordsPreview ?? this.linkedWordsPreview,
       updatedAtLabel: updatedAtLabel ?? this.updatedAtLabel,
       createdAtLabel: createdAtLabel ?? this.createdAtLabel,
@@ -563,6 +597,8 @@ AdminReadingRecord adminReadingRecordFromDetail({
             isPro: detail.isPro,
             isPublished: detail.isPublished,
             linkedWordCount: detail.linkedWords.length,
+            questionCount: detail.questions.length,
+            hasCover: detail.cover.hasCover,
             linkedWordsPreview: adminLinkedWordPreviewFromDetail(detail),
             updatedAtLabel: updatedAtLabel,
           ))
@@ -576,6 +612,8 @@ AdminReadingRecord adminReadingRecordFromDetail({
         isPro: detail.isPro,
         isPublished: detail.isPublished,
         linkedWordCount: detail.linkedWords.length,
+        questionCount: detail.questions.length,
+        hasCover: detail.cover.hasCover,
         linkedWordsPreview: adminLinkedWordPreviewFromDetail(detail),
         updatedAtLabel: updatedAtLabel,
       );

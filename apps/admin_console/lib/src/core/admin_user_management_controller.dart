@@ -93,6 +93,14 @@ class AdminUserListOverridesController
     state = next;
   }
 
+  void removeAll(Iterable<String> userIds) {
+    final next = <String, AdminUserListItem>{...state};
+    for (final userId in userIds) {
+      next.remove(userId);
+    }
+    state = next;
+  }
+
   void clear() {
     state = const <String, AdminUserListItem>{};
   }
@@ -103,6 +111,10 @@ class AdminDeletedUsersController extends StateNotifier<Set<String>> {
 
   void add(String userId) {
     state = <String>{...state, userId};
+  }
+
+  void addAll(Iterable<String> userIds) {
+    state = <String>{...state, ...userIds};
   }
 
   void remove(String userId) {

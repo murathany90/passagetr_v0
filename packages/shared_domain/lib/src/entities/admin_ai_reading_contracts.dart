@@ -2,7 +2,11 @@ import 'admin_console_contracts.dart';
 
 const adminAiProviderGemini = 'gemini';
 const adminAiProviderOpenRouter = 'openrouter';
-const adminAiGeminiDefaultModel = 'gemini-2.0-flash';
+const adminAiProviderGeminiImage = 'gemini_image';
+const adminAiProviderOpenAiImages = 'openai_images';
+const adminAiGeminiDefaultModel = 'gemini-2.5-flash';
+const adminAiGeminiImageDefaultModel = 'gemini-2.5-flash-image';
+const adminAiOpenAiImageDefaultModel = 'gpt-image-1.5';
 const adminAiOpenRouterCuratedModels = <String>[
   'arcee-ai/trinity-large-preview:free',
   'nvidia/nemotron-3-super-120b-a12b:free',
@@ -10,9 +14,15 @@ const adminAiOpenRouterCuratedModels = <String>[
   'qwen/qwen3-coder:free',
   'stepfun/step-3.5-flash:free',
 ];
+const adminAiCoverModels = <String>[
+  adminAiGeminiImageDefaultModel,
+  adminAiOpenAiImageDefaultModel,
+];
 const adminAiSupportedProviders = <String>[
   adminAiProviderGemini,
   adminAiProviderOpenRouter,
+  adminAiProviderGeminiImage,
+  adminAiProviderOpenAiImages,
 ];
 
 List<String> adminAiModelsForProvider(String provider) {
@@ -32,13 +42,22 @@ String? adminAiDefaultModelForProvider(String provider) {
 
 String adminAiModelLabel(String model) {
   return switch (model) {
-    adminAiGeminiDefaultModel => 'Gemini 2.0 Flash',
+    adminAiGeminiDefaultModel => 'Gemini 2.5 Flash',
+    adminAiGeminiImageDefaultModel => 'Gemini 2.5 Flash Image',
+    adminAiOpenAiImageDefaultModel => 'OpenAI GPT Image 1.5',
     'arcee-ai/trinity-large-preview:free' => 'Trinity Large Preview (free)',
     'nvidia/nemotron-3-super-120b-a12b:free' => 'Nemotron 3 Super 120B (free)',
     'z-ai/glm-4.5-air:free' => 'GLM 4.5 Air (free)',
     'qwen/qwen3-coder:free' => 'Qwen3 Coder (free)',
     'stepfun/step-3.5-flash:free' => 'Step 3.5 Flash (free)',
     _ => model,
+  };
+}
+
+String adminAiCoverProviderForModel(String? model) {
+  return switch (model?.trim()) {
+    adminAiOpenAiImageDefaultModel => adminAiProviderOpenAiImages,
+    _ => adminAiProviderGeminiImage,
   };
 }
 
@@ -354,6 +373,253 @@ class AdminAiGeneratedReadingDraft {
       generationMeta: AdminAiGenerationMeta.fromJson(
         _adminAiCoerceMap(json?['generation_meta']),
       ),
+    );
+  }
+}
+
+class AdminAiGenerateReadingQuestionsRequest {
+  const AdminAiGenerateReadingQuestionsRequest({
+    required this.readingId,
+    this.provider = adminAiProviderGemini,
+    this.model = adminAiGeminiDefaultModel,
+    this.questionCount = 3,
+  });
+
+  final String readingId;
+  final String provider;
+  final String? model;
+  final int questionCount;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'reading_id': readingId,
+    'provider': provider,
+    'model': model,
+    'question_count': questionCount,
+  };
+
+  factory AdminAiGenerateReadingQuestionsRequest.fromJson(
+    Map<String, dynamic>? json,
+  ) {
+    final provider =
+        _adminAiProviderFromValue(json?['provider']) ?? adminAiProviderGemini;
+    return AdminAiGenerateReadingQuestionsRequest(
+      readingId: json?['reading_id']?.toString() ?? '',
+      provider: provider,
+      model:
+          _adminAiEmptyStringAsNull(json?['model']?.toString()) ??
+          adminAiDefaultModelForProvider(provider),
+      questionCount: (json?['question_count'] as num?)?.toInt() ?? 3,
+    );
+  }
+}
+
+class AdminAiGeneratedReadingQuestions {
+  const AdminAiGeneratedReadingQuestions({
+    required this.questions,
+    required this.provider,
+    required this.model,
+    required this.generatedAt,
+  });
+
+  final List<AdminReadingQuestionInput> questions;
+  final String provider;
+  final String model;
+  final DateTime generatedAt;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'questions': questions.map((item) => item.toJson()).toList(growable: false),
+    'provider': provider,
+    'model': model,
+    'generated_at': generatedAt.toIso8601String(),
+  };
+
+  factory AdminAiGeneratedReadingQuestions.fromJson(Map<String, dynamic>? json) {
+    final rawQuestions = json?['questions'];
+    return AdminAiGeneratedReadingQuestions(
+      questions: switch (rawQuestions) {
+        List<dynamic>() => rawQuestions
+            .whereType<Map>()
+            .map(
+              (item) => AdminReadingQuestionInput.fromJson(
+                item.map((key, value) => MapEntry(key.toString(), value)),
+              ),
+            )
+            .toList(growable: false),
+        _ => const <AdminReadingQuestionInput>[],
+      },
+      provider:
+          _adminAiProviderFromValue(json?['provider']) ?? adminAiProviderGemini,
+      model: json?['model']?.toString() ?? '',
+      generatedAt:
+          _adminAiDateTimeFromValue(json?['generated_at']) ?? DateTime.now(),
+    );
+  }
+}
+
+class AdminAiGenerateReadingCoverRequest {
+  const AdminAiGenerateReadingCoverRequest({
+    required this.readingId,
+    this.provider,
+    this.model,
+  });
+
+  final String readingId;
+  final String? provider;
+  final String? model;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'reading_id': readingId,
+    'provider': provider,
+    'model': model,
+  };
+
+  factory AdminAiGenerateReadingCoverRequest.fromJson(
+    Map<String, dynamic>? json,
+  ) {
+    return AdminAiGenerateReadingCoverRequest(
+      readingId: json?['reading_id']?.toString() ?? '',
+      provider: _adminAiEmptyStringAsNull(json?['provider']?.toString()),
+      model: _adminAiEmptyStringAsNull(json?['model']?.toString()),
+    );
+  }
+}
+
+class AdminAiReadingRunRequest {
+  const AdminAiReadingRunRequest({
+    required this.jobType,
+    required this.readingIds,
+    this.provider = adminAiProviderGemini,
+    this.model = adminAiGeminiDefaultModel,
+    this.questionCount = 3,
+    this.filterSnapshot,
+  });
+
+  final String jobType;
+  final List<String> readingIds;
+  final String provider;
+  final String? model;
+  final int questionCount;
+  final Map<String, dynamic>? filterSnapshot;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'job_type': jobType,
+    'reading_ids': readingIds,
+    'provider': provider,
+    'model': model,
+    'question_count': questionCount,
+    'filter_snapshot': filterSnapshot,
+  };
+}
+
+class AdminAiReadingRun {
+  const AdminAiReadingRun({
+    required this.id,
+    required this.jobType,
+    required this.status,
+    required this.provider,
+    required this.model,
+    required this.questionCount,
+    required this.totalCount,
+    required this.processedCount,
+    required this.succeededCount,
+    required this.failedCount,
+    required this.skippedCount,
+    this.failureSamples = const <String>[],
+    this.pauseReason,
+    this.lastErrorMessage,
+    this.consecutiveFailureCount = 0,
+    this.filterSnapshot = const <String, dynamic>{},
+    this.startedAt,
+    this.completedAt,
+    this.updatedAt,
+  });
+
+  final String id;
+  final String jobType;
+  final String status;
+  final String provider;
+  final String model;
+  final int questionCount;
+  final int totalCount;
+  final int processedCount;
+  final int succeededCount;
+  final int failedCount;
+  final int skippedCount;
+  final List<String> failureSamples;
+  final String? pauseReason;
+  final String? lastErrorMessage;
+  final int consecutiveFailureCount;
+  final Map<String, dynamic> filterSnapshot;
+  final DateTime? startedAt;
+  final DateTime? completedAt;
+  final DateTime? updatedAt;
+
+  bool get isFinished =>
+      status == 'completed' || status == 'failed' || status == 'cancelled';
+  bool get isActive => status == 'queued' || status == 'running' || status == 'paused';
+  bool get isPaused => status == 'paused';
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'id': id,
+    'job_type': jobType,
+    'status': status,
+    'provider': provider,
+    'model': model,
+    'question_count': questionCount,
+    'total_count': totalCount,
+    'processed_count': processedCount,
+    'succeeded_count': succeededCount,
+    'failed_count': failedCount,
+    'skipped_count': skippedCount,
+    'failure_samples': failureSamples,
+    'pause_reason': pauseReason,
+    'last_error_message': lastErrorMessage,
+    'consecutive_failure_count': consecutiveFailureCount,
+    'filter_snapshot': filterSnapshot,
+    'started_at': startedAt?.toIso8601String(),
+    'completed_at': completedAt?.toIso8601String(),
+    'updated_at': updatedAt?.toIso8601String(),
+  };
+
+  factory AdminAiReadingRun.fromJson(Map<String, dynamic>? json) {
+    final rawFailures = json?['failure_samples'];
+    final rawFilterSnapshot = json?['filter_snapshot'];
+    return AdminAiReadingRun(
+      id: json?['id']?.toString() ?? '',
+      jobType: json?['job_type']?.toString() ?? '',
+      status: json?['status']?.toString() ?? '',
+      provider:
+          _adminAiProviderFromValue(json?['provider']) ?? adminAiProviderGemini,
+      model: json?['model']?.toString() ?? '',
+      questionCount: (json?['question_count'] as num?)?.toInt() ?? 0,
+      totalCount: (json?['total_count'] as num?)?.toInt() ?? 0,
+      processedCount: (json?['processed_count'] as num?)?.toInt() ?? 0,
+      succeededCount: (json?['succeeded_count'] as num?)?.toInt() ?? 0,
+      failedCount: (json?['failed_count'] as num?)?.toInt() ?? 0,
+      skippedCount: (json?['skipped_count'] as num?)?.toInt() ?? 0,
+      failureSamples: switch (rawFailures) {
+        List<dynamic>() => rawFailures
+            .map((item) => item.toString())
+            .where((item) => item.trim().isNotEmpty)
+            .toList(growable: false),
+        _ => const <String>[],
+      },
+      pauseReason: _adminAiEmptyStringAsNull(json?['pause_reason']?.toString()),
+      lastErrorMessage: _adminAiEmptyStringAsNull(
+        json?['last_error_message']?.toString(),
+      ),
+      consecutiveFailureCount:
+          (json?['consecutive_failure_count'] as num?)?.toInt() ?? 0,
+      filterSnapshot: switch (rawFilterSnapshot) {
+        Map<String, dynamic>() => rawFilterSnapshot,
+        Map() => rawFilterSnapshot.map(
+          (key, value) => MapEntry(key.toString(), value),
+        ),
+        _ => const <String, dynamic>{},
+      },
+      startedAt: _adminAiDateTimeFromValue(json?['started_at']),
+      completedAt: _adminAiDateTimeFromValue(json?['completed_at']),
+      updatedAt: _adminAiDateTimeFromValue(json?['updated_at']),
     );
   }
 }

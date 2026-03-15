@@ -11,7 +11,7 @@ const corsHeaders: Record<string, string> = {
 
 const validCefrLevels = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
 const supportedProviders = ["gemini", "openrouter"] as const;
-const geminiAllowedModels = ["gemini-2.0-flash"] as const;
+const geminiAllowedModels = ["gemini-2.5-flash"] as const;
 const openRouterAllowedModels = [
   "arcee-ai/trinity-large-preview:free",
   "nvidia/nemotron-3-super-120b-a12b:free",
@@ -23,6 +23,14 @@ const openRouterAllowedModels = [
 type AiProvider = (typeof supportedProviders)[number];
 
 const defaultGeminiModel = geminiAllowedModels[0];
+
+function canonicalGeminiModel(model: string | null): string {
+  const normalized = String(model ?? "").trim().toLowerCase();
+  return normalized === "gemini-2.0-flash" ||
+      normalized === "gemini-2.0-flash-001"
+    ? defaultGeminiModel
+    : (model ?? defaultGeminiModel);
+}
 
 export interface GenerateReadingDraftRequest {
   topic: string;
@@ -167,6 +175,19 @@ function classifyDraftError(
     };
   }
 
+  if (
+    lowered.includes("no longer available to new users") ||
+    lowered.includes("not found for api version") ||
+    lowered.includes("model is invalid")
+  ) {
+    return {
+      status: 422,
+      error: "invalid_ai_response",
+      message:
+        "Secilen Gemini modeli artik kullanilamiyor. Varsayilan Gemini 2.5 Flash modeliyle tekrar deneyin.",
+    };
+  }
+
   return {
     status: 422,
     error: "invalid_ai_response",
@@ -294,7 +315,7 @@ function validateRequest(
   }
 
   if (provider === "gemini") {
-    const geminiModel = model ?? defaultGeminiModel;
+    const geminiModel = canonicalGeminiModel(model ?? defaultGeminiModel);
     if (
       !geminiAllowedModels.includes(
         geminiModel as (typeof geminiAllowedModels)[number],
@@ -639,10 +660,13 @@ async function generateWithGemini(
   }
 
   const response = await fetchFn(
-    `https://generativelanguage.googleapis.com/v1beta/models/${request.model}:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${request.model}:generateContent`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "x-goog-api-key": apiKey,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         contents: [
           {

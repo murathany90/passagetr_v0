@@ -116,6 +116,64 @@ void main() {
     expect(readings.single.packId, 'pack-2');
   });
 
+  test('loads question count and cover fields from local sync store', () async {
+    final database = FakeLocalSyncStore();
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passages',
+        entityId: 'reading-1',
+        payloadJson:
+            '{"id":"reading-1","pack_id":"pack-2","title":"Cover Reading","level":"B1","category":"History","is_pro":false,"cover_bucket_name":"reading-covers","cover_storage_path":"readings/reading-1/cover.png","cover_alt_text":"Cover Reading artwork"}',
+        updatedAt: DateTime.utc(2026, 3, 14, 10, 0),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_questions',
+        entityId: 'question-1',
+        payloadJson:
+            '{"id":"question-1","passage_id":"reading-1","sort_order":1,"question":"First question?","options_json":["Yes","No"],"correct_option_index":0,"is_published":true}',
+        updatedAt: DateTime.utc(2026, 3, 14, 10, 1),
+      ),
+    );
+    await database.upsertContentEntity(
+      ContentEntityRecord(
+        scope: 'readings',
+        entityType: 'reading_passage_questions',
+        entityId: 'question-2',
+        payloadJson:
+            '{"id":"question-2","passage_id":"reading-1","sort_order":2,"question":"Second question?","options_json":["A","B"],"correct_option_index":1,"is_published":true}',
+        updatedAt: DateTime.utc(2026, 3, 14, 10, 2),
+      ),
+    );
+
+    final repository = FoundationReadingRepository(
+      database: database,
+      config: const AppConfig(
+        appName: 'PASSAGETR',
+        environment: AppEnvironment.dev,
+        platformMode: PlatformMode.mobile,
+        supabaseUrl: 'https://example.supabase.co',
+        supabaseAnonKey: 'anon',
+        adminConsoleUrl: '',
+        adminPreviewEnabled: true,
+      ),
+    );
+
+    final readings = await repository.fetchReadings();
+
+    expect(readings, hasLength(1));
+    expect(readings.single.questionCount, 2);
+    expect(readings.single.hasCover, isTrue);
+    expect(
+      readings.single.coverUrl,
+      'https://example.supabase.co/storage/v1/object/public/reading-covers/readings/reading-1/cover.png',
+    );
+    expect(readings.single.coverAltText, 'Cover Reading artwork');
+  });
+
   test('loads focus words by joining passage links with synced words', () async {
     final database = FakeLocalSyncStore();
     await database.upsertContentEntity(

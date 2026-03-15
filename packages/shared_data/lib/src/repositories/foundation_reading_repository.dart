@@ -181,16 +181,43 @@ class FoundationReadingRepository implements ReadingRepository {
       scope: 'readings',
       entityType: 'reading_passages',
     );
+    final questionRecords = await database.listContentEntities(
+      scope: 'readings',
+      entityType: 'reading_passage_questions',
+    );
+    final questionCounts = <String, int>{};
+    for (final record in questionRecords) {
+      final payload = _decodePayload(record.payloadJson);
+      if (payload['is_published'] == false) {
+        continue;
+      }
+      final passageId = payload['passage_id']?.toString().trim();
+      if (passageId == null || passageId.isEmpty) {
+        continue;
+      }
+      questionCounts[passageId] = (questionCounts[passageId] ?? 0) + 1;
+    }
     return readings
         .map((record) {
           final payload = _decodePayload(record.payloadJson);
+          final passageId = payload['id']?.toString() ?? record.entityId;
           return ReadingPassage(
-            id: payload['id']?.toString() ?? record.entityId,
+            id: passageId,
             title: payload['title']?.toString() ?? '',
             level: payload['level']?.toString(),
             category: payload['category']?.toString(),
             packId: payload['pack_id']?.toString(),
             summary: payload['summary']?.toString(),
+            questionCount:
+                (_asInt(payload['question_count']) ?? questionCounts[passageId]) ??
+                0,
+            coverBucketName: payload['cover_bucket_name']?.toString(),
+            coverStoragePath: payload['cover_storage_path']?.toString(),
+            coverAltText: payload['cover_alt_text']?.toString(),
+            coverUrl: _coverUrlFor(
+              payload['cover_bucket_name']?.toString(),
+              payload['cover_storage_path']?.toString(),
+            ),
             isPro: payload['is_pro'] as bool? ?? false,
           );
         })
@@ -214,9 +241,11 @@ class FoundationReadingRepository implements ReadingRepository {
     } catch (_) {
       rows =
           (await client
-                  .from('reading_passages')
-                  .select('id,pack_id,title,level,category,is_pro')
-                  .order('title'))
+                .from('reading_passages')
+                .select(
+                  'id,pack_id,title,level,category,is_pro,cover_bucket_name,cover_storage_path,cover_alt_text',
+                )
+                .order('title'))
               as List<dynamic>;
     }
     return rows
@@ -229,11 +258,40 @@ class FoundationReadingRepository implements ReadingRepository {
             category: row['category']?.toString(),
             packId: row['pack_id']?.toString(),
             summary: row['summary']?.toString(),
+            questionCount: (row['question_count'] as num?)?.toInt() ?? 0,
+            coverBucketName: row['cover_bucket_name']?.toString(),
+            coverStoragePath: row['cover_storage_path']?.toString(),
+            coverAltText: row['cover_alt_text']?.toString(),
+            coverUrl: _coverUrlFor(
+              row['cover_bucket_name']?.toString(),
+              row['cover_storage_path']?.toString(),
+            ),
             isPro: row['is_pro'] as bool? ?? false,
           ),
         )
         .where((item) => item.id.isNotEmpty)
         .toList(growable: false);
+  }
+
+  String? _coverUrlFor(String? bucketName, String? storagePath) {
+    final bucket = bucketName?.trim();
+    final path = storagePath?.trim();
+    if (bucket == null || bucket.isEmpty || path == null || path.isEmpty) {
+      return null;
+    }
+
+    final base = _config?.supabaseUrl.trim() ?? '';
+    if (base.isEmpty) {
+      return null;
+    }
+
+    final normalizedBase = base.endsWith('/') ? base.substring(0, base.length - 1) : base;
+    final encodedPath = path
+        .split('/')
+        .where((segment) => segment.isNotEmpty)
+        .map(Uri.encodeComponent)
+        .join('/');
+    return '$normalizedBase/storage/v1/object/public/$bucket/$encodedPath';
   }
 
   Future<List<ReadingSentence>> _readSectionsFromLocal(String passageId) async {

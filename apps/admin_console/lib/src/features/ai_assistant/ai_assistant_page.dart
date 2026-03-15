@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_core/shared_core.dart';
@@ -7,6 +9,7 @@ import '../../core/admin_ai_assistant_controller.dart';
 import '../../core/admin_console_models.dart';
 import '../../core/admin_providers.dart';
 import '../common/admin_page_parts.dart';
+import '../content/widgets/reading_cover_panel.dart';
 import 'widgets/ai_draft_editor.dart';
 import 'widgets/ai_generation_form.dart';
 import 'widgets/ai_linked_words_panel.dart';
@@ -208,6 +211,34 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
           onPublish: () => _handlePersist(isPublish: true, packs: packs),
         ),
         const SizedBox(height: 18),
+        ReadingCoverPanel(
+          detail: editableDraft,
+          coverUrl: _coverUrlForAsset(editableDraft.cover),
+          enabled: editableDraft.metadata.id?.trim().isNotEmpty ?? false,
+          disabledMessage: editableDraft.metadata.id?.trim().isNotEmpty ?? false
+              ? null
+              : 'Cover islemleri icin once taslagi kaydedip reading ID alin.',
+          isBusy: state.isBusy,
+          onChanged: (detail) => ref
+              .read(adminAiAssistantControllerProvider.notifier)
+              .replaceEditableDraft(detail),
+          onGenerate: () => _generateCoverForDraft(editableDraft),
+          onUpload: ({
+            required bytes,
+            required fileName,
+            required mimeType,
+            String? altText,
+          }) => _uploadCoverForDraft(
+            detail: editableDraft,
+            bytes: bytes,
+            fileName: fileName,
+            mimeType: mimeType,
+            altText: altText,
+          ),
+          onRemove: () => _removeCoverForDraft(editableDraft),
+          onMessage: _showMessage,
+        ),
+        const SizedBox(height: 18),
         _AiMetadataPanel(metadata: metadata),
       ],
     );
@@ -276,6 +307,123 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
       );
       ref.read(adminReadingChangesProvider.notifier).upsert(record);
     }
+  }
+
+  Future<AppResult<AdminReadingDetail>> _generateCoverForDraft(
+    AdminReadingDetail detail,
+  ) async {
+    final readingId = detail.metadata.id?.trim();
+    if (readingId == null || readingId.isEmpty) {
+      return const AppFailure<AdminReadingDetail>(
+        'Cover uretimi icin taslak once kaydedilmeli.',
+      );
+    }
+
+    final result = await ref
+        .read(adminAiReadingRepositoryProvider)
+        .generateReadingCover(AdminAiGenerateReadingCoverRequest(readingId: readingId));
+    if (result case AppSuccess<AdminReadingDetail>()) {
+      ref
+          .read(adminAiAssistantControllerProvider.notifier)
+          .replaceEditableDraft(result.value);
+    }
+    return result;
+  }
+
+  Future<AppResult<AdminReadingDetail>> _uploadCoverForDraft({
+    required AdminReadingDetail detail,
+    required Uint8List bytes,
+    required String fileName,
+    required String mimeType,
+    String? altText,
+  }) async {
+    final readingId = detail.metadata.id?.trim();
+    if (readingId == null || readingId.isEmpty) {
+      return const AppFailure<AdminReadingDetail>(
+        'Cover yuklemek icin taslak once kaydedilmeli.',
+      );
+    }
+
+    final result = await ref.read(adminContentRepositoryProvider).uploadReadingCover(
+      readingId: readingId,
+      bytes: bytes,
+      fileName: fileName,
+      mimeType: mimeType,
+      altText: altText,
+    );
+    if (result case AppSuccess<AdminReadingDetail>()) {
+      ref
+          .read(adminAiAssistantControllerProvider.notifier)
+          .replaceEditableDraft(result.value);
+    }
+    return result;
+  }
+
+  Future<AppResult<AdminReadingDetail>> _removeCoverForDraft(
+    AdminReadingDetail detail,
+  ) async {
+    final readingId = detail.metadata.id?.trim();
+    if (readingId == null || readingId.isEmpty) {
+      return const AppFailure<AdminReadingDetail>(
+        'Cover silmek icin taslak once kaydedilmeli.',
+      );
+    }
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .removeReadingCover(readingId: readingId);
+    if (result case AppSuccess<AdminReadingDetail>()) {
+      ref
+          .read(adminAiAssistantControllerProvider.notifier)
+          .replaceEditableDraft(result.value);
+    }
+    return result;
+  }
+
+  String? _coverUrlForAsset(AdminReadingCoverAsset cover) {
+    final bucket = cover.bucketName?.trim();
+    final storagePath = cover.storagePath?.trim();
+    if (bucket == null ||
+        bucket.isEmpty ||
+        storagePath == null ||
+        storagePath.isEmpty) {
+      return null;
+    }
+
+    final supabaseUrl = ref.read(adminAppConfigProvider).supabaseUrl.trim();
+    if (supabaseUrl.isEmpty) {
+      return null;
+    }
+
+    final normalizedBase = supabaseUrl.endsWith('/')
+        ? supabaseUrl.substring(0, supabaseUrl.length - 1)
+        : supabaseUrl;
+    final encodedPath = storagePath
+        .split('/')
+        .where((segment) => segment.isNotEmpty)
+        .map(Uri.encodeComponent)
+        .join('/');
+    return '$normalizedBase/storage/v1/object/public/$bucket/$encodedPath';
+  }
+
+  void _showMessage(String message, {bool isError = false}) {
+    if (!mounted) {
+      return;
+    }
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    if (messenger == null) {
+      return;
+    }
+    messenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: isError
+              ? Theme.of(context).colorScheme.errorContainer
+              : null,
+        ),
+      );
   }
 
   String? _emptyAsNull(String value) {

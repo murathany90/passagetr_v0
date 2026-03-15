@@ -172,6 +172,33 @@ void main() {
   );
 
   testWidgets(
+    'generated draft shows disabled cover panel until first save assigns reading id',
+    (tester) async {
+      await _pumpPage(
+        tester,
+        aiRepository: _WidgetFakeAdminAiReadingRepository(
+          result: AppSuccess<AdminAiGeneratedReadingDraft>(
+            _draftWithoutSuggestion,
+          ),
+        ),
+      );
+
+      await tester.enterText(
+        find.byKey(const ValueKey('ai-topic-field')),
+        'Ocean',
+      );
+      await tester.tap(find.widgetWithText(FilledButton, 'Generate'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Cover'), findsOneWidget);
+      expect(
+        find.text('Cover islemleri icin once taslagi kaydedip reading ID alin.'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
     'save draft with pending word card upserts word before reading detail',
     (tester) async {
       final contentRepository = _WidgetFakeAdminContentRepository();
@@ -337,6 +364,9 @@ class _WidgetFakeAdminAiReadingRepository implements AdminAiReadingRepository {
     return result ??
         AppSuccess<AdminAiGeneratedReadingDraft>(_draftWithoutSuggestion);
   }
+
+  @override
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 class _WidgetFakeAdminContentRepository implements AdminContentRepository {

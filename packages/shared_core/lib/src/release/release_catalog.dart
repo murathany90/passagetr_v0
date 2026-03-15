@@ -20,6 +20,69 @@ class ReleaseNoteEntry {
 
 const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
   ReleaseNoteEntry(
+    version: 'v2.0.18',
+    releaseDate: '2026-03-15',
+    title: 'Admin users bulk delete',
+    summary:
+        'Admin Kullanicilar ekranindaki toplu secim barina yikici bulk delete aksiyonu eklendi; secili hesaplar mevcut tekli silme zinciriyle kismi basari destekli olarak kaldirilabilir.',
+    highlights: <String>[
+      'Toplu secim barinda artik Kullanicilari Sil chipi gorunur ve yikici onay dialogu acar.',
+      'Bulk delete sonucu deleted, skipped ve failed item ozetleriyle parse edilir; UI gercekten silinen hesaplari listeden dusurur.',
+      'Aktif admin oturumu ve developer hesaplari icin mevcut server-side korumalar korunur; bu hesaplar item bazinda atlanabilir.',
+      'admin_manage_users edge functioni delete_many actioni ve admin.user.bulk_deleted summary audit kaydi ile genisletildi.',
+    ],
+  ),  ReleaseNoteEntry(
+    version: 'v2.0.17',
+    releaseDate: '2026-03-15',
+    title: 'Cover backfill throttling and failure-rate guard',
+    summary:
+        'Cover backfill artik tekli batch, 10 saniyelik throttle ve yuksek toplam hata oraninda auto-pause korumasi ile daha guvenli calisir; progress dialogu son 5 hatayi daha gorunur sekilde sunar.',
+    highlights: <String>[
+      'Cover backfill processReadingAiRun cagrilarinda batchSize=1 kullanir ve her item sonrasi 10 saniye bekler.',
+      'Run toplamda en az 10 kayit islediyse ve hata orani yuzde 60 veya uzerine ciktiysa auto_failure_rate_threshold ile otomatik duraklatilir.',
+      'Progress ekraninda son 5 hata artik ayri bir hata panelinde daha okunakli bicimde listelenir.',
+      'Mevcut 5 art arda hata korumasi korunur; resume sirasinda son hata statei temizlenir.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.16',
+    releaseDate: '2026-03-15',
+    title: 'Admin cover backfill run controls',
+    summary:
+        'Admin Okumalar ekranindaki AI backfill akisi duraklat, devam et, durdur ve otomatik hata-esik korumasi ile guvenli run yonetimine gecti; cover backfill config dialogu artik model secimi ve filtre snapshot ozeti sunuyor.',
+    highlights: <String>[
+      'Eksik Kapaklar akisi baslatmadan once hedef kayit sayisi, filtre ozeti ve model secimi gosteren config dialogu acar.',
+      'AI Backfill Progress artik aktif runlari yeniden yukler; ayni job type icin ikinci run acmak yerine mevcut progress dialogunu acar.',
+      'Cover backfill Gemini 2.5 Flash Image veya OpenAI GPT Image 1.5 modeliyle baslatilabilir; resume sirasinda model guncellenebilir.',
+      'Reading AI run hattina paused durumu, pause reason, last error ve 5 art arda hata sonrasi auto-pause korumasi eklendi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.15',
+    releaseDate: '2026-03-15',
+    title: 'Admin manual cover upload and student cover rollout',
+    summary:
+        'Admin reading editor cover paneli webde dosya secmeyi guvenilir bicimde yapar hale getirildi; student web ve APK dagitimi da remote reading cover goruntulemesini canliya tasiyacak sekilde yenilendi.',
+    highlights: <String>[
+      'Admin reading cover paneli image_picker yerine web uyumlu file_picker ile dosya yukler; Dosya Yukle ve Dosya ile Degistir aksiyonlari browserda calisir.',
+      'Gemini ile uretilen veya manuel yuklenen reading cover kayitlari student tarafinda remote storage URL uzerinden gosterilir.',
+      'Bu release ile admin web yeniden deploy edilir; student web ve arm64 APK de remote cover tuketimini iceren guncel build ile yayinlanir.',
+      'Mini test ve cover pipeline icin Gemini 2.5 Flash / Gemini 2.5 Flash Image uyumlulugu korunur.',
+    ],
+  ),  ReleaseNoteEntry(
+    version: 'v2.0.14',
+    releaseDate: '2026-03-14',
+    title: 'Admin reading cover Gemini image rollout',
+    summary:
+        'Reading cover generation hattina Gemini 2.5 Flash Image ana saglayici, OpenAI Images ise ikinci alternatif olarak eklendi; admin cover pipeline ve batch isleyici canliya alinmaya hazir hale getirildi.',
+    highlights: <String>[
+      'admin_ai_generate_reading_cover edge functioni varsayilan olarak gemini-2.5-flash-image ile 16:9 cover uretir.',
+      'Gemini image istegi basarisiz olursa ve OpenAI secret tanimliysa OpenAI Images ikinci alternatif olarak devreye girer.',
+      'Admin reading cover pipeline, mini test batch altyapisi ve student remote cover tuketimi ayni release paketinde canliya alinabilir durumda tutuldu.',
+      'Bu release ile admin web deploy, function deploy ve migration push zinciri Faz 11.3 kapsaminda kapatildi.',
+    ],
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.13',
     releaseDate: '2026-03-14',
     title: 'Student manual content refresh',
@@ -189,3 +252,9 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
     ],
   ),
 ];
+
+
+
+
+
+

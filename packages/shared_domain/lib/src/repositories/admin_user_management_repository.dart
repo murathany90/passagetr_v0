@@ -15,9 +15,15 @@ abstract interface class AdminUserManagementRepository {
 
   Future<AppResult<void>> bulkSetUserAccess(AdminBulkUserUpdate update);
 
-  Future<AppResult<AdminUserListItem>> updateUser(AdminUserUpdateRequest request);
+  Future<AppResult<AdminUserListItem>> updateUser(
+    AdminUserUpdateRequest request,
+  );
 
   Future<AppResult<void>> deleteUser({required String userId});
+
+  Future<AppResult<AdminBulkUserDeleteResult>> bulkDeleteUsers({
+    required List<String> userIds,
+  });
 
   Future<AppResult<AdminInviteResult>> inviteUser(AdminInviteRequest request);
 

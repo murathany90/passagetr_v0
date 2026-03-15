@@ -179,6 +179,91 @@ void main() {
     );
   });
 
+  test('maps generated reading questions from named function', () async {
+    final repository = FoundationAdminAiReadingRepository(
+      config: config,
+      namedFunctionInvoker: (functionName, body) async {
+        expect(functionName, 'admin_ai_generate_reading_questions');
+        expect(body, isA<Map<String, dynamic>>());
+        return AdminAiReadingFunctionResponse(
+          status: 200,
+          data: <String, dynamic>{
+            'questions': [
+              {
+                'sort_order': 1,
+                'question': 'What moves across the sea?',
+                'options': ['Waves', 'Cars'],
+                'correct_option_index': 0,
+                'explanation': 'The passage says waves carry energy.',
+              },
+            ],
+            'provider': 'gemini',
+            'model': 'gemini-2.5-flash',
+            'generated_at': '2026-03-14T10:00:00Z',
+          },
+        );
+      },
+    );
+
+    final result = await repository.generateReadingQuestions(
+      const AdminAiGenerateReadingQuestionsRequest(readingId: 'reading-1'),
+    );
+
+    expect(result, isA<AppSuccess<AdminAiGeneratedReadingQuestions>>());
+    final value =
+        (result as AppSuccess<AdminAiGeneratedReadingQuestions>).value;
+    expect(value.questions, hasLength(1));
+    expect(value.questions.single.correctOptionIndex, 0);
+    expect(value.provider, adminAiProviderGemini);
+  });
+
+  test('maps generated reading cover detail from named function', () async {
+    final repository = FoundationAdminAiReadingRepository(
+      config: config,
+      namedFunctionInvoker: (functionName, body) async {
+        expect(functionName, 'admin_ai_generate_reading_cover');
+        expect(body, isA<Map<String, dynamic>>());
+        expect(
+          body,
+          <String, dynamic>{
+            'reading_id': 'reading-1',
+            'provider': adminAiProviderOpenAiImages,
+            'model': adminAiOpenAiImageDefaultModel,
+          },
+        );
+        return AdminAiReadingFunctionResponse(
+          status: 200,
+          data: <String, dynamic>{
+            'id': 'reading-1',
+            'title': 'Ocean Science',
+            'sentences': [
+              {'idx': 1, 'sentence_en': 'Waves carry energy across the sea.'},
+            ],
+            'cover_media_asset_id': 'asset-1',
+            'cover_bucket_name': 'reading-covers',
+            'cover_storage_path': 'readings/reading-1/asset-1.png',
+            'cover_alt_text': 'Ocean Science cover',
+            'cover_generation_meta': {'provider': 'openai-images'},
+          },
+        );
+      },
+    );
+
+    final result = await repository.generateReadingCover(
+      const AdminAiGenerateReadingCoverRequest(
+        readingId: 'reading-1',
+        provider: adminAiProviderOpenAiImages,
+        model: adminAiOpenAiImageDefaultModel,
+      ),
+    );
+
+    expect(result, isA<AppSuccess<AdminReadingDetail>>());
+    final value = (result as AppSuccess<AdminReadingDetail>).value;
+    expect(value.cover.hasCover, isTrue);
+    expect(value.cover.bucketName, 'reading-covers');
+    expect(value.cover.storagePath, 'readings/reading-1/asset-1.png');
+  });
+
   test('AdminReadingDetail serializes questions and AI metadata', () {
     final detail = AdminReadingDetail(
       metadata: const AdminContentMetadata(id: 'reading-1'),
@@ -215,4 +300,92 @@ void main() {
     expect(decoded.aiGenerated, isTrue);
     expect(decoded.aiGenerationMeta?.actualWordCount, 42);
   });
+
+  test('lists active AI runs from admin RPC', () async {
+    final repository = FoundationAdminAiReadingRepository(
+      config: config,
+      rpcInvoker: (functionName, {params = const <String, dynamic>{}}) async {
+        expect(functionName, 'admin_list_active_reading_ai_runs');
+        expect(params, isEmpty);
+        return <Map<String, dynamic>>[
+          <String, dynamic>{
+            'id': 'run-1',
+            'job_type': 'cover_backfill',
+            'status': 'paused',
+            'provider': adminAiProviderGeminiImage,
+            'model': adminAiGeminiImageDefaultModel,
+            'question_count': 3,
+            'total_count': 12,
+            'processed_count': 7,
+            'succeeded_count': 4,
+            'failed_count': 3,
+            'skipped_count': 0,
+            'failure_samples': const <String>['sample error'],
+            'pause_reason': 'auto_failure_threshold',
+            'last_error_message': 'Last failure',
+            'consecutive_failure_count': 5,
+            'filter_snapshot': const <String, dynamic>{'has_cover': false},
+          },
+        ];
+      },
+    );
+
+    final result = await repository.listActiveReadingAiRuns();
+
+    expect(result, isA<AppSuccess<List<AdminAiReadingRun>>>());
+    final runs = (result as AppSuccess<List<AdminAiReadingRun>>).value;
+    expect(runs, hasLength(1));
+    expect(runs.single.isPaused, isTrue);
+    expect(runs.single.pauseReason, 'auto_failure_threshold');
+    expect(runs.single.consecutiveFailureCount, 5);
+    expect(runs.single.filterSnapshot['has_cover'], isFalse);
+  });
+
+  test('controls AI run through admin RPC', () async {
+    final repository = FoundationAdminAiReadingRepository(
+      config: config,
+      rpcInvoker: (functionName, {params = const <String, dynamic>{}}) async {
+        expect(functionName, 'admin_control_reading_ai_run');
+        expect(params['p_payload'], <String, dynamic>{
+          'run_id': 'run-1',
+          'action': 'resume',
+          'provider': adminAiProviderOpenAiImages,
+          'model': adminAiOpenAiImageDefaultModel,
+          'question_count': null,
+        });
+        return <String, dynamic>{
+          'id': 'run-1',
+          'job_type': 'cover_backfill',
+          'status': 'running',
+          'provider': adminAiProviderOpenAiImages,
+          'model': adminAiOpenAiImageDefaultModel,
+          'question_count': 3,
+          'total_count': 12,
+          'processed_count': 7,
+          'succeeded_count': 4,
+          'failed_count': 3,
+          'skipped_count': 0,
+          'failure_samples': const <String>[],
+          'pause_reason': null,
+          'last_error_message': null,
+          'consecutive_failure_count': 0,
+          'filter_snapshot': const <String, dynamic>{'has_cover': false},
+        };
+      },
+    );
+
+    final result = await repository.controlReadingAiRun(
+      runId: 'run-1',
+      action: 'resume',
+      provider: adminAiProviderOpenAiImages,
+      model: adminAiOpenAiImageDefaultModel,
+    );
+
+    expect(result, isA<AppSuccess<AdminAiReadingRun>>());
+    final run = (result as AppSuccess<AdminAiReadingRun>).value;
+    expect(run.status, 'running');
+    expect(run.provider, adminAiProviderOpenAiImages);
+    expect(run.model, adminAiOpenAiImageDefaultModel);
+  });
 }
+

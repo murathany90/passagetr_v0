@@ -65,11 +65,15 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                         runSpacing: 12,
                         children: [
                           SizedBox(
-                            width: constraints.maxWidth < 560 ? constraints.maxWidth : 220,
+                            width: constraints.maxWidth < 560
+                                ? constraints.maxWidth
+                                : 220,
                             child: DropdownButtonFormField<AppRole?>(
                               initialValue: query.role,
                               isExpanded: true,
-                              decoration: const InputDecoration(labelText: 'Rol'),
+                              decoration: const InputDecoration(
+                                labelText: 'Rol',
+                              ),
                               items: const [
                                 DropdownMenuItem<AppRole?>(
                                   value: null,
@@ -94,11 +98,15 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                             ),
                           ),
                           SizedBox(
-                            width: constraints.maxWidth < 560 ? constraints.maxWidth : 220,
+                            width: constraints.maxWidth < 560
+                                ? constraints.maxWidth
+                                : 220,
                             child: DropdownButtonFormField<EntitlementPlan?>(
                               initialValue: query.plan,
                               isExpanded: true,
-                              decoration: const InputDecoration(labelText: 'Plan'),
+                              decoration: const InputDecoration(
+                                labelText: 'Plan',
+                              ),
                               items: const [
                                 DropdownMenuItem<EntitlementPlan?>(
                                   value: null,
@@ -119,7 +127,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                             ),
                           ),
                           SizedBox(
-                            width: constraints.maxWidth < 560 ? constraints.maxWidth : 220,
+                            width: constraints.maxWidth < 560
+                                ? constraints.maxWidth
+                                : 220,
                             child:
                                 DropdownButtonFormField<AdminUserStatusFilter?>(
                                   initialValue: query.status,
@@ -185,7 +195,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
   Widget _buildInviteStatusCard(BuildContext context) {
     final result = _lastInviteResult!;
     final isAccepted = result.accepted;
-    final title = isAccepted ? 'Son Davet Kuyruga Alindi' : 'Son Davet Reddedildi';
+    final title = isAccepted
+        ? 'Son Davet Kuyruga Alindi'
+        : 'Son Davet Reddedildi';
     final message = isAccepted
         ? '${result.email} icin davet Supabase mail kuyru guna alindi. Mail teslimati SMTP/Auth ayarlarina baglidir.'
         : result.errorMessage ??
@@ -205,7 +217,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
             FilledButton.tonalIcon(
               onPressed: _isInviteBusy ? null : () => _retryLastInvite(context),
               icon: const Icon(Icons.refresh_rounded),
-              label: Text(_isInviteBusy ? 'Yeniden deneniyor...' : 'Retry Invite'),
+              label: Text(
+                _isInviteBusy ? 'Yeniden deneniyor...' : 'Retry Invite',
+              ),
             ),
         ],
       ),
@@ -248,6 +262,11 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
               isBusy: _isBulkBusy,
               onClear: () =>
                   ref.read(adminSelectedUserIdsProvider.notifier).clear(),
+              onDeleteSelected: () => _deleteSelectedUsers(
+                context,
+                selectedIds: selectedIds.toList(growable: false),
+                accessContext: accessContext,
+              ),
               onApplyRole: (role) => _applyBulkUpdate(
                 context,
                 AdminBulkUserUpdate(
@@ -409,8 +428,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                 displayName: '',
                 role: result.value.role,
                 plan: result.value.plan,
-                statusLabel:
-                    result.value.role == AppRole.user ? 'active' : 'staff',
+                statusLabel: result.value.role == AppRole.user
+                    ? 'active'
+                    : 'staff',
                 lastSeenAt: null,
                 updatedAt: DateTime.now(),
               ),
@@ -464,8 +484,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                 displayName: '',
                 role: result.value.role,
                 plan: result.value.plan,
-                statusLabel:
-                    result.value.role == AppRole.user ? 'active' : 'staff',
+                statusLabel: result.value.role == AppRole.user
+                    ? 'active'
+                    : 'staff',
                 lastSeenAt: null,
                 updatedAt: DateTime.now(),
               ),
@@ -597,9 +618,9 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
                 timestampLabel: 'az once',
               ),
             );
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kullanici guncellendi.')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Kullanici guncellendi.')));
       case AppFailure<AdminUserListItem>():
         ScaffoldMessenger.of(
           context,
@@ -663,9 +684,107 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
       return;
     }
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text((result as AppFailure<void>).message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text((result as AppFailure<void>).message)),
+    );
+  }
+
+  Future<void> _deleteSelectedUsers(
+    BuildContext context, {
+    required List<String> selectedIds,
+    required AccessContext accessContext,
+  }) async {
+    if (selectedIds.isEmpty) {
+      return;
+    }
+
+    final messages = <String>[
+      '${selectedIds.length} kullanici kalici olarak silinecek. Auth hesabi, profil, rol ve plan kayitlari kaldirilir.',
+    ];
+    if (selectedIds.contains(accessContext.userId)) {
+      messages.add(
+        'Aktif admin oturumunuz secim icinde. Bu hesap sunucu tarafinda atlanir.',
+      );
+    }
+    if (!accessContext.canManageRoles) {
+      messages.add(
+        'Developer hesaplari seciliyse ve yetkiniz yoksa bu hesaplar silinmeden atlanir.',
+      );
+    }
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Secili kullanicilari sil'),
+        content: Text(messages.join('\n\n')),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Vazgec'),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              foregroundColor: Theme.of(context).colorScheme.onError,
+            ),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Secilenleri Sil'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) {
+      return;
+    }
+    if (!context.mounted) {
+      return;
+    }
+
+    setState(() {
+      _isBulkBusy = true;
+    });
+    final repository = ref.read(adminUserManagementRepositoryProvider);
+    final result = await repository.bulkDeleteUsers(userIds: selectedIds);
+    if (mounted) {
+      setState(() {
+        _isBulkBusy = false;
+      });
+    }
+    if (!context.mounted) {
+      return;
+    }
+
+    switch (result) {
+      case AppSuccess<AdminBulkUserDeleteResult>():
+        final deletedIds = result.value.deletedUserIds;
+        if (deletedIds.isNotEmpty) {
+          ref.read(adminDeletedUserIdsProvider.notifier).addAll(deletedIds);
+          ref
+              .read(adminUserListOverridesProvider.notifier)
+              .removeAll(deletedIds);
+        }
+        ref.read(adminSelectedUserIdsProvider.notifier).clear();
+        ref.invalidate(adminUsersPageProvider);
+        ref.invalidate(adminDashboardSnapshotProvider);
+        ref.invalidate(adminAuditFeedProvider);
+        ref
+            .read(adminAuditOverridesProvider.notifier)
+            .push(
+              AdminAuditRecord(
+                id: 'bulk-user-delete-${DateTime.now().millisecondsSinceEpoch}',
+                title: 'admin.user.bulk_deleted',
+                subtitle: _formatBulkDeleteSummary(result.value),
+                timestampLabel: 'az once',
+              ),
+            );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_formatBulkDeleteSummary(result.value))),
+        );
+      case AppFailure<AdminBulkUserDeleteResult>():
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(result.message)));
+    }
   }
 
   Future<void> _applyBulkUpdate(
@@ -858,6 +977,17 @@ class _AdminUsersPageState extends ConsumerState<AdminUsersPage> {
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
+
+  String _formatBulkDeleteSummary(AdminBulkUserDeleteResult result) {
+    final segments = <String>['${result.deletedCount} kullanici silindi'];
+    if (result.skippedCount > 0) {
+      segments.add('${result.skippedCount} kullanici atlandi');
+    }
+    if (result.failedCount > 0) {
+      segments.add('${result.failedCount} kullanici hata verdi');
+    }
+    return '${segments.join(', ')}.';
+  }
 }
 
 class _BulkActionBar extends StatelessWidget {
@@ -866,6 +996,7 @@ class _BulkActionBar extends StatelessWidget {
     required this.allowDeveloperGrant,
     required this.isBusy,
     required this.onClear,
+    required this.onDeleteSelected,
     required this.onApplyRole,
     required this.onApplyPlan,
   });
@@ -874,6 +1005,7 @@ class _BulkActionBar extends StatelessWidget {
   final bool allowDeveloperGrant;
   final bool isBusy;
   final VoidCallback onClear;
+  final VoidCallback onDeleteSelected;
   final ValueChanged<AppRole> onApplyRole;
   final ValueChanged<EntitlementPlan> onApplyPlan;
 
@@ -905,6 +1037,14 @@ class _BulkActionBar extends StatelessWidget {
         FilledButton.tonal(
           onPressed: isBusy ? null : () => onApplyPlan(EntitlementPlan.pro),
           child: const Text('Plan pro'),
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.error,
+            foregroundColor: Theme.of(context).colorScheme.onError,
+          ),
+          onPressed: isBusy ? null : onDeleteSelected,
+          child: const Text('Kullanicilari Sil'),
         ),
         TextButton(
           onPressed: isBusy ? null : onClear,

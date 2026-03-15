@@ -980,6 +980,8 @@ class _ReadingInfoPanel extends StatelessWidget {
         children: [
           ReadingArtwork(
             seed: seed,
+            remoteUrl: reading.coverUrl,
+            semanticLabel: reading.coverAltText ?? reading.title,
             height: 220,
             borderRadius: BorderRadius.circular(20),
           ),

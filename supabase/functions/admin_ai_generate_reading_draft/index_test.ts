@@ -32,7 +32,7 @@ Deno.test("gemini request returns 200 and valid JSON", async () => {
       resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
       generateDraft: async () => ({
         provider: "gemini",
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-flash",
         content: {
           title: "Journey to Mars",
           level: "B1",
@@ -76,7 +76,7 @@ Deno.test("gemini request returns 200 and valid JSON", async () => {
   const payload = await response.json();
   assertEquals(payload.title, "Journey to Mars");
   assertEquals(payload.generation_meta.provider, "gemini");
-  assertEquals(payload.generation_meta.model, "gemini-2.0-flash");
+  assertEquals(payload.generation_meta.model, "gemini-2.5-flash");
   assertEquals(payload.generation_meta.actual_word_count, 13);
   assertEquals(payload.questions.length, 1);
 });
@@ -170,6 +170,51 @@ Deno.test("unsupported openrouter model returns 400", async () => {
   assertEquals(payload.error, "invalid_request");
 });
 
+Deno.test("legacy gemini model alias is normalized to gemini 2.5 flash", async () => {
+  const response = await handleRequest(
+    requestWithBody({
+      ...validBody,
+      provider: "gemini",
+      model: "gemini-2.0-flash",
+    }),
+    {
+      now: () => new Date("2026-03-13T10:00:00.000Z"),
+      resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
+      generateDraft: async (request) => ({
+        provider: "gemini",
+        model: request.model,
+        content: {
+          title: "Journey to Mars",
+          level: "B1",
+          category: "science",
+          tags_raw: "space, mars",
+          sentences: [
+            {
+              idx: 1,
+              sentence_en: "Astronauts train for long missions.",
+              sentence_tr: "Astronotlar uzun gorevler icin egitim alir.",
+            },
+          ],
+          suggested_linked_words: [],
+          questions: [
+            {
+              sort_order: 1,
+              question: "What do astronauts train for?",
+              options: ["Long missions", "Short walks"],
+              correct_option_index: 0,
+              explanation: null,
+            },
+          ],
+        },
+      }),
+    },
+  );
+
+  assertEquals(response.status, 200);
+  const payload = await response.json();
+  assertEquals(payload.generation_meta.model, "gemini-2.5-flash");
+});
+
 Deno.test("invalid provider response returns controlled 422", async () => {
   const response = await handleRequest(
     requestWithBody({
@@ -224,7 +269,7 @@ Deno.test("quota style provider error returns 429", async () => {
 Deno.test("prompt infers category and tags instead of reading them from request", () => {
   const prompt = buildPrompt({
     provider: "gemini",
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash",
     topic: "Space travel",
     cefr_level: "B1",
     target_word_count: 120,
@@ -237,3 +282,64 @@ Deno.test("prompt infers category and tags instead of reading them from request"
   assertEquals(prompt.includes("Category:"), false);
   assertEquals(prompt.includes("Tags raw:"), false);
 });
+
+Deno.test("gemini draft request uses x-goog-api-key header", async () => {
+  let requestUrl = "";
+  let requestApiKeyHeader = "";
+
+  const response = await handleRequest(
+    requestWithBody(validBody),
+    {
+      env: (name) => {
+        if (name === "GEMINI_API_KEY") {
+          return "gemini-key";
+        }
+        if (name === "SUPABASE_URL") {
+          return "https://example.supabase.co";
+        }
+        if (name === "SUPABASE_ANON_KEY") {
+          return "anon-key";
+        }
+        return undefined;
+      },
+      resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
+      fetchFn: async (input, init) => {
+        const requestInit = init as globalThis.RequestInit | undefined;
+        requestUrl = String(input);
+        requestApiKeyHeader = String(
+          (requestInit?.headers as Record<string, string> | undefined)
+              ?.["x-goog-api-key"] ?? "",
+        );
+        return new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [
+                    {
+                      text:
+                        "{\"title\":\"Journey to Mars\",\"level\":\"B1\",\"category\":\"science\",\"tags_raw\":\"space, mars\",\"sentences\":[{\"idx\":1,\"sentence_en\":\"Astronauts train for long missions.\",\"sentence_tr\":\"Astronotlar uzun gorevler icin egitim alir.\"}],\"suggested_linked_words\":[],\"questions\":[{\"sort_order\":1,\"question\":\"What do astronauts train for?\",\"options\":[\"Long missions\",\"Short walks\"],\"correct_option_index\":0,\"explanation\":null}]}",
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      },
+    },
+  );
+
+  assertEquals(response.status, 200);
+  assertEquals(
+    requestUrl,
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+  );
+  assertEquals(requestUrl.includes("?key="), false);
+  assertEquals(requestApiKeyHeader, "gemini-key");
+});
+

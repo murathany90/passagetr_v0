@@ -9,6 +9,57 @@ Zorunlu kural:
 - Web sidebar chip ve dar layout/APK `Profil/Giris` release kartinin ayni shared metadata kaynagindan beslendigini deploy oncesi dogrula.
 - Deploy scriptleri bu dosyada guncel surum etiketi yoksa fail etmelidir.
 
+## v2.0.18 - 2026-03-15
+
+Baslik:
+Admin users bulk delete
+
+Notlar:
+- Admin Kullanicilar sekmesindeki toplu secim barina Kullanicilari Sil yikici aksiyonu eklendi.
+- Toplu silme mevcut tekli silme ile ayni hard-delete zincirini kullanir; auth.users, profil, rol ve plan kayitlari kaldirilir.
+- Islem kismi basari destekler; self-delete ve developer yetki kisitlari item bazinda atlanir ve sonuc ozeti snackbar ile gosterilir.
+- admin_manage_users edge functioni yeni delete_many action'i ile per-user sonuc listesi ve summary audit kaydi dondurur.
+## v2.0.17 - 2026-03-15
+
+Baslik:
+Cover backfill throttling and failure-rate guard
+
+Notlar:
+- Cover backfill artik batchSize=1 ile ilerler; her cover uretimi sonrasi 10 saniyelik throttle beklemesi vardir.
+- Run toplamda en az 10 kayit islediyse ve hata orani yuzde 60 veya uzerine ciktiysa auto_failure_rate_threshold ile otomatik duraklatilir.
+- Mevcut 5 art arda hata korumasi korunur; resume sirasinda pause ve last error statei temizlenir.
+- AI Backfill Progress dialogunda Son 5 hata ayri bir panelde daha gorunur ve okunakli gosterilir.
+## v2.0.16 - 2026-03-15
+
+Baslik:
+Admin cover backfill run controls
+
+Notlar:
+- Admin Okumalar ekranindaki Eksik Kapaklar akisi artik baslangic dialogu ile hedef kayit sayisi, filtre snapshot ozeti ve model secimi gosterir.
+- AI Backfill Progress karti aktif runlari geri yukler; ayni job type icin ikinci run baslatmak yerine mevcut progress dialogunu acar.
+- Cover backfill Gemini 2.5 Flash Image veya OpenAI GPT Image 1.5 modeliyle baslatilabilir; paused run resume sirasinda model guncellenebilir.
+- Reading AI run hattina paused durumu, pause reason, last error ve 5 art arda hata sonrasi auto-pause korumasi eklendi.
+## v2.0.15 - 2026-03-15
+
+Baslik:
+Admin manual cover upload and student cover rollout
+
+Notlar:
+- Admin Okumayi Duzenle cover paneli webde image_picker yerine file_picker kullanir; Dosya Yukle ve Dosya ile Degistir butonlari browserda gercek dosya secimi acip binary upload yapar.
+- Gemini text ve image functionlari gemini-2.5-flash ve gemini-2.5-flash-image ile uyumlu halde production'da calismaya devam eder.
+- Student web ve Android arm64 release build bu paketle birlikte yeniden yayinlanir; reading cover alanlari remote storage URL uzerinden gorunur hale gelir.
+- Mobilde yeni kapaklari gormek icin mevcut Ayarlar > Icerigi yenile aksiyonu kullanilabilir.
+## v2.0.14 - 2026-03-14
+
+Baslik:
+Admin reading cover Gemini image rollout
+
+Notlar:
+- `admin_ai_generate_reading_cover` edge functioni artik varsayilan olarak gemini-2.5-flash-image ile 16:9 reading cover uretir.
+- Gemini image istegi basarisiz olursa ve OPENAI_API_KEY tanimliysa OpenAI Images ikinci alternatif olarak devreye girer.
+- Faz 11.3 kapsamindaki reading mini test batch ve cover pipeline migration/function hatlari production deploy paketine alinmistir.
+- Admin web deploy bu release ile yeni cover pipeline davranisini gosterecek sekilde yeniden yayinlandi.
+
 ## v2.0.13 - 2026-03-14
 
 Baslik:
@@ -156,3 +207,15 @@ Notlar:
 - Okuma listesi 21 kartlik sayfalara bolundu; `Onceki / Sonraki` gecisi eklendi.
 - Okuma kartlari ve detay bilgi panelindeki sure bilgisi kaldirildi.
 - Okuma detay ekrani artik `reading_passage_sentences` kayitlarindan gercek Ingilizce cumleleri yukler.
+
+
+
+
+
+
+
+
+
+
+
+

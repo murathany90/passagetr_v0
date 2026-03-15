@@ -1,7 +1,7 @@
 name: admin_console
 description: PASSAGETR v2 admin console
 publish_to: none
-version: 2.0.13+13
+version: 2.0.18+18
 resolution: workspace
 
 environment:
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.6.1
+  file_picker: ^10.3.3
   go_router: ^16.2.1
   supabase_flutter: ^2.10.2
   shared_core:
@@ -32,3 +33,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+
+
+
+

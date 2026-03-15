@@ -475,6 +475,8 @@ class _ReadingCard extends StatelessWidget {
             children: [
               ReadingArtwork(
                 seed: seed,
+                remoteUrl: reading.coverUrl,
+                semanticLabel: reading.coverAltText ?? reading.title,
                 height: 220,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(24),

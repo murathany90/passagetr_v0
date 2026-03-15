@@ -9,15 +9,33 @@ typedef AdminAiReadingFunctionInvoker =
       AdminAiGenerateReadingRequest request,
     );
 
+typedef AdminAiReadingNamedFunctionInvoker =
+    Future<AdminAiReadingFunctionResponse> Function(
+      String functionName,
+      Object? body,
+    );
+
+typedef AdminAiReadingRpcInvoker =
+    Future<dynamic> Function(
+      String functionName, {
+      Map<String, dynamic> params,
+    });
+
 class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
   const FoundationAdminAiReadingRepository({
     required AppConfig config,
     AdminAiReadingFunctionInvoker? functionInvoker,
+    AdminAiReadingNamedFunctionInvoker? namedFunctionInvoker,
+    AdminAiReadingRpcInvoker? rpcInvoker,
   }) : _config = config,
-       _functionInvoker = functionInvoker;
+       _functionInvoker = functionInvoker,
+       _namedFunctionInvoker = namedFunctionInvoker,
+       _rpcInvoker = rpcInvoker;
 
   final AppConfig _config;
   final AdminAiReadingFunctionInvoker? _functionInvoker;
+  final AdminAiReadingNamedFunctionInvoker? _namedFunctionInvoker;
+  final AdminAiReadingRpcInvoker? _rpcInvoker;
 
   @override
   Future<AppResult<AdminAiGeneratedReadingDraft>> generateReadingDraft(
@@ -57,6 +75,193 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       return AppFailure<AdminAiGeneratedReadingDraft>(
         _messageFromException(error),
       );
+    }
+  }
+
+  @override
+  Future<AppResult<AdminAiGeneratedReadingQuestions>> generateReadingQuestions(
+    AdminAiGenerateReadingQuestionsRequest request,
+  ) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminAiGeneratedReadingQuestions>(
+        'Preview modunda AI soru uretimi desteklenmiyor.',
+      );
+    }
+
+    try {
+      final response = await _invokeNamedFunction(
+        'admin_ai_generate_reading_questions',
+        request.toJson(),
+      );
+      final payload = _coerceMap(response.data);
+      if (response.status >= 400) {
+        return AppFailure<AdminAiGeneratedReadingQuestions>(
+          _messageFromErrorPayload(payload),
+        );
+      }
+
+      final result = AdminAiGeneratedReadingQuestions.fromJson(payload);
+      if (result.questions.isEmpty) {
+        return const AppFailure<AdminAiGeneratedReadingQuestions>(
+          'AI servisi soru uretmedi.',
+        );
+      }
+      return AppSuccess<AdminAiGeneratedReadingQuestions>(result);
+    } catch (error) {
+      return AppFailure<AdminAiGeneratedReadingQuestions>(
+        _messageFromException(error),
+      );
+    }
+  }
+
+  @override
+  Future<AppResult<AdminReadingDetail>> generateReadingCover(
+    AdminAiGenerateReadingCoverRequest request,
+  ) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminReadingDetail>(
+        'Preview modunda AI cover uretimi desteklenmiyor.',
+      );
+    }
+
+    try {
+      final response = await _invokeNamedFunction(
+        'admin_ai_generate_reading_cover',
+        request.toJson(),
+      );
+      final payload = _coerceMap(response.data);
+      if (response.status >= 400) {
+        return AppFailure<AdminReadingDetail>(_messageFromErrorPayload(payload));
+      }
+      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminReadingDetail>(_messageFromException(error));
+    }
+  }
+
+  @override
+  Future<AppResult<AdminAiReadingRun>> createReadingAiRun(
+    AdminAiReadingRunRequest request,
+  ) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminAiReadingRun>(
+        'Preview modunda toplu AI run desteklenmiyor.',
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_create_reading_ai_run',
+        params: <String, dynamic>{'p_payload': request.toJson()},
+      );
+      return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminAiReadingRun>(
+        'AI batch run baslatilamadi: $error',
+      );
+    }
+  }
+
+  @override
+  Future<AppResult<AdminAiReadingRun>> getReadingAiRun(String runId) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminAiReadingRun>(
+        'Preview modunda toplu AI run desteklenmiyor.',
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_get_reading_ai_run',
+        params: <String, dynamic>{'p_run_id': runId},
+      );
+      return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminAiReadingRun>('AI batch run okunamadi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<List<AdminAiReadingRun>>> listActiveReadingAiRuns() async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<List<AdminAiReadingRun>>(
+        'Preview modunda toplu AI run desteklenmiyor.',
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpcRaw('admin_list_active_reading_ai_runs');
+      final rows = switch (payload) {
+        List<dynamic>() => payload,
+        _ => const <dynamic>[],
+      };
+      final runs = rows
+          .map((item) => AdminAiReadingRun.fromJson(_coerceMap(item)))
+          .toList(growable: false);
+      return AppSuccess<List<AdminAiReadingRun>>(runs);
+    } catch (error) {
+      return AppFailure<List<AdminAiReadingRun>>(
+        'Aktif AI batch run listesi okunamadi: $error',
+      );
+    }
+  }
+
+  @override
+  Future<AppResult<AdminAiReadingRun>> processReadingAiRun({
+    required String runId,
+    int batchSize = 3,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminAiReadingRun>(
+        'Preview modunda toplu AI run desteklenmiyor.',
+      );
+    }
+
+    try {
+      final response = await _invokeNamedFunction(
+        'admin_ai_process_reading_run',
+        <String, dynamic>{'run_id': runId, 'batch_size': batchSize},
+      );
+      final payload = _coerceMap(response.data);
+      if (response.status >= 400) {
+        return AppFailure<AdminAiReadingRun>(_messageFromErrorPayload(payload));
+      }
+      return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminAiReadingRun>('AI batch run islenemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<AdminAiReadingRun>> controlReadingAiRun({
+    required String runId,
+    required String action,
+    String? provider,
+    String? model,
+    int? questionCount,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminAiReadingRun>(
+        'Preview modunda toplu AI run desteklenmiyor.',
+      );
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_control_reading_ai_run',
+        params: <String, dynamic>{
+          'p_payload': <String, dynamic>{
+            'run_id': runId,
+            'action': action,
+            'provider': provider,
+            'model': model,
+            'question_count': questionCount,
+          },
+        },
+      );
+      return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminAiReadingRun>('AI batch run kontrol edilemedi: $error');
     }
   }
 
@@ -100,6 +305,69 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
         rethrow;
       }
     }
+  }
+
+  Future<AdminAiReadingFunctionResponse> _invokeNamedFunction(
+    String functionName,
+    Object? body,
+  ) async {
+    if (_namedFunctionInvoker != null) {
+      return _namedFunctionInvoker(functionName, body);
+    }
+
+    await SupabaseBootstrap.initialize(_config);
+    final session = await _resolveSession();
+    try {
+      final response = await Supabase.instance.client.functions.invoke(
+        functionName,
+        method: HttpMethod.post,
+        headers: _functionHeadersForSession(session),
+        body: body,
+      );
+      return AdminAiReadingFunctionResponse(
+        status: response.status,
+        data: response.data,
+      );
+    } catch (error) {
+      if (!_shouldRetryWithFreshSession(error)) {
+        rethrow;
+      }
+
+      final refreshedSession = await _resolveSession(forceRefresh: true);
+      final response = await Supabase.instance.client.functions.invoke(
+        functionName,
+        method: HttpMethod.post,
+        headers: _functionHeadersForSession(refreshedSession),
+        body: body,
+      );
+      return AdminAiReadingFunctionResponse(
+        status: response.status,
+        data: response.data,
+      );
+    }
+  }
+
+  Future<Map<String, dynamic>> _invokeJsonRpc(
+    String functionName, {
+    required Map<String, dynamic> params,
+  }) async {
+    final response = await _invokeJsonRpcRaw(functionName, params: params);
+    return _coerceMap(response);
+  }
+
+  Future<dynamic> _invokeJsonRpcRaw(
+    String functionName, {
+    Map<String, dynamic> params = const <String, dynamic>{},
+  }) async {
+    if (_rpcInvoker != null) {
+      return _rpcInvoker(functionName, params: params);
+    }
+
+    await SupabaseBootstrap.initialize(_config);
+    return Supabase.instance.client.rpc<dynamic>(
+      functionName,
+      params: params,
+    );
   }
 
   Future<Session?> _resolveSession({bool forceRefresh = false}) async {

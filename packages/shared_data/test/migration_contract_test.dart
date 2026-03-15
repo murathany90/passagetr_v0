@@ -56,6 +56,9 @@ void main() {
       '202603140038_word_pack_reclassification.sql',
       '202603140039_word_pack_reclassification_preview_hotfix.sql',
       '202603140040_word_pack_reclassification_apply_hotfix.sql',
+      '202603140041_reading_ai_questions_and_cover_pipeline.sql',
+      '202603150042_reading_ai_run_controls.sql',
+      '202603150043_cover_backfill_failure_rate_guard.sql',
     ];
 
     final fileNames = migrationDir
@@ -275,5 +278,60 @@ void main() {
     expect(sql, contains('user_word_favorites'));
     expect(sql, contains('reading_passage_words'));
     expect(sql, contains('merged_duplicate_count'));
+  });
+
+  test('phase 11.3 reading AI migration contains cover and batch pipeline', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603140041_reading_ai_questions_and_cover_pipeline.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('cover_media_asset_id'));
+    expect(sql, contains('cover_bucket_name'));
+    expect(sql, contains('cover_storage_path'));
+    expect(sql, contains('cover_alt_text'));
+    expect(sql, contains('cover_generation_meta'));
+    expect(sql, contains('reading_ai_runs'));
+    expect(sql, contains('reading_ai_run_items'));
+    expect(sql, contains('question_backfill'));
+    expect(sql, contains('cover_backfill'));
+    expect(sql, contains('reading-covers'));
+    expect(sql, contains('admin_set_reading_cover'));
+    expect(sql, contains('admin_clear_reading_cover'));
+    expect(sql, contains('admin_create_reading_ai_run'));
+    expect(sql, contains('admin_get_reading_ai_run'));
+    expect(sql, contains('admin_claim_reading_ai_run_items'));
+    expect(sql, contains('admin_mark_reading_ai_run_item'));
+    expect(sql, contains('question_count'));
+    expect(sql, contains('has_cover'));
+  });
+
+  test('phase 11.4 reading AI controls migration contains paused run controls', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603150042_reading_ai_run_controls.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains("status in ('queued', 'running', 'paused', 'completed', 'failed', 'cancelled')"));
+    expect(sql, contains('pause_reason text'));
+    expect(sql, contains('last_error_message text'));
+    expect(sql, contains('consecutive_failure_count integer not null default 0'));
+    expect(sql, contains('admin_list_active_reading_ai_runs'));
+    expect(sql, contains('admin_control_reading_ai_run'));
+    expect(sql, contains("'auto_failure_threshold'"));
+    expect(sql, contains("status = 'paused'"));
+  });
+
+  test('phase 11.4.1 cover backfill guard migration contains failure rate pause', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603150043_cover_backfill_failure_rate_guard.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('admin_mark_reading_ai_run_item'));
+    expect(sql, contains('auto_failure_rate_threshold'));
+    expect(sql, contains('v_processed_count >= 10'));
+    expect(sql, contains('(v_failed_count * 100) >= (v_processed_count * 60)'));
+    expect(sql, contains('last_error_message = null'));
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -332,6 +334,112 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
+  Future<AppResult<AdminReadingDetail>> uploadReadingCover({
+    required String readingId,
+    required Uint8List bytes,
+    required String fileName,
+    required String mimeType,
+    String? altText,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminReadingDetail>(
+        'Preview modunda cover yukleme desteklenmiyor.',
+      );
+    }
+
+    final normalizedReadingId = _normalizedId(readingId);
+    if (normalizedReadingId == null) {
+      return const AppFailure<AdminReadingDetail>('Reading ID zorunlu.');
+    }
+    if (bytes.isEmpty) {
+      return const AppFailure<AdminReadingDetail>('Bos dosya yuklenemedi.');
+    }
+
+    try {
+      await SupabaseBootstrap.initialize(_config);
+      final existingResult = await fetchReadingDetail(readingId: normalizedReadingId);
+      if (existingResult case AppFailure<AdminReadingDetail>()) {
+        return AppFailure<AdminReadingDetail>(existingResult.message);
+      }
+
+      final existingDetail = (existingResult as AppSuccess<AdminReadingDetail>).value;
+      final bucketName = 'reading-covers';
+      final storagePath = _buildReadingCoverPath(
+        readingId: normalizedReadingId,
+        fileName: fileName,
+      );
+
+      await Supabase.instance.client.storage
+          .from(bucketName)
+          .uploadBinary(
+            storagePath,
+            bytes,
+            fileOptions: FileOptions(contentType: mimeType, upsert: false),
+          );
+
+      try {
+        final payload = await _invokeJsonRpc(
+          'admin_set_reading_cover',
+          params: <String, dynamic>{
+            'p_payload': <String, dynamic>{
+              'reading_id': normalizedReadingId,
+              'bucket_name': bucketName,
+              'storage_path': storagePath,
+              'mime_type': mimeType,
+              'alt_text': _normalizedValue(altText),
+            },
+          },
+        );
+        final detail = AdminReadingDetail.fromJson(payload);
+        await _removeStoredCover(existingDetail.cover);
+        return AppSuccess<AdminReadingDetail>(detail);
+      } catch (error) {
+        await Supabase.instance.client.storage.from(bucketName).remove([
+          storagePath,
+        ]);
+        return AppFailure<AdminReadingDetail>(
+          'Cover kaydedilemedi: $error',
+        );
+      }
+    } catch (error) {
+      return AppFailure<AdminReadingDetail>('Cover yuklenemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<AdminReadingDetail>> removeReadingCover({
+    required String readingId,
+  }) async {
+    if (!_config.supabaseEnabled) {
+      return const AppFailure<AdminReadingDetail>(
+        'Preview modunda cover silme desteklenmiyor.',
+      );
+    }
+
+    final normalizedReadingId = _normalizedId(readingId);
+    if (normalizedReadingId == null) {
+      return const AppFailure<AdminReadingDetail>('Reading ID zorunlu.');
+    }
+
+    try {
+      final existingResult = await fetchReadingDetail(readingId: normalizedReadingId);
+      if (existingResult case AppFailure<AdminReadingDetail>()) {
+        return AppFailure<AdminReadingDetail>(existingResult.message);
+      }
+      final existingDetail = (existingResult as AppSuccess<AdminReadingDetail>).value;
+
+      final payload = await _invokeJsonRpc(
+        'admin_clear_reading_cover',
+        params: <String, dynamic>{'p_passage_id': normalizedReadingId},
+      );
+      await _removeStoredCover(existingDetail.cover);
+      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+    } catch (error) {
+      return AppFailure<AdminReadingDetail>('Cover silinemedi: $error');
+    }
+  }
+
+  @override
   Future<AppResult<AdminReadingDetail>> autoAssignReadingFocusWords({
     required String readingId,
     int limit = 10,
@@ -583,6 +691,43 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         clearPosRaw: resolvedPosRaw == null,
       ),
     );
+  }
+
+  String _buildReadingCoverPath({
+    required String readingId,
+    required String fileName,
+  }) {
+    final now = DateTime.now().toUtc().millisecondsSinceEpoch;
+    final sanitizedName = fileName
+        .trim()
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^a-z0-9._-]+'), '-')
+        .replaceAll(RegExp(r'-{2,}'), '-');
+    final resolvedName = sanitizedName.isEmpty ? 'cover.png' : sanitizedName;
+    return 'readings/$readingId/$now-$resolvedName';
+  }
+
+  Future<void> _removeStoredCover(AdminReadingCoverAsset cover) async {
+    if (!cover.hasCover) {
+      return;
+    }
+
+    final bucketName = cover.bucketName?.trim();
+    final storagePath = cover.storagePath?.trim();
+    if (bucketName == null ||
+        bucketName.isEmpty ||
+        storagePath == null ||
+        storagePath.isEmpty) {
+      return;
+    }
+
+    try {
+      await Supabase.instance.client.storage.from(bucketName).remove([
+        storagePath,
+      ]);
+    } catch (_) {
+      // DB state is already updated; stale objects can be cleaned up later.
+    }
   }
 }
 

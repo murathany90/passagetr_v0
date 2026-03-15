@@ -6,11 +6,15 @@ class ReadingArtwork extends StatelessWidget {
   const ReadingArtwork({
     super.key,
     required this.seed,
+    this.remoteUrl,
+    this.semanticLabel,
     required this.height,
     required this.borderRadius,
   });
 
   final ReadingSeedData seed;
+  final String? remoteUrl;
+  final String? semanticLabel;
   final double height;
   final BorderRadius borderRadius;
 
@@ -21,16 +25,37 @@ class ReadingArtwork extends StatelessWidget {
       child: SizedBox(
         height: height,
         width: double.infinity,
-        child: seed.imageAsset == null
-            ? _ArtworkFallback(seed: seed)
-            : Image.asset(
-                seed.imageAsset!,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return _ArtworkFallback(seed: seed);
-                },
-              ),
+        child: _buildArtwork(),
       ),
+    );
+  }
+
+  Widget _buildArtwork() {
+    final normalizedRemoteUrl = remoteUrl?.trim();
+    if (normalizedRemoteUrl != null && normalizedRemoteUrl.isNotEmpty) {
+      return Image.network(
+        normalizedRemoteUrl,
+        fit: BoxFit.cover,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) {
+          return _buildSeedArtwork();
+        },
+      );
+    }
+    return _buildSeedArtwork();
+  }
+
+  Widget _buildSeedArtwork() {
+    if (seed.imageAsset == null) {
+      return _ArtworkFallback(seed: seed);
+    }
+    return Image.asset(
+      seed.imageAsset!,
+      fit: BoxFit.cover,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) {
+        return _ArtworkFallback(seed: seed);
+      },
     );
   }
 }

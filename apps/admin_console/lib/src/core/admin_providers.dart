@@ -641,6 +641,8 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
               isPro: row['is_pro'] as bool? ?? false,
               isPublished: row['is_published'] as bool? ?? false,
               linkedWordCount: (row['linked_word_count'] as num?)?.toInt() ?? 0,
+              questionCount: (row['question_count'] as num?)?.toInt() ?? 0,
+              hasCover: row['has_cover'] as bool? ?? false,
               linkedWordsPreview: _coerceStringList(
                 row['linked_words_preview'],
               ),
@@ -670,6 +672,11 @@ Future<List<AdminReadingRecord>> _loadAdminReadings(
           isPro: item.isPro,
           isPublished: true,
           linkedWordCount: 0,
+          questionCount: item.questionCount,
+          hasCover:
+              (item.coverUrl?.trim().isNotEmpty ?? false) ||
+              ((item.coverBucketName?.trim().isNotEmpty ?? false) &&
+                  (item.coverStoragePath?.trim().isNotEmpty ?? false)),
           linkedWordsPreview: const <String>[],
           updatedAtLabel: 'preview',
           createdAtLabel: 'preview',
@@ -795,6 +802,8 @@ Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
           'p_query': request.query.isEmpty ? null : request.query,
           'p_level': request.level,
           'p_status': _statusFilterValue(request.isPublished),
+          'p_has_questions': request.hasQuestions,
+          'p_has_cover': request.hasCover,
           'p_offset': request.offset,
           'p_limit': request.limit,
         },
@@ -815,6 +824,8 @@ Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
                 isPublished: row['is_published'] as bool? ?? false,
                 linkedWordCount:
                     (row['linked_word_count'] as num?)?.toInt() ?? 0,
+                questionCount: (row['question_count'] as num?)?.toInt() ?? 0,
+                hasCover: row['has_cover'] as bool? ?? false,
                 linkedWordsPreview: _coerceStringList(
                   row['linked_words_preview'],
                 ),
@@ -848,6 +859,11 @@ Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
           isPro: item.isPro,
           isPublished: true,
           linkedWordCount: 0,
+          questionCount: item.questionCount,
+          hasCover:
+              (item.coverUrl?.trim().isNotEmpty ?? false) ||
+              ((item.coverBucketName?.trim().isNotEmpty ?? false) &&
+                  (item.coverStoragePath?.trim().isNotEmpty ?? false)),
           linkedWordsPreview: const <String>[],
           updatedAtLabel: 'preview',
           createdAtLabel: 'preview',
@@ -863,6 +879,20 @@ Future<AdminPage<AdminReadingRecord>> _loadAdminReadingPage(
               return true;
             }
             return item.isPublished == request.isPublished;
+          })
+          .where((item) {
+            if (request.hasQuestions == null) {
+              return true;
+            }
+            return request.hasQuestions!
+                ? item.questionCount > 0
+                : item.questionCount == 0;
+          })
+          .where((item) {
+            if (request.hasCover == null) {
+              return true;
+            }
+            return item.hasCover == request.hasCover;
           })
           .where((item) {
             if (request.query.isEmpty) {
