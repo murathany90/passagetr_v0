@@ -2205,10 +2205,12 @@ class _WordRow extends StatelessWidget {
               Switch(value: word.isPublished, onChanged: onTogglePublished),
               IconButton(
                 onPressed: onEdit,
+                tooltip: 'Duzenle',
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
                 onPressed: onDelete,
+                tooltip: 'Sil',
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
             ],
@@ -2315,10 +2317,12 @@ class _ReadingRow extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onEdit,
+                tooltip: 'Duzenle',
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
                 onPressed: onDelete,
+                tooltip: 'Sil',
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
             ],
@@ -2396,19 +2400,23 @@ class _GrammarRow extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: canMoveUp ? onMoveUp : null,
+                tooltip: 'Yukari tasi',
                 icon: const Icon(Icons.keyboard_arrow_up_rounded),
               ),
               IconButton(
                 onPressed: canMoveDown ? onMoveDown : null,
+                tooltip: 'Asagi tasi',
                 icon: const Icon(Icons.keyboard_arrow_down_rounded),
               ),
               Switch(value: module.isPublished, onChanged: onTogglePublished),
               IconButton(
                 onPressed: onEdit,
+                tooltip: 'Duzenle',
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
                 onPressed: onDelete,
+                tooltip: 'Sil',
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
             ],
