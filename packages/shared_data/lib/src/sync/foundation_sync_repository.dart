@@ -54,6 +54,10 @@ class FoundationSyncRepository implements SyncRepository {
           break;
         case SyncScope.auth:
         case SyncScope.admin:
+          // Bu scope'lar için veri senkronizasyonu yapılmaz.
+          // Sadece TTL timestamp'i güncellenir (metadata-only touch).
+          // Gelecekte bu scope'lara özgü senkronizasyon eklenirse
+          // buradaki _touchScope çağrısını gerçek veri çekimi ile değiştirin.
           if (force) {
             await _touchScope(scope.name);
           } else {

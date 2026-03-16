@@ -5,6 +5,7 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../bootstrap/supabase_bootstrap.dart';
+import '../local/drift/local_sync_models.dart';
 import '../local/drift/local_sync_store.dart';
 
 typedef WordRemoteReader = Future<List<WordEntry>> Function({String? packId});
@@ -37,20 +38,88 @@ class FoundationWordRepository implements WordRepository {
 
   @override
   Future<List<WordEntry>> fetchWords({String? packId}) async {
+    try {
+      final remoteItems = await _readFromRemote(packId: packId);
+      if (remoteItems.isNotEmpty) {
+        // Auto-sync: Successful remote fetch updates the local database.
+        _syncWordsToLocal(remoteItems);
+        return remoteItems;
+      }
+    } catch (error) {
+      // Log network error if needed and fall back to local.
+    }
+
     final localItems = await _readFromLocal(packId: packId);
     if (localItems.isNotEmpty) {
       return localItems;
     }
 
+    return _previewWords(packId);
+  }
+
+  @override
+  Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
+    final normalizedIds = ids
+        .map((item) => item.trim())
+        .where((item) => item.isNotEmpty)
+        .toSet()
+        .toList(growable: false);
+    if (normalizedIds.isEmpty) {
+      return const <WordEntry>[];
+    }
+
     try {
-      final remoteItems = await _readFromRemote(packId: packId);
+      final remoteItems = await _readFromRemoteByIds(normalizedIds);
       if (remoteItems.isNotEmpty) {
+        _syncWordsToLocal(remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Fall back to bundled preview content when the network path is unavailable.
+      // Fallback to local.
     }
 
+    final localItems = await _readFromLocal();
+    final localById = <String, WordEntry>{
+      for (final item in localItems)
+        if (normalizedIds.contains(item.id)) item.id: item,
+    };
+    return normalizedIds
+        .map((id) => localById[id])
+        .whereType<WordEntry>()
+        .toList(growable: false);
+  }
+
+  Future<void> _syncWordsToLocal(List<WordEntry> words) async {
+    final database = _database;
+    if (database == null) {
+      return;
+    }
+
+    for (final word in words) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'words',
+          entityType: 'words',
+          entityId: word.id,
+          payloadJson: jsonEncode({
+            'id': word.id,
+            'pack_id': word.packId,
+            'en_word': word.enWord,
+            'tr_meaning': word.trMeaning,
+            'pos': word.pos,
+            'example_en': word.exampleEn,
+            'example_tr': word.exampleTr,
+            'synonyms_raw': word.synonymsRaw,
+            'antonyms_raw': word.antonymsRaw,
+            'notes': word.notes,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
+  }
+
+  List<WordEntry> _previewWords(String? packId) {
     return const <WordEntry>[
       WordEntry(
         id: 'word-a',
@@ -108,47 +177,10 @@ class FoundationWordRepository implements WordRepository {
         trMeaning: 'reddetmek',
         pos: 'phr. v.',
       ),
-    ];
-  }
-
-  @override
-  Future<List<WordEntry>> fetchWordsByIds(Iterable<String> ids) async {
-    final normalizedIds = ids
-        .map((item) => item.trim())
-        .where((item) => item.isNotEmpty)
-        .toSet()
-        .toList(growable: false);
-    if (normalizedIds.isEmpty) {
-      return const <WordEntry>[];
-    }
-
-    final localItems = await _readFromLocal();
-    final localById = <String, WordEntry>{
-      for (final item in localItems)
-        if (normalizedIds.contains(item.id)) item.id: item,
-    };
-    final needsRemote =
-        localById.length != normalizedIds.length ||
-        localById.values.any((item) => !_hasRichMetadata(item));
-    if (!needsRemote && localById.isNotEmpty) {
-      return normalizedIds
-          .map((id) => localById[id])
-          .whereType<WordEntry>()
-          .toList(growable: false);
-    }
-
-    try {
-      final remoteItems = await _readFromRemoteByIds(normalizedIds);
-      if (remoteItems.isNotEmpty) {
-        return remoteItems;
-      }
-    } catch (_) {
-      // Keep partial local metadata available when the network path is unavailable.
-    }
-
-    return normalizedIds
-        .map((id) => localById[id])
-        .whereType<WordEntry>()
+    ]
+        .where(
+          (item) => packId == null || packId.isEmpty || item.packId == packId,
+        )
         .toList(growable: false);
   }
 

@@ -19,7 +19,7 @@ class StudentReadingEngagementController
        _now = now ?? _defaultNow,
        _isWeb = isWeb ?? kIsWeb,
        super(const <String, ReadingEngagement>{}) {
-    unawaited(load());
+    load();
   }
 
   final ReadingEngagementRepository _engagementRepository;

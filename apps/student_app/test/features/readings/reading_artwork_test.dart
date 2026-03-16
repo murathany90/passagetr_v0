@@ -9,7 +9,6 @@ void main() {
     summary: 'Summary',
     author: 'Author',
     durationMinutes: 5,
-    progressPercent: 0,
     levelBadgeColor: Color(0xFF000000),
     artworkColors: <Color>[Color(0xFF112233), Color(0xFF445566)],
     artworkIcon: Icons.landscape_rounded,

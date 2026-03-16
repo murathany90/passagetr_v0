@@ -9,9 +9,31 @@ Zorunlu kural:
 - Web sidebar chip ve dar layout/APK `Profil/Giris` release kartinin ayni shared metadata kaynagindan beslendigini deploy oncesi dogrula.
 - Deploy scriptleri bu dosyada guncel surum etiketi yoksa fail etmelidir.
 
-## v2.0.21 - 2026-03-16
+## v2.0.23 - 2026-03-16
 
 Baslik:
+Öğrenci Paneli Modernizasyonu ve Dashboard Widgetlerı
+
+Notlar:
+- Öğrenci ana sayfası "Hızlı İstatistikler" (Quick Stats Bar), "Günün Kelimesi" ve "Önerilen Okumalar" widget'ları ile modernize edildi.
+- `GrammarModuleSeed` içerisindeki hardcoded ilerleme verileri (progressPercent) temizlendi; sistem tamamen dinamik DB verilerine bağlandı.
+- Admin CMS üzerindeki toplu işlem yetenekleri ve UI geliştirmeleri bu sürümle birlikte web ve mobil platformlarda optimize edildi.
+- Student web deploy ve Android ARM64 APK build işlemleri v2.0.23 sürümüyle gerçekleştirildi.
+
+## v2.0.22 - 2026-03-16
+
+Baslik:
+Admin Console C4/C5/C6/B5 iyileştirmeleri ve UI/UX güncellemeleri
+
+Notlar:
+- Admin panel dashboard loading için shimmer skeleton ve deferred loader hata senaryoları (error states) iyileştirildi.
+- Dashboard icerik trend grafiğine (CustomPaint) imleç etkileşimleriyle animasyonlu tooltip ve nokta gösterimleri (fl_chart mimarisini andıran) eklendi.
+- Son audit kayitlarina, ilgili sayfalara hızlı geçiş sağlayan Action butonu eklendi.
+- Öğrenci arayüzünde "Çeviri Modu" toggle olarak etkinleşip cümle kartlarında inline translate simgeleri sunar hale getirildi. Hatalı fallback analytics verileri sıfırlandı.
+- Haftalık progress kartının yanısıra 7 günlük başarı Timeline widget'ı öğrenci arayüzüne dahil edildi.
+- Android Offline First ve Web Remote First yapısı optimize edildi. Web admin build ve student app release build'leri çalıştırıldı.
+
+## v2.0.21 - 2026-03-16
 Admin cover pool migration to ImageRouter and Hugging Face
 
 Notlar:
@@ -37,7 +59,7 @@ Admin dashboard content coverage metrics
 Notlar:
 - Admin dashboard stok kartlari negatif delta yerine semantik olarak dogru toplam-yayinda ve hazir-eksik formatina gecirildi.
 - Mini test, kapak, odak kelime baglantisi ve sozluk eslesmesi icin yeni kapsama kartlari eklendi.
-- Sozluk havuzu karti aktif dictionary entry sayisini gosterir; okuma, kelime ve gramer kartlari ise toplam envanter ve yayinda sayilarini birlikte sunar.
+- Sozluk havuzu karti aktif dictionary entry sayisini gosterer; okuma, kelime ve gramer kartlari ise toplam envanter ve yayinda sayilarini birlikte sunar.
 - Kullanici Trend Serisi kaldirilip audit log tabanli Icerik Operasyon Trendi paneli eklendi.
 
 ## v2.0.18 - 2026-03-15
@@ -238,17 +260,3 @@ Notlar:
 - Okuma listesi 21 kartlik sayfalara bolundu; `Onceki / Sonraki` gecisi eklendi.
 - Okuma kartlari ve detay bilgi panelindeki sure bilgisi kaldirildi.
 - Okuma detay ekrani artik `reading_passage_sentences` kayitlarindan gercek Ingilizce cumleleri yukler.
-
-
-
-
-
-
-
-
-
-
-
-
-
-

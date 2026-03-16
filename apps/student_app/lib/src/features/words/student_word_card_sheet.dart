@@ -113,12 +113,10 @@ class _StudentWordCardSheetState extends ConsumerState<StudentWordCardSheet> {
   @override
   void dispose() {
     if (_ownsTtsPlayback) {
-      unawaited(
-        _ttsController.stopIfMatching(
-          target: StudentTtsTarget.word,
-          readingId: widget.readingId,
-          wordId: _content.word?.id,
-        ),
+      _ttsController.stopIfMatching(
+        target: StudentTtsTarget.word,
+        readingId: widget.readingId,
+        wordId: _content.word?.id,
       );
     }
     super.dispose();

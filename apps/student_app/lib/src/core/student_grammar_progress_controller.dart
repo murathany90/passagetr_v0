@@ -13,7 +13,7 @@ class StudentGrammarProgressController
   }) : _progressRepository = progressRepository,
        _now = now ?? _defaultNow,
        super(const AsyncValue.loading()) {
-    unawaited(load());
+    load();
   }
 
   final ProgressRepository _progressRepository;

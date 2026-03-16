@@ -25,5 +25,8 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
   });
+  Future<AppResult<AppRole>> fetchCurrentRole();
+  void notifySessionExpired();
+  Stream<void> get onSessionExpired;
   Future<AppResult<void>> signOut();
 }

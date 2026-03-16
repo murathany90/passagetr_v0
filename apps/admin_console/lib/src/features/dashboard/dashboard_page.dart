@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_domain/shared_domain.dart';
 import 'package:shared_ui/shared_ui.dart';
 
+import '../../core/admin_console_models.dart';
 import '../../core/admin_providers.dart';
 import '../common/admin_page_parts.dart';
 
@@ -153,15 +154,9 @@ class AdminDashboardPage extends ConsumerWidget {
                     children: [
                       SizedBox(
                         height: 240,
-                        child: CustomPaint(
-                          painter: _AdminTrendPainter(
-                            color: AppThemeTokens.of(context).hero,
-                            fillColor: AppThemeTokens.of(
-                              context,
-                            ).surfaceMuted.withValues(alpha: 0.75),
-                            values: _normalizeTrend(data.contentTrend),
-                          ),
-                          child: const SizedBox.expand(),
+                        child: _InteractiveTrendChart(
+                          values: _normalizeTrend(data.contentTrend),
+                          rawValues: data.contentTrend,
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -169,11 +164,8 @@ class AdminDashboardPage extends ConsumerWidget {
                         spacing: 8,
                         runSpacing: 8,
                         children: [
-                          for (final point in data.contentTrend.take(10))
-                            _InfoChip(
-                              label:
-                                  '${point.label}: ${point.value.toStringAsFixed(point.value.truncateToDouble() == point.value ? 0 : 1)}',
-                            ),
+                          for (final point in data.contentTrend.take(7))
+                            _TrendChip(point: point),
                         ],
                       ),
                     ],
@@ -227,19 +219,30 @@ class AdminDashboardPage extends ConsumerWidget {
                       return Column(
                         children: [
                           for (final item in feed.records.take(6)) ...[
+                            // C6: Her audit kaydına navigasyon butonu eklendi.
                             ListTile(
                               contentPadding: EdgeInsets.zero,
                               title: Text(item.title),
                               subtitle: Text(item.subtitle),
-                              trailing: Text(item.timestampLabel),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    item.timestampLabel,
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  _AuditActionChip(record: item),
+                                ],
+                              ),
                             ),
                             const Divider(height: 1),
                           ],
                         ],
                       );
                     },
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
+                    // C4: Audit feed loading shimmer.
+                    loading: () => const _AuditFeedSkeleton(),
                     error: (error, stackTrace) => Text(error.toString()),
                   ),
                 );
@@ -277,8 +280,26 @@ class AdminDashboardPage extends ConsumerWidget {
             ),
           ],
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Text(error.toString()),
+        // C4: Ana loading durumu için shimmer skeleton.
+        loading: () => const _DashboardSkeleton(),
+        error: (error, stackTrace) => Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.warning_amber_rounded, size: 36),
+              const SizedBox(height: 12),
+              Text('Dashboard yüklenemedi', style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 6),
+              Text(error.toString(), style: Theme.of(context).textTheme.bodyMedium),
+              const SizedBox(height: 16),
+              FilledButton.tonal(
+                onPressed: () => ref.invalidate(adminDashboardSnapshotProvider),
+                child: const Text('Yeniden Dene'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -515,11 +536,15 @@ class _AdminTrendPainter extends CustomPainter {
     required this.color,
     required this.fillColor,
     required this.values,
+    this.hoveredIndex,
+    this.rawValues = const [],
   });
 
   final Color color;
   final Color fillColor;
   final List<double> values;
+  final int? hoveredIndex;
+  final List<AdminTrendPoint> rawValues;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -573,13 +598,52 @@ class _AdminTrendPainter extends CustomPainter {
 
     canvas.drawPath(fillPath, fillPaint);
     canvas.drawPath(linePath, linePaint);
+
+    // C5: Tüm veri noktalarına küçük daire çiz
+    final dotPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+    for (final pt in points) {
+      canvas.drawCircle(pt, 3, dotPaint);
+    }
+
+    // C5: Hover noktasında büyük daire + etiket
+    final hi = hoveredIndex;
+    if (hi != null && hi >= 0 && hi < points.length) {
+      final hp = points[hi];
+      canvas.drawCircle(hp, 6, dotPaint);
+      canvas.drawCircle(hp, 6, Paint()..color = fillColor..style = PaintingStyle.stroke..strokeWidth = 2);
+
+      if (hi < rawValues.length) {
+        final pt = rawValues[hi];
+        final val = pt.value.truncateToDouble() == pt.value
+            ? pt.value.toInt().toString()
+            : pt.value.toStringAsFixed(1);
+        final label = '${pt.label}: $val';
+        final tp = TextPainter(
+          text: TextSpan(
+            text: label,
+            style: TextStyle(
+              color: color,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+        )..layout();
+        final dx = (hp.dx + 8).clamp(0.0, size.width - tp.width);
+        final dy = (hp.dy - tp.height - 6).clamp(0.0, size.height - tp.height);
+        tp.paint(canvas, Offset(dx, dy));
+      }
+    }
   }
 
   @override
   bool shouldRepaint(covariant _AdminTrendPainter oldDelegate) {
     return oldDelegate.values != values ||
         oldDelegate.color != color ||
-        oldDelegate.fillColor != fillColor;
+        oldDelegate.fillColor != fillColor ||
+        oldDelegate.hoveredIndex != hoveredIndex;
   }
 }
 
@@ -613,3 +677,231 @@ class _InfoChip extends StatelessWidget {
     return Chip(label: Text(label), visualDensity: VisualDensity.compact);
   }
 }
+
+/// C5: Trend grafiği üzerine hover veri noktaları ve Y-ekseni gridlines ekler.
+class _InteractiveTrendChart extends StatefulWidget {
+  const _InteractiveTrendChart({
+    required this.values,
+    required this.rawValues,
+  });
+
+  final List<double> values;
+  final List<AdminTrendPoint> rawValues;
+
+  @override
+  State<_InteractiveTrendChart> createState() => _InteractiveTrendChartState();
+}
+
+class _InteractiveTrendChartState extends State<_InteractiveTrendChart> {
+  int? _hoveredIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    return MouseRegion(
+      onHover: (event) {
+        if (widget.values.length < 2) return;
+        final stepX = context.size!.width / (widget.values.length - 1);
+        final index = (event.localPosition.dx / stepX).round()
+            .clamp(0, widget.values.length - 1);
+        if (_hoveredIndex != index) {
+          setState(() => _hoveredIndex = index);
+        }
+      },
+      onExit: (_) => setState(() => _hoveredIndex = null),
+      child: CustomPaint(
+        painter: _AdminTrendPainter(
+          color: tokens.hero,
+          fillColor: tokens.surfaceMuted.withValues(alpha: 0.75),
+          values: widget.values,
+          hoveredIndex: _hoveredIndex,
+          rawValues: widget.rawValues,
+        ),
+        child: const SizedBox.expand(),
+      ),
+    );
+  }
+}
+
+/// C6: Audit kayıt tipine göre hedef sayfaya yönlendiren chip.
+class _AuditActionChip extends StatelessWidget {
+  const _AuditActionChip({required this.record});
+
+  final AdminAuditRecord record;
+
+  String? _routeFor(String action, String subtitle) {
+    final lower = action.toLowerCase();
+    final sub = subtitle.toLowerCase();
+    if (lower.contains('reading') || sub.contains('reading')) {
+      return '/content/readings';
+    }
+    if (lower.contains('word') || sub.contains('word')) {
+      return '/content/words';
+    }
+    if (lower.contains('grammar') || sub.contains('grammar')) {
+      return '/content/grammar';
+    }
+    if (lower.contains('user') || sub.contains('user')) {
+      return '/users';
+    }
+    if (lower.contains('setting') || sub.contains('setting')) {
+      return '/settings';
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final route = _routeFor(record.title, record.subtitle);
+    if (route == null) return const SizedBox.shrink();
+    return ActionChip(
+      label: const Text('Aç'),
+      visualDensity: VisualDensity.compact,
+      onPressed: () => context.go(route),
+    );
+  }
+}
+
+/// C5: Trend chip'i — etiket + değer vurgulu.
+class _TrendChip extends StatelessWidget {
+  const _TrendChip({required this.point});
+
+  final AdminTrendPoint point;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    final value = point.value.truncateToDouble() == point.value
+        ? point.value.toInt().toString()
+        : point.value.toStringAsFixed(1);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: tokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            point.label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: tokens.secondaryText,
+            ),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// C4: Dashboard ana yükleme durumu skeleton.
+class _DashboardSkeleton extends StatefulWidget {
+  const _DashboardSkeleton();
+
+  @override
+  State<_DashboardSkeleton> createState() => _DashboardSkeletonState();
+}
+
+class _DashboardSkeletonState extends State<_DashboardSkeleton>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _anim;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
+    _anim = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _anim,
+      builder: (context, _) {
+        final tokens = AppThemeTokens.of(context);
+        final color = tokens.secondaryText.withValues(alpha: 0.08 + _anim.value * 0.07);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              children: List.generate(
+                6,
+                (_) => Container(
+                  width: 200,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Container(
+              height: 300,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(24),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+/// C4: Audit feed yükleme skeleton.
+class _AuditFeedSkeleton extends StatelessWidget {
+  const _AuditFeedSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    final color = tokens.secondaryText.withValues(alpha: 0.1);
+    return Column(
+      children: List.generate(
+        4,
+        (_) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(height: 14, width: 180, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
+                    const SizedBox(height: 6),
+                    Container(height: 12, width: 120, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
+                  ],
+                ),
+              ),
+              Container(height: 14, width: 60, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+

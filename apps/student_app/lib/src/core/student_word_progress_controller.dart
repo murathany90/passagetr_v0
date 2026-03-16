@@ -34,7 +34,7 @@ class StudentWordProgressController
        _accessContext = accessContext,
        _now = now ?? _defaultNow,
        super(const AsyncValue.loading()) {
-    unawaited(load());
+    load();
   }
 
   final ProgressRepository _progressRepository;

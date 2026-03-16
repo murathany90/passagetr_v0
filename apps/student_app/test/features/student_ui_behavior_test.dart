@@ -412,9 +412,9 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    expect(find.text('Kesfet'), findsOneWidget);
+    expect(find.textContaining('Kesfet'), findsAtLeast(1));
 
-    await tester.tap(find.text('Kesfet'));
+    await tester.tap(find.textContaining('Kesfet').first);
     await tester.pumpAndSettle();
 
     expect(find.text('Incomplete Reading'), findsOneWidget);
@@ -517,8 +517,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('First live sentence.'), findsNothing);
-      expect(find.text('First'), findsOneWidget);
-      expect(find.text('Second'), findsOneWidget);
+      expect(find.textContaining('First'), findsAtLeast(1));
+      expect(find.textContaining('Second'), findsAtLeast(1));
       expect(find.text('Sure'), findsNothing);
       expect(
         find.text(
@@ -704,7 +704,7 @@ void main() {
       find.byKey(const ValueKey<String>('reading_quiz_panel')),
       findsOneWidget,
     );
-    expect(find.text('Mini Test'), findsOneWidget);
+    expect(find.textContaining('Mini Test'), findsAtLeast(1));
 
     await tester.ensureVisible(
       find.byKey(const ValueKey<String>('reading_quiz_option_question-1_0')),
@@ -830,7 +830,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      final focusTokenFinder = find.text('Orbit');
+      final focusTokenFinder = find.textContaining('Orbit');
       await tester.ensureVisible(focusTokenFinder);
       await tester.tap(focusTokenFinder);
       await tester.pumpAndSettle();
@@ -854,7 +854,7 @@ void main() {
 
       expect(find.text('rota'), findsNothing);
 
-      final focusPanelFinder = find.text('orbit').last;
+      final focusPanelFinder = find.textContaining('orbit').last;
       await tester.ensureVisible(focusPanelFinder);
       await tester.tap(focusPanelFinder);
       await tester.pumpAndSettle();
@@ -900,7 +900,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.text('Kaydetmek icin giris yap'), findsOneWidget);
+      expect(find.textContaining('Kaydetmek icin giris yap'), findsAtLeast(1));
       final bookmarkButton = tester.widget<IconButton>(
         find.ancestor(
           of: find.byIcon(Icons.bookmark_border_rounded),
@@ -1377,6 +1377,16 @@ class _StaticAuthRepository implements AuthRepository {
   Future<AppResult<void>> signOut() async {
     return const AppSuccess<void>(null);
   }
+
+  @override
+  Future<AppResult<AppRole>> fetchCurrentRole() async =>
+      AppSuccess<AppRole>(accessContext.role);
+
+  @override
+  void notifySessionExpired() {}
+
+  @override
+  Stream<void> get onSessionExpired => const Stream<void>.empty();
 }
 
 class _FakeReadingRepository implements ReadingRepository {

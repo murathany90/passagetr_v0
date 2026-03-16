@@ -20,6 +20,32 @@ class ReleaseNoteEntry {
 
 const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
   ReleaseNoteEntry(
+    version: 'v2.0.23',
+    releaseDate: '2026-03-16',
+    title: 'Öğrenci Paneli Modernizasyonu ve Dashboard Widgetlerı',
+    summary:
+        'Öğrenci ana sayfası modern bir istatistik çubuğu, "Günün Kelimesi" kartı ve kişiselleştirilmiş "Senin İçin Önerilenler" bölümü ile güncellendi. Gramer modülleri üzerindeki statik ilerleme verileri temizlenerek sistem tamamen dinamik hale getirildi.',
+    highlights: <String>[
+      'Ana sayfaya modern Quick Stats Bar (Kelime, Okuma, Başarı metrikleri) eklendi.',
+      'Günlük değişen "Günün Kelimesi" kartı entegre edildi.',
+      'Kullanıcının ilerlemesine göre dinamik "Önerilen Okumalar" bölümü sunuldu.',
+      'GrammarModuleSeed üzerindeki teknik borç temizlendi, tüm ilerleme verileri DB-driven hale getirildi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.22',
+    releaseDate: '2026-03-16',
+    title: 'Admin Console C4/C5/C6/B5 iyileştirmeleri ve UI/UX güncellemeleri',
+    summary:
+        'Admin panel dashboard shimmer skeleton, interaktif trend grafiği, audit feed için yönlendirme butonları ve Admin Deferred Loader error durumları iyileştirildi. Öğrenci web ve uygulama arayüzlerinde görsel çeviri toggles, haftalık activity timeline eklendi ve fake analytics değerleri temizlendi.',
+    highlights: <String>[
+      'Admin dashboard loading için shimmer ve deferred loader hata stateleri dahil edildi.',
+      'Dashboard icerik trend grafiği imleç etkileşimleriyle interaktif hale getirildi.',
+      'Son audit kayitlarina yönlendirilebilir aksiyon butonlari eklendi.',
+      'Öğrenci arayüzünde çeviri moduna özel inline simgeler ve yeni haftalık timeline kartı sunuldu.',
+    ],
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.21',
     releaseDate: '2026-03-16',
     title: 'Admin cover pool migration to ImageRouter and Hugging Face',

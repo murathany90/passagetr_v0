@@ -29,18 +29,88 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>admin_console</title>
+  <title>PASSAGETR Admin</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      background: #0F172A;
+      overflow: hidden;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      background: #0F172A;
+      transition: opacity 0.4s ease;
+    }
+
+    #loading.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-title {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #94A3B8;
+      margin-bottom: 30px;
+    }
+
+    .loading-title span {
+      background: linear-gradient(135deg, #72A3FF, #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pulse {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #72A3FF;
+      box-shadow: 0 0 0 0 rgba(114, 163, 255, 0.7);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(114, 163, 255, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(114, 163, 255, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(114, 163, 255, 0);
+      }
+    }
+  </style>
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <div id="loading">
+    <div class="loading-title"><span>PASSAGETR</span> ADMIN</div>
+    <div class="pulse"></div>
+  </div>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      const loader = document.getElementById('loading');
+      if (loader) {
+        loader.classList.add('fade-out');
+        setTimeout(function () { loader.remove(); }, 400);
+      }
+    });
+  </script>
 </body>
 </html>

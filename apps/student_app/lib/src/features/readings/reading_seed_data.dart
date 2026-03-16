@@ -24,7 +24,6 @@ class ReadingSeedData {
     required this.summary,
     required this.author,
     required this.durationMinutes,
-    required this.progressPercent,
     required this.levelBadgeColor,
     required this.artworkColors,
     required this.artworkIcon,
@@ -37,15 +36,12 @@ class ReadingSeedData {
   final String summary;
   final String author;
   final int durationMinutes;
-  final int progressPercent;
   final Color levelBadgeColor;
   final List<Color> artworkColors;
   final IconData artworkIcon;
   final String? imageAsset;
   final List<ReadingSectionSeed> sections;
   final List<ReadingFocusWordSeed> focusWords;
-
-  bool get isCompleted => progressPercent >= 100;
 }
 
 const readingSeedData = <String, ReadingSeedData>{
@@ -55,7 +51,7 @@ const readingSeedData = <String, ReadingSeedData>{
         'Derin deniz kesiflerinin bilinmeyen dunyasi ve okyanusun karanlik sirlari uzerine buyuleyici bir arastirma.',
     author: 'Jane Doe',
     durationMinutes: 15,
-    progressPercent: 45,
+
     levelBadgeColor: Color(0xFFF05D80),
     artworkColors: <Color>[
       Color(0xFFD8C7AA),
@@ -93,7 +89,7 @@ const readingSeedData = <String, ReadingSeedData>{
         "Stephen Hawking'in unlu eserinden alinmis kisa bir ozet parcasi. Evrenin baslangici ve sonu.",
     author: 'Stephen Hawking',
     durationMinutes: 10,
-    progressPercent: 0,
+
     levelBadgeColor: Color(0xFFF2A646),
     artworkColors: <Color>[
       Color(0xFF45D4E6),
@@ -127,7 +123,7 @@ const readingSeedData = <String, ReadingSeedData>{
         'Bir kafede kahve siparis ederken ve sohbet ederken kullanilan gunluk Ingilizce kaliplari.',
     author: 'PASSAGETR Team',
     durationMinutes: 5,
-    progressPercent: 100,
+
     levelBadgeColor: Color(0xFF37A981),
     artworkColors: <Color>[
       Color(0xFF3D281D),
@@ -196,7 +192,7 @@ ReadingSeedData _fallbackReadingSeedForPassage(ReadingPassage passage) {
     summary: summary,
     author: 'PASSAGETR',
     durationMinutes: _estimateReadingDuration(summary),
-    progressPercent: 0,
+
     levelBadgeColor: _fallbackLevelColor(passage.level),
     artworkColors: palettes[seedIndex],
     artworkIcon: _fallbackArtworkIcon(passage.category),

@@ -34,6 +34,11 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
   AdminWordsFilterState _wordsFilters = const AdminWordsFilterState();
   AdminReadingsFilterState _readingsFilters = const AdminReadingsFilterState();
   AdminGrammarFilterState _grammarFilters = const AdminGrammarFilterState();
+
+  final Set<String> _selectedWordIds = <String>{};
+  final Set<String> _selectedReadingIds = <String>{};
+  final Set<int> _selectedGrammarIds = <int>{};
+
   bool _isBulkAssigningFocusWords = false;
   AdminAiReadingRun? _activeQuestionRun;
   AdminAiReadingRun? _activeCoverRun;
@@ -47,7 +52,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     _readingsQueryController = TextEditingController();
     _grammarQueryController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      unawaited(_restoreActiveReadingAiRuns());
+      _restoreActiveReadingAiRuns();
     });
   }
 
@@ -56,7 +61,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.destination != widget.destination &&
         widget.destination == AdminDestination.readings) {
-      unawaited(_restoreActiveReadingAiRuns());
+      _restoreActiveReadingAiRuns();
     }
   }
 
@@ -102,7 +107,82 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           context.go(route);
         },
       ),
-      body: _buildDestinationBody(context),
+      body: Stack(
+        children: [
+          _buildDestinationBody(context),
+          if (_selectedWordIds.isNotEmpty)
+            Positioned(
+              bottom: 16,
+              left: 24,
+              right: 24,
+              child: _BulkActionToolbar(
+                count: _selectedWordIds.length,
+                onPublish: () => _togglePublishedBulk(
+                  context,
+                  entityType: 'word',
+                  entityIds: _selectedWordIds.toList(),
+                  nextValue: true,
+                ),
+                onUnpublish: () => _togglePublishedBulk(
+                  context,
+                  entityType: 'word',
+                  entityIds: _selectedWordIds.toList(),
+                  nextValue: false,
+                ),
+                onDelete: () => _deleteWordsBulk(context, _selectedWordIds.toList()),
+                onClear: () => setState(() => _selectedWordIds.clear()),
+              ),
+            ),
+          if (_selectedReadingIds.isNotEmpty)
+            Positioned(
+              bottom: 16,
+              left: 24,
+              right: 24,
+              child: _BulkActionToolbar(
+                count: _selectedReadingIds.length,
+                onPublish: () => _togglePublishedBulk(
+                  context,
+                  entityType: 'reading',
+                  entityIds: _selectedReadingIds.toList(),
+                  nextValue: true,
+                ),
+                onUnpublish: () => _togglePublishedBulk(
+                  context,
+                  entityType: 'reading',
+                  entityIds: _selectedReadingIds.toList(),
+                  nextValue: false,
+                ),
+                onDelete: () =>
+                    _deleteReadingsBulk(context, _selectedReadingIds.toList()),
+                onClear: () => setState(() => _selectedReadingIds.clear()),
+              ),
+            ),
+          if (_selectedGrammarIds.isNotEmpty)
+            Positioned(
+              bottom: 16,
+              left: 24,
+              right: 24,
+              child: _BulkActionToolbar(
+                count: _selectedGrammarIds.length,
+                onPublish: () => _togglePublishedBulk(
+                  context,
+                  entityType: 'grammar',
+                  entityIds: _selectedGrammarIds.map((id) => id.toString()).toList(),
+                  nextValue: true,
+                ),
+                onUnpublish: () => _togglePublishedBulk(
+                  context,
+                  entityType: 'grammar',
+                  entityIds: _selectedGrammarIds.map((id) => id.toString()).toList(),
+                  nextValue: false,
+                ),
+                onDelete: () =>
+                    _deleteGrammarBulk(context, _selectedGrammarIds.toList()),
+                onClear: () => setState(() => _selectedGrammarIds.clear()),
+              ),
+            ),
+        ],
+      ),
     );
   }
 
@@ -332,7 +412,33 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
+              if (activePack != null && visibleWords.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        value: _selectedWordIds.length == visibleWords.length &&
+                            visibleWords.isNotEmpty,
+                        tristate: _selectedWordIds.isNotEmpty &&
+                            _selectedWordIds.length < visibleWords.length,
+                        onChanged: (value) {
+                          setState(() {
+                            if (value == true) {
+                              _selectedWordIds
+                                  .addAll(visibleWords.map((e) => e.id));
+                            } else {
+                              _selectedWordIds.clear();
+                            }
+                          });
+                        },
+                      ),
+                      const Text('Tümünü seç'),
+                    ],
+                  ),
+                ),
+              const SizedBox(height: 8),
               if (activePack == null)
                 const _EmptyState(
                   title: 'Paket secilmedi',
@@ -360,6 +466,16 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                 for (final word in visibleWords) ...[
                   _WordRow(
                     word: word,
+                    isSelected: _selectedWordIds.contains(word.id),
+                    onSelected: (value) {
+                      setState(() {
+                        if (value == true) {
+                          _selectedWordIds.add(word.id);
+                        } else {
+                          _selectedWordIds.remove(word.id);
+                        }
+                      });
+                    },
                     onEdit: () => _openWordEditor(
                       context,
                       packs: packs,
@@ -662,7 +778,33 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             ),
           ),
           const SizedBox(height: 20),
-          if (visibleReadings.isEmpty)
+          if (visibleReadings.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: _selectedReadingIds.length == visibleReadings.length &&
+                        visibleReadings.isNotEmpty,
+                    tristate: _selectedReadingIds.isNotEmpty &&
+                        _selectedReadingIds.length < visibleReadings.length,
+                    onChanged: (value) {
+                      setState(() {
+                        if (value == true) {
+                          _selectedReadingIds
+                              .addAll(visibleReadings.map((e) => e.id));
+                        } else {
+                          _selectedReadingIds.clear();
+                        }
+                      });
+                    },
+                  ),
+                  const Text('Tümünü seç'),
+                ],
+              ),
+            ),
+          const SizedBox(height: 8),
+              if (visibleReadings.isEmpty)
             _EmptyState(
               title: 'Okuma kaydi yok',
               subtitle:
@@ -695,6 +837,16 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               _ReadingRow(
                 reading: reading,
                 packLabel: _packLabelForReading(reading, packs),
+                isSelected: _selectedReadingIds.contains(reading.id),
+                onSelected: (value) {
+                  setState(() {
+                    if (value == true) {
+                      _selectedReadingIds.add(reading.id);
+                    } else {
+                      _selectedReadingIds.remove(reading.id);
+                    }
+                  });
+                },
                 onEdit: () => _openReadingEditor(
                   context,
                   packs: packs,
@@ -838,6 +990,32 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             ),
           ),
           const SizedBox(height: 20),
+          if (visibleModules.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: _selectedGrammarIds.length == visibleModules.length &&
+                        visibleModules.isNotEmpty,
+                    tristate: _selectedGrammarIds.isNotEmpty &&
+                        _selectedGrammarIds.length < visibleModules.length,
+                    onChanged: (value) {
+                      setState(() {
+                        if (value == true) {
+                          _selectedGrammarIds
+                              .addAll(visibleModules.map((e) => e.id));
+                        } else {
+                          _selectedGrammarIds.clear();
+                        }
+                      });
+                    },
+                  ),
+                  const Text('Tümünü seç'),
+                ],
+              ),
+            ),
+          const SizedBox(height: 8),
           if (visibleModules.isEmpty)
             _EmptyState(
               title: 'Gramer modulu yok',
@@ -861,6 +1039,16 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             for (var index = 0; index < visibleModules.length; index++) ...[
               _GrammarRow(
                 module: visibleModules[index],
+                isSelected: _selectedGrammarIds.contains(visibleModules[index].id),
+                onSelected: (value) {
+                  setState(() {
+                    if (value == true) {
+                      _selectedGrammarIds.add(visibleModules[index].id);
+                    } else {
+                      _selectedGrammarIds.remove(visibleModules[index].id);
+                    }
+                  });
+                },
                 canMoveUp: canReorder && index > 0,
                 canMoveDown: canReorder && index < visibleModules.length - 1,
                 onMoveUp: () =>
@@ -1211,6 +1399,163 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     _pushAudit('admin.word.deleted', word.enWord);
     _showSnackBar('Kelime silindi.');
+  }
+
+  Future<void> _togglePublishedBulk(
+    BuildContext context, {
+    required String entityType,
+    required List<String> entityIds,
+    required bool nextValue,
+  }) async {
+    final shouldProceed = await _confirmAction(
+      context,
+      title: 'Toplu durumu degistir',
+      description:
+          'Secili ${entityIds.length} ogeyi ${nextValue ? 'yayinlamak' : 'taslaga almak'} istediginize emin misiniz?',
+      confirmLabel: nextValue ? 'Yayinla' : 'Taslak Yap',
+    );
+    if (!shouldProceed) return;
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .setContentPublishedBulk(
+          entityType: entityType,
+          entityIds: entityIds,
+          isPublished: nextValue,
+        );
+    if (!mounted) return;
+
+    if (result case AppFailure<void>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    setState(() {
+      _selectedWordIds.clear();
+      _selectedReadingIds.clear();
+      _selectedGrammarIds.clear();
+    });
+
+    ref.invalidate(adminPacksProvider);
+    ref.invalidate(adminWordEntriesProvider);
+    ref.invalidate(adminWordPageProvider);
+    ref.invalidate(adminReadingsProvider);
+    ref.invalidate(adminReadingPageProvider);
+    ref.invalidate(adminGrammarModulesProvider);
+    ref.invalidate(adminDashboardSnapshotProvider);
+    ref.invalidate(adminAuditFeedProvider);
+
+    _pushAudit('admin.bulk.published_toggle', '${entityIds.length} oge guncellendi');
+    _showSnackBar('Toplu islem tamamlandi.');
+  }
+
+  Future<void> _deleteWordsBulk(BuildContext context, List<String> wordIds) async {
+    final shouldDelete = await _confirmAction(
+      context,
+      title: 'Tümünü sil',
+      description:
+          'Secili ${wordIds.length} kelime kalici olarak silinecek. Emin misiniz?',
+      confirmLabel: 'Sil',
+      isDestructive: true,
+    );
+    if (!shouldDelete) return;
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .deleteWordsBulk(wordIds: wordIds);
+    if (!mounted) return;
+
+    if (result case AppFailure<void>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    setState(() {
+      _selectedWordIds.clear();
+    });
+
+    ref.invalidate(adminWordEntriesProvider);
+    ref.invalidate(adminWordPageProvider);
+    ref.invalidate(adminPacksProvider);
+    ref.invalidate(adminDashboardSnapshotProvider);
+    ref.invalidate(adminAuditFeedProvider);
+
+    _pushAudit('admin.bulk.words_deleted', '${wordIds.length} kelime silindi');
+    _showSnackBar('${wordIds.length} kelime silindi.');
+  }
+
+  Future<void> _deleteReadingsBulk(
+    BuildContext context,
+    List<String> readingIds,
+  ) async {
+    final shouldDelete = await _confirmAction(
+      context,
+      title: 'Tümünü sil',
+      description:
+          'Secili ${readingIds.length} okuma parcasi kalici olarak silinecek. Emin misiniz?',
+      confirmLabel: 'Sil',
+      isDestructive: true,
+    );
+    if (!shouldDelete) return;
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .deleteReadingsBulk(readingIds: readingIds);
+    if (!mounted) return;
+
+    if (result case AppFailure<void>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    setState(() {
+      _selectedReadingIds.clear();
+    });
+
+    ref.invalidate(adminReadingsProvider);
+    ref.invalidate(adminReadingPageProvider);
+    ref.invalidate(adminPacksProvider);
+    ref.invalidate(adminDashboardSnapshotProvider);
+    ref.invalidate(adminAuditFeedProvider);
+
+    _pushAudit('admin.bulk.readings_deleted', '${readingIds.length} okuma silindi');
+    _showSnackBar('${readingIds.length} okuma silindi.');
+  }
+
+  Future<void> _deleteGrammarBulk(
+    BuildContext context,
+    List<int> moduleIds,
+  ) async {
+    final shouldDelete = await _confirmAction(
+      context,
+      title: 'Tümünü sil',
+      description:
+          'Secili ${moduleIds.length} gramer modulu kalici olarak silinecek. Emin misiniz?',
+      confirmLabel: 'Sil',
+      isDestructive: true,
+    );
+    if (!shouldDelete) return;
+
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .deleteGrammarModulesBulk(moduleIds: moduleIds);
+    if (!mounted) return;
+
+    if (result case AppFailure<void>()) {
+      _showSnackBar(result.message, isError: true);
+      return;
+    }
+
+    setState(() {
+      _selectedGrammarIds.clear();
+    });
+
+    ref.invalidate(adminGrammarModulesProvider);
+    ref.invalidate(adminDashboardSnapshotProvider);
+    ref.invalidate(adminAuditFeedProvider);
+
+    _pushAudit('admin.bulk.grammar_deleted', '${moduleIds.length} modul silindi');
+    _showSnackBar('${moduleIds.length} modul silindi.');
   }
 
   Future<void> _togglePublishedForWord(
@@ -2742,12 +3087,16 @@ class _PackTile extends StatelessWidget {
 class _WordRow extends StatelessWidget {
   const _WordRow({
     required this.word,
+    required this.isSelected,
+    required this.onSelected,
     required this.onEdit,
     required this.onDelete,
     required this.onTogglePublished,
   });
 
   final AdminWordRecord word;
+  final bool isSelected;
+  final ValueChanged<bool?> onSelected;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final ValueChanged<bool> onTogglePublished;
@@ -2760,6 +3109,11 @@ class _WordRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Checkbox(
+            value: isSelected,
+            onChanged: onSelected,
+          ),
+          const SizedBox(width: 8),
           Expanded(
             flex: 3,
             child: Column(
@@ -2840,6 +3194,8 @@ class _ReadingRow extends StatelessWidget {
   const _ReadingRow({
     required this.reading,
     required this.packLabel,
+    required this.isSelected,
+    required this.onSelected,
     required this.onEdit,
     required this.onDelete,
     required this.onAutoAssign,
@@ -2849,6 +3205,8 @@ class _ReadingRow extends StatelessWidget {
 
   final AdminReadingRecord reading;
   final String packLabel;
+  final bool isSelected;
+  final ValueChanged<bool?> onSelected;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final VoidCallback? onAutoAssign;
@@ -2863,6 +3221,11 @@ class _ReadingRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Checkbox(
+            value: isSelected,
+            onChanged: onSelected,
+          ),
+          const SizedBox(width: 8),
           Expanded(
             flex: 4,
             child: Column(
@@ -2958,6 +3321,8 @@ class _ReadingRow extends StatelessWidget {
 class _GrammarRow extends StatelessWidget {
   const _GrammarRow({
     required this.module,
+    required this.isSelected,
+    required this.onSelected,
     required this.canMoveUp,
     required this.canMoveDown,
     required this.onMoveUp,
@@ -2968,6 +3333,8 @@ class _GrammarRow extends StatelessWidget {
   });
 
   final AdminGrammarRecord module;
+  final bool isSelected;
+  final ValueChanged<bool?> onSelected;
   final bool canMoveUp;
   final bool canMoveDown;
   final VoidCallback onMoveUp;
@@ -2983,6 +3350,11 @@ class _GrammarRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Checkbox(
+            value: isSelected,
+            onChanged: onSelected,
+          ),
+          const SizedBox(width: 8),
           SizedBox(
             width: 64,
             child: Text(
@@ -3226,7 +3598,7 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted && !_isQuestionJob) {
-        unawaited(_refreshCoverPoolStatus());
+        _refreshCoverPoolStatus();
       }
     });
   }
@@ -5464,4 +5836,87 @@ String? _emptyAsNull(String rawValue) {
     return null;
   }
   return trimmed;
+}
+
+class _BulkActionToolbar extends StatelessWidget {
+  const _BulkActionToolbar({
+    required this.count,
+    required this.onPublish,
+    required this.onUnpublish,
+    required this.onDelete,
+    required this.onClear,
+  });
+
+  final int count;
+  final VoidCallback onPublish;
+  final VoidCallback onUnpublish;
+  final VoidCallback onDelete;
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      decoration: BoxDecoration(
+        color: tokens.accent.withValues(alpha: 0.95),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: tokens.accent.withValues(alpha: 0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Text(
+            '$count oge secildi',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+          const Spacer(),
+          TextButton.icon(
+            onPressed: onClear,
+            icon: const Icon(Icons.close, color: Colors.white),
+            label: const Text('Secimi Temizle', style: TextStyle(color: Colors.white)),
+          ),
+          const SizedBox(width: 12),
+          FilledButton.icon(
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: tokens.accent,
+            ),
+            onPressed: onPublish,
+            icon: const Icon(Icons.publish_rounded),
+            label: const Text('Toplu Yayinla'),
+          ),
+          const SizedBox(width: 12),
+          FilledButton.icon(
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.white.withValues(alpha: 0.2),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: onUnpublish,
+            icon: const Icon(Icons.unpublished_rounded),
+            label: const Text('Toplu Taslak Yap'),
+          ),
+          const SizedBox(width: 12),
+          FilledButton.icon(
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.red.shade400,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: onDelete,
+            icon: const Icon(Icons.delete_outline_rounded),
+            label: const Text('Toplu Sil'),
+          ),
+        ],
+      ),
+    );
+  }
 }

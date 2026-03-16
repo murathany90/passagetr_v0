@@ -5,6 +5,7 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../bootstrap/supabase_bootstrap.dart';
+import '../local/drift/local_sync_models.dart';
 import '../local/drift/local_sync_store.dart';
 
 class FoundationGrammarRepository implements GrammarRepository {
@@ -23,18 +24,19 @@ class FoundationGrammarRepository implements GrammarRepository {
 
   @override
   Future<List<GrammarModule>> fetchModules() async {
-    final localItems = await _readModulesFromLocal();
-    if (localItems.isNotEmpty) {
-      return localItems;
-    }
-
     try {
       final remoteItems = await _readModulesFromRemote();
       if (remoteItems.isNotEmpty) {
+        _syncGrammarModulesToLocal(remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Preview fallback is used when live data cannot be reached.
+      // Fallback to local
+    }
+
+    final localItems = await _readModulesFromLocal();
+    if (localItems.isNotEmpty) {
+      return localItems;
     }
 
     return _previewModules;
@@ -42,21 +44,119 @@ class FoundationGrammarRepository implements GrammarRepository {
 
   @override
   Future<GrammarModuleDetail?> fetchModuleDetail(int moduleId) async {
+    try {
+      final remoteDetail = await _readDetailFromRemote(moduleId);
+      if (remoteDetail != null) {
+        _syncGrammarDetailToLocal(remoteDetail);
+        return remoteDetail;
+      }
+    } catch (_) {
+      // Fallback to local
+    }
+
     final localDetail = await _readDetailFromLocal(moduleId);
     if (localDetail != null) {
       return localDetail;
     }
 
-    try {
-      final remoteDetail = await _readDetailFromRemote(moduleId);
-      if (remoteDetail != null) {
-        return remoteDetail;
-      }
-    } catch (_) {
-      // Preview fallback is used when live data cannot be reached.
-    }
-
     return _previewDetails[moduleId];
+  }
+
+  Future<void> _syncGrammarModulesToLocal(List<GrammarModule> modules) async {
+    final database = _database;
+    if (database == null) return;
+
+    for (final item in modules) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'grammar',
+          entityType: 'gramer_modulleri',
+          entityId: item.id.toString(),
+          payloadJson: jsonEncode({
+            'id': item.id,
+            'sira': item.sortOrder,
+            'baslik': item.title,
+            'toplam_sayfa': item.pageCount,
+            'icon': item.icon,
+            'renk': item.color,
+            'is_published': true,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _syncGrammarDetailToLocal(GrammarModuleDetail detail) async {
+    final database = _database;
+    if (database == null) return;
+
+    // Sync the module itself first
+    await _syncGrammarModulesToLocal([detail.module]);
+
+    for (final page in detail.pages) {
+      // Sync Page
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'grammar',
+          entityType: 'gramer_sayfalari',
+          entityId: page.id.toString(),
+          payloadJson: jsonEncode({
+            'id': page.id,
+            'modul_id': detail.module.id,
+            'sayfa_no': page.pageNumber,
+            'baslik': page.title,
+            'icerik_html': page.htmlContent,
+            'kelime_sayisi': page.wordCount,
+            'is_published': true,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+
+      // Sync Examples for this page
+      for (final example in page.examples) {
+        await database.upsertContentEntity(
+          ContentEntityRecord(
+            scope: 'grammar',
+            entityType: 'gramer_ornekler',
+            entityId: example.id.toString(),
+            payloadJson: jsonEncode({
+              'id': example.id,
+              'sayfa_id': page.id,
+              'sira': example.sortOrder,
+              'ingilizce': example.english,
+              'turkce': example.turkish,
+              'aciklama': example.description,
+              'is_published': true,
+            }),
+            updatedAt: DateTime.now(),
+          ),
+        );
+      }
+
+      // Sync Questions for this page
+      for (final question in page.questions) {
+        await database.upsertContentEntity(
+          ContentEntityRecord(
+            scope: 'grammar',
+            entityType: 'gramer_testler',
+            entityId: question.id.toString(),
+            payloadJson: jsonEncode({
+              'id': question.id,
+              'sayfa_id': page.id,
+              'sira': question.sortOrder,
+              'soru': question.prompt,
+              'secenekler_json': jsonEncode(question.options),
+              'dogru_cevap': question.correctAnswer,
+              'aciklama': question.description,
+              'is_published': true,
+            }),
+            updatedAt: DateTime.now(),
+          ),
+        );
+      }
+    }
   }
 
   Future<List<GrammarModule>> _readModulesFromLocal() async {

@@ -24,18 +24,19 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingPassage>> fetchReadings() async {
-    final localItems = await _readFromLocal();
-    if (localItems.isNotEmpty) {
-      return localItems;
-    }
-
     try {
       final remoteItems = await _readFromRemote();
       if (remoteItems.isNotEmpty) {
+        _syncReadingPassagesToLocal(remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Fall back to bundled preview content when the network path is unavailable.
+      // Fallback to local
+    }
+
+    final localItems = await _readFromLocal();
+    if (localItems.isNotEmpty) {
+      return localItems;
     }
 
     return const <ReadingPassage>[
@@ -68,18 +69,19 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingSentence>> fetchReadingSections(String passageId) async {
-    final localItems = await _readSectionsFromLocal(passageId);
-    if (localItems.isNotEmpty) {
-      return localItems;
-    }
-
     try {
       final remoteItems = await _readSectionsFromRemote(passageId);
       if (remoteItems.isNotEmpty) {
+        _syncReadingSentencesToLocal(passageId, remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Fall back to bundled preview content handled by the UI layer.
+      // Fallback to local
+    }
+
+    final localItems = await _readSectionsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      return localItems;
     }
 
     return const <ReadingSentence>[];
@@ -87,18 +89,19 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
-    final localItems = await _readFocusWordsFromLocal(passageId);
-    if (localItems.isNotEmpty) {
-      return localItems;
-    }
-
     try {
       final remoteItems = await _readFocusWordsFromRemote(passageId);
       if (remoteItems.isNotEmpty) {
+        _syncReadingFocusWordsToLocal(passageId, remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Keep the panel empty when linked words are unavailable.
+      // Fallback to local
+    }
+
+    final localItems = await _readFocusWordsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      return localItems;
     }
 
     return const <ReadingFocusWord>[];
@@ -106,18 +109,19 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingQuestion>> fetchQuestions(String passageId) async {
-    final localItems = await _readQuestionsFromLocal(passageId);
-    if (localItems.isNotEmpty) {
-      return localItems;
-    }
-
     try {
       final remoteItems = await _readQuestionsFromRemote(passageId);
       if (remoteItems.isNotEmpty) {
+        _syncReadingQuestionsToLocal(passageId, remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Keep quiz surface empty when question records are unavailable.
+      // Fallback to local
+    }
+
+    final localItems = await _readQuestionsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      return localItems;
     }
 
     return const <ReadingQuestion>[];
@@ -169,6 +173,112 @@ class FoundationReadingRepository implements ReadingRepository {
     }
 
     return null;
+  }
+
+  Future<void> _syncReadingPassagesToLocal(List<ReadingPassage> passages) async {
+    final database = _database;
+    if (database == null) return;
+
+    for (final item in passages) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'readings',
+          entityType: 'reading_passages',
+          entityId: item.id,
+          payloadJson: jsonEncode({
+            'id': item.id,
+            'pack_id': item.packId,
+            'title': item.title,
+            'level': item.level,
+            'category': item.category,
+            'is_pro': item.isPro,
+            'summary': item.summary,
+            'question_count': item.questionCount,
+            'cover_bucket_name': item.coverBucketName,
+            'cover_storage_path': item.coverStoragePath,
+            'cover_alt_text': item.coverAltText,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _syncReadingSentencesToLocal(
+    String passageId,
+    List<ReadingSentence> sentences,
+  ) async {
+    final database = _database;
+    if (database == null) return;
+
+    for (final item in sentences) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'readings',
+          entityType: 'reading_passage_sentences',
+          entityId: '${passageId}_${item.index}',
+          payloadJson: jsonEncode({
+            'passage_id': passageId,
+            'idx': item.index,
+            'sentence_en': item.englishText,
+            'sentence_tr': item.turkishText,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _syncReadingFocusWordsToLocal(
+    String passageId,
+    List<ReadingFocusWord> focusWords,
+  ) async {
+    final database = _database;
+    if (database == null) return;
+
+    for (final item in focusWords) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'readings',
+          entityType: 'reading_passage_words',
+          entityId: '${passageId}_${item.wordId}',
+          payloadJson: jsonEncode({
+            'passage_id': passageId,
+            'word_id': item.wordId,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _syncReadingQuestionsToLocal(
+    String passageId,
+    List<ReadingQuestion> questions,
+  ) async {
+    final database = _database;
+    if (database == null) return;
+
+    for (final item in questions) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'readings',
+          entityType: 'reading_passage_questions',
+          entityId: item.id,
+          payloadJson: jsonEncode({
+            'id': item.id,
+            'passage_id': passageId,
+            'sort_order': item.sortOrder,
+            'question': item.question,
+            'options_json': jsonEncode(item.options),
+            'correct_option_index': item.correctOptionIndex,
+            'explanation': item.explanation,
+            'is_published': true,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
   }
 
   Future<List<ReadingPassage>> _readFromLocal() async {
@@ -483,6 +593,10 @@ class FoundationReadingRepository implements ReadingRepository {
     return const <String, dynamic>{};
   }
 
+  // DB'deki `reading_passage_sentences.idx` sütunu 1-tabanlıdır.
+  // `idx` (metod parametresi) 0-tabanlı cümle indeksidir; 1 eklenerek
+  // DB değerine dönüştürülür. Backcompat için ikinci deneme (0-tabanlı)
+  // korunmaktadır; şema kesinleşince bu yedek kaldırılabilir.
   List<int> _candidateSentenceIndexes(int idx) {
     if (idx < 0) {
       return const <int>[];
@@ -492,6 +606,7 @@ class FoundationReadingRepository implements ReadingRepository {
       return <int>[oneBasedIndex];
     }
 
+    // Önce doğru 1-tabanlı index, bulunamazsa eski 0-tabanlı (backcompat).
     return <int>[oneBasedIndex, idx];
   }
 

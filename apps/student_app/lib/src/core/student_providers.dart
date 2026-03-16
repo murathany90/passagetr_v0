@@ -11,6 +11,7 @@ import 'student_analytics_service.dart';
 import 'student_content_refresh_controller.dart';
 import 'student_grammar_progress_controller.dart';
 import 'student_reading_engagement_controller.dart';
+import 'student_reading_progress_controller.dart';
 import 'tts/student_tts_controller.dart';
 import 'tts/student_tts_engine.dart';
 import 'student_translation_controller.dart';
@@ -115,10 +116,8 @@ final studentAppDatabaseProvider = Provider<AppDatabase>((ref) {
 
 final studentBootstrapProvider = FutureProvider<void>((ref) async {
   await ref.read(studentAccessProvider.notifier).restoreSession();
-  if (kIsWeb) {
-    return;
-  }
-
+  // Web'de sync repository preview-noop döndürür; DB yazımı olmaz.
+  // Yine de aynı akıştan geçirilir — gelecekteki web cache desteğine hazırlık.
   final syncRepository = ref.read(studentSyncRepositoryProvider);
   await syncRepository.syncIfStale(SyncScope.content);
   await syncRepository.syncIfStale(SyncScope.progress);
@@ -330,14 +329,15 @@ final studentTranslationProvider =
     });
 
 final studentReadingProgressProvider =
-    FutureProvider<Map<String, ReadingProgress>>((ref) async {
-      final items = await ref
-          .watch(studentProgressRepositoryProvider)
-          .fetchReadingProgress();
-      return <String, ReadingProgress>{
-        for (final item in items) item.passageId: item,
-      };
-    });
+    StateNotifierProvider<
+      StudentReadingProgressController,
+      AsyncValue<Map<String, ReadingProgress>>
+    >(
+      (ref) => StudentReadingProgressController(
+        progressRepository: ref.watch(studentProgressRepositoryProvider),
+        accessContext: ref.watch(studentAccessProvider),
+      ),
+    );
 
 final studentPacksProvider = FutureProvider<List<ContentPack>>((ref) {
   return ref.watch(studentPackRepositoryProvider).fetchPacks();
@@ -469,6 +469,7 @@ final studentWordsProvider = FutureProvider<List<WordEntry>>((ref) {
 void invalidateStudentContentProviders(Ref ref) {
   ref.invalidate(studentPacksProvider);
   ref.invalidate(studentReadingsProvider);
+  ref.read(studentReadingProgressProvider.notifier).load();
   ref.invalidate(studentReadingSectionsProvider);
   ref.invalidate(studentReadingFocusWordsProvider);
   ref.invalidate(studentReadingQuestionsProvider);
@@ -550,7 +551,7 @@ final studentWordSummaryProvider = Provider<StudentWordSummary>((ref) {
 final studentStreakDaysProvider = Provider<int>((ref) {
   return ref
       .watch(studentAnalyticsSnapshotProvider)
-      .maybeWhen(data: (snapshot) => snapshot.streakDays, orElse: () => 7);
+      .maybeWhen(data: (snapshot) => snapshot.streakDays, orElse: () => 0);
 });
 
 final studentReviewWordCountProvider = Provider<int>((ref) {
@@ -573,7 +574,7 @@ final studentContinueReadingSummaryProvider =
 
       for (final reading in readings) {
         final progress = progressMap[reading.id];
-        if (_hasStartedReading(progress) && !(progress?.completed ?? false)) {
+        if (hasReadingStarted(progress) && !(progress?.completed ?? false)) {
           selectedReading = reading;
           selectedProgress = progress;
           break;
@@ -585,7 +586,7 @@ final studentContinueReadingSummaryProvider =
       final resolvedReading = selectedReading ?? readings.first;
       selectedProgress ??= progressMap[resolvedReading.id];
 
-      final progressPercent = _readingProgressPercent(selectedProgress);
+      final progressPercent = calculateReadingProgressPercent(selectedProgress);
       final isCompleted = selectedProgress?.completed ?? progressPercent >= 100;
       return StudentContinueReadingSummary(
         reading: resolvedReading,
@@ -602,7 +603,7 @@ ReadingPassage? _selectFirstUnstartedReading(
   for (final reading in readings) {
     final progress = progressMap[reading.id];
     if (progress == null ||
-        (!_hasStartedReading(progress) && !progress.completed)) {
+        (!hasReadingStarted(progress) && !progress.completed)) {
       return reading;
     }
   }
@@ -610,15 +611,15 @@ ReadingPassage? _selectFirstUnstartedReading(
   return null;
 }
 
-bool _hasStartedReading(ReadingProgress? progress) {
+bool hasReadingStarted(ReadingProgress? progress) {
   if (progress == null) {
     return false;
   }
 
-  return progress.completed || _readingProgressPercent(progress) > 0;
+  return progress.completed || calculateReadingProgressPercent(progress) > 0;
 }
 
-int _readingProgressPercent(ReadingProgress? progress) {
+int calculateReadingProgressPercent(ReadingProgress? progress) {
   if (progress == null) {
     return 0;
   }
@@ -676,7 +677,7 @@ final studentWeeklyTrendProvider = Provider<List<double>>((ref) {
       .watch(studentAnalyticsSnapshotProvider)
       .maybeWhen(
         data: (snapshot) => snapshot.weeklyTrend,
-        orElse: () => const <double>[0.32, 0.26, 0.51, 0.43, 0.59, 0.82, 0.71],
+        orElse: () => List<double>.filled(7, 0.0),
       );
 });
 
@@ -685,7 +686,7 @@ final studentGoalProgressProvider = Provider<double>((ref) {
       .watch(studentAnalyticsSnapshotProvider)
       .maybeWhen(
         data: (snapshot) => snapshot.todayGoalProgress,
-        orElse: () => 0.58,
+        orElse: () => 0.0,
       );
 });
 
@@ -694,14 +695,14 @@ final studentCompletedGoalDaysProvider = Provider<int>((ref) {
       .watch(studentAnalyticsSnapshotProvider)
       .maybeWhen(
         data: (snapshot) => snapshot.completedGoalDays,
-        orElse: () => 4,
+        orElse: () => 0,
       );
 });
 
 final studentAnalyticsEstimatedProvider = Provider<bool>((ref) {
   return ref
       .watch(studentAnalyticsSnapshotProvider)
-      .maybeWhen(data: (snapshot) => snapshot.isEstimated, orElse: () => true);
+      .maybeWhen(data: (snapshot) => snapshot.isEstimated, orElse: () => false);
 });
 
 const _fallbackPackProgress = <String, int>{};
@@ -729,4 +730,43 @@ final studentPackProgressProvider = Provider<Map<String, int>>((ref) {
   }
 
   return resolved;
+});
+
+final studentWordOfTheDayProvider = Provider<WordEntry?>((ref) {
+  final words = ref.watch(studentWordsProvider).valueOrNull;
+  if (words == null || words.isEmpty) {
+    return null;
+  }
+
+  // Gunluk degisen ama session suresince sabit kalan basit bir seed mantigi.
+  // Gercek bir "seen/mastered" filtresi ile daha da iyilestirilebilir.
+  final dayOfYear =
+      DateTime.now().difference(DateTime(DateTime.now().year, 1, 1)).inDays;
+  final index = dayOfYear % words.length;
+  return words[index];
+});
+
+final studentRecommendedReadingsProvider = Provider<List<ReadingPassage>>((ref) {
+  final readings = ref.watch(studentReadingsProvider).valueOrNull ?? const [];
+  if (readings.isEmpty) {
+    return const [];
+  }
+
+  final progressMap =
+      ref.watch(studentReadingProgressProvider).valueOrNull ??
+      const <String, ReadingProgress>{};
+
+  // Henuz tamamlanmamis olanlari filtrele
+  final uncompleted =
+      readings.where((r) {
+        final p = progressMap[r.id];
+        return p == null || !p.completed;
+      }).toList();
+
+  if (uncompleted.isEmpty) {
+    return readings.take(3).toList();
+  }
+
+  // Karisik veya seviyeye gore onerilebilir; simdilik ilk 3 uygun olani aliyoruz
+  return uncompleted.take(3).toList();
 });

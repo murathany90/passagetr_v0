@@ -144,7 +144,7 @@ void main() {
       addTearDown(container.dispose);
 
       await container.read(studentReadingsProvider.future);
-      await container.read(studentReadingProgressProvider.future);
+      await container.read(studentReadingProgressProvider.notifier).load();
 
       final summary = container.read(studentContinueReadingSummaryProvider);
 
@@ -186,7 +186,7 @@ void main() {
       addTearDown(container.dispose);
 
       await container.read(studentReadingsProvider.future);
-      await container.read(studentReadingProgressProvider.future);
+      await container.read(studentReadingProgressProvider.notifier).load();
 
       final summary = container.read(studentContinueReadingSummaryProvider);
 

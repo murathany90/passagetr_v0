@@ -5,6 +5,7 @@ import 'package:shared_domain/shared_domain.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../bootstrap/supabase_bootstrap.dart';
+import '../local/drift/local_sync_models.dart';
 import '../local/drift/local_sync_store.dart';
 
 typedef PackRemoteReader = Future<List<ContentPack>> Function();
@@ -30,18 +31,19 @@ class FoundationPackRepository implements PackRepository {
 
   @override
   Future<List<ContentPack>> fetchPacks() async {
-    final localItems = await _readFromLocal();
-    if (localItems.isNotEmpty) {
-      return localItems;
-    }
-
     try {
       final remoteItems = await _readFromRemote();
       if (remoteItems.isNotEmpty) {
+        _syncPacksToLocal(remoteItems);
         return remoteItems;
       }
     } catch (_) {
-      // Fall back to bundled preview content when the network path is unavailable.
+      // Fallback to local
+    }
+
+    final localItems = await _readFromLocal();
+    if (localItems.isNotEmpty) {
+      return localItems;
     }
 
     return const <ContentPack>[
@@ -64,6 +66,26 @@ class FoundationPackRepository implements PackRepository {
         wordCount: 150,
       ),
     ];
+  }
+
+  Future<void> _syncPacksToLocal(List<ContentPack> packs) async {
+    final database = _database;
+    if (database == null) return;
+
+    for (final item in packs) {
+      await database.upsertContentEntity(
+        ContentEntityRecord(
+          scope: 'packs',
+          entityType: 'packs',
+          entityId: item.id,
+          payloadJson: jsonEncode({
+            'id': item.id,
+            'name': item.name,
+          }),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
   }
 
   Future<List<ContentPack>> _readFromLocal() async {

@@ -651,7 +651,7 @@ class _AppSettingsCard extends StatelessWidget {
                 onPressed: contentRefreshState.isLoading
                     ? null
                     : () {
-                        unawaited(onRefreshContentPressed());
+                        onRefreshContentPressed();
                       },
                 icon: contentRefreshState.isLoading
                     ? const SizedBox(
@@ -1015,14 +1015,14 @@ class _SettingsQuickActionsCard extends StatelessWidget {
               ),
               FilledButton.tonalIcon(
                 onPressed: () {
-                  unawaited(onRefreshPressed());
+                  onRefreshPressed();
                 },
                 icon: const Icon(Icons.refresh_rounded),
                 label: const Text('Oturumu Yenile'),
               ),
               OutlinedButton.icon(
                 onPressed: () {
-                  unawaited(onSignOutPressed());
+                  onSignOutPressed();
                 },
                 icon: const Icon(Icons.logout_rounded),
                 label: const Text('Çıkış Yap'),
@@ -1107,7 +1107,7 @@ class _AccountManagementCard extends StatelessWidget {
             subtitle: 'Bu cihazdaki etkin oturumu yenile veya doğrula.',
             trailing: FilledButton.tonal(
               onPressed: () {
-                unawaited(onRefreshPressed());
+                onRefreshPressed();
               },
               child: const Text('Yenile'),
             ),
@@ -1118,7 +1118,7 @@ class _AccountManagementCard extends StatelessWidget {
             subtitle: 'Bu cihazdaki etkin oturumu kapat.',
             trailing: FilledButton.icon(
               onPressed: () {
-                unawaited(onSignOutPressed());
+                onSignOutPressed();
               },
               icon: const Icon(Icons.logout_rounded),
               label: const Text('Çıkış Yap'),
@@ -1274,14 +1274,14 @@ class _AccountManagementSheet extends StatelessWidget {
             children: [
               FilledButton.tonalIcon(
                 onPressed: () {
-                  unawaited(onRefreshPressed());
+                  onRefreshPressed();
                 },
                 icon: const Icon(Icons.refresh_rounded),
                 label: const Text('Oturumu Yenile'),
               ),
               FilledButton.icon(
                 onPressed: () {
-                  unawaited(onSignOutPressed());
+                  onSignOutPressed();
                 },
                 icon: const Icon(Icons.logout_rounded),
                 label: const Text('Çıkış Yap'),

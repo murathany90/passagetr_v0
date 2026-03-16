@@ -18,18 +18,37 @@ class FoundationAdminUserManagementRepository
     implements AdminUserManagementRepository {
   const FoundationAdminUserManagementRepository({
     required AppConfig config,
+    required AuthRepository authRepository,
     Future<AdminUserManagementFunctionResponse> Function(
       Map<String, dynamic> body,
     )?
     manageUsersInvoker,
   }) : _config = config,
+       _authRepository = authRepository,
        _manageUsersInvoker = manageUsersInvoker;
 
   final AppConfig _config;
+  final AuthRepository _authRepository;
   final Future<AdminUserManagementFunctionResponse> Function(
     Map<String, dynamic> body,
   )?
   _manageUsersInvoker;
+
+  void _handleError(Object error) {
+    if (error is PostgrestException) {
+      if (error.code == '401' || error.code == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    } else if (error is AuthException) {
+      if (error.statusCode == '401' || error.statusCode == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    } else if (error is FunctionException) {
+      if (error.status == 401 || error.status == 403) {
+        _authRepository.notifySessionExpired();
+      }
+    }
+  }
 
   @override
   Future<AppResult<AdminPage<AdminUserListItem>>> listUsers(
@@ -89,6 +108,7 @@ class FoundationAdminUserManagementRepository
         ),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminPage<AdminUserListItem>>(
         'Kullanici listesi yuklenemedi: $error',
       );
@@ -117,6 +137,7 @@ class FoundationAdminUserManagementRepository
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Kullanici erisimi guncellenemedi: $error');
     }
   }
@@ -145,6 +166,7 @@ class FoundationAdminUserManagementRepository
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Toplu kullanici guncellemesi basarisiz: $error');
     }
   }
@@ -196,6 +218,7 @@ class FoundationAdminUserManagementRepository
         ),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminUserListItem>('Kullanici guncellenemedi: $error');
     }
   }
@@ -219,6 +242,7 @@ class FoundationAdminUserManagementRepository
       }
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Kullanici silinemedi: $error');
     }
   }
@@ -267,6 +291,7 @@ class FoundationAdminUserManagementRepository
         AdminBulkUserDeleteResult.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminBulkUserDeleteResult>(
         'Toplu kullanici silme basarisiz: $error',
       );
@@ -352,6 +377,7 @@ class FoundationAdminUserManagementRepository
       });
       return AppSuccess<AdminInviteResult>(parsed);
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminInviteResult>('Davet gonderilemedi: $error');
     }
   }

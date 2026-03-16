@@ -247,14 +247,15 @@ class StudentSurfaceCard extends StatelessWidget {
           ? null
           : BoxConstraints(minHeight: minHeight!),
       decoration: BoxDecoration(
-        color: tokens.surface,
+        color: tokens.surfaceElevated,
         borderRadius: BorderRadius.circular(tokens.cardRadius),
-        border: Border.all(color: tokens.surfaceBorder),
+        border: Border.all(color: tokens.surfaceBorder.withValues(alpha: 0.8)),
         boxShadow: [
           BoxShadow(
             color: tokens.surfaceShadow,
-            blurRadius: 20,
-            offset: const Offset(0, 6),
+            blurRadius: 16,
+            offset: const Offset(0, 8),
+            spreadRadius: -4,
           ),
         ],
       ),
@@ -656,7 +657,7 @@ class _StudentSidebar extends ConsumerWidget {
       width: tokens.railWidth,
       decoration: BoxDecoration(
         color: tokens.railBackground,
-        border: Border(right: BorderSide(color: tokens.surfaceBorder)),
+        border: Border(right: BorderSide(color: tokens.surfaceBorder.withValues(alpha: 0.5))),
       ),
       child: Column(
         children: [
@@ -772,7 +773,7 @@ class _SidebarActionButton extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(18),
       onTap: () {
-        unawaited(onPressed());
+        onPressed();
       },
       child: Ink(
         width: 76,

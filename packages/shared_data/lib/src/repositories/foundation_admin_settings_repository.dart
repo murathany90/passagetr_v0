@@ -5,10 +5,26 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../bootstrap/supabase_bootstrap.dart';
 
 class FoundationAdminSettingsRepository implements AdminSettingsRepository {
-  const FoundationAdminSettingsRepository({required AppConfig config})
-    : _config = config;
+  const FoundationAdminSettingsRepository({
+    required AppConfig config,
+    required AuthRepository authRepository,
+  }) : _config = config,
+       _authRepository = authRepository;
 
   final AppConfig _config;
+  final AuthRepository _authRepository;
+
+  void _handleError(Object error) {
+    if (error is PostgrestException) {
+      if (error.code == '401' || error.code == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    } else if (error is AuthException) {
+      if (error.statusCode == '401' || error.statusCode == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    }
+  }
 
   @override
   Future<AppResult<AdminSettingsSnapshot>> fetchSettings() async {
@@ -25,6 +41,7 @@ class FoundationAdminSettingsRepository implements AdminSettingsRepository {
         AdminSettingsSnapshot.fromJson(_coerceMap(response)),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminSettingsSnapshot>('Ayarlar yuklenemedi: $error');
     }
   }
@@ -47,6 +64,7 @@ class FoundationAdminSettingsRepository implements AdminSettingsRepository {
         AdminSettingsSnapshot.fromJson(_coerceMap(response)),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminSettingsSnapshot>('Ayarlar kaydedilemedi: $error');
     }
   }

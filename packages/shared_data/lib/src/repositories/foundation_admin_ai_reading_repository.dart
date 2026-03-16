@@ -24,18 +24,37 @@ typedef AdminAiReadingRpcInvoker =
 class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
   const FoundationAdminAiReadingRepository({
     required AppConfig config,
+    required AuthRepository authRepository,
     AdminAiReadingFunctionInvoker? functionInvoker,
     AdminAiReadingNamedFunctionInvoker? namedFunctionInvoker,
     AdminAiReadingRpcInvoker? rpcInvoker,
   }) : _config = config,
+       _authRepository = authRepository,
        _functionInvoker = functionInvoker,
        _namedFunctionInvoker = namedFunctionInvoker,
        _rpcInvoker = rpcInvoker;
 
   final AppConfig _config;
+  final AuthRepository _authRepository;
   final AdminAiReadingFunctionInvoker? _functionInvoker;
   final AdminAiReadingNamedFunctionInvoker? _namedFunctionInvoker;
   final AdminAiReadingRpcInvoker? _rpcInvoker;
+
+  void _handleError(Object error) {
+    if (error is PostgrestException) {
+      if (error.code == '401' || error.code == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    } else if (error is AuthException) {
+      if (error.statusCode == '401' || error.statusCode == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    } else if (error is FunctionException) {
+      if (error.status == 401 || error.status == 403) {
+        _authRepository.notifySessionExpired();
+      }
+    }
+  }
 
   @override
   Future<AppResult<AdminAiGeneratedReadingDraft>> generateReadingDraft(
@@ -72,6 +91,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
 
       return AppSuccess<AdminAiGeneratedReadingDraft>(draft);
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiGeneratedReadingDraft>(
         _messageFromException(error),
       );
@@ -108,6 +128,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       }
       return AppSuccess<AdminAiGeneratedReadingQuestions>(result);
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiGeneratedReadingQuestions>(
         _messageFromException(error),
       );
@@ -135,6 +156,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       }
       return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminReadingDetail>(_messageFromException(error));
     }
   }
@@ -154,6 +176,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
         AdminAiCoverPoolStatus.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiCoverPoolStatus>(
         'AI cover havuz durumu okunamadi: $error',
       );
@@ -177,6 +200,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       );
       return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiReadingRun>(
         'AI batch run baslatilamadi: $error',
       );
@@ -198,6 +222,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       );
       return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiReadingRun>('AI batch run okunamadi: $error');
     }
   }
@@ -221,6 +246,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
           .toList(growable: false);
       return AppSuccess<List<AdminAiReadingRun>>(runs);
     } catch (error) {
+      _handleError(error);
       return AppFailure<List<AdminAiReadingRun>>(
         'Aktif AI batch run listesi okunamadi: $error',
       );
@@ -249,6 +275,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       }
       return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiReadingRun>('AI batch run islenemedi: $error');
     }
   }
@@ -282,6 +309,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       );
       return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminAiReadingRun>('AI batch run kontrol edilemedi: $error');
     }
   }
@@ -303,6 +331,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
         data: response.data,
       );
     } catch (error) {
+      _handleError(error);
       if (!_shouldRetryWithFreshSession(error)) {
         rethrow;
       }
@@ -350,6 +379,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
         data: response.data,
       );
     } catch (error) {
+      _handleError(error);
       if (!_shouldRetryWithFreshSession(error)) {
         rethrow;
       }

@@ -10,7 +10,7 @@ class AdminSettingsController extends StateNotifier<AdminSettingsState> {
   AdminSettingsController({required AdminSettingsRepository repository})
     : _repository = repository,
       super(const AdminSettingsState()) {
-    unawaited(load());
+    load();
   }
 
   final AdminSettingsRepository _repository;

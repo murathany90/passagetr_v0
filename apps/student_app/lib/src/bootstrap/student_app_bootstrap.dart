@@ -40,13 +40,13 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
     if (bootstrap.hasValue && !_smokeActionScheduled) {
       _smokeActionScheduled = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        unawaited(_runSmokeActionIfRequested());
+        _runSmokeActionIfRequested();
       });
     }
     if (bootstrap.hasValue && !_connectivityBound) {
       _connectivityBound = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        unawaited(_bindConnectivitySync());
+        _bindConnectivitySync();
       });
     }
 
@@ -60,7 +60,7 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
   @override
   void dispose() {
     _appLifecycleListener?.dispose();
-    unawaited(_connectivitySubscription?.cancel());
+    _connectivitySubscription?.cancel();
     super.dispose();
   }
 
@@ -122,7 +122,7 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
       if (!isOnline) {
         return;
       }
-      unawaited(_runReconnectionSync());
+      _runReconnectionSync();
     });
   }
 
@@ -133,6 +133,6 @@ class _StudentAppBootstrapState extends ConsumerState<StudentAppBootstrap> {
   }
 
   void _stopActiveTts() {
-    unawaited(ref.read(studentTtsControllerProvider.notifier).stop());
+    ref.read(studentTtsControllerProvider.notifier).stop();
   }
 }

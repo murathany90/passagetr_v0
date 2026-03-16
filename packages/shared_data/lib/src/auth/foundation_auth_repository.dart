@@ -20,9 +20,19 @@ class FoundationAuthRepository implements AuthRepository {
   final AccessContext _fallbackAccessContext;
   final StreamController<AccessContext> _controller =
       StreamController<AccessContext>.broadcast();
+  final StreamController<void> _sessionExpiredController =
+      StreamController<void>.broadcast();
   StreamSubscription<AuthState>? _authSubscription;
 
   AccessContext _current;
+
+  @override
+  Stream<void> get onSessionExpired => _sessionExpiredController.stream;
+
+  @override
+  void notifySessionExpired() {
+    _sessionExpiredController.add(null);
+  }
 
   @override
   Future<AuthSession> restoreSession() async {
@@ -246,6 +256,21 @@ class FoundationAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<AppResult<AppRole>> fetchCurrentRole() async {
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AppRole>(_current.role);
+    }
+
+    try {
+      final claims = await _readClaimsFromDatabase();
+      final roleStr = claims['app_role'] ?? 'user';
+      return AppSuccess<AppRole>(AppRole.fromName(roleStr));
+    } catch (error) {
+      return AppFailure<AppRole>('Failed to fetch current role.', cause: error);
+    }
+  }
+
+  @override
   Future<AppResult<void>> signOut() async {
     try {
       if (_config.supabaseEnabled) {
@@ -263,6 +288,7 @@ class FoundationAuthRepository implements AuthRepository {
   void dispose() {
     _authSubscription?.cancel();
     _controller.close();
+    _sessionExpiredController.close();
   }
 
   Future<void> _ensureSupabaseReady() async {
@@ -363,7 +389,7 @@ class FoundationAuthRepository implements AuthRepository {
     _authSubscription = Supabase.instance.client.auth.onAuthStateChange.listen((
       data,
     ) {
-      unawaited(_emitResolvedContext(data.session));
+      _emitResolvedContext(data.session);
     });
   }
 

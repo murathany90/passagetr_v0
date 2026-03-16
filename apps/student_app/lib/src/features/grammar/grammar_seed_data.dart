@@ -9,7 +9,6 @@ class GrammarModuleSeed {
     required this.pageCount,
     required this.description,
     required this.state,
-    required this.progressPercent,
     required this.icon,
     required this.tint,
   });
@@ -19,7 +18,6 @@ class GrammarModuleSeed {
   final int pageCount;
   final String description;
   final GrammarModuleState state;
-  final int progressPercent;
   final IconData icon;
   final Color tint;
 }
@@ -69,7 +67,6 @@ const grammarModuleSeeds = <GrammarModuleSeed>[
     pageCount: 12,
     description: 'Özneler, nesneler ve fiillerin cümle içindeki rolleri.',
     state: GrammarModuleState.completed,
-    progressPercent: 100,
     icon: Icons.check_circle_outline_rounded,
     tint: Color(0xFF32B67A),
   ),
@@ -79,7 +76,6 @@ const grammarModuleSeeds = <GrammarModuleSeed>[
     pageCount: 45,
     description: 'İngilizcedeki tüm zamanların karşılaştırmalı analizi.',
     state: GrammarModuleState.inProgress,
-    progressPercent: 30,
     icon: Icons.description_outlined,
     tint: Color(0xFF8A94A6),
   ),
@@ -89,7 +85,6 @@ const grammarModuleSeeds = <GrammarModuleSeed>[
     pageCount: 20,
     description: 'Yetenek, zorunluluk, ihtimal ve izin anlatımları.',
     state: GrammarModuleState.locked,
-    progressPercent: 0,
     icon: Icons.lock_outline_rounded,
     tint: Color(0xFFBCC6D4),
   ),
@@ -99,7 +94,6 @@ const grammarModuleSeeds = <GrammarModuleSeed>[
     pageCount: 18,
     description: 'If clauses Type 0, 1, 2, 3 ve mixed structures.',
     state: GrammarModuleState.locked,
-    progressPercent: 0,
     icon: Icons.lock_outline_rounded,
     tint: Color(0xFFBCC6D4),
   ),
@@ -229,7 +223,6 @@ GrammarModuleSeed _fallbackGrammarModuleSeed(int moduleId) {
     pageCount: 0,
     description: 'Bu modülün açıklaması yakında güncellenecek.',
     state: GrammarModuleState.inProgress,
-    progressPercent: 0,
     icon: Icons.auto_stories_outlined,
     tint: palette[moduleId.abs() % palette.length],
   );

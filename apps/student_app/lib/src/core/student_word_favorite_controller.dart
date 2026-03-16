@@ -19,7 +19,7 @@ class StudentWordFavoriteController
        _now = now ?? _defaultNow,
        _isWeb = isWeb ?? kIsWeb,
        super(const <String, WordFavorite>{}) {
-    unawaited(load());
+    load();
   }
 
   final WordFavoriteRepository _favoriteRepository;

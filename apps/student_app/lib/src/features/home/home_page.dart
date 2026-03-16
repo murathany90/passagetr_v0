@@ -7,6 +7,7 @@ import 'package:shared_ui/shared_ui.dart';
 
 import '../../core/student_providers.dart';
 import '../common/page_parts.dart';
+import '../readings/reading_artwork.dart';
 import '../readings/reading_seed_data.dart';
 
 class StudentHomePage extends ConsumerWidget {
@@ -24,6 +25,13 @@ class StudentHomePage extends ConsumerWidget {
     final goalProgress = ref.watch(studentGoalProgressProvider);
     final completedGoalDays = ref.watch(studentCompletedGoalDaysProvider);
     final analyticsEstimated = ref.watch(studentAnalyticsEstimatedProvider);
+
+    final wordOfTheDay = ref.watch(studentWordOfTheDayProvider);
+    final recommendedReadings = ref.watch(studentRecommendedReadingsProvider);
+    final wordSummary = ref.watch(studentWordSummaryProvider);
+    final readingProgressMap =
+        ref.watch(studentReadingProgressProvider).valueOrNull ?? const {};
+
     final displayName = _displayNameFor(accessContext);
 
     return StudentShellFrame(
@@ -40,6 +48,13 @@ class StudentHomePage extends ConsumerWidget {
         builder: (context, constraints) {
           final isWide = constraints.maxWidth >= AppBreakpoints.studentHomeWide;
 
+          final statsBar = _QuickStatsBar(
+            studiedWords: wordSummary.studiedCount,
+            totalWords: wordSummary.totalCount,
+            completedReadings:
+                readingProgressMap.values.where((p) => p.completed).length,
+          );
+
           final heroCard = _StreakHeroCard(
             days: streakDays,
             goalProgress: goalProgress,
@@ -48,10 +63,13 @@ class StudentHomePage extends ConsumerWidget {
             reading: continueSummary.reading,
             progressPercent: continueSummary.progressPercent,
             ctaLabel: continueSummary.ctaLabel,
-            onPressed: continueSummary.hasReading
-                ? () => context.go('/readings/${continueSummary.reading.id}')
-                : null,
+            onPressed:
+                continueSummary.hasReading
+                    ? () =>
+                        context.go('/readings/${continueSummary.reading.id}')
+                    : null,
           );
+          final wordOfTheDayCard = _WordOfTheDayCard(word: wordOfTheDay);
           final reviewCard = _ReviewCard(
             reviewCount: reviewCount,
             onPressed: () => context.go('/words/flashcards'),
@@ -65,23 +83,38 @@ class StudentHomePage extends ConsumerWidget {
             isEstimated: analyticsEstimated,
           );
 
+          final recommendedSection = _RecommendedReadingsSection(
+            readings: recommendedReadings,
+            progressMap: readingProgressMap,
+            canViewPremium: accessContext.canViewPremium,
+          );
+
           if (!isWide) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                statsBar,
+                const SizedBox(height: 18),
                 heroCard,
                 const SizedBox(height: 18),
                 continueCard,
                 const SizedBox(height: 18),
+                wordOfTheDayCard,
+                const SizedBox(height: 18),
                 reviewCard,
                 const SizedBox(height: 18),
                 weeklyCard,
+                const SizedBox(height: 24),
+                recommendedSection,
               ],
             );
           }
 
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              statsBar,
+              const SizedBox(height: 20),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -94,11 +127,21 @@ class StudentHomePage extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 282, child: reviewCard),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        wordOfTheDayCard,
+                        const SizedBox(height: 20),
+                        reviewCard,
+                      ],
+                    ),
+                  ),
                   const SizedBox(width: 20),
                   Expanded(child: weeklyCard),
                 ],
               ),
+              const SizedBox(height: 24),
+              recommendedSection,
             ],
           );
         },
@@ -214,8 +257,11 @@ class _StreakHeroCard extends StatelessWidget {
                       const SizedBox(width: 12),
                       Text(
                         '$days Gün',
-                        style: Theme.of(context).textTheme.headlineMedium
-                            ?.copyWith(color: Colors.white),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineMedium?.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
                       const Spacer(),
                       Container(
@@ -438,127 +484,9 @@ class _ReviewCard extends StatelessWidget {
             ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
           ),
           const SizedBox(height: 28),
-          FilledButton(
-            onPressed: onPressed,
-            child: const Text('Kartları Başlat'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ignore: unused_element
-class _WeeklyProgressCard extends StatelessWidget {
-  const _WeeklyProgressCard({
-    required this.trend,
-    required this.totalWords,
-    required this.totalSentences,
-    required this.completedGoalDays,
-    required this.goalProgress,
-    required this.isEstimated,
-  });
-
-  final List<double> trend;
-  final int totalWords;
-  final int totalSentences;
-  final int completedGoalDays;
-  final double goalProgress;
-  final bool isEstimated;
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = AppThemeTokens.of(context);
-
-    return StudentSurfaceCard(
-      minHeight: 390,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Haftalık İlerleme',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Okuma ve kelime çalışma puanın',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: tokens.secondaryText,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: tokens.surfaceMuted,
-                  borderRadius: BorderRadius.circular(tokens.pillRadius),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 10,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Bu Hafta',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(width: 8),
-                      Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: tokens.accent,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 26),
-          Row(
-            children: [
-              _MetricPill(
-                label: '${(goalProgress * 100).round()}%',
-                caption: 'Günlük hedef',
-              ),
-              const SizedBox(width: 18),
-              _MetricPill(
-                label: '$completedGoalDays gün',
-                caption: '$totalWords kelime | $totalSentences oturum',
-              ),
-            ],
-          ),
-          const SizedBox(height: 22),
           SizedBox(
-            height: 210,
-            child: CustomPaint(
-              painter: _WeeklyTrendPainter(
-                color: tokens.accent,
-                fillColor: tokens.accentSoft.withValues(alpha: 0.85),
-                values: trend,
-              ),
-              child: const SizedBox.expand(),
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Row(
-            children: [
-              _WeekLabel('Pzt'),
-              _WeekLabel('Sal'),
-              _WeekLabel('Çar'),
-              _WeekLabel('Per'),
-              _WeekLabel('Cum'),
-              _WeekLabel('Cmt'),
-              _WeekLabel('Paz'),
-            ],
+            width: double.infinity,
+            child: FilledButton(onPressed: onPressed, child: const Text('Kartları Başlat')),
           ),
         ],
       ),
@@ -599,14 +527,14 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Haftalik Ilerleme',
+                      'Haftalık İlerleme',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       isEstimated
-                          ? 'Canli veri yerine tahmini haftalik trend gosteriliyor.'
-                          : 'Canli haftalik aktivite ozeti',
+                          ? 'Canlı veri yerine tahmini haftalık trend gösteriliyor.'
+                          : 'Canlı haftalık aktivite özeti',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: tokens.secondaryText,
                       ),
@@ -616,9 +544,10 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
               ),
               DecoratedBox(
                 decoration: BoxDecoration(
-                  color: isEstimated
-                      ? tokens.warning.withValues(alpha: 0.12)
-                      : tokens.surfaceMuted,
+                  color:
+                      isEstimated
+                          ? tokens.warning.withValues(alpha: 0.12)
+                          : tokens.surfaceMuted,
                   borderRadius: BorderRadius.circular(tokens.pillRadius),
                 ),
                 child: Padding(
@@ -650,11 +579,11 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
             children: [
               _MetricPill(
                 label: '${(goalProgress * 100).round()}%',
-                caption: 'Bugunku hedef',
+                caption: 'Bugünkü hedef',
               ),
               const SizedBox(width: 18),
               _MetricPill(
-                label: '$completedGoalDays gun',
+                label: '$completedGoalDays gün',
                 caption: '$totalWords kelime | $totalSentences oturum',
               ),
             ],
@@ -676,7 +605,7 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
             children: [
               _WeekLabel('Pzt'),
               _WeekLabel('Sal'),
-              _WeekLabel('Car'),
+              _WeekLabel('Çar'),
               _WeekLabel('Per'),
               _WeekLabel('Cum'),
               _WeekLabel('Cmt'),
@@ -796,92 +725,302 @@ class _WeeklyBarPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _WeeklyBarPainter oldDelegate) {
-    if (oldDelegate.color != color || oldDelegate.fillColor != fillColor) {
-      return true;
-    }
-    if (oldDelegate.values.length != values.length) {
-      return true;
-    }
-    for (var index = 0; index < values.length; index++) {
-      if (oldDelegate.values[index] != values[index]) {
-        return true;
-      }
-    }
-    return false;
-  }
-}
-
-// ignore: unused_element
-class _WeeklyTrendPainter extends CustomPainter {
-  const _WeeklyTrendPainter({
-    required this.color,
-    required this.fillColor,
-    required this.values,
-  });
-
-  final Color color;
-  final Color fillColor;
-  final List<double> values;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (values.length < 2) {
-      return;
-    }
-
-    final linePaint = Paint()
-      ..color = color
-      ..strokeWidth = 4
-      ..style = PaintingStyle.stroke;
-    final fillPaint = Paint()..color = fillColor;
-
-    final stepX = size.width / (values.length - 1);
-    final points = <Offset>[
-      for (var i = 0; i < values.length; i++)
-        Offset(
-          i * stepX,
-          size.height - (values[i].clamp(0.0, 1.0) * size.height),
-        ),
-    ];
-
-    final linePath = Path()..moveTo(points.first.dx, points.first.dy);
-    final fillPath = Path()..moveTo(points.first.dx, size.height);
-
-    for (var i = 0; i < points.length - 1; i++) {
-      final current = points[i];
-      final next = points[i + 1];
-      final control = Offset((current.dx + next.dx) / 2, current.dy);
-      final control2 = Offset((current.dx + next.dx) / 2, next.dy);
-      linePath.cubicTo(
-        control.dx,
-        control.dy,
-        control2.dx,
-        control2.dy,
-        next.dx,
-        next.dy,
-      );
-      fillPath.cubicTo(
-        control.dx,
-        control.dy,
-        control2.dx,
-        control2.dy,
-        next.dx,
-        next.dy,
-      );
-    }
-
-    fillPath
-      ..lineTo(size.width, size.height)
-      ..close();
-
-    canvas.drawPath(fillPath, fillPaint);
-    canvas.drawPath(linePath, linePaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _WeeklyTrendPainter oldDelegate) {
     return oldDelegate.values != values ||
         oldDelegate.color != color ||
         oldDelegate.fillColor != fillColor;
+  }
+}
+
+class _QuickStatsBar extends StatelessWidget {
+  const _QuickStatsBar({
+    required this.studiedWords,
+    required this.totalWords,
+    required this.completedReadings,
+  });
+
+  final int studiedWords;
+  final int totalWords;
+  final int completedReadings;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          _StatPill(
+            icon: Icons.auto_awesome_rounded,
+            label: '$studiedWords / $totalWords',
+            caption: 'Kelime',
+            color: tokens.accent,
+          ),
+          const SizedBox(width: 12),
+          _StatPill(
+            icon: Icons.menu_book_rounded,
+            label: '$completedReadings',
+            caption: 'Okuma',
+            color: tokens.success,
+          ),
+          const SizedBox(width: 12),
+          _StatPill(
+            icon: Icons.emoji_events_rounded,
+            label:
+                '%${totalWords > 0 ? ((studiedWords / totalWords) * 100).round() : 0}',
+            caption: 'Başarı',
+            color: tokens.warning,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatPill extends StatelessWidget {
+  const _StatPill({
+    required this.icon,
+    required this.label,
+    required this.caption,
+    required this.color,
+  });
+
+  final IconData icon;
+  final String label;
+  final String caption;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: tokens.surfaceElevated,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: tokens.surfaceBorder),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 20, color: color),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                label,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Text(
+                caption,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: tokens.secondaryText,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WordOfTheDayCard extends StatelessWidget {
+  const _WordOfTheDayCard({required this.word});
+
+  final WordEntry? word;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    if (word == null) return const SizedBox.shrink();
+
+    return StudentSurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.lightbulb_outline_rounded, color: tokens.warning),
+              const SizedBox(width: 10),
+              Text(
+                'Günün Kelimesi',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: tokens.warning,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            word!.enWord,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              color: tokens.primaryText,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            word!.trMeaning,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: tokens.accent,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          if (word!.exampleEn.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            Text(
+              word!.exampleEn,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: tokens.secondaryText,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _RecommendedReadingsSection extends StatelessWidget {
+  const _RecommendedReadingsSection({
+    required this.readings,
+    required this.progressMap,
+    required this.canViewPremium,
+  });
+
+  final List<ReadingPassage> readings;
+  final Map<String, ReadingProgress> progressMap;
+  final bool canViewPremium;
+
+  @override
+  Widget build(BuildContext context) {
+    if (readings.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Senin İçin Önerilenler',
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox(height: 16),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              for (final reading in readings)
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: SizedBox(
+                    width: 300,
+                    child: _RecommendedReadingItem(
+                      reading: reading,
+                      progress: progressMap[reading.id],
+                      isLocked: reading.isPro && !canViewPremium,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _RecommendedReadingItem extends StatelessWidget {
+  const _RecommendedReadingItem({
+    required this.reading,
+    this.progress,
+    required this.isLocked,
+  });
+
+  final ReadingPassage reading;
+  final ReadingProgress? progress;
+  final bool isLocked;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+    final seed = readingSeedForPassage(reading);
+
+    return StudentSurfaceCard(
+      padding: EdgeInsets.zero,
+      onTap:
+          isLocked
+              ? () => context.go('/premium')
+              : () => context.go('/readings/${reading.id}'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ReadingArtwork(
+            seed: seed,
+            remoteUrl: reading.coverUrl,
+            height: 120,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: seed.levelBadgeColor.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(99),
+                      ),
+                      child: Text(
+                        reading.level ?? '-',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: seed.levelBadgeColor,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    if (isLocked) ...[
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.lock_outline_rounded,
+                        size: 14,
+                        color: tokens.warning,
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  reading.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  seed.summary,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: tokens.secondaryText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

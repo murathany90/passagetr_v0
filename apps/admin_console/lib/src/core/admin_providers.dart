@@ -50,31 +50,36 @@ final adminAuthRepositoryProvider = Provider<FoundationAuthRepository>((ref) {
 final adminContentRepositoryProvider = Provider<AdminContentRepository>(
   (ref) => FoundationAdminContentRepository(
     config: ref.watch(adminAppConfigProvider),
+    authRepository: ref.watch(adminAuthRepositoryProvider),
   ),
 );
 
 final adminAiReadingRepositoryProvider = Provider<AdminAiReadingRepository>(
   (ref) => FoundationAdminAiReadingRepository(
     config: ref.watch(adminAppConfigProvider),
+    authRepository: ref.watch(adminAuthRepositoryProvider),
   ),
 );
 
 final adminUserManagementRepositoryProvider =
     Provider<AdminUserManagementRepository>(
       (ref) => FoundationAdminUserManagementRepository(
-        config: ref.watch(adminAppConfigProvider),
+        _config: ref.watch(adminAppConfigProvider),
+        authRepository: ref.watch(adminAuthRepositoryProvider),
       ),
     );
 
 final adminSettingsRepositoryProvider = Provider<AdminSettingsRepository>(
   (ref) => FoundationAdminSettingsRepository(
     config: ref.watch(adminAppConfigProvider),
+    authRepository: ref.watch(adminAuthRepositoryProvider),
   ),
 );
 
 final adminAnalyticsRepositoryProvider = Provider<AdminAnalyticsRepository>(
   (ref) => FoundationAdminAnalyticsRepository(
     config: ref.watch(adminAppConfigProvider),
+    authRepository: ref.watch(adminAuthRepositoryProvider),
   ),
 );
 

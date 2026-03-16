@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -57,7 +57,7 @@ class _StudentReadingDetailPageState
 
   @override
   void dispose() {
-    unawaited(_ttsController.stop());
+    _ttsController.stop();
     super.dispose();
   }
 
@@ -68,12 +68,9 @@ class _StudentReadingDetailPageState
       return;
     }
 
-    unawaited(_ttsController.stop());
+    _ttsController.stop();
     _revealedTranslations.clear();
     _loadingTranslations.clear();
-    _selectedWords.clear();
-    _selectedQuestionOptionIndexes.clear();
-    _readingQuizResult = null;
     _isSubmittingReadingQuiz = false;
     _hasTriggeredInitialRefresh = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -137,6 +134,7 @@ class _StudentReadingDetailPageState
         }
 
         final seed = readingSeedForPassage(reading);
+        final progress = ref.watch(studentReadingProgressProvider).valueOrNull?[reading.id];
         final adjacentReadings = _resolveAdjacentReadings(items, reading.id);
         final articleSections = _resolveArticleSections(
           seed,
@@ -184,6 +182,7 @@ class _StudentReadingDetailPageState
                 readingId: reading.id,
                 reading: reading,
                 seed: seed,
+                progress: progress,
                 summary: _resolveVisibleSummary(reading, seed),
                 focusModeEnabled: _focusModeEnabled,
                 articleSections: articleSections,
@@ -315,7 +314,7 @@ class _StudentReadingDetailPageState
   }
 
   void _goBack(BuildContext context) {
-    unawaited(_ttsController.stop());
+    _ttsController.stop();
     if (context.canPop()) {
       context.pop();
       return;
@@ -366,7 +365,7 @@ class _StudentReadingDetailPageState
   }
 
   void _navigateToReading(ReadingPassage reading, AccessContext accessContext) {
-    unawaited(_ttsController.stop());
+    _ttsController.stop();
     if (reading.isPro && !accessContext.canViewPremium) {
       context.go('/premium');
       return;
@@ -401,9 +400,13 @@ class _StudentReadingDetailPageState
     }
   }
 
-  void _handleWordTap(int lookupIndex, _SentenceToken token) {
+  void _handleWordTap(int lookupIndex, _SentenceToken token, Offset? globalPosition) {
     if (token.wordCard != null) {
-      _showWordCardSheet(token.wordCard!);
+      if (globalPosition != null) {
+        _showContextualWordCard(token.wordCard!, globalPosition);
+      } else {
+        _showWordCardSheet(token.wordCard!);
+      }
       return;
     }
 
@@ -421,11 +424,123 @@ class _StudentReadingDetailPageState
           displayWord: token.displayWord,
           lookupQuery: token.lookupQuery,
         );
+        // İlerlemeyi kaydet
+        ref.read(studentReadingProgressProvider.notifier).recordReadingProgress(
+              readingId: widget.readingId,
+              sentenceIndex: lookupIndex,
+            );
       }
     });
   }
 
+  OverlayEntry? _wordCardOverlayEntry;
+
+  void _hideContextualWordCard() {
+    _wordCardOverlayEntry?.remove();
+    _wordCardOverlayEntry = null;
+  }
+
+  void _showContextualWordCard(WordEntry word, Offset position) {
+    _hideContextualWordCard();
+    
+    _wordCardOverlayEntry = OverlayEntry(
+      builder: (context) {
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _hideContextualWordCard,
+                child: Container(color: Colors.transparent),
+              ),
+            ),
+            Positioned(
+              left: position.dx > MediaQuery.sizeOf(context).width - 300
+                  ? MediaQuery.sizeOf(context).width - 300
+                  : position.dx,
+              top: position.dy + 20,
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  width: 280,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.15),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              word.enWord,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primaryContainer,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              word.pos,
+                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        word.trMeaning,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton.icon(
+                            onPressed: () {
+                              _hideContextualWordCard();
+                              _showWordCardSheet(word);
+                            },
+                            icon: const Icon(Icons.open_in_new, size: 16),
+                            label: const Text('Karta Git'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    Overlay.of(context).insert(_wordCardOverlayEntry!);
+  }
+
   Future<void> _showWordCardSheet(WordEntry word) async {
+    _hideContextualWordCard();
     await showStudentWordCardSheet(
       context,
       initialWord: word,
@@ -476,6 +591,12 @@ class _StudentReadingDetailPageState
       _loadingTranslations.remove(lookupIndex);
       _revealedTranslations.add(lookupIndex);
     });
+
+    // İlerlemeyi kaydet
+    ref.read(studentReadingProgressProvider.notifier).recordReadingProgress(
+          readingId: readingId,
+          sentenceIndex: lookupIndex,
+        );
   }
 
   void _showSnackBar(String message) {
@@ -942,6 +1063,7 @@ class _ReadingInfoPanel extends StatelessWidget {
     required this.readingId,
     required this.reading,
     required this.seed,
+    this.progress,
     required this.summary,
     required this.focusModeEnabled,
     required this.articleSections,
@@ -954,6 +1076,7 @@ class _ReadingInfoPanel extends StatelessWidget {
   final String readingId;
   final ReadingPassage reading;
   final ReadingSeedData seed;
+  final ReadingProgress? progress;
   final String? summary;
   final bool focusModeEnabled;
   final List<_ReadingArticleSection> articleSections;
@@ -999,7 +1122,10 @@ class _ReadingInfoPanel extends StatelessWidget {
           const SizedBox(height: 16),
           _MetaPill(label: 'Yazar', value: seed.author),
           const SizedBox(height: 10),
-          _MetaPill(label: 'Ilerleme', value: '%${seed.progressPercent}'),
+          _MetaPill(
+            label: 'Ilerleme',
+            value: '%${calculateReadingProgressPercent(progress)}',
+          ),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
@@ -1124,7 +1250,7 @@ class _ReadingArticlePanel extends ConsumerWidget {
   final Future<void> Function(String readingId, _ReadingArticleSection section)
   onPlaySentence;
   final Future<void> Function(_ReadingArticleSection section) onStopSentence;
-  final void Function(int lookupIndex, _SentenceToken token) onWordTap;
+  final void Function(int lookupIndex, _SentenceToken token, Offset? globalPosition)? onWordTap;
   final ValueChanged<_ReadingArticleSection> onWordLongPress;
   final void Function(ReadingQuestion question, int optionIndex)
   onQuestionSelected;
@@ -1197,33 +1323,82 @@ class _ReadingArticlePanel extends ConsumerWidget {
                             )
                           else
                             const Spacer(),
-                          StudentTtsIconButton(
-                            key: ValueKey<String>(
-                              'reading_sentence_tts_${section.lookupIndex}',
-                            ),
-                            isSpeaking: isSentenceSpeaking,
-                            isInitializing: isSentenceInitializing,
-                            isUnavailable: ttsState.isUnavailable,
-                            tooltip: isSentenceSpeaking
-                                ? 'Durdur'
-                                : 'Cumleyi dinle',
-                            iconSize: 18,
-                            visualDensity: VisualDensity.compact,
-                            onPlay: () => onPlaySentence(readingId, section),
-                            onStop: () => onStopSentence(section),
-                          ),
                         ],
                       ),
                       if (section.heading.isNotEmpty)
                         const SizedBox(height: 12),
-                      _InteractiveSentenceText(
-                        sentence: section.englishText,
-                        focusModeEnabled: focusModeEnabled,
-                        focusWordCards: linkedWordCards,
-                        selectedWord: selectedWords[section.lookupIndex],
-                        onWordTap: (token) =>
-                            onWordTap(section.lookupIndex, token),
-                        onWordLongPress: () => onWordLongPress(section),
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 24),
+                            child: _InteractiveSentenceText(
+                              section: section,
+                              focusModeEnabled: focusModeEnabled,
+                              focusWordCards: linkedWordCards,
+                              selectedWord: selectedWords[section.lookupIndex],
+                              onWordTap: onWordTap,
+                              onWordLongPress: () => onWordLongPress(section),
+                            ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                StudentTtsIconButton(
+                                  key: ValueKey<String>(
+                                    'reading_sentence_tts_${section.lookupIndex}',
+                                  ),
+                                  isSpeaking: isSentenceSpeaking,
+                                  isInitializing: isSentenceInitializing,
+                                  isUnavailable: ttsState.isUnavailable,
+                                  tooltip: isSentenceSpeaking
+                                      ? 'Durdur'
+                                      : 'Cumleyi dinle',
+                                  iconSize: 18,
+                                  visualDensity: VisualDensity.compact,
+                                  onPlay: () async {
+                                    onPlaySentence(readingId, section);
+                                    // İlerlemeyi kaydet
+                                    ref
+                                        .read(studentReadingProgressProvider.notifier)
+                                        .recordReadingProgress(
+                                          readingId: readingId,
+                                          sentenceIndex: section.lookupIndex,
+                                        );
+                                  },
+                                  onStop: () => onStopSentence(section),
+                                ),
+                                const SizedBox(width: 4),
+                                Tooltip(
+                                  message: revealedTranslations.contains(
+                                    section.lookupIndex,
+                                  )
+                                      ? 'Ceviriyi gizle'
+                                      : 'Cumleyi cevir',
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(20),
+                                    onTap: () => onWordLongPress(section),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Icon(
+                                        Icons.translate_rounded,
+                                        size: 16,
+                                        color: revealedTranslations.contains(
+                                          section.lookupIndex,
+                                        )
+                                            ? AppThemeTokens.of(context).accent
+                                            : AppThemeTokens.of(context)
+                                                .secondaryText,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                       if (selectedWords.containsKey(section.lookupIndex)) ...[
                         const SizedBox(height: 16),
@@ -1729,7 +1904,7 @@ class _ReadingNavigationButton extends StatelessWidget {
 
 class _InteractiveSentenceText extends StatelessWidget {
   const _InteractiveSentenceText({
-    required this.sentence,
+    required this.section,
     required this.focusModeEnabled,
     required this.focusWordCards,
     required this.selectedWord,
@@ -1737,11 +1912,11 @@ class _InteractiveSentenceText extends StatelessWidget {
     required this.onWordLongPress,
   });
 
-  final String sentence;
+  final _ReadingArticleSection section;
   final bool focusModeEnabled;
   final List<WordEntry> focusWordCards;
   final _SelectedDictionaryWord? selectedWord;
-  final ValueChanged<_SentenceToken> onWordTap;
+  final void Function(int lookupIndex, _SentenceToken token, Offset? globalPosition)? onWordTap;
   final VoidCallback onWordLongPress;
 
   @override
@@ -1750,80 +1925,36 @@ class _InteractiveSentenceText extends StatelessWidget {
       context,
     ).textTheme.bodyLarge?.copyWith(height: focusModeEnabled ? 1.9 : 1.6);
     final tokens = AppThemeTokens.of(context);
-    final words = _tokenizeSentence(sentence, focusWordCards);
+    final words = _tokenizeSentence(section.englishText, focusWordCards);
 
-    return Wrap(
-      spacing: 4,
-      runSpacing: focusModeEnabled ? 10 : 6,
-      children: [
-        for (final token in words)
-          _SentenceTokenChip(
-            token: token,
-            textStyle: textStyle,
-            isSelected:
-                selectedWord?.lookupQuery == token.lookupQuery &&
-                selectedWord?.displayWord == token.displayWord,
-            isFocusWord: token.wordCard != null,
-            accentColor: tokens.accentSoft,
-            focusColor: tokens.accentBlue,
-            onTap: () => onWordTap(token),
-            onLongPress: onWordLongPress,
-          ),
-      ],
-    );
-  }
-}
-
-class _SentenceTokenChip extends StatelessWidget {
-  const _SentenceTokenChip({
-    required this.token,
-    required this.textStyle,
-    required this.isSelected,
-    required this.isFocusWord,
-    required this.accentColor,
-    required this.focusColor,
-    required this.onTap,
-    required this.onLongPress,
-  });
-
-  final _SentenceToken token;
-  final TextStyle? textStyle;
-  final bool isSelected;
-  final bool isFocusWord;
-  final Color accentColor;
-  final Color focusColor;
-  final VoidCallback onTap;
-  final VoidCallback onLongPress;
-
-  @override
-  Widget build(BuildContext context) {
-    final resolvedTextStyle = (textStyle ?? const TextStyle()).copyWith(
-      fontWeight: isFocusWord ? FontWeight.w800 : textStyle?.fontWeight,
-      color: isFocusWord ? focusColor : textStyle?.color,
-      decoration: isFocusWord ? TextDecoration.underline : TextDecoration.none,
-      decorationColor: isFocusWord ? focusColor.withValues(alpha: 0.45) : null,
-      decorationThickness: isFocusWord ? 1.6 : null,
-    );
-
-    return Material(
-      color: isSelected
-          ? accentColor.withValues(alpha: 0.16)
-          : isFocusWord
-          ? focusColor.withValues(alpha: 0.08)
-          : Colors.transparent,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: token.isLookupable ? onTap : null,
-        onLongPress: onLongPress,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-          child: Text(token.displayWord, style: resolvedTextStyle),
-        ),
+    return RichText(
+      text: TextSpan(
+        children: [
+          for (final token in words)
+            TextSpan(
+              text: '${token.displayWord} ',
+              style: (textStyle ?? const TextStyle()).copyWith(
+                fontWeight: token.wordCard != null ? FontWeight.w800 : textStyle?.fontWeight,
+                color: token.wordCard != null ? tokens.accentBlue : textStyle?.color,
+                decoration: token.wordCard != null ? TextDecoration.underline : TextDecoration.none,
+                decorationColor: token.wordCard != null ? tokens.accentBlue.withValues(alpha: 0.45) : null,
+                decorationThickness: token.wordCard != null ? 1.6 : null,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTapDown = (details) {
+                  onWordTap?.call(
+                    section.lookupIndex,
+                    token,
+                    details.globalPosition,
+                  );
+                },
+            ),
+        ],
       ),
     );
   }
 }
+
 
 class _DictionaryInlinePanel extends ConsumerWidget {
   const _DictionaryInlinePanel({required this.query});

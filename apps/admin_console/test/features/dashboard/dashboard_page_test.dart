@@ -98,7 +98,7 @@ void main() {
       expect(find.text('644 / 22'), findsOneWidget);
       expect(find.text('633 / 33'), findsOneWidget);
       expect(find.text('Yayinda 5314'), findsOneWidget);
-      expect(find.text('08 Mar: 11'), findsOneWidget);
+      expect(find.text('08 Mar'), findsOneWidget); // _TrendChip label
       expect(find.text('-674'), findsNothing);
     },
   );

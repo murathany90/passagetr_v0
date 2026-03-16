@@ -10,13 +10,19 @@ class AppTheme {
     const tokens = AppThemeTokens(
       appBackground: Color(0xFFF4F6FA),
       surface: Colors.white,
+      surfaceElevated: Colors.white,
       surfaceMuted: Color(0xFFF7F9FD),
       surfaceBorder: Color(0xFFE3E8F1),
       surfaceShadow: Color(0x140F172A),
+      glassBackground: Color(0xCCFFFFFF),
+      glassBorder: Color(0x33E3E8F1),
       primaryText: Color(0xFF18243D),
       secondaryText: Color(0xFF5A6D8B),
       accent: Color(0xFF1B2D63),
       accentSoft: Color(0xFFDCE4F4),
+      accentGradient: LinearGradient(
+        colors: [Color(0xFF1B2D63), Color(0xFF2A4186)],
+      ),
       hero: Color(0xFFFF6A00),
       heroGlow: Color(0xFFFF9248),
       success: Color(0xFF11C979),
@@ -52,24 +58,30 @@ class AppTheme {
 
   static ThemeData dark() {
     const tokens = AppThemeTokens(
-      appBackground: Color(0xFF111827),
-      surface: Color(0xFF18202D),
-      surfaceMuted: Color(0xFF1E293B),
-      surfaceBorder: Color(0xFF2A374F),
-      surfaceShadow: Color(0x66000000),
+      appBackground: Color(0xFF0F172A),
+      surface: Color(0xFF1E293B),
+      surfaceElevated: Color(0xFF263146),
+      surfaceMuted: Color(0xFF18202D),
+      surfaceBorder: Color(0xFF334155),
+      surfaceShadow: Color(0x99000000),
+      glassBackground: Color(0x991E293B),
+      glassBorder: Color(0x3364748B),
       primaryText: Color(0xFFF8FAFC),
-      secondaryText: Color(0xFFB6C2D9),
-      accent: Color(0xFFC8D5FF),
+      secondaryText: Color(0xFF94A3B8),
+      accent: Color(0xFF72A3FF),
       accentSoft: Color(0xFF24314B),
-      hero: Color(0xFFFF6A00),
+      accentGradient: LinearGradient(
+        colors: [Color(0xFF72A3FF), Color(0xFF3B82F6)],
+      ),
+      hero: Color(0xFFFF7E33),
       heroGlow: Color(0xFFFF9248),
-      success: Color(0xFF11C979),
-      warning: Color(0xFFF8A200),
+      success: Color(0xFF22D3EE),
+      warning: Color(0xFFFBBF24),
       badgeOrange: Color(0xFFFF8C63),
       accentBlue: Color(0xFF72A3FF),
-      purple: Color(0xFF8D84FF),
-      pink: Color(0xFFFF5A8C),
-      green: Color(0xFF14C77F),
+      purple: Color(0xFFA78BFA),
+      pink: Color(0xFFFB7185),
+      green: Color(0xFF34D399),
       railBackground: Color(0xFF0F172A),
       mobileNavBackground: Color(0xFF0F172A),
       cardRadius: 24,
@@ -129,24 +141,28 @@ class AppTheme {
           height: 1.05,
           fontWeight: FontWeight.w800,
           color: tokens.primaryText,
+          letterSpacing: -1.5,
         ),
         displaySmall: TextStyle(
           fontSize: 22,
           height: 1.2,
           fontWeight: FontWeight.w800,
           color: tokens.primaryText,
+          letterSpacing: -0.5,
         ),
         headlineMedium: TextStyle(
           fontSize: 30,
           height: 1.14,
           fontWeight: FontWeight.w800,
           color: tokens.primaryText,
+          letterSpacing: -1,
         ),
         headlineSmall: TextStyle(
           fontSize: 22,
           height: 1.2,
           fontWeight: FontWeight.w800,
           color: tokens.primaryText,
+          letterSpacing: -0.5,
         ),
         titleLarge: TextStyle(
           fontSize: 18,
@@ -190,8 +206,8 @@ class AppTheme {
       appBarTheme: AppBarThemeData(
         backgroundColor: tokens.surface,
         elevation: 0,
-        scrolledUnderElevation: 0,
-        surfaceTintColor: Colors.transparent,
+        scrolledUnderElevation: 8,
+        surfaceTintColor: tokens.appBackground.withValues(alpha: 0.1),
         foregroundColor: tokens.primaryText,
         titleTextStyle: textTheme.headlineSmall,
       ),
@@ -202,7 +218,7 @@ class AppTheme {
         shadowColor: tokens.surfaceShadow,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(tokens.cardRadius),
-          side: BorderSide(color: tokens.surfaceBorder),
+          side: BorderSide(color: tokens.surfaceBorder, width: 1),
         ),
       ),
       chipTheme: ChipThemeData(
@@ -220,9 +236,9 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: tokens.surface,
+        fillColor: tokens.surfaceMuted.withValues(alpha: 0.5),
         hintStyle: textTheme.titleMedium?.copyWith(
-          color: tokens.secondaryText.withValues(alpha: 0.78),
+          color: tokens.secondaryText.withValues(alpha: 0.6),
         ),
         labelStyle: textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
         prefixIconColor: tokens.secondaryText,
@@ -231,15 +247,15 @@ class AppTheme {
           vertical: 18,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(tokens.cardRadius - 8),
+          borderRadius: BorderRadius.circular(tokens.cardRadius - 4),
           borderSide: BorderSide(color: tokens.surfaceBorder),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(tokens.cardRadius - 8),
+          borderRadius: BorderRadius.circular(tokens.cardRadius - 4),
           borderSide: BorderSide(color: tokens.surfaceBorder),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(tokens.cardRadius - 8),
+          borderRadius: BorderRadius.circular(tokens.cardRadius - 4),
           borderSide: BorderSide(color: tokens.accent, width: 1.5),
         ),
       ),
@@ -251,7 +267,11 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(tokens.pillRadius),
           ),
-          textStyle: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+          textStyle: textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            letterSpacing: 0.5,
+          ),
+          elevation: 0,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -302,7 +322,7 @@ class AppTheme {
           if (states.contains(WidgetState.selected)) {
             return tokens.accent;
           }
-          return tokens.surface;
+          return tokens.secondaryText.withValues(alpha: 0.5);
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {

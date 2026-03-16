@@ -52,6 +52,7 @@ final adminConsoleRouterProvider = Provider<GoRouter>((ref) {
           child: DeferredPageLoader(
             loadLibrary: dashboard_page.loadLibrary,
             builder: (context) => dashboard_page.AdminDashboardPage(),
+            errorBuilder: (context, error) => const _DeferredErrorState(),
           ),
         ),
       ),
@@ -61,6 +62,7 @@ final adminConsoleRouterProvider = Provider<GoRouter>((ref) {
           child: DeferredPageLoader(
             loadLibrary: users_page.loadLibrary,
             builder: (context) => users_page.AdminUsersPage(),
+            errorBuilder: (context, error) => const _DeferredErrorState(),
           ),
         ),
       ),
@@ -74,6 +76,7 @@ final adminConsoleRouterProvider = Provider<GoRouter>((ref) {
           child: DeferredPageLoader(
             loadLibrary: ai_assistant_page.loadLibrary,
             builder: (context) => ai_assistant_page.AdminAiAssistantPage(),
+            errorBuilder: (context, error) => const _DeferredErrorState(),
           ),
         ),
       ),
@@ -116,6 +119,7 @@ final adminConsoleRouterProvider = Provider<GoRouter>((ref) {
           child: DeferredPageLoader(
             loadLibrary: settings_page.loadLibrary,
             builder: (context) => settings_page.AdminSettingsPage(),
+            errorBuilder: (context, error) => const _DeferredErrorState(),
           ),
         ),
       ),
@@ -154,5 +158,38 @@ class _AdminRouteLoadingScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: Center(child: CircularProgressIndicator()));
+  }
+}
+
+/// B5: Deferred page yükleme hataları için fallback widget'l.
+class _DeferredErrorState extends StatelessWidget {
+  const _DeferredErrorState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.cloud_off_rounded, size: 48),
+              const SizedBox(height: 16),
+              const Text(
+                'Sayfa yüklenemedi',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Ağ bağlantınızı kontrol edin ve sayfayı yenileyin.',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

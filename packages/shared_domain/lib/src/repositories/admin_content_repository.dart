@@ -97,6 +97,20 @@ abstract interface class AdminContentRepository {
 
   Future<AppResult<void>> deleteReading({required String readingId});
 
+  Future<AppResult<void>> setContentPublishedBulk({
+    required String entityType,
+    required List<String> entityIds,
+    required bool isPublished,
+  });
+
+  Future<AppResult<void>> deleteWordsBulk({required List<String> wordIds});
+
+  Future<AppResult<void>> deleteReadingsBulk({required List<String> readingIds});
+
+  Future<AppResult<void>> deleteGrammarModulesBulk({
+    required List<int> moduleIds,
+  });
+
   Future<AppResult<AdminGrammarModuleDetail>> fetchGrammarModuleDetail({
     required int moduleId,
   });

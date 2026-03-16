@@ -40,7 +40,7 @@ class _StudentFlashcardsPageState extends ConsumerState<StudentFlashcardsPage> {
 
   @override
   void dispose() {
-    unawaited(_ttsController.stop());
+    _ttsController.stop();
     super.dispose();
   }
 

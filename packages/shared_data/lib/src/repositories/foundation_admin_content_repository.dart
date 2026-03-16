@@ -7,10 +7,26 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../bootstrap/supabase_bootstrap.dart';
 
 class FoundationAdminContentRepository implements AdminContentRepository {
-  const FoundationAdminContentRepository({required AppConfig config})
-    : _config = config;
+  const FoundationAdminContentRepository({
+    required AppConfig config,
+    required AuthRepository authRepository,
+  }) : _config = config,
+       _authRepository = authRepository;
 
   final AppConfig _config;
+  final AuthRepository _authRepository;
+
+  void _handleError(Object error) {
+    if (error is PostgrestException) {
+      if (error.code == '401' || error.code == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    } else if (error is AuthException) {
+      if (error.statusCode == '401' || error.statusCode == '403') {
+        _authRepository.notifySessionExpired();
+      }
+    }
+  }
 
   @override
   Future<AppResult<void>> setContentPublished({
@@ -33,6 +49,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Icerik yayin durumu guncellenemedi: $error');
     }
   }
@@ -57,6 +74,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return AppSuccess<AdminPackDetail>(AdminPackDetail.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminPackDetail>('Paket detayi yuklenemedi: $error');
     }
   }
@@ -95,6 +113,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return AppSuccess<AdminPackDetail>(AdminPackDetail.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminPackDetail>('Paket kaydedilemedi: $error');
     }
   }
@@ -112,6 +131,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Paket silinemedi: $error');
     }
   }
@@ -133,6 +153,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return AppSuccess<AdminWordDetail>(AdminWordDetail.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminWordDetail>('Kelime detayi yuklenemedi: $error');
     }
   }
@@ -192,6 +213,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return AppSuccess<AdminWordDetail>(AdminWordDetail.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminWordDetail>('Kelime kaydedilemedi: $error');
     }
   }
@@ -209,6 +231,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Kelime silinemedi: $error');
     }
   }
@@ -229,6 +252,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('CSV import tamamlanamadi: $error');
     }
   }
@@ -255,6 +279,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Okuma CSV import tamamlanamadi: $error');
     }
   }
@@ -278,6 +303,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         AdminReadingDetail.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminReadingDetail>('Okuma detayi yuklenemedi: $error');
     }
   }
@@ -329,6 +355,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         AdminReadingDetail.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminReadingDetail>('Okuma kaydedilemedi: $error');
     }
   }
@@ -394,6 +421,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         await _removeStoredCover(existingDetail.cover);
         return AppSuccess<AdminReadingDetail>(detail);
       } catch (error) {
+      _handleError(error);
         await Supabase.instance.client.storage.from(bucketName).remove([
           storagePath,
         ]);
@@ -402,6 +430,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         );
       }
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminReadingDetail>('Cover yuklenemedi: $error');
     }
   }
@@ -435,6 +464,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       await _removeStoredCover(existingDetail.cover);
       return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminReadingDetail>('Cover silinemedi: $error');
     }
   }
@@ -464,6 +494,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         AdminReadingDetail.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminReadingDetail>(
         'Odak kelimeler otomatik atanamadi: $error',
       );
@@ -496,6 +527,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         AdminBulkReadingFocusWordAssignmentResult.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminBulkReadingFocusWordAssignmentResult>(
         'Toplu odak kelime atama tamamlanamadi: $error',
       );
@@ -515,7 +547,91 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Okuma silinemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<void>> setContentPublishedBulk({
+    required String entityType,
+    required List<String> entityIds,
+    required bool isPublished,
+  }) async {
+    if (!_config.supabaseEnabled || entityIds.isEmpty) {
+      return const AppSuccess<void>(null);
+    }
+
+    try {
+      final futures = entityIds.map((id) => setContentPublished(
+          entityType: entityType,
+          entityId: id,
+          isPublished: isPublished,
+        ),
+      );
+      final results = await Future.wait(futures);
+      final failure = results.whereType<AppFailure<void>>().firstOrNull;
+      if (failure != null) return failure;
+      return const AppSuccess<void>(null);
+    } catch (error) {
+      _handleError(error);
+      return AppFailure<void>('Toplu yayin durumu guncellenemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<void>> deleteWordsBulk({required List<String> wordIds}) async {
+    if (!_config.supabaseEnabled || wordIds.isEmpty) {
+      return const AppSuccess<void>(null);
+    }
+
+    try {
+      final futures = wordIds.map((id) => deleteWord(wordId: id));
+      final results = await Future.wait(futures);
+      final failure = results.whereType<AppFailure<void>>().firstOrNull;
+      if (failure != null) return failure;
+      return const AppSuccess<void>(null);
+    } catch (error) {
+      _handleError(error);
+      return AppFailure<void>('Kelimeler toplu silinemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<void>> deleteReadingsBulk({required List<String> readingIds}) async {
+    if (!_config.supabaseEnabled || readingIds.isEmpty) {
+      return const AppSuccess<void>(null);
+    }
+
+    try {
+      final futures = readingIds.map((id) => deleteReading(readingId: id));
+      final results = await Future.wait(futures);
+      final failure = results.whereType<AppFailure<void>>().firstOrNull;
+      if (failure != null) return failure;
+      return const AppSuccess<void>(null);
+    } catch (error) {
+      _handleError(error);
+      return AppFailure<void>('Okumalar toplu silinemedi: $error');
+    }
+  }
+
+  @override
+  Future<AppResult<void>> deleteGrammarModulesBulk({
+    required List<int> moduleIds,
+  }) async {
+    if (!_config.supabaseEnabled || moduleIds.isEmpty) {
+      return const AppSuccess<void>(null);
+    }
+
+    try {
+      final futures = moduleIds.map((id) => deleteGrammarModule(moduleId: id));
+      final results = await Future.wait(futures);
+      final failure = results.whereType<AppFailure<void>>().firstOrNull;
+      if (failure != null) return failure;
+      return const AppSuccess<void>(null);
+    } catch (error) {
+      _handleError(error);
+      return AppFailure<void>('Gramer modulleri toplu silinemedi: $error');
     }
   }
 
@@ -540,6 +656,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         AdminGrammarModuleDetail.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminGrammarModuleDetail>(
         'Gramer modulu detayi yuklenemedi: $error',
       );
@@ -593,6 +710,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         AdminGrammarModuleDetail.fromJson(payload),
       );
     } catch (error) {
+      _handleError(error);
       return AppFailure<AdminGrammarModuleDetail>(
         'Gramer modulu kaydedilemedi: $error',
       );
@@ -612,6 +730,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Gramer modulu silinemedi: $error');
     }
   }
@@ -631,6 +750,7 @@ class FoundationAdminContentRepository implements AdminContentRepository {
       );
       return const AppSuccess<void>(null);
     } catch (error) {
+      _handleError(error);
       return AppFailure<void>('Gramer sirasi guncellenemedi: $error');
     }
   }

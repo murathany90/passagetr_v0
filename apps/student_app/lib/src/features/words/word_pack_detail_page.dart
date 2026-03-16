@@ -36,7 +36,7 @@ class _StudentWordPackDetailPageState
 
   @override
   void dispose() {
-    unawaited(_ttsController.stop());
+    _ttsController.stop();
     super.dispose();
   }
 

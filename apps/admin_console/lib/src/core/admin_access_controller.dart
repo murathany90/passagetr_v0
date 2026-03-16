@@ -23,11 +23,36 @@ class AdminAccessController extends StateNotifier<AdminAuthState> {
       }
       state = _stateForContext(context);
     });
+    _expirySubscription = _authRepository.onSessionExpired.listen((_) {
+      expireSession();
+    });
   }
 
   final AuthRepository _authRepository;
   StreamSubscription<AccessContext>? _subscription;
+  StreamSubscription<void>? _expirySubscription;
+  Timer? _permissionTimer;
   bool _suspendStreamUpdates = false;
+
+  void _startPermissionTimer() {
+    _permissionTimer?.cancel();
+    _permissionTimer = Timer.periodic(const Duration(minutes: 15), (_) {
+      _fetchAndVerifyRole();
+    });
+  }
+
+  Future<void> _fetchAndVerifyRole() async {
+    if (!state.isAuthenticated) return;
+
+    final result = await _authRepository.fetchCurrentRole();
+    if (result case AppSuccess<AppRole>()) {
+      if (result.value != AppRole.admin && result.value != AppRole.superAdmin) {
+        await expireSession(
+          message: 'Yetkileriniz degisti. Artik admin console erisiminiz yok.',
+        );
+      }
+    }
+  }
 
   Future<void> restoreSession() async {
     state = state.copyWith(
@@ -38,6 +63,9 @@ class AdminAccessController extends StateNotifier<AdminAuthState> {
     final session = await _authRepository.restoreSession();
     _suspendStreamUpdates = false;
     state = _stateForContext(AccessContext.fromSession(session));
+    if (state.isAuthenticated) {
+      _startPermissionTimer();
+    }
   }
 
   Future<AppResult<AuthSession>> refreshSession() async {
@@ -46,6 +74,9 @@ class AdminAccessController extends StateNotifier<AdminAuthState> {
     final result = await _authRepository.refreshSession();
     _suspendStreamUpdates = false;
     _updateFromResult(result);
+    if (state.isAuthenticated) {
+      _startPermissionTimer();
+    }
     return result;
   }
 
@@ -94,6 +125,7 @@ class AdminAccessController extends StateNotifier<AdminAuthState> {
     }
 
     state = _stateForContext(resolvedContext);
+    _startPermissionTimer();
     return AppSuccess<AuthSession>(resolvedContext.session);
   }
 
@@ -186,6 +218,8 @@ class AdminAccessController extends StateNotifier<AdminAuthState> {
   @override
   void dispose() {
     _subscription?.cancel();
+    _expirySubscription?.cancel();
+    _permissionTimer?.cancel();
     super.dispose();
   }
 }
