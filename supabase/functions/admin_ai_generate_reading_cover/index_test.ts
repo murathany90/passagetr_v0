@@ -77,7 +77,7 @@ Deno.test("default ImageRouter request downloads URL response", async () => {
     {
       env: (name) => {
         if (name === "IMAGEROUTER_API_KEY") {
-          return "ir-key";
+          return "ir_test_key";
         }
         return undefined;
       },
@@ -131,8 +131,72 @@ Deno.test("default ImageRouter request downloads URL response", async () => {
   assertEquals(seenModel, "google/nano-banana-2:free");
   assertEquals(seenUrls[0], "https://api.imagerouter.io/v1/openai/images/generations");
   assertEquals(seenUrls[1], "https://cdn.imagerouter.io/generated/test.png");
-  assertEquals(seenAuthHeader, "Bearer ir-key");
+  assertEquals(seenAuthHeader, "Bearer ir_test_key");
   assertEquals(seenBody.includes('"model":"google/nano-banana-2:free"'), true);
+  assertEquals(seenBody.includes('"size":"1024x1024"'), true);
+  assertEquals(seenBody.includes('"response_format":"url"'), true);
+  assertEquals(seenBody.includes('"output_format"'), false);
+});
+
+Deno.test("invalid ImageRouter key format returns actionable auth guidance", async () => {
+  let fetchCalled = false;
+
+  const response = await handleRequest(
+    requestWithBody({
+      reading_id: "reading-1",
+      provider: "imagerouter",
+      model: "google/nano-banana-2:free",
+    }),
+    {
+      env: (name) => {
+        if (name === "IMAGEROUTER_API_KEY") {
+          return "plain-text-key";
+        }
+        return undefined;
+      },
+      resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
+      fetchReadingDetail: async () => readingDetail,
+      reserveAttempt: async () => ({ allowed: true }),
+      markAttemptResult: async () => undefined,
+      fetchFn: async () => {
+        fetchCalled = true;
+        return new Response("unexpected", { status: 500 });
+      },
+    },
+  );
+
+  assertEquals(response.status, 422);
+  const payload = await response.json();
+  assertEquals(payload.error, "invalid_ai_response");
+  assertEquals(String(payload.message).includes("ir_"), true);
+  assertEquals(fetchCalled, false);
+});
+
+Deno.test("invalid Hugging Face token format returns actionable auth guidance", async () => {
+  const response = await handleRequest(
+    requestWithBody({
+      reading_id: "reading-1",
+      provider: "huggingface",
+      model: "stabilityai/stable-diffusion-xl-base-1.0",
+    }),
+    {
+      env: (name) => {
+        if (name === "HUGGINGFACE_API_TOKEN") {
+          return "plain-token";
+        }
+        return undefined;
+      },
+      resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
+      fetchReadingDetail: async () => readingDetail,
+      reserveAttempt: async () => ({ allowed: true }),
+      markAttemptResult: async () => undefined,
+    },
+  );
+
+  assertEquals(response.status, 422);
+  const payload = await response.json();
+  assertEquals(payload.error, "invalid_ai_response");
+  assertEquals(String(payload.message).includes("hf_"), true);
 });
 
 Deno.test("default Hugging Face request retries one 503 and then succeeds", async () => {
@@ -148,7 +212,7 @@ Deno.test("default Hugging Face request retries one 503 and then succeeds", asyn
     {
       env: (name) => {
         if (name === "HUGGINGFACE_API_TOKEN") {
-          return "hf-token";
+          return "hf_test_token";
         }
         return undefined;
       },
@@ -195,6 +259,62 @@ Deno.test("default Hugging Face request retries one 503 and then succeeds", asyn
   assertEquals(response.status, 200);
   assertEquals(callCount, 2);
   assertEquals(marked, ["rate_limited", "success"]);
+});
+
+Deno.test("default Hugging Face falls back to classic inference endpoint after router auth failure", async () => {
+  const seenUrls: string[] = [];
+
+  const response = await handleRequest(
+    requestWithBody({
+      reading_id: "reading-1",
+      provider: "huggingface",
+      model: "stabilityai/stable-diffusion-xl-base-1.0",
+    }),
+    {
+      env: (name) => {
+        if (name === "HUGGINGFACE_API_TOKEN") {
+          return "hf_test_token";
+        }
+        return undefined;
+      },
+      resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
+      fetchReadingDetail: async () => readingDetail,
+      reserveAttempt: async () => ({ allowed: true }),
+      markAttemptResult: async () => undefined,
+      fetchFn: async (input) => {
+        const url = String(input);
+        seenUrls.push(url);
+        if (url.startsWith("https://router.huggingface.co/")) {
+          return new Response(
+            JSON.stringify({ error: "missing inference providers permission" }),
+            {
+              status: 401,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }
+        return new Response(new Uint8Array([7, 8, 9]), {
+          status: 200,
+          headers: { "Content-Type": "image/png" },
+        });
+      },
+      persistCover: async () => ({
+        id: "reading-1",
+        title: "Ocean Science",
+        sentences: [{ idx: 1, sentence_en: "Waves carry energy across the sea." }],
+        cover_media_asset_id: "asset-1",
+        cover_bucket_name: "reading-covers",
+        cover_storage_path: "readings/reading-1/asset-1.png",
+        cover_alt_text: "Ocean Science cover",
+      }),
+    },
+  );
+
+  assertEquals(response.status, 200);
+  assertEquals(seenUrls, [
+    "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0",
+    "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
+  ]);
 });
 
 Deno.test("auto mode falls back from ImageRouter rate limit to Hugging Face", async () => {

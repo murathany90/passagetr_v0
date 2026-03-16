@@ -301,7 +301,7 @@ function classifyCoverError(
         status: 422,
         error: "invalid_ai_response",
         message:
-          "AI cover saglayicisi yetki hatasi verdi. ImageRouter veya Hugging Face API ayarlarini kontrol edin.",
+          "AI cover saglayicisi yetki hatasi verdi. ImageRouter anahtari ir_ ile baslamali; Hugging Face tokeni hf_ ile baslamali ve Inference Providers erisimine sahip olmali.",
       };
     }
     return {
@@ -329,14 +329,16 @@ function classifyCoverError(
   if (
     lowered.includes("api key") ||
     lowered.includes("unauthorized") ||
-    lowered.includes("forbidden")
+    lowered.includes("forbidden") ||
+    lowered.includes("permission") ||
+    lowered.includes("inference providers")
   ) {
     return {
       status: 422,
       error: "invalid_ai_response",
       message:
-        "AI cover saglayicisi yetki hatasi verdi. ImageRouter veya Hugging Face API ayarlarini kontrol edin.",
-      };
+        "AI cover saglayicisi yetki hatasi verdi. ImageRouter anahtari ir_ ile baslamali; Hugging Face tokeni hf_ ile baslamali ve Inference Providers erisimine sahip olmali.",
+    };
   }
   return {
     status: 422,
@@ -597,6 +599,14 @@ async function defaultGenerateImageRouter(
       false,
     );
   }
+  if (!apiKey.startsWith("ir_")) {
+    throw new CoverGenerationError(
+      "ImageRouter API key format is invalid. Expected an ir_ prefix.",
+      401,
+      "failed",
+      false,
+    );
+  }
 
   const baseUrl = (env("IMAGEROUTER_BASE_URL")?.trim() ??
     "https://api.imagerouter.io").replace(/\/+$/, "");
@@ -612,10 +622,8 @@ async function defaultGenerateImageRouter(
         model,
         prompt,
         n: 1,
-        quality: "auto",
-        size: "auto",
+        size: "1024x1024",
         response_format: "url",
-        output_format: "png",
       }),
     },
   );
@@ -676,62 +684,90 @@ async function defaultGenerateHuggingFace(
       false,
     );
   }
+  if (!token.startsWith("hf_")) {
+    throw new CoverGenerationError(
+      "Hugging Face token format is invalid. Expected an hf_ prefix.",
+      401,
+      "failed",
+      false,
+    );
+  }
 
-  const response = await fetchFn(
-    `https://router.huggingface.co/hf-inference/models/${huggingFaceModelPath(model)}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: prompt,
-        parameters: {
-          width: 1024,
-          height: 1024,
-          num_inference_steps: 30,
-        },
-      }),
+  const payloadBody = JSON.stringify({
+    inputs: prompt,
+    parameters: {
+      width: 1024,
+      height: 1024,
+      num_inference_steps: 30,
     },
-  );
-
-  if (!response.ok) {
-    const payload = await parseResponsePayload(response);
-    throw createProviderError(
-      response.status,
-      payloadMessage(
-        payload,
-        `Hugging Face request failed with ${response.status}.`,
-      ),
+  });
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  const requestBinary = async (url: string): Promise<{ bytes: Uint8Array; mimeType: string }> => {
+    const response = await fetchFn(
+      url,
+      {
+        method: "POST",
+        headers,
+        body: payloadBody,
+      },
     );
-  }
 
-  const mimeType = normalizeNullableText(response.headers.get("content-type")) ??
-    "image/png";
-  if (mimeType.toLowerCase().includes("json")) {
-    const payload = await parseResponsePayload(response);
-    throw new CoverGenerationError(
-      payloadMessage(payload, "Hugging Face response did not include binary image data."),
-      422,
-      "failed",
-      false,
+    if (!response.ok) {
+      const payload = await parseResponsePayload(response);
+      throw createProviderError(
+        response.status,
+        payloadMessage(
+          payload,
+          `Hugging Face request failed with ${response.status}.`,
+        ),
+      );
+    }
+
+    const mimeType = normalizeNullableText(response.headers.get("content-type")) ??
+      "image/png";
+    if (mimeType.toLowerCase().includes("json")) {
+      const payload = await parseResponsePayload(response);
+      throw new CoverGenerationError(
+        payloadMessage(payload, "Hugging Face response did not include binary image data."),
+        422,
+        "failed",
+        false,
+      );
+    }
+
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    if (bytes.length === 0) {
+      throw new CoverGenerationError(
+        "Hugging Face returned an empty image response.",
+        422,
+        "failed",
+        false,
+      );
+    }
+    return { bytes, mimeType };
+  };
+
+  let downloaded: { bytes: Uint8Array; mimeType: string };
+  try {
+    downloaded = await requestBinary(
+      `https://router.huggingface.co/hf-inference/models/${huggingFaceModelPath(model)}`,
     );
-  }
-
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  if (bytes.length === 0) {
-    throw new CoverGenerationError(
-      "Hugging Face returned an empty image response.",
-      422,
-      "failed",
-      false,
+  } catch (error) {
+    const providerError = toProviderError(error);
+    if (providerError.status !== 401 && providerError.status !== 403) {
+      throw providerError;
+    }
+    downloaded = await requestBinary(
+      `https://api-inference.huggingface.co/models/${huggingFaceModelPath(model)}`,
     );
   }
 
   return {
-    bytes,
-    mimeType,
+    bytes: downloaded.bytes,
+    mimeType: downloaded.mimeType,
     provider: providerHuggingFace,
     model,
     style: coverStyle,

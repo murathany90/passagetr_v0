@@ -3228,9 +3228,6 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       if (mounted && !_isQuestionJob) {
         unawaited(_refreshCoverPoolStatus());
       }
-      if (mounted && _run != null && _run!.isActive && !_run!.isPaused) {
-        unawaited(_pumpRun());
-      }
     });
   }
 
@@ -3370,6 +3367,13 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('${_jobLabel(run.jobType)} / ${run.status}'),
+        if (run.isActive && !run.isPaused && !_isPumping) ...[
+          const SizedBox(height: 12),
+          Text(
+            "Bu run aktif durumda. Isleme devam etmek icin Devam Et'e basin.",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ],
         const SizedBox(height: 12),
         LinearProgressIndicator(
           value: run.totalCount <= 0
@@ -3513,7 +3517,7 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
     }
 
     final canPause = !_isActing && (run.status == 'running' || run.status == 'queued');
-    final canResume = !_isActing && run.status == 'paused';
+    final canContinue = !_isActing && !_isPumping && run.isActive;
     final canCancel = !_isActing && run.isActive;
     return [
       TextButton(
@@ -3525,9 +3529,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
           onPressed: _handlePause,
           child: const Text('Duraklat'),
         ),
-      if (canResume)
+      if (run.isActive)
         FilledButton.tonal(
-          onPressed: _handleResume,
+          onPressed: canContinue ? _handleContinue : null,
           child: const Text('Devam Et'),
         ),
       if (canCancel)
@@ -3612,6 +3616,21 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
     );
   }
 
+  Future<void> _handleContinue() async {
+    final run = _run;
+    if (run == null) {
+      return;
+    }
+    if (run.isPaused) {
+      await _handleResume();
+      return;
+    }
+    setState(() {
+      _errorText = null;
+    });
+    await _pumpRun();
+  }
+
   Future<void> _handleCancel() async {
     await _runControlAction(action: 'cancel');
   }
@@ -3668,7 +3687,13 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
     if (_isPumping) {
       return;
     }
-    _isPumping = true;
+    if (mounted) {
+      setState(() {
+        _isPumping = true;
+      });
+    } else {
+      _isPumping = true;
+    }
     try {
       while (mounted) {
         final run = _run;
@@ -3709,7 +3734,13 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
         await Future<void>.delayed(const Duration(seconds: 10));
       }
     } finally {
-      _isPumping = false;
+      if (mounted) {
+        setState(() {
+          _isPumping = false;
+        });
+      } else {
+        _isPumping = false;
+      }
     }
   }
 
