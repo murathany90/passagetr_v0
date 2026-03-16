@@ -236,6 +236,10 @@ function extractErrorMessage(payload: Record<string, unknown>): string {
   );
 }
 
+function isInvalidSourceReading(payload: Record<string, unknown>): boolean {
+  return String(payload.error ?? "").trim() == "invalid_source_reading";
+}
+
 export async function handleRequest(
   req: Request,
   deps: Partial<HandlerDeps> = {},
@@ -394,10 +398,12 @@ export async function handleRequest(
         );
 
         if (generated.status >= 400) {
+          const isSkippedInvalidSource = run.job_type == "cover_backfill" &&
+            isInvalidSourceReading(generated.payload);
           await (deps.markItem ?? markItem)(
             callerClient,
             item.item_id,
-            "failed",
+            isSkippedInvalidSource ? "skipped" : "failed",
             extractErrorMessage(generated.payload),
           );
           continue;

@@ -59,6 +59,9 @@ void main() {
       '202603140041_reading_ai_questions_and_cover_pipeline.sql',
       '202603150042_reading_ai_run_controls.sql',
       '202603150043_cover_backfill_failure_rate_guard.sql',
+      '202603150044_admin_dashboard_content_metrics.sql',
+      '202603150045_ai_cover_provider_pool.sql',
+      '202603160046_cover_backfill_auth_fallback_and_ordering.sql',
     ];
 
     final fileNames = migrationDir
@@ -233,6 +236,38 @@ void main() {
     expect(sql, contains("'question_count'"));
   });
 
+  test('phase 11.7 AI cover pool migration contains provider pool RPCs', () {
+    final migrationFile = File(
+      '${migrationDir.path}${Platform.pathSeparator}202603150045_ai_cover_provider_pool.sql',
+    );
+    final sql = migrationFile.readAsStringSync();
+
+    expect(sql, contains('ai_cover_model_daily_usage'));
+    expect(sql, contains('admin_default_ai_cover_settings'));
+    expect(sql, contains('admin_get_ai_cover_pool_status'));
+    expect(sql, contains('admin_reserve_ai_cover_model_attempt'));
+    expect(sql, contains('admin_mark_ai_cover_model_attempt_result'));
+    expect(sql, contains('provider_migration_required'));
+    expect(sql, contains("'cover_auto'"));
+    expect(sql, contains("'huggingface'"));
+    expect(sql, contains("'imagerouter'"));
+  });
+
+  test(
+    'phase 11.7a cover fallback migration contains deterministic cover ordering',
+    () {
+      final migrationFile = File(
+        '${migrationDir.path}${Platform.pathSeparator}202603160046_cover_backfill_auth_fallback_and_ordering.sql',
+      );
+      final sql = migrationFile.readAsStringSync();
+
+      expect(sql, contains('admin_create_reading_ai_run'));
+      expect(sql, contains("when v_job_type = 'cover_backfill' then lower(coalesce(rp.title, ''))"));
+      expect(sql, contains("when v_job_type = 'cover_backfill' then rp.id::text"));
+      expect(sql, contains('requested.ord asc'));
+    },
+  );
+
   test(
     'word pack reclassification migration contains preview and apply RPCs',
     () {
@@ -312,26 +347,63 @@ void main() {
     );
     final sql = migrationFile.readAsStringSync();
 
-    expect(sql, contains("status in ('queued', 'running', 'paused', 'completed', 'failed', 'cancelled')"));
+    expect(
+      sql,
+      contains(
+        "status in ('queued', 'running', 'paused', 'completed', 'failed', 'cancelled')",
+      ),
+    );
     expect(sql, contains('pause_reason text'));
     expect(sql, contains('last_error_message text'));
-    expect(sql, contains('consecutive_failure_count integer not null default 0'));
+    expect(
+      sql,
+      contains('consecutive_failure_count integer not null default 0'),
+    );
     expect(sql, contains('admin_list_active_reading_ai_runs'));
     expect(sql, contains('admin_control_reading_ai_run'));
     expect(sql, contains("'auto_failure_threshold'"));
     expect(sql, contains("status = 'paused'"));
   });
 
-  test('phase 11.4.1 cover backfill guard migration contains failure rate pause', () {
-    final migrationFile = File(
-      '${migrationDir.path}${Platform.pathSeparator}202603150043_cover_backfill_failure_rate_guard.sql',
-    );
-    final sql = migrationFile.readAsStringSync();
+  test(
+    'phase 11.4.1 cover backfill guard migration contains failure rate pause',
+    () {
+      final migrationFile = File(
+        '${migrationDir.path}${Platform.pathSeparator}202603150043_cover_backfill_failure_rate_guard.sql',
+      );
+      final sql = migrationFile.readAsStringSync();
 
-    expect(sql, contains('admin_mark_reading_ai_run_item'));
-    expect(sql, contains('auto_failure_rate_threshold'));
-    expect(sql, contains('v_processed_count >= 10'));
-    expect(sql, contains('(v_failed_count * 100) >= (v_processed_count * 60)'));
-    expect(sql, contains('last_error_message = null'));
-  });
+      expect(sql, contains('admin_mark_reading_ai_run_item'));
+      expect(sql, contains('auto_failure_rate_threshold'));
+      expect(sql, contains('v_processed_count >= 10'));
+      expect(
+        sql,
+        contains('(v_failed_count * 100) >= (v_processed_count * 60)'),
+      );
+      expect(sql, contains('last_error_message = null'));
+    },
+  );
+
+  test(
+    'phase 11.6 dashboard metrics migration contains coverage and content trend',
+    () {
+      final migrationFile = File(
+        '${migrationDir.path}${Platform.pathSeparator}202603150044_admin_dashboard_content_metrics.sql',
+      );
+      final sql = migrationFile.readAsStringSync();
+
+      expect(sql, contains('admin_fetch_dashboard_snapshot'));
+      expect(sql, contains("'reading_inventory'"));
+      expect(sql, contains("'word_inventory'"));
+      expect(sql, contains("'grammar_inventory'"));
+      expect(sql, contains("'mini_test_coverage'"));
+      expect(sql, contains("'cover_coverage'"));
+      expect(sql, contains("'linked_word_coverage'"));
+      expect(sql, contains("'dictionary_match_coverage'"));
+      expect(sql, contains("'dictionary_entry_count'"));
+      expect(sql, contains("'content_trend'"));
+      expect(sql, contains('dictionary_entries'));
+      expect(sql, contains('admin.reading.cover.set'));
+    },
+  );
 }

@@ -140,6 +140,27 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
   }
 
   @override
+  Future<AppResult<AdminAiCoverPoolStatus>> fetchAiCoverPoolStatus() async {
+    if (!_config.supabaseEnabled) {
+      return AppSuccess<AdminAiCoverPoolStatus>(_previewCoverPoolStatus());
+    }
+
+    try {
+      final payload = await _invokeJsonRpc(
+        'admin_get_ai_cover_pool_status',
+        params: const <String, dynamic>{},
+      );
+      return AppSuccess<AdminAiCoverPoolStatus>(
+        AdminAiCoverPoolStatus.fromJson(payload),
+      );
+    } catch (error) {
+      return AppFailure<AdminAiCoverPoolStatus>(
+        'AI cover havuz durumu okunamadi: $error',
+      );
+    }
+  }
+
+  @override
   Future<AppResult<AdminAiReadingRun>> createReadingAiRun(
     AdminAiReadingRunRequest request,
   ) async {
@@ -492,6 +513,26 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
     }
     return 'AI draft olusturulamadi: $error';
   }
+}
+
+AdminAiCoverPoolStatus _previewCoverPoolStatus() {
+  final models = adminDefaultAiCoverModelConfigs()
+      .map(
+        (item) => AdminAiCoverModelUsageStatus(
+          provider: item.provider,
+          model: item.modelId,
+          enabled: item.enabled,
+          priority: item.priority,
+          dailyCap: item.dailyCap,
+          lifetimeCap: item.lifetimeCap,
+        ),
+      )
+      .toList(growable: false);
+  return AdminAiCoverPoolStatus(
+    usageDateUtc: DateTime.now().toUtc(),
+    localCapsEnabled: true,
+    models: models,
+  );
 }
 
 class AdminAiReadingFunctionResponse {

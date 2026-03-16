@@ -373,7 +373,7 @@ class FoundationAdminUserManagementRepository
     Map<String, dynamic> body,
   ) async {
     if (_manageUsersInvoker != null) {
-      return _manageUsersInvoker!(body);
+      return _manageUsersInvoker(body);
     }
 
     await SupabaseBootstrap.initialize(_config);

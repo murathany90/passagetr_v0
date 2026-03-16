@@ -50,14 +50,46 @@ AdminDashboardSnapshot _previewSnapshot(int days) {
     windowDays: normalizedDays,
     userCount: const AdminDashboardMetric(total: 128, delta: 18),
     proUserCount: const AdminDashboardMetric(total: 46, delta: 6),
-    wordCount: const AdminDashboardMetric(total: 842, delta: 52),
-    readingCount: const AdminDashboardMetric(total: 118, delta: 9),
-    grammarCount: const AdminDashboardMetric(total: 27, delta: 1),
+    readingInventory: const AdminDashboardInventoryMetric(
+      total: 118,
+      publishedCount: 104,
+    ),
+    wordInventory: const AdminDashboardInventoryMetric(
+      total: 842,
+      publishedCount: 790,
+    ),
+    grammarInventory: const AdminDashboardInventoryMetric(
+      total: 27,
+      publishedCount: 24,
+    ),
+    miniTestCoverage: const AdminDashboardCoverageMetric(
+      total: 118,
+      readyCount: 96,
+      missingCount: 22,
+    ),
+    coverCoverage: const AdminDashboardCoverageMetric(
+      total: 118,
+      readyCount: 84,
+      missingCount: 34,
+    ),
+    linkedWordCoverage: const AdminDashboardCoverageMetric(
+      total: 118,
+      readyCount: 101,
+      missingCount: 17,
+    ),
+    dictionaryMatchCoverage: const AdminDashboardCoverageMetric(
+      total: 790,
+      readyCount: 712,
+      missingCount: 78,
+    ),
+    dictionaryEntryCount: 18240,
     auditCount: const AdminDashboardMetric(total: 64, delta: 14),
-    userTrend: List<AdminTrendPoint>.generate(
+    contentTrend: List<AdminTrendPoint>.generate(
       baseTrend.length,
-      (index) =>
-          AdminTrendPoint(label: 'G${index + 1}', value: baseTrend[index]),
+      (index) => AdminTrendPoint(
+        label: 'G${index + 1}',
+        value: (baseTrend[index] * 100).roundToDouble(),
+      ),
       growable: false,
     ),
     maintenanceMode: false,

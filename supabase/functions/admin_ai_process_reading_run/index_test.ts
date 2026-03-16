@@ -23,8 +23,8 @@ function createRunSummary(
     id: "run-1",
     job_type: "cover_backfill",
     status: "running",
-    provider: "gemini_image",
-    model: "gemini-2.5-flash-image",
+    provider: "cover_auto",
+    model: "auto",
     question_count: 3,
     total_count: 2,
     processed_count: 0,
@@ -82,8 +82,8 @@ Deno.test("cover backfill forwards selected provider and model", async () => {
           }) as never;
         }
         return createRunSummary({
-          provider: "openai_images",
-          model: "gpt-image-1.5",
+          provider: "imagerouter",
+          model: "google/nano-banana-2:free",
         }) as never;
       },
       claimRunItems: async () => [
@@ -113,8 +113,8 @@ Deno.test("cover backfill forwards selected provider and model", async () => {
   assertEquals(calledBodies.length, 1);
   assertObjectMatch(calledBodies[0], {
     reading_id: "reading-1",
-    provider: "openai_images",
-    model: "gpt-image-1.5",
+    provider: "imagerouter",
+    model: "google/nano-banana-2:free",
   });
   assertEquals(marked, [{ itemId: "item-1", status: "succeeded" }]);
 });
@@ -179,6 +179,63 @@ Deno.test("processor stops after run auto-pauses on repeated failures", async ()
   assertEquals(marked.length, 1);
   assertEquals(marked[0].itemId, "item-1");
   assertEquals(marked[0].status, "failed");
+});
+
+Deno.test("cover invalid_source_reading is marked as skipped", async () => {
+  const marked: Array<{ itemId: string; status: string; error?: string }> = [];
+  let fetchRunSummaryCount = 0;
+
+  const response = await handleRequest(
+    requestWithBody({ run_id: "run-1", batch_size: 1 }),
+    {
+      resolveCaller: async () => ({ role: "admin", userId: "admin-1" }),
+      createClient: () => ({}) as never,
+      fetchRunSummary: async () => {
+        fetchRunSummaryCount += 1;
+        if (fetchRunSummaryCount >= 3) {
+          return createRunSummary({
+            status: "completed",
+            processed_count: 1,
+            skipped_count: 1,
+          }) as never;
+        }
+        return createRunSummary() as never;
+      },
+      claimRunItems: async () => [
+        {
+          item_id: "item-1",
+          passage_id: "reading-1",
+          passage_title: "Ocean Science",
+        },
+      ],
+      fetchReadingDetail: async () => ({
+        id: "reading-1",
+        title: "Ocean Science",
+        sentences: [{ idx: 1, sentence_en: "Waves carry energy." }],
+      }),
+      callFunction: async () => ({
+        status: 422,
+        payload: {
+          error: "invalid_source_reading",
+          message: "Reading detail is not complete enough for cover generation.",
+        },
+      }),
+      markItem: async (_client, itemId, status, errorMessage) => {
+        marked.push({ itemId, status, error: errorMessage });
+      },
+    },
+  );
+
+  assertEquals(response.status, 200);
+  const payload = await response.json();
+  assertEquals(payload.status, "completed");
+  assertEquals(marked, [
+    {
+      itemId: "item-1",
+      status: "skipped",
+      error: "Reading detail is not complete enough for cover generation.",
+    },
+  ]);
 });
 
 Deno.test("cancelled run does not process newly claimed items", async () => {

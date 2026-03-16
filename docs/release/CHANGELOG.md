@@ -9,6 +9,37 @@ Zorunlu kural:
 - Web sidebar chip ve dar layout/APK `Profil/Giris` release kartinin ayni shared metadata kaynagindan beslendigini deploy oncesi dogrula.
 - Deploy scriptleri bu dosyada guncel surum etiketi yoksa fail etmelidir.
 
+## v2.0.21 - 2026-03-16
+
+Baslik:
+Admin cover pool migration to ImageRouter and Hugging Face
+
+Notlar:
+- Reading cover uretimi direct Gemini/OpenAI image saglayicilarindan cikarilip ImageRouter primary ve Hugging Face fallback havuzuna tasindi.
+- Cover pipeline artik Otomatik Havuz, explicit ImageRouter modeli veya explicit Hugging Face modeli ile calisabilir.
+- Her model icin gunluk attempt, success, failed ve rate-limited sayaçlari tutulur; admin Ayarlar ekranina AI Cover sekmesi eklendi.
+- Okumalar, Eksik Kapaklar backfill ve AI Asistan save-sonrasi cover paneli ayni provider secim ve kullanim ozetini kullanir.
+## v2.0.20 - 2026-03-15
+
+Baslik:
+Student reading cards compact layout
+
+Notlar:
+- Student Okuma sekmesindeki kartlardan `Bu okuma icin ozet ve ceviri destegi yakinda genisletilecek.` placeholder metni kaldirildi.
+- Okuma kartlarinin grid spacing, kart yuksekligi, gorsel yuksekligi ve ic padding degerleri sikilastirilip bosluklar azaltildi.
+- Gercek summary varsa kartta kisa ozet gosterilmeye devam eder; placeholder summary artik render edilmez.
+- Student web `v2.0.20` ile bu daha kompakt kart duzeni canliya alindi.
+## v2.0.19 - 2026-03-15
+
+Baslik:
+Admin dashboard content coverage metrics
+
+Notlar:
+- Admin dashboard stok kartlari negatif delta yerine semantik olarak dogru toplam-yayinda ve hazir-eksik formatina gecirildi.
+- Mini test, kapak, odak kelime baglantisi ve sozluk eslesmesi icin yeni kapsama kartlari eklendi.
+- Sozluk havuzu karti aktif dictionary entry sayisini gosterir; okuma, kelime ve gramer kartlari ise toplam envanter ve yayinda sayilarini birlikte sunar.
+- Kullanici Trend Serisi kaldirilip audit log tabanli Icerik Operasyon Trendi paneli eklendi.
+
 ## v2.0.18 - 2026-03-15
 
 Baslik:
@@ -207,6 +238,8 @@ Notlar:
 - Okuma listesi 21 kartlik sayfalara bolundu; `Onceki / Sonraki` gecisi eklendi.
 - Okuma kartlari ve detay bilgi panelindeki sure bilgisi kaldirildi.
 - Okuma detay ekrani artik `reading_passage_sentences` kayitlarindan gercek Ingilizce cumleleri yukler.
+
+
 
 
 

@@ -20,6 +20,44 @@ class ReleaseNoteEntry {
 
 const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
   ReleaseNoteEntry(
+    version: 'v2.0.21',
+    releaseDate: '2026-03-16',
+    title: 'Admin cover pool migration to ImageRouter and Hugging Face',
+    summary:
+        'Reading cover uretimi direct Gemini/OpenAI image saglayicilarindan cikarilip ImageRouter primary ve Hugging Face fallback havuzuna tasindi; model bazli gunluk kullanim ve admin AI Cover ayarlari eklendi.',
+    highlights: <String>[
+      'Cover generation artik cover_auto, imagerouter ve huggingface modlariyla calisir; direct gemini_image ve direct openai_images kullanilmaz.',
+      'ImageRouter free modelleri birinci katman, Hugging Face image modelleri ikinci katman fallback olarak sirali calisir.',
+      'Her model icin gunluk attempt, success, failed ve rate-limited sayaclari tutulur; local cap ayarlari admin Ayarlar > AI Cover sekmesinden yonetilir.',
+      'Okumalar, Eksik Kapaklar backfill ve AI Asistan cover paneli ayni otomatik havuz secimini ve kullanim ozetini kullanir.',
+    ],
+  ),  ReleaseNoteEntry(
+    version: 'v2.0.20',
+    releaseDate: '2026-03-15',
+    title: 'Student reading cards compact layout',
+    summary:
+        'Student Okuma sekmesindeki reading card yerlesimi sikilastirildi; placeholder summary kaldirildi ve web gorunumu daha kompakt hale getirildi.',
+    highlights: <String>[
+      'Reading cardlar placeholder summary metnini artik gostermez.',
+      'Kart yuksekligi, kapak gorseli yuksekligi ve grid spacing degerleri daraltildi.',
+      'Gercek summary bulunan okumalar ozet gostermeye devam eder; bos veya placeholder ozetler gizlenir.',
+      'Student web v2.0.20 ile daha yogun ve daha temiz okuma kartlari canliya alindi.',
+    ],
+  ),
+  ReleaseNoteEntry(
+    version: 'v2.0.19',
+    releaseDate: '2026-03-15',
+    title: 'Admin dashboard content coverage metrics',
+    summary:
+        'Admin dashboard stok ve kapsam metrikleri yeniden dengelendi; mini test, kapak, linked word ve sozluk eslesmesi kartlari ile audit log tabanli icerik operasyon trendi eklendi.',
+    highlights: <String>[
+      'Dashboard artik anlamsiz negatif delta gosteren stok kartlari yerine toplam-yayinda ve hazir-eksik semantigiyle calisir.',
+      'Mini test, kapak, odak kelime baglantisi ve sozluk eslesmesi icin kapsama kartlari eklendi.',
+      'Okuma, kelime ve gramer kartlari toplam envanter ile yayinda sayisini birlikte gosterir.',
+      'Kullanici Trend Serisi yerine audit log tabanli Icerik Operasyon Trendi paneli render edilir.',
+    ],
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.18',
     releaseDate: '2026-03-15',
     title: 'Admin users bulk delete',
@@ -100,7 +138,7 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
     releaseDate: '2026-03-14',
     title: 'Student reading pack filter and version chip fix',
     summary:
-        'Student web sidebar surum etiketi dar rail uzerinde tam gorunecek sekilde sadeleştirildi; Okuma Odasi sayfasina paket secimi filtresi eklendi ve reading catalog pack_id bilgisi web ile APK akisi icin tasinmaya baslandi.',
+        'Student web sidebar surum etiketi dar rail uzerinde tam gorunecek sekilde sadelestirildi; Okuma Odasi sayfasina paket secimi filtresi eklendi ve reading catalog pack_id bilgisi web ile APK akisi icin tasinmaya baslandi.',
     highlights: <String>[
       'Sidebar surum chipi icon yerine dar rail uyumlu metin-odakli outlined button olarak guncellendi.',
       'Okuma Odasi artik Tum Paketler veya belirli bir paket secilerek filtrelenebilir; filtre saved ve favorites gorunumlerinde de calisir.',
@@ -246,12 +284,14 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
         'Sidebar surum etiketi, changelog routeu, release manifesti ve reading pro katalog akisi ayni release hatti altinda toplandi.',
     highlights: <String>[
       'Web sidebar altindaki surum etiketi artik v2.0.1 gosterir ve /changelog sayfasini acar.',
-      'Student webde reading catalog görünur-kilitli davranisi canliya alindi.',
+      'Student webde reading catalog gorunur-kilitli davranisi canliya alindi.',
       'Admin console reading isPro kaydi canli veritabani migrationlari ile eslendi.',
       'Sentence translation esleme ve light tema sidebar kontrasti duzeltildi.',
     ],
   ),
 ];
+
+
 
 
 

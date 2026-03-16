@@ -1,12 +1,17 @@
+import 'dart:math' as math;
+
 import 'admin_console_contracts.dart';
 
 const adminAiProviderGemini = 'gemini';
 const adminAiProviderOpenRouter = 'openrouter';
-const adminAiProviderGeminiImage = 'gemini_image';
-const adminAiProviderOpenAiImages = 'openai_images';
+const adminAiProviderCoverAuto = 'cover_auto';
+const adminAiProviderImageRouter = 'imagerouter';
+const adminAiProviderHuggingFace = 'huggingface';
 const adminAiGeminiDefaultModel = 'gemini-2.5-flash';
-const adminAiGeminiImageDefaultModel = 'gemini-2.5-flash-image';
-const adminAiOpenAiImageDefaultModel = 'gpt-image-1.5';
+const adminAiCoverAutoModel = 'auto';
+const adminAiImageRouterDefaultDailyCap = 3;
+const adminAiHuggingFaceDefaultDailyCap = 50;
+const adminAiImageRouterOpenAiLifetimeCap = 500;
 const adminAiOpenRouterCuratedModels = <String>[
   'arcee-ai/trinity-large-preview:free',
   'nvidia/nemotron-3-super-120b-a12b:free',
@@ -14,15 +19,31 @@ const adminAiOpenRouterCuratedModels = <String>[
   'qwen/qwen3-coder:free',
   'stepfun/step-3.5-flash:free',
 ];
+const adminAiImageRouterCoverModels = <String>[
+  'google/nano-banana-2:free',
+  'openai/gpt-image-1.5:free',
+  'black-forest-labs/FLUX-2-klein-4b:free',
+  'z-image/turbo:free',
+  'qwen/qwen-image:free',
+  'google/gemini-2.5-flash:free',
+];
+const adminAiHuggingFaceCoverModels = <String>[
+  'stabilityai/stable-diffusion-xl-base-1.0',
+  'black-forest-labs/FLUX.1-dev',
+  'stabilityai/stable-diffusion-3.5-large',
+  'playgroundai/playground-v2.5-1024px-aesthetic',
+];
 const adminAiCoverModels = <String>[
-  adminAiGeminiImageDefaultModel,
-  adminAiOpenAiImageDefaultModel,
+  adminAiCoverAutoModel,
+  ...adminAiImageRouterCoverModels,
+  ...adminAiHuggingFaceCoverModels,
 ];
 const adminAiSupportedProviders = <String>[
   adminAiProviderGemini,
   adminAiProviderOpenRouter,
-  adminAiProviderGeminiImage,
-  adminAiProviderOpenAiImages,
+  adminAiProviderCoverAuto,
+  adminAiProviderImageRouter,
+  adminAiProviderHuggingFace,
 ];
 
 List<String> adminAiModelsForProvider(String provider) {
@@ -43,8 +64,20 @@ String? adminAiDefaultModelForProvider(String provider) {
 String adminAiModelLabel(String model) {
   return switch (model) {
     adminAiGeminiDefaultModel => 'Gemini 2.5 Flash',
-    adminAiGeminiImageDefaultModel => 'Gemini 2.5 Flash Image',
-    adminAiOpenAiImageDefaultModel => 'OpenAI GPT Image 1.5',
+    adminAiCoverAutoModel => 'Otomatik Havuz',
+    'google/nano-banana-2:free' => 'Nano Banana 2 (free)',
+    'openai/gpt-image-1.5:free' => 'GPT Image 1.5 (free)',
+    'black-forest-labs/FLUX-2-klein-4b:free' => 'FLUX 2 Klein 4b (free)',
+    'z-image/turbo:free' => 'Z Image Turbo (free)',
+    'qwen/qwen-image:free' => 'Qwen Image (free)',
+    'google/gemini-2.5-flash:free' => 'Gemini 2.5 Flash (free)',
+    'stabilityai/stable-diffusion-xl-base-1.0' =>
+      'Stable Diffusion XL Base 1.0',
+    'black-forest-labs/FLUX.1-dev' => 'FLUX.1 Dev',
+    'stabilityai/stable-diffusion-3.5-large' =>
+      'Stable Diffusion 3.5 Large',
+    'playgroundai/playground-v2.5-1024px-aesthetic' =>
+      'Playground v2.5 1024px Aesthetic',
     'arcee-ai/trinity-large-preview:free' => 'Trinity Large Preview (free)',
     'nvidia/nemotron-3-super-120b-a12b:free' => 'Nemotron 3 Super 120B (free)',
     'z-ai/glm-4.5-air:free' => 'GLM 4.5 Air (free)',
@@ -55,10 +88,131 @@ String adminAiModelLabel(String model) {
 }
 
 String adminAiCoverProviderForModel(String? model) {
-  return switch (model?.trim()) {
-    adminAiOpenAiImageDefaultModel => adminAiProviderOpenAiImages,
-    _ => adminAiProviderGeminiImage,
-  };
+  final normalized = model?.trim();
+  if (normalized == null ||
+      normalized.isEmpty ||
+      normalized == adminAiCoverAutoModel) {
+    return adminAiProviderCoverAuto;
+  }
+  if (adminAiImageRouterCoverModels.contains(normalized)) {
+    return adminAiProviderImageRouter;
+  }
+  if (adminAiHuggingFaceCoverModels.contains(normalized)) {
+    return adminAiProviderHuggingFace;
+  }
+  return adminAiProviderCoverAuto;
+}
+
+bool adminAiIsImageRouterCoverModel(String? model) {
+  return adminAiImageRouterCoverModels.contains(model?.trim());
+}
+
+bool adminAiIsHuggingFaceCoverModel(String? model) {
+  return adminAiHuggingFaceCoverModels.contains(model?.trim());
+}
+
+class AdminAiCoverModelUsageStatus {
+  const AdminAiCoverModelUsageStatus({
+    required this.provider,
+    required this.model,
+    required this.enabled,
+    required this.priority,
+    required this.dailyCap,
+    this.lifetimeCap,
+    this.attemptCount = 0,
+    this.successCount = 0,
+    this.failedCount = 0,
+    this.rateLimitedCount = 0,
+  });
+
+  final String provider;
+  final String model;
+  final bool enabled;
+  final int priority;
+  final int dailyCap;
+  final int? lifetimeCap;
+  final int attemptCount;
+  final int successCount;
+  final int failedCount;
+  final int rateLimitedCount;
+
+  int get remainingDailyCap => math.max(0, dailyCap - attemptCount);
+  bool get isAutoOption => model == adminAiCoverAutoModel;
+
+  factory AdminAiCoverModelUsageStatus.fromJson(Map<String, dynamic>? json) {
+    return AdminAiCoverModelUsageStatus(
+      provider:
+          _adminAiProviderFromValue(json?['provider']) ?? adminAiProviderCoverAuto,
+      model: json?['model']?.toString() ?? adminAiCoverAutoModel,
+      enabled: json?['enabled'] as bool? ?? true,
+      priority: (json?['priority'] as num?)?.toInt() ?? 0,
+      dailyCap:
+          (json?['daily_cap'] as num?)?.toInt() ??
+          (json?['provider']?.toString() == adminAiProviderHuggingFace
+              ? adminAiHuggingFaceDefaultDailyCap
+              : adminAiImageRouterDefaultDailyCap),
+      lifetimeCap: (json?['lifetime_cap'] as num?)?.toInt(),
+      attemptCount: (json?['attempt_count'] as num?)?.toInt() ?? 0,
+      successCount: (json?['success_count'] as num?)?.toInt() ?? 0,
+      failedCount: (json?['failed_count'] as num?)?.toInt() ?? 0,
+      rateLimitedCount: (json?['rate_limited_count'] as num?)?.toInt() ?? 0,
+    );
+  }
+}
+
+class AdminAiCoverPoolStatus {
+  const AdminAiCoverPoolStatus({
+    required this.usageDateUtc,
+    required this.localCapsEnabled,
+    this.models = const <AdminAiCoverModelUsageStatus>[],
+  });
+
+  final DateTime usageDateUtc;
+  final bool localCapsEnabled;
+  final List<AdminAiCoverModelUsageStatus> models;
+
+  List<AdminAiCoverModelUsageStatus> get enabledModels => models
+      .where((item) => item.enabled && !item.isAutoOption)
+      .toList(growable: false);
+
+  AdminAiCoverModelUsageStatus? statusForSelection(String? model) {
+    final normalizedModel = model?.trim() ?? adminAiCoverAutoModel;
+    final normalizedProvider = adminAiCoverProviderForModel(normalizedModel);
+    for (final item in models) {
+      if (item.provider == normalizedProvider && item.model == normalizedModel) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  List<AdminAiCoverModelUsageStatus> statusesForProvider(String provider) {
+    return models
+        .where((item) => item.provider == provider && !item.isAutoOption)
+        .toList(growable: false)
+      ..sort((left, right) => left.priority.compareTo(right.priority));
+  }
+
+  factory AdminAiCoverPoolStatus.fromJson(Map<String, dynamic>? json) {
+    final rawModels = json?['models'];
+    return AdminAiCoverPoolStatus(
+      usageDateUtc:
+          _adminAiDateTimeFromValue(json?['usage_date_utc']) ??
+          DateTime.now().toUtc(),
+      localCapsEnabled: json?['local_caps_enabled'] as bool? ?? true,
+      models: switch (rawModels) {
+        List<dynamic>() => rawModels
+            .whereType<Map>()
+            .map(
+              (item) => AdminAiCoverModelUsageStatus.fromJson(
+                item.map((key, value) => MapEntry(key.toString(), value)),
+              ),
+            )
+            .toList(growable: false),
+        _ => const <AdminAiCoverModelUsageStatus>[],
+      },
+    );
+  }
 }
 
 class AdminAiGenerateReadingRequest {

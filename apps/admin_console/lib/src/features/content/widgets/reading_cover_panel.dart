@@ -20,11 +20,13 @@ class ReadingCoverPanel extends StatefulWidget {
     super.key,
     required this.detail,
     required this.coverUrl,
+    required this.selectedModel,
     required this.onChanged,
     required this.onGenerate,
     required this.onUpload,
     required this.onRemove,
     required this.onMessage,
+    this.poolStatus,
     this.enabled = true,
     this.disabledMessage,
     this.isBusy = false,
@@ -32,11 +34,14 @@ class ReadingCoverPanel extends StatefulWidget {
 
   final AdminReadingDetail detail;
   final String? coverUrl;
+  final String selectedModel;
   final ValueChanged<AdminReadingDetail> onChanged;
-  final Future<AppResult<AdminReadingDetail>> Function() onGenerate;
+  final Future<AppResult<AdminReadingDetail>> Function(String selectedModel)
+  onGenerate;
   final ReadingCoverUploadCallback onUpload;
   final Future<AppResult<AdminReadingDetail>> Function() onRemove;
   final void Function(String message, {bool isError}) onMessage;
+  final AdminAiCoverPoolStatus? poolStatus;
   final bool enabled;
   final String? disabledMessage;
   final bool isBusy;
@@ -47,8 +52,24 @@ class ReadingCoverPanel extends StatefulWidget {
 
 class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
   bool _isActing = false;
+  late String _selectedModel;
 
   bool get _canInteract => widget.enabled && !_isActing && !widget.isBusy;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedModel = widget.selectedModel;
+  }
+
+  @override
+  void didUpdateWidget(covariant ReadingCoverPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedModel != widget.selectedModel &&
+        widget.selectedModel != _selectedModel) {
+      _selectedModel = widget.selectedModel;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +124,51 @@ class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
             ),
           ),
           const SizedBox(height: 16),
+          DropdownButtonFormField<String>(
+            isExpanded: true,
+            initialValue: _availableModels.contains(_selectedModel)
+                ? _selectedModel
+                : adminAiCoverAutoModel,
+            decoration: const InputDecoration(labelText: 'Cover modeli'),
+            items: [
+              for (final item in _availableModels)
+                DropdownMenuItem(
+                  value: item,
+                  child: Text(
+                    adminAiModelLabel(item),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+            ],
+            selectedItemBuilder: (context) => [
+              for (final item in _availableModels)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    adminAiModelLabel(item),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+            ],
+            onChanged: !_canInteract
+                ? null
+                : (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      _selectedModel = value;
+                    });
+                  },
+          ),
+          const SizedBox(height: 12),
+          _CoverUsageSummary(
+            selectedModel: _selectedModel,
+            poolStatus: widget.poolStatus,
+          ),
+          const SizedBox(height: 16),
           Wrap(
             spacing: 12,
             runSpacing: 12,
@@ -137,7 +203,7 @@ class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
 
   Future<void> _handleGenerate() async {
     await _runAction(
-      widget.onGenerate,
+      () => widget.onGenerate(_selectedModel),
       successMessage: widget.detail.cover.hasCover
           ? 'Cover yeniden uretildi.'
           : 'Cover olusturuldu.',
@@ -218,6 +284,17 @@ class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
     }
     return 'image/png';
   }
+
+  List<String> get _availableModels {
+    final enabled = widget.poolStatus?.enabledModels ?? const <AdminAiCoverModelUsageStatus>[];
+    if (enabled.isEmpty) {
+      return adminAiCoverModels;
+    }
+    return <String>[
+      adminAiCoverAutoModel,
+      ...enabled.map((item) => item.model),
+    ];
+  }
 }
 
 class _CoverPlaceholder extends StatelessWidget {
@@ -248,6 +325,66 @@ class _CoverPlaceholder extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _CoverUsageSummary extends StatelessWidget {
+  const _CoverUsageSummary({
+    required this.selectedModel,
+    required this.poolStatus,
+  });
+
+  final String selectedModel;
+  final AdminAiCoverPoolStatus? poolStatus;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    if (poolStatus == null) {
+      return Text(
+        'Kullanim durumu yuklenemedi.',
+        style: theme.textTheme.bodySmall,
+      );
+    }
+
+    if (selectedModel == adminAiCoverAutoModel) {
+      final imageRouter = poolStatus!.statusesForProvider(adminAiProviderImageRouter);
+      final huggingFace = poolStatus!.statusesForProvider(adminAiProviderHuggingFace);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Otomatik havuz sirasi', style: theme.textTheme.titleSmall),
+          const SizedBox(height: 8),
+          if (imageRouter.isNotEmpty)
+            Text(
+              'ImageRouter: ${imageRouter.map((item) => '${adminAiModelLabel(item.model)} ${item.attemptCount}/${item.dailyCap}').join(' • ')}',
+              style: theme.textTheme.bodySmall,
+            ),
+          if (huggingFace.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              'Hugging Face: ${huggingFace.map((item) => '${adminAiModelLabel(item.model)} ${item.attemptCount}/${item.dailyCap}').join(' • ')}',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+        ],
+      );
+    }
+
+    final status = poolStatus!.statusForSelection(selectedModel);
+    if (status == null) {
+      return Text(
+        'Secili model icin kullanim bilgisi yok.',
+        style: theme.textTheme.bodySmall,
+      );
+    }
+    final lifetimeText = status.lifetimeCap == null
+        ? ''
+        : ' • toplam ${status.lifetimeCap}';
+    return Text(
+      'Bugun ${status.attemptCount}/${status.dailyCap} • basarili ${status.successCount} • hata ${status.failedCount} • rate limit ${status.rateLimitedCount}$lifetimeText',
+      style: theme.textTheme.bodySmall,
     );
   }
 }

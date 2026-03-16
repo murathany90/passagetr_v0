@@ -85,7 +85,7 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                 : constraints.maxWidth >= AppBreakpoints.mobileWide
                 ? 2
                 : 1;
-            final spacing = isWide ? 22.0 : 16.0;
+            final spacing = isWide ? 18.0 : 12.0;
             final totalPages = (visibleItems.length / _pageSize).ceil();
             final resolvedPage = totalPages == 0
                 ? 0
@@ -196,7 +196,7 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
                       crossAxisCount: columns,
                       crossAxisSpacing: spacing,
                       mainAxisSpacing: spacing,
-                      mainAxisExtent: 580,
+                      mainAxisExtent: 500,
                     ),
                     itemCount: pageItems.length,
                     itemBuilder: (context, index) {
@@ -462,10 +462,11 @@ class _ReadingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
+    final summary = _cardSummaryFor(reading, seed, isLocked);
 
     return StudentSurfaceCard(
       padding: EdgeInsets.zero,
-      minHeight: 520,
+      minHeight: 480,
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -477,7 +478,7 @@ class _ReadingCard extends StatelessWidget {
                 seed: seed,
                 remoteUrl: reading.coverUrl,
                 semanticLabel: reading.coverAltText ?? reading.title,
-                height: 220,
+                height: 200,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(24),
                 ),
@@ -516,7 +517,7 @@ class _ReadingCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
+              padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -526,19 +527,19 @@ class _ReadingCard extends StatelessWidget {
                       context,
                     ).textTheme.headlineMedium?.copyWith(height: 1.15),
                   ),
-                  const SizedBox(height: 12),
-                  Expanded(
-                    child: Text(
-                      _cardSummaryFor(reading, seed, isLocked),
-                      maxLines: 4,
+                  if (summary != null) ...[
+                    const SizedBox(height: 10),
+                    Text(
+                      summary,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: tokens.secondaryText,
-                        height: 1.45,
+                        height: 1.4,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
+                  ],
+                  const Spacer(),
                   if (isLocked)
                     Text(
                       'Pro ile Ac',
@@ -610,7 +611,7 @@ class _ReadingCard extends StatelessWidget {
     );
   }
 
-  String _cardSummaryFor(
+  String? _cardSummaryFor(
     ReadingPassage reading,
     ReadingSeedData seed,
     bool isLocked,
@@ -624,7 +625,11 @@ class _ReadingCard extends StatelessWidget {
       return summary;
     }
 
-    return seed.summary;
+    if (!isFallbackReadingSummary(seed.summary)) {
+      return seed.summary;
+    }
+
+    return null;
   }
 }
 

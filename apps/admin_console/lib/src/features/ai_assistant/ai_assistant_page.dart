@@ -214,6 +214,8 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
         ReadingCoverPanel(
           detail: editableDraft,
           coverUrl: _coverUrlForAsset(editableDraft.cover),
+          selectedModel: adminAiCoverAutoModel,
+          poolStatus: ref.watch(adminAiCoverPoolStatusProvider).valueOrNull,
           enabled: editableDraft.metadata.id?.trim().isNotEmpty ?? false,
           disabledMessage: editableDraft.metadata.id?.trim().isNotEmpty ?? false
               ? null
@@ -222,7 +224,8 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
           onChanged: (detail) => ref
               .read(adminAiAssistantControllerProvider.notifier)
               .replaceEditableDraft(detail),
-          onGenerate: () => _generateCoverForDraft(editableDraft),
+          onGenerate: (selectedModel) =>
+              _generateCoverForDraft(editableDraft, selectedModel),
           onUpload: ({
             required bytes,
             required fileName,
@@ -311,6 +314,7 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
 
   Future<AppResult<AdminReadingDetail>> _generateCoverForDraft(
     AdminReadingDetail detail,
+    String selectedModel,
   ) async {
     final readingId = detail.metadata.id?.trim();
     if (readingId == null || readingId.isEmpty) {
@@ -321,7 +325,14 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
 
     final result = await ref
         .read(adminAiReadingRepositoryProvider)
-        .generateReadingCover(AdminAiGenerateReadingCoverRequest(readingId: readingId));
+        .generateReadingCover(
+          AdminAiGenerateReadingCoverRequest(
+            readingId: readingId,
+            provider: adminAiCoverProviderForModel(selectedModel),
+            model: selectedModel,
+          ),
+        );
+    ref.invalidate(adminAiCoverPoolStatusProvider);
     if (result case AppSuccess<AdminReadingDetail>()) {
       ref
           .read(adminAiAssistantControllerProvider.notifier)

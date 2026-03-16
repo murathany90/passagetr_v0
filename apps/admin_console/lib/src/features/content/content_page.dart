@@ -1395,6 +1395,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             initialDetail: detail,
             coverUrlBuilder: (cover) =>
                 _coverUrlForAsset(ref.read(adminAppConfigProvider).supabaseUrl, cover),
+            aiCoverPoolStatus: ref.watch(adminAiCoverPoolStatusProvider).valueOrNull,
             onGenerateCover: _generateCoverForReadingDetail,
             onUploadCover: _uploadCoverForReadingDetail,
             onRemoveCover: _removeCoverForReadingDetail,
@@ -1754,13 +1755,16 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
       return;
     }
 
-    final targetReadings = filteredReadings
+    final targetReadings = _sortReadingsForBackfill(
+      filteredReadings
         .where(
           (item) => jobType == 'question_backfill'
               ? item.questionCount == 0
               : !item.hasCover,
         )
-        .toList(growable: false);
+        .toList(growable: false),
+      jobType: jobType,
+    );
     if (targetReadings.isEmpty) {
       _showSnackBar(
         jobType == 'question_backfill'
@@ -1917,6 +1921,26 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           matchesCover &&
           matchesQuery;
     }).toList(growable: false);
+  }
+
+  List<AdminReadingRecord> _sortReadingsForBackfill(
+    List<AdminReadingRecord> readings, {
+    required String jobType,
+  }) {
+    if (jobType != 'cover_backfill') {
+      return readings;
+    }
+    final sorted = List<AdminReadingRecord>.from(readings);
+    sorted.sort((left, right) {
+      final titleCompare = left.title.toLowerCase().compareTo(
+        right.title.toLowerCase(),
+      );
+      if (titleCompare != 0) {
+        return titleCompare;
+      }
+      return left.id.compareTo(right.id);
+    });
+    return sorted;
   }
 
   Future<void> _openGrammarEditor(
@@ -2245,6 +2269,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
   Future<AppResult<AdminReadingDetail>> _generateCoverForReadingDetail(
     AdminReadingDetail detail,
+    String selectedModel,
   ) async {
     final readingId = detail.metadata.id?.trim();
     if (readingId == null || readingId.isEmpty) {
@@ -2252,9 +2277,17 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         'Cover uretimi icin reading once kaydedilmeli.',
       );
     }
-    return ref
+    final result = await ref
         .read(adminAiReadingRepositoryProvider)
-        .generateReadingCover(AdminAiGenerateReadingCoverRequest(readingId: readingId));
+        .generateReadingCover(
+          AdminAiGenerateReadingCoverRequest(
+            readingId: readingId,
+            provider: adminAiCoverProviderForModel(selectedModel),
+            model: selectedModel,
+          ),
+        );
+    ref.invalidate(adminAiCoverPoolStatusProvider);
+    return result;
   }
 
   Future<AppResult<AdminReadingDetail>> _uploadCoverForReadingDetail({
@@ -3164,7 +3197,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
   late final TextEditingController _questionCountController;
   String _questionProvider = adminAiProviderGemini;
   String? _questionModel = adminAiGeminiDefaultModel;
-  String _coverModel = adminAiGeminiImageDefaultModel;
+  String _coverModel = adminAiCoverAutoModel;
+  AdminAiCoverPoolStatus? _coverPoolStatus;
   String? _errorText;
   bool _isActing = false;
   bool _isPumping = false;
@@ -3187,10 +3221,13 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       _questionModel =
           _run!.model.isEmpty ? adminAiGeminiDefaultModel : _run!.model;
       _coverModel =
-          _run!.model.isEmpty ? adminAiGeminiImageDefaultModel : _run!.model;
+          _run!.model.isEmpty ? adminAiCoverAutoModel : _run!.model;
       _settledNotified = !_run!.isActive;
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && !_isQuestionJob) {
+        unawaited(_refreshCoverPoolStatus());
+      }
       if (mounted && _run != null && _run!.isActive && !_run!.isPaused) {
         unawaited(_pumpRun());
       }
@@ -3218,6 +3255,7 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
   }
 
   Widget _buildConfigBody(BuildContext context) {
+    final availableCoverModels = _availableCoverModels;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -3288,10 +3326,12 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
           ),
         ] else ...[
           DropdownButtonFormField<String>(
-            initialValue: _coverModel,
+            initialValue: availableCoverModels.contains(_coverModel)
+                ? _coverModel
+                : adminAiCoverAutoModel,
             decoration: const InputDecoration(labelText: 'Model'),
             items: [
-              for (final item in adminAiCoverModels)
+              for (final item in availableCoverModels)
                 DropdownMenuItem(
                   value: item,
                   child: Text(adminAiModelLabel(item)),
@@ -3308,6 +3348,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
                     });
                   },
           ),
+          const SizedBox(height: 12),
+          _buildCoverUsageSummary(context),
         ],
         if (_errorText != null) ...[
           const SizedBox(height: 12),
@@ -3322,6 +3364,7 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
 
   Widget _buildProgressBody(BuildContext context, AdminAiReadingRun run) {
     final canEditCoverModel = !_isQuestionJob && (run.status == 'paused' || run.status == 'queued');
+    final availableCoverModels = _availableCoverModels;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -3345,6 +3388,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
             for (final item in _filterSummaryLines(run.filterSnapshot))
               _MetricChip(label: item),
             _MetricChip(label: 'Model ${adminAiModelLabel(run.model)}'),
+            if (run.skippedCount > 0)
+              _MetricChip(label: 'Atlandi ${run.skippedCount}'),
             if (run.consecutiveFailureCount > 0)
               _MetricChip(label: 'Art arda hata ${run.consecutiveFailureCount}'),
           ],
@@ -3352,10 +3397,12 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
         if (!_isQuestionJob) ...[
           const SizedBox(height: 16),
           DropdownButtonFormField<String>(
-            initialValue: _coverModel,
+            initialValue: availableCoverModels.contains(_coverModel)
+                ? _coverModel
+                : adminAiCoverAutoModel,
             decoration: const InputDecoration(labelText: 'Model'),
             items: [
-              for (final item in adminAiCoverModels)
+              for (final item in availableCoverModels)
                 DropdownMenuItem(
                   value: item,
                   child: Text(adminAiModelLabel(item)),
@@ -3372,6 +3419,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
                   }
                 : null,
           ),
+          const SizedBox(height: 12),
+          _buildCoverUsageSummary(context),
         ],
         if (run.pauseReason != null && run.pauseReason!.trim().isNotEmpty) ...[
           const SizedBox(height: 12),
@@ -3532,6 +3581,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
 
     if (result case AppSuccess<AdminAiReadingRun>(value: final run)) {
       _applyRun(run);
+      if (!_isQuestionJob) {
+        await _refreshCoverPoolStatus();
+      }
       if (run.isActive && !run.isPaused) {
         await _pumpRun();
       }
@@ -3596,6 +3648,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
 
     if (result case AppSuccess<AdminAiReadingRun>(value: final nextRun)) {
       _applyRun(nextRun);
+      if (!_isQuestionJob) {
+        await _refreshCoverPoolStatus();
+      }
       if (action == 'resume' && nextRun.isActive && !nextRun.isPaused) {
         await _pumpRun();
       }
@@ -3631,6 +3686,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
 
         if (result case AppSuccess<AdminAiReadingRun>(value: final nextRun)) {
           _applyRun(nextRun);
+          if (!_isQuestionJob) {
+            await _refreshCoverPoolStatus();
+          }
           if (!nextRun.isActive || nextRun.isPaused) {
             break;
           }
@@ -3679,6 +3737,77 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       _settledNotified = true;
       widget.onRunSettled(run);
     }
+  }
+
+  Future<void> _refreshCoverPoolStatus() async {
+    final result = await widget.repository.fetchAiCoverPoolStatus();
+    if (!mounted) {
+      return;
+    }
+    if (result case AppSuccess<AdminAiCoverPoolStatus>(value: final status)) {
+      setState(() {
+        _coverPoolStatus = status;
+      });
+    }
+  }
+
+  List<String> get _availableCoverModels {
+    final enabledModels = _coverPoolStatus?.enabledModels ?? const <AdminAiCoverModelUsageStatus>[];
+    if (enabledModels.isEmpty) {
+      return adminAiCoverModels;
+    }
+    return <String>[
+      adminAiCoverAutoModel,
+      ...enabledModels.map((item) => item.model),
+    ];
+  }
+
+  Widget _buildCoverUsageSummary(BuildContext context) {
+    final theme = Theme.of(context);
+    final status = _coverPoolStatus;
+    if (status == null) {
+      return Text(
+        'Kullanim durumu yukleniyor...',
+        style: theme.textTheme.bodySmall,
+      );
+    }
+    if (_coverModel == adminAiCoverAutoModel) {
+      final imageRouter = status.statusesForProvider(adminAiProviderImageRouter);
+      final huggingFace = status.statusesForProvider(adminAiProviderHuggingFace);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Otomatik havuz', style: theme.textTheme.titleSmall),
+          const SizedBox(height: 6),
+          if (imageRouter.isNotEmpty)
+            Text(
+              'ImageRouter: ${imageRouter.map((item) => '${adminAiModelLabel(item.model)} ${item.attemptCount}/${item.dailyCap}').join(' • ')}',
+              style: theme.textTheme.bodySmall,
+            ),
+          if (huggingFace.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              'Hugging Face: ${huggingFace.map((item) => '${adminAiModelLabel(item.model)} ${item.attemptCount}/${item.dailyCap}').join(' • ')}',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+        ],
+      );
+    }
+    final selectedStatus = status.statusForSelection(_coverModel);
+    if (selectedStatus == null) {
+      return Text(
+        'Secili model icin kullanim bilgisi yok.',
+        style: theme.textTheme.bodySmall,
+      );
+    }
+    final lifetimeText = selectedStatus.lifetimeCap == null
+        ? ''
+        : ' • toplam ${selectedStatus.lifetimeCap}';
+    return Text(
+      'Bugun ${selectedStatus.attemptCount}/${selectedStatus.dailyCap} • basarili ${selectedStatus.successCount} • hata ${selectedStatus.failedCount} • rate limit ${selectedStatus.rateLimitedCount}$lifetimeText',
+      style: theme.textTheme.bodySmall,
+    );
   }
 }
 
@@ -3736,6 +3865,14 @@ String _runPauseReasonLabel(AdminAiReadingRun run) {
       'Run otomatik duraklatildi: 5 art arda hata algilandi.',
     'auto_failure_rate_threshold' =>
       'Run otomatik duraklatildi: toplam hata orani cok yuksek.',
+    'provider_auth_skipped_to_fallback' =>
+      'Run devam ediyor: bir provider yetki hatasi nedeniyle atlandi ve fallback havuzuna gecildi.',
+    'all_cover_providers_unavailable' =>
+      'Run duraklatildi: uygun cover provider kalmadi.',
+    'invalid_source_reading_skipped' =>
+      'Bazi okumalar cover olusturma icin eksik detay nedeniyle atlandi.',
+    'provider_migration_required' =>
+      'Run duraklatildi: yeni cover saglayici havuzu secilip devam ettirilmeli.',
     'user_paused' => 'Run manuel olarak duraklatildi.',
     'user_cancelled' => 'Run manuel olarak durduruldu.',
     _ => 'Run duraklatildi.',
@@ -4221,6 +4358,7 @@ class _ReadingEditorDialog extends StatefulWidget {
     required this.packs,
     required this.initialDetail,
     required this.coverUrlBuilder,
+    required this.aiCoverPoolStatus,
     required this.onGenerateCover,
     required this.onUploadCover,
     required this.onRemoveCover,
@@ -4230,7 +4368,11 @@ class _ReadingEditorDialog extends StatefulWidget {
   final List<AdminPackRecord> packs;
   final AdminReadingDetail initialDetail;
   final String? Function(AdminReadingCoverAsset cover) coverUrlBuilder;
-  final Future<AppResult<AdminReadingDetail>> Function(AdminReadingDetail detail)
+  final AdminAiCoverPoolStatus? aiCoverPoolStatus;
+  final Future<AppResult<AdminReadingDetail>> Function(
+    AdminReadingDetail detail,
+    String selectedModel,
+  )
   onGenerateCover;
   final Future<AppResult<AdminReadingDetail>> Function({
     required AdminReadingDetail detail,
@@ -4390,12 +4532,15 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
               ReadingCoverPanel(
                 detail: _detail,
                 coverUrl: widget.coverUrlBuilder(_detail.cover),
+                selectedModel: adminAiCoverAutoModel,
+                poolStatus: widget.aiCoverPoolStatus,
                 enabled: hasPersistedId,
                 disabledMessage: hasPersistedId
                     ? null
                     : 'Cover islemleri icin reading once kaydedilmeli.',
                 onChanged: _updateDetail,
-                onGenerate: () => widget.onGenerateCover(_detail),
+                onGenerate: (selectedModel) =>
+                    widget.onGenerateCover(_detail, selectedModel),
                 onUpload: ({
                   required bytes,
                   required fileName,

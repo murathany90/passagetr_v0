@@ -22,7 +22,7 @@ class AdminDashboardPage extends ConsumerWidget {
     return AdminShellFrame(
       destination: AdminDestination.dashboard,
       title: 'PASSAGETR Dashboard',
-      subtitle: 'Kullanici, icerik ve audit akislarini trend bazli izle.',
+      subtitle: 'Icerik kapsami, operasyon ritmi ve audit akislarini izle.',
       accessContext: accessContext,
       headerAction: Wrap(
         spacing: 12,
@@ -74,20 +74,52 @@ class AdminDashboardPage extends ConsumerWidget {
                     subtitle: 'Aktif premium hesaplar',
                     metric: data.proUserCount,
                   ),
-                  _DeltaMetricCard(
-                    title: 'Kelime Havuzu',
-                    subtitle: 'Words tablolarinin toplam hacmi',
-                    metric: data.wordCount,
-                  ),
-                  _DeltaMetricCard(
+                  _InventoryMetricCard(
                     title: 'Okuma Kutuphanesi',
-                    subtitle: 'Reading passages toplam hacmi',
-                    metric: data.readingCount,
+                    subtitle: 'Toplam reading kaydi',
+                    total: data.readingInventory.total,
+                    helperLabel:
+                        'Yayinda ${data.readingInventory.publishedCount}',
                   ),
-                  _DeltaMetricCard(
+                  _CoverageMetricCard(
+                    title: 'Mini Test Hazirligi',
+                    subtitle: 'Hazir / Eksik',
+                    metric: data.miniTestCoverage,
+                  ),
+                  _CoverageMetricCard(
+                    title: 'Kapak Hazirligi',
+                    subtitle: 'Hazir / Eksik',
+                    metric: data.coverCoverage,
+                  ),
+                  _CoverageMetricCard(
+                    title: 'Odak Kelime Baglantisi',
+                    subtitle: 'Hazir / Eksik',
+                    metric: data.linkedWordCoverage,
+                  ),
+                  _InventoryMetricCard(
+                    title: 'Kelime Kartlari',
+                    subtitle: 'Toplam word karti',
+                    total: data.wordInventory.total,
+                    helperLabel: 'Yayinda ${data.wordInventory.publishedCount}',
+                  ),
+                  _CoverageMetricCard(
+                    title: 'Sozluk Eslesmesi',
+                    subtitle: 'Eslesen / Eslesmeyen',
+                    metric: data.dictionaryMatchCoverage,
+                    primaryLabel: 'Eslesen',
+                    secondaryLabel: 'Eslesmeyen',
+                  ),
+                  _SimpleMetricCard(
+                    title: 'Sozluk Havuzu',
+                    subtitle: 'Aktif dictionary entry sayisi',
+                    total: data.dictionaryEntryCount,
+                  ),
+                  _InventoryMetricCard(
                     title: 'Gramer Modulleri',
-                    subtitle: 'Yonetilen gramer modulu sayisi',
-                    metric: data.grammarCount,
+                    subtitle: 'Toplam gramer modulu',
+                    total: data.grammarInventory.total,
+                    helperLabel:
+                        'Yayinda ${data.grammarInventory.publishedCount}',
                   ),
                   _DeltaMetricCard(
                     title: 'Audit Kayitlari',
@@ -112,8 +144,10 @@ class AdminDashboardPage extends ConsumerWidget {
                 final isWide =
                     constraints.maxWidth >= AppBreakpoints.desktopWide;
                 final trendPanel = AdminPanelCard(
-                  title: 'Kullanici Trend Serisi',
-                  trailing: _InfoChip(label: '${data.userTrend.length} nokta'),
+                  title: 'Icerik Operasyon Trendi',
+                  trailing: _InfoChip(
+                    label: '${data.contentTrend.length} nokta',
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -125,7 +159,7 @@ class AdminDashboardPage extends ConsumerWidget {
                             fillColor: AppThemeTokens.of(
                               context,
                             ).surfaceMuted.withValues(alpha: 0.75),
-                            values: _normalizeTrend(data.userTrend),
+                            values: _normalizeTrend(data.contentTrend),
                           ),
                           child: const SizedBox.expand(),
                         ),
@@ -135,7 +169,7 @@ class AdminDashboardPage extends ConsumerWidget {
                         spacing: 8,
                         runSpacing: 8,
                         children: [
-                          for (final point in data.userTrend.take(10))
+                          for (final point in data.contentTrend.take(10))
                             _InfoChip(
                               label:
                                   '${point.label}: ${point.value.toStringAsFixed(point.value.truncateToDouble() == point.value ? 0 : 1)}',
@@ -334,6 +368,141 @@ class _StatusRow extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: emphasize ? tokens.badgeOrange : null,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InventoryMetricCard extends StatelessWidget {
+  const _InventoryMetricCard({
+    required this.title,
+    required this.subtitle,
+    required this.total,
+    required this.helperLabel,
+  });
+
+  final String title;
+  final String subtitle;
+  final int total;
+  final String helperLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: tokens.surface,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 8),
+          Text('$total', style: Theme.of(context).textTheme.displaySmall),
+          const SizedBox(height: 8),
+          _InfoChip(label: helperLabel),
+          const SizedBox(height: 10),
+          Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+        ],
+      ),
+    );
+  }
+}
+
+class _CoverageMetricCard extends StatelessWidget {
+  const _CoverageMetricCard({
+    required this.title,
+    required this.subtitle,
+    required this.metric,
+    this.primaryLabel = 'Hazir',
+    this.secondaryLabel = 'Eksik',
+  });
+
+  final String title;
+  final String subtitle;
+  final AdminDashboardCoverageMetric metric;
+  final String primaryLabel;
+  final String secondaryLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: tokens.surface,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 8),
+          Text(
+            '${metric.readyCount} / ${metric.missingCount}',
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _InfoChip(label: '$primaryLabel ${metric.readyCount}'),
+              _InfoChip(label: '$secondaryLabel ${metric.missingCount}'),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            '$subtitle | Toplam ${metric.total}',
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SimpleMetricCard extends StatelessWidget {
+  const _SimpleMetricCard({
+    required this.title,
+    required this.subtitle,
+    required this.total,
+  });
+
+  final String title;
+  final String subtitle;
+  final int total;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = AppThemeTokens.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: tokens.surface,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 8),
+          Text('$total', style: Theme.of(context).textTheme.displaySmall),
+          const SizedBox(height: 10),
+          Text(
+            subtitle,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
           ),
         ],
       ),

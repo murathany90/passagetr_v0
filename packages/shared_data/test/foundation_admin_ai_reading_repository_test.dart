@@ -227,8 +227,8 @@ void main() {
           body,
           <String, dynamic>{
             'reading_id': 'reading-1',
-            'provider': adminAiProviderOpenAiImages,
-            'model': adminAiOpenAiImageDefaultModel,
+            'provider': adminAiProviderImageRouter,
+            'model': 'google/nano-banana-2:free',
           },
         );
         return AdminAiReadingFunctionResponse(
@@ -243,7 +243,7 @@ void main() {
             'cover_bucket_name': 'reading-covers',
             'cover_storage_path': 'readings/reading-1/asset-1.png',
             'cover_alt_text': 'Ocean Science cover',
-            'cover_generation_meta': {'provider': 'openai-images'},
+            'cover_generation_meta': {'provider': 'imagerouter'},
           },
         );
       },
@@ -252,8 +252,8 @@ void main() {
     final result = await repository.generateReadingCover(
       const AdminAiGenerateReadingCoverRequest(
         readingId: 'reading-1',
-        provider: adminAiProviderOpenAiImages,
-        model: adminAiOpenAiImageDefaultModel,
+        provider: adminAiProviderImageRouter,
+        model: 'google/nano-banana-2:free',
       ),
     );
 
@@ -262,6 +262,55 @@ void main() {
     expect(value.cover.hasCover, isTrue);
     expect(value.cover.bucketName, 'reading-covers');
     expect(value.cover.storagePath, 'readings/reading-1/asset-1.png');
+  });
+
+  test('reads AI cover pool status from admin RPC', () async {
+    final repository = FoundationAdminAiReadingRepository(
+      config: config,
+      rpcInvoker: (functionName, {params = const <String, dynamic>{}}) async {
+        expect(functionName, 'admin_get_ai_cover_pool_status');
+        expect(params, isEmpty);
+        return <String, dynamic>{
+          'usage_date_utc': '2026-03-15',
+          'local_caps_enabled': true,
+          'models': [
+            <String, dynamic>{
+              'provider': adminAiProviderImageRouter,
+              'model': 'google/nano-banana-2:free',
+              'enabled': true,
+              'priority': 1,
+              'daily_cap': 3,
+              'attempt_count': 2,
+              'success_count': 1,
+              'failed_count': 1,
+              'rate_limited_count': 0,
+            },
+            <String, dynamic>{
+              'provider': adminAiProviderHuggingFace,
+              'model': 'stabilityai/stable-diffusion-xl-base-1.0',
+              'enabled': true,
+              'priority': 7,
+              'daily_cap': 50,
+              'attempt_count': 0,
+              'success_count': 0,
+              'failed_count': 0,
+              'rate_limited_count': 0,
+            },
+          ],
+        };
+      },
+    );
+
+    final result = await repository.fetchAiCoverPoolStatus();
+
+    expect(result, isA<AppSuccess<AdminAiCoverPoolStatus>>());
+    final pool = (result as AppSuccess<AdminAiCoverPoolStatus>).value;
+    expect(pool.models, hasLength(2));
+    expect(pool.statusForSelection('google/nano-banana-2:free')?.attemptCount, 2);
+    expect(
+      pool.statusesForProvider(adminAiProviderHuggingFace).single.dailyCap,
+      adminAiHuggingFaceDefaultDailyCap,
+    );
   });
 
   test('AdminReadingDetail serializes questions and AI metadata', () {
@@ -312,8 +361,8 @@ void main() {
             'id': 'run-1',
             'job_type': 'cover_backfill',
             'status': 'paused',
-            'provider': adminAiProviderGeminiImage,
-            'model': adminAiGeminiImageDefaultModel,
+            'provider': adminAiProviderCoverAuto,
+            'model': adminAiCoverAutoModel,
             'question_count': 3,
             'total_count': 12,
             'processed_count': 7,
@@ -349,16 +398,16 @@ void main() {
         expect(params['p_payload'], <String, dynamic>{
           'run_id': 'run-1',
           'action': 'resume',
-          'provider': adminAiProviderOpenAiImages,
-          'model': adminAiOpenAiImageDefaultModel,
+          'provider': adminAiProviderHuggingFace,
+          'model': 'stabilityai/stable-diffusion-xl-base-1.0',
           'question_count': null,
         });
         return <String, dynamic>{
           'id': 'run-1',
           'job_type': 'cover_backfill',
           'status': 'running',
-          'provider': adminAiProviderOpenAiImages,
-          'model': adminAiOpenAiImageDefaultModel,
+          'provider': adminAiProviderHuggingFace,
+          'model': 'stabilityai/stable-diffusion-xl-base-1.0',
           'question_count': 3,
           'total_count': 12,
           'processed_count': 7,
@@ -377,15 +426,15 @@ void main() {
     final result = await repository.controlReadingAiRun(
       runId: 'run-1',
       action: 'resume',
-      provider: adminAiProviderOpenAiImages,
-      model: adminAiOpenAiImageDefaultModel,
+      provider: adminAiProviderHuggingFace,
+      model: 'stabilityai/stable-diffusion-xl-base-1.0',
     );
 
     expect(result, isA<AppSuccess<AdminAiReadingRun>>());
     final run = (result as AppSuccess<AdminAiReadingRun>).value;
     expect(run.status, 'running');
-    expect(run.provider, adminAiProviderOpenAiImages);
-    expect(run.model, adminAiOpenAiImageDefaultModel);
+    expect(run.provider, adminAiProviderHuggingFace);
+    expect(run.model, 'stabilityai/stable-diffusion-xl-base-1.0');
   });
 }
 

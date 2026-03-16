@@ -450,30 +450,205 @@ class AdminDataManagementSettings {
   }
 }
 
+class AdminAiCoverModelConfig {
+  const AdminAiCoverModelConfig({
+    required this.provider,
+    required this.modelId,
+    this.enabled = true,
+    this.dailyCap = adminAiImageRouterDefaultDailyCap,
+    this.lifetimeCap,
+    this.priority = 0,
+  });
+
+  final String provider;
+  final String modelId;
+  final bool enabled;
+  final int dailyCap;
+  final int? lifetimeCap;
+  final int priority;
+
+  AdminAiCoverModelConfig copyWith({
+    String? provider,
+    String? modelId,
+    bool? enabled,
+    int? dailyCap,
+    int? lifetimeCap,
+    int? priority,
+    bool clearLifetimeCap = false,
+  }) {
+    return AdminAiCoverModelConfig(
+      provider: provider ?? this.provider,
+      modelId: modelId ?? this.modelId,
+      enabled: enabled ?? this.enabled,
+      dailyCap: dailyCap ?? this.dailyCap,
+      lifetimeCap: clearLifetimeCap ? null : lifetimeCap ?? this.lifetimeCap,
+      priority: priority ?? this.priority,
+    );
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'provider': provider,
+    'model_id': modelId,
+    'enabled': enabled,
+    'daily_cap': dailyCap,
+    'lifetime_cap': lifetimeCap,
+    'priority': priority,
+  };
+
+  factory AdminAiCoverModelConfig.fromJson(Map<String, dynamic>? json) {
+    final provider = _adminConsoleAiCoverProviderFromValue(json?['provider']) ??
+        adminAiProviderImageRouter;
+    final modelId = json?['model_id']?.toString() ?? '';
+    final fallbackDailyCap = provider == adminAiProviderHuggingFace
+        ? adminAiHuggingFaceDefaultDailyCap
+        : adminAiImageRouterDefaultDailyCap;
+    final fallbackLifetimeCap =
+        provider == adminAiProviderImageRouter &&
+            modelId == 'openai/gpt-image-1.5:free'
+        ? adminAiImageRouterOpenAiLifetimeCap
+        : null;
+
+    return AdminAiCoverModelConfig(
+      provider: provider,
+      modelId: modelId,
+      enabled: json?['enabled'] as bool? ?? true,
+      dailyCap: (json?['daily_cap'] as num?)?.toInt() ?? fallbackDailyCap,
+      lifetimeCap:
+          (json?['lifetime_cap'] as num?)?.toInt() ?? fallbackLifetimeCap,
+      priority: (json?['priority'] as num?)?.toInt() ?? 0,
+    );
+  }
+}
+
+String? _adminConsoleAiCoverProviderFromValue(Object? value) {
+  final normalized = value?.toString().trim().toLowerCase();
+  if (normalized == null || normalized.isEmpty) {
+    return null;
+  }
+  if (
+      normalized == adminAiProviderImageRouter ||
+      normalized == adminAiProviderHuggingFace ||
+      normalized == adminAiProviderCoverAuto ||
+      normalized == adminAiProviderGemini ||
+      normalized == adminAiProviderOpenRouter) {
+    return normalized;
+  }
+  return null;
+}
+
+List<AdminAiCoverModelConfig> adminDefaultAiCoverModelConfigs() {
+  final items = <AdminAiCoverModelConfig>[];
+  var priority = 1;
+  for (final modelId in adminAiImageRouterCoverModels) {
+    items.add(
+      AdminAiCoverModelConfig(
+        provider: adminAiProviderImageRouter,
+        modelId: modelId,
+        dailyCap: adminAiImageRouterDefaultDailyCap,
+        lifetimeCap: modelId == 'openai/gpt-image-1.5:free'
+            ? adminAiImageRouterOpenAiLifetimeCap
+            : null,
+        priority: priority++,
+      ),
+    );
+  }
+  for (final modelId in adminAiHuggingFaceCoverModels) {
+    items.add(
+      AdminAiCoverModelConfig(
+        provider: adminAiProviderHuggingFace,
+        modelId: modelId,
+        dailyCap: adminAiHuggingFaceDefaultDailyCap,
+        priority: priority++,
+      ),
+    );
+  }
+  return items;
+}
+
+class AdminAiCoverSettings {
+  const AdminAiCoverSettings({
+    this.localCapsEnabled = true,
+    this.models = const <AdminAiCoverModelConfig>[],
+  });
+
+  final bool localCapsEnabled;
+  final List<AdminAiCoverModelConfig> models;
+
+  List<AdminAiCoverModelConfig> get sortedModels => List<AdminAiCoverModelConfig>.from(
+    models.isEmpty ? adminDefaultAiCoverModelConfigs() : models,
+  )..sort((left, right) {
+    final byPriority = left.priority.compareTo(right.priority);
+    if (byPriority != 0) {
+      return byPriority;
+    }
+    return adminAiModelLabel(left.modelId).compareTo(
+      adminAiModelLabel(right.modelId),
+    );
+  });
+
+  AdminAiCoverSettings copyWith({
+    bool? localCapsEnabled,
+    List<AdminAiCoverModelConfig>? models,
+  }) {
+    return AdminAiCoverSettings(
+      localCapsEnabled: localCapsEnabled ?? this.localCapsEnabled,
+      models: models ?? this.models,
+    );
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'local_caps_enabled': localCapsEnabled,
+    'models': sortedModels.map((item) => item.toJson()).toList(growable: false),
+  };
+
+  factory AdminAiCoverSettings.fromJson(Map<String, dynamic>? json) {
+    final rawModels = json?['models'];
+    final parsedModels = switch (rawModels) {
+      List<dynamic>() => rawModels
+          .whereType<Map>()
+          .map(
+            (item) => AdminAiCoverModelConfig.fromJson(
+              item.cast<String, dynamic>(),
+            ),
+          )
+          .toList(growable: false),
+      _ => adminDefaultAiCoverModelConfigs(),
+    };
+    return AdminAiCoverSettings(
+      localCapsEnabled: json?['local_caps_enabled'] as bool? ?? true,
+      models: parsedModels,
+    );
+  }
+}
+
 class AdminSettingsSnapshot {
   const AdminSettingsSnapshot({
     this.general = const AdminGeneralSettings(),
     this.notifications = const AdminNotificationSettings(),
     this.security = const AdminSecuritySettings(),
     this.dataManagement = const AdminDataManagementSettings(),
+    this.aiCover = const AdminAiCoverSettings(),
   });
 
   final AdminGeneralSettings general;
   final AdminNotificationSettings notifications;
   final AdminSecuritySettings security;
   final AdminDataManagementSettings dataManagement;
+  final AdminAiCoverSettings aiCover;
 
   AdminSettingsSnapshot copyWith({
     AdminGeneralSettings? general,
     AdminNotificationSettings? notifications,
     AdminSecuritySettings? security,
     AdminDataManagementSettings? dataManagement,
+    AdminAiCoverSettings? aiCover,
   }) {
     return AdminSettingsSnapshot(
       general: general ?? this.general,
       notifications: notifications ?? this.notifications,
       security: security ?? this.security,
       dataManagement: dataManagement ?? this.dataManagement,
+      aiCover: aiCover ?? this.aiCover,
     );
   }
 
@@ -482,6 +657,7 @@ class AdminSettingsSnapshot {
     'notifications': notifications.toJson(),
     'security': security.toJson(),
     'data_management': dataManagement.toJson(),
+    'ai_cover': aiCover.toJson(),
   };
 
   factory AdminSettingsSnapshot.fromJson(Map<String, dynamic>? json) {
@@ -497,6 +673,9 @@ class AdminSettingsSnapshot {
       ),
       dataManagement: AdminDataManagementSettings.fromJson(
         json?['data_management'] as Map<String, dynamic>?,
+      ),
+      aiCover: AdminAiCoverSettings.fromJson(
+        json?['ai_cover'] as Map<String, dynamic>?,
       ),
     );
   }
@@ -540,45 +719,117 @@ class AdminDashboardMetric {
   }
 }
 
+class AdminDashboardInventoryMetric {
+  const AdminDashboardInventoryMetric({
+    required this.total,
+    required this.publishedCount,
+  });
+
+  final int total;
+  final int publishedCount;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'total': total,
+    'published_count': publishedCount,
+  };
+
+  factory AdminDashboardInventoryMetric.fromJson(Map<String, dynamic>? json) {
+    return AdminDashboardInventoryMetric(
+      total: (json?['total'] as num?)?.toInt() ?? 0,
+      publishedCount: (json?['published_count'] as num?)?.toInt() ?? 0,
+    );
+  }
+}
+
+class AdminDashboardCoverageMetric {
+  const AdminDashboardCoverageMetric({
+    required this.total,
+    required this.readyCount,
+    required this.missingCount,
+  });
+
+  final int total;
+  final int readyCount;
+  final int missingCount;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'total': total,
+    'ready_count': readyCount,
+    'missing_count': missingCount,
+  };
+
+  factory AdminDashboardCoverageMetric.fromJson(Map<String, dynamic>? json) {
+    return AdminDashboardCoverageMetric(
+      total: (json?['total'] as num?)?.toInt() ?? 0,
+      readyCount: (json?['ready_count'] as num?)?.toInt() ?? 0,
+      missingCount: (json?['missing_count'] as num?)?.toInt() ?? 0,
+    );
+  }
+}
+
 class AdminDashboardSnapshot {
   const AdminDashboardSnapshot({
     required this.windowDays,
     required this.userCount,
     required this.proUserCount,
-    required this.wordCount,
-    required this.readingCount,
-    required this.grammarCount,
+    required this.readingInventory,
+    required this.wordInventory,
+    required this.grammarInventory,
+    required this.miniTestCoverage,
+    required this.coverCoverage,
+    required this.linkedWordCoverage,
+    required this.dictionaryMatchCoverage,
+    required this.dictionaryEntryCount,
     required this.auditCount,
-    required this.userTrend,
+    required this.contentTrend,
     required this.maintenanceMode,
   });
 
   final int windowDays;
   final AdminDashboardMetric userCount;
   final AdminDashboardMetric proUserCount;
-  final AdminDashboardMetric wordCount;
-  final AdminDashboardMetric readingCount;
-  final AdminDashboardMetric grammarCount;
+  final AdminDashboardInventoryMetric readingInventory;
+  final AdminDashboardInventoryMetric wordInventory;
+  final AdminDashboardInventoryMetric grammarInventory;
+  final AdminDashboardCoverageMetric miniTestCoverage;
+  final AdminDashboardCoverageMetric coverCoverage;
+  final AdminDashboardCoverageMetric linkedWordCoverage;
+  final AdminDashboardCoverageMetric dictionaryMatchCoverage;
+  final int dictionaryEntryCount;
   final AdminDashboardMetric auditCount;
-  final List<AdminTrendPoint> userTrend;
+  final List<AdminTrendPoint> contentTrend;
   final bool maintenanceMode;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
     'window_days': windowDays,
     'user_count': userCount.toJson(),
     'pro_user_count': proUserCount.toJson(),
-    'word_count': wordCount.toJson(),
-    'reading_count': readingCount.toJson(),
-    'grammar_count': grammarCount.toJson(),
+    'reading_inventory': readingInventory.toJson(),
+    'word_inventory': wordInventory.toJson(),
+    'grammar_inventory': grammarInventory.toJson(),
+    'mini_test_coverage': miniTestCoverage.toJson(),
+    'cover_coverage': coverCoverage.toJson(),
+    'linked_word_coverage': linkedWordCoverage.toJson(),
+    'dictionary_match_coverage': dictionaryMatchCoverage.toJson(),
+    'dictionary_entry_count': dictionaryEntryCount,
     'audit_count': auditCount.toJson(),
-    'user_trend': userTrend
+    'content_trend': contentTrend
         .map((item) => item.toJson())
         .toList(growable: false),
     'maintenance_mode': maintenanceMode,
   };
 
   factory AdminDashboardSnapshot.fromJson(Map<String, dynamic>? json) {
-    final rawTrend = json?['user_trend'];
+    final rawTrend = json?['content_trend'] ?? json?['user_trend'];
+    final legacyReadingMetric = AdminDashboardMetric.fromJson(
+      json?['reading_count'] as Map<String, dynamic>?,
+    );
+    final legacyWordMetric = AdminDashboardMetric.fromJson(
+      json?['word_count'] as Map<String, dynamic>?,
+    );
+    final legacyGrammarMetric = AdminDashboardMetric.fromJson(
+      json?['grammar_count'] as Map<String, dynamic>?,
+    );
     return AdminDashboardSnapshot(
       windowDays: (json?['window_days'] as num?)?.toInt() ?? 7,
       userCount: AdminDashboardMetric.fromJson(
@@ -587,19 +838,45 @@ class AdminDashboardSnapshot {
       proUserCount: AdminDashboardMetric.fromJson(
         json?['pro_user_count'] as Map<String, dynamic>?,
       ),
-      wordCount: AdminDashboardMetric.fromJson(
-        json?['word_count'] as Map<String, dynamic>?,
+      readingInventory: AdminDashboardInventoryMetric.fromJson(
+        (json?['reading_inventory'] as Map<String, dynamic>?) ??
+            <String, dynamic>{
+              'total': legacyReadingMetric.total,
+              'published_count': legacyReadingMetric.total,
+            },
       ),
-      readingCount: AdminDashboardMetric.fromJson(
-        json?['reading_count'] as Map<String, dynamic>?,
+      wordInventory: AdminDashboardInventoryMetric.fromJson(
+        (json?['word_inventory'] as Map<String, dynamic>?) ??
+            <String, dynamic>{
+              'total': legacyWordMetric.total,
+              'published_count': legacyWordMetric.total,
+            },
       ),
-      grammarCount: AdminDashboardMetric.fromJson(
-        json?['grammar_count'] as Map<String, dynamic>?,
+      grammarInventory: AdminDashboardInventoryMetric.fromJson(
+        (json?['grammar_inventory'] as Map<String, dynamic>?) ??
+            <String, dynamic>{
+              'total': legacyGrammarMetric.total,
+              'published_count': legacyGrammarMetric.total,
+            },
       ),
+      miniTestCoverage: AdminDashboardCoverageMetric.fromJson(
+        json?['mini_test_coverage'] as Map<String, dynamic>?,
+      ),
+      coverCoverage: AdminDashboardCoverageMetric.fromJson(
+        json?['cover_coverage'] as Map<String, dynamic>?,
+      ),
+      linkedWordCoverage: AdminDashboardCoverageMetric.fromJson(
+        json?['linked_word_coverage'] as Map<String, dynamic>?,
+      ),
+      dictionaryMatchCoverage: AdminDashboardCoverageMetric.fromJson(
+        json?['dictionary_match_coverage'] as Map<String, dynamic>?,
+      ),
+      dictionaryEntryCount:
+          (json?['dictionary_entry_count'] as num?)?.toInt() ?? 0,
       auditCount: AdminDashboardMetric.fromJson(
         json?['audit_count'] as Map<String, dynamic>?,
       ),
-      userTrend: switch (rawTrend) {
+      contentTrend: switch (rawTrend) {
         List<dynamic>() =>
           rawTrend
               .whereType<Map<String, dynamic>>()

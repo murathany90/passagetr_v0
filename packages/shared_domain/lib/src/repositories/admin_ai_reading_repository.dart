@@ -16,6 +16,8 @@ abstract interface class AdminAiReadingRepository {
     AdminAiGenerateReadingCoverRequest request,
   );
 
+  Future<AppResult<AdminAiCoverPoolStatus>> fetchAiCoverPoolStatus();
+
   Future<AppResult<AdminAiReadingRun>> createReadingAiRun(
     AdminAiReadingRunRequest request,
   );

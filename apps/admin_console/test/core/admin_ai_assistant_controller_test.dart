@@ -203,6 +203,9 @@ class _FakeAdminAiReadingRepository implements AdminAiReadingRepository {
   ) async {
     return result;
   }
+
+  @override
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 class _FakeAdminContentRepository implements AdminContentRepository {

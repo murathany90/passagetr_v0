@@ -207,6 +207,45 @@ void main() {
   });
 
   testWidgets(
+    'readings page does not render placeholder summary text on cards',
+    (tester) async {
+      await _pumpStudentBehaviorApp(
+        tester,
+        initialLocation: '/readings',
+        routes: <RouteBase>[
+          GoRoute(
+            path: '/readings',
+            builder: (context, state) => const StudentReadingsPage(),
+          ),
+        ],
+        overrides: <Override>[
+          studentReadingRepositoryProvider.overrideWithValue(
+            _FakeReadingRepository(
+              readings: const <ReadingPassage>[
+                ReadingPassage(
+                  id: 'reading-without-summary',
+                  title: 'Placeholder Free Reading',
+                  level: 'B1',
+                  category: 'Science',
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(find.text('Placeholder Free Reading'), findsOneWidget);
+      expect(
+        find.text('Bu okuma icin ozet ve ceviri destegi yakinda genisletilecek.'),
+        findsNothing,
+      );
+      expect(find.text('Okumaya Basla ->'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
     'readings page filters saved and favorite items from hydrated state',
     (tester) async {
       final container = await _pumpStudentBehaviorApp(

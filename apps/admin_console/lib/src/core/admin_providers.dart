@@ -103,6 +103,17 @@ final adminActiveSettingsProvider = Provider<AdminSettingsSnapshot>((ref) {
   return ref.watch(adminSettingsStateProvider).draft;
 });
 
+final adminAiCoverPoolStatusProvider = FutureProvider<AdminAiCoverPoolStatus>((
+  ref,
+) async {
+  final repository = ref.watch(adminAiReadingRepositoryProvider);
+  final result = await repository.fetchAiCoverPoolStatus();
+  if (result case AppSuccess<AdminAiCoverPoolStatus>()) {
+    return result.value;
+  }
+  throw Exception((result as AppFailure<AdminAiCoverPoolStatus>).message);
+});
+
 final adminDefaultListPageSizeProvider = Provider<int>((ref) {
   final size = ref
       .watch(adminActiveSettingsProvider)
