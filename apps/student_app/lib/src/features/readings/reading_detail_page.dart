@@ -906,6 +906,7 @@ class ReadingDetailHeader extends StatelessWidget {
                 ? 'Yer imi'
                 : 'Kaydetmek icin giris yap',
             child: IconButton(
+              tooltip: isBookmarked ? 'Yer iminden çıkar' : 'Yer imine ekle',
               onPressed: canToggleEngagement ? onBookmarkToggle : null,
               icon: Icon(
                 isBookmarked
@@ -919,6 +920,7 @@ class ReadingDetailHeader extends StatelessWidget {
                 ? 'Favori'
                 : 'Kaydetmek icin giris yap',
             child: IconButton(
+              tooltip: isFavorite ? 'Favorilerden çıkar' : 'Favorilere ekle',
               onPressed: canToggleEngagement ? onFavoriteToggle : null,
               icon: Icon(
                 isFavorite
@@ -928,6 +930,7 @@ class ReadingDetailHeader extends StatelessWidget {
             ),
           ),
           IconButton(
+            tooltip: 'Paylaş',
             onPressed: onShare,
             icon: const Icon(Icons.share_outlined),
           ),
@@ -1258,19 +1261,20 @@ class _ReadingArticlePanel extends ConsumerWidget {
         ],
         ...switch (questions) {
           AsyncData<List<ReadingQuestion>>(value: final items)
-              when items.isNotEmpty => <Widget>[
-                _ReadingQuestionsPanel(
-                  questions: items,
-                  selectedQuestionOptionIndexes: selectedQuestionOptionIndexes,
-                  readingQuizResult: readingQuizResult,
-                  isSubmitting: isSubmittingReadingQuiz,
-                  persistsAttempts: persistsAttempts,
-                  onOptionSelected: onQuestionSelected,
-                  onSubmit: () => onSubmitQuiz(items),
-                  onClear: onClearQuiz,
-                ),
-                const SizedBox(height: 16),
-              ],
+              when items.isNotEmpty =>
+            <Widget>[
+              _ReadingQuestionsPanel(
+                questions: items,
+                selectedQuestionOptionIndexes: selectedQuestionOptionIndexes,
+                readingQuizResult: readingQuizResult,
+                isSubmitting: isSubmittingReadingQuiz,
+                persistsAttempts: persistsAttempts,
+                onOptionSelected: onQuestionSelected,
+                onSubmit: () => onSubmitQuiz(items),
+                onClear: onClearQuiz,
+              ),
+              const SizedBox(height: 16),
+            ],
           AsyncLoading<List<ReadingQuestion>>() => <Widget>[
             _ReadingQuestionsLoadingCard(),
             const SizedBox(height: 16),
@@ -1313,7 +1317,8 @@ class _ReadingQuestionsPanel extends StatelessWidget {
   final _ReadingQuizResult? readingQuizResult;
   final bool isSubmitting;
   final bool persistsAttempts;
-  final void Function(ReadingQuestion question, int optionIndex) onOptionSelected;
+  final void Function(ReadingQuestion question, int optionIndex)
+  onOptionSelected;
   final VoidCallback onSubmit;
   final VoidCallback onClear;
 
@@ -1339,7 +1344,10 @@ class _ReadingQuestionsPanel extends StatelessWidget {
           ),
           if (result != null) ...[
             const SizedBox(height: 14),
-            _ReadingQuizResultBanner(result: result, questionCount: questions.length),
+            _ReadingQuizResultBanner(
+              result: result,
+              questionCount: questions.length,
+            ),
           ],
           const SizedBox(height: 16),
           for (final question in questions) ...[
@@ -1362,7 +1370,9 @@ class _ReadingQuestionsPanel extends StatelessWidget {
           Row(
             children: [
               OutlinedButton(
-                onPressed: selectedQuestionOptionIndexes.isEmpty ? null : onClear,
+                onPressed: selectedQuestionOptionIndexes.isEmpty
+                    ? null
+                    : onClear,
                 child: const Text('Temizle'),
               ),
               const Spacer(),
