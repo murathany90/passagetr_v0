@@ -300,13 +300,6 @@ class FoundationWordRepository implements WordRepository {
         .toList(growable: false);
   }
 
-  bool _hasRichMetadata(WordEntry item) {
-    return item.exampleEn.trim().isNotEmpty ||
-        (item.exampleTr?.trim().isNotEmpty ?? false) ||
-        (item.synonymsRaw?.trim().isNotEmpty ?? false) ||
-        (item.antonymsRaw?.trim().isNotEmpty ?? false) ||
-        (item.notes?.trim().isNotEmpty ?? false);
-  }
 
   Map<String, dynamic> _decodePayload(String payloadJson) {
     final decoded = jsonDecode(payloadJson);

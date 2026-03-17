@@ -64,18 +64,14 @@ Future<void> showStudentWordCardSheet(
       );
     },
     transitionBuilder: (context, animation, secondaryAnimation, child) {
-      final curvedAnimation = CurvedAnimation(
-        parent: animation,
-        curve: Curves.easeOutCubic,
-        reverseCurve: Curves.easeInCubic,
-      );
+      final curve = CurveTween(curve: Curves.easeOutCubic).animate(animation);
       return FadeTransition(
-        opacity: curvedAnimation,
+        opacity: curve,
         child: SlideTransition(
           position: Tween<Offset>(
             begin: const Offset(0, 0.08),
             end: Offset.zero,
-          ).animate(curvedAnimation),
+          ).animate(curve),
           child: child,
         ),
       );

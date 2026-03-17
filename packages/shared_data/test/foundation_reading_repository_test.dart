@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/fake_local_sync_store.dart';
 
@@ -148,6 +149,8 @@ void main() {
         updatedAt: DateTime.utc(2026, 3, 14, 10, 2),
       ),
     );
+
+    SharedPreferences.setMockInitialValues(<String, Object>{});
 
     final repository = FoundationReadingRepository(
       database: database,

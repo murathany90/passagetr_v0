@@ -24,6 +24,14 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingPassage>> fetchReadings() async {
+    // Stale-while-revalidate: serve local first, refresh in background.
+    final localItems = await _readFromLocal();
+    if (localItems.isNotEmpty) {
+      _silentRefreshReadings();
+      return localItems;
+    }
+
+    // No local data — wait for remote.
     try {
       final remoteItems = await _readFromRemote();
       if (remoteItems.isNotEmpty) {
@@ -31,12 +39,7 @@ class FoundationReadingRepository implements ReadingRepository {
         return remoteItems;
       }
     } catch (_) {
-      // Fallback to local
-    }
-
-    final localItems = await _readFromLocal();
-    if (localItems.isNotEmpty) {
-      return localItems;
+      // Remote unavailable and no local data; return fallback.
     }
 
     return const <ReadingPassage>[
@@ -69,6 +72,14 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingSentence>> fetchReadingSections(String passageId) async {
+    // Stale-while-revalidate: serve local first, refresh in background.
+    final localItems = await _readSectionsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      _silentRefreshSections(passageId);
+      return localItems;
+    }
+
+    // No local data — wait for remote.
     try {
       final remoteItems = await _readSectionsFromRemote(passageId);
       if (remoteItems.isNotEmpty) {
@@ -76,12 +87,7 @@ class FoundationReadingRepository implements ReadingRepository {
         return remoteItems;
       }
     } catch (_) {
-      // Fallback to local
-    }
-
-    final localItems = await _readSectionsFromLocal(passageId);
-    if (localItems.isNotEmpty) {
-      return localItems;
+      // Remote unavailable and no local data.
     }
 
     return const <ReadingSentence>[];
@@ -89,6 +95,14 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingFocusWord>> fetchFocusWords(String passageId) async {
+    // Stale-while-revalidate: serve local first, refresh in background.
+    final localItems = await _readFocusWordsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      _silentRefreshFocusWords(passageId);
+      return localItems;
+    }
+
+    // No local data — wait for remote.
     try {
       final remoteItems = await _readFocusWordsFromRemote(passageId);
       if (remoteItems.isNotEmpty) {
@@ -96,12 +110,7 @@ class FoundationReadingRepository implements ReadingRepository {
         return remoteItems;
       }
     } catch (_) {
-      // Fallback to local
-    }
-
-    final localItems = await _readFocusWordsFromLocal(passageId);
-    if (localItems.isNotEmpty) {
-      return localItems;
+      // Remote unavailable and no local data.
     }
 
     return const <ReadingFocusWord>[];
@@ -109,6 +118,14 @@ class FoundationReadingRepository implements ReadingRepository {
 
   @override
   Future<List<ReadingQuestion>> fetchQuestions(String passageId) async {
+    // Stale-while-revalidate: serve local first, refresh in background.
+    final localItems = await _readQuestionsFromLocal(passageId);
+    if (localItems.isNotEmpty) {
+      _silentRefreshQuestions(passageId);
+      return localItems;
+    }
+
+    // No local data — wait for remote.
     try {
       final remoteItems = await _readQuestionsFromRemote(passageId);
       if (remoteItems.isNotEmpty) {
@@ -116,12 +133,7 @@ class FoundationReadingRepository implements ReadingRepository {
         return remoteItems;
       }
     } catch (_) {
-      // Fallback to local
-    }
-
-    final localItems = await _readQuestionsFromLocal(passageId);
-    if (localItems.isNotEmpty) {
-      return localItems;
+      // Remote unavailable and no local data.
     }
 
     return const <ReadingQuestion>[];
@@ -173,6 +185,65 @@ class FoundationReadingRepository implements ReadingRepository {
     }
 
     return null;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Silent background refresh helpers (stale-while-revalidate)
+  // ---------------------------------------------------------------------------
+
+  /// Fetches readings from remote and syncs to local in the background.
+  /// Fire-and-forget: errors are silently ignored since local data was already
+  /// served to the caller.
+  void _silentRefreshReadings() {
+    Future<void>(() async {
+      try {
+        final remoteItems = await _readFromRemote();
+        if (remoteItems.isNotEmpty) {
+          await _syncReadingPassagesToLocal(remoteItems);
+        }
+      } catch (_) {
+        // Silently ignore — local data was already served.
+      }
+    });
+  }
+
+  void _silentRefreshSections(String passageId) {
+    Future<void>(() async {
+      try {
+        final remoteItems = await _readSectionsFromRemote(passageId);
+        if (remoteItems.isNotEmpty) {
+          await _syncReadingSentencesToLocal(passageId, remoteItems);
+        }
+      } catch (_) {
+        // Silently ignore.
+      }
+    });
+  }
+
+  void _silentRefreshFocusWords(String passageId) {
+    Future<void>(() async {
+      try {
+        final remoteItems = await _readFocusWordsFromRemote(passageId);
+        if (remoteItems.isNotEmpty) {
+          await _syncReadingFocusWordsToLocal(passageId, remoteItems);
+        }
+      } catch (_) {
+        // Silently ignore.
+      }
+    });
+  }
+
+  void _silentRefreshQuestions(String passageId) {
+    Future<void>(() async {
+      try {
+        final remoteItems = await _readQuestionsFromRemote(passageId);
+        if (remoteItems.isNotEmpty) {
+          await _syncReadingQuestionsToLocal(passageId, remoteItems);
+        }
+      } catch (_) {
+        // Silently ignore.
+      }
+    });
   }
 
   Future<void> _syncReadingPassagesToLocal(List<ReadingPassage> passages) async {

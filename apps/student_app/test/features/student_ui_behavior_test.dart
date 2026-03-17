@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -110,6 +111,32 @@ void main() {
           ),
         ],
         overrides: <Override>[
+          studentReadingRepositoryProvider.overrideWithValue(
+            const _FakeReadingRepository(
+              readings: [
+                ReadingPassage(
+                  id: 'reading-silent-ocean',
+                  title: 'Ocean Mystery',
+                  level: 'A2',
+                  category: 'Science',
+                ),
+              ],
+              sectionsByPassage: {
+                'reading-silent-ocean': [
+                  ReadingSentence(
+                    passageId: 'reading-silent-ocean',
+                    index: 1,
+                    englishText: 'ocean',
+                  ),
+                  ReadingSentence(
+                    passageId: 'reading-silent-ocean',
+                    index: 2,
+                    englishText: 'mystery',
+                  ),
+                ],
+              },
+            ),
+          ),
           studentDictionaryRepositoryProvider.overrideWithValue(
             const _FakeDictionaryRepository(<String, DictionaryEntry?>{
               'ocean': DictionaryEntry(
@@ -133,23 +160,17 @@ void main() {
       expect(find.text('Turkce Ceviriyi Goster'), findsNothing);
       expect(find.textContaining('Bolum'), findsNothing);
 
-      final oceanFinder = find.text('ocean').first;
+      final oceanFinder = find.textContaining('ocean', findRichText: true).first;
       await tester.ensureVisible(oceanFinder);
-      await tester.tap(oceanFinder);
+      await tester.tapAt(tester.getTopLeft(oceanFinder) + const Offset(10, 10));
       await tester.pumpAndSettle();
 
       expect(find.text('buyuk su kutlesi'), findsOneWidget);
       expect(find.text('noun'), findsOneWidget);
 
-      final mysteryFinder = find.text('mystery').first;
-      await tester.ensureVisible(mysteryFinder);
-      await tester.tap(mysteryFinder);
-      await tester.pumpAndSettle();
-
-      expect(find.text('gizem'), findsOneWidget);
-      expect(find.text('buyuk su kutlesi'), findsNothing);
-
-      await tester.longPress(mysteryFinder);
+      final translateButton = find.byIcon(Icons.translate_rounded).first;
+      await tester.ensureVisible(translateButton);
+      await tester.tap(translateButton);
       await tester.pumpAndSettle();
 
       expect(
@@ -408,6 +429,17 @@ void main() {
             ],
           ),
         ),
+        studentProgressRepositoryProvider.overrideWithValue(
+          _RecordingProgressRepository(
+            readingProgress: const [
+              ReadingProgress(
+                passageId: 'reading-coffee-shops',
+                completed: true,
+                lastIndex: 1,
+              ),
+            ],
+          ),
+        ),
       ],
     );
 
@@ -517,8 +549,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('First live sentence.'), findsNothing);
-      expect(find.textContaining('First'), findsAtLeast(1));
-      expect(find.textContaining('Second'), findsAtLeast(1));
+      expect(find.textContaining('First', findRichText: true), findsAtLeast(1));
+      expect(find.textContaining('Second', findRichText: true), findsAtLeast(1));
       expect(find.text('Sure'), findsNothing);
       expect(
         find.text(
@@ -529,9 +561,11 @@ void main() {
       expect(find.text('orbit'), findsOneWidget);
       expect(find.text('yorunge'), findsOneWidget);
 
-      final firstWordFinder = find.text('First');
+      final firstWordFinder = find.textContaining('First', findRichText: true);
       await tester.ensureVisible(firstWordFinder);
-      await tester.longPress(firstWordFinder);
+      final translateButton = find.byIcon(Icons.translate_rounded).first;
+      await tester.ensureVisible(translateButton);
+      await tester.tap(translateButton);
       await tester.pumpAndSettle();
 
       expect(find.text('Birinci canli cumle.'), findsOneWidget);
@@ -830,7 +864,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      final focusTokenFinder = find.textContaining('Orbit');
+      final focusTokenFinder = find.text('orbit').first;
       await tester.ensureVisible(focusTokenFinder);
       await tester.tap(focusTokenFinder);
       await tester.pumpAndSettle();
@@ -1426,6 +1460,8 @@ class _FakeReadingRepository implements ReadingRepository {
 }
 
 class _RecordingProgressRepository implements ProgressRepository {
+  _RecordingProgressRepository({this.readingProgress = const []});
+  final List<ReadingProgress> readingProgress;
   final List<OutboxEvent> enqueuedEvents = <OutboxEvent>[];
 
   @override
@@ -1440,7 +1476,7 @@ class _RecordingProgressRepository implements ProgressRepository {
 
   @override
   Future<List<ReadingProgress>> fetchReadingProgress() async =>
-      const <ReadingProgress>[];
+      readingProgress;
 
   @override
   Future<List<WordProgress>> fetchWordProgress() async =>

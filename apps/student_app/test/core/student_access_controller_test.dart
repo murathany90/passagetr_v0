@@ -181,6 +181,16 @@ class _FakeAuthRepository implements AuthRepository {
   @override
   Future<AppResult<void>> signOut() async => const AppSuccess<void>(null);
 
+  @override
+  Future<AppResult<AppRole>> fetchCurrentRole() async =>
+      const AppSuccess<AppRole>(AppRole.user);
+
+  @override
+  void notifySessionExpired() {}
+
+  @override
+  Stream<void> get onSessionExpired => const Stream<void>.empty();
+
   void dispose() {
     _controller.close();
   }

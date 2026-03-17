@@ -98,6 +98,10 @@ class _StudentProfilePageState extends ConsumerState<StudentProfilePage> {
             themeMode: themeMode,
           ),
         ),
+        const SizedBox(height: 12),
+        _ProfileStreakBadge(),
+        const SizedBox(height: 18),
+        _ContributionHeatMap(),
         const SizedBox(height: 18),
         _ProBanner(
           isPremium: accessContext.canViewPremium,
@@ -1617,6 +1621,185 @@ class _AuthAccessSheetState extends State<_AuthAccessSheet> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ProfileStreakBadge extends ConsumerWidget {
+  const _ProfileStreakBadge();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tokens = AppThemeTokens.of(context);
+    final streakDays = ref.watch(studentStreakDaysProvider);
+
+    return StudentSurfaceCard(
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [tokens.hero, const Color(0xFFFF720F)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Icon(
+              Icons.local_fire_department_rounded,
+              color: Colors.white,
+              size: 26,
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$streakDays günlük seri',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  streakDays > 0
+                      ? 'Harika gidiyorsun! Seriyi bozma.'
+                      : 'Bugün bir aktivite tamamla ve seriyi başlat!',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: tokens.secondaryText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ContributionHeatMap extends ConsumerWidget {
+  const _ContributionHeatMap();
+
+  static const _cols = 12;
+  static const _rows = 7;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tokens = AppThemeTokens.of(context);
+    final weeklyTrend = ref.watch(studentWeeklyTrendProvider);
+
+    // Build a simple _cols × _rows grid from the 7-element weekly trend.
+    // The current week's data is placed in the last column.
+    final cells = List<double>.filled(_cols * _rows, 0);
+    for (var dayIndex = 0;
+        dayIndex < weeklyTrend.length && dayIndex < _rows;
+        dayIndex++) {
+      cells[(_cols - 1) * _rows + dayIndex] = weeklyTrend[dayIndex];
+    }
+
+    return StudentSurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Aktivite Haritası',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Son 12 haftalık aktivite yoğunluğu',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: tokens.secondaryText,
+            ),
+          ),
+          const SizedBox(height: 18),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final totalGap = (_cols - 1) * 3.0;
+              final cellSize = (constraints.maxWidth - totalGap) / _cols;
+              final clampedSize = cellSize.clamp(8.0, 22.0);
+
+              return Wrap(
+                spacing: 3,
+                runSpacing: 3,
+                children: [
+                  for (var row = 0; row < _rows; row++)
+                    for (var col = 0; col < _cols; col++)
+                      _HeatCell(
+                        size: clampedSize,
+                        intensity: cells[col * _rows + row],
+                        isToday: col == _cols - 1 &&
+                            row == DateTime.now().weekday - 1,
+                        emptyColor: tokens.surfaceMuted,
+                        accentColor: tokens.accent,
+                      ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text('Az', style: Theme.of(context).textTheme.bodySmall),
+              const SizedBox(width: 6),
+              for (final v in [0.0, 0.25, 0.5, 0.75, 1.0]) ...[
+                _HeatCell(
+                  size: 12,
+                  intensity: v,
+                  emptyColor: tokens.surfaceMuted,
+                  accentColor: tokens.accent,
+                ),
+                const SizedBox(width: 3),
+              ],
+              Text('Çok', style: Theme.of(context).textTheme.bodySmall),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HeatCell extends StatelessWidget {
+  const _HeatCell({
+    required this.size,
+    required this.intensity,
+    required this.emptyColor,
+    required this.accentColor,
+    this.isToday = false,
+  });
+
+  final double size;
+  final double intensity;
+  final Color emptyColor;
+  final Color accentColor;
+  final bool isToday;
+
+  @override
+  Widget build(BuildContext context) {
+    final clamped = intensity.clamp(0.0, 1.0);
+    final color = clamped == 0
+        ? emptyColor
+        : Color.lerp(
+            accentColor.withValues(alpha: 0.2),
+            accentColor,
+            clamped,
+          )!;
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(3),
+        border: isToday ? Border.all(color: accentColor, width: 1.5) : null,
       ),
     );
   }

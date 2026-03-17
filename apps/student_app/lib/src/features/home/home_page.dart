@@ -42,7 +42,10 @@ class StudentHomePage extends ConsumerWidget {
       browserTitle: 'Ana Sayfa',
       headerAction: _ProPill(
         isPremium: accessContext.canViewPremium,
-        onPressed: () => context.go('/premium'),
+        isAnonymous: accessContext.isAnonymous,
+        onPressed: () => context.go(
+          accessContext.isAnonymous ? '/profile' : '/premium',
+        ),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -170,14 +173,24 @@ class StudentHomePage extends ConsumerWidget {
 }
 
 class _ProPill extends StatelessWidget {
-  const _ProPill({required this.isPremium, required this.onPressed});
+  const _ProPill({
+    required this.isPremium,
+    required this.isAnonymous,
+    required this.onPressed,
+  });
 
   final bool isPremium;
+  final bool isAnonymous;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
+    final label = isPremium
+        ? 'PRO Aktif'
+        : isAnonymous
+            ? 'Kayıt Ol'
+            : 'Pro\'ya Geç';
 
     return InkWell(
       borderRadius: BorderRadius.circular(tokens.pillRadius),
@@ -196,7 +209,7 @@ class _ProPill extends StatelessWidget {
               Icon(Icons.auto_awesome_outlined, size: 18, color: tokens.hero),
               const SizedBox(width: 8),
               Text(
-                isPremium ? 'PRO Aktif' : 'Pro\'ya Geç',
+                label,
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(color: tokens.hero),
@@ -413,8 +426,38 @@ class _ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
 
+    if (reviewCount == 0) {
+      return StudentSurfaceCard(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.auto_awesome_outlined, color: tokens.hero),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Harika! Tüm kelimeler pekişti \uD83C\uDF89',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.headlineSmall?.copyWith(fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            Text(
+              'Şu an gözden geçirilecek kelime yok. Yeni kelimeler öğrenmeye devam et!',
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
+            ),
+          ],
+        ),
+      );
+    }
+
     return StudentSurfaceCard(
-      minHeight: 390,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -494,7 +537,7 @@ class _ReviewCard extends StatelessWidget {
   }
 }
 
-class _AnalyticsWeeklyProgressCard extends StatelessWidget {
+class _AnalyticsWeeklyProgressCard extends StatefulWidget {
   const _AnalyticsWeeklyProgressCard({
     required this.trend,
     required this.totalWords,
@@ -510,6 +553,32 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
   final int completedGoalDays;
   final double goalProgress;
   final bool isEstimated;
+
+  @override
+  State<_AnalyticsWeeklyProgressCard> createState() =>
+      _AnalyticsWeeklyProgressCardState();
+}
+
+class _AnalyticsWeeklyProgressCardState
+    extends State<_AnalyticsWeeklyProgressCard> {
+  int? _hoveredBarIndex;
+
+  static const _weekDays = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+
+  void _onInteraction(Offset localPosition, double cardWidth) {
+    if (widget.trend.isEmpty) return;
+    final segmentWidth = cardWidth / widget.trend.length;
+    final index = (localPosition.dx / segmentWidth).floor();
+    if (index >= 0 && index < widget.trend.length && index != _hoveredBarIndex) {
+      setState(() => _hoveredBarIndex = index);
+    }
+  }
+
+  void _clearHover() {
+    if (_hoveredBarIndex != null) {
+      setState(() => _hoveredBarIndex = null);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -532,7 +601,7 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      isEstimated
+                      widget.isEstimated
                           ? 'Canlı veri yerine tahmini haftalık trend gösteriliyor.'
                           : 'Canlı haftalık aktivite özeti',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -545,7 +614,7 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
               DecoratedBox(
                 decoration: BoxDecoration(
                   color:
-                      isEstimated
+                      widget.isEstimated
                           ? tokens.warning.withValues(alpha: 0.12)
                           : tokens.surfaceMuted,
                   borderRadius: BorderRadius.circular(tokens.pillRadius),
@@ -558,15 +627,15 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        isEstimated ? 'Tahmini Veri' : 'Bu Hafta',
+                        widget.isEstimated ? 'Tahmini Veri' : 'Bu Hafta',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(width: 8),
                       Icon(
-                        isEstimated
+                        widget.isEstimated
                             ? Icons.info_outline_rounded
                             : Icons.bar_chart_rounded,
-                        color: isEstimated ? tokens.warning : tokens.accent,
+                        color: widget.isEstimated ? tokens.warning : tokens.accent,
                       ),
                     ],
                   ),
@@ -578,26 +647,64 @@ class _AnalyticsWeeklyProgressCard extends StatelessWidget {
           Row(
             children: [
               _MetricPill(
-                label: '${(goalProgress * 100).round()}%',
+                label: '${(widget.goalProgress * 100).round()}%',
                 caption: 'Bugünkü hedef',
               ),
               const SizedBox(width: 18),
               _MetricPill(
-                label: '$completedGoalDays gün',
-                caption: '$totalWords kelime | $totalSentences oturum',
+                label: '${widget.completedGoalDays} gün',
+                caption: '${widget.totalWords} kelime | ${widget.totalSentences} oturum',
               ),
             ],
           ),
           const SizedBox(height: 22),
+          // Interactive tooltip
+          if (_hoveredBarIndex != null &&
+              _hoveredBarIndex! < widget.trend.length)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: tokens.surfaceMuted,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '${_weekDays[_hoveredBarIndex!]}: ${(widget.trend[_hoveredBarIndex!] * 100).round()}%',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: tokens.accent,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
           SizedBox(
             height: 210,
-            child: CustomPaint(
-              painter: _WeeklyBarPainter(
-                color: tokens.accent,
-                fillColor: tokens.accentSoft.withValues(alpha: 0.85),
-                values: trend,
-              ),
-              child: const SizedBox.expand(),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return MouseRegion(
+                  onHover: (event) =>
+                      _onInteraction(event.localPosition, constraints.maxWidth),
+                  onExit: (_) => _clearHover(),
+                  child: GestureDetector(
+                    onTapDown: (details) =>
+                        _onInteraction(details.localPosition, constraints.maxWidth),
+                    onTapUp: (_) => Future.delayed(
+                      const Duration(seconds: 2),
+                      _clearHover,
+                    ),
+                    child: CustomPaint(
+                      painter: _WeeklyBarPainter(
+                        color: tokens.accent,
+                        fillColor: tokens.accentSoft.withValues(alpha: 0.85),
+                        values: widget.trend,
+                        highlightIndex: _hoveredBarIndex,
+                      ),
+                      child: const SizedBox.expand(),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(height: 16),
@@ -672,11 +779,13 @@ class _WeeklyBarPainter extends CustomPainter {
     required this.color,
     required this.fillColor,
     required this.values,
+    this.highlightIndex,
   });
 
   final Color color;
   final Color fillColor;
   final List<double> values;
+  final int? highlightIndex;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -688,6 +797,7 @@ class _WeeklyBarPainter extends CustomPainter {
       ..color = color.withValues(alpha: 0.12)
       ..strokeWidth = 1.5;
     final barPaint = Paint()..color = fillColor;
+    final highlightBarPaint = Paint()..color = color.withValues(alpha: 0.65);
     final capPaint = Paint()..color = color;
     final segmentWidth = size.width / values.length;
     final barWidth = segmentWidth * 0.58;
@@ -705,6 +815,7 @@ class _WeeklyBarPainter extends CustomPainter {
       final barHeight = (size.height * normalized).clamp(10.0, size.height);
       final left = (segmentWidth * index) + ((segmentWidth - barWidth) / 2);
       final top = size.height - barHeight;
+      final isHighlighted = index == highlightIndex;
       final bodyRect = RRect.fromRectAndCorners(
         Rect.fromLTWH(left, top, barWidth, barHeight),
         topLeft: radius,
@@ -712,7 +823,7 @@ class _WeeklyBarPainter extends CustomPainter {
         bottomLeft: radius,
         bottomRight: radius,
       );
-      canvas.drawRRect(bodyRect, barPaint);
+      canvas.drawRRect(bodyRect, isHighlighted ? highlightBarPaint : barPaint);
 
       final capRect = RRect.fromRectAndCorners(
         Rect.fromLTWH(left, top, barWidth, capHeight.clamp(0, barHeight)),
@@ -727,7 +838,8 @@ class _WeeklyBarPainter extends CustomPainter {
   bool shouldRepaint(covariant _WeeklyBarPainter oldDelegate) {
     return oldDelegate.values != values ||
         oldDelegate.color != color ||
-        oldDelegate.fillColor != fillColor;
+        oldDelegate.fillColor != fillColor ||
+        oldDelegate.highlightIndex != highlightIndex;
   }
 }
 

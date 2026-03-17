@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
+
+import 'fake_auth_repo.dart';
 import 'package:shared_domain/shared_domain.dart';
 
 void main() {
@@ -16,6 +18,7 @@ void main() {
 
   test('bulkDeleteUsers maps successful response payload', () async {
     final repository = FoundationAdminUserManagementRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       manageUsersInvoker: (_) async =>
           const AdminUserManagementFunctionResponse(
@@ -51,7 +54,8 @@ void main() {
   });
 
   test('bulkDeleteUsers returns failure for empty selection', () async {
-    final repository = FoundationAdminUserManagementRepository(config: config);
+    final repository = FoundationAdminUserManagementRepository(
+      authRepository: FakeAuthRepo(),config: config);
 
     final result = await repository.bulkDeleteUsers(userIds: const []);
 
@@ -64,6 +68,7 @@ void main() {
 
   test('bulkDeleteUsers surfaces function failure message', () async {
     final repository = FoundationAdminUserManagementRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       manageUsersInvoker: (_) async =>
           const AdminUserManagementFunctionResponse(

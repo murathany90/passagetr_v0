@@ -3,6 +3,8 @@ import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
 import 'package:shared_domain/shared_domain.dart';
 
+import 'fake_auth_repo.dart';
+
 void main() {
   const config = AppConfig(
     appName: 'PASSAGETR',
@@ -37,6 +39,7 @@ void main() {
 
   test('maps successful AI response to typed draft', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       functionInvoker: (_) async => AdminAiReadingFunctionResponse(
         status: 200,
@@ -94,6 +97,7 @@ void main() {
 
   test('returns controlled failure for malformed schema', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       functionInvoker: (_) async => AdminAiReadingFunctionResponse(
         status: 200,
@@ -128,6 +132,7 @@ void main() {
 
   test('maps function errors to user facing message', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       functionInvoker: (_) async => AdminAiReadingFunctionResponse(
         status: 403,
@@ -146,6 +151,7 @@ void main() {
 
   test('maps rate limited error to quota guidance', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       functionInvoker: (_) async => AdminAiReadingFunctionResponse(
         status: 429,
@@ -164,6 +170,7 @@ void main() {
 
   test('maps invalid jwt exception to re-login guidance', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       functionInvoker: (_) async => throw Exception(
         'FunctionException(status: 401, details: {code: 401, message: Invalid JWT}, reasonPhrase: )',
@@ -181,6 +188,7 @@ void main() {
 
   test('maps generated reading questions from named function', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       namedFunctionInvoker: (functionName, body) async {
         expect(functionName, 'admin_ai_generate_reading_questions');
@@ -219,6 +227,7 @@ void main() {
 
   test('maps generated reading cover detail from named function', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       namedFunctionInvoker: (functionName, body) async {
         expect(functionName, 'admin_ai_generate_reading_cover');
@@ -266,6 +275,7 @@ void main() {
 
   test('reads AI cover pool status from admin RPC', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       rpcInvoker: (functionName, {params = const <String, dynamic>{}}) async {
         expect(functionName, 'admin_get_ai_cover_pool_status');
@@ -352,6 +362,7 @@ void main() {
 
   test('lists active AI runs from admin RPC', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       rpcInvoker: (functionName, {params = const <String, dynamic>{}}) async {
         expect(functionName, 'admin_list_active_reading_ai_runs');
@@ -392,6 +403,7 @@ void main() {
 
   test('controls AI run through admin RPC', () async {
     final repository = FoundationAdminAiReadingRepository(
+      authRepository: FakeAuthRepo(),
       config: config,
       rpcInvoker: (functionName, {params = const <String, dynamic>{}}) async {
         expect(functionName, 'admin_control_reading_ai_run');

@@ -149,4 +149,14 @@ class _StaticAuthRepository implements AuthRepository {
   Future<AppResult<void>> signOut() async {
     return const AppSuccess<void>(null);
   }
+
+  @override
+  Future<AppResult<AppRole>> fetchCurrentRole() async =>
+      const AppSuccess<AppRole>(AppRole.user);
+
+  @override
+  void notifySessionExpired() {}
+
+  @override
+  Stream<void> get onSessionExpired => const Stream<void>.empty();
 }

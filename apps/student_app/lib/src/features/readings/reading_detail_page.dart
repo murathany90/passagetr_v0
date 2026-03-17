@@ -57,6 +57,7 @@ class _StudentReadingDetailPageState
 
   @override
   void dispose() {
+    _hideContextualWordCard();
     _ttsController.stop();
     super.dispose();
   }
@@ -1337,7 +1338,6 @@ class _ReadingArticlePanel extends ConsumerWidget {
                               focusWordCards: linkedWordCards,
                               selectedWord: selectedWords[section.lookupIndex],
                               onWordTap: onWordTap,
-                              onWordLongPress: () => onWordLongPress(section),
                             ),
                           ),
                           Positioned(
@@ -1909,7 +1909,6 @@ class _InteractiveSentenceText extends StatelessWidget {
     required this.focusWordCards,
     required this.selectedWord,
     required this.onWordTap,
-    required this.onWordLongPress,
   });
 
   final _ReadingArticleSection section;
@@ -1917,7 +1916,6 @@ class _InteractiveSentenceText extends StatelessWidget {
   final List<WordEntry> focusWordCards;
   final _SelectedDictionaryWord? selectedWord;
   final void Function(int lookupIndex, _SentenceToken token, Offset? globalPosition)? onWordTap;
-  final VoidCallback onWordLongPress;
 
   @override
   Widget build(BuildContext context) {

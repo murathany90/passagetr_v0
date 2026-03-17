@@ -1,13 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_core/shared_core.dart';
 import 'package:shared_data/shared_data.dart';
+
+import 'fake_auth_repo.dart';
 import 'package:shared_domain/shared_domain.dart';
 
 void main() {
   test(
     'fetchDashboardSnapshot returns preview coverage metrics when Supabase is disabled',
     () async {
-      const repository = FoundationAdminAnalyticsRepository(
+      final repository = FoundationAdminAnalyticsRepository(
+        authRepository: FakeAuthRepo(),
         config: AppConfig(
           appName: 'admin_console',
           environment: AppEnvironment.dev,
