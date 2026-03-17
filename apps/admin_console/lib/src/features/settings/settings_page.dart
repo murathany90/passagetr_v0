@@ -639,6 +639,7 @@ class _AiCoverSettingsTab extends StatelessWidget {
                                   ),
                                 )
                               : null,
+                          tooltip: 'Yukari tasi',
                           icon: const Icon(Icons.arrow_upward_rounded),
                         ),
                         IconButton(
@@ -655,6 +656,7 @@ class _AiCoverSettingsTab extends StatelessWidget {
                                   ),
                                 )
                               : null,
+                          tooltip: 'Asagi tasi',
                           icon: const Icon(Icons.arrow_downward_rounded),
                         ),
                         Switch(

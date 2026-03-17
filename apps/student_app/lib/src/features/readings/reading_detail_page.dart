@@ -1050,6 +1050,7 @@ class ReadingDetailHeader extends StatelessWidget {
           ),
           IconButton(
             onPressed: onShare,
+            tooltip: 'Paylas',
             icon: const Icon(Icons.share_outlined),
           ),
         ],
