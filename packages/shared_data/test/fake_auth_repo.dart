@@ -7,13 +7,16 @@ class FakeAuthRepo implements AuthRepository {
   Future<AuthSession> restoreSession() async => throw UnimplementedError();
 
   @override
-  Future<AppResult<AuthSession>> refreshSession() async => throw UnimplementedError();
+  Future<AppResult<AuthSession>> refreshSession() async =>
+      throw UnimplementedError();
 
   @override
-  Stream<AccessContext> watchAccessContext() => const Stream<AccessContext>.empty();
+  Stream<AccessContext> watchAccessContext() =>
+      const Stream<AccessContext>.empty();
 
   @override
-  Future<AppResult<AuthSession>> signInAnonymously() async => throw UnimplementedError();
+  Future<AppResult<AuthSession>> signInAnonymously() async =>
+      throw UnimplementedError();
 
   @override
   Future<AppResult<AuthSession>> signUpWithEmail({
@@ -28,10 +31,14 @@ class FakeAuthRepo implements AuthRepository {
   }) async => throw UnimplementedError();
 
   @override
-  Future<AppResult<void>> resendSignUpConfirmation({required String email}) async => throw UnimplementedError();
+  Future<AppResult<void>> resendSignUpConfirmation({
+    required String email,
+  }) async => throw UnimplementedError();
 
   @override
-  Future<AppResult<AuthSession>> updateDisplayName({required String displayName}) async => throw UnimplementedError();
+  Future<AppResult<AuthSession>> updateDisplayName({
+    required String displayName,
+  }) async => throw UnimplementedError();
 
   @override
   Future<AppResult<AuthSession>> upgradeAnonymousWithEmail({

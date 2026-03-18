@@ -1661,18 +1661,18 @@ class _ProfileStreakBadge extends ConsumerWidget {
               children: [
                 Text(
                   '$streakDays günlük seri',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   streakDays > 0
                       ? 'Harika gidiyorsun! Seriyi bozma.'
                       : 'Bugün bir aktivite tamamla ve seriyi başlat!',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: tokens.secondaryText,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
                 ),
               ],
             ),
@@ -1697,9 +1697,11 @@ class _ContributionHeatMap extends ConsumerWidget {
     // Build a simple _cols × _rows grid from the 7-element weekly trend.
     // The current week's data is placed in the last column.
     final cells = List<double>.filled(_cols * _rows, 0);
-    for (var dayIndex = 0;
-        dayIndex < weeklyTrend.length && dayIndex < _rows;
-        dayIndex++) {
+    for (
+      var dayIndex = 0;
+      dayIndex < weeklyTrend.length && dayIndex < _rows;
+      dayIndex++
+    ) {
       cells[(_cols - 1) * _rows + dayIndex] = weeklyTrend[dayIndex];
     }
 
@@ -1714,9 +1716,9 @@ class _ContributionHeatMap extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(
             'Son 12 haftalık aktivite yoğunluğu',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: tokens.secondaryText,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
           ),
           const SizedBox(height: 18),
           LayoutBuilder(
@@ -1734,7 +1736,8 @@ class _ContributionHeatMap extends ConsumerWidget {
                       _HeatCell(
                         size: clampedSize,
                         intensity: cells[col * _rows + row],
-                        isToday: col == _cols - 1 &&
+                        isToday:
+                            col == _cols - 1 &&
                             row == DateTime.now().weekday - 1,
                         emptyColor: tokens.surfaceMuted,
                         accentColor: tokens.accent,
@@ -1787,11 +1790,7 @@ class _HeatCell extends StatelessWidget {
     final clamped = intensity.clamp(0.0, 1.0);
     final color = clamped == 0
         ? emptyColor
-        : Color.lerp(
-            accentColor.withValues(alpha: 0.2),
-            accentColor,
-            clamped,
-          )!;
+        : Color.lerp(accentColor.withValues(alpha: 0.2), accentColor, clamped)!;
 
     return Container(
       width: size,

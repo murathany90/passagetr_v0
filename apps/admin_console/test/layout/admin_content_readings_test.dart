@@ -89,7 +89,9 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
 
       expect(
-        find.text("Bu run aktif durumda. Isleme devam etmek icin Devam Et'e basin."),
+        find.text(
+          "Bu run aktif durumda. Isleme devam etmek icin Devam Et'e basin.",
+        ),
         findsOneWidget,
       );
       expect(repository.createRunCalls, 0);

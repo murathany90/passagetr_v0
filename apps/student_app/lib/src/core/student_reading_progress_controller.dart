@@ -29,12 +29,13 @@ class StudentReadingProgressController
 
     state = await AsyncValue.guard(() async {
       final progressList = await _progressRepository.fetchReadingProgress();
-      final latestState = state.valueOrNull ?? const <String, ReadingProgress>{};
-      
+      final latestState =
+          state.valueOrNull ?? const <String, ReadingProgress>{};
+
       final Map<String, ReadingProgress> nextMap = {
         for (final item in progressList) item.passageId: item,
       };
-      
+
       return <String, ReadingProgress>{...nextMap, ...latestState};
     });
   }
@@ -46,11 +47,12 @@ class StudentReadingProgressController
   }) async {
     final currentState = state.valueOrNull ?? const <String, ReadingProgress>{};
     final existing = currentState[readingId];
-    
+
     // Yalnizca ileriye donuk ilerlemeyi veya tamamlama durumunu kaydet
     if (existing != null) {
       if (completed && existing.completed) return const AppSuccess(null);
-      if (!completed && existing.lastIndex >= sentenceIndex) return const AppSuccess(null);
+      if (!completed && existing.lastIndex >= sentenceIndex)
+        return const AppSuccess(null);
     }
 
     final nextProgress = ReadingProgress(

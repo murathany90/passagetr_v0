@@ -55,7 +55,9 @@ void main() {
 
   test('bulkDeleteUsers returns failure for empty selection', () async {
     final repository = FoundationAdminUserManagementRepository(
-      authRepository: FakeAuthRepo(),config: config);
+      authRepository: FakeAuthRepo(),
+      config: config,
+    );
 
     final result = await repository.bulkDeleteUsers(userIds: const []);
 

@@ -122,9 +122,7 @@ void main() {
 }
 
 class _FakeStudentTtsEngine implements StudentTtsEngine {
-  _FakeStudentTtsEngine({
-    this.availability = StudentTtsAvailability.available,
-  });
+  _FakeStudentTtsEngine({this.availability = StudentTtsAvailability.available});
 
   final StudentTtsAvailability availability;
 

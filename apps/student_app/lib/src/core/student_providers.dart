@@ -740,13 +740,16 @@ final studentWordOfTheDayProvider = Provider<WordEntry?>((ref) {
 
   // Gunluk degisen ama session suresince sabit kalan basit bir seed mantigi.
   // Gercek bir "seen/mastered" filtresi ile daha da iyilestirilebilir.
-  final dayOfYear =
-      DateTime.now().difference(DateTime(DateTime.now().year, 1, 1)).inDays;
+  final dayOfYear = DateTime.now()
+      .difference(DateTime(DateTime.now().year, 1, 1))
+      .inDays;
   final index = dayOfYear % words.length;
   return words[index];
 });
 
-final studentRecommendedReadingsProvider = Provider<List<ReadingPassage>>((ref) {
+final studentRecommendedReadingsProvider = Provider<List<ReadingPassage>>((
+  ref,
+) {
   final readings = ref.watch(studentReadingsProvider).valueOrNull ?? const [];
   if (readings.isEmpty) {
     return const [];
@@ -757,11 +760,10 @@ final studentRecommendedReadingsProvider = Provider<List<ReadingPassage>>((ref) 
       const <String, ReadingProgress>{};
 
   // Henuz tamamlanmamis olanlari filtrele
-  final uncompleted =
-      readings.where((r) {
-        final p = progressMap[r.id];
-        return p == null || !p.completed;
-      }).toList();
+  final uncompleted = readings.where((r) {
+    final p = progressMap[r.id];
+    return p == null || !p.completed;
+  }).toList();
 
   if (uncompleted.isEmpty) {
     return readings.take(3).toList();

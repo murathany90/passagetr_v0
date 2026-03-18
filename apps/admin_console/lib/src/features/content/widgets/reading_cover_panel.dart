@@ -94,7 +94,9 @@ class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 ),
-                child: widget.coverUrl != null && widget.coverUrl!.trim().isNotEmpty
+                child:
+                    widget.coverUrl != null &&
+                        widget.coverUrl!.trim().isNotEmpty
                     ? Image.network(
                         widget.coverUrl!,
                         fit: BoxFit.cover,
@@ -242,10 +244,7 @@ class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
   }
 
   Future<void> _handleRemove() async {
-    await _runAction(
-      widget.onRemove,
-      successMessage: 'Cover kaldirildi.',
-    );
+    await _runAction(widget.onRemove, successMessage: 'Cover kaldirildi.');
   }
 
   Future<void> _runAction(
@@ -286,7 +285,9 @@ class _ReadingCoverPanelState extends State<ReadingCoverPanel> {
   }
 
   List<String> get _availableModels {
-    final enabled = widget.poolStatus?.enabledModels ?? const <AdminAiCoverModelUsageStatus>[];
+    final enabled =
+        widget.poolStatus?.enabledModels ??
+        const <AdminAiCoverModelUsageStatus>[];
     if (enabled.isEmpty) {
       return adminAiCoverModels;
     }
@@ -312,9 +313,7 @@ class _CoverPlaceholder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            hasCover
-                ? Icons.broken_image_outlined
-                : Icons.landscape_outlined,
+            hasCover ? Icons.broken_image_outlined : Icons.landscape_outlined,
             size: 40,
             color: colorScheme.onSurfaceVariant,
           ),
@@ -349,8 +348,12 @@ class _CoverUsageSummary extends StatelessWidget {
     }
 
     if (selectedModel == adminAiCoverAutoModel) {
-      final imageRouter = poolStatus!.statusesForProvider(adminAiProviderImageRouter);
-      final huggingFace = poolStatus!.statusesForProvider(adminAiProviderHuggingFace);
+      final imageRouter = poolStatus!.statusesForProvider(
+        adminAiProviderImageRouter,
+      );
+      final huggingFace = poolStatus!.statusesForProvider(
+        adminAiProviderHuggingFace,
+      );
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

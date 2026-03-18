@@ -94,15 +94,15 @@ final adminSettingsStateProvider =
       ),
     );
 
-final adminAiAssistantControllerProvider = StateNotifierProvider<
-  AdminAiAssistantController,
-  AdminAiAssistantState
->((ref) {
-  return AdminAiAssistantController(
-    aiRepository: ref.watch(adminAiReadingRepositoryProvider),
-    contentRepository: ref.watch(adminContentRepositoryProvider),
-  );
-});
+final adminAiAssistantControllerProvider =
+    StateNotifierProvider<AdminAiAssistantController, AdminAiAssistantState>((
+      ref,
+    ) {
+      return AdminAiAssistantController(
+        aiRepository: ref.watch(adminAiReadingRepositoryProvider),
+        contentRepository: ref.watch(adminContentRepositoryProvider),
+      );
+    });
 
 final adminActiveSettingsProvider = Provider<AdminSettingsSnapshot>((ref) {
   return ref.watch(adminSettingsStateProvider).draft;

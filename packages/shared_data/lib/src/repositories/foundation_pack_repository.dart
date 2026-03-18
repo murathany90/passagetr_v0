@@ -78,10 +78,7 @@ class FoundationPackRepository implements PackRepository {
           scope: 'packs',
           entityType: 'packs',
           entityId: item.id,
-          payloadJson: jsonEncode({
-            'id': item.id,
-            'name': item.name,
-          }),
+          payloadJson: jsonEncode({'id': item.id, 'name': item.name}),
           updatedAt: DateTime.now(),
         ),
       );

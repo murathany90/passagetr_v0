@@ -25,15 +25,12 @@ final studentRouterProvider = Provider<GoRouter>((ref) {
   final appConfig = ref.read(studentAppConfigProvider);
 
   return GoRouter(
-    errorBuilder: (context, state) => _StudentNotFoundPage(
-      location: state.uri.toString(),
-    ),
+    errorBuilder: (context, state) =>
+        _StudentNotFoundPage(location: state.uri.toString()),
     routes: [
       ShellRoute(
-        builder: (context, state, child) => StudentAppShell(
-          state: state,
-          child: child,
-        ),
+        builder: (context, state, child) =>
+            StudentAppShell(state: state, child: child),
         routes: [
           GoRoute(
             path: '/',
@@ -78,7 +75,8 @@ final studentRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/grammar/:moduleId',
             builder: (context, state) => StudentGrammarDetailPage(
-              moduleId: int.tryParse(state.pathParameters['moduleId'] ?? '') ?? 1,
+              moduleId:
+                  int.tryParse(state.pathParameters['moduleId'] ?? '') ?? 1,
             ),
           ),
           GoRoute(
@@ -185,9 +183,9 @@ class _StudentNotFoundPage extends StatelessWidget {
                 Text(
                   'Aradığın adres ($location) mevcut değil veya kaldırılmış olabilir.',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: tokens.secondaryText,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
                 ),
                 const SizedBox(height: 32),
                 FilledButton.icon(

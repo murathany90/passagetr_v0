@@ -125,7 +125,10 @@ class FoundationAuthRepository implements AuthRepository {
       _emit(AccessContext.anonymous());
       return AppSuccess<AuthSession>(AccessContext.anonymous().session);
     } catch (error) {
-      return AppFailure<AuthSession>(_signUpFailureMessage(error), cause: error);
+      return AppFailure<AuthSession>(
+        _signUpFailureMessage(error),
+        cause: error,
+      );
     }
   }
 
@@ -152,7 +155,10 @@ class FoundationAuthRepository implements AuthRepository {
       );
       return AppSuccess<AuthSession>(_current.session);
     } catch (error) {
-      return AppFailure<AuthSession>(_signInFailureMessage(error), cause: error);
+      return AppFailure<AuthSession>(
+        _signInFailureMessage(error),
+        cause: error,
+      );
     }
   }
 
@@ -310,7 +316,8 @@ class FoundationAuthRepository implements AuthRepository {
 
     final hasRefreshToken =
         session.refreshToken != null && session.refreshToken!.trim().isNotEmpty;
-    if (hasRefreshToken && (forceRefresh || session.isExpired || _expiresSoon(session))) {
+    if (hasRefreshToken &&
+        (forceRefresh || session.isExpired || _expiresSoon(session))) {
       session = await _tryRefreshSession(auth, fallback: session);
     }
 

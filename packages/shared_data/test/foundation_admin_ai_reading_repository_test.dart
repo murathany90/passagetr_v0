@@ -232,14 +232,11 @@ void main() {
       namedFunctionInvoker: (functionName, body) async {
         expect(functionName, 'admin_ai_generate_reading_cover');
         expect(body, isA<Map<String, dynamic>>());
-        expect(
-          body,
-          <String, dynamic>{
-            'reading_id': 'reading-1',
-            'provider': adminAiProviderImageRouter,
-            'model': 'google/nano-banana-2:free',
-          },
-        );
+        expect(body, <String, dynamic>{
+          'reading_id': 'reading-1',
+          'provider': adminAiProviderImageRouter,
+          'model': 'google/nano-banana-2:free',
+        });
         return AdminAiReadingFunctionResponse(
           status: 200,
           data: <String, dynamic>{
@@ -316,7 +313,10 @@ void main() {
     expect(result, isA<AppSuccess<AdminAiCoverPoolStatus>>());
     final pool = (result as AppSuccess<AdminAiCoverPoolStatus>).value;
     expect(pool.models, hasLength(2));
-    expect(pool.statusForSelection('google/nano-banana-2:free')?.attemptCount, 2);
+    expect(
+      pool.statusForSelection('google/nano-banana-2:free')?.attemptCount,
+      2,
+    );
     expect(
       pool.statusesForProvider(adminAiProviderHuggingFace).single.dailyCap,
       adminAiHuggingFaceDefaultDailyCap,
@@ -449,4 +449,3 @@ void main() {
     expect(run.model, 'stabilityai/stable-diffusion-xl-base-1.0');
   });
 }
-

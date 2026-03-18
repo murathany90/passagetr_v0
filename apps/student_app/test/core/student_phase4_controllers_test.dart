@@ -175,9 +175,8 @@ class _Phase4FakeProgressRepository implements ProgressRepository {
 }
 
 class _FakeReadingEngagementRepository implements ReadingEngagementRepository {
-  _FakeReadingEngagementRepository({
-    List<ReadingEngagement>? seedEngagements,
-  }) : _seedEngagements = seedEngagements ?? const <ReadingEngagement>[];
+  _FakeReadingEngagementRepository({List<ReadingEngagement>? seedEngagements})
+    : _seedEngagements = seedEngagements ?? const <ReadingEngagement>[];
 
   final List<ReadingEngagement> _seedEngagements;
   final List<(String, bool)> bookmarkWrites = <(String, bool)>[];

@@ -43,7 +43,8 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
     var items = ref.watch(studentReadingsProvider).valueOrNull ?? const [];
     final packs = ref.watch(studentPacksProvider);
     final engagementByPassage = ref.watch(studentReadingEngagementProvider);
-    final progressMap = ref.watch(studentReadingProgressProvider).valueOrNull ?? const {};
+    final progressMap =
+        ref.watch(studentReadingProgressProvider).valueOrNull ?? const {};
     final canPersistEngagement = InteractionGuard.canPersist(accessContext);
 
     return StudentShellFrame(
@@ -62,198 +63,199 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
       body: items.isEmpty && ref.watch(studentReadingsProvider).isLoading
           ? const _ReadingsSkeletonGrid()
           : items.isEmpty && ref.watch(studentReadingsProvider).hasError
-              ? _ReadingsStateCard(
-                  title: 'Okuma kutuphanesi simdi yuklenemiyor',
-                  message:
-                      'Baglanti tekrar geldiginde okumalar otomatik yenilenir. Bu ekrani yeniden acmayi dene.',
-                  onRetry: () => ref.invalidate(studentReadingsProvider),
-                )
-              : LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isWide =
-                        constraints.maxWidth >= AppBreakpoints.studentReadingsWide;
-                    final showAuthRequired =
-                        !canPersistEngagement &&
-                        selectedView != ReadingCollectionView.all;
-                    final packOptions = _packOptionsFor(
-                      items,
-                      packs.valueOrNull ?? const <ContentPack>[],
-                    );
-                    final resolvedSelectedPackId =
-                        packOptions.any((item) => item.id == selectedPackId)
-                        ? selectedPackId
-                        : null;
-                    final visibleItems = showAuthRequired
-                        ? const <ReadingPassage>[]
-                        : _visibleReadings(
-                            items,
-                            engagementByPassage,
-                            progressMap,
-                            selectedPackId: resolvedSelectedPackId,
-                          );
-                    final columns = constraints.maxWidth >= AppBreakpoints.desktopWide
-                        ? 3
-                        : constraints.maxWidth >= AppBreakpoints.mobileWide
-                        ? 2
-                        : 1;
-                    final spacing = isWide ? 18.0 : 12.0;
-                    final totalPages = (visibleItems.length / _pageSize).ceil();
-                    final resolvedPage = totalPages == 0
-                        ? 0
-                        : currentPage.clamp(0, totalPages - 1);
-                    final pageItems = visibleItems
-                        .skip(resolvedPage * _pageSize)
-                        .take(_pageSize)
-                        .toList(growable: false);
+          ? _ReadingsStateCard(
+              title: 'Okuma kutuphanesi simdi yuklenemiyor',
+              message:
+                  'Baglanti tekrar geldiginde okumalar otomatik yenilenir. Bu ekrani yeniden acmayi dene.',
+              onRetry: () => ref.invalidate(studentReadingsProvider),
+            )
+          : LayoutBuilder(
+              builder: (context, constraints) {
+                final isWide =
+                    constraints.maxWidth >= AppBreakpoints.studentReadingsWide;
+                final showAuthRequired =
+                    !canPersistEngagement &&
+                    selectedView != ReadingCollectionView.all;
+                final packOptions = _packOptionsFor(
+                  items,
+                  packs.valueOrNull ?? const <ContentPack>[],
+                );
+                final resolvedSelectedPackId =
+                    packOptions.any((item) => item.id == selectedPackId)
+                    ? selectedPackId
+                    : null;
+                final visibleItems = showAuthRequired
+                    ? const <ReadingPassage>[]
+                    : _visibleReadings(
+                        items,
+                        engagementByPassage,
+                        progressMap,
+                        selectedPackId: resolvedSelectedPackId,
+                      );
+                final columns =
+                    constraints.maxWidth >= AppBreakpoints.desktopWide
+                    ? 3
+                    : constraints.maxWidth >= AppBreakpoints.mobileWide
+                    ? 2
+                    : 1;
+                final spacing = isWide ? 18.0 : 12.0;
+                final totalPages = (visibleItems.length / _pageSize).ceil();
+                final resolvedPage = totalPages == 0
+                    ? 0
+                    : currentPage.clamp(0, totalPages - 1);
+                final pageItems = visibleItems
+                    .skip(resolvedPage * _pageSize)
+                    .take(_pageSize)
+                    .toList(growable: false);
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (!isWide) ...[
-                          StudentSearchField(
-                            controller: searchController,
-                            hintText: 'Makale, hikaye ara...',
-                            onChanged: _updateQuery,
-                          ),
-                          const SizedBox(height: 18),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (!isWide) ...[
+                      StudentSearchField(
+                        controller: searchController,
+                        hintText: 'Makale, hikaye ara...',
+                        onChanged: _updateQuery,
+                      ),
+                      const SizedBox(height: 18),
+                    ],
+                    _ReadingToggle(
+                      selectedView: selectedView,
+                      onSelectionChanged: (value) {
+                        setState(() {
+                          selectedView = value;
+                          currentPage = 0;
+                        });
+                      },
+                    ),
+                    if (selectedView == ReadingCollectionView.all ||
+                        packOptions.length > 1) ...[
+                      const SizedBox(height: 16),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          if (selectedView == ReadingCollectionView.all)
+                            FilterChip(
+                              label: const Text('Kesfet'),
+                              selected: discoverOnly,
+                              onSelected: (value) {
+                                setState(() {
+                                  discoverOnly = value;
+                                  currentPage = 0;
+                                });
+                              },
+                            ),
+                          if (packOptions.length > 1)
+                            ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minWidth: 220,
+                                maxWidth: 320,
+                              ),
+                              child: DropdownButtonFormField<String?>(
+                                key: const ValueKey<String>(
+                                  'reading-pack-filter-dropdown',
+                                ),
+                                initialValue: resolvedSelectedPackId,
+                                isExpanded: true,
+                                decoration: const InputDecoration(
+                                  labelText: 'Paket',
+                                ),
+                                items: <DropdownMenuItem<String?>>[
+                                  const DropdownMenuItem<String?>(
+                                    value: null,
+                                    child: Text('Tum Paketler'),
+                                  ),
+                                  ...packOptions.map(
+                                    (item) => DropdownMenuItem<String?>(
+                                      value: item.id,
+                                      child: Text(item.label),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedPackId = value;
+                                    currentPage = 0;
+                                  });
+                                },
+                              ),
+                            ),
                         ],
-                        _ReadingToggle(
-                          selectedView: selectedView,
-                          onSelectionChanged: (value) {
-                            setState(() {
-                              selectedView = value;
-                              currentPage = 0;
-                            });
-                          },
+                      ),
+                    ],
+                    const SizedBox(height: 28),
+                    if (showAuthRequired)
+                      _ReadingsInfoCard(
+                        title: selectedView == ReadingCollectionView.saved
+                            ? 'Kayitlilar giris gerektirir'
+                            : 'Favoriler giris gerektirir',
+                        message:
+                            'Tum okumalari gezebilirsin, ancak kisisel kayitlarin ve favorilerin icin giris yapman gerekir.',
+                        actionLabel: 'Profile Git',
+                        onAction: () => context.go('/profile'),
+                      )
+                    else if (visibleItems.isEmpty)
+                      _ReadingsInfoCard(
+                        title: _emptyTitleForSelectedView(),
+                        message: _emptyMessageForSelectedView(),
+                      )
+                    else ...[
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: columns,
+                          crossAxisSpacing: spacing,
+                          mainAxisSpacing: spacing,
+                          mainAxisExtent: 500,
                         ),
-                        if (selectedView == ReadingCollectionView.all ||
-                            packOptions.length > 1) ...[
-                          const SizedBox(height: 16),
-                          Wrap(
-                            spacing: 12,
-                            runSpacing: 12,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              if (selectedView == ReadingCollectionView.all)
-                                FilterChip(
-                                  label: const Text('Kesfet'),
-                                  selected: discoverOnly,
-                                  onSelected: (value) {
-                                    setState(() {
-                                      discoverOnly = value;
-                                      currentPage = 0;
-                                    });
-                                  },
-                                ),
-                              if (packOptions.length > 1)
-                                ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    minWidth: 220,
-                                    maxWidth: 320,
-                                  ),
-                                  child: DropdownButtonFormField<String?>(
-                                    key: const ValueKey<String>(
-                                      'reading-pack-filter-dropdown',
-                                    ),
-                                    initialValue: resolvedSelectedPackId,
-                                    isExpanded: true,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Paket',
-                                    ),
-                                    items: <DropdownMenuItem<String?>>[
-                                      const DropdownMenuItem<String?>(
-                                        value: null,
-                                        child: Text('Tum Paketler'),
-                                      ),
-                                      ...packOptions.map(
-                                        (item) => DropdownMenuItem<String?>(
-                                          value: item.id,
-                                          child: Text(item.label),
-                                        ),
-                                      ),
-                                    ],
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedPackId = value;
-                                        currentPage = 0;
-                                      });
-                                    },
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ],
-                        const SizedBox(height: 28),
-                        if (showAuthRequired)
-                          _ReadingsInfoCard(
-                            title: selectedView == ReadingCollectionView.saved
-                                ? 'Kayitlilar giris gerektirir'
-                                : 'Favoriler giris gerektirir',
-                            message:
-                                'Tum okumalari gezebilirsin, ancak kisisel kayitlarin ve favorilerin icin giris yapman gerekir.',
-                            actionLabel: 'Profile Git',
-                            onAction: () => context.go('/profile'),
-                          )
-                        else if (visibleItems.isEmpty)
-                          _ReadingsInfoCard(
-                            title: _emptyTitleForSelectedView(),
-                            message: _emptyMessageForSelectedView(),
-                          )
-                        else ...[
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: columns,
-                              crossAxisSpacing: spacing,
-                              mainAxisSpacing: spacing,
-                              mainAxisExtent: 500,
+                        itemCount: pageItems.length,
+                        itemBuilder: (context, index) {
+                          final item = pageItems[index];
+                          final isLocked =
+                              item.isPro && !accessContext.canViewPremium;
+                          return _ReadingCard(
+                            item: item,
+                            progress: progressMap[item.id],
+                            isLocked: isLocked,
+                            onTap: () => _navigateToReading(
+                              context,
+                              item,
+                              accessContext,
                             ),
-                            itemCount: pageItems.length,
-                            itemBuilder: (context, index) {
-                              final item = pageItems[index];
-                              final isLocked =
-                                  item.isPro && !accessContext.canViewPremium;
-                              return _ReadingCard(
-                                item: item,
-                                progress: progressMap[item.id],
-                                isLocked: isLocked,
-                                onTap: () => _navigateToReading(
-                                  context,
-                                  item,
-                                  accessContext,
-                                ),
-                              );
-                            },
-                          ),
-                          if (totalPages > 1) ...[
-                            const SizedBox(height: 24),
-                            _ReadingsPaginationBar(
-                              currentPage: resolvedPage,
-                              totalPages: totalPages,
-                              pageSize: _pageSize,
-                              totalItems: visibleItems.length,
-                              onPrevious: resolvedPage == 0
-                                  ? null
-                                  : () {
-                                      setState(() {
-                                        currentPage = resolvedPage - 1;
-                                      });
-                                    },
-                              onNext: resolvedPage >= totalPages - 1
-                                  ? null
-                                  : () {
-                                      setState(() {
-                                        currentPage = resolvedPage + 1;
-                                      });
-                                    },
-                            ),
-                          ],
-                        ],
+                          );
+                        },
+                      ),
+                      if (totalPages > 1) ...[
+                        const SizedBox(height: 24),
+                        _ReadingsPaginationBar(
+                          currentPage: resolvedPage,
+                          totalPages: totalPages,
+                          pageSize: _pageSize,
+                          totalItems: visibleItems.length,
+                          onPrevious: resolvedPage == 0
+                              ? null
+                              : () {
+                                  setState(() {
+                                    currentPage = resolvedPage - 1;
+                                  });
+                                },
+                          onNext: resolvedPage >= totalPages - 1
+                              ? null
+                              : () {
+                                  setState(() {
+                                    currentPage = resolvedPage + 1;
+                                  });
+                                },
+                        ),
                       ],
-                    );
-                  },
-                ),
+                    ],
+                  ],
+                );
+              },
+            ),
     );
   }
 
@@ -270,8 +272,7 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
             .where(
               (item) =>
                   (selectedPackId == null || item.packId == selectedPackId) &&
-                  (!discoverOnly ||
-                      progressMap[item.id]?.completed != true),
+                  (!discoverOnly || progressMap[item.id]?.completed != true),
             )
             .toList(growable: false),
       ReadingCollectionView.saved =>
@@ -309,8 +310,12 @@ class _StudentReadingsPageState extends ConsumerState<StudentReadingsPage> {
       case ReadingCollectionView.all:
         if (discoverOnly) {
           visible.sort((left, right) {
-            final leftPercent = calculateReadingProgressPercent(progressMap[left.id]);
-            final rightPercent = calculateReadingProgressPercent(progressMap[right.id]);
+            final leftPercent = calculateReadingProgressPercent(
+              progressMap[left.id],
+            );
+            final rightPercent = calculateReadingProgressPercent(
+              progressMap[right.id],
+            );
             return leftPercent.compareTo(rightPercent);
           });
         }
@@ -897,9 +902,10 @@ class _ReadingsSkeletonGridState extends State<_ReadingsSkeletonGrid>
             final columns = constraints.maxWidth >= AppBreakpoints.desktopWide
                 ? 3
                 : constraints.maxWidth >= AppBreakpoints.mobileWide
-                    ? 2
-                    : 1;
-            final spacing = constraints.maxWidth >= AppBreakpoints.studentReadingsWide
+                ? 2
+                : 1;
+            final spacing =
+                constraints.maxWidth >= AppBreakpoints.studentReadingsWide
                 ? 18.0
                 : 12.0;
             return GridView.builder(
@@ -912,7 +918,8 @@ class _ReadingsSkeletonGridState extends State<_ReadingsSkeletonGrid>
                 mainAxisExtent: 500,
               ),
               itemCount: columns * 2,
-              itemBuilder: (context, _) => _SkeletonCard(opacity: _shimmer.value),
+              itemBuilder: (context, _) =>
+                  _SkeletonCard(opacity: _shimmer.value),
             );
           },
         );
@@ -929,7 +936,9 @@ class _SkeletonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = AppThemeTokens.of(context);
-    final baseColor = tokens.secondaryText.withValues(alpha: 0.08 + opacity * 0.07);
+    final baseColor = tokens.secondaryText.withValues(
+      alpha: 0.08 + opacity * 0.07,
+    );
     return StudentSurfaceCard(
       padding: EdgeInsets.zero,
       minHeight: 480,
@@ -940,7 +949,9 @@ class _SkeletonCard extends StatelessWidget {
             height: 200,
             decoration: BoxDecoration(
               color: baseColor,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
             ),
           ),
           Expanded(
@@ -949,13 +960,40 @@ class _SkeletonCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(height: 22, width: 180, decoration: BoxDecoration(color: baseColor, borderRadius: BorderRadius.circular(6))),
+                  Container(
+                    height: 22,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
                   const SizedBox(height: 10),
-                  Container(height: 14, decoration: BoxDecoration(color: baseColor, borderRadius: BorderRadius.circular(6))),
+                  Container(
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  Container(height: 14, width: 220, decoration: BoxDecoration(color: baseColor, borderRadius: BorderRadius.circular(6))),
+                  Container(
+                    height: 14,
+                    width: 220,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
                   const Spacer(),
-                  Container(height: 16, width: 100, decoration: BoxDecoration(color: baseColor, borderRadius: BorderRadius.circular(6))),
+                  Container(
+                    height: 16,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -965,4 +1003,3 @@ class _SkeletonCard extends StatelessWidget {
     );
   }
 }
-

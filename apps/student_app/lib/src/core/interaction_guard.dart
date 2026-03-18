@@ -46,9 +46,9 @@ class InteractionGuard {
               'Anonim olarak içerikleri görüntüleyebilirsin, ancak ilerleme, '
               'favori ve çalışma verilerinin kaydedilmesi için bir hesap gerekli.',
               textAlign: TextAlign.center,
-              style: Theme.of(sheetContext).textTheme.bodyLarge?.copyWith(
-                color: tokens.secondaryText,
-              ),
+              style: Theme.of(
+                sheetContext,
+              ).textTheme.bodyLarge?.copyWith(color: tokens.secondaryText),
             ),
             const SizedBox(height: 24),
             SizedBox(

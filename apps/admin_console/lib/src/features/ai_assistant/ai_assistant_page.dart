@@ -226,18 +226,19 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
               .replaceEditableDraft(detail),
           onGenerate: (selectedModel) =>
               _generateCoverForDraft(editableDraft, selectedModel),
-          onUpload: ({
-            required bytes,
-            required fileName,
-            required mimeType,
-            String? altText,
-          }) => _uploadCoverForDraft(
-            detail: editableDraft,
-            bytes: bytes,
-            fileName: fileName,
-            mimeType: mimeType,
-            altText: altText,
-          ),
+          onUpload:
+              ({
+                required bytes,
+                required fileName,
+                required mimeType,
+                String? altText,
+              }) => _uploadCoverForDraft(
+                detail: editableDraft,
+                bytes: bytes,
+                fileName: fileName,
+                mimeType: mimeType,
+                altText: altText,
+              ),
           onRemove: () => _removeCoverForDraft(editableDraft),
           onMessage: _showMessage,
         ),
@@ -355,13 +356,15 @@ class _AdminAiAssistantPageState extends ConsumerState<AdminAiAssistantPage> {
       );
     }
 
-    final result = await ref.read(adminContentRepositoryProvider).uploadReadingCover(
-      readingId: readingId,
-      bytes: bytes,
-      fileName: fileName,
-      mimeType: mimeType,
-      altText: altText,
-    );
+    final result = await ref
+        .read(adminContentRepositoryProvider)
+        .uploadReadingCover(
+          readingId: readingId,
+          bytes: bytes,
+          fileName: fileName,
+          mimeType: mimeType,
+          altText: altText,
+        );
     if (result case AppSuccess<AdminReadingDetail>()) {
       ref
           .read(adminAiAssistantControllerProvider.notifier)
@@ -505,6 +508,7 @@ class _StatusBanner extends StatelessWidget {
           ),
           IconButton(
             onPressed: onDismiss,
+            tooltip: 'Kapat',
             icon: Icon(Icons.close_rounded, color: foreground),
           ),
         ],

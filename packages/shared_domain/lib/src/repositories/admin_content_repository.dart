@@ -105,7 +105,9 @@ abstract interface class AdminContentRepository {
 
   Future<AppResult<void>> deleteWordsBulk({required List<String> wordIds});
 
-  Future<AppResult<void>> deleteReadingsBulk({required List<String> readingIds});
+  Future<AppResult<void>> deleteReadingsBulk({
+    required List<String> readingIds,
+  });
 
   Future<AppResult<void>> deleteGrammarModulesBulk({
     required List<int> moduleIds,

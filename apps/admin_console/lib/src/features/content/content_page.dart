@@ -129,7 +129,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   entityIds: _selectedWordIds.toList(),
                   nextValue: false,
                 ),
-                onDelete: () => _deleteWordsBulk(context, _selectedWordIds.toList()),
+                onDelete: () =>
+                    _deleteWordsBulk(context, _selectedWordIds.toList()),
                 onClear: () => setState(() => _selectedWordIds.clear()),
               ),
             ),
@@ -167,13 +168,17 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                 onPublish: () => _togglePublishedBulk(
                   context,
                   entityType: 'grammar',
-                  entityIds: _selectedGrammarIds.map((id) => id.toString()).toList(),
+                  entityIds: _selectedGrammarIds
+                      .map((id) => id.toString())
+                      .toList(),
                   nextValue: true,
                 ),
                 onUnpublish: () => _togglePublishedBulk(
                   context,
                   entityType: 'grammar',
-                  entityIds: _selectedGrammarIds.map((id) => id.toString()).toList(),
+                  entityIds: _selectedGrammarIds
+                      .map((id) => id.toString())
+                      .toList(),
                   nextValue: false,
                 ),
                 onDelete: () =>
@@ -419,15 +424,18 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
                   child: Row(
                     children: [
                       Checkbox(
-                        value: _selectedWordIds.length == visibleWords.length &&
+                        value:
+                            _selectedWordIds.length == visibleWords.length &&
                             visibleWords.isNotEmpty,
-                        tristate: _selectedWordIds.isNotEmpty &&
+                        tristate:
+                            _selectedWordIds.isNotEmpty &&
                             _selectedWordIds.length < visibleWords.length,
                         onChanged: (value) {
                           setState(() {
                             if (value == true) {
-                              _selectedWordIds
-                                  .addAll(visibleWords.map((e) => e.id));
+                              _selectedWordIds.addAll(
+                                visibleWords.map((e) => e.id),
+                              );
                             } else {
                               _selectedWordIds.clear();
                             }
@@ -548,7 +556,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         runSpacing: 12,
         children: [
           Tooltip(
-            message: 'Filtre sonucundaki mini testi eksik kayitlar icin soru uret',
+            message:
+                'Filtre sonucundaki mini testi eksik kayitlar icin soru uret',
             child: FilledButton.tonalIcon(
               onPressed: _isPreviewMode
                   ? null
@@ -561,7 +570,8 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             ),
           ),
           Tooltip(
-            message: 'Filtre sonucundaki gorseli eksik kayitlar icin kapak uret',
+            message:
+                'Filtre sonucundaki gorseli eksik kayitlar icin kapak uret',
             child: FilledButton.tonalIcon(
               onPressed: _isPreviewMode
                   ? null
@@ -601,7 +611,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
           ),
         ],
       ),
-          child: Column(
+      child: Column(
         children: [
           if (_activeQuestionRun != null || _activeCoverRun != null) ...[
             _ReadingAiRunProgressCard(
@@ -784,15 +794,18 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               child: Row(
                 children: [
                   Checkbox(
-                    value: _selectedReadingIds.length == visibleReadings.length &&
+                    value:
+                        _selectedReadingIds.length == visibleReadings.length &&
                         visibleReadings.isNotEmpty,
-                    tristate: _selectedReadingIds.isNotEmpty &&
+                    tristate:
+                        _selectedReadingIds.isNotEmpty &&
                         _selectedReadingIds.length < visibleReadings.length,
                     onChanged: (value) {
                       setState(() {
                         if (value == true) {
-                          _selectedReadingIds
-                              .addAll(visibleReadings.map((e) => e.id));
+                          _selectedReadingIds.addAll(
+                            visibleReadings.map((e) => e.id),
+                          );
                         } else {
                           _selectedReadingIds.clear();
                         }
@@ -804,7 +817,7 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               ),
             ),
           const SizedBox(height: 8),
-              if (visibleReadings.isEmpty)
+          if (visibleReadings.isEmpty)
             _EmptyState(
               title: 'Okuma kaydi yok',
               subtitle:
@@ -996,15 +1009,18 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
               child: Row(
                 children: [
                   Checkbox(
-                    value: _selectedGrammarIds.length == visibleModules.length &&
+                    value:
+                        _selectedGrammarIds.length == visibleModules.length &&
                         visibleModules.isNotEmpty,
-                    tristate: _selectedGrammarIds.isNotEmpty &&
+                    tristate:
+                        _selectedGrammarIds.isNotEmpty &&
                         _selectedGrammarIds.length < visibleModules.length,
                     onChanged: (value) {
                       setState(() {
                         if (value == true) {
-                          _selectedGrammarIds
-                              .addAll(visibleModules.map((e) => e.id));
+                          _selectedGrammarIds.addAll(
+                            visibleModules.map((e) => e.id),
+                          );
                         } else {
                           _selectedGrammarIds.clear();
                         }
@@ -1039,7 +1055,9 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             for (var index = 0; index < visibleModules.length; index++) ...[
               _GrammarRow(
                 module: visibleModules[index],
-                isSelected: _selectedGrammarIds.contains(visibleModules[index].id),
+                isSelected: _selectedGrammarIds.contains(
+                  visibleModules[index].id,
+                ),
                 onSelected: (value) {
                   setState(() {
                     if (value == true) {
@@ -1445,11 +1463,17 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     ref.invalidate(adminDashboardSnapshotProvider);
     ref.invalidate(adminAuditFeedProvider);
 
-    _pushAudit('admin.bulk.published_toggle', '${entityIds.length} oge guncellendi');
+    _pushAudit(
+      'admin.bulk.published_toggle',
+      '${entityIds.length} oge guncellendi',
+    );
     _showSnackBar('Toplu islem tamamlandi.');
   }
 
-  Future<void> _deleteWordsBulk(BuildContext context, List<String> wordIds) async {
+  Future<void> _deleteWordsBulk(
+    BuildContext context,
+    List<String> wordIds,
+  ) async {
     final shouldDelete = await _confirmAction(
       context,
       title: 'Tümünü sil',
@@ -1518,7 +1542,10 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     ref.invalidate(adminDashboardSnapshotProvider);
     ref.invalidate(adminAuditFeedProvider);
 
-    _pushAudit('admin.bulk.readings_deleted', '${readingIds.length} okuma silindi');
+    _pushAudit(
+      'admin.bulk.readings_deleted',
+      '${readingIds.length} okuma silindi',
+    );
     _showSnackBar('${readingIds.length} okuma silindi.');
   }
 
@@ -1554,7 +1581,10 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     ref.invalidate(adminDashboardSnapshotProvider);
     ref.invalidate(adminAuditFeedProvider);
 
-    _pushAudit('admin.bulk.grammar_deleted', '${moduleIds.length} modul silindi');
+    _pushAudit(
+      'admin.bulk.grammar_deleted',
+      '${moduleIds.length} modul silindi',
+    );
     _showSnackBar('${moduleIds.length} modul silindi.');
   }
 
@@ -1734,18 +1764,21 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     final draft = await showDialog<AdminReadingDetail>(
       context: context,
-      builder: (context) =>
-          _ReadingEditorDialog(
-            packs: packs,
-            initialDetail: detail,
-            coverUrlBuilder: (cover) =>
-                _coverUrlForAsset(ref.read(adminAppConfigProvider).supabaseUrl, cover),
-            aiCoverPoolStatus: ref.watch(adminAiCoverPoolStatusProvider).valueOrNull,
-            onGenerateCover: _generateCoverForReadingDetail,
-            onUploadCover: _uploadCoverForReadingDetail,
-            onRemoveCover: _removeCoverForReadingDetail,
-            onMessage: _showSnackBar,
-          ),
+      builder: (context) => _ReadingEditorDialog(
+        packs: packs,
+        initialDetail: detail,
+        coverUrlBuilder: (cover) => _coverUrlForAsset(
+          ref.read(adminAppConfigProvider).supabaseUrl,
+          cover,
+        ),
+        aiCoverPoolStatus: ref
+            .watch(adminAiCoverPoolStatusProvider)
+            .valueOrNull,
+        onGenerateCover: _generateCoverForReadingDetail,
+        onUploadCover: _uploadCoverForReadingDetail,
+        onRemoveCover: _removeCoverForReadingDetail,
+        onMessage: _showSnackBar,
+      ),
     );
     if (draft == null) {
       return;
@@ -2102,12 +2135,12 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
     final targetReadings = _sortReadingsForBackfill(
       filteredReadings
-        .where(
-          (item) => jobType == 'question_backfill'
-              ? item.questionCount == 0
-              : !item.hasCover,
-        )
-        .toList(growable: false),
+          .where(
+            (item) => jobType == 'question_backfill'
+                ? item.questionCount == 0
+                : !item.hasCover,
+          )
+          .toList(growable: false),
       jobType: jobType,
     );
     if (targetReadings.isEmpty) {
@@ -2208,19 +2241,24 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
     ref.invalidate(adminAuditFeedProvider);
 
     final message = switch (run.status) {
-      'cancelled' => run.jobType == 'question_backfill'
-          ? 'Mini test backfill durduruldu. ${run.processedCount} kayit islendi.'
-          : 'Kapak backfill durduruldu. ${run.processedCount} kayit islendi.',
-      'failed' => run.jobType == 'question_backfill'
-          ? 'Mini test backfill basarisiz oldu: ${run.failedCount} hata.'
-          : 'Kapak backfill basarisiz oldu: ${run.failedCount} hata.',
-      _ => run.jobType == 'question_backfill'
-          ? 'Mini test backfill tamamlandi: ${run.succeededCount} basarili, ${run.failedCount} hata.'
-          : 'Kapak backfill tamamlandi: ${run.succeededCount} basarili, ${run.failedCount} hata.',
+      'cancelled' =>
+        run.jobType == 'question_backfill'
+            ? 'Mini test backfill durduruldu. ${run.processedCount} kayit islendi.'
+            : 'Kapak backfill durduruldu. ${run.processedCount} kayit islendi.',
+      'failed' =>
+        run.jobType == 'question_backfill'
+            ? 'Mini test backfill basarisiz oldu: ${run.failedCount} hata.'
+            : 'Kapak backfill basarisiz oldu: ${run.failedCount} hata.',
+      _ =>
+        run.jobType == 'question_backfill'
+            ? 'Mini test backfill tamamlandi: ${run.succeededCount} basarili, ${run.failedCount} hata.'
+            : 'Kapak backfill tamamlandi: ${run.succeededCount} basarili, ${run.failedCount} hata.',
     };
     _showSnackBar(
       message,
-      isError: run.status == 'failed' || (run.failedCount > 0 && run.succeededCount == 0),
+      isError:
+          run.status == 'failed' ||
+          (run.failedCount > 0 && run.succeededCount == 0),
     );
   }
 
@@ -2241,31 +2279,35 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
 
   Future<List<AdminReadingRecord>> _loadFilteredReadingsForBackfill() async {
     final allReadings = await ref.read(adminReadingsProvider.future);
-    return allReadings.where((item) {
-      final matchesLevel =
-          _readingsFilters.level == null || item.level == _readingsFilters.level;
-      final matchesPublished =
-          _readingsFilters.isPublished == null ||
-          item.isPublished == _readingsFilters.isPublished;
-      final matchesQuestions = _readingsFilters.hasQuestions == null
-          ? true
-          : _readingsFilters.hasQuestions!
-          ? item.questionCount > 0
-          : item.questionCount == 0;
-      final matchesCover = _readingsFilters.hasCover == null
-          ? true
-          : item.hasCover == _readingsFilters.hasCover;
-      final haystack =
-          '${item.title} ${item.category ?? ''} ${item.level ?? ''} ${item.tagsRaw ?? ''}'
-              .toLowerCase();
-      final matchesQuery = _readingsFilters.query.isEmpty ||
-          haystack.contains(_readingsFilters.query.toLowerCase());
-      return matchesLevel &&
-          matchesPublished &&
-          matchesQuestions &&
-          matchesCover &&
-          matchesQuery;
-    }).toList(growable: false);
+    return allReadings
+        .where((item) {
+          final matchesLevel =
+              _readingsFilters.level == null ||
+              item.level == _readingsFilters.level;
+          final matchesPublished =
+              _readingsFilters.isPublished == null ||
+              item.isPublished == _readingsFilters.isPublished;
+          final matchesQuestions = _readingsFilters.hasQuestions == null
+              ? true
+              : _readingsFilters.hasQuestions!
+              ? item.questionCount > 0
+              : item.questionCount == 0;
+          final matchesCover = _readingsFilters.hasCover == null
+              ? true
+              : item.hasCover == _readingsFilters.hasCover;
+          final haystack =
+              '${item.title} ${item.category ?? ''} ${item.level ?? ''} ${item.tagsRaw ?? ''}'
+                  .toLowerCase();
+          final matchesQuery =
+              _readingsFilters.query.isEmpty ||
+              haystack.contains(_readingsFilters.query.toLowerCase());
+          return matchesLevel &&
+              matchesPublished &&
+              matchesQuestions &&
+              matchesCover &&
+              matchesQuery;
+        })
+        .toList(growable: false);
   }
 
   List<AdminReadingRecord> _sortReadingsForBackfill(
@@ -2648,13 +2690,15 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
         'Cover yuklemek icin reading once kaydedilmeli.',
       );
     }
-    return ref.read(adminContentRepositoryProvider).uploadReadingCover(
-      readingId: readingId,
-      bytes: bytes,
-      fileName: fileName,
-      mimeType: mimeType,
-      altText: altText,
-    );
+    return ref
+        .read(adminContentRepositoryProvider)
+        .uploadReadingCover(
+          readingId: readingId,
+          bytes: bytes,
+          fileName: fileName,
+          mimeType: mimeType,
+          altText: altText,
+        );
   }
 
   Future<AppResult<AdminReadingDetail>> _removeCoverForReadingDetail(
@@ -2787,7 +2831,9 @@ class _AdminContentPageState extends ConsumerState<AdminContentPage> {
             model ??= adminAiDefaultModelForProvider(provider);
             return AlertDialog(
               title: Text(
-                replaceExisting ? 'Mini Testleri Yeniden Uret' : 'Mini Test Uret',
+                replaceExisting
+                    ? 'Mini Testleri Yeniden Uret'
+                    : 'Mini Test Uret',
               ),
               content: SizedBox(
                 width: 520,
@@ -3109,10 +3155,7 @@ class _WordRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Checkbox(
-            value: isSelected,
-            onChanged: onSelected,
-          ),
+          Checkbox(value: isSelected, onChanged: onSelected),
           const SizedBox(width: 8),
           Expanded(
             flex: 3,
@@ -3176,10 +3219,12 @@ class _WordRow extends StatelessWidget {
               Switch(value: word.isPublished, onChanged: onTogglePublished),
               IconButton(
                 onPressed: onEdit,
+                tooltip: 'Düzenle',
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
                 onPressed: onDelete,
+                tooltip: 'Sil',
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
             ],
@@ -3221,10 +3266,7 @@ class _ReadingRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Checkbox(
-            value: isSelected,
-            onChanged: onSelected,
-          ),
+          Checkbox(value: isSelected, onChanged: onSelected),
           const SizedBox(width: 8),
           Expanded(
             flex: 4,
@@ -3274,7 +3316,9 @@ class _ReadingRow extends StatelessWidget {
                 _MetricChip(label: reading.isPro ? 'pro' : 'free'),
                 _MetricChip(label: 'odak ${reading.linkedWordCount}'),
                 _MetricChip(label: 'mini test ${reading.questionCount}'),
-                _MetricChip(label: reading.hasCover ? 'kapak var' : 'kapak yok'),
+                _MetricChip(
+                  label: reading.hasCover ? 'kapak var' : 'kapak yok',
+                ),
                 _MetricChip(label: 'guncel ${reading.updatedAtLabel}'),
                 _MetricChip(label: reading.isPublished ? 'yayinda' : 'taslak'),
               ],
@@ -3304,10 +3348,12 @@ class _ReadingRow extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onEdit,
+                tooltip: 'Düzenle',
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
                 onPressed: onDelete,
+                tooltip: 'Sil',
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
             ],
@@ -3350,10 +3396,7 @@ class _GrammarRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Checkbox(
-            value: isSelected,
-            onChanged: onSelected,
-          ),
+          Checkbox(value: isSelected, onChanged: onSelected),
           const SizedBox(width: 8),
           SizedBox(
             width: 64,
@@ -3394,19 +3437,23 @@ class _GrammarRow extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: canMoveUp ? onMoveUp : null,
+                tooltip: 'Yukarı taşı',
                 icon: const Icon(Icons.keyboard_arrow_up_rounded),
               ),
               IconButton(
                 onPressed: canMoveDown ? onMoveDown : null,
+                tooltip: 'Aşağı taşı',
                 icon: const Icon(Icons.keyboard_arrow_down_rounded),
               ),
               Switch(value: module.isPublished, onChanged: onTogglePublished),
               IconButton(
                 onPressed: onEdit,
+                tooltip: 'Düzenle',
                 icon: const Icon(Icons.edit_outlined),
               ),
               IconButton(
                 onPressed: onDelete,
+                tooltip: 'Sil',
                 icon: const Icon(Icons.delete_outline_rounded),
               ),
             ],
@@ -3468,7 +3515,8 @@ class _ReadingAiRunProgressCard extends StatelessWidget {
               run: questionRun!,
               onOpen: onOpenQuestionRun,
             ),
-          if (questionRun != null && coverRun != null) const SizedBox(height: 12),
+          if (questionRun != null && coverRun != null)
+            const SizedBox(height: 12),
           if (coverRun != null)
             _RunSummaryTile(
               title: 'Cover',
@@ -3482,11 +3530,7 @@ class _ReadingAiRunProgressCard extends StatelessWidget {
 }
 
 class _RunSummaryTile extends StatelessWidget {
-  const _RunSummaryTile({
-    required this.title,
-    required this.run,
-    this.onOpen,
-  });
+  const _RunSummaryTile({required this.title, required this.run, this.onOpen});
 
   final String title;
   final AdminAiReadingRun run;
@@ -3501,10 +3545,7 @@ class _RunSummaryTile extends StatelessWidget {
           children: [
             Expanded(child: Text('$title / ${run.status}')),
             if (onOpen != null)
-              FilledButton.tonal(
-                onPressed: onOpen,
-                child: const Text('Ac'),
-              ),
+              FilledButton.tonal(onPressed: onOpen, child: const Text('Ac')),
           ],
         ),
         const SizedBox(height: 6),
@@ -3590,10 +3631,10 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       _questionProvider = _run!.provider == adminAiProviderOpenRouter
           ? adminAiProviderOpenRouter
           : adminAiProviderGemini;
-      _questionModel =
-          _run!.model.isEmpty ? adminAiGeminiDefaultModel : _run!.model;
-      _coverModel =
-          _run!.model.isEmpty ? adminAiCoverAutoModel : _run!.model;
+      _questionModel = _run!.model.isEmpty
+          ? adminAiGeminiDefaultModel
+          : _run!.model;
+      _coverModel = _run!.model.isEmpty ? adminAiCoverAutoModel : _run!.model;
       _settledNotified = !_run!.isActive;
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -3617,7 +3658,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       title: Text(title),
       content: SizedBox(
         width: 620,
-        child: run == null ? _buildConfigBody(context) : _buildProgressBody(context, run),
+        child: run == null
+            ? _buildConfigBody(context)
+            : _buildProgressBody(context, run),
       ),
       actions: _buildActions(context, run),
     );
@@ -3677,7 +3720,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
                   child: Text(adminAiModelLabel(item)),
                 ),
             ],
-            onChanged: adminAiModelsForProvider(_questionProvider).length <= 1 ||
+            onChanged:
+                adminAiModelsForProvider(_questionProvider).length <= 1 ||
                     _isActing
                 ? null
                 : (value) {
@@ -3732,7 +3776,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
   }
 
   Widget _buildProgressBody(BuildContext context, AdminAiReadingRun run) {
-    final canEditCoverModel = !_isQuestionJob && (run.status == 'paused' || run.status == 'queued');
+    final canEditCoverModel =
+        !_isQuestionJob && (run.status == 'paused' || run.status == 'queued');
     final availableCoverModels = _availableCoverModels;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -3767,7 +3812,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
             if (run.skippedCount > 0)
               _MetricChip(label: 'Atlandi ${run.skippedCount}'),
             if (run.consecutiveFailureCount > 0)
-              _MetricChip(label: 'Art arda hata ${run.consecutiveFailureCount}'),
+              _MetricChip(
+                label: 'Art arda hata ${run.consecutiveFailureCount}',
+              ),
           ],
         ),
         if (!_isQuestionJob) ...[
@@ -3802,7 +3849,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
           const SizedBox(height: 12),
           Text(_runPauseReasonLabel(run)),
         ],
-        if (run.lastErrorMessage != null && run.lastErrorMessage!.trim().isNotEmpty) ...[
+        if (run.lastErrorMessage != null &&
+            run.lastErrorMessage!.trim().isNotEmpty) ...[
           const SizedBox(height: 8),
           Text(
             run.lastErrorMessage!,
@@ -3811,23 +3859,20 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
         ],
         if (run.failureSamples.isNotEmpty) ...[
           const SizedBox(height: 12),
-          Text(
-            'Son 5 hata',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text('Son 5 hata', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.errorContainer.withValues(
-                alpha: 0.35,
-              ),
+              color: Theme.of(
+                context,
+              ).colorScheme.errorContainer.withValues(alpha: 0.35),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: Theme.of(context).colorScheme.error.withValues(
-                  alpha: 0.35,
-                ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.error.withValues(alpha: 0.35),
               ),
             ),
             child: Column(
@@ -3888,7 +3933,8 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       ];
     }
 
-    final canPause = !_isActing && (run.status == 'running' || run.status == 'queued');
+    final canPause =
+        !_isActing && (run.status == 'running' || run.status == 'queued');
     final canContinue = !_isActing && !_isPumping && run.isActive;
     final canCancel = !_isActing && run.isActive;
     return [
@@ -3907,10 +3953,7 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
           child: const Text('Devam Et'),
         ),
       if (canCancel)
-        FilledButton(
-          onPressed: _handleCancel,
-          child: const Text('Durdur'),
-        ),
+        FilledButton(onPressed: _handleCancel, child: const Text('Durdur')),
     ];
   }
 
@@ -3980,7 +4023,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
   Future<void> _handleResume() async {
     await _runControlAction(
       action: 'resume',
-      provider: _isQuestionJob ? _questionProvider : adminAiCoverProviderForModel(_coverModel),
+      provider: _isQuestionJob
+          ? _questionProvider
+          : adminAiCoverProviderForModel(_coverModel),
       model: _isQuestionJob ? _questionModel : _coverModel,
       questionCount: _isQuestionJob
           ? int.tryParse(_questionCountController.text.trim())
@@ -4155,7 +4200,9 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
   }
 
   List<String> get _availableCoverModels {
-    final enabledModels = _coverPoolStatus?.enabledModels ?? const <AdminAiCoverModelUsageStatus>[];
+    final enabledModels =
+        _coverPoolStatus?.enabledModels ??
+        const <AdminAiCoverModelUsageStatus>[];
     if (enabledModels.isEmpty) {
       return adminAiCoverModels;
     }
@@ -4175,8 +4222,12 @@ class _ReadingAiRunDialogState extends State<_ReadingAiRunDialog> {
       );
     }
     if (_coverModel == adminAiCoverAutoModel) {
-      final imageRouter = status.statusesForProvider(adminAiProviderImageRouter);
-      final huggingFace = status.statusesForProvider(adminAiProviderHuggingFace);
+      final imageRouter = status.statusesForProvider(
+        adminAiProviderImageRouter,
+      );
+      final huggingFace = status.statusesForProvider(
+        adminAiProviderHuggingFace,
+      );
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -4785,7 +4836,9 @@ class _ReadingEditorDialog extends StatefulWidget {
     String? altText,
   })
   onUploadCover;
-  final Future<AppResult<AdminReadingDetail>> Function(AdminReadingDetail detail)
+  final Future<AppResult<AdminReadingDetail>> Function(
+    AdminReadingDetail detail,
+  )
   onRemoveCover;
   final void Function(String message, {bool isError}) onMessage;
 
@@ -4812,7 +4865,9 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
     );
     _linkedWordsJsonController = TextEditingController(
       text: _prettyJson(
-        _detail.linkedWords.map((item) => item.toJson()).toList(growable: false),
+        _detail.linkedWords
+            .map((item) => item.toJson())
+            .toList(growable: false),
       ),
     );
   }
@@ -4861,10 +4916,7 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 ],
                 onChanged: (value) {
                   _updateDetail(
-                    _detail.copyWith(
-                      packId: value,
-                      clearPackId: value == null,
-                    ),
+                    _detail.copyWith(packId: value, clearPackId: value == null),
                   );
                 },
               ),
@@ -4913,10 +4965,7 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 ],
               ),
               const SizedBox(height: 16),
-              AiDraftEditor(
-                detail: _detail,
-                onChanged: _updateDetail,
-              ),
+              AiDraftEditor(detail: _detail, onChanged: _updateDetail),
               const SizedBox(height: 16),
               TextField(
                 controller: _linkedWordsJsonController,
@@ -4927,10 +4976,7 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 ),
               ),
               const SizedBox(height: 16),
-              AiQuestionsPanel(
-                detail: _detail,
-                onChanged: _updateDetail,
-              ),
+              AiQuestionsPanel(detail: _detail, onChanged: _updateDetail),
               const SizedBox(height: 16),
               ReadingCoverPanel(
                 detail: _detail,
@@ -4944,18 +4990,19 @@ class _ReadingEditorDialogState extends State<_ReadingEditorDialog> {
                 onChanged: _updateDetail,
                 onGenerate: (selectedModel) =>
                     widget.onGenerateCover(_detail, selectedModel),
-                onUpload: ({
-                  required bytes,
-                  required fileName,
-                  required mimeType,
-                  String? altText,
-                }) => widget.onUploadCover(
-                  detail: _detail,
-                  bytes: bytes,
-                  fileName: fileName,
-                  mimeType: mimeType,
-                  altText: altText,
-                ),
+                onUpload:
+                    ({
+                      required bytes,
+                      required fileName,
+                      required mimeType,
+                      String? altText,
+                    }) => widget.onUploadCover(
+                      detail: _detail,
+                      bytes: bytes,
+                      fileName: fileName,
+                      mimeType: mimeType,
+                      altText: altText,
+                    ),
                 onRemove: () => widget.onRemoveCover(_detail),
                 onMessage: widget.onMessage,
               ),
@@ -5883,7 +5930,10 @@ class _BulkActionToolbar extends StatelessWidget {
           TextButton.icon(
             onPressed: onClear,
             icon: const Icon(Icons.close, color: Colors.white),
-            label: const Text('Secimi Temizle', style: TextStyle(color: Colors.white)),
+            label: const Text(
+              'Secimi Temizle',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           const SizedBox(width: 12),
           FilledButton.icon(

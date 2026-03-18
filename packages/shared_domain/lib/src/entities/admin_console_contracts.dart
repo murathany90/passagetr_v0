@@ -496,7 +496,8 @@ class AdminAiCoverModelConfig {
   };
 
   factory AdminAiCoverModelConfig.fromJson(Map<String, dynamic>? json) {
-    final provider = _adminConsoleAiCoverProviderFromValue(json?['provider']) ??
+    final provider =
+        _adminConsoleAiCoverProviderFromValue(json?['provider']) ??
         adminAiProviderImageRouter;
     final modelId = json?['model_id']?.toString() ?? '';
     final fallbackDailyCap = provider == adminAiProviderHuggingFace
@@ -525,8 +526,7 @@ String? _adminConsoleAiCoverProviderFromValue(Object? value) {
   if (normalized == null || normalized.isEmpty) {
     return null;
   }
-  if (
-      normalized == adminAiProviderImageRouter ||
+  if (normalized == adminAiProviderImageRouter ||
       normalized == adminAiProviderHuggingFace ||
       normalized == adminAiProviderCoverAuto ||
       normalized == adminAiProviderGemini ||
@@ -574,17 +574,18 @@ class AdminAiCoverSettings {
   final bool localCapsEnabled;
   final List<AdminAiCoverModelConfig> models;
 
-  List<AdminAiCoverModelConfig> get sortedModels => List<AdminAiCoverModelConfig>.from(
-    models.isEmpty ? adminDefaultAiCoverModelConfigs() : models,
-  )..sort((left, right) {
-    final byPriority = left.priority.compareTo(right.priority);
-    if (byPriority != 0) {
-      return byPriority;
-    }
-    return adminAiModelLabel(left.modelId).compareTo(
-      adminAiModelLabel(right.modelId),
-    );
-  });
+  List<AdminAiCoverModelConfig> get sortedModels =>
+      List<AdminAiCoverModelConfig>.from(
+        models.isEmpty ? adminDefaultAiCoverModelConfigs() : models,
+      )..sort((left, right) {
+        final byPriority = left.priority.compareTo(right.priority);
+        if (byPriority != 0) {
+          return byPriority;
+        }
+        return adminAiModelLabel(
+          left.modelId,
+        ).compareTo(adminAiModelLabel(right.modelId));
+      });
 
   AdminAiCoverSettings copyWith({
     bool? localCapsEnabled,
@@ -604,14 +605,15 @@ class AdminAiCoverSettings {
   factory AdminAiCoverSettings.fromJson(Map<String, dynamic>? json) {
     final rawModels = json?['models'];
     final parsedModels = switch (rawModels) {
-      List<dynamic>() => rawModels
-          .whereType<Map>()
-          .map(
-            (item) => AdminAiCoverModelConfig.fromJson(
-              item.cast<String, dynamic>(),
-            ),
-          )
-          .toList(growable: false),
+      List<dynamic>() =>
+        rawModels
+            .whereType<Map>()
+            .map(
+              (item) => AdminAiCoverModelConfig.fromJson(
+                item.cast<String, dynamic>(),
+              ),
+            )
+            .toList(growable: false),
       _ => adminDefaultAiCoverModelConfigs(),
     };
     return AdminAiCoverSettings(

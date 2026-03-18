@@ -135,7 +135,9 @@ class _StudentReadingDetailPageState
         }
 
         final seed = readingSeedForPassage(reading);
-        final progress = ref.watch(studentReadingProgressProvider).valueOrNull?[reading.id];
+        final progress = ref
+            .watch(studentReadingProgressProvider)
+            .valueOrNull?[reading.id];
         final adjacentReadings = _resolveAdjacentReadings(items, reading.id);
         final articleSections = _resolveArticleSections(
           seed,
@@ -401,7 +403,11 @@ class _StudentReadingDetailPageState
     }
   }
 
-  void _handleWordTap(int lookupIndex, _SentenceToken token, Offset? globalPosition) {
+  void _handleWordTap(
+    int lookupIndex,
+    _SentenceToken token,
+    Offset? globalPosition,
+  ) {
     if (token.wordCard != null) {
       if (globalPosition != null) {
         _showContextualWordCard(token.wordCard!, globalPosition);
@@ -426,7 +432,9 @@ class _StudentReadingDetailPageState
           lookupQuery: token.lookupQuery,
         );
         // İlerlemeyi kaydet
-        ref.read(studentReadingProgressProvider.notifier).recordReadingProgress(
+        ref
+            .read(studentReadingProgressProvider.notifier)
+            .recordReadingProgress(
               readingId: widget.readingId,
               sentenceIndex: lookupIndex,
             );
@@ -443,7 +451,7 @@ class _StudentReadingDetailPageState
 
   void _showContextualWordCard(WordEntry word, Offset position) {
     _hideContextualWordCard();
-    
+
     _wordCardOverlayEntry = OverlayEntry(
       builder: (context) {
         return Stack(
@@ -466,7 +474,9 @@ class _StudentReadingDetailPageState
                   width: 280,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
@@ -485,9 +495,8 @@ class _StudentReadingDetailPageState
                           Expanded(
                             child: Text(
                               word.enWord,
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
                           Container(
@@ -496,14 +505,19 @@ class _StudentReadingDetailPageState
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primaryContainer,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primaryContainer,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
                               word.pos,
-                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                              ),
+                              style: Theme.of(context).textTheme.labelSmall
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimaryContainer,
+                                  ),
                             ),
                           ),
                         ],
@@ -594,7 +608,9 @@ class _StudentReadingDetailPageState
     });
 
     // İlerlemeyi kaydet
-    ref.read(studentReadingProgressProvider.notifier).recordReadingProgress(
+    ref
+        .read(studentReadingProgressProvider.notifier)
+        .recordReadingProgress(
           readingId: readingId,
           sentenceIndex: lookupIndex,
         );
@@ -1051,6 +1067,7 @@ class ReadingDetailHeader extends StatelessWidget {
           ),
           IconButton(
             onPressed: onShare,
+            tooltip: 'Paylaş',
             icon: const Icon(Icons.share_outlined),
           ),
         ],
@@ -1251,7 +1268,12 @@ class _ReadingArticlePanel extends ConsumerWidget {
   final Future<void> Function(String readingId, _ReadingArticleSection section)
   onPlaySentence;
   final Future<void> Function(_ReadingArticleSection section) onStopSentence;
-  final void Function(int lookupIndex, _SentenceToken token, Offset? globalPosition)? onWordTap;
+  final void Function(
+    int lookupIndex,
+    _SentenceToken token,
+    Offset? globalPosition,
+  )?
+  onWordTap;
   final ValueChanged<_ReadingArticleSection> onWordLongPress;
   final void Function(ReadingQuestion question, int optionIndex)
   onQuestionSelected;
@@ -1362,7 +1384,10 @@ class _ReadingArticlePanel extends ConsumerWidget {
                                     onPlaySentence(readingId, section);
                                     // İlerlemeyi kaydet
                                     ref
-                                        .read(studentReadingProgressProvider.notifier)
+                                        .read(
+                                          studentReadingProgressProvider
+                                              .notifier,
+                                        )
                                         .recordReadingProgress(
                                           readingId: readingId,
                                           sentenceIndex: section.lookupIndex,
@@ -1372,9 +1397,10 @@ class _ReadingArticlePanel extends ConsumerWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Tooltip(
-                                  message: revealedTranslations.contains(
-                                    section.lookupIndex,
-                                  )
+                                  message:
+                                      revealedTranslations.contains(
+                                        section.lookupIndex,
+                                      )
                                       ? 'Ceviriyi gizle'
                                       : 'Cumleyi cevir',
                                   child: InkWell(
@@ -1385,12 +1411,14 @@ class _ReadingArticlePanel extends ConsumerWidget {
                                       child: Icon(
                                         Icons.translate_rounded,
                                         size: 16,
-                                        color: revealedTranslations.contains(
-                                          section.lookupIndex,
-                                        )
+                                        color:
+                                            revealedTranslations.contains(
+                                              section.lookupIndex,
+                                            )
                                             ? AppThemeTokens.of(context).accent
-                                            : AppThemeTokens.of(context)
-                                                .secondaryText,
+                                            : AppThemeTokens.of(
+                                                context,
+                                              ).secondaryText,
                                       ),
                                     ),
                                   ),
@@ -1433,19 +1461,20 @@ class _ReadingArticlePanel extends ConsumerWidget {
         ],
         ...switch (questions) {
           AsyncData<List<ReadingQuestion>>(value: final items)
-              when items.isNotEmpty => <Widget>[
-                _ReadingQuestionsPanel(
-                  questions: items,
-                  selectedQuestionOptionIndexes: selectedQuestionOptionIndexes,
-                  readingQuizResult: readingQuizResult,
-                  isSubmitting: isSubmittingReadingQuiz,
-                  persistsAttempts: persistsAttempts,
-                  onOptionSelected: onQuestionSelected,
-                  onSubmit: () => onSubmitQuiz(items),
-                  onClear: onClearQuiz,
-                ),
-                const SizedBox(height: 16),
-              ],
+              when items.isNotEmpty =>
+            <Widget>[
+              _ReadingQuestionsPanel(
+                questions: items,
+                selectedQuestionOptionIndexes: selectedQuestionOptionIndexes,
+                readingQuizResult: readingQuizResult,
+                isSubmitting: isSubmittingReadingQuiz,
+                persistsAttempts: persistsAttempts,
+                onOptionSelected: onQuestionSelected,
+                onSubmit: () => onSubmitQuiz(items),
+                onClear: onClearQuiz,
+              ),
+              const SizedBox(height: 16),
+            ],
           AsyncLoading<List<ReadingQuestion>>() => <Widget>[
             _ReadingQuestionsLoadingCard(),
             const SizedBox(height: 16),
@@ -1488,7 +1517,8 @@ class _ReadingQuestionsPanel extends StatelessWidget {
   final _ReadingQuizResult? readingQuizResult;
   final bool isSubmitting;
   final bool persistsAttempts;
-  final void Function(ReadingQuestion question, int optionIndex) onOptionSelected;
+  final void Function(ReadingQuestion question, int optionIndex)
+  onOptionSelected;
   final VoidCallback onSubmit;
   final VoidCallback onClear;
 
@@ -1514,7 +1544,10 @@ class _ReadingQuestionsPanel extends StatelessWidget {
           ),
           if (result != null) ...[
             const SizedBox(height: 14),
-            _ReadingQuizResultBanner(result: result, questionCount: questions.length),
+            _ReadingQuizResultBanner(
+              result: result,
+              questionCount: questions.length,
+            ),
           ],
           const SizedBox(height: 16),
           for (final question in questions) ...[
@@ -1537,7 +1570,9 @@ class _ReadingQuestionsPanel extends StatelessWidget {
           Row(
             children: [
               OutlinedButton(
-                onPressed: selectedQuestionOptionIndexes.isEmpty ? null : onClear,
+                onPressed: selectedQuestionOptionIndexes.isEmpty
+                    ? null
+                    : onClear,
                 child: const Text('Temizle'),
               ),
               const Spacer(),
@@ -1915,7 +1950,12 @@ class _InteractiveSentenceText extends StatelessWidget {
   final bool focusModeEnabled;
   final List<WordEntry> focusWordCards;
   final _SelectedDictionaryWord? selectedWord;
-  final void Function(int lookupIndex, _SentenceToken token, Offset? globalPosition)? onWordTap;
+  final void Function(
+    int lookupIndex,
+    _SentenceToken token,
+    Offset? globalPosition,
+  )?
+  onWordTap;
 
   @override
   Widget build(BuildContext context) {
@@ -1932,10 +1972,18 @@ class _InteractiveSentenceText extends StatelessWidget {
             TextSpan(
               text: '${token.displayWord} ',
               style: (textStyle ?? const TextStyle()).copyWith(
-                fontWeight: token.wordCard != null ? FontWeight.w800 : textStyle?.fontWeight,
-                color: token.wordCard != null ? tokens.accentBlue : textStyle?.color,
-                decoration: token.wordCard != null ? TextDecoration.underline : TextDecoration.none,
-                decorationColor: token.wordCard != null ? tokens.accentBlue.withValues(alpha: 0.45) : null,
+                fontWeight: token.wordCard != null
+                    ? FontWeight.w800
+                    : textStyle?.fontWeight,
+                color: token.wordCard != null
+                    ? tokens.accentBlue
+                    : textStyle?.color,
+                decoration: token.wordCard != null
+                    ? TextDecoration.underline
+                    : TextDecoration.none,
+                decorationColor: token.wordCard != null
+                    ? tokens.accentBlue.withValues(alpha: 0.45)
+                    : null,
                 decorationThickness: token.wordCard != null ? 1.6 : null,
               ),
               recognizer: TapGestureRecognizer()
@@ -1952,7 +2000,6 @@ class _InteractiveSentenceText extends StatelessWidget {
     );
   }
 }
-
 
 class _DictionaryInlinePanel extends ConsumerWidget {
   const _DictionaryInlinePanel({required this.query});

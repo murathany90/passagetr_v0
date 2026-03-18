@@ -6,7 +6,7 @@ enum AppRole {
   const AppRole(this.value);
 
   final String value;
-  
+
   static AppRole fromName(String? name) {
     for (final role in AppRole.values) {
       if (role.value == name) return role;

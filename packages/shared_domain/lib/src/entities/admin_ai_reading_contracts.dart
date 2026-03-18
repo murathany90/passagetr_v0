@@ -74,8 +74,7 @@ String adminAiModelLabel(String model) {
     'stabilityai/stable-diffusion-xl-base-1.0' =>
       'Stable Diffusion XL Base 1.0',
     'black-forest-labs/FLUX.1-dev' => 'FLUX.1 Dev',
-    'stabilityai/stable-diffusion-3.5-large' =>
-      'Stable Diffusion 3.5 Large',
+    'stabilityai/stable-diffusion-3.5-large' => 'Stable Diffusion 3.5 Large',
     'playgroundai/playground-v2.5-1024px-aesthetic' =>
       'Playground v2.5 1024px Aesthetic',
     'arcee-ai/trinity-large-preview:free' => 'Trinity Large Preview (free)',
@@ -142,7 +141,8 @@ class AdminAiCoverModelUsageStatus {
   factory AdminAiCoverModelUsageStatus.fromJson(Map<String, dynamic>? json) {
     return AdminAiCoverModelUsageStatus(
       provider:
-          _adminAiProviderFromValue(json?['provider']) ?? adminAiProviderCoverAuto,
+          _adminAiProviderFromValue(json?['provider']) ??
+          adminAiProviderCoverAuto,
       model: json?['model']?.toString() ?? adminAiCoverAutoModel,
       enabled: json?['enabled'] as bool? ?? true,
       priority: (json?['priority'] as num?)?.toInt() ?? 0,
@@ -179,7 +179,8 @@ class AdminAiCoverPoolStatus {
     final normalizedModel = model?.trim() ?? adminAiCoverAutoModel;
     final normalizedProvider = adminAiCoverProviderForModel(normalizedModel);
     for (final item in models) {
-      if (item.provider == normalizedProvider && item.model == normalizedModel) {
+      if (item.provider == normalizedProvider &&
+          item.model == normalizedModel) {
         return item;
       }
     }
@@ -201,14 +202,15 @@ class AdminAiCoverPoolStatus {
           DateTime.now().toUtc(),
       localCapsEnabled: json?['local_caps_enabled'] as bool? ?? true,
       models: switch (rawModels) {
-        List<dynamic>() => rawModels
-            .whereType<Map>()
-            .map(
-              (item) => AdminAiCoverModelUsageStatus.fromJson(
-                item.map((key, value) => MapEntry(key.toString(), value)),
-              ),
-            )
-            .toList(growable: false),
+        List<dynamic>() =>
+          rawModels
+              .whereType<Map>()
+              .map(
+                (item) => AdminAiCoverModelUsageStatus.fromJson(
+                  item.map((key, value) => MapEntry(key.toString(), value)),
+                ),
+              )
+              .toList(growable: false),
         _ => const <AdminAiCoverModelUsageStatus>[],
       },
     );
@@ -587,18 +589,21 @@ class AdminAiGeneratedReadingQuestions {
     'generated_at': generatedAt.toIso8601String(),
   };
 
-  factory AdminAiGeneratedReadingQuestions.fromJson(Map<String, dynamic>? json) {
+  factory AdminAiGeneratedReadingQuestions.fromJson(
+    Map<String, dynamic>? json,
+  ) {
     final rawQuestions = json?['questions'];
     return AdminAiGeneratedReadingQuestions(
       questions: switch (rawQuestions) {
-        List<dynamic>() => rawQuestions
-            .whereType<Map>()
-            .map(
-              (item) => AdminReadingQuestionInput.fromJson(
-                item.map((key, value) => MapEntry(key.toString(), value)),
-              ),
-            )
-            .toList(growable: false),
+        List<dynamic>() =>
+          rawQuestions
+              .whereType<Map>()
+              .map(
+                (item) => AdminReadingQuestionInput.fromJson(
+                  item.map((key, value) => MapEntry(key.toString(), value)),
+                ),
+              )
+              .toList(growable: false),
         _ => const <AdminReadingQuestionInput>[],
       },
       provider:
@@ -710,7 +715,8 @@ class AdminAiReadingRun {
 
   bool get isFinished =>
       status == 'completed' || status == 'failed' || status == 'cancelled';
-  bool get isActive => status == 'queued' || status == 'running' || status == 'paused';
+  bool get isActive =>
+      status == 'queued' || status == 'running' || status == 'paused';
   bool get isPaused => status == 'paused';
 
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -752,10 +758,11 @@ class AdminAiReadingRun {
       failedCount: (json?['failed_count'] as num?)?.toInt() ?? 0,
       skippedCount: (json?['skipped_count'] as num?)?.toInt() ?? 0,
       failureSamples: switch (rawFailures) {
-        List<dynamic>() => rawFailures
-            .map((item) => item.toString())
-            .where((item) => item.trim().isNotEmpty)
-            .toList(growable: false),
+        List<dynamic>() =>
+          rawFailures
+              .map((item) => item.toString())
+              .where((item) => item.trim().isNotEmpty)
+              .toList(growable: false),
         _ => const <String>[],
       },
       pauseReason: _adminAiEmptyStringAsNull(json?['pause_reason']?.toString()),

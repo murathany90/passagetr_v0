@@ -41,9 +41,9 @@ class WeeklyActivityTimeline extends StatelessWidget {
         children: [
           Text(
             'Bu Haftaki Aktivite',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 16),
           Row(
@@ -66,7 +66,13 @@ class _DayColumn extends StatelessWidget {
   final StudentDailyStat stat;
 
   static const List<String> _dayNames = [
-    'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct', 'Pz',
+    'Pt',
+    'Sa',
+    'Ça',
+    'Pe',
+    'Cu',
+    'Ct',
+    'Pz',
   ];
 
   @override
@@ -89,9 +95,7 @@ class _DayColumn extends StatelessWidget {
             color: stat.goalCompleted
                 ? tokens.success.withValues(alpha: 0.15)
                 : tokens.surfaceMuted,
-            border: isToday
-                ? Border.all(color: tokens.accent, width: 2)
-                : null,
+            border: isToday ? Border.all(color: tokens.accent, width: 2) : null,
           ),
           child: Center(
             child: Text(
@@ -149,9 +153,9 @@ class _TimelineEmptyState extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             'Bugün bir okuma veya kelime çalışması yaparak streak başlat!',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: tokens.secondaryText,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
           ),
         ],
       ),

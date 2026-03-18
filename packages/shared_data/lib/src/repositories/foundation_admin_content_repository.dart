@@ -384,12 +384,15 @@ class FoundationAdminContentRepository implements AdminContentRepository {
 
     try {
       await SupabaseBootstrap.initialize(_config);
-      final existingResult = await fetchReadingDetail(readingId: normalizedReadingId);
+      final existingResult = await fetchReadingDetail(
+        readingId: normalizedReadingId,
+      );
       if (existingResult case AppFailure<AdminReadingDetail>()) {
         return AppFailure<AdminReadingDetail>(existingResult.message);
       }
 
-      final existingDetail = (existingResult as AppSuccess<AdminReadingDetail>).value;
+      final existingDetail =
+          (existingResult as AppSuccess<AdminReadingDetail>).value;
       final bucketName = 'reading-covers';
       final storagePath = _buildReadingCoverPath(
         readingId: normalizedReadingId,
@@ -421,13 +424,11 @@ class FoundationAdminContentRepository implements AdminContentRepository {
         await _removeStoredCover(existingDetail.cover);
         return AppSuccess<AdminReadingDetail>(detail);
       } catch (error) {
-      _handleError(error);
+        _handleError(error);
         await Supabase.instance.client.storage.from(bucketName).remove([
           storagePath,
         ]);
-        return AppFailure<AdminReadingDetail>(
-          'Cover kaydedilemedi: $error',
-        );
+        return AppFailure<AdminReadingDetail>('Cover kaydedilemedi: $error');
       }
     } catch (error) {
       _handleError(error);
@@ -451,18 +452,23 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     }
 
     try {
-      final existingResult = await fetchReadingDetail(readingId: normalizedReadingId);
+      final existingResult = await fetchReadingDetail(
+        readingId: normalizedReadingId,
+      );
       if (existingResult case AppFailure<AdminReadingDetail>()) {
         return AppFailure<AdminReadingDetail>(existingResult.message);
       }
-      final existingDetail = (existingResult as AppSuccess<AdminReadingDetail>).value;
+      final existingDetail =
+          (existingResult as AppSuccess<AdminReadingDetail>).value;
 
       final payload = await _invokeJsonRpc(
         'admin_clear_reading_cover',
         params: <String, dynamic>{'p_passage_id': normalizedReadingId},
       );
       await _removeStoredCover(existingDetail.cover);
-      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+      return AppSuccess<AdminReadingDetail>(
+        AdminReadingDetail.fromJson(payload),
+      );
     } catch (error) {
       _handleError(error);
       return AppFailure<AdminReadingDetail>('Cover silinemedi: $error');
@@ -563,7 +569,8 @@ class FoundationAdminContentRepository implements AdminContentRepository {
     }
 
     try {
-      final futures = entityIds.map((id) => setContentPublished(
+      final futures = entityIds.map(
+        (id) => setContentPublished(
           entityType: entityType,
           entityId: id,
           isPublished: isPublished,
@@ -580,7 +587,9 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
-  Future<AppResult<void>> deleteWordsBulk({required List<String> wordIds}) async {
+  Future<AppResult<void>> deleteWordsBulk({
+    required List<String> wordIds,
+  }) async {
     if (!_config.supabaseEnabled || wordIds.isEmpty) {
       return const AppSuccess<void>(null);
     }
@@ -598,7 +607,9 @@ class FoundationAdminContentRepository implements AdminContentRepository {
   }
 
   @override
-  Future<AppResult<void>> deleteReadingsBulk({required List<String> readingIds}) async {
+  Future<AppResult<void>> deleteReadingsBulk({
+    required List<String> readingIds,
+  }) async {
     if (!_config.supabaseEnabled || readingIds.isEmpty) {
       return const AppSuccess<void>(null);
     }
