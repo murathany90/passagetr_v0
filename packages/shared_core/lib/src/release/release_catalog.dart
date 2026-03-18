@@ -57,7 +57,8 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
       'Her model icin gunluk attempt, success, failed ve rate-limited sayaclari tutulur; local cap ayarlari admin Ayarlar > AI Cover sekmesinden yonetilir.',
       'Okumalar, Eksik Kapaklar backfill ve AI Asistan cover paneli ayni otomatik havuz secimini ve kullanim ozetini kullanir.',
     ],
-  ),  ReleaseNoteEntry(
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.20',
     releaseDate: '2026-03-15',
     title: 'Student reading cards compact layout',
@@ -95,7 +96,8 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
       'Aktif admin oturumu ve developer hesaplari icin mevcut server-side korumalar korunur; bu hesaplar item bazinda atlanabilir.',
       'admin_manage_users edge functioni delete_many actioni ve admin.user.bulk_deleted summary audit kaydi ile genisletildi.',
     ],
-  ),  ReleaseNoteEntry(
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.17',
     releaseDate: '2026-03-15',
     title: 'Cover backfill throttling and failure-rate guard',
@@ -133,7 +135,8 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
       'Bu release ile admin web yeniden deploy edilir; student web ve arm64 APK de remote cover tuketimini iceren guncel build ile yayinlanir.',
       'Mini test ve cover pipeline icin Gemini 2.5 Flash / Gemini 2.5 Flash Image uyumlulugu korunur.',
     ],
-  ),  ReleaseNoteEntry(
+  ),
+  ReleaseNoteEntry(
     version: 'v2.0.14',
     releaseDate: '2026-03-14',
     title: 'Admin reading cover Gemini image rollout',
@@ -316,11 +319,3 @@ const List<ReleaseNoteEntry> releaseCatalog = <ReleaseNoteEntry>[
     ],
   ),
 ];
-
-
-
-
-
-
-
-

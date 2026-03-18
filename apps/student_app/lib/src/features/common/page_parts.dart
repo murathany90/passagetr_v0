@@ -657,7 +657,9 @@ class _StudentSidebar extends ConsumerWidget {
       width: tokens.railWidth,
       decoration: BoxDecoration(
         color: tokens.railBackground,
-        border: Border(right: BorderSide(color: tokens.surfaceBorder.withValues(alpha: 0.5))),
+        border: Border(
+          right: BorderSide(color: tokens.surfaceBorder.withValues(alpha: 0.5)),
+        ),
       ),
       child: Column(
         children: [

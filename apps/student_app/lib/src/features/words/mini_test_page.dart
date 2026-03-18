@@ -91,7 +91,9 @@ class _StudentMiniTestPageState extends ConsumerState<StudentMiniTestPage> {
                 });
               },
               onBack: () => context.go(
-                widget.packId == null ? '/words' : '/words/packs/${widget.packId}',
+                widget.packId == null
+                    ? '/words'
+                    : '/words/packs/${widget.packId}',
               ),
             );
           }

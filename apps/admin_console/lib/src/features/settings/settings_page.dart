@@ -601,7 +601,9 @@ class _AiCoverSettingsTab extends StatelessWidget {
                                 runSpacing: 8,
                                 children: [
                                   _InfoChip(
-                                    label: config.provider == adminAiProviderImageRouter
+                                    label:
+                                        config.provider ==
+                                            adminAiProviderImageRouter
                                         ? 'ImageRouter'
                                         : 'Hugging Face',
                                   ),
@@ -639,6 +641,7 @@ class _AiCoverSettingsTab extends StatelessWidget {
                                   ),
                                 )
                               : null,
+                          tooltip: 'Yukarı taşı',
                           icon: const Icon(Icons.arrow_upward_rounded),
                         ),
                         IconButton(
@@ -655,6 +658,7 @@ class _AiCoverSettingsTab extends StatelessWidget {
                                   ),
                                 )
                               : null,
+                          tooltip: 'Aşağı taşı',
                           icon: const Icon(Icons.arrow_downward_rounded),
                         ),
                         Switch(
@@ -677,7 +681,9 @@ class _AiCoverSettingsTab extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            key: ValueKey('daily-cap-${config.provider}-${config.modelId}'),
+                            key: ValueKey(
+                              'daily-cap-${config.provider}-${config.modelId}',
+                            ),
                             initialValue: config.dailyCap.toString(),
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
@@ -724,8 +730,9 @@ class _AiCoverSettingsTab extends StatelessWidget {
                                               clearLifetimeCap: true,
                                             )
                                           : config.copyWith(
-                                              lifetimeCap:
-                                                  int.tryParse(trimmed),
+                                              lifetimeCap: int.tryParse(
+                                                trimmed,
+                                              ),
                                             ),
                                     ),
                                   ),

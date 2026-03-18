@@ -246,7 +246,9 @@ class FoundationReadingRepository implements ReadingRepository {
     });
   }
 
-  Future<void> _syncReadingPassagesToLocal(List<ReadingPassage> passages) async {
+  Future<void> _syncReadingPassagesToLocal(
+    List<ReadingPassage> passages,
+  ) async {
     final database = _database;
     if (database == null) return;
 
@@ -390,7 +392,8 @@ class FoundationReadingRepository implements ReadingRepository {
             packId: payload['pack_id']?.toString(),
             summary: payload['summary']?.toString(),
             questionCount:
-                (_asInt(payload['question_count']) ?? questionCounts[passageId]) ??
+                (_asInt(payload['question_count']) ??
+                    questionCounts[passageId]) ??
                 0,
             coverBucketName: payload['cover_bucket_name']?.toString(),
             coverStoragePath: payload['cover_storage_path']?.toString(),
@@ -422,11 +425,11 @@ class FoundationReadingRepository implements ReadingRepository {
     } catch (_) {
       rows =
           (await client
-                .from('reading_passages')
-                .select(
-                  'id,pack_id,title,level,category,is_pro,cover_bucket_name,cover_storage_path,cover_alt_text',
-                )
-                .order('title'))
+                  .from('reading_passages')
+                  .select(
+                    'id,pack_id,title,level,category,is_pro,cover_bucket_name,cover_storage_path,cover_alt_text',
+                  )
+                  .order('title'))
               as List<dynamic>;
     }
     return rows
@@ -466,7 +469,9 @@ class FoundationReadingRepository implements ReadingRepository {
       return null;
     }
 
-    final normalizedBase = base.endsWith('/') ? base.substring(0, base.length - 1) : base;
+    final normalizedBase = base.endsWith('/')
+        ? base.substring(0, base.length - 1)
+        : base;
     final encodedPath = path
         .split('/')
         .where((segment) => segment.isNotEmpty)

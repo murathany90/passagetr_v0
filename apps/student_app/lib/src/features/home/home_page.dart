@@ -43,9 +43,8 @@ class StudentHomePage extends ConsumerWidget {
       headerAction: _ProPill(
         isPremium: accessContext.canViewPremium,
         isAnonymous: accessContext.isAnonymous,
-        onPressed: () => context.go(
-          accessContext.isAnonymous ? '/profile' : '/premium',
-        ),
+        onPressed: () =>
+            context.go(accessContext.isAnonymous ? '/profile' : '/premium'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -54,8 +53,9 @@ class StudentHomePage extends ConsumerWidget {
           final statsBar = _QuickStatsBar(
             studiedWords: wordSummary.studiedCount,
             totalWords: wordSummary.totalCount,
-            completedReadings:
-                readingProgressMap.values.where((p) => p.completed).length,
+            completedReadings: readingProgressMap.values
+                .where((p) => p.completed)
+                .length,
           );
 
           final heroCard = _StreakHeroCard(
@@ -66,11 +66,9 @@ class StudentHomePage extends ConsumerWidget {
             reading: continueSummary.reading,
             progressPercent: continueSummary.progressPercent,
             ctaLabel: continueSummary.ctaLabel,
-            onPressed:
-                continueSummary.hasReading
-                    ? () =>
-                        context.go('/readings/${continueSummary.reading.id}')
-                    : null,
+            onPressed: continueSummary.hasReading
+                ? () => context.go('/readings/${continueSummary.reading.id}')
+                : null,
           );
           final wordOfTheDayCard = _WordOfTheDayCard(word: wordOfTheDay);
           final reviewCard = _ReviewCard(
@@ -189,8 +187,8 @@ class _ProPill extends StatelessWidget {
     final label = isPremium
         ? 'PRO Aktif'
         : isAnonymous
-            ? 'Kayıt Ol'
-            : 'Pro\'ya Geç';
+        ? 'Kayıt Ol'
+        : 'Pro\'ya Geç';
 
     return InkWell(
       borderRadius: BorderRadius.circular(tokens.pillRadius),
@@ -270,11 +268,8 @@ class _StreakHeroCard extends StatelessWidget {
                       const SizedBox(width: 12),
                       Text(
                         '$days Gün',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.headlineMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium
+                            ?.copyWith(color: Colors.white),
                       ),
                       const Spacer(),
                       Container(
@@ -529,7 +524,10 @@ class _ReviewCard extends StatelessWidget {
           const SizedBox(height: 28),
           SizedBox(
             width: double.infinity,
-            child: FilledButton(onPressed: onPressed, child: const Text('Kartları Başlat')),
+            child: FilledButton(
+              onPressed: onPressed,
+              child: const Text('Kartları Başlat'),
+            ),
           ),
         ],
       ),
@@ -569,7 +567,9 @@ class _AnalyticsWeeklyProgressCardState
     if (widget.trend.isEmpty) return;
     final segmentWidth = cardWidth / widget.trend.length;
     final index = (localPosition.dx / segmentWidth).floor();
-    if (index >= 0 && index < widget.trend.length && index != _hoveredBarIndex) {
+    if (index >= 0 &&
+        index < widget.trend.length &&
+        index != _hoveredBarIndex) {
       setState(() => _hoveredBarIndex = index);
     }
   }
@@ -613,10 +613,9 @@ class _AnalyticsWeeklyProgressCardState
               ),
               DecoratedBox(
                 decoration: BoxDecoration(
-                  color:
-                      widget.isEstimated
-                          ? tokens.warning.withValues(alpha: 0.12)
-                          : tokens.surfaceMuted,
+                  color: widget.isEstimated
+                      ? tokens.warning.withValues(alpha: 0.12)
+                      : tokens.surfaceMuted,
                   borderRadius: BorderRadius.circular(tokens.pillRadius),
                 ),
                 child: Padding(
@@ -635,7 +634,9 @@ class _AnalyticsWeeklyProgressCardState
                         widget.isEstimated
                             ? Icons.info_outline_rounded
                             : Icons.bar_chart_rounded,
-                        color: widget.isEstimated ? tokens.warning : tokens.accent,
+                        color: widget.isEstimated
+                            ? tokens.warning
+                            : tokens.accent,
                       ),
                     ],
                   ),
@@ -653,7 +654,8 @@ class _AnalyticsWeeklyProgressCardState
               const SizedBox(width: 18),
               _MetricPill(
                 label: '${widget.completedGoalDays} gün',
-                caption: '${widget.totalWords} kelime | ${widget.totalSentences} oturum',
+                caption:
+                    '${widget.totalWords} kelime | ${widget.totalSentences} oturum',
               ),
             ],
           ),
@@ -664,7 +666,10 @@ class _AnalyticsWeeklyProgressCardState
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: tokens.surfaceMuted,
                   borderRadius: BorderRadius.circular(12),
@@ -687,12 +692,12 @@ class _AnalyticsWeeklyProgressCardState
                       _onInteraction(event.localPosition, constraints.maxWidth),
                   onExit: (_) => _clearHover(),
                   child: GestureDetector(
-                    onTapDown: (details) =>
-                        _onInteraction(details.localPosition, constraints.maxWidth),
-                    onTapUp: (_) => Future.delayed(
-                      const Duration(seconds: 2),
-                      _clearHover,
+                    onTapDown: (details) => _onInteraction(
+                      details.localPosition,
+                      constraints.maxWidth,
                     ),
+                    onTapUp: (_) =>
+                        Future.delayed(const Duration(seconds: 2), _clearHover),
                     child: CustomPaint(
                       painter: _WeeklyBarPainter(
                         color: tokens.accent,
@@ -924,15 +929,15 @@ class _StatPill extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
               Text(
                 caption,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: tokens.secondaryText,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
               ),
             ],
           ),
@@ -972,9 +977,9 @@ class _WordOfTheDayCard extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             word!.enWord,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              color: tokens.primaryText,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium?.copyWith(color: tokens.primaryText),
           ),
           const SizedBox(height: 6),
           Text(
@@ -1065,10 +1070,9 @@ class _RecommendedReadingItem extends StatelessWidget {
 
     return StudentSurfaceCard(
       padding: EdgeInsets.zero,
-      onTap:
-          isLocked
-              ? () => context.go('/premium')
-              : () => context.go('/readings/${reading.id}'),
+      onTap: isLocked
+          ? () => context.go('/premium')
+          : () => context.go('/readings/${reading.id}'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1124,9 +1128,9 @@ class _RecommendedReadingItem extends StatelessWidget {
                   seed.summary,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: tokens.secondaryText,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: tokens.secondaryText),
                 ),
               ],
             ),

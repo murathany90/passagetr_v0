@@ -229,7 +229,9 @@ class AdminDashboardPage extends ConsumerWidget {
                                 children: [
                                   Text(
                                     item.timestampLabel,
-                                    style: Theme.of(context).textTheme.bodySmall,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall,
                                   ),
                                   const SizedBox(width: 8),
                                   _AuditActionChip(record: item),
@@ -289,9 +291,15 @@ class AdminDashboardPage extends ConsumerWidget {
             children: [
               const Icon(Icons.warning_amber_rounded, size: 36),
               const SizedBox(height: 12),
-              Text('Dashboard yüklenemedi', style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Dashboard yüklenemedi',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 6),
-              Text(error.toString(), style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                error.toString(),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const SizedBox(height: 16),
               FilledButton.tonal(
                 onPressed: () => ref.invalidate(adminDashboardSnapshotProvider),
@@ -612,7 +620,14 @@ class _AdminTrendPainter extends CustomPainter {
     if (hi != null && hi >= 0 && hi < points.length) {
       final hp = points[hi];
       canvas.drawCircle(hp, 6, dotPaint);
-      canvas.drawCircle(hp, 6, Paint()..color = fillColor..style = PaintingStyle.stroke..strokeWidth = 2);
+      canvas.drawCircle(
+        hp,
+        6,
+        Paint()
+          ..color = fillColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      );
 
       if (hi < rawValues.length) {
         final pt = rawValues[hi];
@@ -680,10 +695,7 @@ class _InfoChip extends StatelessWidget {
 
 /// C5: Trend grafiği üzerine hover veri noktaları ve Y-ekseni gridlines ekler.
 class _InteractiveTrendChart extends StatefulWidget {
-  const _InteractiveTrendChart({
-    required this.values,
-    required this.rawValues,
-  });
+  const _InteractiveTrendChart({required this.values, required this.rawValues});
 
   final List<double> values;
   final List<AdminTrendPoint> rawValues;
@@ -702,8 +714,10 @@ class _InteractiveTrendChartState extends State<_InteractiveTrendChart> {
       onHover: (event) {
         if (widget.values.length < 2) return;
         final stepX = context.size!.width / (widget.values.length - 1);
-        final index = (event.localPosition.dx / stepX).round()
-            .clamp(0, widget.values.length - 1);
+        final index = (event.localPosition.dx / stepX).round().clamp(
+          0,
+          widget.values.length - 1,
+        );
         if (_hoveredIndex != index) {
           setState(() => _hoveredIndex = index);
         }
@@ -785,16 +799,16 @@ class _TrendChip extends StatelessWidget {
         children: [
           Text(
             point.label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: tokens.secondaryText,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: tokens.secondaryText),
           ),
           const SizedBox(width: 6),
           Text(
             value,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w700),
           ),
         ],
       ),
@@ -837,7 +851,9 @@ class _DashboardSkeletonState extends State<_DashboardSkeleton>
       animation: _anim,
       builder: (context, _) {
         final tokens = AppThemeTokens.of(context);
-        final color = tokens.secondaryText.withValues(alpha: 0.08 + _anim.value * 0.07);
+        final color = tokens.secondaryText.withValues(
+          alpha: 0.08 + _anim.value * 0.07,
+        );
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -890,13 +906,34 @@ class _AuditFeedSkeleton extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(height: 14, width: 180, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
+                    Container(
+                      height: 14,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
                     const SizedBox(height: 6),
-                    Container(height: 12, width: 120, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
+                    Container(
+                      height: 12,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Container(height: 14, width: 60, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
+              Container(
+                height: 14,
+                width: 60,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
             ],
           ),
         ),
@@ -904,4 +941,3 @@ class _AuditFeedSkeleton extends StatelessWidget {
     );
   }
 }
-

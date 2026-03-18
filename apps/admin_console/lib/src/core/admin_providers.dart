@@ -64,7 +64,7 @@ final adminAiReadingRepositoryProvider = Provider<AdminAiReadingRepository>(
 final adminUserManagementRepositoryProvider =
     Provider<AdminUserManagementRepository>(
       (ref) => FoundationAdminUserManagementRepository(
-        _config: ref.watch(adminAppConfigProvider),
+        config: ref.watch(adminAppConfigProvider),
         authRepository: ref.watch(adminAuthRepositoryProvider),
       ),
     );
@@ -94,15 +94,15 @@ final adminSettingsStateProvider =
       ),
     );
 
-final adminAiAssistantControllerProvider = StateNotifierProvider<
-  AdminAiAssistantController,
-  AdminAiAssistantState
->((ref) {
-  return AdminAiAssistantController(
-    aiRepository: ref.watch(adminAiReadingRepositoryProvider),
-    contentRepository: ref.watch(adminContentRepositoryProvider),
-  );
-});
+final adminAiAssistantControllerProvider =
+    StateNotifierProvider<AdminAiAssistantController, AdminAiAssistantState>((
+      ref,
+    ) {
+      return AdminAiAssistantController(
+        aiRepository: ref.watch(adminAiReadingRepositoryProvider),
+        contentRepository: ref.watch(adminContentRepositoryProvider),
+      );
+    });
 
 final adminActiveSettingsProvider = Provider<AdminSettingsSnapshot>((ref) {
   return ref.watch(adminSettingsStateProvider).draft;

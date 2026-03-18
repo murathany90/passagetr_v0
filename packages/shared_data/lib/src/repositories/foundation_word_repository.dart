@@ -121,63 +121,63 @@ class FoundationWordRepository implements WordRepository {
 
   List<WordEntry> _previewWords(String? packId) {
     return const <WordEntry>[
-      WordEntry(
-        id: 'word-a',
-        packId: 'pack-yds-001',
-        enWord: 'a great deal of',
-        trMeaning: 'çok miktarda',
-        pos: 'prep.',
-      ),
-      WordEntry(
-        id: 'word-b',
-        packId: 'pack-business',
-        enWord: 'benchmark',
-        trMeaning: 'ölçüt',
-        pos: 'n.',
-      ),
-      WordEntry(
-        id: 'word-c',
-        packId: 'pack-yds-001',
-        enWord: 'allocate',
-        trMeaning: 'tahsis etmek',
-        pos: 'v.',
-      ),
-      WordEntry(
-        id: 'word-d',
-        packId: 'pack-business',
-        enWord: 'revenue',
-        trMeaning: 'gelir',
-        pos: 'n.',
-      ),
-      WordEntry(
-        id: 'word-e',
-        packId: 'pack-academic',
-        enWord: 'hypothesis',
-        trMeaning: 'hipotez',
-        pos: 'n.',
-      ),
-      WordEntry(
-        id: 'word-f',
-        packId: 'pack-travel',
-        enWord: 'itinerary',
-        trMeaning: 'seyahat planı',
-        pos: 'n.',
-      ),
-      WordEntry(
-        id: 'word-g',
-        packId: 'pack-daily-speaking',
-        enWord: 'catch up',
-        trMeaning: 'hasret gidermek',
-        pos: 'phr. v.',
-      ),
-      WordEntry(
-        id: 'word-h',
-        packId: 'pack-phrasal-verbs',
-        enWord: 'turn down',
-        trMeaning: 'reddetmek',
-        pos: 'phr. v.',
-      ),
-    ]
+          WordEntry(
+            id: 'word-a',
+            packId: 'pack-yds-001',
+            enWord: 'a great deal of',
+            trMeaning: 'çok miktarda',
+            pos: 'prep.',
+          ),
+          WordEntry(
+            id: 'word-b',
+            packId: 'pack-business',
+            enWord: 'benchmark',
+            trMeaning: 'ölçüt',
+            pos: 'n.',
+          ),
+          WordEntry(
+            id: 'word-c',
+            packId: 'pack-yds-001',
+            enWord: 'allocate',
+            trMeaning: 'tahsis etmek',
+            pos: 'v.',
+          ),
+          WordEntry(
+            id: 'word-d',
+            packId: 'pack-business',
+            enWord: 'revenue',
+            trMeaning: 'gelir',
+            pos: 'n.',
+          ),
+          WordEntry(
+            id: 'word-e',
+            packId: 'pack-academic',
+            enWord: 'hypothesis',
+            trMeaning: 'hipotez',
+            pos: 'n.',
+          ),
+          WordEntry(
+            id: 'word-f',
+            packId: 'pack-travel',
+            enWord: 'itinerary',
+            trMeaning: 'seyahat planı',
+            pos: 'n.',
+          ),
+          WordEntry(
+            id: 'word-g',
+            packId: 'pack-daily-speaking',
+            enWord: 'catch up',
+            trMeaning: 'hasret gidermek',
+            pos: 'phr. v.',
+          ),
+          WordEntry(
+            id: 'word-h',
+            packId: 'pack-phrasal-verbs',
+            enWord: 'turn down',
+            trMeaning: 'reddetmek',
+            pos: 'phr. v.',
+          ),
+        ]
         .where(
           (item) => packId == null || packId.isEmpty || item.packId == packId,
         )
@@ -299,7 +299,6 @@ class FoundationWordRepository implements WordRepository {
         .where((item) => item.id.isNotEmpty)
         .toList(growable: false);
   }
-
 
   Map<String, dynamic> _decodePayload(String payloadJson) {
     final decoded = jsonDecode(payloadJson);

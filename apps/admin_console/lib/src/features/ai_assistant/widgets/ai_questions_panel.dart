@@ -103,20 +103,25 @@ class _QuestionCard extends StatelessWidget {
               if (onRemove != null)
                 IconButton(
                   onPressed: onRemove,
+                  tooltip: 'Sil',
                   icon: const Icon(Icons.delete_outline_rounded),
                 ),
             ],
           ),
           TextFormField(
-            key: ValueKey('question-text-${question.sortOrder}-${question.question}'),
+            key: ValueKey(
+              'question-text-${question.sortOrder}-${question.question}',
+            ),
             initialValue: question.question,
             decoration: const InputDecoration(labelText: 'Question'),
             onChanged: (value) => onChanged(question.copyWith(question: value)),
           ),
           const SizedBox(height: 12),
-          for (var optionIndex = 0;
-              optionIndex < question.options.length;
-              optionIndex++) ...[
+          for (
+            var optionIndex = 0;
+            optionIndex < question.options.length;
+            optionIndex++
+          ) ...[
             Row(
               children: [
                 Expanded(
@@ -148,11 +153,13 @@ class _QuestionCard extends StatelessWidget {
                       onChanged(
                         question.copyWith(
                           options: options,
-                          correctOptionIndex:
-                              nextCorrectIndex < 0 ? 0 : nextCorrectIndex,
+                          correctOptionIndex: nextCorrectIndex < 0
+                              ? 0
+                              : nextCorrectIndex,
                         ),
                       );
                     },
+                    tooltip: 'Seçeneği sil',
                     icon: const Icon(Icons.remove_circle_outline_rounded),
                   ),
                 ],
@@ -176,9 +183,11 @@ class _QuestionCard extends StatelessWidget {
             initialValue: question.correctOptionIndex,
             decoration: const InputDecoration(labelText: 'Dogru Secenek'),
             items: [
-              for (var optionIndex = 0;
-                  optionIndex < question.options.length;
-                  optionIndex++)
+              for (
+                var optionIndex = 0;
+                optionIndex < question.options.length;
+                optionIndex++
+              )
                 DropdownMenuItem(
                   value: optionIndex,
                   child: Text('Secenek ${optionIndex + 1}'),

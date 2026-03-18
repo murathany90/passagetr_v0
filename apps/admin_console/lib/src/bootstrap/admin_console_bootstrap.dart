@@ -12,8 +12,7 @@ class AdminConsoleBootstrap extends ConsumerStatefulWidget {
       _AdminConsoleBootstrapState();
 }
 
-class _AdminConsoleBootstrapState
-    extends ConsumerState<AdminConsoleBootstrap> {
+class _AdminConsoleBootstrapState extends ConsumerState<AdminConsoleBootstrap> {
   @override
   void initState() {
     super.initState();

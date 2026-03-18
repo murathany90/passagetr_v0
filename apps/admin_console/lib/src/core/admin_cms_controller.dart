@@ -86,6 +86,7 @@ class AdminAuditLogController extends StateNotifier<List<AdminAuditRecord>> {
 String formatRoleLabel(AppRole role) => switch (role) {
   AppRole.user => 'user',
   AppRole.admin => 'admin',
+  AppRole.superAdmin => 'super_admin',
   AppRole.developer => 'developer',
 };
 

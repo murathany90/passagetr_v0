@@ -262,8 +262,16 @@ void main() {
       final sql = migrationFile.readAsStringSync();
 
       expect(sql, contains('admin_create_reading_ai_run'));
-      expect(sql, contains("when v_job_type = 'cover_backfill' then lower(coalesce(rp.title, ''))"));
-      expect(sql, contains("when v_job_type = 'cover_backfill' then rp.id::text"));
+      expect(
+        sql,
+        contains(
+          "when v_job_type = 'cover_backfill' then lower(coalesce(rp.title, ''))",
+        ),
+      );
+      expect(
+        sql,
+        contains("when v_job_type = 'cover_backfill' then rp.id::text"),
+      );
       expect(sql, contains('requested.ord asc'));
     },
   );

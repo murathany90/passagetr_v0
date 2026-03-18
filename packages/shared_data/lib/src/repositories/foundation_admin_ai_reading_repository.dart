@@ -152,9 +152,13 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       );
       final payload = _coerceMap(response.data);
       if (response.status >= 400) {
-        return AppFailure<AdminReadingDetail>(_messageFromErrorPayload(payload));
+        return AppFailure<AdminReadingDetail>(
+          _messageFromErrorPayload(payload),
+        );
       }
-      return AppSuccess<AdminReadingDetail>(AdminReadingDetail.fromJson(payload));
+      return AppSuccess<AdminReadingDetail>(
+        AdminReadingDetail.fromJson(payload),
+      );
     } catch (error) {
       _handleError(error);
       return AppFailure<AdminReadingDetail>(_messageFromException(error));
@@ -236,7 +240,9 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
     }
 
     try {
-      final payload = await _invokeJsonRpcRaw('admin_list_active_reading_ai_runs');
+      final payload = await _invokeJsonRpcRaw(
+        'admin_list_active_reading_ai_runs',
+      );
       final rows = switch (payload) {
         List<dynamic>() => payload,
         _ => const <dynamic>[],
@@ -310,7 +316,9 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
       return AppSuccess<AdminAiReadingRun>(AdminAiReadingRun.fromJson(payload));
     } catch (error) {
       _handleError(error);
-      return AppFailure<AdminAiReadingRun>('AI batch run kontrol edilemedi: $error');
+      return AppFailure<AdminAiReadingRun>(
+        'AI batch run kontrol edilemedi: $error',
+      );
     }
   }
 
@@ -415,10 +423,7 @@ class FoundationAdminAiReadingRepository implements AdminAiReadingRepository {
     }
 
     await SupabaseBootstrap.initialize(_config);
-    return Supabase.instance.client.rpc<dynamic>(
-      functionName,
-      params: params,
-    );
+    return Supabase.instance.client.rpc<dynamic>(functionName, params: params);
   }
 
   Future<Session?> _resolveSession({bool forceRefresh = false}) async {

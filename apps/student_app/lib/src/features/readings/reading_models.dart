@@ -65,8 +65,7 @@ class SentenceToken {
 }
 
 final RegExp _tokenPattern = RegExp(r'\S+');
-final RegExp _edgePunctuationPattern =
-    RegExp(r'^[^A-Za-z0-9]+|[^A-Za-z0-9]+$');
+final RegExp _edgePunctuationPattern = RegExp(r'^[^A-Za-z0-9]+|[^A-Za-z0-9]+$');
 
 /// Tokenizes a sentence into [SentenceToken]s, linking focus words.
 List<SentenceToken> tokenizeSentence(
@@ -87,20 +86,21 @@ List<SentenceToken> tokenizeSentence(
     return const <SentenceToken>[];
   }
 
-  final focusPhrases = focusWordCards
-      .map((item) {
-        final parts = item.enWord
-            .split(RegExp(r'\s+'))
-            .map(normalizeDictionaryQuery)
-            .where((part) => part.isNotEmpty)
-            .toList(growable: false);
-        return _FocusPhrase(word: item, parts: parts);
-      })
-      .where((item) => item.parts.isNotEmpty)
-      .toList(growable: false)
-    ..sort(
-      (left, right) => right.parts.length.compareTo(left.parts.length),
-    );
+  final focusPhrases =
+      focusWordCards
+          .map((item) {
+            final parts = item.enWord
+                .split(RegExp(r'\s+'))
+                .map(normalizeDictionaryQuery)
+                .where((part) => part.isNotEmpty)
+                .toList(growable: false);
+            return _FocusPhrase(word: item, parts: parts);
+          })
+          .where((item) => item.parts.isNotEmpty)
+          .toList(growable: false)
+        ..sort(
+          (left, right) => right.parts.length.compareTo(left.parts.length),
+        );
 
   final matchedWords = List<WordEntry?>.filled(rawTokens.length, null);
   for (var index = 0; index < rawTokens.length; index++) {

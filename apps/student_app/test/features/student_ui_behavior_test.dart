@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -160,7 +159,9 @@ void main() {
       expect(find.text('Turkce Ceviriyi Goster'), findsNothing);
       expect(find.textContaining('Bolum'), findsNothing);
 
-      final oceanFinder = find.textContaining('ocean', findRichText: true).first;
+      final oceanFinder = find
+          .textContaining('ocean', findRichText: true)
+          .first;
       await tester.ensureVisible(oceanFinder);
       await tester.tapAt(tester.getTopLeft(oceanFinder) + const Offset(10, 10));
       await tester.pumpAndSettle();
@@ -259,7 +260,9 @@ void main() {
 
       expect(find.text('Placeholder Free Reading'), findsOneWidget);
       expect(
-        find.text('Bu okuma icin ozet ve ceviri destegi yakinda genisletilecek.'),
+        find.text(
+          'Bu okuma icin ozet ve ceviri destegi yakinda genisletilecek.',
+        ),
         findsNothing,
       );
       expect(find.text('Okumaya Basla ->'), findsOneWidget);
@@ -550,7 +553,10 @@ void main() {
 
       expect(find.text('First live sentence.'), findsNothing);
       expect(find.textContaining('First', findRichText: true), findsAtLeast(1));
-      expect(find.textContaining('Second', findRichText: true), findsAtLeast(1));
+      expect(
+        find.textContaining('Second', findRichText: true),
+        findsAtLeast(1),
+      );
       expect(find.text('Sure'), findsNothing);
       expect(
         find.text(
@@ -1475,8 +1481,7 @@ class _RecordingProgressRepository implements ProgressRepository {
       const <GrammarProgress>[];
 
   @override
-  Future<List<ReadingProgress>> fetchReadingProgress() async =>
-      readingProgress;
+  Future<List<ReadingProgress>> fetchReadingProgress() async => readingProgress;
 
   @override
   Future<List<WordProgress>> fetchWordProgress() async =>

@@ -192,7 +192,9 @@ void main() {
 
       expect(find.text('Cover'), findsOneWidget);
       expect(
-        find.text('Cover islemleri icin once taslagi kaydedip reading ID alin.'),
+        find.text(
+          'Cover islemleri icin once taslagi kaydedip reading ID alin.',
+        ),
         findsOneWidget,
       );
     },

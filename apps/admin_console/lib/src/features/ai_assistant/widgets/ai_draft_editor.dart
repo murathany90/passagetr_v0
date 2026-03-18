@@ -157,6 +157,7 @@ class _SentenceEditorCard extends StatelessWidget {
               if (onRemove != null)
                 IconButton(
                   onPressed: onRemove,
+                  tooltip: 'Sil',
                   icon: const Icon(Icons.delete_outline_rounded),
                 ),
             ],
