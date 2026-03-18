@@ -64,7 +64,7 @@ final adminAiReadingRepositoryProvider = Provider<AdminAiReadingRepository>(
 final adminUserManagementRepositoryProvider =
     Provider<AdminUserManagementRepository>(
       (ref) => FoundationAdminUserManagementRepository(
-        _config: ref.watch(adminAppConfigProvider),
+        config: ref.watch(adminAppConfigProvider),
         authRepository: ref.watch(adminAuthRepositoryProvider),
       ),
     );

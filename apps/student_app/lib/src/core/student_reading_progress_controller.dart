@@ -51,8 +51,9 @@ class StudentReadingProgressController
     // Yalnizca ileriye donuk ilerlemeyi veya tamamlama durumunu kaydet
     if (existing != null) {
       if (completed && existing.completed) return const AppSuccess(null);
-      if (!completed && existing.lastIndex >= sentenceIndex)
+      if (!completed && existing.lastIndex >= sentenceIndex) {
         return const AppSuccess(null);
+      }
     }
 
     final nextProgress = ReadingProgress(

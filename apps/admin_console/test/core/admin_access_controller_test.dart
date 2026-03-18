@@ -79,6 +79,15 @@ class _FakeAuthRepository implements AuthRepository {
   Stream<AccessContext> watchAccessContext() => _controller.stream;
 
   @override
+  Future<AppResult<AppRole>> fetchCurrentRole() async => AppSuccess(AppRole.user);
+
+  @override
+  void notifySessionExpired() {}
+
+  @override
+  Stream<void> get onSessionExpired => Stream.empty();
+
+  @override
   Future<AppResult<AuthSession>> signInAnonymously() async {
     return AppSuccess<AuthSession>(AuthSession.anonymous());
   }

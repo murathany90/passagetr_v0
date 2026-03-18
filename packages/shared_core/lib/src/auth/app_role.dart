@@ -1,6 +1,7 @@
 enum AppRole {
   user('user'),
   admin('admin'),
+  superAdmin('super_admin'),
   developer('developer');
 
   const AppRole(this.value);
