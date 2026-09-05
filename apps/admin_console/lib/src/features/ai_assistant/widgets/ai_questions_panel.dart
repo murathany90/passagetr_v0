@@ -103,6 +103,7 @@ class _QuestionCard extends StatelessWidget {
               if (onRemove != null)
                 IconButton(
                   onPressed: onRemove,
+                  tooltip: 'Sil',
                   icon: const Icon(Icons.delete_outline_rounded),
                 ),
             ],
@@ -138,6 +139,7 @@ class _QuestionCard extends StatelessWidget {
                 if (question.options.length > 2) ...[
                   const SizedBox(width: 8),
                   IconButton(
+                    tooltip: 'Secenegi sil',
                     onPressed: () {
                       final options = question.options.toList(growable: true)
                         ..removeAt(optionIndex);

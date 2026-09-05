@@ -16,6 +16,10 @@ jobs:
         with:
           channel: stable
 
+      - name: Setup Mock Environment File
+        shell: pwsh
+        run: Copy-Item .\env\app.web.prod.json.example .\env\app.web.json
+
       - name: Flutter pub get
         shell: pwsh
         run: flutter pub get
